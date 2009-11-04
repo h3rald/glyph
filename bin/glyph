@@ -1,0 +1,58 @@
+#!/usr/bin/ruby
+$: << File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'rubygems'
+require 'gli'
+
+include GLI
+
+desc 'Describe some switch here'
+switch [:s,:switch]
+
+desc 'Describe some flag here'
+default_value 'the default'
+arg_name 'The name of the argument'
+flag [:f,:flagname]
+
+desc 'Describe init here'
+arg_name 'Describe arguments to init here'
+command :init do |c|
+  c.desc 'Describe a switch to init'
+  c.switch :s
+
+  c.desc 'Describe a flag to init'
+  c.default_value 'default'
+  c.flag :s
+  c.action do |global_options,options,args|
+
+    # Your command logic here
+     
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+  end
+end
+
+desc 'Describe compile here'
+arg_name 'Describe arguments to compile here'
+command :compile do |c|
+  c.action do |global_options,options,args|
+  end
+end
+
+pre do |global,command,options,args|
+  # Pre logic here
+  # Return true to proceed; false to abourt and not call the
+  # chosen command
+  true
+end
+
+post do |global,command,options,args|
+  # Post logic here
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+GLI.run(ARGV)
