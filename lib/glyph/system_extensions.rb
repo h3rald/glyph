@@ -1,5 +1,17 @@
 #!/usr/bin/env ruby
 
+module Kernel
+
+	def info(message)
+		puts " ->  #{message}"
+	end
+
+	def warning(message)
+		puts " [!] #{message}"
+	end
+
+end
+
 class Object
 
 	def class_instance_variable(pair)

@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require File.join(File.dirname(__FILE__), "..", "spec_helper")
+
+describe "project:create" do
+
+	before do
+		setup_rake_app
+		create_project_dir
+	end
+
+	after do
+		teardown_rake_app
+		delete_project_dir
+	end
+
+	it "Should not create a new project if no valid directory is supplied" do
+		lambda { @rake['project:create'].invoke '.' }.should raise_error
+		@rake['project:create'].reenable
+		lambda { @rake['project:create'].invoke 'test_dir' }.should raise_error
+	end
+
+	it "Should create a new project if an existing empty directory is supplied" do
+		lambda { @rake['project:create'].invoke "#{@project}" }.should_not raise_error
+		(@project/'tasks').exist?.should == true
+		(@project/'config').exist?.should == true
+		(@project/'source').exist?.should == true
+		(@project/'output').exist?.should == true
+		(@project/'lib').exist?.should == true
+	end
+
+end

@@ -1,23 +1,18 @@
-require 'rake/clean'
 require 'rubygems'
+require 'rake/clean'
 require 'rake/gempackagetask'
-require 'rake/rdoctask'
+require 'spec/rake/spectask'
+require 'lib/glyph'
 
-Rake::RDocTask.new do |rd|
-  rd.main = "README.rdoc"
-  rd.rdoc_files.include("README.rdoc","lib/**/*.rb","bin/**/*")
-  rd.title = 'Your application title'
+gemspec = eval(File.read('glyph.gemspec'))
+
+Rake::GemPackageTask.new(gemspec) { |pkg| }
+
+desc "Run all specs"
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
 end
 
-spec = eval(File.read('glyph.gemspec'))
+task :default => :spec
 
-Rake::GemPackageTask.new(spec) do |pkg|
-end
-
-require 'rake/testtask'
-Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.test_files = FileList['test/tc_*.rb']
-end
-
-task :default => :test
+FileList['tasks/*/*.rake'].each { |rakefile| load rakefile}

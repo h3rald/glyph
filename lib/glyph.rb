@@ -11,10 +11,19 @@ require 'pathname'
 require 'yaml'
 require 'gli'
 require 'extlib'
-
-lib = Pathname(__FILE__).dirname.expand_path
-core = lib/'glyph'
+require 'rake'
 
 module Glyph
+
+	CONFIG = {}
+
+	# Glyph's library directory
+	LIB_DIR = Pathname(__FILE__).dirname.expand_path/'glyph'
+
+	# Glyph's spec directory
+	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
+
+
+	require LIB_DIR/'system_extensions'
 
 end
