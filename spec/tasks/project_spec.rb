@@ -1,16 +1,15 @@
 #!/usr/bin/env ruby
-
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe "project:create" do
 
 	before do
-		setup_rake_app
+		@rake = Glyph::APP
+		@rake['project:create'].reenable
 		create_project_dir
 	end
 
 	after do
-		teardown_rake_app
 		delete_project_dir
 	end
 
@@ -21,7 +20,7 @@ describe "project:create" do
 	end
 
 	it "Should create a new project if an existing empty directory is supplied" do
-		lambda { @rake['project:create'].invoke "#{@project}" }.should_not raise_error
+		lambda { @rake['project:create'].invoke @project }.should_not raise_error
 		(@project/'tasks').exist?.should == true
 		(@project/'config').exist?.should == true
 		(@project/'source').exist?.should == true

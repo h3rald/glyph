@@ -1,6 +1,0 @@
-= glyph
-
-Describe your project here
-
-:include:glyph.rdoc
-

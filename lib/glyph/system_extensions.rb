@@ -3,11 +3,11 @@
 module Kernel
 
 	def info(message)
-		puts " ->  #{message}"
+		puts " ->  #{message}" unless Glyph::CONFIG[:quiet]
 	end
 
 	def warning(message)
-		puts " [!] #{message}"
+		puts " [!] #{message}" unless Glyph::CONFIG[:quiet]
 	end
 
 end

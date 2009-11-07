@@ -1,5 +1,0 @@
-= glyph
-
-Generate this with
-    glyph rdoc
-After you have described your command line interface

@@ -2,7 +2,7 @@
 #
 namespace :project do
 
-	desc "Creates a new Glyph project in the specified (empty) directory"
+	desc "Create a new Glyph project"
 	task :create, [:dir] do |t, args|
 		dir = Pathname.new args[:dir]
 		raise ArgumentError, "Directory #{dir} does not exist." unless dir.exist?

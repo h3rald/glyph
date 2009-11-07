@@ -1,19 +1,10 @@
 #!/usr/bin/env ruby
+$: << File.expand_path(File.dirname(__FILE__) + '/../lib')
 
-require File.join(File.dirname(__FILE__), "..", "lib", "glyph")
+require "stringio"
+require "glyph"
 
-def setup_rake_app
-	dir = File.dirname __FILE__
-	@rake = Rake::Application.new
-	Rake.application = @rake
-	FileList["#{dir}/../tasks/**/*.rake"].each do |f|
-		load f
-	end	
-end
-
-def teardown_rake_app
-	Rake.application = nil
-end
+Glyph.cfg :quiet => true
 
 def create_project_dir
 	@project = Glyph::SPEC_DIR/"test_project"
@@ -22,5 +13,17 @@ end
 
 def delete_project_dir
 	@project.rmtree
+end
+
+def run_command(cmd)
+	out = StringIO.new
+	old_stdout = $stdout
+	old_stderr = $stderr
+	$stdout = out
+	$stderr = out 
+	GLI.run(cmd.split)
+	$stdout = old_stdout
+	$stderr = old_stderr
+	out.string
 end
 
