@@ -1,24 +1,35 @@
 include GLI
 
-desc 'Describe some switch here'
-switch [:s,:switch]
-
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
-
 desc 'Create a new Glyph project'
+arg_name "project_name"
 command :init do |c|
 	c.action do |global_options,options,args|
 		Glyph.run 'project:create', Dir.pwd
 	end
 end
 
-desc 'Describe compile here'
-arg_name 'Describe arguments to compile here'
-command :compile do |c|
+desc 'Get/set configuration settings'
+arg_name "setting [new_value]"
+command :config do |c|
+	desc "Save to global configuration"
+	c.switch [:g, :global]
 	c.action do |global_options,options,args|
+		if options[:g] then
+			cfg = Glyph::GLOBAL_CONFIG
+		else
+			cfg = Glyph::PROJECT_CONFIG
+		end
+		case
+		when args.length == 0 then
+			raise RuntimeError, "Too few arguments."
+		when args.length == 1 then # read current config
+			info Glyph::CONFIG.get(args[0])
+		when args.length == 2 then
+			cfg.set args[0], args[1]
+			Glyph.reset_config
+		else
+			raise RuntimeError, "Too many arguments."
+		end
 	end
 end
 

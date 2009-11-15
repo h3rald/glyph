@@ -15,11 +15,14 @@ require 'rake'
 
 module Glyph
 
-	# Glyph's main configuration hash
-	CONFIG = {}
+	# Current project directory
+	PROJECT = Pathname.new(Dir.pwd)
 
 	# Library directory
 	LIB_DIR = Pathname(__FILE__).dirname.expand_path/'glyph'
+	
+	# Glyph home directory
+	HOME = LIB_DIR/'../../'
 
 	# Spec directory
 	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
@@ -30,26 +33,43 @@ module Glyph
 	# Default rake app
 	APP = Rake.application
 
-
 	require LIB_DIR/'system_extensions'
 	require LIB_DIR/'commands'
+	require LIB_DIR/'config'
 
-	def self.cfg(setting)
-		case
-		when setting.respond_to?(:pair?) && setting.pair? then
-			CONFIG[setting.name] = setting.value
-		when setting.is_a?(Symbol) then
-			CONFIG[setting]
-		else
-			raise ArgumentError, "Pair or Symbol expected"
-		end
+	def self.testing?
+		const_defined? :TEST_PROJECT rescue false
 	end
+
+	# Glyph configuration
+	CONFIG = Glyph::Config.new :resettable => true, :mutable => false
+
+	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
+	SYSTEM_CONFIG = Glyph::Config.new(:file => HOME/'config.yml')
+	GLOBAL_CONFIG = Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
+	PROJECT_CONFIG = Glyph.testing? ? Glyph::CONFIG.new(:file => TEST_PROJECT/'config/config.yml') : Glyph::Config.new(:file => PROJECT/'config.yml')
 
 	def self.setup
 		# Setup rake app
 		FileList["#{TASKS_DIR}/**/*.rake"].each do |f|
 			load f
 		end	
+		# Load configuration
+		reset_config
+	end
+
+	def self.config_override(setting, value)
+		PROJECT_CONFIG.set setting, value
+		reset_config
+	end
+
+	def self.reset_config
+		CONFIG.reset SYSTEM_CONFIG.to_hash.merge(GLOBAL_CONFIG.to_hash).merge(PROJECT_CONFIG.to_hash)
+	end
+
+	def self.glyph_project?
+		children = ["config", "source", "output"]
+		PROJECT.children.map{|c| c.basename.to_s} & children == children
 	end
 
 	def self.enable(task)
