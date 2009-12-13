@@ -11,12 +11,10 @@ require 'pathname'
 require 'yaml'
 require 'gli'
 require 'extlib'
+require 'tenjin'
 require 'rake'
 
 module Glyph
-
-	# Current project directory
-	PROJECT = Pathname.new(Dir.pwd)
 
 	# Library directory
 	LIB_DIR = Pathname(__FILE__).dirname.expand_path/'glyph'
@@ -36,10 +34,14 @@ module Glyph
 	require LIB_DIR/'system_extensions'
 	require LIB_DIR/'commands'
 	require LIB_DIR/'config'
+	require LIB_DIR/'macros'
 
 	def self.testing?
-		const_defined? :TEST_PROJECT rescue false
+		const_defined? :TEST_MODE rescue false
 	end
+
+	# Current project directory
+	PROJECT = (Glyph.testing?) ? Glyph::SPEC_DIR/"test_project" : Pathname.new(Dir.pwd)
 
 	# Glyph configuration
 	CONFIG = Glyph::Config.new :resettable => true, :mutable => false
@@ -47,9 +49,10 @@ module Glyph
 	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
 	SYSTEM_CONFIG = Glyph::Config.new(:file => HOME/'config.yml')
 	GLOBAL_CONFIG = Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
-	PROJECT_CONFIG = Glyph.testing? ? Glyph::CONFIG.new(:file => TEST_PROJECT/'config/config.yml') : Glyph::Config.new(:file => PROJECT/'config.yml')
+	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config/config.yml')
 
 	def self.setup
+		@@phase = :initialization
 		# Setup rake app
 		FileList["#{TASKS_DIR}/**/*.rake"].each do |f|
 			load f
@@ -83,6 +86,16 @@ module Glyph
 
 	def self.run(task, *args)
 		Rake::Task[task].invoke *args
+	end
+
+	@@phase = nil
+
+	def self.phase
+		@@phase
+	end
+
+	def self.phase=(value)
+		@@phase = value
 	end
 
 end

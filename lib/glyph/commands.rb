@@ -8,6 +8,14 @@ command :init do |c|
 	end
 end
 
+desc 'Add a new text file to project'
+arg_name "project_name"
+command :add do |c|
+	c.action do |global_options,options,args|
+		Glyph.run 'project:add', args[0]
+	end
+end
+
 desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|

@@ -13,7 +13,7 @@ describe Glyph do
 
 	it "should run rake tasks" do
 		create_project_dir
-		Glyph.run 'project:create', @project# }.should_not raise_error
+		Glyph.run 'project:create', @project
 		lambda { Glyph.run! 'project:create', @project }.should raise_error
 		delete_project_dir
 		create_project_dir

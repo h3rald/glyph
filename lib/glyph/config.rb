@@ -35,7 +35,7 @@ module Glyph
 		end
 
 		def set(setting, value)
-			raise RuntimeError, "Configuration cannot be reset" unless @options[:mutable]
+			raise RuntimeError, "Configuration cannot be changed" unless @options[:mutable]
 			hash = @data
 			path = setting.to_s.split(".").map{|s| s.intern}
 			count = 1
