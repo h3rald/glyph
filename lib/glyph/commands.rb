@@ -1,6 +1,6 @@
-include GLI
+#!/usr/bin/env ruby
 
-desc 'Create a new Glyph project'
+gli_desc 'Create a new Glyph project'
 arg_name "project_name"
 command :init do |c|
 	c.action do |global_options,options,args|
@@ -8,7 +8,7 @@ command :init do |c|
 	end
 end
 
-desc 'Add a new text file to project'
+gli_desc 'Add a new text file to project'
 arg_name "project_name"
 command :add do |c|
 	c.action do |global_options,options,args|
@@ -16,10 +16,10 @@ command :add do |c|
 	end
 end
 
-desc 'Get/set configuration settings'
+gli_desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|
-	desc "Save to global configuration"
+	c.desc "Save to global configuration"
 	c.switch [:g, :global]
 	c.action do |global_options,options,args|
 		if options[:g] then
@@ -45,11 +45,17 @@ pre do |global,command,options,args|
 	# Pre logic here
 	# Return true to proceed; false to abourt and not call the
 	# chosen command
+	if command.name == :help then
+		puts
+		puts "Glyph v#{Glyph::VERSION}"
+	end
+	puts 
 	true
 end
 
 post do |global,command,options,args|
 	# Post logic here
+	puts
 end
 
 on_error do |exception|

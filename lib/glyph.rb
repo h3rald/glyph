@@ -16,6 +16,9 @@ require 'rake'
 
 module Glyph
 
+	# Program Version
+	VERSION = '0.1.0'
+
 	# Library directory
 	LIB_DIR = Pathname(__FILE__).dirname.expand_path/'glyph'
 	
@@ -35,7 +38,6 @@ module Glyph
 	SNIPPETS = {}
 
 	require LIB_DIR/'system_extensions'
-	require LIB_DIR/'commands'
 	require LIB_DIR/'config'
 
 	def self.testing?
