@@ -17,18 +17,16 @@ require "glyph"
 Glyph.config_override :quiet, true
 
 def create_project_dir
-	@project = Glyph::PROJECT
-	@project.mkpath
+	Glyph::PROJECT.mkpath
 end
 
 def create_project
-	Glyph.enable "project:create"
 	create_project_dir
-	Glyph::APP['project:create'].invoke @project
+	Glyph.run! 'project:create', Glyph::PROJECT.to_s
 end
 
 def delete_project_dir
-	@project.rmtree
+	Glyph::PROJECT.rmtree
 end
 
 alias delete_project delete_project_dir
@@ -53,6 +51,6 @@ def create_sample_file(filename, text, opts={})
 	contents = text
  	contents << '#{note "Test", :type => :important}\n' if opts[:tenjin]
 	contents << '@test\n' if opts[:snippets]
-	File.open((@project/"source"/filename).to_s, "w+") {|f| f.write contents }
+	File.open((Glyph::PROJECT/"source"/filename).to_s, "w+") {|f| f.write contents }
 end
 

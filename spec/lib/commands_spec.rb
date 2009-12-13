@@ -14,11 +14,12 @@ describe "glyph" do
 	it "[init] should create a project in the current directory" do
 		Glyph.enable "project:create"
 		run_command_successfully(['init']).should == false
-		Dir.chdir @project.to_s
+		Dir.chdir Glyph::PROJECT.to_s
 		run_command_successfully(['init']).should == true
 	end
 
 	it "[config] should read configuration settings" do
+		create_project
 		run_command_successfully(["config", "-g"]).should == false
 		Glyph.config_override :quiet, false
 		run_command(["config", "quiet"]).match(/false/m).should_not == nil
@@ -26,6 +27,7 @@ describe "glyph" do
 	end
 
 	it "[config] should write configuration settings" do
+		create_project
 		run_command_successfully(["config", "test_setting", true]).should == true
 		Glyph::CONFIG.get(:test_setting).should == true
 		Glyph::PROJECT_CONFIG.get('test_setting').should == true
@@ -38,6 +40,7 @@ describe "glyph" do
 	end
 
 	it "[add] should create a new text file" do
+		create_project
 		run_command_successfully(["add", "test.textile"]).should == true
 		(Glyph::PROJECT/'text/test.textile').exist?.should == true
 	end

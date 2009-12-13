@@ -25,7 +25,7 @@ module Glyph
 		def read
 			raise RuntimeError, "Configuration is not stored in a file." if @file.blank?
 			if @file.exist? then 
-				contents = YAML.load_file(@file.to_s)
+				contents = yaml_load @file
 				raise RuntimeError, "Invalid configuration file '#{@file}'" unless contents.is_a? Hash
 				@data = contents
 			else
@@ -71,7 +71,7 @@ module Glyph
 
 		def write
 			raise RuntimeError, "Configuration is not stored in a file." if @file.blank?
-			File.open(@file.to_s, "w+") {|f| f.write @data.to_yaml }
+			yaml_dump @file, @data
 		end
 
 	end

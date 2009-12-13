@@ -31,10 +31,12 @@ module Glyph
 	# Default rake app
 	APP = Rake.application
 
+	# Snippets hash
+	SNIPPETS = {}
+
 	require LIB_DIR/'system_extensions'
 	require LIB_DIR/'commands'
 	require LIB_DIR/'config'
-	require LIB_DIR/'macros'
 
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
@@ -49,7 +51,7 @@ module Glyph
 	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
 	SYSTEM_CONFIG = Glyph::Config.new(:file => HOME/'config.yml')
 	GLOBAL_CONFIG = Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
-	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config/config.yml')
+	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml')
 
 	def self.setup
 		@@phase = :initialization
