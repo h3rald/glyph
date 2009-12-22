@@ -45,8 +45,7 @@ pre do |global,command,options,args|
 	# Pre logic here
 	# Return true to proceed; false to abourt and not call the
 	# chosen command
-	if command.name == :help then
-		puts
+	if !command || command.name == :help then
 		puts "Glyph v#{Glyph::VERSION}"
 	end
 	puts 
@@ -55,7 +54,6 @@ end
 
 post do |global,command,options,args|
 	# Post logic here
-	puts
 end
 
 on_error do |exception|
@@ -63,4 +61,3 @@ on_error do |exception|
 	# return false to skip default error handling
 	true
 end
-
