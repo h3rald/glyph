@@ -1,13 +1,6 @@
 #!/usr/bin/ruby
 $: << File.expand_path(File.dirname(__FILE__) + '/../lib')
-require 'rubygems'
-
-require 'gli'
-include GLI
-
-alias gli_desc desc # desc is used by Rake as well...
 require 'glyph'
-
 require 'glyph/commands'
 
 

@@ -16,4 +16,9 @@ describe "load" do
 		Glyph::SNIPPETS[:test].blank?.should == false
 	end
 
+	it "[macros] should load macro definitions" do
+		lambda { Glyph.run! 'load:macros'}.should_not raise_error
+		Glyph::MACROS['note'].blank?.should == false
+	end
+
 end

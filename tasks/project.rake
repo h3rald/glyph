@@ -8,8 +8,9 @@ namespace :project do
 		raise ArgumentError, "Directory #{dir} does not exist." unless dir.exist?
 		raise ArgumentError, "Directory #{dir} is not empty." unless dir.children.blank?
 		# Create subdirectories
-		subdirs = ['lib/tasks', 'lib', 'text', 'output', 'lib/macros', 'assets', 'layouts', 'styles']
+		subdirs = ['lib/tasks', 'lib', 'text', 'output', 'assets', 'layouts', 'styles']
 		subdirs.each {|d| (dir/d).mkpath }
+		file_copy Glyph::LIB_DIR/'macros.rb', Glyph::PROJECT/'lib/macros.rb'
 		# Create snippets
 		yaml_dump Glyph::PROJECT/'snippets.yml', {:test => "This is a \nTest snippet"}
 		# Create files

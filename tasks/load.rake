@@ -9,5 +9,9 @@ namespace :load do
 		Glyph::SNIPPETS.replace snippets
 	end
 
+	desc "Load macros"
+	task :macros do
+		Glyph::Preprocessor.instance_eval file_load(Glyph::PROJECT/'lib/macros.rb')
+	end
 
 end

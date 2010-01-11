@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+include GLI
+
+alias gli_desc desc # desc is used by Rake as well...
+
 gli_desc 'Create a new Glyph project'
 arg_name "project_name"
 command :init do |c|

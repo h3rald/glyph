@@ -18,4 +18,21 @@ module Kernel
 		YAML.load_file(file.to_s)
 	end
 
+	def file_load(file)
+		begin
+			File.open(file, 'r') do |f|
+				while l = f.gets 
+					result << l
+				end
+			end
+			result
+		rescue
+			raise RuntimeError, "Unable to read file '#{file}'"
+		end
+	end
+
+	def file_copy(source, dest, options={})
+		FileUtils.cp source, dest, options
+	end
+
 end
