@@ -3,7 +3,7 @@
 #
 # @website http://www.h3rald.com/glyph
 # @author Fabio Cevasco (mailto:h3rald@h3rald.com)
-# @copyright Copyright (c) 2009 Fabio Cevasco
+# @copyright Copyright (c) 2009-2010 Fabio Cevasco
 # @license BSD
 
 require 'rubygems'
@@ -37,6 +37,9 @@ module Glyph
 	# Snippets hash
 	SNIPPETS = {}
 
+	# Macros hash
+	MACROS = {}
+
 	require LIB_DIR/'system_extensions'
 	require LIB_DIR/'config'
 
@@ -56,7 +59,6 @@ module Glyph
 	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml')
 
 	def self.setup
-		@@phase = :initialization
 		# Setup rake app
 		FileList["#{TASKS_DIR}/**/*.rake"].each do |f|
 			load f
@@ -90,16 +92,6 @@ module Glyph
 
 	def self.run(task, *args)
 		Rake::Task[task].invoke *args
-	end
-
-	@@phase = nil
-
-	def self.phase
-		@@phase
-	end
-
-	def self.phase=(value)
-		@@phase = value
 	end
 
 end
