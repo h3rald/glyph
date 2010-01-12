@@ -24,7 +24,7 @@ namespace :project do
 		file = Glyph::PROJECT/"text/#{args[:file]}" 
 		file.parent.mkpath
 		raise ArgumentError, "File '#{args[:file]}' already exists." if file.exist?
-		File.new(file.to_s, "w")
+		File.new(file.to_s, "w").close
 	end
 
 end

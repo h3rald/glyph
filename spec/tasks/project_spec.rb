@@ -12,7 +12,6 @@ describe "project:create" do
 	end
 
 	it "[create] should not create a new project if no valid directory is supplied" do
-		lambda { Glyph.run! 'project:create', '.' }.should raise_error
 		lambda { Glyph.run! 'project:create', 'test_dir' }.should raise_error
 	end
 

@@ -19,16 +19,13 @@ module Kernel
 	end
 
 	def file_load(file)
-		begin
-			File.open(file, 'r') do |f|
-				while l = f.gets 
-					result << l
-				end
+		result = ""
+		File.open(file, 'r') do |f|
+			while l = f.gets 
+				result << l
 			end
-			result
-		rescue
-			raise RuntimeError, "Unable to read file '#{file}'"
 		end
+		result
 	end
 
 	def file_copy(source, dest, options={})

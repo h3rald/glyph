@@ -26,7 +26,7 @@ def create_project
 end
 
 def delete_project_dir
-	Glyph::PROJECT.rmtree
+	FileUtils.rm_rf Glyph::PROJECT.to_s
 end
 
 alias delete_project delete_project_dir

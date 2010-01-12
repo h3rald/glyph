@@ -42,6 +42,7 @@ module Glyph
 
 	require LIB_DIR/'system_extensions'
 	require LIB_DIR/'config'
+	require LIB_DIR/'preprocessor'
 
 	def self.testing?
 		const_defined? :TEST_MODE rescue false

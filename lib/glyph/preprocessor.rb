@@ -5,22 +5,31 @@ module Glyph
 	module Preprocessor
 
 		PARAM_REGEX = "[^()]*(?:@\(.*\))*[^()]*"
-		MACRO_REGEX = /([^()\s])\((#{PARAM_REGEX}(?:\|#{PARAM_REGEX})*)\)/ 
-		
-		def process(text)
+		MACRO_REGEX = /([^()\s]+)\((#{PARAM_REGEX}(?:\|#{PARAM_REGEX})*)\)/ 
+
+		def self.process(text)
 			text.gsub(MACRO_REGEX) do |m|
 				# Note: pipes (|) cannot be escaped; use &#124; instead.
-				m.replace run($1, $2.split('|'))
+				begin
+					m = run($1, $2.split('|'))
+				rescue Exception => e
+					warning e
+				end
+				m
 			end
 		end
 
-		def run(macro, *params)
-			raise RuntimeError, "Undefined macro '#{macro}'" unless Glyph::MACROS.include? macro
-			Glyph::MACROS[macro].call params
+		def self.run(m, params)
+			raise RuntimeError, "Undefined macro '#{m}'" unless Glyph::MACROS.include? m.to_sym
+			Glyph::MACROS[m.to_sym].call params
 		end
 
-		def macro(name, &block)
-			Glyph::MACROS[name.to_s] = block			
+		def self.macro(name, &block)
+			Glyph::MACROS[name.to_sym] = block			
+		end
+
+		def self.macro_alias(new_macro, old_macro)
+			Glyph::MACROS[new_macro.to_sym] = Glyph::MACROS[old_macro.to_sym]
 		end
 
 	end
