@@ -40,8 +40,12 @@ module Glyph
 	# Macros hash
 	MACROS = {}
 
+	# IDs array
+	IDS = []
+
 	require LIB_DIR/'system_extensions'
 	require LIB_DIR/'config'
+	require LIB_DIR/'preprocessor_actions'
 	require LIB_DIR/'preprocessor'
 
 	def self.testing?

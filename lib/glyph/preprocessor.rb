@@ -7,21 +7,25 @@ module Glyph
 		PARAM_REGEX = "[^()]*(?:@\(.*\))*[^()]*"
 		MACRO_REGEX = /([^()\s]+)\((#{PARAM_REGEX}(?:\|#{PARAM_REGEX})*)\)/ 
 
-		def self.process(text)
+		extend Actions
+
+		def self.process(text, info={})
 			text.gsub(MACRO_REGEX) do |m|
 				# Note: pipes (|) cannot be escaped; use &#124; instead.
 				begin
-					m = run($1, $2.split('|'))
+					meta = {:macro => $1}.merge info
+					m = run($1, $2.split('|'), meta)
 				rescue Exception => e
+					raise
 					warning e
 				end
 				m
 			end
 		end
 
-		def self.run(m, params)
+		def self.run(m, params, meta)
 			raise RuntimeError, "Undefined macro '#{m}'" unless Glyph::MACROS.include? m.to_sym
-			Glyph::MACROS[m.to_sym].call params
+			Glyph::MACROS[m.to_sym].call params, meta
 		end
 
 		def self.macro(name, &block)
@@ -35,3 +39,5 @@ module Glyph
 	end
 
 end
+
+

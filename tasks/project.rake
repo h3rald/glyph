@@ -10,7 +10,7 @@ namespace :project do
 		# Create subdirectories
 		subdirs = ['lib/tasks', 'lib', 'text', 'output', 'assets', 'layouts', 'styles']
 		subdirs.each {|d| (dir/d).mkpath }
-		file_copy Glyph::LIB_DIR/'macros.rb', Glyph::PROJECT/'lib/macros.rb'
+		file_copy Glyph::LIB_DIR/'macros_html.rb', Glyph::PROJECT/'lib/macros_html.rb'
 		# Create snippets
 		yaml_dump Glyph::PROJECT/'snippets.yml', {:test => "This is a \nTest snippet"}
 		# Create files

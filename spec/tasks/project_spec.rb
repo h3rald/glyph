@@ -18,7 +18,7 @@ describe "project:create" do
 	it "[create] should create a new project if an existing empty directory is supplied" do
 		lambda { Glyph.run! 'project:create', Glyph::PROJECT }.should_not raise_error
 		(Glyph::PROJECT/'lib/tasks').exist?.should == true
-		(Glyph::PROJECT/'lib/macros.rb').exist?.should == true
+		(Glyph::PROJECT/'lib/macros_html.rb').exist?.should == true
 		(Glyph::PROJECT/'text').exist?.should == true
 		(Glyph::PROJECT/'layouts').exist?.should == true
 		(Glyph::PROJECT/'styles').exist?.should == true
