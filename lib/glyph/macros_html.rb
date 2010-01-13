@@ -37,7 +37,7 @@ macro :anchor do |params, meta|
 end
 
 macro :snippet do |params, meta|
-	get_snippet params, meta
+	process get_snippet(params, meta)
 end
 
 macro_alias '--', :comment

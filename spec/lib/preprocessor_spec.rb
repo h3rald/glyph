@@ -20,17 +20,23 @@ describe Glyph::Preprocessor do
 		end
 	end
 
-	def define_link_macro
-		@p.macro :link do |params, meta|
+	def define_ref_macro
+		@p.macro :ref do |params, meta|
 			%{<a href="#{params[0]}">#{params[1]}</a>}
+		end
+	end
+
+	def define_div_macro
+		@p.macro :div do |params, meta|
+			%{<div>#{@p.process(params[0])}</div>}
 		end
 	end
 
 	it "should define macros" do
 		lambda { define_em_macro }.should_not raise_error
-		lambda { define_link_macro }.should_not raise_error
+		lambda { define_ref_macro }.should_not raise_error
 		Glyph::MACROS.include?(:em).should == true
-		Glyph::MACROS.include?(:link).should == true
+		Glyph::MACROS.include?(:ref).should == true
 	end
 
 	it "should process text and run simple macros" do
@@ -42,14 +48,14 @@ describe Glyph::Preprocessor do
 	end
 
 	it "should process and run complex macros" do
-		define_link_macro
-		text = "This is a link(http://www.h3rald.com|test)."
+		define_ref_macro
+		text = "This is a ref(http://www.h3rald.com|test)."
 		@p.process(text).should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
 	end
 
 	it "should support macro aliases" do
-		define_link_macro
-		lambda { @p.macro_alias("=>", :link)}.should_not raise_error
+		define_ref_macro
+		lambda { @p.macro_alias("=>", :ref)}.should_not raise_error
 		text = "This is a =>(http://www.h3rald.com|test)."
 		@p.process(text).should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
 	end
@@ -66,8 +72,8 @@ describe Glyph::Preprocessor do
 	end
 
 	it "should support multiline macros" do
-		define_link_macro
-		text = %{This is a test containing a link(
+		define_ref_macro
+		text = %{This is a test containing a ref(
 		http://www.h3rald.com
 		|
 		multiline
@@ -81,6 +87,12 @@ describe Glyph::Preprocessor do
 		text = %{This text contains em(
 			some @(escaped em(content)...) etc.).}
 		@p.process(text).should == %{This text contains <em>some escaped em(content)... etc.</em>.}
+	end
+
+	it "should support nested macros (implemented manually)" do
+		define_div_macro
+		text = "This is a test. div(This div contains @((something within brackets and)) an em(emphasis @(random(test)...)))."
+		@p.process(text).should == "This is a test. <div>This div contains (something within brackets and) an <em>emphasis random(test)...</em></div>." 
 	end
 
 
