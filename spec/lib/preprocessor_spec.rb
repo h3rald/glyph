@@ -65,6 +65,24 @@ describe Glyph::Preprocessor do
 		lambda { @p.process("Testing &(wrong).")}.should raise_error(MacroError)
 	end
 
+	it "should support multiline macros" do
+		define_link_macro
+		text = %{This is a test containing a link(
+		http://www.h3rald.com
+		|
+		multiline
+		
+		) macro.}
+		@p.process(text).should == %{This is a test containing a <a href="http://www.h3rald.com">multiline</a> macro.}
+	end
+
+	it "should support escape characters" do
+		define_em_macro
+		text = %{This text contains em(
+			some @(escaped em(content)...)).}
+		@p.process(text).should == %{This text contains <em>some escaped em(content)...</em>.}
+	end
+
 
 end
 

@@ -5,7 +5,7 @@ module Glyph
 	module Preprocessor
 
 		PARAM_REGEX = "[^()]*(?:@\(.*\))*[^()]*"
-		MACRO_REGEX = /([^()\s]+)\((#{PARAM_REGEX}(?:\|#{PARAM_REGEX})*)\)/ 
+		MACRO_REGEX = /([^()\s]+)\((#{PARAM_REGEX}(?:\|#{PARAM_REGEX})*)\)/m 
 
 		extend Actions
 
@@ -14,7 +14,7 @@ module Glyph
 				# Note: pipes (|) cannot be escaped; use &#124; instead.
 				begin
 					meta = {:macro => $1}.merge info
-					m = run($1, $2.split('|'), meta)
+					m = run($1, $2.split('|').map{|e| e.strip}, meta).strip.gsub(/@\((.*)\)/, '\1')
 				rescue Exception => e
 					raise
 					warning e
