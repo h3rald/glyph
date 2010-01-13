@@ -79,8 +79,8 @@ describe Glyph::Preprocessor do
 	it "should support escape characters" do
 		define_em_macro
 		text = %{This text contains em(
-			some @(escaped em(content)...)).}
-		@p.process(text).should == %{This text contains <em>some escaped em(content)...</em>.}
+			some @(escaped em(content)...) etc.).}
+		@p.process(text).should == %{This text contains <em>some escaped em(content)... etc.</em>.}
 	end
 
 
