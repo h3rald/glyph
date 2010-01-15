@@ -1,0 +1,47 @@
+grammar MacroLanguage
+
+	rule expression
+		(escaping_macro / macro / escaped_text)* {
+			def content
+				elements.map{|e| e.content}
+			end
+		} 
+	end	
+
+	rule escaping_macro
+		macro_name '[=' text '=]' {
+			def content
+				{:esc_macro => {macro_name.text_value => text.content}}
+			end
+		}
+	end
+
+	rule macro
+		macro_name '[' expression ']' {
+			def content
+				{:macro => {macro_name.text_value => expression.content}}
+			end
+		}
+	end
+
+	rule escaped_text
+		(('\\' .) / !((macro_name ('[' / '[=')) / (']' / '=]')) .)+ {
+			def content
+				{:esc_text => text_value}
+			end
+		}
+	end
+
+	rule text
+		(('\\' .) / !((macro_name '[=') / '=]') .)+ {
+			def content
+				{:text => text_value}
+			end
+		}
+	end
+
+	rule macro_name
+		[^\[\]\\\s]+
+	end
+
+end

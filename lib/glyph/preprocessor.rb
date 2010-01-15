@@ -2,21 +2,18 @@
 
 module Glyph
 
-	module Preprocessor
+	class MacroLanguageParser
+		DOC = {} # Document Tree
+	end
 
-		PARAM_REGEX = "[^()|]*(?:@\(.*\))?[^()|]*"
-		MACRO_REGEX = /([^()\s]+)\((#{PARAM_REGEX}(?:\|#{PARAM_REGEX})*?)\)/m 
+	module Preprocessor
 
 		extend Actions
 
+
 		def self.process(text, info={})
-			text.gsub(MACRO_REGEX) do |m|
-				# Note: pipes (|) cannot be escaped; use &#124; instead.
-				meta = {:macro => $1}.merge info
-				m = run($1, $2.split('|').map{|e| e.strip}, meta).strip
-				m.gsub!(/@\((.*)\)/, '\1') 
-				m
-			end
+			parser = MacroLanguageParser.new
+			# TODO
 		end
 
 		def self.run(m, params, meta)

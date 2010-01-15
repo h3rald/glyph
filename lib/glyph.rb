@@ -11,7 +11,7 @@ require 'pathname'
 require 'yaml'
 require 'gli'
 require 'extlib'
-require 'tenjin'
+require 'treetop'
 require 'rake'
 
 module Glyph
@@ -47,6 +47,7 @@ module Glyph
 	require LIB_DIR/'config'
 	require LIB_DIR/'preprocessor_actions'
 	require LIB_DIR/'preprocessor'
+	require LIB_DIR/'macro_laguage'
 
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
