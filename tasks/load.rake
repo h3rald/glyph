@@ -11,7 +11,10 @@ namespace :load do
 
 	desc "Load macros"
 	task :macros do
-		Glyph::Preprocessor.instance_eval file_load(Glyph::PROJECT/'lib/macros_html.rb')
+		macro_dir = (Glyph::PROJECT/"lib/macros/#{Glyph::CONFIG.get(:target)}")
+		macro_dir.children.each do |f|
+			Glyph::Preprocessor.instance_eval(file_load f)
+		end
 	end
 
 end

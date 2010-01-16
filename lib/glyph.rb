@@ -20,10 +20,10 @@ module Glyph
 	VERSION = '0.1.0'
 
 	# Library directory
-	LIB_DIR = Pathname(__FILE__).dirname.expand_path/'glyph'
+	LIB = Pathname(__FILE__).dirname.expand_path/'glyph'
 	
 	# Glyph home directory
-	HOME = LIB_DIR/'../../'
+	HOME = LIB/'../../'
 
 	# Spec directory
 	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
@@ -43,11 +43,11 @@ module Glyph
 	# IDs array
 	IDS = []
 
-	require LIB_DIR/'system_extensions'
-	require LIB_DIR/'config'
-	require LIB_DIR/'glyph_language'
-	require LIB_DIR/'preprocessor_actions'
-	require LIB_DIR/'preprocessor'
+	require LIB/'system_extensions'
+	require LIB/'config'
+	require LIB/'glyph_language'
+	require LIB/'preprocessor_actions'
+	require LIB/'preprocessor'
 
 	def self.testing?
 		const_defined? :TEST_MODE rescue false

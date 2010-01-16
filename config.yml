@@ -1,6 +1,2 @@
-:macros:
-  :note_types:
-  - :important
-  - :standard
-  - :tip  
-  - :caution
+:pdf_renderer: 'wkhtmltopdf'
+:target: 'html'

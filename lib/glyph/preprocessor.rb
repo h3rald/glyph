@@ -49,12 +49,12 @@ module Glyph
 			rescue Exception => e
 				source = context[:source] ? "'#{context[:source]}'" : ''
 				raise if e.is_a? MacroError
-				raise RuntimeError, "An error occurred when preprocessing #{source}"
+				raise #RuntimeError, "An error occurred when preprocessing #{source}"
 			end
 		end
 
 		def self.get_params_from(value)
-			esc = '(__||[=ESCAPED_PIPE=]||__'
+			esc = '__[=ESCAPED_PIPE=]__'
 			value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
 		end
 

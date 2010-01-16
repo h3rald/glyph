@@ -50,5 +50,3 @@ macro_alias '--', :comment
 macro_alias '#', :anchor
 macro_alias '&', :snippet
 macro_alias '@', :escape
-
-
