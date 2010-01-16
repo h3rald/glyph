@@ -15,13 +15,14 @@ describe Glyph::Preprocessor do
 	end
 
 	def define_em_macro
-		@p.macro :em do |params, meta| 
-			%{<em>#{params[0]}</em>}
+		@p.macro :em do |value, context| 
+			%{<em>#{value}</em>}
 		end
 	end
 
 	def define_ref_macro
-		@p.macro :ref do |params, meta|
+		@p.macro :ref do |value, context|
+			params = @p.get_params_from value
 			%{<a href="#{params[0]}">#{params[1]}</a>}
 		end
 	end
@@ -57,7 +58,7 @@ describe Glyph::Preprocessor do
 	it "should store IDs" do
 		@p.process("this is a #[test|test].").should == "this is a <a id=\"test\">test</a>."
 		Glyph::IDS.include?(:test).should == true 
-		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "#(): ID 'test' already exists.")
+		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "[--] #: ID 'test' already exists.")
 	end
 
 	it "should retrieve snippets" do
@@ -79,11 +80,21 @@ describe Glyph::Preprocessor do
 	it "should support escape characters" do
 		define_em_macro
 		text = %{This text contains em[
-			some escaped em\[content\]...) etc.].}
-		@p.process(text).should == %{This text contains <em>some escaped em(content)... etc.</em>.}
+			some escaped em\\[content\\]... etc.].}
+		@p.process(text).should == %{This text contains <em>some escaped em[content]... etc.</em>.}
 	end
 
+	it "should support nested macros" do
+		define_em_macro
+		define_ref_macro
+		text = %{This is an ref[#test|em[emphasized] link]}
+		@p.process(text).should == %{This is an <a href="#test"><em>emphasized</em> link</a>}
+	end
+
+	it "should support escaping macros" do
+		define_em_macro
+		text = %{This is a test em[This can @[=contain test[macros em[test]]=]]}		
+		@p.process(text).should == %{This is a test <em>This can contain test[macros em[test]]</em>}
+	end
 
 end
-
-

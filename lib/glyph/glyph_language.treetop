@@ -1,0 +1,27 @@
+grammar GlyphLanguage
+
+	rule expression
+		(escaping_macro / macro / escaped_text)* <GlyphSyntaxNode> 
+	end	
+
+	rule escaping_macro
+		macro_name '[=' text '=]' <MacroNode> 
+	end
+
+	rule macro
+		macro_name '[' expression ']' <MacroNode> 
+	end
+
+	rule escaped_text
+		(('\\' .) / !((macro_name ('[' / '[=')) / (']' / '=]')) .)+  <TextNode> 
+	end
+
+	rule text
+		(('\\' .) / !((macro_name '[=') / '=]') .)+ <TextNode> 	
+	end
+
+	rule macro_name
+		[^\[\]\|\\\s]+
+	end
+
+end

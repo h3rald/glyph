@@ -33,3 +33,12 @@ module Kernel
 	end
 
 end
+
+class MacroError < RuntimeError
+	attr_reader :context
+	def initialize(context, msg)
+		@context = context
+		source = context[:source] || "--"
+		super("[#{source}] #{@context[:macro]}: #{msg}")
+	end
+end

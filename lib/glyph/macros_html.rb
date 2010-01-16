@@ -1,47 +1,54 @@
 #!/usr/bin/env ruby
 
-macro :note do |params, meta|
+macro :note do |value, context|
 	%{
 		<div class="note">
 			<span class="note-title">Note</span>
-			<span class="note-body">#{params[0]}</span>
+			<span class="note-body">#{value}</span>
 		</div>
 	}
 end
 
-macro :important do |params, meta|
+macro :important do |value, context|
 	%{
 		<div class="note important">
 			<span class="note-title">Important</span>
-			<span class="note-body">#{params[0]}</span>
+			<span class="note-body">#{value}</span>
 		</div>
 	}
 end
 
-macro :tip do |params, meta|
+macro :tip do |value, context|
 	%{
 		<div class="note tip">
 			<span class="note-title">Tip</span>
-			<span class="note-body">#{params[0]}</span>
+			<span class="note-body">#{value}</span>
 		</div>
 	}
 end
 
-macro :comment do |params, meta|
-	%{<!-- #{params[0]} -->}
+macro :comment do |value, context|
+	%{<!-- #{value} -->}
 end
 
-macro :anchor do |params, meta|
-	store_id params, meta
+macro :anchor do |value, context|
+	params = get_params_from value
+	store_id params, context
 	%{<a id="#{params[0]}">#{params[1]}</a>}
 end
 
-macro :snippet do |params, meta|
-	process get_snippet(params, meta)
+macro :snippet do |value, context|
+	params = get_params_from value
+	process get_snippet(params, context)
+end
+
+macro :escape do |value, context|
+	value
 end
 
 macro_alias '--', :comment
 macro_alias '#', :anchor
 macro_alias '&', :snippet
+macro_alias '@', :escape
 
 

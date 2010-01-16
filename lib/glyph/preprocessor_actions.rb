@@ -1,12 +1,5 @@
 #!/usr/bin/env ruby
 
-class MacroError < RuntimeError
-	attr_reader :meta
-	def initialize(meta, msg)
-		@meta = meta
-		super("#{@meta[:macro]}(): #{msg}")
-	end
-end
 
 module Glyph
 
@@ -14,15 +7,15 @@ module Glyph
 
 		module Actions
 
-			def store_id(params, meta)
+			def store_id(params, context)
 				ident = params[0].to_sym
-				raise MacroError.new(meta, "ID '#{ident}' already exists.") if Glyph::IDS.include? ident
+				raise MacroError.new(context, "ID '#{ident}' already exists.") if Glyph::IDS.include? ident
 				Glyph::IDS << ident
 			end
 
-			def get_snippet(params, meta)
+			def get_snippet(params, context)
 				ident = params[0].to_sym
-				raise MacroError.new(meta, "Snippet '#{ident}' does not exist.") unless Glyph::SNIPPETS.include? ident
+				raise MacroError.new(context, "Snippet '#{ident}' does not exist.") unless Glyph::SNIPPETS.include? ident
 				Glyph::SNIPPETS[ident]
 			end
 
