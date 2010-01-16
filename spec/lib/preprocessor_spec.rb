@@ -97,4 +97,12 @@ describe Glyph::Preprocessor do
 		@p.process(text).should == %{This is a test <em>This can contain test[macros em[test]]</em>}
 	end
 
+	it "should be possible to use macros in snippets" do
+		define_em_macro
+		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
+		Glyph::SNIPPETS[:b] = "and another em[test]"
+		text = "TEST: &[a]"
+		@p.process(text).should == "TEST: this is a <em>test</em> and another <em>test</em>"
+	end
+
 end

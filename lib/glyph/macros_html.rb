@@ -39,7 +39,7 @@ end
 
 macro :snippet do |value, context|
 	params = get_params_from value
-	process get_snippet(params, context)
+	process get_snippet(params, context), :source => "snippet:#{params[0]}"
 end
 
 macro :escape do |value, context|
