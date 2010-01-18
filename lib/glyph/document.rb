@@ -20,8 +20,15 @@ module Glyph
 				@contents = {:raw => file_load(file)}.to_tree
 			end
 
-			def get(format)
-				@contents.iterate {|c, level| return c.value if c.name == format }
+			def get(*format_seq)
+				end_seq = format_seq.length-1
+				current = 0
+				@contents.descend do |c, level|
+					if c.name == format_seq[current] then
+						return c.value if current == end_seq
+						current += 1
+					end
+				end
 				nil
 			end
 
