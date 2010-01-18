@@ -39,6 +39,6 @@ class MacroError < RuntimeError
 	def initialize(context, msg)
 		@context = context
 		source = context[:source] || "--"
-		super("[#{source}] #{@context[:macro]}: #{msg}")
+		super("[#{source}] #{@context[:macro].join(" > ")}: #{msg}")
 	end
 end

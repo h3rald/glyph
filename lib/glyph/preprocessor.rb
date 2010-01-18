@@ -20,7 +20,7 @@ class MacroNode < GlyphSyntaxNode
 	def evaluate(context)
 		macro = macro_name.text_value.to_sym
 		raise RuntimeError, "Undefined macro '#{macro}'" unless Glyph::MACROS.include? macro
-		context[:macro] = (context[:macro]) ? "#{context[:macro]} > #{macro}" : macro
+		(context[:macro]) ? context[:macro] << macro : context[:macro] = [macro]
 		Glyph::MACROS[macro].call(super(context).strip, context).to_s
 	end
 

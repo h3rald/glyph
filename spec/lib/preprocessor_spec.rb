@@ -54,17 +54,6 @@ describe Glyph::Preprocessor do
 		text = "This is a =>[http://www.h3rald.com|test]."
 		@p.process(text).should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
 	end
-	
-	it "should store IDs" do
-		@p.process("this is a #[test|test].").should == "this is a <a id=\"test\">test</a>."
-		Glyph::IDS.include?(:test).should == true 
-		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "[--] #: ID 'test' already exists.")
-	end
-
-	it "should retrieve snippets" do
-		@p.process("Testing a snippet: &[test].").should == "Testing a snippet: This is a \nTest snippet."
-		lambda { @p.process("Testing &[wrong].")}.should raise_error(MacroError)
-	end
 
 	it "should support multiline macros" do
 		define_ref_macro
@@ -95,14 +84,6 @@ describe Glyph::Preprocessor do
 		define_em_macro
 		text = %{This is a test em[This can @[=contain test[macros em[test]]=]]}		
 		@p.process(text).should == %{This is a test <em>This can contain test[macros em[test]]</em>}
-	end
-
-	it "should be possible to use macros in snippets" do
-		define_em_macro
-		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
-		Glyph::SNIPPETS[:b] = "and another em[test]"
-		text = "TEST: &[a]"
-		@p.process(text).should == "TEST: this is a <em>test</em> and another <em>test</em>"
 	end
 
 end
