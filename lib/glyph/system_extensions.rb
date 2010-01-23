@@ -36,8 +36,8 @@ end
 
 class Hash
 
-	def to_tree
-		HashTree.new.replace self
+	def to_node
+		HashNode.new.replace self
 	end
 
 	def pair?
@@ -57,7 +57,7 @@ class Hash
 end
 
 
-class HashTree < Hash
+class HashNode < Hash
 
 	attr_reader :children
 	attr_accessor :parent
@@ -69,7 +69,7 @@ class HashTree < Hash
 
 	def <<(hash)
 		raise ArgumentError, "#{hash} is not a Hash" unless hash.is_a? Hash
-		ht = (hash.is_a? HashTree) ? hash : hash.to_tree
+		ht = (hash.is_a? HashNode) ? hash : hash.to_node
 		ht.parent = self
 		@children << ht
 	end
@@ -103,10 +103,13 @@ class HashTree < Hash
 end
 
 class MacroError < RuntimeError
-	attr_reader :context
-	def initialize(context, msg)
-		@context = context
-		source = context[:source] || "--"
-		super("[#{source}] #{@context[:macro].join(" > ")}: #{msg}")
+	attr_reader :node
+	def initialize(node, msg)
+		@node = node
+		source = @node[:source] || "--"
+		macros = []
+		@node.ascend {|n| macros << n[:macro] if n[:macro] }
+		macros.join(" > ")
+		super("[#{source}] #{macros}: #{msg}")
 	end
 end

@@ -1,36 +1,36 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
-describe HashTree do
+describe HashNode do
 
-	def create_hash_tree
-		@ht = {:a => 1, :b => 2}.to_tree
+	def create_hash_node
+		@ht = {:a => 1, :b => 2}.to_node
 	end
 
 	it "should be a hash" do
-		ht = HashTree.new
+		ht = HashNode.new
 		ht.is_a?(Hash).should == true
 		ht.children.should == []
 	end
 
 	it "should be generated from a hash" do
-		create_hash_tree
+		create_hash_node
 		@ht.respond_to?(:children).should == true
 	end
 
 	it "should support child elements" do
-		create_hash_tree
+		create_hash_node
 		lambda { @ht << "wrong" }.should raise_error
 		lambda { @ht << {:c => 3, :d => 4} }.should_not raise_error
 		@ht.children[0][:c].should == 3
-		lambda { @ht << {:e => 5, :f => 6}.to_tree }.should_not raise_error
+		lambda { @ht << {:e => 5, :f => 6}.to_node }.should_not raise_error
 		@ht.child(1) << {:g => 7, :h => 8}
 		@ht.child(1) << {:i => 9, :j => 10}
 		((@ht>>1>>1)[:j]).should == 10
 	end
 	
 	it "should support iteration" do
-		create_hash_tree
+		create_hash_node
 		@ht << {:c => 3, :d => 4}
 		@ht << {:e => 5, :f => 6}
 		@ht.child(0) << {:g => 7, :h => 8}
@@ -50,7 +50,7 @@ describe HashTree do
 	end
 
 	it "should store information about parent nodes" do
-		create_hash_tree
+		create_hash_node
 		@ht << {:c => 3, :d => 4}
 		@ht << {:e => 5, :f => 6}
 		@ht.child(1) << {:g => 7, :h => 8}

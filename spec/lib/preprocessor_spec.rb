@@ -86,4 +86,14 @@ describe Glyph::Preprocessor do
 		@p.process(text).should == %{This is a test <em>This can contain test[macros em[test]]</em>}
 	end
 
+	it "should store syntax node information in context" do
+		define_em_macro
+		define_ref_macro
+		@p.macro :test_node do |value, context|
+			context.parent[:macro]
+		end
+		text = %{Test em[test_node[...]].}
+		@p.process(text).should == "Test <em>em</em>."
+	end
+
 end
