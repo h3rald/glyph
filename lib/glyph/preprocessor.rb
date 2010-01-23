@@ -51,15 +51,15 @@ module Glyph
 		PARSER = ::GlyphLanguageParser.new
 
 		def self.process(text, context={})
+			context[:source] ||= ["--"]
 			begin
 				PARSER.parse(text).evaluate context
 			rescue Exception => e
-				source = context[:source] ? "'#{context[:source]}'" : ''
 				raise if e.is_a? MacroError
 				if Glyph.testing? then
 					raise 
 				else
-					raise RuntimeError, "An error occurred when preprocessing #{source}"
+					raise RuntimeError, "An error occurred when preprocessing #{context[:source]}"
 				end
 			end
 		end

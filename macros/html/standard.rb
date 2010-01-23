@@ -38,7 +38,8 @@ macro :anchor do |node|
 end
 
 macro :snippet do |node|
-	process get_snippet_from(node), :source => "snippet: #{node[:value]}"
+	node[:source] << "snippet: #{node[:value]}"
+	process get_snippet_from(node), node
 end
 
 macro :escape do |node|
