@@ -89,11 +89,18 @@ describe Glyph::Preprocessor do
 	it "should store syntax node information in context" do
 		define_em_macro
 		define_ref_macro
+		count = 0
 		@p.macro :test_node do |value, context|
+			#puts "\n======="
+			context.ascend do |n| 
+				#puts n[:macro]
+				count+=1
+			end
 			context.parent[:macro]
 		end
-		text = %{Test em[test_node[...]].}
+		text = %{Test em[test_node[em[test_node[---]]]].}
 		@p.process(text).should == "Test <em>em</em>."
+		count.should == 8
 	end
 
 end

@@ -4,18 +4,9 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 
 	attr_reader :hashnode
 
-	def evaluate(context, parent=nil)
-		parent ||= {}.to_node
-		@hashnode = context.to_node
-		parent << @hashnode 
-		parent = @hashnode
-		value = elements.map do |e| 
-			v = ""
-			if e.respond_to? :evaluate then
-				v = e.evaluate(@hashnode, parent)
-			end
-			v
-		end.join
+	def evaluate(context, current=nil)
+		@hashnode ||= context.to_node
+		value = elements.map { |e| e.evaluate(@hashnode, current) if e.respond_to? :evaluate }.join
 		escs = [
 			['\\]', ']'], 
 			['\\[', '['],
@@ -31,10 +22,12 @@ class QualifiedNode < GlyphSyntaxNode; end
 
 class MacroNode < QualifiedNode
 
-	def evaluate(context, parent=nil)
+	def evaluate(context, current=nil)
+		current ||= context.to_node
 		name = macro_name.text_value.to_sym
-		@hashnode = {:macro => name}.merge(context).to_node
-		value = super(@hashnode, parent).strip
+		@hashnode = context.merge(:macro => name)
+		current << @hashnode
+		value = super(@hashnode, @hashnode).strip
 		raise RuntimeError, "Undefined macro '#{name}'" unless Glyph::MACROS.include? name
 		Glyph::MACROS[name].call(value, @hashnode).to_s
 	end
@@ -43,7 +36,7 @@ end
 
 class TextNode < QualifiedNode 
 
-	def evaluate(context, parent=nil)
+	def evaluate(context, current=nil)
 		text_value
 	end
 
@@ -64,7 +57,7 @@ module Glyph
 			rescue Exception => e
 				source = context[:source] ? "'#{context[:source]}'" : ''
 				raise if e.is_a? MacroError
-				raise# RuntimeError, "An error occurred when preprocessing #{source}"
+				raise RuntimeError, "An error occurred when preprocessing #{source}"
 			end
 		end
 
