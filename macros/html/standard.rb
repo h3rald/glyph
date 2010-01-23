@@ -32,14 +32,13 @@ macro :comment do |node|
 end
 
 macro :anchor do |node|
-	params = get_params_from node[:value]
-	store_id params, node
+	params = get_params_from node
+	store_id_from node
 	%{<a id="#{params[0]}">#{params[1]}</a>}
 end
 
 macro :snippet do |node|
-	params = get_params_from node[:value]
-	process get_snippet(params, node), :source => "snippet: #{params[0]}"
+	process get_snippet_from(node), :source => "snippet: #{node[:value]}"
 end
 
 macro :escape do |node|

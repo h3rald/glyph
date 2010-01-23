@@ -7,15 +7,22 @@ module Glyph
 
 		module Actions
 
-			def store_id(params, context)
+			def get_params_from(node)
+				esc = '__[=ESCAPED_PIPE=]__'
+				node[:value].gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
+			end
+
+			def store_id_from(node)
+				params = get_params_from node
 				ident = params[0].to_sym
-				raise MacroError.new(context, "ID '#{ident}' already exists.") if Glyph::IDS.include? ident
+				raise MacroError.new(node, "ID '#{ident}' already exists.") if Glyph::IDS.include? ident
 				Glyph::IDS << ident
 			end
 
-			def get_snippet(params, context)
+			def get_snippet_from(node)
+				params = get_params_from node
 				ident = params[0].to_sym
-				raise MacroError.new(context, "Snippet '#{ident}' does not exist.") unless Glyph::SNIPPETS.include? ident
+				raise MacroError.new(node, "Snippet '#{ident}' does not exist.") unless Glyph::SNIPPETS.include? ident
 				Glyph::SNIPPETS[ident]
 			end
 

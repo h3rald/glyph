@@ -56,13 +56,12 @@ module Glyph
 			rescue Exception => e
 				source = context[:source] ? "'#{context[:source]}'" : ''
 				raise if e.is_a? MacroError
-				raise #RuntimeError, "An error occurred when preprocessing #{source}"
+				if Glyph.testing? then
+					raise 
+				else
+					raise RuntimeError, "An error occurred when preprocessing #{source}"
+				end
 			end
-		end
-
-		def self.get_params_from(value)
-			esc = '__[=ESCAPED_PIPE=]__'
-			value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
 		end
 
 		def self.macro(name, &block)

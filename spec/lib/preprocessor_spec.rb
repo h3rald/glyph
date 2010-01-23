@@ -22,7 +22,7 @@ describe Glyph::Preprocessor do
 
 	def define_ref_macro
 		@p.macro :ref do |node|
-			params = @p.get_params_from node[:value]
+			params = @p.get_params_from node
 			%{<a href="#{params[0]}">#{params[1]}</a>}
 		end
 	end
