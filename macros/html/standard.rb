@@ -1,49 +1,49 @@
 #!/usr/bin/env ruby
 
-macro :note do |value, context|
+macro :note do |node|
 	%{
 		<div class="note">
 			<span class="note-title">Note</span>
-			<span class="note-body">#{value}</span>
+			<span class="note-body">#{node[:value]}</span>
 		</div>
 	}
 end
 
-macro :important do |value, context|
+macro :important do |node|
 	%{
 		<div class="note important">
 			<span class="note-title">Important</span>
-			<span class="note-body">#{value}</span>
+			<span class="note-body">#{node[:value]}</span>
 		</div>
 	}
 end
 
-macro :tip do |value, context|
+macro :tip do |node|
 	%{
 		<div class="note tip">
 			<span class="note-title">Tip</span>
-			<span class="note-body">#{value}</span>
+			<span class="note-body">#{node[:value]}</span>
 		</div>
 	}
 end
 
-macro :comment do |value, context|
-	%{<!-- #{value} -->}
+macro :comment do |node|
+	%{<!-- #{node[:value]} -->}
 end
 
-macro :anchor do |value, context|
-	params = get_params_from value
-	store_id params, context
+macro :anchor do |node|
+	params = get_params_from node[:value]
+	store_id params, node
 	%{<a id="#{params[0]}">#{params[1]}</a>}
 end
 
-macro :snippet do |value, context|
-	params = get_params_from value
-	process get_snippet(params, context), :source => "snippet: #{params[0]}"
+macro :snippet do |node|
+	params = get_params_from node[:value]
+	process get_snippet(params, node), :source => "snippet: #{params[0]}"
 end
 
-macro :escape do |value, context|
-	value
+macro :escape do |node|
+	node[:value]
 end
 
 macro_alias '--', :comment

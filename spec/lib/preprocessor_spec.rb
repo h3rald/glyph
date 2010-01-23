@@ -15,14 +15,14 @@ describe Glyph::Preprocessor do
 	end
 
 	def define_em_macro
-		@p.macro :em do |value, context| 
-			%{<em>#{value}</em>}
+		@p.macro :em do |node| 
+			%{<em>#{node[:value]}</em>}
 		end
 	end
 
 	def define_ref_macro
-		@p.macro :ref do |value, context|
-			params = @p.get_params_from value
+		@p.macro :ref do |node|
+			params = @p.get_params_from node[:value]
 			%{<a href="#{params[0]}">#{params[1]}</a>}
 		end
 	end
@@ -90,13 +90,13 @@ describe Glyph::Preprocessor do
 		define_em_macro
 		define_ref_macro
 		count = 0
-		@p.macro :test_node do |value, context|
+		@p.macro :test_node do |node|
 			#puts "\n======="
-			context.ascend do |n| 
+			node.ascend do |n| 
 				#puts n[:macro]
 				count+=1
 			end
-			context.parent[:macro]
+			node.parent[:macro]
 		end
 		text = %{Test em[test_node[em[test_node[---]]]].}
 		@p.process(text).should == "Test <em>em</em>."

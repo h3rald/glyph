@@ -15,8 +15,8 @@ describe Glyph::Preprocessor::Actions do
 	end
 
 	def define_em_macro
-		@p.macro :em do |value, context| 
-			%{<em>#{value}</em>}
+		@p.macro :em do |node| 
+			%{<em>#{node[:value]}</em>}
 		end
 	end
 
