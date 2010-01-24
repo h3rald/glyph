@@ -43,8 +43,14 @@ macro :snippet do |node|
 end
 
 macro :include do |node|
-	node[:source] << "file: #{node[:file]}"
-	process load_file_from(node), node
+	contents = load_file_from(node)
+	if Glyph::CONFIG.get "filters.by_file_extension" then
+		ext = node[:value].match(/\.(.*)$/)[1]
+		raise MacroError.new(node, "Macro '#{ext}' not found") unless Glyph::MACROS.include?(ext.to_sym)
+		contents = "#{ext}[#{contents}]"
+	end	
+	node[:source] = "file: #{node[:value]}"
+	process contents, node
 end
 
 macro :section do |node| 

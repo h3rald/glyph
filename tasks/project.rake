@@ -15,7 +15,7 @@ namespace :project do
 		# Create snippets
 		yaml_dump Glyph::PROJECT/'snippets.yml', {:test => "This is a \nTest snippet"}
 		# Create files
-		# TODO
+		file_write Glyph::PROJECT/'document.glyph'
 		info "Project '#{dir.basename}' created successfully."
 	end
 

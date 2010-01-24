@@ -19,6 +19,7 @@ describe "project:create" do
 		lambda { Glyph.run! 'project:create', Glyph::PROJECT }.should_not raise_error
 		(Glyph::PROJECT/'lib/tasks').exist?.should == true
 		(Glyph::PROJECT/'lib/macros/html/standard.rb').exist?.should == true
+		(Glyph::PROJECT/'document.glyph').exist?.should == true
 		(Glyph::PROJECT/'text').exist?.should == true
 		(Glyph::PROJECT/'layouts').exist?.should == true
 		(Glyph::PROJECT/'styles').exist?.should == true

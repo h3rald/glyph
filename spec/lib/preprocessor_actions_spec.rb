@@ -56,17 +56,15 @@ describe Glyph::Preprocessor::Actions do
 	end
 
 	it "should support file inclusion" do
-		file_copy Glyph::SPEC_DIR/'files/container.textile', Glyph::PROJECT/'text/container.textile'
-		(Glyph::PROJECT/'text/a/b/c').mkpath
-		file_copy Glyph::SPEC_DIR/'files/included.textile', Glyph::PROJECT/'text/a//b/c/included.textile'
 		l = Glyph::CONFIG.get(:first_heading_level)
+		Glyph.config_override "filters.by_extension", true
 		@p.process(file_load(Glyph::PROJECT/'text/container.textile')).gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
 			<h#{l} id="t_Container_section">Container section</h#{l}>
 			This is a test.
 				<div class="section">
-				<h#{l+1} id="t_Test_Section">Test Section</h#{l+1}>
-				...
+				<h#{l+1} id="t_Test_Section">Test Section</h#{l+1}>	
+				<p>&#8230;</p>
 				</div>
 			</div>
 		}.gsub(/\n|\t|_\d{1,3}/, '')

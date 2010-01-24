@@ -49,6 +49,8 @@ module Glyph
 	require LIB/'preprocessor_actions'
 	require LIB/'preprocessor'
 
+	DOCUMENT = {}.to_node
+
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
 	end

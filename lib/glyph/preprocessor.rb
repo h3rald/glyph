@@ -20,6 +20,28 @@ end
 
 class MacroNode < GlyphSyntaxNode
 
+	# chapter[sec[par[...]]]]:
+	#
+	# -- current = nil
+	# gsn.evaluate
+	# Evaluate children
+	# mn.evaluate # chapter
+	# -- current = context
+	# ::: context < chapter
+	# -- current = chapter
+	# gsn.evaluate # chapter
+	# Evaluate chapter children
+	# mn.evaluate # sec
+	# -- current = chapter
+	# ::: context < chapter < sec
+	# -- current = sec
+	# gsn.evaluate # sec
+	# Evaluate sec children
+	# mn.evaluate # par
+	# -- current = sec
+	# ::: context < chapter < sec < par
+	# -- current = par
+
 	def evaluate(context, current=nil)
 		name = macro_name.text_value.to_sym
 		raise RuntimeError, "Undefined macro '#{name}'" unless Glyph::MACROS.include? name
@@ -50,10 +72,10 @@ module Glyph
 
 		PARSER = ::GlyphLanguageParser.new
 
-		def self.process(text, context={})
+		def self.process(text, context={}, print=nil)
 			context[:source] ||= ["--"]
 			begin
-				current = context[:macro] ? context : nil
+				current = context[:macro] ? context.to_node : nil
 				PARSER.parse(text).evaluate context, current
 			rescue Exception => e
 				raise if e.is_a? MacroError
@@ -63,6 +85,13 @@ module Glyph
 					raise RuntimeError, "An error occurred when preprocessing #{context[:source]}"
 				end
 			end
+		end
+
+		def self.process_document
+			context = {:source => ["file: document.glyph"]}.to_node
+			process(file_load(Glyph::PROJECT/'document.glyph'), context, true)
+			context
+			#Glyph::DOCUMENT.from context
 		end
 
 		def self.macro(name, &block)

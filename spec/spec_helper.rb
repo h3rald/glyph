@@ -23,6 +23,11 @@ end
 def create_project
 	create_project_dir
 	Glyph.run! 'project:create', Glyph::PROJECT.to_s
+	file_copy Glyph::SPEC_DIR/'files/container.textile', Glyph::PROJECT/'text/container.textile'
+	(Glyph::PROJECT/'text/a/b/c').mkpath
+	file_copy Glyph::SPEC_DIR/'files/included.textile', Glyph::PROJECT/'text/a//b/c/included.textile'
+	file_copy Glyph::SPEC_DIR/'files/markdown.markdown', Glyph::PROJECT/'text/a//b/c/markdown.markdown'
+	file_copy Glyph::SPEC_DIR/'files/document.glyph', Glyph::PROJECT/'document.glyph'
 end
 
 def delete_project_dir
@@ -49,7 +54,7 @@ end
 
 def create_sample_file(filename, text, opts={})
 	contents = text
- 	contents << '#{note "Test", :type => :important}\n' if opts[:tenjin]
+	contents << '#{note "Test", :type => :important}\n' if opts[:tenjin]
 	contents << '@test\n' if opts[:snippets]
 	File.open((Glyph::PROJECT/"source"/filename).to_s, "w+") {|f| f.write contents }
 end

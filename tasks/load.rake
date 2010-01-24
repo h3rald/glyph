@@ -2,6 +2,10 @@
 
 namespace :load do
 
+	desc "Load all files"
+	task :all => [:snippets, :macros] do
+	end
+	
 	desc "Load snippets"
 	task :snippets do
 		snippets = yaml_load Glyph::PROJECT/'snippets.yml'

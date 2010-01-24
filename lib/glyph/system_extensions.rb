@@ -28,6 +28,12 @@ module Kernel
 		result
 	end
 
+	def file_write(file, contents="")
+		File.open(file, 'w+') do |f|
+			f.write contents
+		end
+	end
+
 	def file_copy(source, dest, options={})
 		FileUtils.cp source, dest, options
 	end
@@ -67,9 +73,20 @@ class HashNode < Hash
 		@children = []
 	end
 
+	def to_node
+		self
+	end
+
+	def from(node)
+		n = node.to_node
+		replace node
+		@parent = n.parent
+		@children = n.children
+	end
+
 	def <<(hash)
 		raise ArgumentError, "#{hash} is not a Hash" unless hash.is_a? Hash
-		ht = (hash.is_a? HashNode) ? hash : hash.to_node
+		ht = hash.to_node
 		ht.parent = self
 		@children << ht
 	end
@@ -87,7 +104,9 @@ class HashNode < Hash
 	def descend(element=nil, level=0, &block)
 		element ||= self
 		yield element, level
-		element.each_child {|c| descend c, level+1, &block }
+		element.each_child do |c| 
+			descend c, level+1, &block 
+		end
 	end
 
 	def ascend(element=nil, &block)

@@ -101,4 +101,11 @@ describe Glyph::Preprocessor do
 		count.should == 8
 	end
 
+	it "should process document.glyph" do
+		c = @p.process_document
+		macros = []
+		macros.should == []
+		#TODO
+	end
+
 end

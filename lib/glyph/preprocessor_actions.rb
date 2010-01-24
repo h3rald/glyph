@@ -30,10 +30,8 @@ module Glyph
 				params = get_params_from node
 				title = params[0]
 				level = Glyph::CONFIG.get(:first_heading_level) - 1
-				previous = ""
 				node.ascend do |n| 
 					if [:section, :chapter].include? n[:macro] then
-						n.children.each{|c| previous = c[:title] if c[:title] }
 						level+=1
 					end
 				end
@@ -41,6 +39,13 @@ module Glyph
 				node[:title] = title
 				node[:id] = anchor.to_sym
 				node[:level] = level
+				count = 0
+				#puts "------"
+				node.descend do |n, level|
+					count+=1
+					#puts n.to_yaml
+					break if count > 5
+				end
 				store_id_from node
 				node
 			end
