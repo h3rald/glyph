@@ -22,6 +22,30 @@ module Glyph
 			@data = hash
 		end
 
+		def merge_or_update(cfg, method=:merge)
+			raise ArgumentError, "#{cfg} is not a Glyph::Config" unless cfg.is_a? Glyph::Config
+			block = lambda do |key, v1, v2|
+				if v1.is_a?(Hash) && v2.is_a?(Hash) then
+					v1.send(method, v2, &block)
+				else
+					v2
+				end
+			end
+			new_data = @data.send(method, cfg.to_hash, &block)
+			opts = @options.merge :data => new_data, :file => nil
+			(method == :merge) ? Config.new(opts) : self
+		end
+
+		def update(cfg)
+			merge_or_update cfg, :update
+		end
+
+		def merge(cfg)
+			merge_or_update cfg, :merge
+		end
+
+		alias merge! update
+
 		def read
 			raise RuntimeError, "Configuration is not stored in a file." if @file.blank?
 			if @file.exist? then 
@@ -36,6 +60,9 @@ module Glyph
 
 		def set(setting, value)
 			raise RuntimeError, "Configuration cannot be changed" unless @options[:mutable]
+			if value.is_a?(String) && value.match(/^(:.+|\[.*\]|\{.*\}|true|false|nil)$/) then
+				value = Kernel.instance_eval value
+			end
 			hash = @data
 			path = setting.to_s.split(".").map{|s| s.intern}
 			count = 1

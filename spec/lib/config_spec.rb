@@ -31,8 +31,10 @@ describe Glyph::Config do
 		lambda { @cfg.set "test.wrong", true}.should raise_error
 		lambda { @cfg.set "test2.value", true}.should_not raise_error
 		@cfg.get("test2.value").should == true
+		lambda { @cfg.set "test2.value", "false"}.should_not raise_error
+		@cfg.get("test2.value").should == false
 		@cfg.get("test2.value2").should == nil
-		@cfg.to_hash.should == {:test => false, :test2 => {:value => true}}
+		@cfg.to_hash.should == {:test => false, :test2 => {:value => false}}
 	end
 
 	it "can be resetted with a Hash, if resettable" do
@@ -57,6 +59,20 @@ describe Glyph::Config do
 		cfg2 = Glyph::Config.new :file => @config_path
 		cfg2.read
 		cfg2.to_hash.should == @cfg.to_hash
+	end
+
+	it "should merge with another Config without data loss" do
+		hash1 = {:a =>1, :b => {:b1 => 1, :b2 => 2, :b3 => {:b11 => 1, :b12 =>2}, :b4 => 4}, :c => 3}
+		hash2 = {:a =>1, :b => {:b1 => 1111, :b2 => 2222, :b3 => {:b12 =>2222}}}
+		@write_config_file.call hash1.to_yaml
+		@cfg.read
+		@write_config_file.call hash2.to_yaml
+		cfg2 = Glyph::Config.new :file => @config_path
+		@cfg.update cfg2
+		updated = {:a =>1, :b => {:b1 => 1111, :b2 => 2222, :b3 => {:b11 => 1, :b12 =>2222}, :b4 => 4}, :c=> 3}
+		@cfg.to_hash.should == updated
+		hash1.merge! hash2
+		hash1.should == {:a =>1, :b => {:b1 => 1111, :b2 => 2222, :b3 => {:b12 =>2222}}, :c=> 3}
 	end
 
 

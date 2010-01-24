@@ -106,7 +106,7 @@ class MacroError < RuntimeError
 	attr_reader :node
 	def initialize(node, msg)
 		@node = node
-		source = @node[:source] || "--"
+		source = @node[:source].last || "--"
 		macros = []
 		@node.ascend {|n| macros << n[:macro] if n[:macro] }
 		macros.join(" > ")

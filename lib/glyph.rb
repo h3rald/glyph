@@ -79,7 +79,8 @@ module Glyph
 	end
 
 	def self.reset_config
-		CONFIG.reset SYSTEM_CONFIG.to_hash.merge(GLOBAL_CONFIG.to_hash).merge(PROJECT_CONFIG.to_hash)
+		#CONFIG.reset SYSTEM_CONFIG.to_hash.merge(GLOBAL_CONFIG.to_hash).merge(PROJECT_CONFIG.to_hash)
+		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
 	end
 
 	def self.glyph_project?
