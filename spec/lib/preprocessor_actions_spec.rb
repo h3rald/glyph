@@ -40,18 +40,18 @@ describe Glyph::Preprocessor::Actions do
 	end
 
 	it "should manage sections and titles" do
-		text = "chapter[title[Chapter X] ... section[title[Section Y] ... section[title[Another section] ...]]]"
+		text = "chapter[title[Chapter X] ... section[title[Section Y|sec-y] ... section[title[Another section] ...]]]"
 		l = Glyph::CONFIG.get(:first_heading_level)
-		@p.process(text).gsub(/\n|\t/, '').should == %{<div class="section">
-					<h#{l}>Chapter X</h#{l}> ... 
+		@p.process(text).gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="section">
+					<h#{l} id="t_Chapter_X">Chapter X</h#{l}> ... 
 					<div class="section">
-					<h#{l+1}>Section Y</h#{l+1}> ... 
+					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 
 						<div class="section">
-						<h#{l+2}>Another section</h#{l+2}> ...
+						<h#{l+2} id="t_Another_section">Another section</h#{l+2}> ...
 						</div>
 					</div>
 				</div>
-		}.gsub(/\n|\t/, '')
+		}.gsub(/\n|\t|_\d{1,3}/, '')
 	end
 
 	it "should support file inclusion" do
@@ -59,16 +59,16 @@ describe Glyph::Preprocessor::Actions do
 		(Glyph::PROJECT/'text/a/b/c').mkpath
 		file_copy Glyph::SPEC_DIR/'files/included.textile', Glyph::PROJECT/'text/a//b/c/included.textile'
 		l = Glyph::CONFIG.get(:first_heading_level)
-		@p.process(file_load(Glyph::PROJECT/'text/container.textile')).gsub(/\n|\t/, '').should == %{
+		@p.process(file_load(Glyph::PROJECT/'text/container.textile')).gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
-			<h#{l}>Container section</h#{l}>
+			<h#{l} id="t_Container_section">Container section</h#{l}>
 			This is a test.
 				<div class="section">
-				<h#{l+1}>Test Section</h#{l+1}>
+				<h#{l+1} id="t_Test_Section">Test Section</h#{l+1}>
 				...
 				</div>
 			</div>
-		}.gsub(/\n|\t/, '')
+		}.gsub(/\n|\t|_\d{1,3}/, '')
 	end
 
 end	

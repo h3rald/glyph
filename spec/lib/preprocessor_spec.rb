@@ -91,9 +91,7 @@ describe Glyph::Preprocessor do
 		define_ref_macro
 		count = 0
 		@p.macro :test_node do |node|
-			#puts "\n======="
 			node.ascend do |n| 
-				#puts n[:macro]
 				count+=1
 			end
 			node.parent[:macro]

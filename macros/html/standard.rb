@@ -56,9 +56,9 @@ macro :section do |node|
 end
 
 macro :title do |node|
-	title, level = get_title_from node
+	title_node = get_title_from node
 	%{
-		<h#{level}>#{title}</h#{level}>
+		<h#{title_node[:level]} id="#{title_node[:id]}">#{title_node[:title]}</h#{title_node[:level]}>
 	}	
 end
 

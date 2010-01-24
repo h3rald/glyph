@@ -14,7 +14,7 @@ module Glyph
 
 			def store_id_from(node)
 				params = get_params_from node
-				ident = params[0].to_sym
+				ident = node[:id] || params[0].to_sym
 				raise MacroError.new(node, "ID '#{ident}' already exists.") if Glyph::IDS.include? ident
 				Glyph::IDS << ident
 			end
@@ -27,14 +27,21 @@ module Glyph
 			end
 
 			def get_title_from(node)
-				title = node[:value]
+				params = get_params_from node
+				title = params[0]
 				level = Glyph::CONFIG.get(:first_heading_level) - 1
+				previous = ""
 				node.ascend do |n| 
 					if [:section, :chapter].include? n[:macro] then
+						n.children.each{|c| previous = c[:title] if c[:title] }
 						level+=1
 					end
 				end
-				[title, level]
+				anchor = params[1] ? params[1] : "t_#{title.gsub(' ', '_')}_#{rand(100)}"
+				node[:title] = title
+				node[:id] = anchor.to_sym
+				node[:level] = level
+				node
 			end
 
 			def load_file_from(node)
