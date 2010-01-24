@@ -53,7 +53,8 @@ module Glyph
 		def self.process(text, context={})
 			context[:source] ||= ["--"]
 			begin
-				PARSER.parse(text).evaluate context
+				current = context[:macro] ? context : nil
+				PARSER.parse(text).evaluate context, current
 			rescue Exception => e
 				raise if e.is_a? MacroError
 				if Glyph.testing? then

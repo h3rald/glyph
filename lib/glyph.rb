@@ -83,7 +83,7 @@ module Glyph
 	end
 
 	def self.glyph_project?
-		children = ["config", "source", "output"]
+		children = ["config", "text", "output"]
 		PROJECT.children.map{|c| c.basename.to_s} & children == children
 	end
 

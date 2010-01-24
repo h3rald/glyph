@@ -42,11 +42,36 @@ macro :snippet do |node|
 	process get_snippet_from(node), node
 end
 
-macro :escape do |node|
-	node[:value]
+macro :include do |node|
+	node[:source] << "file: #{node[:file]}"
+	process load_file_from(node), node
+end
+
+macro :section do |node| 
+	%{
+		<div class="section">
+			#{node[:value]}
+		</div>
+	}	
+end
+
+macro :title do |node|
+	title, level = get_title_from node
+	%{
+		<h#{level}>#{title}</h#{level}>
+	}	
+end
+
+macro :escape do |node| 
+	node[:value] 
 end
 
 macro_alias '--', :comment
 macro_alias '#', :anchor
 macro_alias '&', :snippet
-macro_alias '@', :escape
+macro_alias '%', :escape
+macro_alias :chapter, :section
+macro_alias :header, :title
+macro_alias :heading, :title
+macro_alias "===", :title
+macro_alias "@", :include

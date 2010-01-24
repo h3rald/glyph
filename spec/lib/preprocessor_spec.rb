@@ -82,7 +82,7 @@ describe Glyph::Preprocessor do
 
 	it "should support escaping macros" do
 		define_em_macro
-		text = %{This is a test em[This can @[=contain test[macros em[test]]=]]}		
+		text = %{This is a test em[This can %[=contain test[macros em[test]]=]]}		
 		@p.process(text).should == %{This is a test <em>This can contain test[macros em[test]]</em>}
 	end
 

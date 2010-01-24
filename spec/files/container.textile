@@ -1,0 +1,5 @@
+section[
+title[Container section]
+This is a test.
+@[included.textile]
+]

@@ -26,17 +26,49 @@ describe Glyph::Preprocessor::Actions do
 		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "[--] #: ID 'test' already exists.")
 	end
 
-	it "should retrieve snippets" do
+	it "should support snippets" do
 		@p.process("Testing a snippet: &[test].").should == "Testing a snippet: This is a \nTest snippet."
 		lambda { @p.process("Testing &[wrong].")}.should raise_error(MacroError)
 	end
 	
-	it "should be possible to use macros in snippets" do
+	it "should allod macros within snippets" do
 		define_em_macro
 		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
 		Glyph::SNIPPETS[:b] = "and another em[test]"
 		text = "TEST: &[a]"
 		@p.process(text).should == "TEST: this is a <em>test</em> and another <em>test</em>"
+	end
+
+	it "should manage sections and titles" do
+		text = "chapter[title[Chapter X] ... section[title[Section Y] ... section[title[Another section] ...]]]"
+		l = Glyph::CONFIG.get(:first_heading_level)
+		@p.process(text).gsub(/\n|\t/, '').should == %{<div class="section">
+					<h#{l}>Chapter X</h#{l}> ... 
+					<div class="section">
+					<h#{l+1}>Section Y</h#{l+1}> ... 
+						<div class="section">
+						<h#{l+2}>Another section</h#{l+2}> ...
+						</div>
+					</div>
+				</div>
+		}.gsub(/\n|\t/, '')
+	end
+
+	it "should support file inclusion" do
+		file_copy Glyph::SPEC_DIR/'files/container.textile', Glyph::PROJECT/'text/container.textile'
+		(Glyph::PROJECT/'text/a/b/c').mkpath
+		file_copy Glyph::SPEC_DIR/'files/included.textile', Glyph::PROJECT/'text/a//b/c/included.textile'
+		l = Glyph::CONFIG.get(:first_heading_level)
+		@p.process(file_load(Glyph::PROJECT/'text/container.textile')).gsub(/\n|\t/, '').should == %{
+			<div class="section">
+			<h#{l}>Container section</h#{l}>
+			This is a test.
+				<div class="section">
+				<h#{l+1}>Test Section</h#{l+1}>
+				...
+				</div>
+			</div>
+		}.gsub(/\n|\t/, '')
 	end
 
 end	
