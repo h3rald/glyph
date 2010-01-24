@@ -41,6 +41,7 @@ module Glyph
 				node[:title] = title
 				node[:id] = anchor.to_sym
 				node[:level] = level
+				store_id_from node
 				node
 			end
 

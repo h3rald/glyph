@@ -52,6 +52,7 @@ describe Glyph::Preprocessor::Actions do
 					</div>
 				</div>
 		}.gsub(/\n|\t|_\d{1,3}/, '')
+		Glyph::IDS.include?(:"sec-y").should == true 
 	end
 
 	it "should support file inclusion" do
