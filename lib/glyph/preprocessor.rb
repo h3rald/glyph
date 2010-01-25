@@ -52,10 +52,6 @@ module Glyph
 
 		PARSER = ::GlyphLanguageParser.new
 
-		#def self.process(text, context={})
-		#	analyze(text, context)[:output]
-		#end
-
 		def self.process(text, context={})
 			begin
 				node = PARSER.parse(text)
@@ -74,7 +70,7 @@ module Glyph
 		end
 
 		def self.build_document
-			context = {:soure => "file: document.glyph"}
+			context = {:source => "file: document.glyph"}
 			Glyph::DOCUMENT.from process(file_load(Glyph::PROJECT/'document.glyph'), context)
 		end
 
