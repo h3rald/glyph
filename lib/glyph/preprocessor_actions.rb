@@ -39,13 +39,6 @@ module Glyph
 				node[:title] = title
 				node[:id] = anchor.to_sym
 				node[:level] = level
-				count = 0
-				#puts "------"
-				node.descend do |n, level|
-					count+=1
-					#puts n.to_yaml
-					break if count > 5
-				end
 				store_id_from node
 				node
 			end

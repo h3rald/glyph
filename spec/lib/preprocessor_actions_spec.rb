@@ -42,7 +42,7 @@ describe Glyph::Preprocessor::Actions do
 	it "should manage sections and titles" do
 		text = "chapter[title[Chapter X] ... section[title[Section Y|sec-y] ... section[title[Another section] ...]]]"
 		l = Glyph::CONFIG.get(:first_heading_level)
-		@p.process(text).gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="section">
+		@p.process(text, {}).gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="section">
 					<h#{l} id="t_Chapter_X">Chapter X</h#{l}> ... 
 					<div class="section">
 					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 

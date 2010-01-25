@@ -38,7 +38,7 @@ macro :anchor do |node|
 end
 
 macro :snippet do |node|
-	node[:source] << "snippet: #{node[:value]}"
+	node[:source] = "snippet: #{node[:value]}"
 	process get_snippet_from(node), node
 end
 
@@ -77,7 +77,4 @@ macro_alias '#', :anchor
 macro_alias '&', :snippet
 macro_alias '%', :escape
 macro_alias :chapter, :section
-macro_alias :header, :title
-macro_alias :heading, :title
-macro_alias "===", :title
 macro_alias "@", :include

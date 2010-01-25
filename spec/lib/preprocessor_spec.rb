@@ -102,10 +102,14 @@ describe Glyph::Preprocessor do
 	end
 
 	it "should process document.glyph" do
-		c = @p.process_document
+		@p.build_document
 		macros = []
-		macros.should == []
-		#TODO
+		Glyph::DOCUMENT.descend do |n, level|
+			macros << {n[:macro] => level} if n[:macro]
+		end
+		macros.should == [{:"@" => 1},{:textile => 2},{:section => 3}, {:title => 4}, 
+			{:"@" => 4}, {:textile => 5}, {:section => 6}, {:title => 7}, 
+			{:"@" => 1}, {:markdown => 2},{:section => 3}, {:title => 4}]
 	end
 
 end
