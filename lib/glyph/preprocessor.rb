@@ -4,10 +4,10 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 
 	attr_reader :hashnode
 
-	def evaluate(context, current=nil, print=false)
+	def evaluate(context, current=nil)
 		current ||= context.to_node
 		@hashnode ||= current.to_node
-		value = elements.map { |e| e.evaluate(context, current, print) if e.respond_to? :evaluate }.join 
+		value = elements.map { |e| e.evaluate(context, current) if e.respond_to? :evaluate }.join 
 		escs = [
 			['\\]', ']'], 
 			['\\[', '['],
@@ -19,22 +19,15 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 
 end 
 
-class QualifiedNode < GlyphSyntaxNode; end
 
-class MacroNode < QualifiedNode
+class MacroNode < GlyphSyntaxNode
 
-	def evaluate(context, current=nil, print=false)
+	def evaluate(context, current=nil)
 		name = macro_name.text_value.to_sym
 		raise RuntimeError, "Undefined macro '#{name}'" unless Glyph::MACROS.include? name
 		@hashnode = {:macro => name, :source => context[:source]}.to_node
 		current << @hashnode
-		if print then
-			puts "---"
-			puts "hashnode: #{@hashnode[:macro]}"
-			puts "current: #{current[:macro]}" 
-			current.children.each {|c| puts " -> #{c[:macro]}"}
-		end
-		value = super(context, @hashnode, print).strip 
+		value = super(context, @hashnode).strip 
 		@hashnode[:value] = value
 		Glyph::MACROS[name].call(@hashnode).to_s
 	end
@@ -42,9 +35,9 @@ class MacroNode < QualifiedNode
 end
 
 
-class TextNode < QualifiedNode 
+class TextNode < GlyphSyntaxNode	
 
-	def evaluate(context, current=nil, print=false)
+	def evaluate(context, current=nil)
 		text_value
 	end
 
@@ -59,15 +52,15 @@ module Glyph
 
 		PARSER = ::GlyphLanguageParser.new
 
-		def self.process(text, context={})
-			analyze(text, context)[:output]
-		end
+		#def self.process(text, context={})
+		#	analyze(text, context)[:output]
+		#end
 
-		def self.analyze(text, context={}, print=false)
+		def self.process(text, context={})
 			begin
 				node = PARSER.parse(text)
 				context[:source] ||= "--"
-				text = node.evaluate(context, nil, print)
+				text = node.evaluate(context, nil)
 				node.hashnode[:output] = text
 				node.hashnode
 			rescue Exception => e
@@ -82,7 +75,7 @@ module Glyph
 
 		def self.build_document
 			context = {:soure => "file: document.glyph"}
-			Glyph::DOCUMENT.from analyze(file_load(Glyph::PROJECT/'document.glyph'), context)
+			Glyph::DOCUMENT.from process(file_load(Glyph::PROJECT/'document.glyph'), context)
 		end
 
 		def self.macro(name, &block)

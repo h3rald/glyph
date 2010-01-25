@@ -21,13 +21,13 @@ describe Glyph::Preprocessor::Actions do
 	end
 
 	it "should store IDs" do
-		@p.process("this is a #[test|test].").should == "this is a <a id=\"test\">test</a>."
+		@p.process("this is a #[test|test].")[:output].should == "this is a <a id=\"test\">test</a>."
 		Glyph::IDS.include?(:test).should == true 
 		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "[--] #: ID 'test' already exists.")
 	end
 
 	it "should support snippets" do
-		@p.process("Testing a snippet: &[test].").should == "Testing a snippet: This is a \nTest snippet."
+		@p.process("Testing a snippet: &[test].")[:output].should == "Testing a snippet: This is a \nTest snippet."
 		lambda { @p.process("Testing &[wrong].")}.should raise_error(MacroError)
 	end
 	
@@ -36,13 +36,13 @@ describe Glyph::Preprocessor::Actions do
 		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
 		Glyph::SNIPPETS[:b] = "and another em[test]"
 		text = "TEST: &[a]"
-		@p.process(text).should == "TEST: this is a <em>test</em> and another <em>test</em>"
+		@p.process(text)[:output].should == "TEST: this is a <em>test</em> and another <em>test</em>"
 	end
 
 	it "should manage sections and titles" do
 		text = "chapter[title[Chapter X] ... section[title[Section Y|sec-y] ... section[title[Another section] ...]]]"
 		l = Glyph::CONFIG.get(:first_heading_level)
-		@p.process(text, {}).gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="section">
+		@p.process(text)[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="section">
 					<h#{l} id="t_Chapter_X">Chapter X</h#{l}> ... 
 					<div class="section">
 					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 
@@ -58,7 +58,7 @@ describe Glyph::Preprocessor::Actions do
 	it "should support file inclusion" do
 		l = Glyph::CONFIG.get(:first_heading_level)
 		Glyph.config_override "filters.by_extension", true
-		@p.process(file_load(Glyph::PROJECT/'text/container.textile')).gsub(/\n|\t|_\d{1,3}/, '').should == %{
+		@p.process(file_load(Glyph::PROJECT/'text/container.textile'))[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
 			<h#{l} id="t_Container_section">Container section</h#{l}>
 			This is a test.

@@ -39,7 +39,7 @@ end
 
 macro :snippet do |node|
 	node[:source] = "snippet: #{node[:value]}"
-	process get_snippet_from(node), node
+	process(get_snippet_from(node), node)[:output]
 end
 
 macro :include do |node|
@@ -50,7 +50,7 @@ macro :include do |node|
 		contents = "#{ext}[#{contents}]"
 	end	
 	node[:source] = "file: #{node[:value]}"
-	process contents, node
+	process(contents, node)[:output]
 end
 
 macro :section do |node| 

@@ -37,22 +37,22 @@ describe Glyph::Preprocessor do
 	it "should process text and run simple macros" do
 		define_em_macro
 		text = "This is a em[test]. It em[should] work."
-		@p.process(text).should == "This is a <em>test</em>. It <em>should</em> work."
+		@p.process(text)[:output].should == "This is a <em>test</em>. It <em>should</em> work."
 		text2 = "This is pointless, but valid: em[]. This em[will] though."
-		@p.process(text2).should == "This is pointless, but valid: <em></em>. This <em>will</em> though."
+		@p.process(text2)[:output].should == "This is pointless, but valid: <em></em>. This <em>will</em> though."
 	end
 
 	it "should process and run complex macros" do
 		define_ref_macro
 		text = "This is a ref[http://www.h3rald.com|test]."
-		@p.process(text).should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
+		@p.process(text)[:output].should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
 	end
 
 	it "should support macro aliases" do
 		define_ref_macro
 		lambda { @p.macro_alias("=>", :ref)}.should_not raise_error
 		text = "This is a =>[http://www.h3rald.com|test]."
-		@p.process(text).should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
+		@p.process(text)[:output].should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
 	end
 
 	it "should support multiline macros" do
@@ -63,27 +63,27 @@ describe Glyph::Preprocessor do
 		multiline
 		
 		] macro.}
-		@p.process(text).should == %{This is a test containing a <a href="http://www.h3rald.com">multiline</a> macro.}
+		@p.process(text)[:output].should == %{This is a test containing a <a href="http://www.h3rald.com">multiline</a> macro.}
 	end
 
 	it "should support escape characters" do
 		define_em_macro
 		text = %{This text contains em[
 			some escaped em\\[content\\]... etc.].}
-		@p.process(text).should == %{This text contains <em>some escaped em[content]... etc.</em>.}
+		@p.process(text)[:output].should == %{This text contains <em>some escaped em[content]... etc.</em>.}
 	end
 
 	it "should support nested macros" do
 		define_em_macro
 		define_ref_macro
 		text = %{This is an ref[#test|em[emphasized] link]}
-		@p.process(text).should == %{This is an <a href="#test"><em>emphasized</em> link</a>}
+		@p.process(text)[:output].should == %{This is an <a href="#test"><em>emphasized</em> link</a>}
 	end
 
 	it "should support escaping macros" do
 		define_em_macro
 		text = %{This is a test em[This can %[=contain test[macros em[test]]=]]}		
-		@p.process(text).should == %{This is a test <em>This can contain test[macros em[test]]</em>}
+		@p.process(text)[:output].should == %{This is a test <em>This can contain test[macros em[test]]</em>}
 	end
 
 	it "should store syntax node information in context" do
@@ -97,7 +97,7 @@ describe Glyph::Preprocessor do
 			node.parent[:macro]
 		end
 		text = %{Test em[test_node[em[test_node[---]]]].}
-		@p.process(text).should == "Test <em>em</em>."
+		@p.process(text)[:output].should == "Test <em>em</em>."
 		count.should == 8
 	end
 
