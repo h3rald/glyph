@@ -6,7 +6,7 @@ describe "Filter Macros" do
 	before do
 		create_project
 		Glyph.run! 'load:macros'
-		@p = Glyph::Preprocessor
+		@p = Glyph::Interpreter
 	end
 
 	after do

@@ -46,7 +46,7 @@ end
 
 module Glyph
 
-	module Preprocessor
+	module Interpreter
 
 		extend Actions
 

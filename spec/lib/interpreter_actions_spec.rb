@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
-describe Glyph::Preprocessor::Actions do
+describe Glyph::Interpreter::Actions do
 
 	before do
 		create_project
 		Glyph.run! 'load:macros'
 		Glyph.run! 'load:snippets'
-		@p = Glyph::Preprocessor
+		@p = Glyph::Interpreter
 	end
 
 	after do

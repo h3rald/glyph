@@ -16,11 +16,11 @@ namespace :load do
 	desc "Load macros"
 	task :macros do
 		macro_base = Glyph::PROJECT/"lib/macros"
-		Glyph::Preprocessor.instance_eval(file_load macro_base/"filters.rb")
+		Glyph::Interpreter.instance_eval(file_load macro_base/"filters.rb")
 		macro_dir = macro_base/Glyph::CONFIG.get("filters.target").to_s
 		if macro_dir.exist? then
 			macro_dir.children.each do |f|
-				Glyph::Preprocessor.instance_eval(file_load f)
+				Glyph::Interpreter.instance_eval(file_load f)
 			end
 		end
 	end
