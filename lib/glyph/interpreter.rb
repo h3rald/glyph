@@ -48,8 +48,6 @@ module Glyph
 
 	module Interpreter
 
-		extend Actions
-
 		PARSER = ::GlyphLanguageParser.new
 
 		def self.process(text, context={})

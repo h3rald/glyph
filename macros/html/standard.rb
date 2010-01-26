@@ -32,18 +32,18 @@ macro :comment do |node|
 end
 
 macro :anchor do |node|
-	params = get_params_from node
-	store_id_from node
+	params = node.get_params
+	node.store_id
 	%{<a id="#{params[0]}">#{params[1]}</a>}
 end
 
 macro :snippet do |node|
 	node[:source] = "snippet: #{node[:value]}"
-	process(get_snippet_from(node), node)[:output]
+	process(node.get_snippet, node)[:output]
 end
 
 macro :include do |node|
-	contents = load_file_from(node)
+	contents = node.load_file
 	if Glyph::CONFIG.get "filters.by_file_extension" then
 		ext = node[:value].match(/\.(.*)$/)[1]
 		raise MacroError.new(node, "Macro '#{ext}' not found") unless Glyph::MACROS.include?(ext.to_sym)
@@ -62,7 +62,7 @@ macro :section do |node|
 end
 
 macro :title do |node|
-	title_node = get_title_from node
+	title_node = node.get_title
 	%{
 		<h#{title_node[:level]} id="#{title_node[:id]}">#{title_node[:title]}</h#{title_node[:level]}>
 	}	

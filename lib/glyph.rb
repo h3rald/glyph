@@ -46,8 +46,8 @@ module Glyph
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'
+	require LIB/'node_actions'
 	require LIB/'glyph_language'
-	require LIB/'interpreter_actions'
 	require LIB/'interpreter'
 
 	DOCUMENT = {}.to_node

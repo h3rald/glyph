@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
-describe Glyph::Interpreter::Actions do
+describe Glyph::Node do
 
 	before do
 		create_project
