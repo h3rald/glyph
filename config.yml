@@ -1,3 +1,6 @@
+:document:
+  :author: ""
+  :title: ""
 :pdf_renderer: 'wkhtmltopdf'
 :first_heading_level: 2
 :filters:
