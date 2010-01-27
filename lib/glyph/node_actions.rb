@@ -24,17 +24,17 @@ module Glyph
 			Glyph::SNIPPETS[ident]
 		end
 
-		def get_title
+		def get_header
 			params = get_params
 			title = params[0]
 			level = Glyph::CONFIG.get(:first_heading_level) - 1
 			ascend do |n| 
-				if [:section, :chapter].include? n[:macro] then
+				if [:section, :chapter, :part].include? n[:macro] then
 					level+=1
 				end
 			end
 			anchor = params[1] ? params[1] : "t_#{title.gsub(' ', '_')}_#{rand(100)}"
-			self[:title] = title
+			self[:header] = title
 			self[:id] = anchor.to_sym
 			self[:level] = level
 			store_id

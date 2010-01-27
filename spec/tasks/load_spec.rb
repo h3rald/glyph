@@ -19,6 +19,7 @@ describe "load" do
 	it "[macros] should load macro definitions" do
 		lambda { Glyph.run! 'load:macros'}.should_not raise_error
 		Glyph::MACROS[:note].blank?.should == false
+		Glyph::MACROS[:"#"].blank?.should == false
 	end
 
 end

@@ -50,8 +50,8 @@ describe Glyph::Interpreter do
 
 	it "should support macro aliases" do
 		define_ref_macro
-		lambda { @p.macro_alias("=>", :ref)}.should_not raise_error
-		text = "This is a =>[http://www.h3rald.com|test]."
+		lambda { @p.macro_alias("->" => :ref)}.should_not raise_error
+		text = "This is a ->[http://www.h3rald.com|test]."
 		@p.process(text)[:output].should == "This is a <a href=\"http://www.h3rald.com\">test</a>."
 	end
 
@@ -107,9 +107,9 @@ describe Glyph::Interpreter do
 		Glyph::DOCUMENT.descend do |n, level|
 			macros << {n[:macro] => level} if n[:macro]
 		end
-		macros.should == [{:"@" => 1},{:textile => 2},{:section => 3}, {:title => 4}, 
-			{:"@" => 4}, {:textile => 5}, {:section => 6}, {:title => 7}, 
-			{:"@" => 1}, {:markdown => 2},{:section => 3}, {:title => 4}]
+		macros.should == [{:"@" => 1},{:textile => 2},{:section => 3}, {:header => 4}, 
+			{:"@" => 4}, {:textile => 5}, {:section => 6}, {:header => 7}, 
+			{:"@" => 1}, {:markdown => 2},{:section => 3}, {:header => 4}]
 	end
 
 end

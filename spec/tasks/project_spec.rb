@@ -17,15 +17,17 @@ describe "project:create" do
 
 	it "[create] should create a new project if an existing empty directory is supplied" do
 		lambda { Glyph.run! 'project:create', Glyph::PROJECT }.should_not raise_error
+		(Glyph::PROJECT/'lib').exist?.should == true
 		(Glyph::PROJECT/'lib/tasks').exist?.should == true
-		(Glyph::PROJECT/'lib/macros/html/standard.rb').exist?.should == true
+		(Glyph::PROJECT/'lib/macros/common.rb').exist?.should == true
+		(Glyph::PROJECT/'lib/macros/filters.rb').exist?.should == true
+		(Glyph::PROJECT/'lib/macros/html/inline.rb').exist?.should == true
+		(Glyph::PROJECT/'lib/macros/html/structure.rb').exist?.should == true
 		(Glyph::PROJECT/'document.glyph').exist?.should == true
 		(Glyph::PROJECT/'text').exist?.should == true
-		(Glyph::PROJECT/'layouts').exist?.should == true
 		(Glyph::PROJECT/'styles').exist?.should == true
-		(Glyph::PROJECT/'assets').exist?.should == true
+		(Glyph::PROJECT/'images').exist?.should == true
 		(Glyph::PROJECT/'output').exist?.should == true
-		(Glyph::PROJECT/'lib').exist?.should == true
 	end
 
 	it "[add] should add new files to project" do

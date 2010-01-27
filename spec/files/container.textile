@@ -1,5 +1,5 @@
 section[
-title[Container section]
+header[Container section]
 This is a test.
 @[included.textile]
 ]

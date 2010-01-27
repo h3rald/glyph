@@ -66,4 +66,4 @@ macro :markdown do |node|
 	end
 end
 
-macro_alias :md, :markdown
+macro_alias :md => :markdown

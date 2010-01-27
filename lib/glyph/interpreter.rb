@@ -76,8 +76,8 @@ module Glyph
 			Glyph::MACROS[name.to_sym] = block			
 		end
 
-		def self.macro_alias(new_macro, old_macro)
-			Glyph::MACROS[new_macro.to_sym] = Glyph::MACROS[old_macro.to_sym]
+		def self.macro_alias(pair)
+			Glyph::MACROS[pair.name.to_sym] = Glyph::MACROS[pair.value.to_sym]
 		end
 
 	end
