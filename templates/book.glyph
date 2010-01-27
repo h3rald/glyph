@@ -1,0 +1,20 @@
+document[
+	titlepage[
+		textile[
+			%(title)\.$[document.title]%
+			%(author)by _\.$[document.author]_%
+			%(pubdate)\.ruby[=Time.now.strftime("%d %M %Y")=]%
+		]
+	]
+	toc[]
+	--[=
+
+	preface[preface.textile]
+	
+	chapter[@[chapter1.textile]]
+	chapter[@[chapter2.textile]]
+
+	index[]
+
+	=]
+]

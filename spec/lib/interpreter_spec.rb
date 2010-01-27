@@ -71,6 +71,7 @@ describe Glyph::Interpreter do
 		text = %{This text contains em[
 			some escaped em\\[content\\]... etc.].}
 		@p.process(text)[:output].should == %{This text contains <em>some escaped em[content]... etc.</em>.}
+		@p.process("test \\\\ _\\.em[test]_.")[:output].should == "test \\ _<em>test</em>_."
 	end
 
 	it "should support nested macros" do
@@ -78,12 +79,6 @@ describe Glyph::Interpreter do
 		define_ref_macro
 		text = %{This is an ref[#test|em[emphasized] link]}
 		@p.process(text)[:output].should == %{This is an <a href="#test"><em>emphasized</em> link</a>}
-	end
-
-	it "should support escaping macros" do
-		define_em_macro
-		text = %{This is a test em[This can %[=contain test[macros em[test]]=]]}		
-		@p.process(text)[:output].should == %{This is a test <em>This can contain test[macros em[test]]</em>}
 	end
 
 	it "should store syntax node information in context" do

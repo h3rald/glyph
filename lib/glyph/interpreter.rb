@@ -11,7 +11,9 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 		escs = [
 			['\\]', ']'], 
 			['\\[', '['],
-			['\\=', '=']
+			['\\=', '='],
+			['\\.', ''],
+			['\\\\', '\\']
 		]
 		escs.each{|e| value.gsub! e[0], e[1]}
 		value

@@ -25,7 +25,17 @@ macro :escape do |node|
 	node[:value] 
 end
 
+macro :ruby do |node|
+	Kernel.instance_eval(node[:value])
+end
+
+macro :config do |node|
+	Glyph::CONFIG.get node[:value]
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
-macro_alias '%' => :escape
-macro_alias "@" => :include
+macro_alias '.' => :escape
+macro_alias '@' => :include
+macro_alias '%' => :ruby
+macro_alias '$' => :config

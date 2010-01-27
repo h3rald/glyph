@@ -12,10 +12,7 @@ module GlyphLanguage
     start_index = index
     if node_cache[:expression].has_key?(index)
       cached = node_cache[:expression][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
+      @index = cached.interval.end if cached
       return cached
     end
 
@@ -67,10 +64,7 @@ module GlyphLanguage
     start_index = index
     if node_cache[:escaping_macro].has_key?(index)
       cached = node_cache[:escaping_macro][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
+      @index = cached.interval.end if cached
       return cached
     end
 
@@ -129,10 +123,7 @@ module GlyphLanguage
     start_index = index
     if node_cache[:macro].has_key?(index)
       cached = node_cache[:macro][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
+      @index = cached.interval.end if cached
       return cached
     end
 
@@ -193,10 +184,7 @@ module GlyphLanguage
     start_index = index
     if node_cache[:escaped_text].has_key?(index)
       cached = node_cache[:escaped_text][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
+      @index = cached.interval.end if cached
       return cached
     end
 
@@ -374,10 +362,7 @@ module GlyphLanguage
     start_index = index
     if node_cache[:text].has_key?(index)
       cached = node_cache[:text][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
+      @index = cached.interval.end if cached
       return cached
     end
 
@@ -506,10 +491,7 @@ module GlyphLanguage
     start_index = index
     if node_cache[:macro_name].has_key?(index)
       cached = node_cache[:macro_name][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
+      @index = cached.interval.end if cached
       return cached
     end
 
