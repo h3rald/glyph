@@ -5,7 +5,6 @@ include GLI
 alias gli_desc desc # desc is used by Rake as well...
 
 gli_desc 'Create a new Glyph project'
-arg_name "project_name"
 command :init do |c|
 	c.action do |global_options,options,args|
 		Glyph.run 'project:create', Dir.pwd
@@ -13,7 +12,7 @@ command :init do |c|
 end
 
 gli_desc 'Add a new text file to project'
-arg_name "project_name"
+arg_name "file_name"
 command :add do |c|
 	c.action do |global_options,options,args|
 		Glyph.run 'project:add', args[0]
