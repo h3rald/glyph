@@ -38,7 +38,7 @@ describe "Macro: " do
 
 	it "section, chapter, title" do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
-		l = Glyph::CONFIG.get(:first_heading_level)
+		l = Glyph::CONFIG.get("structure.first_header_level")
 		@p.process(text)[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="chapter">
 					<h#{l} id="t_Chapter_X">Chapter X</h#{l}> ... 
 					<div class="section">
@@ -53,7 +53,7 @@ describe "Macro: " do
 	end
 
 	it "include" do
-		l = Glyph::CONFIG.get(:first_heading_level)
+		l = Glyph::CONFIG.get("structure.first_header_level")
 		Glyph.config_override "filters.by_extension", true
 		@p.process(file_load(Glyph::PROJECT/'text/container.textile'))[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">

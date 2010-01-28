@@ -1,8 +1,10 @@
 :document:
   :author: ""
   :title: ""
+:structure:
+  :headers: [:section, :chapter, :part, :introduction]  
+  :first_header_level: 2
 :pdf_renderer: 'wkhtmltopdf'
-:first_heading_level: 2
 :filters:
   :by_file_extension: true
   :target: 'html'

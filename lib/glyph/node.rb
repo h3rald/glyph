@@ -90,9 +90,9 @@ module Glyph
 		def get_header
 			params = get_params
 			title = params[0]
-			level = Glyph::CONFIG.get(:first_heading_level) - 1
+			level = Glyph::CONFIG.get("structure.first_header_level") - 1
 			ascend do |n| 
-				if [:section, :chapter, :part].include? n[:macro] then
+				if Glyph::CONFIG.get("structure.headers").include? n[:macro] then
 					level+=1
 				end
 			end
