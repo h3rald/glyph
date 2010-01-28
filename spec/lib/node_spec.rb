@@ -59,5 +59,18 @@ describe Glyph::Node do
 		(@ht>>1>>0>>0).root.should == @ht
 	end
 
+	it "should find child nodes" do
+		create_node
+		@ht << {:c => 3, :d => 4}
+		@ht << {:e => 5, :f => 6}
+		result = @ht.find_child do |node|
+			node[:d] == 4
+		end
+		result.should == {:c => 3, :d => 4}
+		result2 = @ht.find_child do |node|
+			node[:q] == 7
+		end
+		result2.should == nil
+	end
 
 end

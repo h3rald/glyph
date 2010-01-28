@@ -3,7 +3,7 @@
 macro :section do |node| 
 	%{
 		<div class="#{node[:macro]}">
-			#{node[:value]}
+		#{node[:value]}
 		</div>
 	}	
 end
@@ -20,7 +20,7 @@ macro :document do |node|
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-	#{node[:value]}
+		#{node[:value]}
 </html>
 	}
 end
@@ -28,7 +28,7 @@ end
 macro :body do |node|
 	%{
 		<body>
-			#{node[:value]}
+		#{node[:value]}
 		</body>
 	}
 end
@@ -39,7 +39,7 @@ macro :head do |node|
 			<title>#{Glyph::CONFIG.get("document.title")}</title>
 			<meta name="author" content="#{Glyph::CONFIG.get("document.author")}">
 			<meta name="copyright" content="#{Glyph::CONFIG.get("document.author")}">
-			#{node[:value]}
+		#{node[:value]}
 		</head>
 	}
 end
@@ -65,9 +65,46 @@ macro :style do |node|
 	end
 	%{
 		<style>
-			#{node[:style]}
+		#{node[:style]}
 		</style>
 	}
+end
+
+# Output:
+# <ul class="toc">
+# 	<li class="toc-chapter">Test 1</li>
+# 	<li class="toc-chapter">Test 2</li>
+# 	<li class="toc-chapter">Test 3</li>
+# 	<li class="toc-chapter">Test 4</li>
+# 	<li>
+# 		<ul>
+# 			<li class="toc-section">Section 4.1</li>
+# 			<li class="toc-section">Section 4.2</li>
+# 			<li class="toc-section">Section 4.3</li>
+# 		</ul>
+# 	</li>
+# 	<li class="toc-chapter">Test 5</li>
+# </ul>
+
+macro :toc do |node|
+	afterwards do
+		toc = ""
+		descend_section = lambda do |node|
+			node.descend do |node, level|
+				list = ""
+				if Glyph::CONFIG.get("structure.headers").include? node[:macro]
+					title_node = node.find {|n| n[:title] }
+					list << "<li>#{title_node[:title]}</li>" if title_node
+					child_list = ""
+					node.children.each do |c|
+						child_list << descend_section.call(c)
+					end	
+					list << "<ul>#{child_list}</ul>" unless child_list.blank?
+				end
+			end
+			list
+		end
+	end
 end
 
 # See http://microformats.org/wiki/book-brainstorming

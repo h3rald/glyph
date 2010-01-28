@@ -56,6 +56,13 @@ module Glyph
 			end
 		end
 
+		def find_child(&block)
+			descend do |node, level|
+				return node if block.call(node)
+			end
+			nil
+		end
+
 		def ascend(element=nil, &block)
 			element ||= self
 			yield element
