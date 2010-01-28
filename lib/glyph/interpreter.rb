@@ -51,6 +51,7 @@ module Glyph
 	module Interpreter
 
 		PARSER = ::GlyphLanguageParser.new
+		DELAYED_ACTIONS = {}
 
 		def self.process(text, context={})
 			begin
@@ -72,6 +73,9 @@ module Glyph
 		def self.build_document
 			context = {:source => "file: document.glyph"}
 			Glyph::DOCUMENT.from process(file_load(Glyph::PROJECT/'document.glyph'), context)
+			DELAYED_ACTIONS.each_pair do |key, value|
+				Glyph::DOCUMENT[:output].gsub! key.to_s, value.call.to_s 
+			end
 		end
 
 		def self.macro(name, &block)
@@ -80,6 +84,12 @@ module Glyph
 
 		def self.macro_alias(pair)
 			Glyph::MACROS[pair.name.to_sym] = Glyph::MACROS[pair.value.to_sym]
+		end
+
+		def self.afterwards(&block)
+			ident = block.to_s.to_sym
+			DELAYED_ACTIONS[ident] = block
+			ident
 		end
 
 	end

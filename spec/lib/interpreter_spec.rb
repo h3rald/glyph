@@ -107,4 +107,30 @@ describe Glyph::Interpreter do
 			{:"@" => 1}, {:markdown => 2},{:section => 3}, {:header => 4}]
 	end
 
+	it "should support delayed actions" do
+		@p.macro :count_chapters do |node|
+			@p.afterwards do
+				count = 0
+				Glyph::DOCUMENT.descend do |node, level|
+					count +=1 if node[:macro] == :chapter
+				end
+				count
+			end
+		end
+		text = %{
+		Total: count_chapters[] chapters.
+		chapter[
+			chapter[
+				section[
+					test
+				]
+			]
+			chapter[test]
+		]
+		}
+		file_write Glyph::PROJECT/'document.glyph', text
+		@p.build_document
+		Glyph::DOCUMENT[:output].gsub(/\n|\t/, '')[0..17].should == "Total: 3 chapters."
+	end
+
 end
