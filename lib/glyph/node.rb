@@ -109,7 +109,7 @@ module Glyph
 					level+=1
 				end
 			end
-			anchor = params[1] ? params[1] : "t_#{title.gsub(' ', '_')}_#{rand(100)}"
+			anchor = params[1] ? params[1] : "h_#{title.gsub(' ', '_')}_#{rand(100)}"
 			self[:header] = title
 			self[:id] = anchor.to_sym
 			self[:level] = level

@@ -40,11 +40,11 @@ describe "Macro: " do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
 		l = Glyph::CONFIG.get("structure.first_header_level")
 		@p.process(text)[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="chapter">
-					<h#{l} id="t_Chapter_X">Chapter X</h#{l}> ... 
+					<h#{l} id="h_Chapter_X">Chapter X</h#{l}> ... 
 					<div class="section">
 					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 
 						<div class="section">
-						<h#{l+2} id="t_Another_section">Another section</h#{l+2}> ...
+						<h#{l+2} id="h_Another_section">Another section</h#{l+2}> ...
 						</div>
 					</div>
 				</div>
@@ -57,10 +57,10 @@ describe "Macro: " do
 		Glyph.config_override "filters.by_extension", true
 		@p.process(file_load(Glyph::PROJECT/'text/container.textile'))[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
-			<h#{l} id="t_Container_section">Container section</h#{l}>
+			<h#{l} id="h_Container_section">Container section</h#{l}>
 			This is a test.
 				<div class="section">
-				<h#{l+1} id="t_Test_Section">Test Section</h#{l+1}>	
+				<h#{l+1} id="h_Test_Section">Test Section</h#{l+1}>	
 				<p>&#8230;</p>
 				</div>
 			</div>
@@ -90,7 +90,16 @@ describe "Macro: " do
 	it "toc" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
 		@p.build_document
-		Glyph::DOCUMENT[:output].should == ""
+		out = Glyph::DOCUMENT[:output].gsub(/\n|\t|_\d+/, '')
+		out.slice(/(.+?)(?:<div)/, 1).should == %{
+			<ul class="toc">
+				<li class="toc-section"><a href="#h_Container_section">Container section</a></li>
+				<ul>
+					<li class="toc-section"><a href="#h_Test_Section">Test Section</a></li>
+				</ul>
+				<li class="toc-section"><a href="#md">Markdown</a></li>
+			</ul>
+		}.gsub(/\n|\t/, '')
 	end
 
 

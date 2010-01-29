@@ -70,51 +70,33 @@ macro :style do |node|
 	}
 end
 
-# Output:
-# <ul class="toc">
-# 	<li class="toc-chapter">Test 1</li>
-# 	<li class="toc-chapter">Test 2</li>
-# 	<li class="toc-chapter">Test 3</li>
-# 	<li class="toc-chapter">Test 4</li>
-# 	<li>
-# 		<ul>
-# 			<li class="toc-section">Section 4.1</li>
-# 			<li class="toc-section">Section 4.2</li>
-# 			<li class="toc-section">Section 4.3</li>
-# 		</ul>
-# 	</li>
-# 	<li class="toc-chapter">Test 5</li>
-# </ul>
-
 macro :toc do |node|
+	link_header = lambda do |v|
+		%{<a href="##{v[:id]}">#{v[:header]}</a>}
+	end
 	afterwards do
 		descend_section = lambda do |n1, added_headers|
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
 				if Glyph::CONFIG.get("structure.headers").include?(n2[:macro])
-					header_node = nil
-					n2.each_child  do |n| 
-						if n[:header] then
-							header_node = n
-							break
-						end
-					end
-					next if added_headers.include? header_node.to_hash
-					added_headers << header_node.to_hash
-					list << "<li>#{header_node[:header]}</li>" if header_node
+					header_node = n2.children.select{|n| n[:header]}[0] rescue nil
+					next if added_headers.include? header_node
+					added_headers << header_node
+					list << "<li class=\"toc-#{n2[:macro]}\">#{link_header.call(header_node)}</li>\n" if header_node
 					child_list = ""
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)
 					end	
-					list << "<li><ul>#{child_list}</ul></li>" unless child_list.blank?
+					list << "<ul>#{child_list}</ul>\n" unless child_list.blank?
 				end
 			end
 			list
 		end
-		%{<ul class="toc">
-				#{descend_section.call(Glyph::DOCUMENT, nil)}
-			</ul>}
+		%{
+<ul class="toc">
+	#{descend_section.call(Glyph::DOCUMENT, nil)}
+</ul>}
 	end
 end
 
