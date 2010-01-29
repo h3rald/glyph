@@ -7,7 +7,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary = 'A Ruby-powered (Un)structured Document Authoring Framework'
   s.description = 'A Ruby-powered (Un)structured Document Authoring Framework able to produce ebooks in different formats'
-  s.files = FileList['bin/*', 'lib/**/*', 'tasks/*', 'spec/**/*', 'README.textile', 'config.yml', 'Rakefile'].to_a
+  s.files = FileList['bin/*', 'lib/**/*', 'tasks/*', 'spec/**/*', 'README.textile', 'config.yml', 'Rakefile', 'document.glyph'].to_a
   s.require_paths << 'lib'
   s.bindir = 'bin'
   s.executables << 'glyph'
