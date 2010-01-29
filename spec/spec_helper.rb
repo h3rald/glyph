@@ -21,6 +21,7 @@ def create_project_dir
 end
 
 def create_project
+	enable_all_tasks
 	create_project_dir
 	Glyph.run! 'project:create', Glyph::PROJECT.to_s
 	file_copy Glyph::SPEC_DIR/'files/container.textile', Glyph::PROJECT/'text/container.textile'
@@ -29,6 +30,10 @@ def create_project
 	file_copy Glyph::SPEC_DIR/'files/markdown.markdown', Glyph::PROJECT/'text/a//b/c/markdown.markdown'
 	file_copy Glyph::SPEC_DIR/'files/document.glyph', Glyph::PROJECT/'document.glyph'
 	file_copy Glyph::SPEC_DIR/'files/test.sass', Glyph::PROJECT/'styles/test.sass'
+end
+
+def enable_all_tasks
+	Rake::Task.tasks.each {|t| t.reenable }
 end
 
 def delete_project_dir

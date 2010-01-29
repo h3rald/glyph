@@ -71,8 +71,6 @@ module Glyph
 		FileList["#{TASKS_DIR}/**/*.rake"].each do |f|
 			load f
 		end	
-		# Load configuration
-		reset_config
 	end
 
 	def self.config_override(setting, value)

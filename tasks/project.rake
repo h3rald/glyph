@@ -14,6 +14,10 @@ namespace :project do
 		yaml_dump Glyph::PROJECT/'snippets.yml', {:test => "This is a \nTest snippet"}
 		# Create files
 		file_copy Glyph::HOME/'document.glyph', Glyph::PROJECT/'document.glyph'
+		config = yaml_load Glyph::HOME/'config.yml'
+	 	config[:document][:filename] = dir.basename.to_s
+		config[:document][:author] = ENV['USER'] || ENV['USERNAME'] 	
+		yaml_dump Glyph::PROJECT/'config.yml', config
 		info "Project '#{dir.basename}' created successfully."
 	end
 

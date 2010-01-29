@@ -22,6 +22,7 @@ describe "project:create" do
 		(Glyph::PROJECT/'lib/macros').exist?.should == true
 		(Glyph::PROJECT/'lib/macros/html').exist?.should == true
 		(Glyph::PROJECT/'document.glyph').exist?.should == true
+		(Glyph::PROJECT/'config.yml').exist?.should == true
 		(Glyph::PROJECT/'text').exist?.should == true
 		(Glyph::PROJECT/'styles').exist?.should == true
 		(Glyph::PROJECT/'images').exist?.should == true

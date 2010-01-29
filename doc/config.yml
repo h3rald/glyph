@@ -1,7 +1,7 @@
 :document:
-  :author: ""
-  :title: ""
-  :filename: ""
+  :author: "Fabio Cevasco"
+  :title: "Glyph Handbook"
+  :filename: "glyph_handbook"
 :structure:
   :headers: [:section, :chapter, :part, :introduction]  
   :first_header_level: 2

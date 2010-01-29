@@ -30,4 +30,9 @@ namespace :load do
 		load_macros.call Glyph::PROJECT/"lib/macros"
 	end
 
+	desc "Load configuration files"
+	task :config do
+		Glyph.reset_config
+	end
+
 end
