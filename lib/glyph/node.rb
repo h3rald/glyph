@@ -89,8 +89,8 @@ module Glyph
 		def store_id
 			params = get_params
 			ident = self[:id] || params[0].to_sym
-			raise MacroError.new(self, "ID '#{ident}' already exists.") if Glyph::IDS.include? ident
-			Glyph::IDS << ident
+			raise MacroError.new(self, "ID '#{ident}' already exists.") if Glyph::IDS.has_key? ident
+			Glyph::IDS[ident.to_sym] = self[:header] || params[1] || params[0]
 		end
 
 		def get_snippet

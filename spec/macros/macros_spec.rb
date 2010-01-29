@@ -22,7 +22,7 @@ describe "Macro: " do
 
 	it "id" do
 		@p.process("this is a #[test|test].")[:output].should == "this is a <a id=\"test\">test</a>."
-		Glyph::IDS.include?(:test).should == true 
+		Glyph::IDS.has_key?(:test).should == true 
 		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "[--] #: ID 'test' already exists.")
 	end
 
@@ -100,6 +100,14 @@ describe "Macro: " do
 				<li class="toc-section"><a href="#md">Markdown</a></li>
 			</ul>
 		}.gsub(/\n|\t/, '')
+	end
+
+	it "link" do
+		Glyph::IDS[:test_id] = "Test ID"
+		@p.process("link[#test_id]")[:output].should == %{<a href="#test_id">Test ID</a>}
+		@p.process("link[#test_id|Override]")[:output].should == %{<a href="#test_id">Override</a>}
+		@p.process("link[#test_id2]")[:output].should == %{<a href="#test_id2">#test_id2</a>}
+		@p.process("link[http://www.h3rald.com|H3RALD]")[:output].should == %{<a href="http://www.h3rald.com">H3RALD</a>}
 	end
 
 

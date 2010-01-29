@@ -41,7 +41,7 @@ module Glyph
 	MACROS = {}
 
 	# IDs array
-	IDS = []
+	IDS = {} 
 
 	require LIB/'system_extensions'
 	require LIB/'config'
