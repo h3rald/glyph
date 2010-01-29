@@ -88,22 +88,33 @@ end
 
 macro :toc do |node|
 	afterwards do
-		toc = ""
-		descend_section = lambda do |node|
-			node.descend do |node, level|
-				list = ""
-				if Glyph::CONFIG.get("structure.headers").include? node[:macro]
-					title_node = node.find {|n| n[:title] }
-					list << "<li>#{title_node[:title]}</li>" if title_node
+		descend_section = lambda do |n1, added_headers|
+			list = ""
+			added_headers ||= []
+			n1.descend do |n2, level|
+				if Glyph::CONFIG.get("structure.headers").include?(n2[:macro])
+					header_node = nil
+					n2.each_child  do |n| 
+						if n[:header] then
+							header_node = n
+							break
+						end
+					end
+					next if added_headers.include? header_node.to_hash
+					added_headers << header_node.to_hash
+					list << "<li>#{header_node[:header]}</li>" if header_node
 					child_list = ""
-					node.children.each do |c|
-						child_list << descend_section.call(c)
+					n2.children.each do |c|
+						child_list << descend_section.call(c, added_headers)
 					end	
-					list << "<ul>#{child_list}</ul>" unless child_list.blank?
+					list << "<li><ul>#{child_list}</ul></li>" unless child_list.blank?
 				end
 			end
 			list
 		end
+		%{<ul class="toc">
+				#{descend_section.call(Glyph::DOCUMENT, nil)}
+			</ul>}
 	end
 end
 

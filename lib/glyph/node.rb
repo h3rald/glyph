@@ -30,6 +30,12 @@ module Glyph
 			@parent = n.parent
 			@children = n.children
 		end
+		
+		def clear
+			super
+			@children.clear
+			@parent = nil
+		end
 
 		def <<(hash)
 			raise ArgumentError, "#{hash} is not a Hash" unless hash.is_a? Hash

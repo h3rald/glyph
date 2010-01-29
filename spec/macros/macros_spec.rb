@@ -87,5 +87,11 @@ describe "Macro: " do
 		@p.process("test.setting = $[test.setting]")[:output].should == %{test.setting = TEST}
 	end
 
+	it "toc" do
+		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
+		@p.build_document
+		Glyph::DOCUMENT[:output].should == ""
+	end
+
 
 end	

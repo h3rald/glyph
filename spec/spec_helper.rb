@@ -35,7 +35,13 @@ def delete_project_dir
 	FileUtils.rm_rf Glyph::PROJECT.to_s
 end
 
-alias delete_project delete_project_dir
+def delete_project 
+	delete_project_dir
+	Glyph::DOCUMENT.clear
+	Glyph::IDS.clear
+	Glyph::SNIPPETS.clear
+	Glyph::MACROS.clear
+end
 
 def run_command(cmd)
 	out = StringIO.new
