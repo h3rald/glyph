@@ -2,6 +2,8 @@
   :author: "Fabio Cevasco"
   :title: "Glyph Handbook"
   :filename: "glyph_handbook"
+  :output: ""
+  :output_targets: [:html, :pdf]
 :structure:
   :headers: [:section, :chapter, :part, :introduction]  
   :first_header_level: 2

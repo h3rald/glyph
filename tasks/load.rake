@@ -3,11 +3,12 @@
 namespace :load do
 
 	desc "Load all files"
-	task :all => [:snippets, :macros, :config] do
+	task :all => [:config, :snippets, :macros] do
 	end
 
 	desc "Load snippets"
 	task :snippets do
+		info "Loading snippets..."
 		snippets = yaml_load Glyph::PROJECT/'snippets.yml'
 		raise RuntimeError, "Invalid snippets file" unless snippets.blank? || snippets.is_a?(Hash)
 		Glyph::SNIPPETS.replace snippets
@@ -15,6 +16,7 @@ namespace :load do
 
 	desc "Load macros"
 	task :macros do
+		info "Loading macros..."
 		load_macros = lambda do |macro_base|
 			macro_base.children.each do |c|
 				Glyph::Interpreter.instance_eval(file_load c) unless c.directory?

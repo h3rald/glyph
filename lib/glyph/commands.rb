@@ -35,7 +35,8 @@ command :compile do |c|
 		else
 			raise RuntimeError, "Too many arguments."
 		end	
-		raise RuntimeError, "Unknown target '#{target}'" unless output_targets.include? target.to_sym
+		raise RuntimeError, "Output target not specified" unless target
+		raise RuntimeError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 		Glyph.run "generate:#{target}"
 		info "'#{cfg('document.filename')}.#{target}' generated successfully."
 	end
@@ -44,6 +45,7 @@ end
 gli_desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|
+	Glyph.run 'load:config'
 	c.desc "Save to global configuration"
 	c.switch [:g, :global]
 	c.action do |global_options,options,args|
@@ -56,6 +58,8 @@ command :config do |c|
 		when 0 then
 			raise RuntimeError, "Too few arguments."
 		when 1 then # read current config
+			setting = cfg(args[0])
+			raise RuntimeError, "Unknown setting '#{args[0]}'" if setting.blank?
 			info Glyph::CONFIG.get(args[0])
 		when 2 then
 			cfg.set args[0], args[1]
@@ -73,7 +77,6 @@ pre do |global,command,options,args|
 	if !command || command.name == :help then
 		puts "Glyph v#{Glyph::VERSION}"
 	end
-	puts 
 	true
 end
 
