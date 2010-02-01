@@ -24,6 +24,31 @@ body {
 	text-align: justify;
 	padding: 0 1em; }
 
+/* Structure */
+
+.titlepage{
+	text-align: center;
+}
+
+.title, h1{
+	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	line-height: 2em;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.author{
+	font-size: 1em;
+}
+
+.pubdate{
+	font-size: 0.8em;
+}
+
+h2 {
+	page-break-before: always;
+}
+
 
 img {
 	margin: 0 5px;
@@ -86,7 +111,6 @@ body {
 h2 {
 	font-size: 2.3em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	font-variant: small-caps;
 	margin: 1em 0 0 0;
 	margin: 0; }
 
@@ -101,21 +125,6 @@ h4 {
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	font-variant: small-caps;
 	margin: 1em 0 0 0; }
-
-.dropcap {
-	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	float: left;
-	font-size: 4.2em;
-	line-height: 0.75em;
-	margin-top: 0.15em;
-	padding-right: 0.25em;
-	text-transform: uppercase; }
-
-p.first-p:first-line {
-	font-variant: small-caps; }
-
-#services h3 {
-	text-align: center; }
 
 em {
 	font-style: italic; }

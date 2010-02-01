@@ -3,11 +3,11 @@ document[
 	body[
 		titlepage[
 			textile[
-div(title) $[document.title]
+h1. $[document.title]
 
-div(author) by _\.$[document.author]_
+div(author). by _\.$[document.author]_
 
-div(pubdate) ruby[=Time.now.strftime("%d %B %Y")=]
+div(pubdate). ruby[=Time.now.strftime("%d %B %Y")=]
 			]
 		]
 		toc[]

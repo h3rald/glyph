@@ -22,9 +22,7 @@ describe "glyph" do
 	it "[config] should read configuration settings" do
 		create_project
 		run_command_successfully(["config", "-g"]).should == false
-		Glyph.config_override :quiet, false
-		run_command(["config", "quiet"]).match(/false/m).should_not == nil
-		Glyph.config_override :quiet, true
+		run_command(["config", "filters.target"]).match(/html/m).should_not == nil
 	end
 
 	it "[config] should write configuration settings" do
