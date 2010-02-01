@@ -3,7 +3,7 @@
 namespace :load do
 
 	desc "Load all files"
-	task :all => [:snippets, :macros] do
+	task :all => [:snippets, :macros, :config] do
 	end
 
 	desc "Load snippets"
@@ -32,6 +32,9 @@ namespace :load do
 
 	desc "Load configuration files"
 	task :config do
+		Glyph::PROJECT_CONFIG.read
+		Glyph::SYSTEM_CONFIG.read
+		Glyph::GLOBAL_CONFIG.read
 		Glyph.reset_config
 	end
 

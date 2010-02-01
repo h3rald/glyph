@@ -67,7 +67,6 @@ module Glyph
 	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml')
 
 	def self.setup
-		# Setup rake app
 		FileList["#{TASKS_DIR}/**/*.rake"].each do |f|
 			load f
 		end	
@@ -79,7 +78,6 @@ module Glyph
 	end
 
 	def self.reset_config
-		#CONFIG.reset SYSTEM_CONFIG.to_hash.merge(GLOBAL_CONFIG.to_hash).merge(PROJECT_CONFIG.to_hash)
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
 	end
 
