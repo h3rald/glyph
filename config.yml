@@ -2,6 +2,8 @@
   :author: ""
   :title: ""
   :filename: ""
+  :output: ""
+  :output_targets: [:html, :pdf]
 :structure:
   :headers: [:section, :chapter, :part, :introduction]  
   :first_header_level: 2

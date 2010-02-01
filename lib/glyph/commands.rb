@@ -19,6 +19,28 @@ command :add do |c|
 	end
 end
 
+gli_desc 'Compile the project'
+arg_name "output_target"
+command :compile do |c|
+	c.action do |global_options, options, args|
+		output_targets = Glyph::CONFIG.get('document.output_targets')
+		target = nil
+		case args.length
+		when 0 then
+			target = cfg('document.output')
+			target = nil if target.blank?
+			target ||= cfg('filters.target')
+		when 1 then
+			target = args[0]
+		else
+			raise RuntimeError, "Too many arguments."
+		end	
+		raise RuntimeError, "Unknown target '#{target}'" unless output_targets.include? target.to_sym
+		Glyph.run "generate:#{target}"
+		info "'#{cfg('document.filename')}.#{target}' generated successfully."
+	end
+end
+
 gli_desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|
@@ -30,12 +52,12 @@ command :config do |c|
 		else
 			cfg = Glyph::PROJECT_CONFIG
 		end
-		case
-		when args.length == 0 then
+		case args.length
+		when 0 then
 			raise RuntimeError, "Too few arguments."
-		when args.length == 1 then # read current config
+		when 1 then # read current config
 			info Glyph::CONFIG.get(args[0])
-		when args.length == 2 then
+		when 2 then
 			cfg.set args[0], args[1]
 			Glyph.reset_config
 		else

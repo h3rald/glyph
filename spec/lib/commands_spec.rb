@@ -23,7 +23,7 @@ describe "glyph" do
 		create_project
 		run_command_successfully(["config", "-g"]).should == false
 		Glyph.config_override :quiet, false
-		run_command(["config", "quiet"]).match(/false/m)#.should_not == nil
+		run_command(["config", "quiet"]).match(/false/m).should_not == nil
 		Glyph.config_override :quiet, true
 	end
 
@@ -44,6 +44,13 @@ describe "glyph" do
 		create_project
 		run_command_successfully(["add", "test.textile"]).should == true
 		(Glyph::PROJECT/'text/test.textile').exist?.should == true
+	end
+
+	it "[compile] should compile the project" do
+		create_project
+		run_command_successfully(["compile", "wrong"]).should == false
+		run_command(["compile"]).match(/test_project\.html/m).should_not == nil
+		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
 end

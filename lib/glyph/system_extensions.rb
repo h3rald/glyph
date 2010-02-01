@@ -10,6 +10,10 @@ module Kernel
 		puts " [!] #{message}" unless Glyph::CONFIG.get :quiet
 	end
 
+	def cfg(setting)
+		Glyph::CONFIG.get(setting)
+	end
+
 	def yaml_dump(file, obj)
 		File.open(file.to_s, 'w+') {|f| f.write obj.to_yaml}
 	end
