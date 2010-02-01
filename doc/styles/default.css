@@ -9,6 +9,7 @@
 html, body {
 	height: 100%;
 	line-height: 1.2;
+	text-align: justify;
 	background: #fff;}
 
 p, ol, ul {
@@ -48,6 +49,14 @@ body {
 
 h2 {
 	page-break-before: always;
+}
+
+ul, ol{
+	margin: 0.5em 0;
+}
+li {
+	margin-left: 1.5em;
+
 }
 
 

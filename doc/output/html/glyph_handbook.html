@@ -18,6 +18,7 @@
 html, body {
 	height: 100%;
 	line-height: 1.2;
+	text-align: justify;
 	background: #fff;}
 
 p, ol, ul {
@@ -57,6 +58,14 @@ body {
 
 h2 {
 	page-break-before: always;
+}
+
+ul, ol{
+	margin: 0.5em 0;
+}
+li {
+	margin-left: 1.5em;
+
 }
 
 
@@ -183,28 +192,60 @@ code {
 	
 		
 		<div class="contents">
-		<h2 id="h_Table_of_Contents_40">Table of Contents</h2>
+		<h2 id="h_Table_of_Contents_8">Table of Contents</h2>
 		
 			
 <ul class="toc">
-	<li class="toc-contents"><a href="#h_Table_of_Contents_40">Table of Contents</a></li>
-<li class="toc-introduction"><a href="#h_Introduction_71">Introduction</a></li>
-<ul><li class="toc-section"><a href="#h_Title_1_55">Title 1</a></li>
-<li class="toc-section"><a href="#h_Title_2_19">Title 2</a></li>
+	<li class="toc-contents"><a href="#h_Table_of_Contents_8">Table of Contents</a></li>
+<li class="toc-introduction"><a href="#h_Introduction_5">Introduction</a></li>
+<ul><li class="toc-section"><a href="#h_What_is_Glyph?_97">What is Glyph?</a></li>
+<ul><li class="toc-section"><a href="#h_Rationale_29">Rationale</a></li>
+</ul>
+<li class="toc-section"><a href="#h_Title_2_61">Title 2</a></li>
 </ul>
 
 </ul>
 		</div>
 	
 		<div class="introduction">
-		<h2 id="h_Introduction_71">Introduction</h2>
+		<h2 id="h_Introduction_5">Introduction</h2>
 <p></p>
 <div class="section">
-		<h3 id="h_Title_1_55">Title 1</h3>
-</div>
+		<h3 id="h_What_is_Glyph?_97">What is Glyph?</h3>
 <p></p>
+<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
+<p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate files in a variety of output formats, such as <span class="caps">HTML</span> or <span class="caps">PDF</span>.</p>
+<p>Glyph was created to provide an easy way to produce printable documents in <span class="caps">HTML</span> and <span class="caps">PDF</span> format, using technologies familiar to web developers like <span class="caps">HTML</span> and <span class="caps">CSS</span>, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.</p>
+<p><div class="section"><br />
+		<h4 id="h_Rationale_29">Rationale</h4></p>
+<p>At the time of writing, the most common ways to create a printable document like, say, a <span class="caps">PDF</span> file, are the following:</p>
+<ol>
+	<li>Use a word processor like Microsoft Word convert it to <span class="caps">PDF</span>, for example using Adobe Acrobat &#8212; Perhaps the most user-friendly method, but relying on proprietary technologies and GUIs.</li>
+	<li>Use LaTeX &#8212; It can be used to produce amazing documents, but it is not exactly the most user-friendly option: you have to learn LaTeX first, and you may not want to.</li>
+	<li>Use <span class="caps">HTML</span> and a 3rd party renderer like <a href="http://www.princexml.com/">PrinceXML</a>.</li>
+</ol>
+<p>The third option is arguably the best, because:</p>
+<ul>
+	<li>It allows web developers to use what they know best (<span class="caps">HTML</span> and <span class="caps">CSS</span>).</li>
+	<li>It does not rely necessarily on GUIs, thereby giving the author more control on the document formatting and its structure.</li>
+</ul>
+<p>The main problem with this method is that writing <span class="caps">HTML</span> code can be tedious, but luckily there are plenty of lightweight markup languages like Textile or Markdown that can make writing <span class="caps">HTML</span> a fun task. Unfortunately though, a markup language alone is not enough, because:</p>
+<ul>
+	<li>It is not a complete alternative to <span class="caps">HTML</span>: you have to fallback to <span class="caps">HTML</span> to do certain things like the document <em>head</em> and <em>body</em> tags, and often block-level elements like <em>div</em> or <em>table</em> are not supported at all.</li>
+	<li>They cannot be easily extended to provide additional functionalities, like creating a <span class="caps">TOC</span> automatically, for example.</li>
+</ul>
+<p>That&#8217;s where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, e.g.:</p>
+<ul>
+	<li>Create <span class="caps">TOC</span>, index and bibliography automatically</li>
+	<li>Define the document structure</li>
+	<li>Manage text snippets, notes, &#8230;</li>
+	<li>Validate links</li>
+	<li>&#8230;<br />
+		</div><br />
+		</div></li>
+</ul>
 <div class="section">
-		<h3 id="h_Title_2_19">Title 2</h3>
+		<h3 id="h_Title_2_61">Title 2</h3>
 </div>
 </div>
 		</body>

@@ -2,7 +2,36 @@ introduction[
 header[Introduction]
 
 section[
-header[Title 1]
+header[What is Glyph?]
+
+Glyph is a _Rapid Document Authoring Framework_. 
+
+Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate files in a variety of output formats, such as HTML or PDF.
+
+Glyph was created to provide an easy way to produce printable documents in HTML and PDF format, using technologies familiar to web developers like HTML and CSS, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.
+
+	section[
+		header[Rationale]
+At the time of writing, the most common ways to create a printable document like, say, a PDF file, are the following:
+# Use a word processor like Microsoft Word convert it to PDF, for example using Adobe Acrobat -- Perhaps the most user-friendly method, but relying on proprietary technologies and GUIs.
+# Use LaTeX -- It can be used to produce amazing documents, but it is not exactly the most user-friendly option: you have to learn LaTeX first, and you may not want to.
+# Use HTML and a 3rd party renderer like =>[http://www.princexml.com/|PrinceXML].
+
+The third option is arguably the best, because:
+* It allows web developers to use what they know best (HTML and CSS).
+* It does not rely necessarily on GUIs, thereby giving the author more control on the document formatting and its structure.
+
+The main problem with this method is that writing HTML code can be tedious, but luckily there are plenty of lightweight markup languages like Textile or Markdown that can make writing HTML a fun task. Unfortunately though, a markup language alone is not enough, because:
+* It is not a complete alternative to HTML: you have to fallback to HTML to do certain things like the document _head_ and _body_ tags, and often block-level elements like _div_ or _table_ are not supported at all.
+* They cannot be easily extended to provide additional functionalities, like creating a TOC automatically, for example.
+
+That's where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, e.g.:
+* Create TOC, index and bibliography automatically
+* Define the document structure
+* Manage text snippets, notes, ...
+* Validate links
+* ...
+	] 
 
 ]
 section[
