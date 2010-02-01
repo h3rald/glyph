@@ -34,7 +34,7 @@ body {
 .title, h1{
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	line-height: 2em;
-	font-size: 2em;
+	font-size: 2.3em;
 	font-weight: bold;
 }
 
@@ -55,9 +55,6 @@ img {
 	margin: 0 5px;
 	padding: 2px; }
 
-li, dd {
-	margin-left: 30px;
-	line-height: 1.5em; }
 dt {
 	margin-top: 1em;
 	font-weight: bold; }
@@ -74,18 +71,19 @@ blockquote, .note {
 	margin: 0;
 	border: 1px solid #555555 }
 
+.toc ul{ margin: 0}
 .toc li {
+	line-height: 1.2em;
+	list-style-type: none;
 	margin-left: 1.5em; }
-.toc li li {
-	margin-left: 1.5em; }
-.toc li li li {
-	margin-left: 1.5em; }
-.toc li li li li {
-	margin-left: 1.5em; }
-.toc li li li li li {
-	margin-left: 1.5em; }
-.toc li {
-	line-height: 1.2em; }
+.toc ul li {
+	margin-left: 2em; }
+.toc ul ul li {
+	margin-left: 2.5em; }
+.toc ul ul ul li {
+	margin-left: 3em; }
+.toc ul ul ul ul li {
+	margin-left: 4em; }
 
 
 table {
@@ -110,21 +108,19 @@ body {
 	font-size: 0.9em; }
 
 h2 {
-	font-size: 2.3em;
+	font-size: 2em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0;
 	margin: 0; }
 
 h3 {
-	font-size: 1.7em;
+	font-size: 1.6em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	font-variant: small-caps;
 	margin: 1em 0 0 0; }
 
 h4 {
 	font-size: 1.3em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	font-variant: small-caps;
 	margin: 1em 0 0 0; }
 
 em {

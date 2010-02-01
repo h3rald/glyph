@@ -10,7 +10,11 @@ div(author). by _\.$[document.author]_
 div(pubdate). ruby[=Time.now.strftime("%d %B %Y")=]
 			]
 		]
-		toc[]
+		contents[
+			header[Table of Contents]	
+			toc[]
+		]
+		@[introduction.textile]
 		--[=
 	
 		preface[preface.textile]

@@ -54,20 +54,11 @@ module Glyph
 		DELAYED_ACTIONS = {}
 
 		def self.process(text, context={})
-			begin
-				node = PARSER.parse(text)
-				context[:source] ||= "--"
-				text = node.evaluate(context, nil)
-				node.hashnode[:output] = text
-				node.hashnode
-			rescue Exception => e
-				raise if e.is_a? MacroError
-				if Glyph.testing? then
-					raise 
-				else
-					raise RuntimeError, "An error occurred when preprocessing #{context[:source]}"
-				end
-			end
+			node = PARSER.parse(text)
+			context[:source] ||= "--"
+			text = node.evaluate(context, nil)
+			node.hashnode[:output] = text
+			node.hashnode
 		end
 
 		def self.build_document

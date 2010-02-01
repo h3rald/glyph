@@ -119,5 +119,7 @@ macro_alias :glossary => :section
 macro_alias :colophon => :section
 macro_alias :promotion => :section
 macro_alias :backcover => :section
+macro_alias :contents => :section
+macro_alias :index => :section
 
 macro_alias :heading => :header

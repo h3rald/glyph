@@ -5,7 +5,7 @@
   :output: ""
   :output_targets: [:html, :pdf]
 :structure:
-  :headers: [:section, :chapter, :part, :introduction]  
+  :headers: [:section, :chapter, :part, :introduction, :contents, :preface, :appendix, :foreword, :afterword, :glossary, :index]  
   :first_header_level: 2
 :pdf_renderer: 'wkhtmltopdf'
 :filters:
