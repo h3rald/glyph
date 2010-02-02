@@ -7,13 +7,21 @@ macro :anchor do |node|
 end
 
 macro :link do |node|
-	params = node.get_params
-	anchor = params[0].gsub(/^#/, '').to_sym
-	if Glyph::IDS.has_key? anchor then
-		params[1] ||= Glyph::IDS[anchor]
+	afterwards do
+		params = node.get_params
+		anchor = params[0].gsub(/^#/, '').to_sym
+		if Glyph::IDS.has_key? anchor then
+			params[1] ||= Glyph::IDS[anchor]
+		end
+		params[1] ||= params[0]
+		%{<a href="#{params[0]}">#{params[1]}</a>}
 	end
-	params[1] ||= params[0]
-	%{<a href="#{params[0]}">#{params[1]}</a>}
+end
+
+macro :fmi do |node|
+	# TODO
+	topic, link = node.get_params
+	%{<span class="fmi">For more information on #{topic}, see =>[#{link}]</span>}
 end
 
 macro :term do |node|

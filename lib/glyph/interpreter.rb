@@ -8,14 +8,6 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 		current ||= context.to_node
 		@hashnode ||= current.to_node
 		value = elements.map { |e| e.evaluate(context, current) if e.respond_to? :evaluate }.join 
-		escs = [
-			['\\]', ']'], 
-			['\\[', '['],
-			['\\=', '='],
-			['\\.', ''],
-			['\\\\', '\\']
-		]
-		escs.each{|e| value.gsub! e[0], e[1]}
 		value
 	end
 
@@ -64,6 +56,15 @@ module Glyph
 		def self.build_document
 			context = {:source => "file: document.glyph"}
 			Glyph::DOCUMENT.from process(file_load(Glyph::PROJECT/'document.glyph'), context)
+			escs = [
+				['\\]', ']'], 
+				['\\[', '['],
+				['\\=', '='],
+				['\\.', ''],
+				['\\\\', '\\'],
+				['\\|', '|']
+			]
+			escs.each{|e| Glyph::DOCUMENT[:output].gsub! e[0], e[1]}
 			DELAYED_ACTIONS.each_pair do |key, value|
 				Glyph::DOCUMENT[:output].gsub! key.to_s, value.call.to_s 
 			end

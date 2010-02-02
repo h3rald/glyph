@@ -93,10 +93,14 @@ macro :toc do |node|
 			end
 			list
 		end
+		l = cfg("structure.first_header_level")
 		%{
+<div class="contents">
+<h#{l}>Table of Contents</h#{l}>
 <ul class="toc">
 	#{descend_section.call(Glyph::DOCUMENT, nil)}
-</ul>}
+</ul>
+</div>}
 	end
 end
 

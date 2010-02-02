@@ -91,7 +91,9 @@ describe "Macro: " do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
 		@p.build_document
 		out = Glyph::DOCUMENT[:output].gsub(/\n|\t|_\d+/, '')
-		out.slice(/(.+?)(?:<div)/, 1).should == %{
+		out.slice(/(.+?<\/div>)/, 1).should == %{
+			<div class="contents">
+			<h2>Table of Contents</h2>
 			<ul class="toc">
 				<li class="toc-section"><a href="#h_Container_section">Container section</a></li>
 				<ul>
@@ -99,6 +101,7 @@ describe "Macro: " do
 				</ul>
 				<li class="toc-section"><a href="#md">Markdown</a></li>
 			</ul>
+			</div>
 		}.gsub(/\n|\t/, '')
 	end
 

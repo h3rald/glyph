@@ -11,13 +11,21 @@ div(pubdate). ruby[=Time.now.strftime("%d %B %Y")=]
 			]
 		]
 		toc[]
+
 		--[=
 	
-		preface[preface.textile]
-		
-		chapter[@[chapter1.textile]]
-		chapter[@[chapter2.textile]]
-	
+		preface[
+			header[Preface]
+			@[preface.textile]
+		]	
+		chapter[
+			header[Chapter #1]
+			@[chapter1.textile]
+		]
+		chapter[
+			header[Chapter #2]
+			@[chapter2.textile]
+		]
 		index[]
 	
 		=]

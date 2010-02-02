@@ -14,9 +14,44 @@ macro :fig do |node|
 	""
 end
 
-macro :code do |node|
+macro :"textile.code" do |node|
 	# TODO
-	node[:value]
+	params = node.get_params
+	%{
+		<notextile>
+		<pre>
+		<code>
+#{params[1]}
+		</code>
+		</pre>
+		</notextile>
+	}
+end
+
+macro :title do |node|
+	title_start = (cfg("structure.first_header_level") > 1) ? "<h1>" : %{<div class "title">} 
+	title_end = (cfg("structure.first_header_level") > 1) ? "</h1>" : %{</div>} 
+	%{
+		#{title_start}
+			#{cfg("document.title")}
+		#{title_end}
+	}
+end
+
+macro :author do |node|
+	%{
+		<div class="author">
+			#{cfg("document.author")}
+		</div>
+	}
+end
+
+macro :pubdate do |node|
+	%{
+		<div class="pubdate">
+			#{Time.now.strftime("%d %B %Y")}
+		</div>
+	}
 end
 
 macro :table do |node|

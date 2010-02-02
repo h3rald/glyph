@@ -70,8 +70,7 @@ describe Glyph::Interpreter do
 		define_em_macro
 		text = %{This text contains em[
 			some escaped em\\[content\\]... etc.].}
-		@p.process(text)[:output].should == %{This text contains <em>some escaped em[content]... etc.</em>.}
-		@p.process("test \\\\ _\\.em[test]_.")[:output].should == "test \\ _<em>test</em>_."
+		@p.process(text)[:output].should == %{This text contains <em>some escaped em\\[content\\]... etc.</em>.}
 	end
 
 	it "should support nested macros" do
