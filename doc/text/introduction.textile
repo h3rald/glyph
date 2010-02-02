@@ -1,6 +1,3 @@
-introduction[
-header[Introduction]
-
 Glyph is a _Rapid Document Authoring Framework_. 
 
 Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate files in a variety of output formats, such as HTML or PDF.
@@ -30,6 +27,3 @@ That's where Glyph comes in: Glyph uses a simple but effective macro language to
 * Validate links
 * ...
 	] 
-
-
-]

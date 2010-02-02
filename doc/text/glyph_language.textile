@@ -1,0 +1,50 @@
+Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.
+
+Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure, like the following:
+
+textile.code[=text|
+document[
+	head[
+		style[default.css]
+	]
+	body[
+		titlepage[
+			title[]
+			author[]
+			pubdate[]
+		]
+		toc[]
+		preface[
+			header[Preface]
+			@[preface.textile]
+		]	
+		chapter[
+			header[Chapter #1]
+			@[chapter1.textile]
+		]
+		chapter[
+			header[Chapter #2]
+			@[chapter2.textile]
+		]
+	]
+]
+=]
+
+Even without knowing anything about &[glang], you can easily figure out nearly everything: there's a @document@ with a @head@ and a @body@, the @body@ contains a title page, a Table of Contents, a Preface and some chapters.
+
+section[header[Introducing Glyph Macros]
+
+By now you probably figure out what a macro looks like: it's an identifier of some kind that wraps a value within square brackets. More specifically:
+* The macro identifier can contain _any_ character except for: @\[@, @\]@, @\\@, @\|@ or spaces.
+* The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
+
+
+]
+
+section[header[Escaping and Quoting|esc_quot]
+
+]
+
+section[header[Creating and Editing Macros]
+
+]

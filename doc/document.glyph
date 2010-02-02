@@ -2,28 +2,29 @@ document[
 	head[style[default.css]]
 	body[
 		titlepage[
-			textile[
-h1. $[document.title]
-
-div(author). by _\.$[document.author]_
-
-div(pubdate). ruby[=Time.now.strftime("%d %B %Y")=]
-			]
+			title[]
+			author[]
+			pubdate[]
 		]
-		contents[
-			header[Table of Contents]	
-			toc[]
+		toc[]
+		introduction[
+			header[Introduction]
+			@[introduction.textile]
 		]
-		@[introduction.textile]
-		--[=
-	
-		preface[preface.textile]
-		
-		chapter[@[chapter1.textile]]
-		chapter[@[chapter2.textile]]
-	
+		chapter[
+			header[Quick Start]
+		]
+		chapter[
+			header[Glyph Language]
+			@[glyph_language.textile]
+		]
+		--[...]
+		appendix[
+			header[Command Reference]
+		]
+		appendix[
+			header[Macro Reference]
+		]
 		index[]
-	
-		=]
 	]
 ]
