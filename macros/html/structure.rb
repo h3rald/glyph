@@ -100,6 +100,16 @@ macro :toc do |node|
 	end
 end
 
+macro :index do |node|
+	# TODO
+	""
+end
+
+macro :bibliography do |node|
+	# TODO
+	""
+end
+
 # See http://microformats.org/wiki/book-brainstorming
 macro_alias :chapter => :section
 macro_alias :part => :section

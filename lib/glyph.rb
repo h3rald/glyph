@@ -43,6 +43,9 @@ module Glyph
 	# IDs array
 	IDS = {} 
 
+	# Array of TODO items.
+	TODOS = []
+
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'

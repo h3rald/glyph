@@ -39,6 +39,12 @@ command :compile do |c|
 		raise RuntimeError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 		Glyph.run "generate:#{target}"
 		info "'#{cfg('document.filename')}.#{target}' generated successfully."
+		unless Glyph::TODOS.blank?
+			info "*** TODOs: ***"
+			Glyph::TODOS.each do |t|
+				info t
+			end
+		end
 	end
 end
 

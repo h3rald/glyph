@@ -5,6 +5,12 @@ macro :comment do |node|
 	""
 end
 
+macro :todo do |node|
+	todo = "[#{node[:source]}] -- #{node[:value]}"
+	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
+	""
+end
+
 macro :snippet do |node|
 	node[:source] = "snippet: #{node[:value]}"
 	process(node.get_snippet, node)[:output]
