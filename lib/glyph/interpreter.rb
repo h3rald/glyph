@@ -4,6 +4,11 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 
 	attr_reader :hashnode
 
+	def analyze(context, current=nil)
+	end
+
+	def 
+
 	def evaluate(context, current=nil)
 		current ||= context.to_node
 		@hashnode ||= current.to_node
@@ -40,34 +45,27 @@ end
 
 module Glyph
 
-	module Interpreter
+	class Interpreter
 
 		PARSER = ::GlyphLanguageParser.new
-		DELAYED_ACTIONS = {}
 
-		def self.process(text, context={})
-			node = PARSER.parse(text)
-			context[:source] ||= "--"
-			text = node.evaluate(context, nil)
-			node.hashnode[:output] = text
-			node.hashnode
+		def initialize(text, context=nil)
+			context ||= {:source => '--'}
+			@raw = PARSER.parse text
+			@context = context
 		end
 
-		def self.build_document
-			context = {:source => "file: document.glyph"}
-			Glyph::DOCUMENT.from process(file_load(Glyph::PROJECT/'document.glyph'), context)
-			escs = [
-				['\\]', ']'], 
-				['\\[', '['],
-				['\\=', '='],
-				['\\.', ''],
-				['\\\\', '\\'],
-				['\\|', '|']
-			]
-			escs.each{|e| Glyph::DOCUMENT[:output].gsub! e[0], e[1]}
-			DELAYED_ACTIONS.each_pair do |key, value|
-				Glyph::DOCUMENT[:output].gsub! key.to_s, value.call.to_s 
-			end
+		def preprocess
+			@document = Glyph::Document.new @raw, @context
+			@document.scan
+		end
+
+		def process(format)
+			@document.analyze format
+		end
+
+		def postprocess(format)
+			@document.postprocess format
 		end
 
 		def self.macro(name, &block)
@@ -78,9 +76,13 @@ module Glyph
 			Glyph::MACROS[pair.name.to_sym] = Glyph::MACROS[pair.value.to_sym]
 		end
 
-		def self.afterwards(&block)
+		def self.before(&block)
+			@document.pre_action block
+		end
+
+		def self.after(&block)
 			ident = block.to_s.to_sym
-			DELAYED_ACTIONS[ident] = block
+			@document.post_action ident, block
 			ident
 		end
 
