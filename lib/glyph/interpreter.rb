@@ -4,11 +4,6 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 
 	attr_reader :hashnode
 
-	def analyze(context, current=nil)
-	end
-
-	def 
-
 	def evaluate(context, current=nil)
 		current ||= context.to_node
 		@hashnode ||= current.to_node
@@ -28,7 +23,7 @@ class MacroNode < GlyphSyntaxNode
 		current << @hashnode
 		value = super(context, @hashnode).strip 
 		@hashnode[:value] = value
-		Glyph::MACROS[name].call(@hashnode).to_s
+		Glyph::MACROS[name].run(@hashnode).to_s
 	end
 
 end
@@ -74,16 +69,6 @@ module Glyph
 
 		def self.macro_alias(pair)
 			Glyph::MACROS[pair.name.to_sym] = Glyph::MACROS[pair.value.to_sym]
-		end
-
-		def self.before(&block)
-			@document.pre_action block
-		end
-
-		def self.after(&block)
-			ident = block.to_s.to_sym
-			@document.post_action ident, block
-			ident
 		end
 
 	end

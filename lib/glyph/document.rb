@@ -19,25 +19,31 @@ module Glyph
 			@context = context
 			@bookmarks = {}
 			@output = {}
-			@pre_actions = []
-			@post_actions = {}
 			@state = :new
 		end
 
 		def bookmark(hash)
-			raise RuntimeError, "Document is already #{@state}" unless @state == :scanned
+			raise RuntimeError, "Document is already #{@state}" unless scanned?
 			ident = hash[:id]
 			raise RuntimeError, "Bookmark '#{ident}' already exists" if @bookmarks.has_key? :ident
 			@bookmarks[ident] = hash
 		end
 
 		def scan
-			# TODO must evaluate macros to set pre/post actions!
-			@pre_actions.each {|value| value.call }
+			raise RuntimeError, "Document is already #{@state}" unless new?
+			@tree.descend do |node, level|
+				macro = node[:macro]
+				if macro && !Glyph::MACROS.has_key?(macro)
+					 warning "Scan -- Undefined macro '#{macro}'." 
+				else
+					Glyph::MACROS[macro].prerun self 
+				end
+			end
 			@state = :scanned
 		end
 
 		def analyze(format)
+			raise RuntimeError, "Document is #{@state}" unless scanned?
 			@output[format] = @tree.evaluate @context, nil
 			@state = :analyzed
 		end
@@ -45,16 +51,14 @@ module Glyph
 		def finalize(format)
 			raise RuntimeError, "Document has not been analyzed" unless analyzed?
 			ESCAPES.each{|e| @output[format].gsub! e[0], e[1]}
-			@post_actions.each_pair {|key, value| @output[format].gsub! key.to_s, value.call.to_s}
+			replacements = {} 
+			@tree.descend do |node, level|
+				macro = node[:macro]
+				obj = Glyph::MACROS[macro]
+				replacements[obj.placeholder] = obj.postrun self 
+			end
+			replacements.each_pair {|key, value| @output[format].gsub! key, value}
 			@state = :finalized
-		end
-
-		def pre_action(&block)
-			@pre_actions << block
-		end
-
-		def post_action(key, &block)
-			@post_actions[key] = block
 		end
 
 		def new?
