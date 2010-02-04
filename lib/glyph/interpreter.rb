@@ -48,26 +48,28 @@ module Glyph
 			context ||= {:source => '--'}
 			@raw = PARSER.parse text
 			@context = context
-		end
-
-		def preprocess
 			@document = Glyph::Document.new @raw, @context
-			@document.scan
 		end
 
-		def process(format)
-			@document.analyze format
+		def process
+			@document.analyze
 		end
 
-		def postprocess(format)
-			@document.postprocess format
+		def postprocess
+			@document.finalize
 		end
 
-		def self.macro(name, &block)
-			Glyph::MACROS[name.to_sym] = block			
+		def document
+			preprocess
+			postprocess
+			@document
 		end
 
-		def self.macro_alias(pair)
+		def macro(name, &block)
+			Glyph::Macro.new(name, @document).instance_eval &block
+		end
+
+		def macro_alias(pair)
 			Glyph::MACROS[pair.name.to_sym] = Glyph::MACROS[pair.value.to_sym]
 		end
 

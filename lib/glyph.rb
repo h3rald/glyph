@@ -40,6 +40,9 @@ module Glyph
 	# Macros hash
 	MACROS = {}
 
+	# Macro source files
+	MACRO_SOURCES = []
+
 	# IDs array
 	IDS = {} 
 

@@ -19,6 +19,8 @@ module Glyph
 			@context = context
 			@bookmarks = {}
 			@output = {}
+			@placeholders = {}
+			@format = cfg 'filters.target'
 			@state = :new
 		end
 
@@ -29,35 +31,16 @@ module Glyph
 			@bookmarks[ident] = hash
 		end
 
-		def scan
-			raise RuntimeError, "Document is already #{@state}" unless new?
-			@tree.descend do |node, level|
-				macro = node[:macro]
-				if macro && !Glyph::MACROS.has_key?(macro)
-					 warning "Scan -- Undefined macro '#{macro}'." 
-				else
-					Glyph::MACROS[macro].prerun self 
-				end
-			end
-			@state = :scanned
-		end
-
-		def analyze(format)
+		def analyze
 			raise RuntimeError, "Document is #{@state}" unless scanned?
-			@output[format] = @tree.evaluate @context, nil
+			@output[@format] = @tree.evaluate @context, nil
 			@state = :analyzed
 		end
 
-		def finalize(format)
+		def finalize
 			raise RuntimeError, "Document has not been analyzed" unless analyzed?
 			ESCAPES.each{|e| @output[format].gsub! e[0], e[1]}
-			replacements = {} 
-			@tree.descend do |node, level|
-				macro = node[:macro]
-				obj = Glyph::MACROS[macro]
-				replacements[obj.placeholder] = obj.postrun self 
-			end
-			replacements.each_pair {|key, value| @output[format].gsub! key, value}
+			@placeholders.each_pair {|key, value| @output[@format].gsub! key, value}
 			@state = :finalized
 		end
 

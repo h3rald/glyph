@@ -19,12 +19,12 @@ namespace :load do
 		info "Loading macros..."
 		load_macros = lambda do |macro_base|
 			macro_base.children.each do |c|
-				Glyph::Interpreter.instance_eval(file_load c) unless c.directory?
+				MACRO_FILES << file_load(c) unless c.directory?
 			end
-			macro_dir = macro_base/Glyph::CONFIG.get("filters.target").to_s
+			macro_dir = macro_base/cfg("filters.target").to_s
 			if macro_dir.exist? then
 				macro_dir.children.each do |f|
-					Glyph::Interpreter.instance_eval(file_load f)
+					MACRO_SOURCES << file_load(f)
 				end
 			end
 		end
