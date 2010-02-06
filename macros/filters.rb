@@ -8,7 +8,7 @@ macro :textile do |node|
 	rescue Exception => e
 		raise MacroError.new(node, "RedCloth gem not installed. Please run: gem insall RedCloth")
 	end
-	target = Glyph::CONFIG.get("filters.target")
+	target = cfg "filters.target"
 	case target.to_sym
 	when :html
 		rc.to_html
@@ -21,7 +21,7 @@ end
 
 macro :markdown do |node|
 	md = nil
-	markdown_converter = Glyph::CONFIG.get "filters.markdown_converter"
+	markdown_converter = cfg "filters.markdown_converter"
 	if !markdown_converter then
 		begin
 			require 'bluecloth'
@@ -58,7 +58,7 @@ macro :markdown do |node|
 	else
 		raise MacroError.new(node, "No MarkDown converter installed. Please run: gem insall bluecloth")
 	end
-	target = Glyph::CONFIG.get("filters.target")
+	target = cfg "filters.target"
 	if target.to_sym == :html then
 		md.to_html
 	else

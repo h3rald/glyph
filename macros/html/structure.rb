@@ -9,7 +9,9 @@ macro :section do |node|
 end
 
 macro :header do |node|
-	node.get_header
+	node.header
+	raise MacroError.new(node, "Bookmark '#{node[:id]}' already exists") if node.document.bookmark? node[:id]
+	node.document.bookmark :id => node[:id], :title => node[:header]
 	%{
 		<h#{node[:level]} id="#{node[:id]}">#{node[:header]}</h#{node[:level]}>
 	}	
@@ -74,12 +76,12 @@ macro :toc do |node|
 	link_header = lambda do |v|
 		%{<a href="##{v[:id]}">#{v[:header]}</a>}
 	end
-	afterwards do
+	toc = node.document.placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
-				if Glyph::CONFIG.get("structure.headers").include?(n2[:macro])
+				if cfg("structure.headers").include?(n2[:macro])
 					header_node = n2.children.select{|n| n[:header]}[0] rescue nil
 					next if added_headers.include? header_node
 					added_headers << header_node
@@ -98,10 +100,11 @@ macro :toc do |node|
 <div class="contents">
 <h#{l}>Table of Contents</h#{l}>
 <ul class="toc">
-	#{descend_section.call(Glyph::DOCUMENT, nil)}
+	#{descend_section.call(document.structure, nil)}
 </ul>
 </div>}
 	end
+	toc
 end
 
 macro :index do |node|

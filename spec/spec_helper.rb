@@ -42,10 +42,9 @@ end
 
 def delete_project 
 	delete_project_dir
-	Glyph::DOCUMENT.clear
-	Glyph::IDS.clear
 	Glyph::SNIPPETS.clear
 	Glyph::MACROS.clear
+	Glyph.instance_eval { remove_const :DOCUMENT rescue nil }
 end
 
 def run_command(cmd)
@@ -71,5 +70,22 @@ def create_sample_file(filename, text, opts={})
 	contents << '#{note "Test", :type => :important}\n' if opts[:tenjin]
 	contents << '@test\n' if opts[:snippets]
 	File.open((Glyph::PROJECT/"source"/filename).to_s, "w+") {|f| f.write contents }
+end
+
+def define_em_macro
+	Glyph.macro :em do |node| 
+		%{<em>#{node[:value]}</em>}
+	end
+end
+
+def define_ref_macro
+	Glyph.macro :ref do |node|
+		params = node.params
+		%{<a href="#{params[0]}">#{params[1]}</a>}
+	end
+end
+
+def interpret(text)
+	@p = Glyph::Interpreter.new(text)
 end
 

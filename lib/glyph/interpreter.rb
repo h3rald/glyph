@@ -19,11 +19,11 @@ class MacroNode < GlyphSyntaxNode
 	def evaluate(context, current=nil)
 		name = macro_name.text_value.to_sym
 		raise RuntimeError, "Undefined macro '#{name}'" unless Glyph::MACROS.include? name
-		@hashnode = {:macro => name, :source => context[:source]}.to_node
+		@hashnode = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
 		current << @hashnode
 		value = super(context, @hashnode).strip 
 		@hashnode[:value] = value
-		Glyph::MACROS[name].run(@hashnode).to_s
+		Glyph::MACROS[name].call(@hashnode).to_s
 	end
 
 end
@@ -42,13 +42,13 @@ module Glyph
 
 	class Interpreter
 
-		PARSER = ::GlyphLanguageParser.new
-
 		def initialize(text, context=nil)
 			context ||= {:source => '--'}
-			@raw = PARSER.parse text
+			@parser = GlyphLanguageParser.new
+			@raw = @parser.parse text
 			@context = context
 			@document = Glyph::Document.new @raw, @context
+			@document.inherit_from @context[:document] if @context[:document]
 		end
 
 		def process
@@ -60,19 +60,13 @@ module Glyph
 		end
 
 		def document
-			preprocess
-			postprocess
+			return @document if @document.finalized?
+			process if @document.new?
+			postprocess if @document.analyzed?
 			@document
 		end
 
-		def macro(name, &block)
-			Glyph::Macro.new(name, @document).instance_eval &block
-		end
-
-		def macro_alias(pair)
-			Glyph::MACROS[pair.name.to_sym] = Glyph::MACROS[pair.value.to_sym]
-		end
-
+	
 	end
 
 end

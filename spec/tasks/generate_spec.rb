@@ -13,7 +13,7 @@ describe "generate" do
 	
 	it ":document should generate Glyph::DOCUMENT" do
 		lambda { Glyph.run! 'generate:document'}.should_not raise_error
-		Glyph::DOCUMENT.children.length.should > 0
+		Glyph::DOCUMENT.structure.children.length.should > 0
 	end
 
 	it ":html should generate a standalone html document" do

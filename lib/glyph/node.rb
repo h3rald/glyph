@@ -80,32 +80,27 @@ module Glyph
 		end
 
 		### ACTIONS
+		
+		def document
+			self[:document]
+		end
 
-		def get_params
-			esc = '__[=ESCAPED_PIPE=]__'
+		def params
+			esc = '__$$$__ESCAPED_PIPE__$$$__'
 			self[:value].gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
 		end
 
-		def store_id
-			params = get_params
-			ident = self[:id] || params[0].to_sym
-			raise MacroError.new(self, "ID '#{ident}' already exists.") if Glyph::IDS.has_key? ident
-			Glyph::IDS[ident.to_sym] = self[:header] || params[1] || params[0]
-		end
-
-		def get_snippet
-			params = get_params
+		def snippet
 			ident = params[0].to_sym
 			raise MacroError.new(self, "Snippet '#{ident}' does not exist.") unless Glyph::SNIPPETS.include? ident
 			Glyph::SNIPPETS[ident]
 		end
 
-		def get_header
-			params = get_params
+		def header
 			title = params[0]
-			level = Glyph::CONFIG.get("structure.first_header_level") - 1
+			level = cfg("structure.first_header_level") - 1
 			ascend do |n| 
-				if Glyph::CONFIG.get("structure.headers").include? n[:macro] then
+				if cfg("structure.headers").include? n[:macro] then
 					level+=1
 				end
 			end
@@ -113,7 +108,6 @@ module Glyph
 			self[:header] = title
 			self[:id] = anchor.to_sym
 			self[:level] = level
-			store_id
 			self
 		end
 

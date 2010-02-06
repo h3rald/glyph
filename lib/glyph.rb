@@ -21,7 +21,7 @@ module Glyph
 
 	# Library directory
 	LIB = Pathname(__FILE__).dirname.expand_path/'glyph'
-	
+
 	# Glyph home directory
 	HOME = LIB/'../../'
 
@@ -40,22 +40,15 @@ module Glyph
 	# Macros hash
 	MACROS = {}
 
-	# Macro source files
-	MACRO_SOURCES = []
-
-	# IDs array
-	IDS = {} 
-
 	# Array of TODO items.
 	TODOS = []
 
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'
+	require LIB/'document'
 	require LIB/'glyph_language'
 	require LIB/'interpreter'
-
-	DOCUMENT = {}.to_node
 
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
@@ -103,6 +96,14 @@ module Glyph
 
 	def self.run(task, *args)
 		Rake::Task[task].invoke *args
+	end
+
+	def self.macro(name, &block)
+		MACROS[name] = block
+	end
+
+	def self.macro_alias(pair)
+		MACROS[pair.name.to_sym] = MACROS[pair.value.to_sym]
 	end
 
 end

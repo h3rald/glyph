@@ -21,4 +21,19 @@ describe Glyph do
 		delete_project_dir
 	end
 
+	it "should define macros" do
+		lambda { define_em_macro }.should_not raise_error
+		lambda { define_ref_macro }.should_not raise_error
+		Glyph::MACROS.include?(:em).should == true
+		Glyph::MACROS.include?(:ref).should == true
+	end
+
+	it "should support macro aliases" do
+		define_ref_macro
+		lambda { Glyph.macro_alias("->" => :ref)}.should_not raise_error
+		Glyph::MACROS[:"->"].should == Glyph::MACROS[:ref]
+	end
+
+
+
 end

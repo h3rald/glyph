@@ -7,39 +7,38 @@ describe "Macro: " do
 		create_project
 		Glyph.run! 'load:macros'
 		Glyph.run! 'load:snippets'
-		@p = Glyph::Interpreter
 	end
 
 	after do
 		delete_project
 	end
 
-	def define_em_macro
-		@p.macro :em do |node| 
-			%{<em>#{node[:value]}</em>}
-		end
-	end
-
-	it "id" do
-		@p.process("this is a #[test|test].")[:output].should == "this is a <a id=\"test\">test</a>."
-		Glyph::IDS.has_key?(:test).should == true 
-		lambda { @p.process("this is a #[test|test].")}.should raise_error(MacroError, "[--] #: ID 'test' already exists.")
+	it "anchor" do
+		interpret "this is a #[test|test]."
+		doc = @p.document
+		doc.output.should == "this is a <a id=\"test\">test</a>."
+		doc.bookmarks.has_key?(:test).should == true 
+		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(MacroError, "[--] #: Bookmark 'test' already exists")
 	end
 
 	it "snippet" do
 		define_em_macro
-		@p.process("Testing a snippet: &[test].")[:output].should == "Testing a snippet: This is a \nTest snippet."
-		lambda { @p.process("Testing &[wrong].")}.should raise_error(MacroError)
+		interpret "Testing a snippet: &[test]."
+		@p.document.output.should == "Testing a snippet: This is a \nTest snippet."
+		lambda { interpret("Testing &[wrong]."); @p.document}.should raise_error(MacroError)
 		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
 		Glyph::SNIPPETS[:b] = "and another em[test]"
 		text = "TEST: &[a]"
-		@p.process(text)[:output].should == "TEST: this is a <em>test</em> and another <em>test</em>"
+		interpret text
+		@p.document.output.should == "TEST: this is a <em>test</em> and another <em>test</em>"
 	end
 
 	it "section, chapter, title" do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
-		l = Glyph::CONFIG.get("structure.first_header_level")
-		@p.process(text)[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="chapter">
+		l = cfg("structure.first_header_level")
+		interpret text
+		doc = @p.document
+		doc.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="chapter">
 					<h#{l} id="h_Chapter_X">Chapter X</h#{l}> ... 
 					<div class="section">
 					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 
@@ -49,13 +48,15 @@ describe "Macro: " do
 					</div>
 				</div>
 		}.gsub(/\n|\t|_\d{1,3}/, '')
-		Glyph::IDS.include?(:"sec-y").should == true 
+		doc.bookmark?(:"sec-y").should == {:id => :"sec-y", :title => "Section Y"} 
 	end
 
 	it "include" do
-		l = Glyph::CONFIG.get("structure.first_header_level")
+		l = cfg("structure.first_header_level")
 		Glyph.config_override "filters.by_extension", true
-		@p.process(file_load(Glyph::PROJECT/'text/container.textile'))[:output].gsub(/\n|\t|_\d{1,3}/, '').should == %{
+		text = file_load(Glyph::PROJECT/'text/container.textile')
+		interpret text
+		@p.document.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
 			<h#{l} id="h_Container_section">Container section</h#{l}>
 			This is a test.
@@ -69,29 +70,34 @@ describe "Macro: " do
 
 
 	it "style" do
-		@p.process("style[test.sass]")[:output].gsub(/\n|\t/, '').should == "<style>#main {  background-color: #0000ff; }</style>"
+		interpret "style[test.sass]"
+		@p.document.output.gsub(/\n|\t/, '').should == "<style>#main {  background-color: #0000ff; }</style>"
 	end	
 
 	it "escape" do
 		define_em_macro
 		text = %{This is a test em[This can .[=contain test[macros em[test]]=]]}		
-		@p.process(text)[:output].should == %{This is a test <em>This can contain test[macros em[test]]</em>}
+		interpret text
+		@p.document.output.should == %{This is a test <em>This can contain test[macros em[test]]</em>}
 	end
 
 	it "ruby" do
-		@p.process("2 + 2 = %[2+2]")[:output].should == %{2 + 2 = 4}
+		interpret "2 + 2 = %[2+2]"
+		@p.document.output.should == %{2 + 2 = 4}
 	end
 
 	it "config" do
 		Glyph.config_override "test.setting", "TEST"
-		@p.process("test.setting = $[test.setting]")[:output].should == %{test.setting = TEST}
+		interpret "test.setting = $[test.setting]"
+		@p.document.output.should == %{test.setting = TEST}
 	end
 
 	it "toc" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
-		@p.build_document
-		out = Glyph::DOCUMENT[:output].gsub(/\n|\t|_\d+/, '')
-		out.slice(/(.+?<\/div>)/, 1).should == %{
+		interpret file_load(Glyph::PROJECT/'document.glyph')
+		doc = @p.document
+		doc.output.gsub!(/\n|\t|_\d+/, '')
+		doc.output.slice(/(.+?<\/div>)/, 1).should == %{
 			<div class="contents">
 			<h2>Table of Contents</h2>
 			<ul class="toc">
@@ -106,11 +112,19 @@ describe "Macro: " do
 	end
 
 	it "link" do
-		Glyph::IDS[:test_id] = "Test ID"
-		@p.process("link[#test_id]")[:output].should == %{<a href="#test_id">Test ID</a>}
-		@p.process("link[#test_id|Override]")[:output].should == %{<a href="#test_id">Override</a>}
-		@p.process("link[#test_id2]")[:output].should == %{<a href="#test_id2">#test_id2</a>}
-		@p.process("link[http://www.h3rald.com|H3RALD]")[:output].should == %{<a href="http://www.h3rald.com">H3RALD</a>}
+		text = %{
+			link[#test_id]
+			link[#test_id2]
+			#[test_id|Test #1]
+			#[test_id2|Test #2]
+		}
+		interpret text
+		@p.document.output.gsub(/\n|\t/, '').should == %{
+			<a href="#test_id">Test #1</a>
+			<a href="#test_id2">Test #2</a>
+			<a id="test_id">Test #1</a>
+			<a id="test_id2">Test #2</a>
+		}.gsub(/\n|\t/, '')
 	end
 
 

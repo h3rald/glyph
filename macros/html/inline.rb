@@ -1,25 +1,31 @@
 #!/usr/bin/env ruby
 
 macro :anchor do |node|
-	params = node.get_params
-	node.store_id
-	%{<a id="#{params[0]}">#{params[1]}</a>}
+	ident, title = node.params
+	raise MacroError.new(node, "Bookmark '#{ident}' already exists") if node.document.bookmark? ident
+	node.document.bookmark :id => ident, :title => title
+	%{<a id="#{ident}">#{title}</a>}
 end
 
 macro :link do |node|
-	params = node.get_params
-	anchor = params[0].gsub(/^#/, '').to_sym
-	if Glyph::IDS.has_key? anchor then
-		params[1] ||= Glyph::IDS[anchor]
+	href, title = node.params
+	if href.match /^#/ then
+		anchor = href.gsub(/^#/, '').to_sym
+		title = node.document.placeholder do |document|
+			# TODO: warn if it doesn't exist
+			document.bookmarks[anchor][:title]
+		end
 	end
-	params[1] ||= params[0]
-	%{<a href="#{params[0]}">#{params[1]}</a>}
+	title ||= href
+	%{<a href="#{href}">#{title}</a>}
 end
 
 macro :fmi do |node|
 	# TODO
-	topic, link = node.get_params
-	%{<span class="fmi">For more information on #{topic}, see =>[#{link}]</span>}
+	topic, href = node.params
+	context = {:source => "macro: fmi", :document => node.document}
+	res = Glyph::Interpreter.new("=>[#{link}]", context).document	
+	%{<span class="fmi">For more information on #{topic}, see #{res}</span>}
 end
 
 macro :term do |node|
@@ -37,6 +43,7 @@ macro :fn do |node|
 	""
 end
 
+macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link
 macro_alias '+' => :term

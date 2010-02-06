@@ -4,13 +4,14 @@ namespace :generate do
 
 	desc "Process document.glyph"
 	task :document => ["load:all"] do
-		info "Processing document..."
+		info "Generating document..."
 		text = file_load Glyph::PROJECT/'document.glyph'
-		interpreter = Glyph::Interpreter.new text
-		MACRO_SOURCES.each do |m|
-			interpreter.instance_eval m
-		end
-		DOCUMENT = interpreter.document
+		interpreter = Glyph::Interpreter.new text, :source => "file: document.glyph"
+		info "Processing..."
+		interpreter.process
+		info "Post-processing..."
+		interpreter.postprocess
+		Glyph::DOCUMENT = interpreter.document 
 	end
 
 	desc "Create a standalong html file"
