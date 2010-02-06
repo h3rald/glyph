@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 $: << File.expand_path(File.dirname(__FILE__) + '/lib')
 require 'rubygems'
+require 'yard'
 require 'rake/clean'
 require 'rake/gempackagetask'
 require 'spec/rake/spectask'
@@ -11,6 +12,10 @@ task :default => :spec
 gemspec = eval(File.read('glyph.gemspec'))
 
 Rake::GemPackageTask.new(gemspec) { |pkg| }
+
+YARD::Rake::YardocTask.new do |t|
+  t.files   = ['lib/**/*.rb', 'macros/**/*.rb', 'tasks/**/*.rb', '*.rb']   # optional
+end
 
 desc "Run all specs"
 Spec::Rake::SpecTask.new('spec') do |t|
