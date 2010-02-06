@@ -65,13 +65,6 @@ def run_command_successfully(cmd)
 	run_command(cmd).match(/error/) == nil
 end
 
-def create_sample_file(filename, text, opts={})
-	contents = text
-	contents << '#{note "Test", :type => :important}\n' if opts[:tenjin]
-	contents << '@test\n' if opts[:snippets]
-	File.open((Glyph::PROJECT/"source"/filename).to_s, "w+") {|f| f.write contents }
-end
-
 def define_em_macro
 	Glyph.macro :em do |node| 
 		%{<em>#{node[:value]}</em>}

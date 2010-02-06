@@ -105,6 +105,10 @@ module Glyph
 	def self.macro_alias(pair)
 		MACROS[pair.name.to_sym] = MACROS[pair.value.to_sym]
 	end
+	
+	def self.run_macro(name, value, document)
+		MACROS[name].call({:source => "Glyph", :value => value, :document => document}.to_node).to_s
+	end
 
 end
 

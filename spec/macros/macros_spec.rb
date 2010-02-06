@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
-describe "Macro: " do
+describe "Macro:" do
 
 	before do
 		create_project
@@ -126,6 +126,13 @@ describe "Macro: " do
 			<a id="test_id2">Test #2</a>
 		}.gsub(/\n|\t/, '')
 	end
+
+	it "fmi" do
+		interpret "fmi[this topic|#test] #[test|Test]"
+		@p.document.output.should == %{<span class="fmi">
+			For more information on this topic, 
+			see <a href="#test">Test</a>.</span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
+	end	
 
 
 end	

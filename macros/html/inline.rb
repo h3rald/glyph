@@ -11,9 +11,14 @@ macro :link do |node|
 	href, title = node.params
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
-		title = node.document.placeholder do |document|
-			# TODO: warn if it doesn't exist
-			document.bookmarks[anchor][:title]
+		bookmark = node.document.bookmarks[anchor]
+		if bookmark then
+			title = bookmark[:title]
+		else
+			title = node.document.placeholder do |document|
+				# TODO: warn if it doesn't exist
+				document.bookmarks[anchor][:title]
+			end
 		end
 	end
 	title ||= href
@@ -23,9 +28,11 @@ end
 macro :fmi do |node|
 	# TODO
 	topic, href = node.params
-	context = {:source => "macro: fmi", :document => node.document}
-	res = Glyph::Interpreter.new("=>[#{link}]", context).document	
-	%{<span class="fmi">For more information on #{topic}, see #{res}</span>}
+	link = node.document.placeholder do |document| 
+		context = {:source => "macro: fmi", :document => document}
+		Glyph.run_macro :link, href, document
+	end
+	%{<span class="fmi">For more information on #{topic}, see #{link}.</span>}
 end
 
 macro :term do |node|
