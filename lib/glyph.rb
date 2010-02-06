@@ -43,6 +43,9 @@ module Glyph
 	# Array of TODO items.
 	TODOS = []
 
+	# Array of errors
+	ERRORS = []
+
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'
