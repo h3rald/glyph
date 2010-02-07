@@ -45,13 +45,15 @@ describe Glyph::Document do
 		@doc.bookmark :id => :test1, :title => "Test #1"
 		@doc.bookmark :id => :test2, :title => "Test #2"
 		@doc.placeholder { "test" }
+		@doc.header :id => :test3, :title => "Test #3", :level => 3
 		doc2 = create_doc @tree
 		doc2.bookmarks.length.should == 0
 		doc2.placeholders.length.should == 0
-		doc2.bookmark :id => :test3, :title => "Test #3"
+		doc2.bookmark :id => :test4, :title => "Test #4"
 		doc2.inherit_from @doc
 		doc2.bookmarks.length.should == 2
-		doc2.placeholders.length.should == 1
+		doc2.placeholders.length.should == 0
+		doc2.headers.length.should == 1
 		doc2.bookmarks[:test3].should == nil
 	end
 

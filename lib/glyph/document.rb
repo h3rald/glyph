@@ -33,7 +33,6 @@ module Glyph
 
 		def inherit_from(document)
 			@bookmarks = document.bookmarks
-			@placeholders = document.placeholders
 			@headers = document.headers
 		end
 
@@ -68,7 +67,13 @@ module Glyph
 		def finalize
 			raise RuntimeError, "Document has not been analyzed" unless analyzed?
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
-			@placeholders.each_pair {|key, value| @output.gsub! key.to_s, value.call(self).to_s}
+			@placeholders.each_pair do |key, value| 
+				begin
+					@output.gsub! key.to_s, value.call(self).to_s
+				rescue Exception => e
+					warning e.message
+				end
+			end
 			@state = :finalized
 		end
 

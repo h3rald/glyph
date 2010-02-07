@@ -18,14 +18,15 @@ describe "Macro:" do
 		doc = @p.document
 		doc.output.should == "this is a <a id=\"test\">test</a>."
 		doc.bookmarks.has_key?(:test).should == true 
-		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(MacroError, "[--] #: Bookmark 'test' already exists")
+		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(MacroError)
 	end
 
 	it "snippet" do
 		define_em_macro
 		interpret "Testing a snippet: &[test]."
 		@p.document.output.should == "Testing a snippet: This is a \nTest snippet."
-		lambda { interpret("Testing &[wrong]."); @p.document}.should raise_error(MacroError)
+		interpret("Testing &[wrong].")
+		@p.document.output.should == "Testing [SNIPPET 'wrong' NOT FOUND]." 
 		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
 		Glyph::SNIPPETS[:b] = "and another em[test]"
 		text = "TEST: &[a]"

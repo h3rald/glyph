@@ -9,7 +9,7 @@ describe "glyph" do
 	end
 
 	after do
-		delete_project_dir
+		delete_project
 	end
 
 	it "[init] should create a project in the current directory" do
@@ -53,9 +53,27 @@ describe "glyph" do
 
 	it "[compile] should support a custom source file" do
 		create_project
-		copy_file Glyph::PROJECT/'document.glyph', Glyph::PROJECT/'custom.glyph'
-		run_command(["compile", "-f", "custom.glyph"]).match(/test_project\.html/m).should_not == nil
+		file_copy Glyph::PROJECT/'document.glyph', Glyph::PROJECT/'custom.glyph'
+		run_command(["compile", "-s", "custom.glyph"]).match(/custom\.glyph/m).should_not == nil
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
+	end
+
+	it "[compile] should continue execution in case of macro errors" do
+		create_project
+		text = %{
+			=>[#invalid1]
+			=>[#invalid2]
+			=>[#valid]
+			&[test]
+			&[invalid3]
+			#[valid|Valid bookmark]
+		}
+		file_write Glyph::PROJECT/'document.glyph', text
+		res = run_command(['-d', "compile"])
+		res.match(/Bookmark 'invalid1' does not exist/).should_not == nil
+		res.match(/Bookmark 'invalid2' does not exist/).should_not == nil
+		res.match(/Bookmark 'valid' does not exist/).should == nil
+		res.match(/Snippet 'invalid3' does not exist/).should_not == nil
 	end
 
 end

@@ -24,7 +24,7 @@ module Kernel
 
 	def file_load(file)
 		result = ""
-		File.open(file, 'r') do |f|
+		File.open(file.to_s, 'r') do |f|
 			while l = f.gets 
 				result << l
 			end
@@ -33,9 +33,10 @@ module Kernel
 	end
 
 	def file_write(file, contents="")
-		File.open(file, 'w+') do |f|
-			f.write contents
+		File.open(file.to_s, 'w+') do |f|
+			f.print contents
 		end
+		contents
 	end
 
 	def file_copy(source, dest, options={})
@@ -71,6 +72,6 @@ class MacroError < RuntimeError
 		macros = []
 		@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }
 		macros.join(" > ")
-		super("[#{source}] #{macros}: #{msg}")
+		super("[#{source} - macro: #{macros}] #{msg}")
 	end
 end

@@ -12,21 +12,43 @@ macro :todo do |node|
 end
 
 macro :snippet do |node|
-	node[:source] = "snippet: #{node[:value]}"
-	i = Glyph::Interpreter.new node.snippet, node
-	i.document.output
+	begin
+		ident = node.params[0].to_sym
+		raise MacroError.new(node, "Snippet '#{ident}' does not exist") unless Glyph::SNIPPETS.include? ident
+		snippet = Glyph::SNIPPETS[ident]
+		node[:source] = "snippet: #{node[:value]}"
+		i = Glyph::Interpreter.new snippet, node
+		i.document.output
+	rescue Exception => e
+		warning e.message
+		"[SNIPPET '#{node[:value]}' NOT FOUND]"
+	end
 end
 
 macro :include do |node|
-	contents = node.load_file
-	if cfg("filters.by_file_extension") then
-		ext = node[:value].match(/\.(.*)$/)[1]
-		raise MacroError.new(node, "Macro '#{ext}' not found") unless Glyph::MACROS.include?(ext.to_sym)
-		contents = "#{ext}[#{contents}]"
-	end	
-	node[:source] = "file: #{node[:value]}"
-	i = Glyph::Interpreter.new contents, node
-	i.document.output
+	begin
+		file = nil
+		(Glyph::PROJECT/"text").find do |f|
+			file = f if f.to_s.match /\/#{node[:value]}$/
+		end	
+		raise MacroError.new(node, "File #{node[:value]} no found.") unless file
+		contents = file_load file
+		if cfg("filters.by_file_extension") then
+			begin
+				ext = node[:value].match(/\.(.*)$/)[1]
+				raise MacroError.new(node, "Macro '#{ext}' not found") unless Glyph::MACROS.include?(ext.to_sym)
+				contents = "#{ext}[#{contents}]"
+			rescue MacroError => e
+				warning e.message
+			end
+		end	
+		node[:source] = "file: #{node[:value]}"
+		i = Glyph::Interpreter.new contents, node
+		i.document.output
+	rescue MacroError => e
+		warning e
+		"[FILE '#{node[:value]}' NOT FOUND]"
+	end
 end
 
 macro :escape do |node| 

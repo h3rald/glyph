@@ -16,8 +16,8 @@ macro :link do |node|
 			title = bookmark[:title]
 		else
 			title = node.document.placeholder do |document|
-				# TODO: warn if it doesn't exist
-				document.bookmarks[anchor][:title]
+				raise MacroError.new(node, "Bookmark '#{anchor}' does not exist") unless document.bookmarks[anchor]
+				document.bookmarks[anchor][:title] rescue "--> #{anchor}"
 			end
 		end
 	end

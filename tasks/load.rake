@@ -34,7 +34,10 @@ namespace :load do
 
 	desc "Load configuration files"
 	task :config do
+		# Save overrides set by commands...
+		overrides = Glyph::PROJECT_CONFIG.dup
 		Glyph::PROJECT_CONFIG.read
+		Glyph::PROJECT_CONFIG.merge! overrides
 		Glyph::SYSTEM_CONFIG.read
 		Glyph::GLOBAL_CONFIG.read
 		Glyph.reset_config

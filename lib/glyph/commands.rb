@@ -25,7 +25,7 @@ GLI.desc 'Compile the project'
 arg_name "[output_target]"
 command :compile do |c|
 	c.desc "Specify a glyph file to compile (default: document.glyph)"
-	c.flag [:f, :file]
+	c.flag [:s, :source]
 	c.action do |global_options, options, args|
 		output_targets = Glyph::CONFIG.get('document.output_targets')
 		target = nil
@@ -39,7 +39,7 @@ command :compile do |c|
 		else
 			raise RuntimeError, "Too many arguments."
 		end	
-		Glyph.config_override 'document.source', options[:f] if options[:f]
+		Glyph.config_override('document.source', options[:s]) if options[:s]
 		raise RuntimeError, "Output target not specified" unless target
 		raise RuntimeError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 		Glyph.run "generate:#{target}"
@@ -101,14 +101,20 @@ post do |global,command,options,args|
 end
 
 on_error do |exception|
-	if Glyph.const_defined? :DEBUG then
-		puts "error: #{exception.message}"
-		puts "backtrace:"
-		exception.backtrace.each do |b|
-			puts b
+	if exception.is_a? MacroError then
+		#warning exception.message
+		puts exception.message
+		false
+	else
+		if Glyph.const_defined? :DEBUG then
+			puts "error: #{exception.message}"
+			puts "backtrace:"
+			exception.backtrace.each do |b|
+				puts b
+			end
 		end
+		true
 	end
 	# Error logic here
 	# return false to skip default error handling
-	true
 end

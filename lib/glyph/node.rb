@@ -90,27 +90,6 @@ module Glyph
 			self[:value].gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
 		end
 
-		def snippet
-			ident = params[0].to_sym
-			raise MacroError.new(self, "Snippet '#{ident}' does not exist.") unless Glyph::SNIPPETS.include? ident
-			Glyph::SNIPPETS[ident]
-		end
-
-		def header
-			title = params[0]
-			level = cfg("structure.first_header_level") - 1
-			ascend do |n| 
-				if cfg("structure.headers").include? n[:macro] then
-					level+=1
-				end
-			end
-			anchor = params[1] ? params[1] : "h_#{title.gsub(' ', '_')}_#{rand(100)}"
-			self[:header] = title
-			self[:id] = anchor.to_sym
-			self[:level] = level
-			self
-		end
-
 		def load_file
 			file = nil
 			(Glyph::PROJECT/"text").find do |f|
