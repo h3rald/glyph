@@ -38,7 +38,7 @@ describe Glyph::Document do
 	it "should store placeholders" do
 		p = lambda { "test" }
 		lambda { @doc.placeholder &p }.should_not raise_error
-		@doc.placeholders["$$$__placeholder#1__$$$".to_sym].should == p
+		@doc.placeholders["‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡".to_sym].should == p
 	end
 
 	it "can inherit data from another document" do

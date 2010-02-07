@@ -9,11 +9,22 @@ macro :section do |node|
 end
 
 macro :header do |node|
-	node.header
-	raise MacroError.new(node, "Bookmark '#{node[:id]}' already exists") if node.document.bookmark? node[:id]
-	node.document.bookmark :id => node[:id], :title => node[:header]
+	title = node.params[0]
+	level = cfg("structure.first_header_level") - 1
+	node.ascend do |n| 
+		if cfg("structure.headers").include? n[:macro] then
+			level+=1
+		end
+	end
+	h_id = node.params[1]
+	h_id ||= "h_#{node.document.headers.length+1}".to_sym
+	node.document.header :title => title, :level => level, :id => h_id
+	node[:id] = h_id
+	node[:header] = title
+	raise MacroError.new(node, "Bookmark '#{h_id}' already exists") if node.document.bookmark? h_id
+	node.document.bookmark :id => h_id, :title => title
 	%{
-		<h#{node[:level]} id="#{node[:id]}">#{node[:header]}</h#{node[:level]}>
+		<h#{level} id="#{h_id}">#{title}</h#{level}>
 	}	
 end
 
@@ -98,7 +109,7 @@ macro :toc do |node|
 		l = cfg("structure.first_header_level")
 		%{
 <div class="contents">
-<h#{l}>Table of Contents</h#{l}>
+<h#{l} id="h_toc">Table of Contents</h#{l}>
 <ul class="toc">
 	#{descend_section.call(document.structure, nil)}
 </ul>

@@ -31,7 +31,7 @@ macro :fmi do |node|
 		context = {:source => "macro: fmi", :document => document}
 		Glyph.run_macro :link, href, document
 	end
-	%{<span class="fmi">For more information on #{topic}, see #{link}.</span>}
+	%{<span class="fmi">for more information on #{topic}, see #{link}</span>}
 end
 
 macro :term do |node|

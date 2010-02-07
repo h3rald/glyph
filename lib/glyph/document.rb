@@ -13,7 +13,7 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders
+		attr_reader :bookmarks, :placeholders, :headers
 
 		def initialize(tree, context)
 			raise RuntimeError, "Invalid syntax tree" unless tree.respond_to? :evaluate
@@ -21,6 +21,7 @@ module Glyph
 			@context = context
 			@bookmarks = {}
 			@placeholders = {}
+			@headers = []
 			@state = :new
 		end
 
@@ -33,10 +34,11 @@ module Glyph
 		def inherit_from(document)
 			@bookmarks = document.bookmarks
 			@placeholders = document.placeholders
+			@headers = document.headers
 		end
 
 		def placeholder(&block)
-			key = "$$$__placeholder##{@placeholders.length+1}__$$$".to_sym
+			key = "‡‡‡‡‡PLACEHOLDER¤#{@placeholders.length+1}‡‡‡‡‡".to_sym
 			raise RuntimeError, "Placeholder '#{key}' already exists" if @placeholders.has_key? key
 			@placeholders[key] = block
 			key
@@ -50,6 +52,10 @@ module Glyph
 			ident = hash[:id].to_sym
 			hash[:id] = ident
 			@bookmarks[ident] = hash
+		end
+
+		def header(hash)
+			@headers << hash
 		end
 
 		def analyze

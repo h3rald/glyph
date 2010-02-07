@@ -33,21 +33,21 @@ describe "Macro:" do
 		@p.document.output.should == "TEST: this is a <em>test</em> and another <em>test</em>"
 	end
 
-	it "section, chapter, title" do
+	it "section, chapter, header" do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
 		l = cfg("structure.first_header_level")
 		interpret text
 		doc = @p.document
-		doc.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{<div class="chapter">
-					<h#{l} id="h_Chapter_X">Chapter X</h#{l}> ... 
+		doc.output.gsub(/\n|\t/, '').should == %{<div class="chapter">
+					<h#{l} id="h_1">Chapter X</h#{l}> ... 
 					<div class="section">
 					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 
 						<div class="section">
-						<h#{l+2} id="h_Another_section">Another section</h#{l+2}> ...
+						<h#{l+2} id="h_3">Another section</h#{l+2}> ...
 						</div>
 					</div>
 				</div>
-		}.gsub(/\n|\t|_\d{1,3}/, '')
+		}.gsub(/\n|\t/, '')
 		doc.bookmark?(:"sec-y").should == {:id => :"sec-y", :title => "Section Y"} 
 	end
 
@@ -58,10 +58,10 @@ describe "Macro:" do
 		interpret text
 		@p.document.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
-			<h#{l} id="h_Container_section">Container section</h#{l}>
+			<h#{l} id="h_1">Container section</h#{l}>
 			This is a test.
 				<div class="section">
-				<h#{l+1} id="h_Test_Section">Test Section</h#{l+1}>	
+				<h#{l+1} id="h_2">Test Section</h#{l+1}>	
 				<p>&#8230;</p>
 				</div>
 			</div>
@@ -96,14 +96,14 @@ describe "Macro:" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
 		interpret file_load(Glyph::PROJECT/'document.glyph')
 		doc = @p.document
-		doc.output.gsub!(/\n|\t|_\d+/, '')
+		doc.output.gsub!(/\n|\t/, '')
 		doc.output.slice(/(.+?<\/div>)/, 1).should == %{
 			<div class="contents">
-			<h2>Table of Contents</h2>
+			<h2 id="h_toc">Table of Contents</h2>
 			<ul class="toc">
-				<li class="toc-section"><a href="#h_Container_section">Container section</a></li>
+				<li class="toc-section"><a href="#h_1">Container section</a></li>
 				<ul>
-					<li class="toc-section"><a href="#h_Test_Section">Test Section</a></li>
+					<li class="toc-section"><a href="#h_2">Test Section</a></li>
 				</ul>
 				<li class="toc-section"><a href="#md">Markdown</a></li>
 			</ul>
@@ -130,8 +130,8 @@ describe "Macro:" do
 	it "fmi" do
 		interpret "fmi[this topic|#test] #[test|Test]"
 		@p.document.output.should == %{<span class="fmi">
-			For more information on this topic, 
-			see <a href="#test">Test</a>.</span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
+			for more information on this topic, 
+			see <a href="#test">Test</a></span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
 	end	
 
 

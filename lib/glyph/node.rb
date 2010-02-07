@@ -86,7 +86,7 @@ module Glyph
 		end
 
 		def params
-			esc = '__$$$__ESCAPED_PIPE__$$$__'
+			esc = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
 			self[:value].gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
 		end
 

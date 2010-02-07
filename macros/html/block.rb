@@ -16,7 +16,7 @@ end
 
 macro :"textile.code" do |node|
 	# TODO
-	params = node.get_params
+	params = node.params
 	%{
 		<notextile>
 		<pre>

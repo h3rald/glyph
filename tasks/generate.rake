@@ -20,7 +20,7 @@ namespace :generate do
 		out = Glyph::PROJECT/"output/html"
 		out.mkpath
 		file = "#{Glyph::CONFIG.get('document.filename')}.html"
-		file_write out/file, Glyph::DOCUMENT.output[:html]
+		file_write out/file, Glyph::DOCUMENT.output
 		# TODO: Copy images
 	end
 
