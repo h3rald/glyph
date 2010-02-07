@@ -51,4 +51,11 @@ describe "glyph" do
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
+	it "[compile] should support a custom source file" do
+		create_project
+		copy_file Glyph::PROJECT/'document.glyph', Glyph::PROJECT/'custom.glyph'
+		run_command(["compile", "-f", "custom.glyph"]).match(/test_project\.html/m).should_not == nil
+		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
+	end
+
 end

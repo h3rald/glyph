@@ -29,7 +29,7 @@ namespace :load do
 			end
 		end
 		load_macros.call Glyph::HOME/"macros"
-		load_macros.call Glyph::PROJECT/"lib/macros"
+		load_macros.call Glyph::PROJECT/"lib/macros" rescue nil
 	end
 
 	desc "Load configuration files"

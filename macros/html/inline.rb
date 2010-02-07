@@ -26,7 +26,6 @@ macro :link do |node|
 end
 
 macro :fmi do |node|
-	# TODO
 	topic, href = node.params
 	link = node.document.placeholder do |document| 
 		context = {:source => "macro: fmi", :document => document}
