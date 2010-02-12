@@ -1,22 +1,22 @@
 #!/usr/bin/env ruby
 
-macro :anchor do |node|
-	ident, title = node.params
-	raise MacroError.new(node, "Bookmark '#{ident}' already exists") if node.document.bookmark? ident
-	node.document.bookmark :id => ident, :title => title
+macro :anchor do 
+	ident, title = @params
+	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
+	bookmark :id => ident, :title => title
 	%{<a id="#{ident}">#{title}</a>}
 end
 
-macro :link do |node|
-	href, title = node.params
+macro :link do
+	href, title = @params
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
-		bookmark = node.document.bookmarks[anchor]
-		if bookmark then
-			title = bookmark[:title]
+		bmk = bookmark? anchor
+		if bmk then
+			title = bmk[:title]
 		else
-			title = node.document.placeholder do |document|
-				raise MacroError.new(node, "Bookmark '#{anchor}' does not exist") unless document.bookmarks[anchor]
+			title = placeholder do |document|
+				macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor]
 				document.bookmarks[anchor][:title] rescue "--> #{anchor}"
 			end
 		end
@@ -25,26 +25,28 @@ macro :link do |node|
 	%{<a href="#{href}">#{title}</a>}
 end
 
-macro :fmi do |node|
-	topic, href = node.params
-	link = node.document.placeholder do |document| 
-		context = {:source => "macro: fmi", :document => document}
-		Glyph.run_macro :link, href, document
+macro :fmi do
+	topic, href = @params
+	link = placeholder do |document| 
+		#context = {:source => "macro: fmi", :document => document}
+		#Glyph.run_macro :link, href, document
+		# TODO Check
+		interpret "link[#{href}]"
 	end
 	%{<span class="fmi">for more information on #{topic}, see #{link}</span>}
 end
 
-macro :term do |node|
+macro :term do
 	# TODO
 	""
 end
 
-macro :biblio do |node|
+macro :biblio do
 	# TODO
 	""
 end
 
-macro :fn do |node|
+macro :fn do
 	# TODO
 	""
 end

@@ -1,102 +1,101 @@
 #!/usr/bin/env ruby
 
-macro :section do |node| 
+macro :section do 
 	%{
-		<div class="#{node[:macro]}">
-		#{node[:value]}
+		<div class="#{@name}">
+		#{@value}
 		</div>
 	}	
 end
 
-macro :header do |node|
-	title = node.params[0]
+macro :header do
+	title = @params[0]
 	level = cfg("structure.first_header_level") - 1
-	node.ascend do |n| 
+	@node.ascend do |n| 
 		if cfg("structure.headers").include? n[:macro] then
 			level+=1
 		end
 	end
-	h_id = node.params[1]
-	h_id ||= "h_#{node.document.headers.length+1}".to_sym
-	node.document.header :title => title, :level => level, :id => h_id
-	node[:id] = h_id
-	node[:header] = title
-	raise MacroError.new(node, "Bookmark '#{h_id}' already exists") if node.document.bookmark? h_id
-	node.document.bookmark :id => h_id, :title => title
+	h_id = @params[1]
+	h_id ||= "h_#{@node[:document].headers.length+1}".to_sym
+	header :title => title, :level => level, :id => h_id
+	@node[:header] = h_id
+	macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
+	bookmark :id => h_id, :title => title
 	%{
 		<h#{level} id="#{h_id}">#{title}</h#{level}>
 	}	
 end
 
-macro :document do |node|
+macro :document do
 	%{
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-		#{node[:value]}
+		#{@value}
 </html>
 	}
 end
 
-macro :body do |node|
+macro :body do
 	%{
 		<body>
-		#{node[:value]}
+		#{@value}
 		</body>
 	}
 end
 
-macro :head do |node|
+macro :head do
 	%{
 		<head>
 			<title>#{Glyph::CONFIG.get("document.title")}</title>
-			<meta name="author" content="#{Glyph::CONFIG.get("document.author")}">
-			<meta name="copyright" content="#{Glyph::CONFIG.get("document.author")}">
-		#{node[:value]}
+			<meta name="author" content="#{cfg("document.author")}">
+			<meta name="copyright" content="#{cfg("document.author")}">
+		#{@value}
 		</head>
 	}
 end
 
-macro :style do |node|
-	file = Glyph::PROJECT/"styles/#{node[:value]}"
-	raise MacroError.new(node, "Stylesheet '#{node[:value]}' not found") unless file.exist?
-	node[:style] = ""
+macro :style do 
+	file = Glyph::PROJECT/"styles/#{@value}"
+	macro_error "Stylesheet '#{@value}' not found" unless file.exist?
+	style = ""
 	case file.extname
 	when ".css"
-		node[:style] = file_load file
+		style = file_load file
 	when ".sass"
 		begin
 			require 'sass'
-			node[:style] = Sass::Engine.new(file_load(file)).render
+			style = Sass::Engine.new(file_load(file)).render
 		rescue LoadError
-			raise MacroError.new node, "Haml is not installed. Please run: gem install haml"
+			macro_erro "Haml is not installed. Please run: gem install haml"
 		rescue Exception
 			raise
 		end
 	else
-		raise MacroError.new node, "Extension '#{file.extname}'"
+		macro_error "Extension '#{file.extname}' not supported."
 	end
 	%{
 		<style>
-		#{node[:style]}
+		#{style}
 		</style>
 	}
 end
 
-macro :toc do |node|
-	link_header = lambda do |v|
-		%{<a href="##{v[:id]}">#{v[:header]}</a>}
+macro :toc do 
+	link_header = lambda do |header|
+		%{<a href="##{header[:id]}">#{header[:title]}</a>}
 	end
-	toc = node.document.placeholder do |document|
+	toc = placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
 				if cfg("structure.headers").include?(n2[:macro])
-					header_node = n2.children.select{|n| n[:header]}[0] rescue nil
-					next if added_headers.include? header_node
-					added_headers << header_node
-					list << "<li class=\"toc-#{n2[:macro]}\">#{link_header.call(header_node)}</li>\n" if header_node
+					header_id = n2.children.select{|n| n[:header]}[0][:header] rescue nil
+					next if added_headers.include? header_id
+					added_headers << header_id
+					list << "<li class=\"toc-#{n2[:macro]}\">#{link_header.call(document.header?(header_id))}</li>\n" if header_id
 					child_list = ""
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)
@@ -118,12 +117,12 @@ macro :toc do |node|
 	toc
 end
 
-macro :index do |node|
+macro :index do
 	# TODO
 	""
 end
 
-macro :bibliography do |node|
+macro :bibliography do
 	# TODO
 	""
 end

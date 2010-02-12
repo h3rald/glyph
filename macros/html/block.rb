@@ -1,34 +1,33 @@
 #!/usr/bin/env ruby
 
-macro :note do |node|
+macro :note do
 	%{
-		<div class="#{node[:macro]}">
-			<span class="note-title">#{node[:macro].capitalize}</span>
-			<span class="note-body">#{node[:value]}</span>
+		<div class="#{@name}">
+			<span class="note-title">#{@name.to_s.capitalize}</span>
+			<span class="note-body">#{@value}</span>
 		</div>
 	}
 end
 
-macro :fig do |node|
+macro :fig do
 	# TODO
 	""
 end
 
-macro :"textile.code" do |node|
+macro :"textile.code" do
 	# TODO
-	params = node.params
 	%{
 		<notextile>
 		<pre>
 		<code>
-#{params[1]}
+#{@params[1]}
 		</code>
 		</pre>
 		</notextile>
 	}
 end
 
-macro :title do |node|
+macro :title do
 	title_start = (cfg("structure.first_header_level") > 1) ? "<h1>" : %{<div class "title">} 
 	title_end = (cfg("structure.first_header_level") > 1) ? "</h1>" : %{</div>} 
 	%{
@@ -38,7 +37,7 @@ macro :title do |node|
 	}
 end
 
-macro :author do |node|
+macro :author do
 	%{
 		<div class="author">
 			#{cfg("document.author")}
@@ -46,7 +45,7 @@ macro :author do |node|
 	}
 end
 
-macro :pubdate do |node|
+macro :pubdate do
 	%{
 		<div class="pubdate">
 			#{Time.now.strftime("%d %B %Y")}
@@ -54,20 +53,20 @@ macro :pubdate do |node|
 	}
 end
 
-macro :table do |node|
-	%{<table>#{node[:value]}</table>}
+macro :table do
+	%{<table>#{@value}</table>}
 end
 
-macro :tr do |node|
-	%{<tr>#{node[:value]}</tr>}
+macro :tr do
+	%{<tr>#{@value}</tr>}
 end
 
-macro :td do |node|
-	%{<td>#{node[:value]}</td>}
+macro :td do
+	%{<td>#{@value}</td>}
 end
 
-macro :th do |node|
-	%{<th>#{node[:value]}</th>}
+macro :th do
+	%{<th>#{@value}</th>}
 end
 
 macro_alias :important => :note

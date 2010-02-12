@@ -23,7 +23,7 @@ class MacroNode < GlyphSyntaxNode
 		current << @hashnode
 		value = super(context, @hashnode).strip 
 		@hashnode[:value] = value
-		Glyph::MACROS[name].call(@hashnode).to_s
+		Glyph::Macro.new(@hashnode).execute
 	end
 
 end

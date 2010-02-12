@@ -1,66 +1,61 @@
 #!/usr/bin/env ruby
 
 
-macro :comment do |node|
+macro :comment do
 	""
 end
 
-macro :todo do |node|
-	todo = "[#{node[:source]}] -- #{node[:value]}"
+macro :todo do
+	todo = "[#{@source}] -- #{@value}"
 	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
 	""
 end
 
-macro :snippet do |node|
+macro :snippet do
 	begin
-		ident = node.params[0].to_sym
-		raise MacroError.new(node, "Snippet '#{ident}' does not exist") unless Glyph::SNIPPETS.include? ident
-		snippet = Glyph::SNIPPETS[ident]
-		node[:source] = "snippet: #{node[:value]}"
-		i = Glyph::Interpreter.new snippet, node
-		i.document.output
+		ident = @params[0].to_sym
+		macro_error "Snippet '#{ident}' does not exist" unless Glyph::SNIPPETS.include? ident
+		interpret Glyph::SNIPPETS[ident]
 	rescue Exception => e
 		warning e.message
-		"[SNIPPET '#{node[:value]}' NOT FOUND]"
+		"[SNIPPET '#{@value}' NOT FOUND]"
 	end
 end
 
-macro :include do |node|
+macro :include do
 	begin
 		file = nil
 		(Glyph::PROJECT/"text").find do |f|
-			file = f if f.to_s.match /\/#{node[:value]}$/
+			file = f if f.to_s.match /\/#{@value}$/
 		end	
-		raise MacroError.new(node, "File #{node[:value]} no found.") unless file
+		macro_error "File #{@value} no found." unless file
 		contents = file_load file
 		if cfg("filters.by_file_extension") then
 			begin
-				ext = node[:value].match(/\.(.*)$/)[1]
-				raise MacroError.new(node, "Macro '#{ext}' not found") unless Glyph::MACROS.include?(ext.to_sym)
+				ext = @value.match(/\.(.*)$/)[1]
+				macro_error "Macro '#{ext}' not found" unless Glyph::MACROS.include?(ext.to_sym)
 				contents = "#{ext}[#{contents}]"
 			rescue MacroError => e
 				warning e.message
 			end
 		end	
-		node[:source] = "file: #{node[:value]}"
-		i = Glyph::Interpreter.new contents, node
-		i.document.output
+		interpret contents
 	rescue MacroError => e
 		warning e
-		"[FILE '#{node[:value]}' NOT FOUND]"
+		"[FILE '#{@value}' NOT FOUND]"
 	end
 end
 
-macro :escape do |node| 
-	node[:value] 
+macro :escape do
+	@value 
 end
 
-macro :ruby do |node|
-	Kernel.instance_eval(node[:value])
+macro :ruby do
+	Kernel.instance_eval(@value)
 end
 
-macro :config do |node|
-	cfg node[:value]
+macro :config do
+	cfg @value
 end
 
 macro_alias '--' => :comment

@@ -79,26 +79,6 @@ module Glyph
 			ascend(parent) {|e| return e unless e.parent }
 		end
 
-		### ACTIONS
-		
-		def document
-			self[:document]
-		end
-
-		def params
-			esc = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
-			self[:value].gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
-		end
-
-		def load_file
-			file = nil
-			(Glyph::PROJECT/"text").find do |f|
-				file = f if f.to_s.match /\/#{self[:value]}$/
-			end	
-			raise ArgumentError, "File #{self[:value]} no found." unless file
-			file_load file
-		end
-
 	end
 
 end

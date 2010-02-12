@@ -39,6 +39,7 @@ module Glyph
 	require LIB/'node'
 	require LIB/'document'
 	require LIB/'glyph_language'
+	require LIB/'macro'
 	require LIB/'interpreter'
 
 	# Returns true if Glyph is running in test mode
@@ -119,6 +120,7 @@ module Glyph
 	# @param name [Symbol, String] the name of the macro
 	# @param value the value of the macro
 	# @param document [Glyph::Document] the current document
+	# TODO: remove
 	def self.run_macro(name, value, document)
 		MACROS[name].call({:source => "Glyph", :value => value, :document => document}.to_node).to_s
 	end

@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-macro :textile do |node|
+macro :textile do
 	rc = nil
 	begin
 		require 'RedCloth'
-		rc = RedCloth.new node[:value], Glyph::CONFIG.get("filters.redcloth.restrictions")
-	rescue Exception => e
-		raise MacroError.new(node, "RedCloth gem not installed. Please run: gem insall RedCloth")
+		rc = RedCloth.new @value, Glyph::CONFIG.get("filters.redcloth.restrictions")
+	rescue Exception
+		macro_error "RedCloth gem not installed. Please run: gem insall RedCloth"
 	end
 	target = cfg "filters.target"
 	case target.to_sym
@@ -15,11 +15,11 @@ macro :textile do |node|
 	when :latex
 		rc.to_latex
 	else
-		raise MacroError.new(node, "RedCloth does not support target '#{target}'")
+		macro_error "RedCloth does not support target '#{target}'"
 	end
 end
 
-macro :markdown do |node|
+macro :markdown do
 	md = nil
 	markdown_converter = cfg "filters.markdown_converter"
 	if !markdown_converter then
@@ -39,7 +39,7 @@ macro :markdown do |node|
 						require 'kramdown'
 						markdown_converter = :Kramdown
 					rescue LoadError
-						raise MacroError.new(node, "No MarkDown converter installed. Please run: gem insall bluecloth")
+						macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"
 					end
 				end
 			end
@@ -48,21 +48,21 @@ macro :markdown do |node|
 	end
 	case markdown_converter
 	when :BlueCloth
-		md = BlueCloth.new node[:value]
+		md = BlueCloth.new @value
 	when :RDiscount
-		md = RDiscount.new node[:value]
+		md = RDiscount.new @value
 	when :Maruku
-		md = Maruku.new node[:value]
+		md = Maruku.new @value
 	when :Kramdown
-		md = Kramdown::Document.new node[:value]
+		md = Kramdown::Document.new @value
 	else
-		raise MacroError.new(node, "No MarkDown converter installed. Please run: gem insall bluecloth")
+	 macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"
 	end
 	target = cfg "filters.target"
 	if target.to_sym == :html then
 		md.to_html
 	else
-		raise MacroError.new(node, "#{markdown_converter} does not support target '#{target}'")
+		macro_error "#{markdown_converter} does not support target '#{target}'"
 	end
 end
 

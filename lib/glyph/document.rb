@@ -57,6 +57,10 @@ module Glyph
 			@headers << hash
 		end
 
+		def header?(ident)
+			@headers.select{|h| h[:id] == ident}[0] rescue nil
+		end
+
 		def analyze
 			raise RuntimeError, "Document is #{@state}" if analyzed? || finalized?
 			@context[:document] = self

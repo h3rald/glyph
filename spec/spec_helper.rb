@@ -67,15 +67,14 @@ def run_command_successfully(cmd)
 end
 
 def define_em_macro
-	Glyph.macro :em do |node| 
-		%{<em>#{node[:value]}</em>}
+	Glyph.macro :em do
+		%{<em>#{@value}</em>}
 	end
 end
 
 def define_ref_macro
-	Glyph.macro :ref do |node|
-		params = node.params
-		%{<a href="#{params[0]}">#{params[1]}</a>}
+	Glyph.macro :ref do
+		%{<a href="#{@params[0]}">#{@params[1]}</a>}
 	end
 end
 

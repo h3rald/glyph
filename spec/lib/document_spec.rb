@@ -75,10 +75,10 @@ describe Glyph::Document do
 	end
 
 	it "should substitute placeholders when finalizing" do
-		Glyph.macro :count_tests do |node|
-			n = node.document.placeholder do
+		Glyph.macro :count_tests do
+			n = placeholder do |document|
 				count = 0
-				node.document.structure.descend do |node, level|
+				document.structure.descend do |node, level|
 					count +=1 if node[:macro] == :test
 				end
 				count
