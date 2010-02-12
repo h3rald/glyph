@@ -14,14 +14,6 @@ describe Glyph::Document do
 
 	end
 
-	def create_tree(text)
-		GlyphLanguageParser.new.parse text 
-	end
-
-	def create_doc(tree)
-		Glyph::Document.new tree, {} 
-	end
-
 	it "should expose document data" do
 		@doc.bookmarks.should == {}
 		@doc.placeholders.should == {}

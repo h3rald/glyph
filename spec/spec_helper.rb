@@ -82,3 +82,10 @@ def interpret(text)
 	@p = Glyph::Interpreter.new(text)
 end
 
+def create_tree(text)
+	GlyphLanguageParser.new.parse text 
+end
+
+def create_doc(tree)
+	Glyph::Document.new tree, {} 
+end
