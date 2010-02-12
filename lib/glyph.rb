@@ -116,15 +116,6 @@ module Glyph
 		MACROS[pair.name.to_sym] = MACROS[pair.value.to_sym]
 	end
 	
-	# Runs a macro (to be used only within other macros)
-	# @param name [Symbol, String] the name of the macro
-	# @param value the value of the macro
-	# @param document [Glyph::Document] the current document
-	# TODO: remove
-	def self.run_macro(name, value, document)
-		MACROS[name].call({:source => "Glyph", :value => value, :document => document}.to_node).to_s
-	end
-
 end
 
 Glyph.setup
