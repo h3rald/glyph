@@ -4,7 +4,8 @@ macro :note do
 	%{
 		<div class="#{@name}">
 			<span class="note-title">#{@name.to_s.capitalize}</span>
-			<span class="note-body">#{@value}</span>
+			#{@value}
+
 		</div>
 	}
 end
@@ -14,6 +15,7 @@ macro :box do
 		<div class="box">
 			<span class="box-title">#{@params[0]}</span>
 		#{@params[1]}
+
 		</div>
 	}
 end

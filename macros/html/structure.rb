@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
 macro :section do 
-	%{
-		<div class="#{@name}">
-		#{@value}
-		</div>
-	}	
+	%{<div class="#{@name}">
+
+#{@value}
+
+		</div>}	
 end
 
 macro :header do
@@ -28,13 +28,11 @@ macro :header do
 end
 
 macro :document do
-	%{
-<?xml version="1.0" encoding="utf-8"?>
+	%{<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 		#{@value}
-</html>
-	}
+</html>}
 end
 
 macro :body do
@@ -49,8 +47,8 @@ macro :head do
 	%{
 		<head>
 			<title>#{Glyph::CONFIG.get("document.title")}</title>
-			<meta name="author" content="#{cfg("document.author")}">
-			<meta name="copyright" content="#{cfg("document.author")}">
+			<meta name="author" content="#{cfg("document.author")}" />
+			<meta name="copyright" content="#{cfg("document.author")}" />
 		#{@value}
 		</head>
 	}
@@ -76,7 +74,7 @@ macro :style do
 		macro_error "Extension '#{file.extname}' not supported."
 	end
 	%{
-		<style>
+		<style type="text/css">
 		#{style}
 		</style>
 	}
@@ -100,7 +98,7 @@ macro :toc do
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)
 					end	
-					list << "<ul>#{child_list}</ul>\n" unless child_list.blank?
+					list << "<li><ul>#{child_list}</ul></li>\n" unless child_list.blank?
 				end
 			end
 			list
