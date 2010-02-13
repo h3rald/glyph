@@ -13,11 +13,19 @@ require 'rake'
 # Glyph is a Rapid Document Authoring Framework able to produce structured documents 	effortlessly.
 module Glyph
 
-	VERSION = '0.1.0'
-
 	LIB = Pathname(__FILE__).dirname.expand_path/'glyph'
 
 	HOME = LIB/'../../'
+
+	require LIB/'system_extensions'
+	require LIB/'config'
+	require LIB/'node'
+	require LIB/'document'
+	require LIB/'glyph_language'
+	require LIB/'macro'
+	require LIB/'interpreter'
+
+	VERSION = file_load HOME/'VERSION'
 
 	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
 
@@ -32,14 +40,6 @@ module Glyph
 	TODOS = []
 
 	ERRORS = []
-
-	require LIB/'system_extensions'
-	require LIB/'config'
-	require LIB/'node'
-	require LIB/'document'
-	require LIB/'glyph_language'
-	require LIB/'macro'
-	require LIB/'interpreter'
 
 	# Returns true if Glyph is running in test mode
 	def self.testing?
