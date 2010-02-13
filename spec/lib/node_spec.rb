@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
-describe Glyph::Node do
+describe Node do
 
 	def create_node
 		@ht = {:a => 1, :b => 2}.to_node
 	end
 
 	it "should be a hash" do
-		ht = Glyph::Node.new
+		ht = Node.new
 		ht.is_a?(Hash).should == true
 		ht.children.should == []
 	end

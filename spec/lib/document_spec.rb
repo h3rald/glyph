@@ -63,7 +63,7 @@ describe Glyph::Document do
 	it "should expose document structure" do
 		lambda { @doc.structure }.should raise_error
 		@doc.analyze
-		@doc.structure.is_a?(Glyph::Node).should == true
+		@doc.structure.is_a?(Node).should == true
 	end
 
 	it "should substitute placeholders when finalizing" do

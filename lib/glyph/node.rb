@@ -3,92 +3,90 @@
 class Hash
 
 	def to_node
-		Glyph::Node.new.replace self
+		Node.new.replace self
 	end
 
 end
 
-module Glyph
 
-	class Node < Hash
+class Node < Hash
 
-		attr_reader :children
-		attr_accessor :parent
+	attr_reader :children
+	attr_accessor :parent
 
-		def initialize(*args)
-			super(*args)
-			@children = []
+	def initialize(*args)
+		super(*args)
+		@children = []
+	end
+
+	def to_node
+		self
+	end
+
+	def from(node)
+		n = node.to_node
+		replace node
+		@parent = n.parent
+		@children = n.children
+	end
+
+	def clear
+		super
+		@children.clear
+		@parent = nil
+	end
+
+	def <<(hash)
+		raise ArgumentError, "#{hash} is not a Hash" unless hash.is_a? Hash
+		ht = hash.to_node
+		ht.parent = self
+		@children << ht
+	end
+
+	def child(number)
+		@children[number]
+	end
+
+	alias >> child 
+
+	def each_child
+		@children.each {|c| yield c }
+	end
+
+	def descend(element=nil, level=0, &block)
+		element ||= self
+		yield element, level
+		element.each_child do |c| 
+			descend c, level+1, &block 
 		end
+	end
 
-		def to_node
-			self
-		end
-
-		def from(node)
-			n = node.to_node
-			replace node
-			@parent = n.parent
-			@children = n.children
-		end
-		
-		def clear
-			super
-			@children.clear
-			@parent = nil
-		end
-
-		def <<(hash)
-			raise ArgumentError, "#{hash} is not a Hash" unless hash.is_a? Hash
-			ht = hash.to_node
-			ht.parent = self
-			@children << ht
-		end
-
-		def child(number)
-			@children[number]
-		end
-
-		alias >> child 
-
-		def each_child
-			@children.each {|c| yield c }
-		end
-
-		def descend(element=nil, level=0, &block)
-			element ||= self
-			yield element, level
-			element.each_child do |c| 
-				descend c, level+1, &block 
-			end
-		end
-
-		def find_child(&block)
-			children.each do |c|
-				c.descend do |node, level|
-					return node if block.call(node)
-				end
-			end
-			nil
-		end
-
-		def find_parent(&block)
-			return nil unless parent
-			parent.ascend do |node|
+	def find_child(&block)
+		children.each do |c|
+			c.descend do |node, level|
 				return node if block.call(node)
 			end
-			nil
 		end
+		nil
+	end
 
-		def ascend(element=nil, &block)
-			element ||= self
-			yield element
-			ascend(element.parent, &block) if element.parent
+	def find_parent(&block)
+		return nil unless parent
+		parent.ascend do |node|
+			return node if block.call(node)
 		end
+		nil
+	end
 
-		def root
-			ascend(parent) {|e| return e unless e.parent }
-		end
+	def ascend(element=nil, &block)
+		element ||= self
+		yield element
+		ascend(element.parent, &block) if element.parent
+	end
 
+	def root
+		ascend(parent) {|e| return e unless e.parent }
 	end
 
 end
+
