@@ -45,25 +45,6 @@ module Kernel
 
 end
 
-class Hash
-
-	def pair?
-		self.length == 1
-	end
-
-	def name
-		return nil unless self.pair?
-		keys[0]
-	end
-
-	def value
-		return nil unless self.pair?
-		values[0]
-	end
-
-end
-
-
 class MacroError < RuntimeError
 	attr_reader :node
 	def initialize(node, msg)

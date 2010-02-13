@@ -2,6 +2,8 @@
 
 class Hash
 
+	# Converts self to a Node
+	# @return [Node] the converted Node
 	def to_node
 		Node.new.replace self
 	end
@@ -14,28 +16,39 @@ class Node < Hash
 	attr_reader :children
 	attr_accessor :parent
 
+	# Creates a new Node
 	def initialize(*args)
 		super(*args)
 		@children = []
 	end
 
+	# @return [Node] Returns self
 	def to_node
 		self
 	end
 
+	# Clone another node (replaces all keys, parent and children)
+	# @param [#to_node] node the Node to clone
+	# @return [self]
 	def from(node)
 		n = node.to_node
 		replace node
 		@parent = n.parent
 		@children = n.children
+		self
 	end
 
+	# Clears all keys, parent and children
 	def clear
 		super
 		@children.clear
 		@parent = nil
 	end
 
+	# Adds a child node to self
+	# @param [Hash] hash the new child
+	# @return [Array] the node's children
+	# @raise [ArgumentError] unless a Hash is passed as parameter
 	def <<(hash)
 		raise ArgumentError, "#{hash} is not a Hash" unless hash.is_a? Hash
 		ht = hash.to_node
@@ -43,16 +56,27 @@ class Node < Hash
 		@children << ht
 	end
 
-	def child(number)
-		@children[number]
+	# Returns a child by its index
+	# @return [Node] the child node or nil
+	# @param [Integer] index the child index
+	def child(index)
+		@children[index]
 	end
 
 	alias >> child 
 
+	# Iterates through children
+	# @yieldparam [Node] c the child node
 	def each_child
 		@children.each {|c| yield c }
 	end
 
+
+	# Iterates through children recursively (including self)
+	# @param [Node, nil] element the node to process
+	# @yieldparam [Integer] level the initial tree depth
+	# @yieldparam [Node] element the current node
+	# @yieldparam [Integer] level the current tree depth
 	def descend(element=nil, level=0, &block)
 		element ||= self
 		yield element, level
@@ -61,6 +85,10 @@ class Node < Hash
 		end
 	end
 
+	# Descend children until the block returns something. 
+	# 	Each child is passed to the block.
+	# @param [Proc] &block the block to call on each child
+	# @return [Node, nil] returns the child node if found, nil otherwise
 	def find_child(&block)
 		children.each do |c|
 			c.descend do |node, level|
@@ -70,6 +98,10 @@ class Node < Hash
 		nil
 	end
 
+	# Ascend parents until the block returns something. 
+	# 	Each parent is passed to the block.
+	# @param [Proc] &block the block to call on each parent
+	# @return [Node, nil] returns the parent node if found, nil otherwise
 	def find_parent(&block)
 		return nil unless parent
 		parent.ascend do |node|
@@ -78,12 +110,16 @@ class Node < Hash
 		nil
 	end
 
+	# Iterates through parents recursively (including self)
+	# @param [Node, nil] element the node to process
+	# @yieldparam [Node] element the current node
 	def ascend(element=nil, &block)
 		element ||= self
 		yield element
 		ascend(element.parent, &block) if element.parent
 	end
 
+	# @return [Node] Returns the root node
 	def root
 		ascend(parent) {|e| return e unless e.parent }
 	end

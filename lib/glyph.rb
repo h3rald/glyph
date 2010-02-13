@@ -110,10 +110,11 @@ module Glyph
 	end
 
 	# Defines an alias for an existing macro
+	# @param [Hash] pair the single-key hash defining the alias
 	# @example
 	# 	{:old_name => :new_name}
 	def self.macro_alias(pair)
-		MACROS[pair.name.to_sym] = MACROS[pair.value.to_sym]
+		MACROS[pair.keys[0].to_sym] = MACROS[pair.values[0].to_sym]
 	end
 	
 end
