@@ -11,6 +11,7 @@ class Hash
 end
 
 
+# A Node is a Hash with an array of children and a parent associated to it.
 class Node < Hash
 
 	attr_reader :children
@@ -125,4 +126,3 @@ class Node < Hash
 	end
 
 end
-
