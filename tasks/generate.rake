@@ -14,14 +14,35 @@ namespace :generate do
 		Glyph::DOCUMENT = interpreter.document 
 	end
 
-	desc "Create a standalong html file"
+	desc "Create a standalone html file"
 	task :html => :document do
 		info "Generating HTML file..."
 		out = Glyph::PROJECT/"output/html"
 		out.mkpath
-		file = "#{Glyph::CONFIG.get('document.filename')}.html"
+		file = "#{cfg('document.filename')}.html"
 		file_write out/file, Glyph::DOCUMENT.output
+		info "'#{cfg('document.filename')}.html' generated successfully."
 		# TODO: Copy images
+	end
+
+	desc "Create a pdf file"
+	task :pdf => :html do
+		info "Generating PDF file..."
+		out = Glyph::PROJECT/"output/pdf"
+		out.mkpath
+		file = cfg('document.filename')
+		case cfg('pdf_renderer')
+		when 'prince' then
+			res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
+			if res then
+				info "'#{file}.pdf' generated successfully."
+			else
+				warning "An error occurred while generating #{file}.pdf"
+			end
+			# TODO: support other PDF renderers
+		else
+			warning "Glyph cannot generate PDF. Please specify a valid pdf_renderer setting."
+		end
 	end
 
 end

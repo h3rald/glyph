@@ -1,16 +1,5 @@
 :document:
-  :source: "document.glyph"
   :author: "Fabio Cevasco"
   :title: "Glyph Handbook"
   :filename: "glyph_handbook"
-  :output: ""
   :output_targets: [:html, :pdf]
-:structure:
-  :headers: [:section, :chapter, :part, :introduction, :contents, :preface, :appendix, :foreword, :afterword, :glossary, :index]  
-  :first_header_level: 2
-:pdf_renderer: 'wkhtmltopdf'
-:filters:
-  :by_file_extension: true
-  :target: 'html'
-  :redcloth:
-    :restrictions: []

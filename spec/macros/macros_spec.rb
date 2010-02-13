@@ -72,7 +72,7 @@ describe "Macro:" do
 
 	it "style" do
 		interpret "style[test.sass]"
-		@p.document.output.gsub(/\n|\t/, '').should == "<style>#main {  background-color: #0000ff; }</style>"
+		@p.document.output.gsub(/\n|\t/, '').should == "<style type=\"text/css\">#main {  background-color: #0000ff; }</style>"
 	end	
 
 	it "escape" do
@@ -103,9 +103,9 @@ describe "Macro:" do
 			<h2 id="h_toc">Table of Contents</h2>
 			<ul class="toc">
 				<li class="toc-section"><a href="#h_1">Container section</a></li>
-				<ul>
+				<li><ul>
 					<li class="toc-section"><a href="#h_2">Test Section</a></li>
-				</ul>
+				</ul></li>
 				<li class="toc-section"><a href="#md">Markdown</a></li>
 			</ul>
 			</div>
