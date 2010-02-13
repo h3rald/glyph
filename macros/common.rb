@@ -28,7 +28,7 @@ macro :include do
 		(Glyph::PROJECT/"text").find do |f|
 			file = f if f.to_s.match /\/#{@value}$/
 		end	
-		macro_error "File #{@value} no found." unless file
+		macro_error "File '#{@value}' no found." unless file
 		contents = file_load file
 		if cfg("filters.by_file_extension") then
 			begin

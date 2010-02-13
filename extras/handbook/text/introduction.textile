@@ -20,10 +20,10 @@ The main problem with this method is that writing HTML code can be tedious, but 
 * It is not a complete alternative to HTML: you have to fallback to HTML to do certain things like the document _head_ and _body_ tags, and often block-level elements like _div_ or _table_ are not supported at all.
 * They cannot be easily extended to provide additional functionalities, like creating a TOC automatically, for example.
 
-That's where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, e.g.:
-* Create TOC, index and bibliography automatically
-* Define the document structure
-* Manage text snippets, notes, ...
-* Validate links
+That's where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, such as:
+* Creating TOC, index and bibliography automatically
+* Defining the document structure
+* Managing text snippets, notes, ...
+* Validating links
 * ...
 	] 

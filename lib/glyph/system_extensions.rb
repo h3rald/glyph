@@ -72,6 +72,6 @@ class MacroError < RuntimeError
 		source = @node[:source] || "--"
 		macros = []
 		@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }
-		super("[#{source} - macro: #{macros.join('/')}] #{msg}")
+		super("[#{source} - macro: #{macros.reverse.join('/')}] #{msg}")
 	end
 end

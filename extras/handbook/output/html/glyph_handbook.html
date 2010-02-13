@@ -7,7 +7,9 @@
 			<meta name="author" content="Fabio Cevasco">
 			<meta name="copyright" content="Fabio Cevasco">
 		<style>
-		* {
+		
+
+* {
 	font-family: inherit;
 	font-style: inherit;
 	font-size: 100%;
@@ -17,12 +19,12 @@
 
 html, body {
 	height: 100%;
-	line-height: 1.2;
+	line-height: 1.3em;
 	text-align: justify;
 	background: #fff;}
 
 p, ol, ul {
-	margin: 0.5em 0; }
+	margin: 0.3em 0; }
 
 table {
 	border-collapse: collapse;
@@ -60,12 +62,9 @@ h2 {
 	page-break-before: always;
 }
 
-ul, ol{
-	margin: 0.5em 0;
-}
 li {
 	margin-left: 1.5em;
-
+	list-style-type: square;
 }
 
 
@@ -82,16 +81,10 @@ p {
 	line-height: 1.5em;
 	margin: 1em 0; }
 
-blockquote, .note {
-	color: #555555;
-	font-style: italic;
-	padding: 0 0 0 33px;
-	margin: 0;
-	border: 1px solid #555555 }
-
-.toc ul{ margin: 0}
+.toc {margin: 1em;}
+.toc ul{ margin: 0.2em;}
 .toc li {
-	line-height: 1.2em;
+	line-height: 1.5em;
 	list-style-type: none;
 	margin-left: 1.5em; }
 .toc ul li {
@@ -118,6 +111,36 @@ th {
 	border: 1px dashed #555555; }
 
 
+/* BLOCKS */
+
+.note, .box {
+	border:1px solid #473F2B;
+	background: #FFF6AD;
+	padding: 0.5em;
+	color: #918058;
+	color: #665A3E;
+	width: 400px;
+	margin: 1em 0;
+}
+
+.box-title {
+	color: #473F2B;
+	height: 1em;
+	text-align: center;
+	display:block;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.code {
+	padding: 0.5em;
+	font-size: 0.9em;
+	border: 1px solid #5A635C;
+	background: #E5E5E5;
+	width: 400px;
+	margin: 1em 0;
+}
+
 
 /* TEXT */
 body {
@@ -126,17 +149,20 @@ body {
 	font-size: 0.9em; }
 
 h2 {
+	line-height: 3em;
 	font-size: 2em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	margin: 1em 0 0 0;
+	margin: 3em 0 0 0;
 	margin: 0; }
 
 h3 {
+	line-height: 2.5em;
 	font-size: 1.6em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
 h4 {
+	line-height: 2em;
 	font-size: 1.3em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
@@ -144,27 +170,10 @@ h4 {
 em {
 	font-style: italic; }
 
-/* *** Article Lists *** */
-.article-list h3, .left-column h3, .right-column h3 {
-	text-align: center; }
-
-.article-item h4 {
-	margin: 0;
-	padding: 0; }
-
-.article-tags {
-	font-size: 90%;
-	padding-left: 1em; }
-
-.article-summary {
-	padding-left: 1em;
-	font-style: italic; }
-
-/* ****** LINKS ****** */
-a {
+a{
+	color: #8A1513;
 	text-decoration: none;
-	outline: none; 
-	color: #a4282d; }
+}
 
 a:hover {
 	color: #CF282D; }
@@ -177,7 +186,8 @@ a:hover {
 	overflow: auto; }
 
 code {
-	font-family: "Consolas", "Monaco", "Monospace"; }
+	font-family: "Consolas", "Monaco", "Monospace"; 
+	font-size: 0.9em;}
 
 		</style>
 		</head>
@@ -191,12 +201,12 @@ code {
 	
 			
 		<div class="author">
-			Fabio Cevasco
+			by <em>Fabio Cevasco</em>
 		</div>
 	
 			
 		<div class="pubdate">
-			13 February 2010
+			February 2010
 		</div>
 		</div>
 	
@@ -208,13 +218,16 @@ code {
 <ul><li class="toc-section"><a href="#h_2">Rationale</a></li>
 </ul>
 <li class="toc-chapter"><a href="#h_3">Quick Start</a></li>
-<li class="toc-chapter"><a href="#h_4">Glyph Language</a></li>
-<ul><li class="toc-section"><a href="#h_5">Introducing Glyph Macros</a></li>
-<li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_7">Creating and Editing Macros</a></li>
+<ul><li class="toc-section"><a href="#h_4">Editing text files</a></li>
+<li class="toc-section"><a href="#h_5">Compiling your project</a></li>
 </ul>
-<li class="toc-appendix"><a href="#h_8">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_9">Macro Reference</a></li>
+<li class="toc-chapter"><a href="#h_6">Glyph Language</a></li>
+<ul><li class="toc-section"><a href="#h_7">Introducing Glyph Macros</a></li>
+<li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
+<li class="toc-section"><a href="#h_9">Creating and Editing Macros</a></li>
+</ul>
+<li class="toc-appendix"><a href="#h_10">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_11">Macro Reference</a></li>
 
 </ul>
 </div>
@@ -243,12 +256,12 @@ code {
 	<li>It is not a complete alternative to <span class="caps">HTML</span>: you have to fallback to <span class="caps">HTML</span> to do certain things like the document <em>head</em> and <em>body</em> tags, and often block-level elements like <em>div</em> or <em>table</em> are not supported at all.</li>
 	<li>They cannot be easily extended to provide additional functionalities, like creating a <span class="caps">TOC</span> automatically, for example.</li>
 </ul>
-<p>That&#8217;s where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, e.g.:</p>
+<p>That&#8217;s where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, such as:</p>
 <ul>
-	<li>Create <span class="caps">TOC</span>, index and bibliography automatically</li>
-	<li>Define the document structure</li>
-	<li>Manage text snippets, notes, &#8230;</li>
-	<li>Validate links</li>
+	<li>Creating <span class="caps">TOC</span>, index and bibliography automatically</li>
+	<li>Defining the document structure</li>
+	<li>Managing text snippets, notes, &#8230;</li>
+	<li>Validating links</li>
 	<li>&#8230;<br />
 		</div></li>
 </ul>
@@ -257,49 +270,73 @@ code {
 		
 		<div class="chapter">
 		<h2 id="h_3">Quick Start</h2>
+	
+			<p>Want to start writing immediately? This short chapter shows you how to get started with glyph in no time. To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
+<div class="code"><pre><code>mkdir my_glyph_project
+cd my_glyph_project
+glyph init</code></pre></div>
+<p>That&#8217;s it. The <code>my_glyph_project</code> directory contains your brand new Glyph project. If you open the <code>document.glyph</code> file with  your favorite text editor, you can start writing your book or article right away.</p>
+<div class="box">
+<p><span class="box-title">Glyph&#8217;s dependencies</span><br />
+		Glyph requires the following gems:</p>
+<ul>
+	<li>extlib</li>
+	<li>gli</li>
+	<li>treetop</li>
+	<li>rake</li>
+</ul>
+<p>Additionally, some Glyph macros may require additional gems, such as:</p>
+<ul>
+	<li>RedCloth (<em>textile</em> macro)</li>
+	<li>Maruku <em>or</em> Kramdown <em>or</em> BlueCloth (<em>markdown</em> macro)</li>
+	<li>Haml (if you want to load .sass files with the <em>style</em> macro)<br />
+		</div></li>
+</ul>
+<div class="section">
+		<h3 id="h_4">Editing text files</h3>
+</div>
+<p></p>
+<div class="section">
+		<h3 id="h_5">Compiling your project</h3>
+</div>
 		</div>
 	
 		
 		<div class="chapter">
-		<h2 id="h_4">Glyph Language</h2>
+		<h2 id="h_6">Glyph Language</h2>
 	
 			<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure, like the following:</p>
-<p>		<pre>
-		<code>
-document[
-	head[
-		style[default.css]
-	]
-	body[
-		titlepage[
-			title[]
-			author[]
-			pubdate[]
-		]
-		toc[]
-		preface[
-			header[Preface]
-			@[preface.textile]
-		]	
-		chapter[
-			header[Chapter #1]
-			@[chapter1.textile]
-		]
-		chapter[
-			header[Chapter #2]
-			@[chapter2.textile]
-		]
-	]
-]
-		</code>
-		</pre>
-		</p>
+<div class="code"><pre><code>document[
+  head[
+    style[default.css]
+  ]
+  body[
+    titlepage[
+      title[]
+      author[]
+      pubdate[]
+    ]
+    toc[]
+    preface[
+      header[Preface]
+      @[preface.textile]
+    ]  
+    chapter[
+      header[Chapter #1]
+      @[chapter1.textile]
+    ]
+    chapter[
+      header[Chapter #2]
+      @[chapter2.textile]
+    ]
+  ]
+]</code></pre></div>
 <p>Even without knowing anything about Glyph Language, you can easily figure out nearly everything: there&#8217;s a <code>document</code> with a <code>head</code> and a <code>body</code>, the <code>body</code> contains a title page, a Table of Contents, a Preface and some chapters.</p>
 <div class="section">
-		<h3 id="h_5">Introducing Glyph Macros</h3>
+		<h3 id="h_7">Introducing Glyph Macros</h3>
 <p></p>
-<p>By now you probably figure out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
+<p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
 	<li>The macro identifier can contain <em>any</em> character except for: <code>[</code>, <code>]</code>, <code>\</code>, <code>|</code> or spaces.</li>
 	<li>The delimiters can be either <code>[</code> and <code>]</code> or <code>[=</code> and <code>=]</code> (<span class="fmi">for more information on differences between delimiters, see <a href="#esc_quot">Escaping and Quoting</a></span>).<br />
@@ -310,19 +347,19 @@ document[
 </div>
 <p></p>
 <div class="section">
-		<h3 id="h_7">Creating and Editing Macros</h3>
+		<h3 id="h_9">Creating and Editing Macros</h3>
 </div>
 		</div>
 	
 		
 		
 		<div class="appendix">
-		<h2 id="h_8">Command Reference</h2>
+		<h2 id="h_10">Command Reference</h2>
 		</div>
 	
 		
 		<div class="appendix">
-		<h2 id="h_9">Macro Reference</h2>
+		<h2 id="h_11">Macro Reference</h2>
 		</div>
 	
 		

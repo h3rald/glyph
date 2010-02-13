@@ -9,6 +9,15 @@ macro :note do
 	}
 end
 
+macro :box do
+	%{
+		<div class="box">
+			<span class="box-title">#{@params[0]}</span>
+		#{@params[1]}
+		</div>
+	}
+end
+
 macro :fig do
 	# TODO
 	""
@@ -16,15 +25,7 @@ end
 
 macro :"textile.code" do
 	# TODO
-	%{
-		<notextile>
-		<pre>
-		<code>
-#{@params[1]}
-		</code>
-		</pre>
-		</notextile>
-	}
+	%{<div class="code"><notextile><pre><code>#{@params[1]}</code></pre></notextile></div>}
 end
 
 macro :title do
@@ -40,7 +41,7 @@ end
 macro :author do
 	%{
 		<div class="author">
-			#{cfg("document.author")}
+			by <em>#{cfg("document.author")}</em>
 		</div>
 	}
 end
@@ -48,7 +49,7 @@ end
 macro :pubdate do
 	%{
 		<div class="pubdate">
-			#{Time.now.strftime("%d %B %Y")}
+			#{Time.now.strftime("%B %Y")}
 		</div>
 	}
 end

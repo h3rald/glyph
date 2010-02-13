@@ -13,6 +13,7 @@ document[
 		]
 		chapter[
 			header[Quick Start]
+			@[quick_start.textile]
 		]
 		chapter[
 			header[Glyph Language]

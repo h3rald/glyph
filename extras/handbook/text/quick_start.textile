@@ -1,0 +1,30 @@
+Want to start writing immediately? This short chapter shows you how to get started with glyph in no time. To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
+
+textile.code[=text|
+mkdir my_glyph_project
+cd my_glyph_project
+glyph init=]
+
+That's it. The @my_glyph_project@ directory contains your brand new Glyph project. If you open the @document.glyph@ file with  your favorite text editor, you can start writing your book or article right away.
+
+box[Glyph's dependencies|
+Glyph requires the following gems:
+* extlib
+* gli
+* treetop
+* rake
+
+Additionally, some Glyph macros may require additional gems, such as:
+* RedCloth (_textile_ macro)
+* Maruku _or_ Kramdown _or_ BlueCloth (_markdown_ macro)
+* Haml (if you want to load .sass files with the _style_ macro)
+]
+
+section[header[Editing text files]
+
+]
+
+section[header[Compiling your project]
+
+
+]

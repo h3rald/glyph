@@ -11,10 +11,11 @@ command :init do |c|
 	end
 end
 
-GLI.desc 'Add a new text file to project'
+GLI.desc 'Add a new text file to the project'
 arg_name "file_name"
 command :add do |c|
 	c.action do |global_options,options,args|
+		raise ArgumentError, "Please specify a file name." if args.blank?
 		Glyph.run 'project:add', args[0]
 	end
 end
@@ -35,11 +36,11 @@ command :compile do |c|
 		when 1 then
 			target = args[0]
 		else
-			raise RuntimeError, "Too many arguments."
+			raise ArgumentError, "Too many arguments."
 		end	
 		Glyph.config_override('document.source', options[:s]) if options[:s]
-		raise RuntimeError, "Output target not specified" unless target
-		raise RuntimeError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
+		raise ArgumentError, "Output target not specified" unless target
+		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 		Glyph.run "generate:#{target}"
 		info "'#{cfg('document.filename')}.#{target}' generated successfully."
 		unless Glyph::TODOS.blank?
@@ -65,7 +66,7 @@ command :config do |c|
 		end
 		case args.length
 		when 0 then
-			raise RuntimeError, "Too few arguments."
+			raise ArgumentError, "Too few arguments."
 		when 1 then # read current config
 			setting = cfg(args[0])
 			raise RuntimeError, "Unknown setting '#{args[0]}'" if setting.blank?
@@ -74,7 +75,7 @@ command :config do |c|
 			cfg.set args[0], args[1]
 			Glyph.reset_config
 		else
-			raise RuntimeError, "Too many arguments."
+			raise ArgumentError, "Too many arguments."
 		end
 	end
 end

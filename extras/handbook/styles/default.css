@@ -1,3 +1,5 @@
+
+
 * {
 	font-family: inherit;
 	font-style: inherit;
@@ -8,12 +10,12 @@
 
 html, body {
 	height: 100%;
-	line-height: 1.2;
+	line-height: 1.3em;
 	text-align: justify;
 	background: #fff;}
 
 p, ol, ul {
-	margin: 0.5em 0; }
+	margin: 0.3em 0; }
 
 table {
 	border-collapse: collapse;
@@ -51,12 +53,9 @@ h2 {
 	page-break-before: always;
 }
 
-ul, ol{
-	margin: 0.5em 0;
-}
 li {
 	margin-left: 1.5em;
-
+	list-style-type: square;
 }
 
 
@@ -73,16 +72,10 @@ p {
 	line-height: 1.5em;
 	margin: 1em 0; }
 
-blockquote, .note {
-	color: #555555;
-	font-style: italic;
-	padding: 0 0 0 33px;
-	margin: 0;
-	border: 1px solid #555555 }
-
-.toc ul{ margin: 0}
+.toc {margin: 1em;}
+.toc ul{ margin: 0.2em;}
 .toc li {
-	line-height: 1.2em;
+	line-height: 1.5em;
 	list-style-type: none;
 	margin-left: 1.5em; }
 .toc ul li {
@@ -109,6 +102,36 @@ th {
 	border: 1px dashed #555555; }
 
 
+/* BLOCKS */
+
+.note, .box {
+	border:1px solid #473F2B;
+	background: #FFF6AD;
+	padding: 0.5em;
+	color: #918058;
+	color: #665A3E;
+	width: 400px;
+	margin: 1em 0;
+}
+
+.box-title {
+	color: #473F2B;
+	height: 1em;
+	text-align: center;
+	display:block;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.code {
+	padding: 0.5em;
+	font-size: 0.9em;
+	border: 1px solid #5A635C;
+	background: #E5E5E5;
+	width: 400px;
+	margin: 1em 0;
+}
+
 
 /* TEXT */
 body {
@@ -117,17 +140,20 @@ body {
 	font-size: 0.9em; }
 
 h2 {
+	line-height: 3em;
 	font-size: 2em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	margin: 1em 0 0 0;
+	margin: 3em 0 0 0;
 	margin: 0; }
 
 h3 {
+	line-height: 2.5em;
 	font-size: 1.6em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
 h4 {
+	line-height: 2em;
 	font-size: 1.3em;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
@@ -135,27 +161,10 @@ h4 {
 em {
 	font-style: italic; }
 
-/* *** Article Lists *** */
-.article-list h3, .left-column h3, .right-column h3 {
-	text-align: center; }
-
-.article-item h4 {
-	margin: 0;
-	padding: 0; }
-
-.article-tags {
-	font-size: 90%;
-	padding-left: 1em; }
-
-.article-summary {
-	padding-left: 1em;
-	font-style: italic; }
-
-/* ****** LINKS ****** */
-a {
+a{
+	color: #8A1513;
 	text-decoration: none;
-	outline: none; 
-	color: #a4282d; }
+}
 
 a:hover {
 	color: #CF282D; }
@@ -168,4 +177,5 @@ a:hover {
 	overflow: auto; }
 
 code {
-	font-family: "Consolas", "Monaco", "Monospace"; }
+	font-family: "Consolas", "Monaco", "Monospace"; 
+	font-size: 0.9em;}
