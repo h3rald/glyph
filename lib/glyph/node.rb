@@ -63,7 +63,17 @@ module Glyph
 		end
 
 		def find_child(&block)
-			descend do |node, level|
+			children.each do |c|
+				c.descend do |node, level|
+					return node if block.call(node)
+				end
+			end
+			nil
+		end
+
+		def find_parent(&block)
+			return nil unless parent
+			parent.ascend do |node|
 				return node if block.call(node)
 			end
 			nil

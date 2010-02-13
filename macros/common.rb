@@ -14,11 +14,11 @@ end
 macro :snippet do
 	begin
 		ident = @params[0].to_sym
-		macro_error "Snippet '#{ident}' does not exist" unless Glyph::SNIPPETS.include? ident
+		macro_error "Snippet '#{ident}' does not exist" unless Glyph::SNIPPETS.has_key? ident
 		interpret Glyph::SNIPPETS[ident]
 	rescue Exception => e
 		warning e.message
-		"[SNIPPET '#{@value}' NOT FOUND]"
+		"[SNIPPET '#{@value}' NOT PROCESSED]"
 	end
 end
 

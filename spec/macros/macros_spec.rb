@@ -26,7 +26,7 @@ describe "Macro:" do
 		interpret "Testing a snippet: &[test]."
 		@p.document.output.should == "Testing a snippet: This is a \nTest snippet."
 		interpret("Testing &[wrong].")
-		@p.document.output.should == "Testing [SNIPPET 'wrong' NOT FOUND]." 
+		@p.document.output.should == "Testing [SNIPPET 'wrong' NOT PROCESSED]." 
 		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
 		Glyph::SNIPPETS[:b] = "and another em[test]"
 		text = "TEST: &[a]"

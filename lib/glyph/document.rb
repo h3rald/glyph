@@ -28,7 +28,7 @@ module Glyph
 
 		def structure
 			raise RuntimeError, "Document is not analyzed" unless analyzed? || finalized?
-			@tree.hashnode
+			@tree.data
 		end
 
 		def inherit_from(document)

@@ -49,5 +49,11 @@ describe Glyph::Macro do
 		@macro.execute.should == "Test: Testing..."
 	end
 
+	it "should detect mutual inclusion" do
+		Glyph.run! 'load:macros'
+		Glyph::SNIPPETS[:inc] = "Test &[inc]"
+		@macro.interpret("&[inc] test").should == "Test [SNIPPET 'inc' NOT PROCESSED] test" 
+	end
+
 end
 

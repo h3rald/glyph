@@ -2,11 +2,11 @@
 
 class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode 
 
-	attr_reader :hashnode
+	attr_reader :data
 
 	def evaluate(context, current=nil)
 		current ||= context.to_node
-		@hashnode ||= current.to_node
+		@data ||= current.to_node
 		value = elements.map { |e| e.evaluate(context, current) if e.respond_to? :evaluate }.join 
 		value
 	end
@@ -19,11 +19,11 @@ class MacroNode < GlyphSyntaxNode
 	def evaluate(context, current=nil)
 		name = macro_name.text_value.to_sym
 		raise RuntimeError, "Undefined macro '#{name}'" unless Glyph::MACROS.include? name
-		@hashnode = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
-		current << @hashnode
-		value = super(context, @hashnode).strip 
-		@hashnode[:value] = value
-		Glyph::Macro.new(@hashnode).execute
+		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
+		current << @data
+		value = super(context, @data).strip 
+		@data[:value] = value
+		Glyph::Macro.new(@data).execute
 	end
 
 end
