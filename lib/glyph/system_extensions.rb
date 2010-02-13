@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module Kernel
 
 	# Prints a message
@@ -14,9 +12,7 @@ module Kernel
 		puts "warning: #{message}" unless cfg :quiet
 	end
 
-	# Returns the value of the specified Glyph configuration setting
-	# @param [Symbol, String] setting the setting to return
-	# @return [Object, nil] the value of the setting if found, nil otherwise
+	# @see Glyph::Config#get
 	def cfg(setting)
 		Glyph::CONFIG.get(setting)
 	end

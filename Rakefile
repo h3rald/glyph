@@ -14,7 +14,8 @@ gemspec = eval(File.read('glyph.gemspec'))
 Rake::GemPackageTask.new(gemspec) { |pkg| }
 
 YARD::Rake::YardocTask.new do |t|
-  t.files   = ['lib/**/*.rb', 'macros/**/*.rb', 'tasks/**/*.rb', '*.rb', 'extras/**/*.*'] 
+  t.files   = ['lib/**/*.rb', 'README.textile', 'lib/*.rb'] 
+	t.options = ['--no-private']
 end
 
 desc "Run all specs"

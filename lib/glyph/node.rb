@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class Hash
 
 	# Converts self to a Node

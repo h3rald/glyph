@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module Glyph
 
 	# The Glyph::Document class stores information about a document or a chunk of text

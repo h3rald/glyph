@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module Glyph
 
 	# The Glyph::Config class is used (you don't say!) to store configuration data. Essentially it wraps a Hash of Hashes

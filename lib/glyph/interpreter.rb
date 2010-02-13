@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-
+# @private
 class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode 
 
 	attr_reader :data
@@ -13,7 +12,7 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 
 end 
 
-
+# @private
 class MacroNode < GlyphSyntaxNode
 
 	def evaluate(context, current=nil)
@@ -28,7 +27,7 @@ class MacroNode < GlyphSyntaxNode
 
 end
 
-
+# @private
 class TextNode < GlyphSyntaxNode	
 
 	def evaluate(context, current=nil)
@@ -40,8 +39,15 @@ end
 
 module Glyph
 
+	# A Glyph::Interpreter object perform the following actions:
+	# * Parses a string of text containing Glyph macros
+	# * Creates a document based on the parsed syntax tree
+	# * Analyzes and finalizes the document
 	class Interpreter
 
+		# Creates a new Glyph::Interpreter object.
+		# @param [String] text the string to interpret
+		# @param [Hash] context the context to pass along when evaluating macros
 		def initialize(text, context=nil)
 			context ||= {:source => '--'}
 			@parser = GlyphLanguageParser.new
@@ -51,14 +57,18 @@ module Glyph
 			@document.inherit_from @context[:document] if @context[:document]
 		end
 
+		# @see Glyph::Document#analyze
 		def process
 			@document.analyze
 		end
 
+		# @see Glyph::Document#finalize
 		def postprocess
 			@document.finalize
 		end
 
+		# Returns the finalized @document (calls self#process and self#postprocess if necessary)
+		# @return [Glyph::Document] the finalized document
 		def document
 			return @document if @document.finalized?
 			process if @document.new?

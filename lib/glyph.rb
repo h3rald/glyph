@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # Copyright (c) 2009-2010 Fabio Cevasco
 # website: http://www.h3rald.com/glyph
 # license: BSD
@@ -11,7 +10,7 @@ require 'extlib'
 require 'treetop'
 require 'rake'
 
-# Glyph is a Rapid Document Authoring Framework
+# Glyph is a Rapid Document Authoring Framework able to produce structured documents 	effortlessly.
 module Glyph
 
 	VERSION = '0.1.0'

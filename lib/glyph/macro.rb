@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module Glyph
 
 	# A Macro object is instantiated by a Glyph::Interpreter whenever a macro is found in the parsed text.
