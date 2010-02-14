@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "handbook/output/html/glyph_handbook.html",
      "handbook/output/pdf/glyph_handbook.pdf",
      "handbook/snippets.yml",
+     "handbook/styles/css3.css",
      "handbook/styles/default.css",
      "handbook/text/glyph_language.textile",
      "handbook/text/introduction.textile",

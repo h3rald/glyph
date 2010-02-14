@@ -104,10 +104,6 @@ h2 {
 	page-break-before: always 
 }
 
-.header {
-	page-break-before: always;
-}
-
 h3 {
 	counter-increment: h3;
 	counter-reset: h4;

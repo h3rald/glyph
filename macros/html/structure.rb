@@ -103,9 +103,10 @@ macro :toc do
 			end
 			list
 		end
+		l = cfg("structure.first_header_level")
 		%{
 <div class="contents">
-<span class="header" id="h_toc">Table of Contents</span>
+<h#{l} class="toc-header" id="h_toc">Table of Contents</h#{l}>
 <ol class="toc">
 	#{descend_section.call(document.structure, nil)}
 </ol>
