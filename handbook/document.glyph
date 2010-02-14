@@ -7,27 +7,31 @@ document[
 			title[]
 			author[]
 			pubdate[]
+		frontmatter[
+			toc[]
+			introduction[
+				header[Introduction]
+				@[introduction.textile]
+			]
 		]
-		toc[]
-		introduction[
-			header[Introduction]
-			@[introduction.textile]
+		bodymatter[
+			chapter[
+				header[Quick Start]
+				@[quick_start.textile]
+			]
+			chapter[
+				header[Glyph Language]
+				@[glyph_language.textile]
+			]
+			--[...]
 		]
-		chapter[
-			header[Quick Start]
-			@[quick_start.textile]
+		backmatter[
+			appendix[
+				header[Command Reference]
+			]
+			appendix[
+				header[Macro Reference]
+			]
 		]
-		chapter[
-			header[Glyph Language]
-			@[glyph_language.textile]
-		]
-		--[...]
-		appendix[
-			header[Command Reference]
-		]
-		appendix[
-			header[Macro Reference]
-		]
-		index[]
 	]
 ]
