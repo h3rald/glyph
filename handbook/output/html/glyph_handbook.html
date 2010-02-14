@@ -6,9 +6,7 @@
 			<meta name="author" content="Fabio Cevasco" />
 			<meta name="copyright" content="Fabio Cevasco" />
 		<style type="text/css">
-		
-
-* {
+		* {
 	font-family: inherit;
 	font-style: inherit;
 	font-size: 100%;
@@ -45,8 +43,8 @@ body {
 .title, h1{
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	line-height: 2em;
-	font-size: 2.3em;
-	font-weight: bold;
+	font-size: 2.5em;
+	font-weight: normal;
 }
 
 .author{
@@ -55,10 +53,6 @@ body {
 
 .pubdate{
 	font-size: 0.8em;
-}
-
-h2 {
-	page-break-before: always;
 }
 
 li {
@@ -80,21 +74,24 @@ p {
 	line-height: 1.5em;
 	margin: 1em 0; }
 
-.toc {margin: 1em;}
-.toc ul{ margin: 0.2em;}
+ol.toc {
+	margin-left: 1.5em;
+}
+
+.toc > li[class] {
+	font-weight: bold;
+}
+
+
 .toc li {
 	line-height: 1.5em;
-	list-style-type: none;
-	margin-left: 1em; }
-.toc ul li {
-	margin-left: 1.5em; }
-.toc ul ul li {
-	margin-left: 2em; }
-.toc ul ul ul li {
-	margin-left: 2.5em; }
-.toc ul ul ul ul li {
-	margin-left: 3em; }
+	list-style-type: none; 
+	margin-left: 0;
+}
 
+.toc li a, .toc li a:hover {
+	color: #000;
+}
 
 table {
 	border: 1px dashed #555555; }
@@ -162,9 +159,11 @@ body {
 	font-family: "Georgia", "Serif";
 	font-size: 0.9em; }
 
-h2 {
+h2, .header {
+	display: block;
 	line-height: 3em;
 	font-size: 2em;
+	font-weight: normal;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 3em 0 0 0;
 	margin: 0; }
@@ -172,12 +171,14 @@ h2 {
 h3 {
 	line-height: 2.5em;
 	font-size: 1.6em;
+	font-weight: normal;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
 h4 {
 	line-height: 2em;
 	font-size: 1.3em;
+	font-weight: normal;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
@@ -204,6 +205,138 @@ code {
 	font-size: 0.9em;}
 
 		</style>
+	
+		
+		<style type="text/css">
+		@page {
+	size: A4;
+	margin: 40pt 30pt 40pt 30pt;
+	@top { content: ""  }
+  @bottom-center { content: counter(page); }
+	@footnotes {
+		border-top: solid black thin;
+		padding-top: 8pt
+  }
+}
+
+@page table-of-contents {
+  @bottom-center { content: ""; }
+}
+
+@page:first { 
+	padding-top: 40%;
+  @bottom-center { content: normal }
+}
+
+@page:left { 
+    @top { content: string(book-title) }
+}
+@page:right {
+    @top { content: string(chapter-title) }
+}
+
+.toc a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+
+h1 { 
+	string-set: book-title content();
+}
+
+h2:before {
+	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+}
+
+.toc li[class] {
+	counter-increment: toc1;
+	counter-reset: toc2;
+}
+
+.toc ol li[class] {
+	counter-increment: toc2;
+	counter-reset: toc3;
+}
+
+.toc ol ol li[class] {
+	counter-increment: toc3;
+	counter-reset: toc4;
+}
+
+.toc ol ol ol li[class] {
+	counter-increment: toc4;
+	counter-reset: toc5;
+}
+
+.toc ol ol ol ol li[class] {
+	counter-increment: toc5;
+}
+
+
+.toc li[class]:before {
+	content: counter(toc1) ". "
+}
+
+.toc ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) " "
+}
+
+.toc ol ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) " "
+}
+
+.toc ol ol ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " "
+}
+
+.toc ol ol ol ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " "
+}
+
+.contents {
+	page: table-of-contents;
+}
+h3:before {
+	content: counter(h2) "." counter(h3) " "
+}
+
+h4:before {
+	content: counter(h2) "." counter(h3) "." counter(h4) " "
+}
+
+h5:before {
+	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+}
+
+h2 { 
+	string-set: chapter-title content();
+	counter-increment: h2;
+	counter-reset: h3;
+	page-break-before: always 
+}
+
+.header {
+	page-break-before: always;
+}
+
+h3 {
+	counter-increment: h3;
+	counter-reset: h4;
+}	
+
+h4 {
+	counter-increment: h4;
+	counter-reset: h5;
+}	
+
+h5 {
+	counter-increment: h5;
+}
+
+
+h2, h3, h4, h5, .header { page-break-after: avoid }
+table { page-break-inside: avoid }
+
+		</style>
 		</head>
 	
 	
@@ -227,24 +360,24 @@ code {
 		</div>
 		
 <div class="contents">
-<h2 id="h_toc">Table of Contents</h2>
-<ul class="toc">
+<span class="header" id="h_toc">Table of Contents</span>
+<ol class="toc">
 	<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li><ul><li class="toc-section"><a href="#h_2">Rationale</a></li>
-</ul></li>
+<li><ol><li class="toc-section"><a href="#h_2">Rationale</a></li>
+</ol></li>
 <li class="toc-chapter"><a href="#h_3">Quick Start</a></li>
-<li><ul><li class="toc-section"><a href="#h_4">Editing text files</a></li>
+<li><ol><li class="toc-section"><a href="#h_4">Editing text files</a></li>
 <li class="toc-section"><a href="#h_5">Compiling your project</a></li>
-</ul></li>
+</ol></li>
 <li class="toc-chapter"><a href="#h_6">Glyph Language</a></li>
-<li><ul><li class="toc-section"><a href="#h_7">Introducing Glyph Macros</a></li>
+<li><ol><li class="toc-section"><a href="#h_7">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
 <li class="toc-section"><a href="#h_9">Creating and Editing Macros</a></li>
-</ul></li>
+</ol></li>
 <li class="toc-appendix"><a href="#h_10">Command Reference</a></li>
 <li class="toc-appendix"><a href="#h_11">Macro Reference</a></li>
 
-</ul>
+</ol>
 </div>
 		<div class="introduction">
 
@@ -311,9 +444,13 @@ glyph init</code></pre></div>
 <p></p>
 <div class="section">
 <h3 id="h_4">Editing text files</h3>
+<p></p>
+<p>&#8230;</p>
 </div>
 <div class="section">
 <h3 id="h_5">Compiling your project</h3>
+<p></p>
+<p>&#8230;</p>
 </div>
 
 		</div>
@@ -360,9 +497,13 @@ glyph init</code></pre></div>
 </div>
 <div class="section">
 <h3 id="esc_quot">Escaping and Quoting</h3>
+<p></p>
+<p>&#8230;</p>
 </div>
 <div class="section">
 <h3 id="h_9">Creating and Editing Macros</h3>
+<p></p>
+<p>&#8230;</p>
 </div>
 
 		</div>

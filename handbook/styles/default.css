@@ -1,5 +1,3 @@
-
-
 * {
 	font-family: inherit;
 	font-style: inherit;
@@ -37,8 +35,8 @@ body {
 .title, h1{
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	line-height: 2em;
-	font-size: 2.3em;
-	font-weight: bold;
+	font-size: 2.5em;
+	font-weight: normal;
 }
 
 .author{
@@ -47,10 +45,6 @@ body {
 
 .pubdate{
 	font-size: 0.8em;
-}
-
-h2 {
-	page-break-before: always;
 }
 
 li {
@@ -72,21 +66,24 @@ p {
 	line-height: 1.5em;
 	margin: 1em 0; }
 
-.toc {margin: 1em;}
-.toc ul{ margin: 0.2em;}
+ol.toc {
+	margin-left: 1.5em;
+}
+
+.toc > li[class] {
+	font-weight: bold;
+}
+
+
 .toc li {
 	line-height: 1.5em;
-	list-style-type: none;
-	margin-left: 1em; }
-.toc ul li {
-	margin-left: 1.5em; }
-.toc ul ul li {
-	margin-left: 2em; }
-.toc ul ul ul li {
-	margin-left: 2.5em; }
-.toc ul ul ul ul li {
-	margin-left: 3em; }
+	list-style-type: none; 
+	margin-left: 0;
+}
 
+.toc li a, .toc li a:hover {
+	color: #000;
+}
 
 table {
 	border: 1px dashed #555555; }
@@ -154,9 +151,11 @@ body {
 	font-family: "Georgia", "Serif";
 	font-size: 0.9em; }
 
-h2 {
+h2, .header {
+	display: block;
 	line-height: 3em;
 	font-size: 2em;
+	font-weight: normal;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 3em 0 0 0;
 	margin: 0; }
@@ -164,12 +163,14 @@ h2 {
 h3 {
 	line-height: 2.5em;
 	font-size: 1.6em;
+	font-weight: normal;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
 h4 {
 	line-height: 2em;
 	font-size: 1.3em;
+	font-weight: normal;
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 

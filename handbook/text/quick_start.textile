@@ -22,9 +22,13 @@ Additionally, some Glyph macros may require additional gems, such as:
 
 section[header[Editing text files]
 
+...
+
 ]
 
 section[header[Compiling your project]
+
+...
 
 
 ]

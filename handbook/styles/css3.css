@@ -1,0 +1,127 @@
+@page {
+	size: A4;
+	margin: 40pt 30pt 40pt 30pt;
+	@top { content: ""  }
+  @bottom-center { content: counter(page); }
+	@footnotes {
+		border-top: solid black thin;
+		padding-top: 8pt
+  }
+}
+
+@page table-of-contents {
+  @bottom-center { content: ""; }
+}
+
+@page:first { 
+	padding-top: 40%;
+  @bottom-center { content: normal }
+}
+
+@page:left { 
+    @top { content: string(book-title) }
+}
+@page:right {
+    @top { content: string(chapter-title) }
+}
+
+.toc a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+
+h1 { 
+	string-set: book-title content();
+}
+
+h2:before {
+	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+}
+
+.toc li[class] {
+	counter-increment: toc1;
+	counter-reset: toc2;
+}
+
+.toc ol li[class] {
+	counter-increment: toc2;
+	counter-reset: toc3;
+}
+
+.toc ol ol li[class] {
+	counter-increment: toc3;
+	counter-reset: toc4;
+}
+
+.toc ol ol ol li[class] {
+	counter-increment: toc4;
+	counter-reset: toc5;
+}
+
+.toc ol ol ol ol li[class] {
+	counter-increment: toc5;
+}
+
+
+.toc li[class]:before {
+	content: counter(toc1) ". "
+}
+
+.toc ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) " "
+}
+
+.toc ol ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) " "
+}
+
+.toc ol ol ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " "
+}
+
+.toc ol ol ol ol li[class]:before {
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " "
+}
+
+.contents {
+	page: table-of-contents;
+}
+h3:before {
+	content: counter(h2) "." counter(h3) " "
+}
+
+h4:before {
+	content: counter(h2) "." counter(h3) "." counter(h4) " "
+}
+
+h5:before {
+	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+}
+
+h2 { 
+	string-set: chapter-title content();
+	counter-increment: h2;
+	counter-reset: h3;
+	page-break-before: always 
+}
+
+.header {
+	page-break-before: always;
+}
+
+h3 {
+	counter-increment: h3;
+	counter-reset: h4;
+}	
+
+h4 {
+	counter-increment: h4;
+	counter-reset: h5;
+}	
+
+h5 {
+	counter-increment: h5;
+}
+
+
+h2, h3, h4, h5, .header { page-break-after: avoid }
+table { page-break-inside: avoid }

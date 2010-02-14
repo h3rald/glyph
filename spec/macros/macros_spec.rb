@@ -100,7 +100,7 @@ describe "Macro:" do
 		doc.output.gsub!(/\n|\t/, '')
 		doc.output.slice(/(.+?<\/div>)/, 1).should == %{
 			<div class="contents">
-			<h2 id="h_toc">Table of Contents</h2>
+			<span class="header" id="h_toc">Table of Contents</span>
 			<ul class="toc">
 				<li class="toc-section"><a href="#h_1">Container section</a></li>
 				<li><ul>

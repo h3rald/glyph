@@ -98,18 +98,17 @@ macro :toc do
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)
 					end	
-					list << "<li><ul>#{child_list}</ul></li>\n" unless child_list.blank?
+					list << "<li><ol>#{child_list}</ol></li>\n" unless child_list.blank?
 				end
 			end
 			list
 		end
-		l = cfg("structure.first_header_level")
 		%{
 <div class="contents">
-<h#{l} id="h_toc">Table of Contents</h#{l}>
-<ul class="toc">
+<span class="header" id="h_toc">Table of Contents</span>
+<ol class="toc">
 	#{descend_section.call(document.structure, nil)}
-</ul>
+</ol>
 </div>}
 	end
 	toc

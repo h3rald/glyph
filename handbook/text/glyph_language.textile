@@ -42,8 +42,12 @@ By now you probably figured out what a macro looks like: it's an identifier of s
 
 section[header[Escaping and Quoting|esc_quot]
 
+...
+
 ]
 
 section[header[Creating and Editing Macros]
+
+...
 
 ]
