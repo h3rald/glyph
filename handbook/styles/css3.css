@@ -9,8 +9,8 @@
   }
 }
 
-@page table-of-contents {
-  @bottom-center { content: ""; }
+@page backmatter, @page frontmatter {
+  @bottom-center, @top { content: ""; }
 }
 
 @page:first { 
@@ -33,9 +33,6 @@ h1 {
 	string-set: book-title content();
 }
 
-h2:before {
-	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
-}
 
 .toc li[class] {
 	counter-increment: toc1;
@@ -82,39 +79,52 @@ h2:before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " "
 }
 
-.contents {
-	page: table-of-contents;
+
+.frontmatter{
+	page: frontmatter;
 }
-h3:before {
+
+.backmatter{
+	page: backmatter;
+}
+
+.bodymatter h2::before {
+	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+}
+
+.bodymatter h3::before {
 	content: counter(h2) "." counter(h3) " "
 }
 
-h4:before {
+.bodymatter h4::before {
 	content: counter(h2) "." counter(h3) "." counter(h4) " "
 }
 
-h5:before {
+.bodymatter h5::before {
 	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
 }
 
 h2 { 
 	string-set: chapter-title content();
-	counter-increment: h2;
-	counter-reset: h3;
 	page-break-before: always 
 }
 
-h3 {
+.bodymatter h2{
+	counter-increment: h2;
+	counter-reset: h3;
+}
+
+.bodymatter h3 {
 	counter-increment: h3;
 	counter-reset: h4;
 }	
 
-h4 {
+.bodymatter h4 {
 	counter-increment: h4;
 	counter-reset: h5;
 }	
 
-h5 {
+.bodymatter h5 {
 	counter-increment: h5;
 }
 
