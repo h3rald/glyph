@@ -126,6 +126,13 @@ macro :bibliography do
 end
 
 # See http://microformats.org/wiki/book-brainstorming
+
+macro_alias :div => :section
+
+macro_alias :frontmatter => :div
+macro_alias :bodymatter => :div
+macro_alias :backmatter => :div
+
 macro_alias :chapter => :section
 macro_alias :part => :section
 macro_alias :preface => :section
