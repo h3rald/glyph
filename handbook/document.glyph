@@ -33,6 +33,9 @@ document[
 			appendix[
 				header[Macro Reference]
 			]
+			appendix[
+				header[Configuration Reference]
+			]
 		]
 	]
 ]

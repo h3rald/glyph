@@ -6,10 +6,11 @@ section[header[Installing Glyph]
 
 To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
 
-textile.code[=text|
-mkdir my_glyph_project
-cd my_glyph_project
-glyph init=]
+@mkdir@ _==my_glyph_project==_
+
+@cd@ _==my_glyph_project==_
+
+@glyph init@
 
 That's it. The @my_glyph_project@ directory contains your brand new Glyph project. If you open the @document.glyph@ file with  your favorite text editor, you can start writing your book or article right away.
 
@@ -87,6 +88,21 @@ todo[...]
 ]
 
 section[header[Changing configuration settings|cfg]
+
+Glyph stores configuration settings in the following YAML files:
+# Your _Project Configuration_ is stored in the @config.yml@ file, included in each Glyph Project.
+# Your _Global Configuration_ is stored in a @.glyphrc@ file in your $HOME (or ==%HOMEPATH%== on Windows) directory (not created by default).
+# The _System Configuration_ is stored in the source directory of Glyph itself.
+
+When compiling, Glyph loads all these configuration files and merges them according to the following rules:
+* A setting configured in the _Project Configuration_ overrides the same setting in both Global and System configuration.
+* A setting configured in the _Global Configuration_ overrides the same setting in the _System Configuration_
+
+Typically, you should use the _Project Configuration_ for all project-specific settings and the _Global Configuration_ for settings affecting all your projects (for example, you may want to set 'document.author' in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The _System Configuration_ is best left untouched.
+
+Instead of editing your configuration settings directly, you can use the @glyph config@ command, as follows:
+
+@glyph config@ _setting_ _\[value\]_
 
 todo[...]
 

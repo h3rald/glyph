@@ -413,6 +413,7 @@ table { page-break-inside: avoid }
 </ol></li>
 <li class="toc-appendix"><a href="#h_12">Command Reference</a></li>
 <li class="toc-appendix"><a href="#h_13">Macro Reference</a></li>
+<li class="toc-appendix"><a href="#h_14">Configuration Reference</a></li>
 
 </ol>
 </div>
@@ -461,9 +462,9 @@ table { page-break-inside: avoid }
 <h3 id="h_3">Installing Glyph</h3>
 <p></p>
 <p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
-<div class="code"><pre><code>mkdir my_glyph_project
-cd my_glyph_project
-glyph init</code></pre></div>
+<p><code>mkdir</code> <em>my_glyph_project</em></p>
+<p><code>cd</code> <em>my_glyph_project</em></p>
+<p><code>glyph init</code></p>
 <p>That&#8217;s it. The <code>my_glyph_project</code> directory contains your brand new Glyph project. If you open the <code>document.glyph</code> file with  your favorite text editor, you can start writing your book or article right away.</p>
 <div class="box">
 <p><span class="box-title">Glyph&#8217;s dependencies</span><br />
@@ -537,6 +538,21 @@ generated automatically when creating a new project is the following:</p>
 </div>
 <div class="section">
 <h3 id="cfg">Changing configuration settings</h3>
+<p></p>
+<p>Glyph stores configuration settings in the following <span class="caps">YAML</span> files:</p>
+<ol>
+	<li>Your <em>Project Configuration</em> is stored in the <code>config.yml</code> file, included in each Glyph Project.</li>
+	<li>Your <em>Global Configuration</em> is stored in a <code>.glyphrc</code> file in your $<span class="caps">HOME</span> (or %HOMEPATH% on Windows) directory (not created by default).</li>
+	<li>The <em>System Configuration</em> is stored in the source directory of Glyph itself.</li>
+</ol>
+<p>When compiling, Glyph loads all these configuration files and merges them according to the following rules:</p>
+<ul>
+	<li>A setting configured in the <em>Project Configuration</em> overrides the same setting in both Global and System configuration.</li>
+	<li>A setting configured in the <em>Global Configuration</em> overrides the same setting in the <em>System Configuration</em></li>
+</ul>
+<p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set &#8216;document.author&#8217; in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
+<p>Instead of editing your configuration settings directly, you can use the <code>glyph config</code> command, as follows:</p>
+<p><code>glyph config</code> <em>setting</em> <em>[value]</em></p>
 </div>
 <div class="section">
 <h3 id="h_7">Compiling your project</h3>
@@ -577,6 +593,11 @@ generated automatically when creating a new project is the following:</p>
 			<div class="appendix">
 
 <h2 id="h_13">Macro Reference</h2>
+
+		</div>
+			<div class="appendix">
+
+<h2 id="h_14">Configuration Reference</h2>
 
 		</div>
 

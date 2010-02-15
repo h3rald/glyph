@@ -24,3 +24,4 @@ That's where Glyph comes in: Glyph uses a simple but effective macro language to
 * Validating links
 
 todo[Expand...]
+todo[List conventions/glossary]
