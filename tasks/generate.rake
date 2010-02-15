@@ -33,6 +33,7 @@ namespace :generate do
 		file = cfg('document.filename')
 		case cfg('pdf_renderer')
 		when 'prince' then
+			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
 			res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
 			if res then
 				info "'#{file}.pdf' generated successfully."

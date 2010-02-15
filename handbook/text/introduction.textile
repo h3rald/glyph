@@ -4,8 +4,6 @@ Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for 
 
 Glyph was created to provide an easy way to produce printable documents in HTML and PDF format, using technologies familiar to web developers like HTML and CSS, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.
 
-	section[header[Rationale]
-
 At the time of writing, the most common ways to create a printable document like, say, a PDF file, are the following:
 # Use a word processor like Microsoft Word convert it to PDF, for example using Adobe Acrobat -- Perhaps the most user-friendly method, but relying on proprietary technologies and GUIs.
 # Use LaTeX -- It can be used to produce amazing documents, but it is not exactly the most user-friendly option: you have to learn LaTeX first, and you may not want to.
@@ -25,4 +23,3 @@ That's where Glyph comes in: Glyph uses a simple but effective macro language to
 * Managing text snippets, notes, ...
 * Validating links
 * ...
-	] 

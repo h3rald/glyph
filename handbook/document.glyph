@@ -1,12 +1,14 @@
 document[
 	head[
 		style[default.css]
-		style[css3.css]]
+		style[css3.css]
+	]
 	body[
 		titlepage[
 			title[]
 			author[]
 			pubdate[]
+		]
 		frontmatter[
 			toc[]
 			introduction[

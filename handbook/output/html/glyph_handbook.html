@@ -211,28 +211,27 @@ code {
 		@page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
-	@top { content: ""  }
-  @bottom-center { content: counter(page); }
+	@top { content: string(chapter-title)  }
+  @bottom { content: counter(page, decimal); }
 	@footnotes {
 		border-top: solid black thin;
 		padding-top: 8pt
   }
 }
 
-@page table-of-contents {
-  @bottom-center { content: ""; }
+@page frontmatter {
+  @top { content: string(chapter-title); }
+	@bottom { content: counter(page, lower-roman); }
+}
+
+@page backmatter {
+  @top { content: string(chapter-title); }
+	@bottom { content: counter(page, decimal); }
 }
 
 @page:first { 
 	padding-top: 40%;
-  @bottom-center { content: normal }
-}
-
-@page:left { 
-    @top { content: string(book-title) }
-}
-@page:right {
-    @top { content: string(chapter-title) }
+  @bottom { content: normal }
 }
 
 .toc a::after {
@@ -243,90 +242,131 @@ h1 {
 	string-set: book-title content();
 }
 
-h2:before {
-	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
-}
 
-.toc li[class] {
+.toc li[class=toc-chapter] {
 	counter-increment: toc1;
 	counter-reset: toc2;
 }
 
-.toc ol li[class] {
+.toc li[class=toc-appendix] {
+	counter-increment: appendix1;
+	counter-reset: toc2;
+}
+
+.toc ol li {
 	counter-increment: toc2;
 	counter-reset: toc3;
 }
 
-.toc ol ol li[class] {
+.toc ol ol li {
 	counter-increment: toc3;
 	counter-reset: toc4;
 }
 
-.toc ol ol ol li[class] {
+.toc ol ol ol li {
 	counter-increment: toc4;
 	counter-reset: toc5;
 }
 
-.toc ol ol ol ol li[class] {
+.toc ol ol ol ol li {
 	counter-increment: toc5;
 }
 
 
-.toc li[class]:before {
+.toc li[class=toc-chapter]::before {
 	content: counter(toc1) ". "
 }
 
-.toc ol li[class]:before {
+.toc li[class=toc-appendix]::before {
+	content: counter(appendix1, upper-latin) ". "
+}
+
+.toc ol li::before {
 	content: counter(toc1) "." counter(toc2) " "
 }
 
-.toc ol ol li[class]:before {
+.toc ol ol li::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " "
 }
 
-.toc ol ol ol li[class]:before {
+.toc ol ol ol li::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " "
 }
 
-.toc ol ol ol ol li[class]:before {
+.toc ol ol ol ol li::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " "
 }
 
-.contents {
-	page: table-of-contents;
+
+.frontmatter{
+	page: frontmatter;
 }
-h3:before {
+
+.backmatter{
+	page: backmatter;
+}
+
+.bodymatter h2::before {
+	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+}
+
+.backmatter h2::before {
+	content: "Appendix " counter(a2, upper-latin) " &ndash; ";
+}
+
+.bodymatter h3::before {
 	content: counter(h2) "." counter(h3) " "
 }
 
-h4:before {
+.backmatter h3::before {
+	content: counter(a2) "." counter(h3) " "
+}
+
+.bodymatter h4::before {
 	content: counter(h2) "." counter(h3) "." counter(h4) " "
 }
 
-h5:before {
+.backmatter h4::before {
+	content: counter(a2) "." counter(h3) "." counter(h4) " "
+}
+
+.bodymatter h5::before {
 	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+}
+
+.backmatter h5::before {
+	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " "
 }
 
 h2 { 
 	string-set: chapter-title content();
-	counter-increment: h2;
-	counter-reset: h3;
 	page-break-before: always 
 }
 
-h3 {
+.bodymatter h2{
+	counter-increment: h2;
+	counter-reset: h3;
+}
+
+.backmatter h2{
+	counter-increment: a2;
+	counter-reset: h3;
+}
+
+.bodymatter h3, .backmatter h3 {
 	counter-increment: h3;
 	counter-reset: h4;
 }	
 
-h4 {
+.bodymatter h4, .backmatter h4 {
 	counter-increment: h4;
 	counter-reset: h5;
 }	
 
-h5 {
+.bodymatter h5, .backmatter h5 {
 	counter-increment: h5;
 }
+
 
 
 h2, h3, h4, h5, .header { page-break-after: avoid }
@@ -354,37 +394,34 @@ table { page-break-inside: avoid }
 		</div>
 
 		</div>
-		
+		<div class="frontmatter">
+
+
 <div class="contents">
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
 	<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li><ol><li class="toc-section"><a href="#h_2">Rationale</a></li>
+<li class="toc-chapter"><a href="#h_2">Quick Start</a></li>
+<li><ol><li class="toc-section"><a href="#h_3">Editing text files</a></li>
+<li class="toc-section"><a href="#h_4">Compiling your project</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_3">Quick Start</a></li>
-<li><ol><li class="toc-section"><a href="#h_4">Editing text files</a></li>
-<li class="toc-section"><a href="#h_5">Compiling your project</a></li>
-</ol></li>
-<li class="toc-chapter"><a href="#h_6">Glyph Language</a></li>
-<li><ol><li class="toc-section"><a href="#h_7">Introducing Glyph Macros</a></li>
+<li class="toc-chapter"><a href="#h_5">Glyph Language</a></li>
+<li><ol><li class="toc-section"><a href="#h_6">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_9">Creating and Editing Macros</a></li>
+<li class="toc-section"><a href="#h_8">Creating and Editing Macros</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#h_10">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_11">Macro Reference</a></li>
+<li class="toc-appendix"><a href="#h_9">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_10">Macro Reference</a></li>
 
 </ol>
 </div>
-		<div class="introduction">
+			<div class="introduction">
 
 <h2 id="h_1">Introduction</h2>
 	
-			<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
+				<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
 <p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate files in a variety of output formats, such as <span class="caps">HTML</span> or <span class="caps">PDF</span>.</p>
 <p>Glyph was created to provide an easy way to produce printable documents in <span class="caps">HTML</span> and <span class="caps">PDF</span> format, using technologies familiar to web developers like <span class="caps">HTML</span> and <span class="caps">CSS</span>, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.</p>
-<div class="section">
-<h3 id="h_2">Rationale</h3>
-<p></p>
 <p>At the time of writing, the most common ways to create a printable document like, say, a <span class="caps">PDF</span> file, are the following:</p>
 <ol>
 	<li>Use a word processor like Microsoft Word convert it to <span class="caps">PDF</span>, for example using Adobe Acrobat &#8212; Perhaps the most user-friendly method, but relying on proprietary technologies and GUIs.</li>
@@ -409,14 +446,17 @@ table { page-break-inside: avoid }
 	<li>Validating links</li>
 	<li>&#8230;</li>
 </ul>
-</div>
 
 		</div>
-		<div class="chapter">
 
-<h2 id="h_3">Quick Start</h2>
+		</div>
+		<div class="bodymatter">
+
+<div class="chapter">
+
+<h2 id="h_2">Quick Start</h2>
 	
-			<p>Want to start writing immediately? This short chapter shows you how to get started with glyph in no time. To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
+				<p>Want to start writing immediately? This short chapter shows you how to get started with glyph in no time. To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
 <div class="code"><pre><code>mkdir my_glyph_project
 cd my_glyph_project
 glyph init</code></pre></div>
@@ -439,22 +479,22 @@ glyph init</code></pre></div>
 </div>
 <p></p>
 <div class="section">
-<h3 id="h_4">Editing text files</h3>
+<h3 id="h_3">Editing text files</h3>
 <p></p>
 <p>&#8230;</p>
 </div>
 <div class="section">
-<h3 id="h_5">Compiling your project</h3>
+<h3 id="h_4">Compiling your project</h3>
 <p></p>
 <p>&#8230;</p>
 </div>
 
 		</div>
-		<div class="chapter">
+			<div class="chapter">
 
-<h2 id="h_6">Glyph Language</h2>
+<h2 id="h_5">Glyph Language</h2>
 	
-			<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
+				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure, like the following:</p>
 <div class="code"><pre><code>document[
   head[
@@ -483,7 +523,7 @@ glyph init</code></pre></div>
 ]</code></pre></div>
 <p>Even without knowing anything about Glyph Language, you can easily figure out nearly everything: there&#8217;s a <code>document</code> with a <code>head</code> and a <code>body</code>, the <code>body</code> contains a title page, a Table of Contents, a Preface and some chapters.</p>
 <div class="section">
-<h3 id="h_7">Introducing Glyph Macros</h3>
+<h3 id="h_6">Introducing Glyph Macros</h3>
 <p></p>
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
@@ -497,26 +537,26 @@ glyph init</code></pre></div>
 <p>&#8230;</p>
 </div>
 <div class="section">
-<h3 id="h_9">Creating and Editing Macros</h3>
+<h3 id="h_8">Creating and Editing Macros</h3>
 <p></p>
 <p>&#8230;</p>
 </div>
 
 		</div>
-		
-		<div class="appendix">
-
-<h2 id="h_10">Command Reference</h2>
 
 		</div>
-		<div class="appendix">
+		<div class="backmatter">
 
-<h2 id="h_11">Macro Reference</h2>
+<div class="appendix">
+
+<h2 id="h_9">Command Reference</h2>
 
 		</div>
-		<div class="index">
+			<div class="appendix">
 
+<h2 id="h_10">Macro Reference</h2>
 
+		</div>
 
 		</div>
 		</body>
