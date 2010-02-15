@@ -34,7 +34,6 @@ Gem::Specification.new do |s|
      "handbook/styles/default.css",
      "handbook/text/glyph_language.textile",
      "handbook/text/introduction.textile",
-     "handbook/text/quick_start.textile",
      "lib/glyph.rb",
      "lib/glyph/commands.rb",
      "lib/glyph/config.rb",

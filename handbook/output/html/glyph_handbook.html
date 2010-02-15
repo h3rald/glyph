@@ -211,11 +211,11 @@ code {
 		@page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
-	@top { content: string(chapter-title)  }
+	@top { content: string(chapter-title);  }
   @bottom { content: counter(page, decimal); }
 	@footnotes {
 		border-top: solid black thin;
-		padding-top: 8pt
+		padding-top: 8pt;
   }
 }
 
@@ -231,7 +231,7 @@ code {
 
 @page:first { 
 	padding-top: 40%;
-  @bottom { content: normal }
+  @bottom { content: normal; }
 }
 
 .toc a::after {
@@ -274,27 +274,27 @@ h1 {
 
 
 .toc li[class=toc-chapter]::before {
-	content: counter(toc1) ". "
+	content: counter(toc1) ". ";
 }
 
 .toc li[class=toc-appendix]::before {
-	content: counter(appendix1, upper-latin) ". "
+	content: counter(appendix1, upper-latin) ". ";
 }
 
 .toc ol li::before {
-	content: counter(toc1) "." counter(toc2) " "
+	content: counter(toc1) "." counter(toc2) " ";
 }
 
 .toc ol ol li::before {
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) " "
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 
 .toc ol ol ol li::before {
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " "
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
 .toc ol ol ol ol li::before {
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " "
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 
 
@@ -315,32 +315,32 @@ h1 {
 }
 
 .bodymatter h3::before {
-	content: counter(h2) "." counter(h3) " "
+	content: counter(h2) "." counter(h3) " ";
 }
 
 .backmatter h3::before {
-	content: counter(a2) "." counter(h3) " "
+	content: counter(a2) "." counter(h3) " ";
 }
 
 .bodymatter h4::before {
-	content: counter(h2) "." counter(h3) "." counter(h4) " "
+	content: counter(h2) "." counter(h3) "." counter(h4) " ";
 }
 
 .backmatter h4::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) " "
+	content: counter(a2) "." counter(h3) "." counter(h4) " ";
 }
 
 .bodymatter h5::before {
-	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
 .backmatter h5::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
 h2 { 
 	string-set: chapter-title content();
-	page-break-before: always 
+	page-break-before: always;
 }
 
 .bodymatter h2{
@@ -367,9 +367,7 @@ h2 {
 	counter-increment: h5;
 }
 
-
-
-h2, h3, h4, h5, .header { page-break-after: avoid }
+h2, h3, h4, h5 { page-break-after: avoid }
 table { page-break-inside: avoid }
 
 		</style>
@@ -401,17 +399,20 @@ table { page-break-inside: avoid }
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
 	<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li class="toc-chapter"><a href="#h_2">Quick Start</a></li>
-<li><ol><li class="toc-section"><a href="#h_3">Editing text files</a></li>
-<li class="toc-section"><a href="#h_4">Compiling your project</a></li>
+<li class="toc-chapter"><a href="#h_2">Basic Usage</a></li>
+<li><ol><li class="toc-section"><a href="#h_3">Installing Glyph</a></li>
+<li class="toc-section"><a href="#h_4">Introducing document.glyph</a></li>
+<li class="toc-section"><a href="#h_5">Editing text files</a></li>
+<li class="toc-section"><a href="#cfg">Changing configuration settings</a></li>
+<li class="toc-section"><a href="#h_7">Compiling your project</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_5">Glyph Language</a></li>
-<li><ol><li class="toc-section"><a href="#h_6">Introducing Glyph Macros</a></li>
+<li class="toc-chapter"><a href="#h_8">Glyph Language</a></li>
+<li><ol><li class="toc-section"><a href="#h_9">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_8">Creating and Editing Macros</a></li>
+<li class="toc-section"><a href="#h_11">Creating and Editing Macros</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#h_9">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_10">Macro Reference</a></li>
+<li class="toc-appendix"><a href="#h_12">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_13">Macro Reference</a></li>
 
 </ol>
 </div>
@@ -444,7 +445,6 @@ table { page-break-inside: avoid }
 	<li>Defining the document structure</li>
 	<li>Managing text snippets, notes, &#8230;</li>
 	<li>Validating links</li>
-	<li>&#8230;</li>
 </ul>
 
 		</div>
@@ -454,9 +454,13 @@ table { page-break-inside: avoid }
 
 <div class="chapter">
 
-<h2 id="h_2">Quick Start</h2>
+<h2 id="h_2">Basic Usage</h2>
 	
-				<p>Want to start writing immediately? This short chapter shows you how to get started with glyph in no time. To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
+				<p>This chapter explains how to install and use Glyph to create and manage documents.</p>
+<div class="section">
+<h3 id="h_3">Installing Glyph</h3>
+<p></p>
+<p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
 <div class="code"><pre><code>mkdir my_glyph_project
 cd my_glyph_project
 glyph init</code></pre></div>
@@ -477,53 +481,75 @@ glyph init</code></pre></div>
 	<li>Haml (if you want to load .sass files with the <em>style</em> macro)</li>
 </ul>
 </div>
-<p></p>
-<div class="section">
-<h3 id="h_3">Editing text files</h3>
-<p></p>
-<p>&#8230;</p>
 </div>
 <div class="section">
-<h3 id="h_4">Compiling your project</h3>
+<h3 id="h_4">Introducing document.glyph</h3>
 <p></p>
-<p>&#8230;</p>
-</div>
-
-		</div>
-			<div class="chapter">
-
-<h2 id="h_5">Glyph Language</h2>
-	
-				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
-<p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure, like the following:</p>
+<p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
+generated automatically when creating a new project is the following:</p>
 <div class="code"><pre><code>document[
-  head[
-    style[default.css]
-  ]
+  head[style[default.css]]
   body[
     titlepage[
       title[]
       author[]
       pubdate[]
     ]
-    toc[]
-    preface[
-      header[Preface]
-      @[preface.textile]
-    ]  
-    chapter[
-      header[Chapter #1]
-      @[chapter1.textile]
+    frontmatter[
+      toc[]
+      preface[header[Preface]
+        @[preface.textile]
+      ]
     ]
-    chapter[
-      header[Chapter #2]
-      @[chapter2.textile]
+    bodymatter[  
+      chapter[header[Chapter #1]
+        @[chapter_1.textile]
+      ]
+      chapter[header[Chapter #2]
+        @[chapter_2.textile]
+      ]
+    ]
+    backmatter[
+      appendix[header[Appendix A]
+        @[appendix_a.textile]
+      ]
     ]
   ]
 ]</code></pre></div>
-<p>Even without knowing anything about Glyph Language, you can easily figure out nearly everything: there&#8217;s a <code>document</code> with a <code>head</code> and a <code>body</code>, the <code>body</code> contains a title page, a Table of Contents, a Preface and some chapters.</p>
+<p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. <code>frontmatter[]</code>, <code>preface[]</code>, <code>chapter[]</code>, etc. are all Glyph <em>macros</em> used to define &#8212; in this case &#8212; some structural elements. In practice, this means that if you plan to generate an <span class="caps">HTML</span> document, they&#8217;ll be converted into <code>&lt;div&gt;</code> tags.</p>
+<p>Be aware that other macros, on the other hand, are used to do something completely different, e.g.:</p>
+<ul>
+	<li><code>toc[]</code> generates the document&#8217;s Table of Contents</li>
+	<li><code>@[]</code> or its alias <code>include[]</code> is used to copy the contents of another file stored anywhere in the <code>/text</code> directory.</li>
+</ul>
+<p>Let&#8217;s now analyze this <code>document.glyph</code> more in detail.</p>
+<ul>
+	<li>The <code>document[]</code> macro wraps every other macro. This is necessary to create the initial <code>&lt;html&gt;</code> tag.</li>
+	<li>Similarly, <code>head[]</code> and <code>body[]</code> are used to generate the respective <span class="caps">HTML</span> tags. Actually, <code>head[]</code> already sets some metadata for you, by default (author and copyright).</li>
+	<li>Within <code>head[]</code>, the <code>style[]</code> macro is used to load the <code>default.css</code> stylesheet, which is included by default the <code>/styles</code> directory of every Glyph project.</li>
+	<li>Immediately after the <code>body[]</code> macro, the <code>titlepage[]</code> macro is used to define (guess&#8230;) the first page of your document. <code>title[]</code>, <code>author[]</code>  and <code>pubdate[]</code> insert the title of the document, its author and the publication date (retrieved from the project&#8217;s <a href="#cfg">configuration settings</a>).</li>
+	<li>Then, the <code>frontmatter[]</code>, <code>bodymatter[]</code> and <code>backmatter[]</code> macros are used to further divide the portions of your document according to the rules of <a href="http://en.wikipedia.org/wiki/Book_design">book design</a>. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.</li>
+	<li><code>preface[]</code>, <code>chapter[]</code>, <code>appendix[]</code> are just a way to wrap content in <code>&lt;div&gt;</code> tags, from an <span class="caps">HTML</span> point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together with the <code>header[]</code> macro.</li>
+</ul>
+</div>
 <div class="section">
-<h3 id="h_6">Introducing Glyph Macros</h3>
+<h3 id="h_5">Editing text files</h3>
+</div>
+<div class="section">
+<h3 id="cfg">Changing configuration settings</h3>
+</div>
+<div class="section">
+<h3 id="h_7">Compiling your project</h3>
+</div>
+
+		</div>
+			<div class="chapter">
+
+<h2 id="h_8">Glyph Language</h2>
+	
+				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
+<div class="section">
+<h3 id="h_9">Introducing Glyph Macros</h3>
 <p></p>
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
@@ -533,13 +559,9 @@ glyph init</code></pre></div>
 </div>
 <div class="section">
 <h3 id="esc_quot">Escaping and Quoting</h3>
-<p></p>
-<p>&#8230;</p>
 </div>
 <div class="section">
-<h3 id="h_8">Creating and Editing Macros</h3>
-<p></p>
-<p>&#8230;</p>
+<h3 id="h_11">Creating and Editing Macros</h3>
 </div>
 
 		</div>
@@ -549,12 +571,12 @@ glyph init</code></pre></div>
 
 <div class="appendix">
 
-<h2 id="h_9">Command Reference</h2>
+<h2 id="h_12">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-<h2 id="h_10">Macro Reference</h2>
+<h2 id="h_13">Macro Reference</h2>
 
 		</div>
 

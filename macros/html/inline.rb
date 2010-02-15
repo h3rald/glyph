@@ -13,12 +13,13 @@ macro :link do
 		anchor = href.gsub(/^#/, '').to_sym
 		bmk = bookmark? anchor
 		if bmk then
-			title = bmk[:title]
+			title ||= bmk[:title]
 		else
-			title = placeholder do |document|
+			plac = placeholder do |document|
 				macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor]
 				document.bookmarks[anchor][:title] rescue "--> #{anchor}"
 			end
+			title ||= plac
 		end
 	end
 	title ||= href

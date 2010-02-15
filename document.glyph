@@ -1,33 +1,29 @@
 document[
-	head[style[default.css]]
-	body[
-		titlepage[
-			textile[
-h1. $[document.title]
-
-div(author). by _\.$[document.author]_
-
-div(pubdate). ruby[=Time.now.strftime("%d %B %Y")=]
+  head[style[default.css]]
+  body[
+    titlepage[
+      title[]
+      author[]
+      pubdate[]
+    ]
+    frontmatter[
+      toc[]
+      preface[header[Preface]
+        @[preface.textile]
+      ]
+    ]
+    bodymatter[  
+      chapter[header[Chapter #1]
+        @[chapter_1.textile]
+      ]
+      chapter[header[Chapter #2]
+        @[chapter_2.textile]
+      ]
+    ]
+		backmatter[
+			appendix[header[Appendix A]
+				@[appendix_a.textile]
 			]
 		]
-		toc[]
-
-		--[=
-	
-		preface[
-			header[Preface]
-			@[preface.textile]
-		]	
-		chapter[
-			header[Chapter #1]
-			@[chapter1.textile]
-		]
-		chapter[
-			header[Chapter #2]
-			@[chapter2.textile]
-		]
-		index[]
-	
-		=]
-	]
+  ]
 ]

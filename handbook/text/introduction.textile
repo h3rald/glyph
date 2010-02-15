@@ -22,4 +22,5 @@ That's where Glyph comes in: Glyph uses a simple but effective macro language to
 * Defining the document structure
 * Managing text snippets, notes, ...
 * Validating links
-* ...
+
+todo[Expand...]

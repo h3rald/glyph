@@ -1,8 +1,7 @@
 document[
 	head[
 		style[default.css]
-		style[css3.css]
-	]
+		style[css3.css]]
 	body[
 		titlepage[
 			title[]
@@ -18,8 +17,8 @@ document[
 		]
 		bodymatter[
 			chapter[
-				header[Quick Start]
-				@[quick_start.textile]
+				header[Basic Usage]
+				@[basic_usage.textile]
 			]
 			chapter[
 				header[Glyph Language]

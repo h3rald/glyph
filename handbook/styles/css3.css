@@ -1,11 +1,11 @@
 @page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
-	@top { content: string(chapter-title)  }
+	@top { content: string(chapter-title);  }
   @bottom { content: counter(page, decimal); }
 	@footnotes {
 		border-top: solid black thin;
-		padding-top: 8pt
+		padding-top: 8pt;
   }
 }
 
@@ -21,7 +21,7 @@
 
 @page:first { 
 	padding-top: 40%;
-  @bottom { content: normal }
+  @bottom { content: normal; }
 }
 
 .toc a::after {
@@ -64,27 +64,27 @@ h1 {
 
 
 .toc li[class=toc-chapter]::before {
-	content: counter(toc1) ". "
+	content: counter(toc1) ". ";
 }
 
 .toc li[class=toc-appendix]::before {
-	content: counter(appendix1, upper-latin) ". "
+	content: counter(appendix1, upper-latin) ". ";
 }
 
 .toc ol li::before {
-	content: counter(toc1) "." counter(toc2) " "
+	content: counter(toc1) "." counter(toc2) " ";
 }
 
 .toc ol ol li::before {
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) " "
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 
 .toc ol ol ol li::before {
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " "
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
 .toc ol ol ol ol li::before {
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " "
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 
 
@@ -105,32 +105,32 @@ h1 {
 }
 
 .bodymatter h3::before {
-	content: counter(h2) "." counter(h3) " "
+	content: counter(h2) "." counter(h3) " ";
 }
 
 .backmatter h3::before {
-	content: counter(a2) "." counter(h3) " "
+	content: counter(a2) "." counter(h3) " ";
 }
 
 .bodymatter h4::before {
-	content: counter(h2) "." counter(h3) "." counter(h4) " "
+	content: counter(h2) "." counter(h3) "." counter(h4) " ";
 }
 
 .backmatter h4::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) " "
+	content: counter(a2) "." counter(h3) "." counter(h4) " ";
 }
 
 .bodymatter h5::before {
-	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
 .backmatter h5::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " "
+	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
 h2 { 
 	string-set: chapter-title content();
-	page-break-before: always 
+	page-break-before: always;
 }
 
 .bodymatter h2{
@@ -157,7 +157,5 @@ h2 {
 	counter-increment: h5;
 }
 
-
-
-h2, h3, h4, h5, .header { page-break-after: avoid }
+h2, h3, h4, h5 { page-break-after: avoid }
 table { page-break-inside: avoid }
