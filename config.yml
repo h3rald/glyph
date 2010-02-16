@@ -6,8 +6,53 @@
   :output: ""
   :output_targets: [:html, :pdf]
 :structure:
-  :headers: [:section, :chapter, :part, :introduction, :contents, :preface, :appendix, :foreword, :afterword, :glossary, :index]  
-  :first_header_level: 2
+  :hidden:
+    - :imprint
+    - :dedication
+    - :inspiration
+    - :postscript
+    - :colophon
+    - :promotion
+  :special:
+    - :preface
+    - :foreword
+    - :introduction
+    - :acknowledgement
+    - :prologue
+    - :epilogue
+    - :addendum
+    - :glossary
+    - :bibliography
+    - :references
+    - :lot
+    - :lof
+  :frontmatter:
+    - :preface
+    - :imprint
+    - :dedication
+    - :inspiration
+    - :foreword
+    - :introduction
+    - :acknowledgement
+    - :prologue
+  :bodymatter:
+    - :volume
+    - :book
+    - :part
+    - :chapter
+  :backmatter:
+    - :epilogue
+    - :afterword
+    - :postscript
+    - :appendix
+    - :addendum
+    - :glossary
+    - :colophon
+    - :bibliography
+    - :promotion
+    - :references
+    - :lot
+    - :lof
 :pdf_renderer: 'prince'
 :filters:
   :by_file_extension: true

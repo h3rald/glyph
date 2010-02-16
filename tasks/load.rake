@@ -41,6 +41,12 @@ namespace :load do
 		Glyph::SYSTEM_CONFIG.read
 		Glyph::GLOBAL_CONFIG.read
 		Glyph.reset_config
+		Glyph.config_override("structure.headers", 
+										[:section] +
+										cfg('structure.frontmatter') + 
+										cfg('structure.backmatter') + 
+										cfg('structure.bodymatter') - 
+										cfg('structure.hidden'))
 	end
 
 end

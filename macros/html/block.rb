@@ -31,12 +31,10 @@ macro :"textile.code" do
 end
 
 macro :title do
-	title_start = (cfg("structure.first_header_level") > 1) ? "<h1>" : %{<div class "title">} 
-	title_end = (cfg("structure.first_header_level") > 1) ? "</h1>" : %{</div>} 
 	%{
-		#{title_start}
+		<h1>
 			#{cfg("document.title")}
-		#{title_end}
+		</h1>
 	}
 end
 

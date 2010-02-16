@@ -2,6 +2,8 @@ Glyph is a _Rapid Document Authoring Framework_.
 
 Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate files in a variety of output formats, such as HTML or PDF.
 
+section[header[Rationale]
+
 Glyph was created to provide an easy way to produce printable documents in HTML and PDF format, using technologies familiar to web developers like HTML and CSS, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.
 
 At the time of writing, the most common ways to create a printable document like, say, a PDF file, are the following:
@@ -22,6 +24,8 @@ That's where Glyph comes in: Glyph uses a simple but effective macro language to
 * Defining the document structure
 * Managing text snippets, notes, ...
 * Validating links
+
+]
 
 todo[Expand...]
 todo[List conventions/glossary]

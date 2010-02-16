@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 
-macro :section do 
+macro :div do 
 	%{<div class="#{@name}">
 
-#{@value}
+		#{@value}
 
 		</div>}	
 end
 
 macro :header do
 	title = @params[0]
-	level = cfg("structure.first_header_level") - 1
+	level = 1
 	@node.ascend do |n| 
 		if cfg("structure.headers").include? n[:macro] then
 			level+=1
@@ -89,7 +89,8 @@ macro :toc do
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
-				if cfg("structure.headers").include?(n2[:macro])
+				if cfg('structure.headers').include?(n2[:macro])
+					next if n2.find_parent{|node| cfg('structure.special').include? node[:macro] } 
 					header_id = n2.children.select{|n| n[:header]}[0][:header] rescue nil
 					next if added_headers.include? header_id
 					added_headers << header_id
@@ -103,12 +104,11 @@ macro :toc do
 			end
 			list
 		end
-		l = cfg("structure.first_header_level")
 		%{
 <div class="contents">
-<h#{l} class="toc-header" id="h_toc">Table of Contents</h#{l}>
+<h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
-	#{descend_section.call(document.structure, nil)}
+			#{descend_section.call(document.structure, nil)}
 </ol>
 </div>}
 	end
@@ -125,33 +125,21 @@ macro :bibliography do
 	""
 end
 
-# See http://microformats.org/wiki/book-brainstorming
+# See:
+#  http://microformats.org/wiki/book-brainstorming
+#  http://en.wikipedia.org/wiki/Book_design
 
-macro_alias :div => :section
+macro_alias :section => :div
 
+(cfg('structure.frontmatter') + cfg('structure.bodymatter') + cfg('structure.backmatter')).
+	uniq.each {|s| macro_alias s => :div }
+
+macro_alias :frontcover => :div
+macro_alias :titlepage => :div
+macro_alias :halftitlepage => :div
 macro_alias :frontmatter => :div
 macro_alias :bodymatter => :div
 macro_alias :backmatter => :div
-
-macro_alias :chapter => :section
-macro_alias :part => :section
-macro_alias :preface => :section
-macro_alias :frontcover => :section
-macro_alias :halftitlepage => :section
-macro_alias :titlepage => :section
-macro_alias :imprint => :section
-macro_alias :dedication => :section
-macro_alias :inspiration => :section
-macro_alias :foreword => :section
-macro_alias :preface => :section
-macro_alias :introduction => :section
-macro_alias :afterword => :section
-macro_alias :appendix => :section
-macro_alias :glossary => :section
-macro_alias :colophon => :section
-macro_alias :promotion => :section
-macro_alias :backcover => :section
-macro_alias :contents => :section
-macro_alias :index => :section
+macro_alias :backcover => :div
 
 macro_alias :heading => :header

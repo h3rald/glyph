@@ -36,15 +36,14 @@ describe "Macro:" do
 
 	it "section, chapter, header" do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
-		l = cfg("structure.first_header_level")
 		interpret text
 		doc = @p.document
 		doc.output.gsub(/\n|\t/, '').should == %{<div class="chapter">
-					<h#{l} id="h_1">Chapter X</h#{l}> ... 
+					<h2 id="h_1">Chapter X</h2> ... 
 					<div class="section">
-					<h#{l+1} id="sec-y">Section Y</h#{l+1}> ... 
+					<h3 id="sec-y">Section Y</h3> ... 
 						<div class="section">
-						<h#{l+2} id="h_3">Another section</h#{l+2}> ...
+						<h4 id="h_3">Another section</h4> ...
 						</div>
 					</div>
 				</div>
@@ -53,16 +52,15 @@ describe "Macro:" do
 	end
 
 	it "include" do
-		l = cfg("structure.first_header_level")
 		Glyph.config_override "filters.by_extension", true
 		text = file_load(Glyph::PROJECT/'text/container.textile')
 		interpret text
 		@p.document.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{
 			<div class="section">
-			<h#{l} id="h_1">Container section</h#{l}>
+			<h2 id="h_1">Container section</h2>
 			This is a test.
 				<div class="section">
-				<h#{l+1} id="h_2">Test Section</h#{l+1}>	
+				<h3 id="h_2">Test Section</h3>	
 				<p>&#8230;</p>
 				</div>
 			</div>

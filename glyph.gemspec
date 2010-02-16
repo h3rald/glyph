@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-02-15}
+  s.date = %q{2010-02-16}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "handbook/snippets.yml",
      "handbook/styles/css3.css",
      "handbook/styles/default.css",
+     "handbook/text/basic_usage.textile",
      "handbook/text/glyph_language.textile",
      "handbook/text/introduction.textile",
      "lib/glyph.rb",

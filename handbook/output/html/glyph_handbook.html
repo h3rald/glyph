@@ -377,7 +377,7 @@ table { page-break-inside: avoid }
 		<body>
 		<div class="titlepage">
 
-<h1>
+		<h1>
 			Glyph Handbook
 		</h1>
 	
@@ -394,35 +394,38 @@ table { page-break-inside: avoid }
 		</div>
 		<div class="frontmatter">
 
-
+		
 <div class="contents">
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
-	<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li class="toc-chapter"><a href="#h_2">Basic Usage</a></li>
-<li><ol><li class="toc-section"><a href="#h_3">Installing Glyph</a></li>
-<li class="toc-section"><a href="#h_4">Introducing document.glyph</a></li>
-<li class="toc-section"><a href="#h_5">Editing text files</a></li>
+			<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
+<li class="toc-chapter"><a href="#h_3">Basic Usage</a></li>
+<li><ol><li class="toc-section"><a href="#h_4">Installing Glyph</a></li>
+<li class="toc-section"><a href="#h_5">Introducing document.glyph</a></li>
+<li class="toc-section"><a href="#h_6">Editing text files</a></li>
 <li class="toc-section"><a href="#cfg">Changing configuration settings</a></li>
-<li class="toc-section"><a href="#h_7">Compiling your project</a></li>
+<li class="toc-section"><a href="#h_8">Compiling your project</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_8">Glyph Language</a></li>
-<li><ol><li class="toc-section"><a href="#h_9">Introducing Glyph Macros</a></li>
+<li class="toc-chapter"><a href="#h_9">Glyph Language</a></li>
+<li><ol><li class="toc-section"><a href="#h_10">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_11">Creating and Editing Macros</a></li>
+<li class="toc-section"><a href="#h_12">Creating and Editing Macros</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#h_12">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_13">Macro Reference</a></li>
-<li class="toc-appendix"><a href="#h_14">Configuration Reference</a></li>
+<li class="toc-appendix"><a href="#h_13">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_14">Macro Reference</a></li>
+<li class="toc-appendix"><a href="#h_15">Configuration Reference</a></li>
 
 </ol>
 </div>
 			<div class="introduction">
 
-<h2 id="h_1">Introduction</h2>
+		<h2 id="h_1">Introduction</h2>
 	
 				<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
 <p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate files in a variety of output formats, such as <span class="caps">HTML</span> or <span class="caps">PDF</span>.</p>
+<div class="section">
+		<h3 id="h_2">Rationale</h3>
+<p></p>
 <p>Glyph was created to provide an easy way to produce printable documents in <span class="caps">HTML</span> and <span class="caps">PDF</span> format, using technologies familiar to web developers like <span class="caps">HTML</span> and <span class="caps">CSS</span>, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.</p>
 <p>At the time of writing, the most common ways to create a printable document like, say, a <span class="caps">PDF</span> file, are the following:</p>
 <ol>
@@ -447,19 +450,20 @@ table { page-break-inside: avoid }
 	<li>Managing text snippets, notes, &#8230;</li>
 	<li>Validating links</li>
 </ul>
+</div>
 
 		</div>
 
 		</div>
 		<div class="bodymatter">
 
-<div class="chapter">
+		<div class="chapter">
 
-<h2 id="h_2">Basic Usage</h2>
+		<h2 id="h_3">Basic Usage</h2>
 	
 				<p>This chapter explains how to install and use Glyph to create and manage documents.</p>
 <div class="section">
-<h3 id="h_3">Installing Glyph</h3>
+		<h3 id="h_4">Installing Glyph</h3>
 <p></p>
 <p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
 <p><code>mkdir</code> <em>my_glyph_project</em></p>
@@ -484,7 +488,7 @@ table { page-break-inside: avoid }
 </div>
 </div>
 <div class="section">
-<h3 id="h_4">Introducing document.glyph</h3>
+		<h3 id="h_5">Introducing document.glyph</h3>
 <p></p>
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
 generated automatically when creating a new project is the following:</p>
@@ -534,10 +538,10 @@ generated automatically when creating a new project is the following:</p>
 </ul>
 </div>
 <div class="section">
-<h3 id="h_5">Editing text files</h3>
+		<h3 id="h_6">Editing text files</h3>
 </div>
 <div class="section">
-<h3 id="cfg">Changing configuration settings</h3>
+		<h3 id="cfg">Changing configuration settings</h3>
 <p></p>
 <p>Glyph stores configuration settings in the following <span class="caps">YAML</span> files:</p>
 <ol>
@@ -555,17 +559,17 @@ generated automatically when creating a new project is the following:</p>
 <p><code>glyph config</code> <em>setting</em> <em>[value]</em></p>
 </div>
 <div class="section">
-<h3 id="h_7">Compiling your project</h3>
+		<h3 id="h_8">Compiling your project</h3>
 </div>
 
 		</div>
 			<div class="chapter">
 
-<h2 id="h_8">Glyph Language</h2>
+		<h2 id="h_9">Glyph Language</h2>
 	
 				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
 <div class="section">
-<h3 id="h_9">Introducing Glyph Macros</h3>
+		<h3 id="h_10">Introducing Glyph Macros</h3>
 <p></p>
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
@@ -574,10 +578,10 @@ generated automatically when creating a new project is the following:</p>
 </ul>
 </div>
 <div class="section">
-<h3 id="esc_quot">Escaping and Quoting</h3>
+		<h3 id="esc_quot">Escaping and Quoting</h3>
 </div>
 <div class="section">
-<h3 id="h_11">Creating and Editing Macros</h3>
+		<h3 id="h_12">Creating and Editing Macros</h3>
 </div>
 
 		</div>
@@ -585,19 +589,19 @@ generated automatically when creating a new project is the following:</p>
 		</div>
 		<div class="backmatter">
 
-<div class="appendix">
+		<div class="appendix">
 
-<h2 id="h_12">Command Reference</h2>
-
-		</div>
-			<div class="appendix">
-
-<h2 id="h_13">Macro Reference</h2>
+		<h2 id="h_13">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-<h2 id="h_14">Configuration Reference</h2>
+		<h2 id="h_14">Macro Reference</h2>
+
+		</div>
+			<div class="appendix">
+
+		<h2 id="h_15">Configuration Reference</h2>
 
 		</div>
 
