@@ -16,6 +16,7 @@ p, ol, ul {
 	margin: 0.3em 0; }
 
 table {
+	margin: auto;
 	border-collapse: collapse;
 	border-spacing: 0; }
 
@@ -86,17 +87,22 @@ ol.toc {
 }
 
 table {
-	border: 1px dashed #555555; }
+	border: 1px solid #555555; }
+
+th{
+	background: #E8E8E8;
+
+}
 
 tr, td, th {
 	padding: 5px; }
 
 td {
-	border-left: 1px dashed #555555;
-	border-right: 1px dashed #555555; }
+	border-left: 1px solid #555555;
+	border-right: 1px solid #555555; }
 
 th {
-	border: 1px dashed #555555; }
+	border: 1px solid #555555; }
 
 
 /* BLOCKS */
@@ -122,7 +128,7 @@ th {
 	padding: 0.5em;
 	color: #918058;
 	color: #665A3E;
-	width: 400px;
+	width: 600px;
 	margin: 1em auto;
 }
 
@@ -139,8 +145,8 @@ th {
 	padding: 0.5em;
 	font-size: 0.9em;
 	border: 1px solid #5A635C;
-	background: #E5E5E5;
-	width: 400px;
+	background: #E8E8E8;
+	width: 600px;
 	margin: 1em auto;
 }
 

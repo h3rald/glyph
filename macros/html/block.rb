@@ -56,36 +56,28 @@ end
 
 macro :table do
 	%{
-		<table>
-		#{@value}
-		
+		<table>#{@value}
 		</table>
 	}
 end
 
 macro :tr do
 	%{
-		<tr>
-		#{@value}
-		
+		<tr>#{@value}	
 		</tr>
 	}
 end
 
 macro :td do
 	%{
-		<td>
-		#{@value}
-		
+		<td>#{@value}
 		</td>
 	}
 end
 
 macro :th do
 	%{
-		<th>
-		#{@value}
-
+		<th>#{@value}
 		</th>
 	}
 end
