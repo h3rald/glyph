@@ -2,7 +2,7 @@ This chapter explains how to install and use Glyph to create and manage document
 
 todo[Expand...]
 
-section[header[Installing Glyph]
+section[header[Installation]
 
 To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
 
@@ -29,7 +29,7 @@ Additionally, some Glyph macros may require additional gems, such as:
 
 ]
 
-section[header[Introducing document.glyph]
+section[header[Document Structure]
 
 Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@
 generated automatically when creating a new project is the following:
@@ -81,13 +81,13 @@ Let's now analyze this @document.glyph@ more in detail.
 
 ]
 
-section[header[Editing text files]
+section[header[Writing your document]
 
 todo[...]
 
 ]
 
-section[header[Changing configuration settings|cfg]
+section[header[Project Configuration|cfg]
 
 Glyph stores configuration settings in the following YAML files:
 # Your _Project Configuration_ is stored in the @config.yml@ file, included in each Glyph Project.
@@ -104,10 +104,50 @@ Instead of editing your configuration settings directly, you can use the @glyph 
 
 @glyph config@ _setting_ _\[value\]_
 
-todo[...]
+If no _value_ is specified, glyph just prints the value of the configuration setting, so typing @glyph config document.author@ right after creating a project (assuming you didn't set this in the Global Configuration) will print nothing, because this setting is blank by default.
 
+To change the value of a configuration setting, specify a value right after the setting, like this:
+
+@glyph config document.author "John Smith"@
+
+In this way, the document author will be set to _John Smith_ for the current project. To save this setting globally, add a @-g@ option, like this:
+
+@glyph config -g document.author "John Smith"@
+
+box[Regarding configuration values and data types...|
+Glyph attempts to "guess" the data type of a configuration values by evaluation (@Kernel#instance_eval@) if the value:
+* is wrapped in quotes (@"@ or @'@) -- String
+* starts with a colon (@:@) -- Symbol
+* is wrapped in square brackets (@\[@ and @\]@) -- Array
+* is wrapped in curly brackets (@\{@ and @\}@) -- Hash
+* is _true_ or _false_ -- Boolean
+* If the value is _nil_ -- NilClass
+
+Note that this guessing is far from being foolproof: If you type something like _{:test, 2}_, for example, you'll get an error. 
 ]
 
+There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file). For a complete reference, see =>[#cfg_ref]. Normally, you may just want to change the following ones:
+
+table[
+	tr[
+		th[Setting]
+		th[Description]
+	]
+	tr[
+		td[*document.author*]
+		td[The author of the document]
+	]
+	tr[
+		td[*document.title*]
+		td[The title of the document]
+	]
+	tr[
+		td[*document.filename*]
+		td[The document file name]
+	]
+]
+
+]
 
 
 section[header[Compiling your project]

@@ -2,4 +2,3 @@
   :author: "Fabio Cevasco"
   :title: "Glyph Handbook"
   :filename: "glyph_handbook"
-  :output_targets: [:html, :pdf]

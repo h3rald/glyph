@@ -16,7 +16,7 @@ macro :link do
 			title ||= bmk[:title]
 		else
 			plac = placeholder do |document|
-				macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor]
+				macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor] 
 				document.bookmarks[anchor][:title] rescue "--> #{anchor}"
 			end
 			title ||= plac

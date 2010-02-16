@@ -82,7 +82,7 @@ module Glyph
 		# 	cfg.sef :quiet, "false" 							# Sets :quiet => false
 		def set(setting, value)
 			raise RuntimeError, "Configuration cannot be changed" unless @options[:mutable]
-			if value.is_a?(String) && value.match(/^(:.+|\[.*\]|\{.*\}|true|false|nil)$/) then
+			if value.is_a?(String) && value.match(/^(["'].*["']|:.+|\[.*\]|\{.*\}|true|false|nil)$/) then
 				value = Kernel.instance_eval value
 			end
 			hash = @data

@@ -55,19 +55,39 @@ macro :pubdate do
 end
 
 macro :table do
-	%{<table>#{@value}</table>}
+	%{
+		<table>
+		#{@value}
+		
+		</table>
+	}
 end
 
 macro :tr do
-	%{<tr>#{@value}</tr>}
+	%{
+		<tr>
+		#{@value}
+		
+		</tr>
+	}
 end
 
 macro :td do
-	%{<td>#{@value}</td>}
+	%{
+		<td>
+		#{@value}
+		
+		</td>
+	}
 end
 
 macro :th do
-	%{<th>#{@value}</th>}
+	%{
+		<th>
+		#{@value}
+
+		</th>
+	}
 end
 
 macro_alias :important => :note

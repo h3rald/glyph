@@ -11,7 +11,7 @@ macro :textile do
 	target = cfg "filters.target"
 	case target.to_sym
 	when :html
-		rc.to_html
+		rc.to_html.gsub /<p><\/p>/, ''
 	when :latex
 		rc.to_latex
 	else

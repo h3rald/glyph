@@ -34,7 +34,7 @@ document[
 				header[Macro Reference]
 			]
 			appendix[
-				header[Configuration Reference]
+				header[Configuration Reference|cfg_ref]
 			]
 		]
 	]

@@ -400,10 +400,10 @@ table { page-break-inside: avoid }
 <ol class="toc">
 			<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
 <li class="toc-chapter"><a href="#h_3">Basic Usage</a></li>
-<li><ol><li class="toc-section"><a href="#h_4">Installing Glyph</a></li>
-<li class="toc-section"><a href="#h_5">Introducing document.glyph</a></li>
-<li class="toc-section"><a href="#h_6">Editing text files</a></li>
-<li class="toc-section"><a href="#cfg">Changing configuration settings</a></li>
+<li><ol><li class="toc-section"><a href="#h_4">Installation</a></li>
+<li class="toc-section"><a href="#h_5">Document Structure</a></li>
+<li class="toc-section"><a href="#h_6">Writing your document</a></li>
+<li class="toc-section"><a href="#cfg">Project Configuration</a></li>
 <li class="toc-section"><a href="#h_8">Compiling your project</a></li>
 </ol></li>
 <li class="toc-chapter"><a href="#h_9">Glyph Language</a></li>
@@ -413,7 +413,7 @@ table { page-break-inside: avoid }
 </ol></li>
 <li class="toc-appendix"><a href="#h_13">Command Reference</a></li>
 <li class="toc-appendix"><a href="#h_14">Macro Reference</a></li>
-<li class="toc-appendix"><a href="#h_15">Configuration Reference</a></li>
+<li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
 </div>
@@ -425,7 +425,7 @@ table { page-break-inside: avoid }
 <p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate files in a variety of output formats, such as <span class="caps">HTML</span> or <span class="caps">PDF</span>.</p>
 <div class="section">
 		<h3 id="h_2">Rationale</h3>
-<p></p>
+
 <p>Glyph was created to provide an easy way to produce printable documents in <span class="caps">HTML</span> and <span class="caps">PDF</span> format, using technologies familiar to web developers like <span class="caps">HTML</span> and <span class="caps">CSS</span>, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.</p>
 <p>At the time of writing, the most common ways to create a printable document like, say, a <span class="caps">PDF</span> file, are the following:</p>
 <ol>
@@ -463,8 +463,8 @@ table { page-break-inside: avoid }
 	
 				<p>This chapter explains how to install and use Glyph to create and manage documents.</p>
 <div class="section">
-		<h3 id="h_4">Installing Glyph</h3>
-<p></p>
+		<h3 id="h_4">Installation</h3>
+
 <p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
 <p><code>mkdir</code> <em>my_glyph_project</em></p>
 <p><code>cd</code> <em>my_glyph_project</em></p>
@@ -488,8 +488,8 @@ table { page-break-inside: avoid }
 </div>
 </div>
 <div class="section">
-		<h3 id="h_5">Introducing document.glyph</h3>
-<p></p>
+		<h3 id="h_5">Document Structure</h3>
+
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
 generated automatically when creating a new project is the following:</p>
 <div class="code"><pre><code>document[
@@ -538,11 +538,11 @@ generated automatically when creating a new project is the following:</p>
 </ul>
 </div>
 <div class="section">
-		<h3 id="h_6">Editing text files</h3>
+		<h3 id="h_6">Writing your document</h3>
 </div>
 <div class="section">
-		<h3 id="cfg">Changing configuration settings</h3>
-<p></p>
+		<h3 id="cfg">Project Configuration</h3>
+
 <p>Glyph stores configuration settings in the following <span class="caps">YAML</span> files:</p>
 <ol>
 	<li>Your <em>Project Configuration</em> is stored in the <code>config.yml</code> file, included in each Glyph Project.</li>
@@ -557,6 +557,72 @@ generated automatically when creating a new project is the following:</p>
 <p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set &#8216;document.author&#8217; in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
 <p>Instead of editing your configuration settings directly, you can use the <code>glyph config</code> command, as follows:</p>
 <p><code>glyph config</code> <em>setting</em> <em>[value]</em></p>
+<p>If no <em>value</em> is specified, glyph just prints the value of the configuration setting, so typing <code>glyph config document.author</code> right after creating a project (assuming you didn&#8217;t set this in the Global Configuration) will print nothing, because this setting is blank by default.</p>
+<p>To change the value of a configuration setting, specify a value right after the setting, like this:</p>
+<p><code>glyph config document.author "John Smith"</code></p>
+<p>In this way, the document author will be set to <em>John Smith</em> for the current project. To save this setting globally, add a <code>-g</code> option, like this:</p>
+<p><code>glyph config -g document.author "John Smith"</code></p>
+<div class="box">
+<p><span class="box-title">Regarding configuration values and data types&#8230;</span><br />
+		Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:</p>
+<ul>
+	<li>is wrapped in quotes (<code>"</code> or <code>'</code>) &#8212; String</li>
+	<li>starts with a colon (<code>:</code>) &#8212; Symbol</li>
+	<li>is wrapped in square brackets (<code>[</code> and <code>]</code>) &#8212; Array</li>
+	<li>is wrapped in curly brackets (<code>\{</code> and <code>\}</code>) &#8212; Hash</li>
+	<li>is <em>true</em> or <em>false</em> &#8212; Boolean</li>
+	<li>If the value is <em>nil</em> &#8212; NilClass</li>
+</ul>
+<p>Note that this guessing is far from being foolproof: If you type something like <em>{:test, 2}</em>, for example, you&#8217;ll get an error.</p>
+</div>
+
+<p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file). For a complete reference, see <a href="#cfg_ref">‡‡‡‡‡PLACEHOLDER¤2‡‡‡‡‡</a>. Normally, you may just want to change the following ones:</p>
+<table>
+<tr>
+<th>
+<p>Setting</p>
+</th>
+
+<th>
+<p>Description</p>
+</th>
+
+</tr>
+
+<tr>
+<td>
+<p><strong>document.author</strong></p>
+</td>
+
+<td>
+<p>The author of the document</p>
+</td>
+
+</tr>
+
+<tr>
+<td>
+<p><strong>document.title</strong></p>
+</td>
+
+<td>
+<p>The title of the document</p>
+</td>
+
+</tr>
+
+<tr>
+<td>
+<p><strong>document.filename</strong></p>
+</td>
+
+<td>
+<p>The document file name</p>
+</td>
+
+</tr>
+
+</table>
 </div>
 <div class="section">
 		<h3 id="h_8">Compiling your project</h3>
@@ -570,7 +636,7 @@ generated automatically when creating a new project is the following:</p>
 				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
 <div class="section">
 		<h3 id="h_10">Introducing Glyph Macros</h3>
-<p></p>
+
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
 	<li>The macro identifier can contain <em>any</em> character except for: <code>[</code>, <code>]</code>, <code>\</code>, <code>|</code> or spaces.</li>
@@ -601,7 +667,7 @@ generated automatically when creating a new project is the following:</p>
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_15">Configuration Reference</h2>
+		<h2 id="cfg_ref">Configuration Reference</h2>
 
 		</div>
 
