@@ -40,11 +40,12 @@ module Glyph
 			@tree.data
 		end
 
-		# Copies bookmarks and headers from another Glyph::Document
+		# Copies bookmarks, headers and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
 		def inherit_from(document)
 			@bookmarks = document.bookmarks
 			@headers = document.headers
+			@placeholders = document.placeholders
 		end
 
 		# Defines a placeholder block that will be evaluated after the whole document has been analyzed
@@ -105,6 +106,7 @@ module Glyph
 		def finalize
 			raise RuntimeError, "Document has not been analyzed" unless analyzed?
 			raise RuntimeError, "Document has already been finalized" if finalized?
+			return (@state = :finalized) if @context[:analyze_only]
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 
 				begin

@@ -44,7 +44,7 @@ describe Glyph::Document do
 		doc2.bookmark :id => :test4, :title => "Test #4"
 		doc2.inherit_from @doc
 		doc2.bookmarks.length.should == 2
-		doc2.placeholders.length.should == 0
+		doc2.placeholders.length.should == 1
 		doc2.headers.length.should == 1
 		doc2.bookmarks[:test3].should == nil
 	end

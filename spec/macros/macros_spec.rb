@@ -32,6 +32,11 @@ describe "Macro:" do
 		text = "TEST: &[a]"
 		interpret text
 		@p.document.output.should == "TEST: this is a <em>test</em> and another <em>test</em>"
+		# Check snippets with links
+		Glyph::SNIPPETS[:c] = "This is a link to something afterwards: =>[#other]"
+		text = "Test. &[c]. #[other|Test]."
+		interpret text
+		@p.document.output.should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
 	end
 
 	it "section, chapter, header" do

@@ -17,7 +17,7 @@ macro :link do
 		else
 			plac = placeholder do |document|
 				macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor] 
-				document.bookmarks[anchor][:title] rescue "--> #{anchor}"
+				document.bookmarks[anchor][:title]
 			end
 			title ||= plac
 		end
@@ -29,9 +29,6 @@ end
 macro :fmi do
 	topic, href = @params
 	link = placeholder do |document| 
-		#context = {:source => "macro: fmi", :document => document}
-		#Glyph.run_macro :link, href, document
-		# TODO Check
 		interpret "link[#{href}]"
 	end
 	%{<span class="fmi">for more information on #{topic}, see #{link}</span>}
