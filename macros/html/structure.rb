@@ -115,16 +115,6 @@ macro :toc do
 	toc
 end
 
-macro :index do
-	# TODO
-	""
-end
-
-macro :bibliography do
-	# TODO
-	""
-end
-
 # See:
 #  http://microformats.org/wiki/book-brainstorming
 #  http://en.wikipedia.org/wiki/Book_design
@@ -141,5 +131,3 @@ macro_alias :frontmatter => :div
 macro_alias :bodymatter => :div
 macro_alias :backmatter => :div
 macro_alias :backcover => :div
-
-macro_alias :heading => :header

@@ -156,5 +156,4 @@ describe "Macro:" do
 		}.gsub(/\n|\t/, '')
 	end
 
-
 end	

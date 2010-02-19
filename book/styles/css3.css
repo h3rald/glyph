@@ -160,7 +160,7 @@ h2 {
 }
 
 h2, h3, h4, h5 { page-break-after: avoid }
-table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
+table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid }
 
 /* Footnotes */
 

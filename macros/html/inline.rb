@@ -37,4 +37,3 @@ end
 macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link
-macro_alias '+' => :term

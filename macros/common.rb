@@ -46,10 +46,6 @@ macro :include do
 	end
 end
 
-macro :escape do
-	@value 
-end
-
 macro :ruby do
 	Kernel.instance_eval(@value)
 end
@@ -58,9 +54,13 @@ macro :config do
 	cfg @value
 end
 
+macro :escape do
+	@value
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
-macro_alias '.' => :escape
 macro_alias '@' => :include
 macro_alias '%' => :ruby
 macro_alias '$' => :config
+macro_alias '.' => :escape
