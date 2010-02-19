@@ -34,16 +34,6 @@ macro :fmi do
 	%{<span class="fmi">for more information on #{topic}, see #{link}</span>}
 end
 
-macro :term do
-	# TODO
-	""
-end
-
-macro :biblio do
-	# TODO
-	""
-end
-
 macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link

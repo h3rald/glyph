@@ -20,14 +20,8 @@ macro :box do
 	}
 end
 
-macro :fig do
-	# TODO
-	""
-end
-
 macro :"textile.code" do
-	# TODO
-	%{<div class="code"><notextile><pre><code>#{@params[1]}</code></pre></notextile></div>}
+	%{<div class="code"><notextile><pre><code>#{@value}</code></pre></notextile></div>}
 end
 
 macro :title do

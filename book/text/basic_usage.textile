@@ -46,7 +46,7 @@ section[header[Document Structure|struct]
 Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@
 generated automatically when creating a new project is the following:
 
-textile.code[=text|
+textile.code[=
 document[
   head[style[default.css]]
   body[
