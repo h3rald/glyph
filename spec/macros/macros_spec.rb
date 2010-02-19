@@ -138,5 +138,23 @@ describe "Macro:" do
 			see <a href="#test">Test</a></span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
 	end	
 
+	it "img" do
+		interpret "img[ligature.jpg|90%]"
+		@p.document.output.gsub(/\t|\n/, '').should == %{
+			<image src="images/ligature.jpg" 
+			width="90%" height="100%" alt="-"/>
+		}.gsub(/\n|\t/, '')
+	end
+
+	it "fig" do
+		interpret "fig[ligature.jpg|Ligature]"
+		@p.document.output.gsub(/\t|\n/, '').should == %{
+			<div class="figure">
+			<image src="images/ligature.jpg" alt="-"/>
+			<div class="caption">Ligature</div>
+			</div>
+		}.gsub(/\n|\t/, '')
+	end
+
 
 end	

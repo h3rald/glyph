@@ -22,7 +22,15 @@ namespace :generate do
 		file = "#{cfg('document.filename')}.html"
 		file_write out/file, Glyph::DOCUMENT.output
 		info "'#{cfg('document.filename')}.html' generated successfully."
-		# TODO: Copy images
+		images = Glyph::PROJECT/'output/html/images'
+		images.mkpath
+		(Glyph::PROJECT/'images').find do |i|
+			if i.file? then
+				dest = "#{Glyph::PROJECT/'output/html/images'}/#{i.relative_path_from(Glyph::PROJECT/'images')}"
+				FileUtils.mkpath dest
+				file_copy i.to_s, dest
+			end
+		end
 	end
 
 	desc "Create a pdf file"

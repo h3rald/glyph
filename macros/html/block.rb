@@ -38,6 +38,49 @@ macro :title do
 	}
 end
 
+macro :img do
+	image = @params[0]
+	width = @params[1]
+ 	width ||=	"100%"
+	height = @params[2]
+ 	height ||= "100%"
+	if (Glyph::PROJECT/"images/#{image}").exist? then
+		%{
+			<image src="images/#{image}" width="#{width}" height="#{height}" alt="-"/>
+		}
+	else
+		warning "Image '#{image}' not found"
+		""
+	end
+end
+
+macro :fig do
+	image = @params[0]
+	caption = @params[1] 
+	caption ||= nil
+	caption = %{<div class="caption">#{caption}</div>} if caption
+	if (Glyph::PROJECT/"images/#{image}").exist? then
+		%{
+			<div class="figure">
+				<image src="images/#{image}" alt="-"/>
+				#{caption}
+			</div>
+		}
+	else
+		warning "Figure '#{image}' not found"
+		""
+	end
+end
+
+
+macro :subtitle do
+	%{
+		<h2>
+			#{cfg("document.subtitle")}
+		</h2>
+	}
+end
+
 macro :author do
 	%{
 		<div class="author">

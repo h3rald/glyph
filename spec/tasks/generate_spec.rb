@@ -21,4 +21,11 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
+	it "should copy images" do
+		dir = (Glyph::PROJECT/'images/test').mkpath
+		file_copy Glyph::HOME/'spec/files/ligature.jpg', Glyph::PROJECT/'images/test' 
+		lambda { Glyph.run! 'generate:html' }.should_not raise_error
+		(Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?.should == true
+	end
+
 end
