@@ -139,10 +139,10 @@ describe "Macro:" do
 	end	
 
 	it "img" do
-		interpret "img[ligature.jpg|90%]"
+		interpret "img[ligature.jpg|90%|90%]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
-			<image src="images/ligature.jpg" 
-			width="90%" height="100%" alt="-"/>
+			<img src="images/ligature.jpg" 
+			width="90%" height="90%" alt="-"/>
 		}.gsub(/\n|\t/, '')
 	end
 
@@ -150,7 +150,7 @@ describe "Macro:" do
 		interpret "fig[ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
 			<div class="figure">
-			<image src="images/ligature.jpg" alt="-"/>
+			<img src="images/ligature.jpg" alt="-"/>
 			<div class="caption">Ligature</div>
 			</div>
 		}.gsub(/\n|\t/, '')

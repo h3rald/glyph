@@ -27,7 +27,7 @@ namespace :generate do
 		(Glyph::PROJECT/'images').find do |i|
 			if i.file? then
 				dest = "#{Glyph::PROJECT/'output/html/images'}/#{i.relative_path_from(Glyph::PROJECT/'images')}"
-				FileUtils.mkpath dest
+				Pathname.new(dest).parent.mkpath
 				file_copy i.to_s, dest
 			end
 		end

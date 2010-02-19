@@ -41,12 +41,12 @@ end
 macro :img do
 	image = @params[0]
 	width = @params[1]
- 	width ||=	"100%"
+ 	w = (width) ? "width=\"#{width}\"" : ''
 	height = @params[2]
- 	height ||= "100%"
+ 	h = (height) ? "height=\"#{height}\"" : ''
 	if (Glyph::PROJECT/"images/#{image}").exist? then
 		%{
-			<image src="images/#{image}" width="#{width}" height="#{height}" alt="-"/>
+			<img src="images/#{image}" #{w} #{h} alt="-"/>
 		}
 	else
 		warning "Image '#{image}' not found"
@@ -62,7 +62,7 @@ macro :fig do
 	if (Glyph::PROJECT/"images/#{image}").exist? then
 		%{
 			<div class="figure">
-				<image src="images/#{image}" alt="-"/>
+				<img src="images/#{image}" alt="-"/>
 				#{caption}
 			</div>
 		}
