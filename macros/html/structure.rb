@@ -122,7 +122,7 @@ end
 macro_alias :section => :div
 
 (cfg('structure.frontmatter') + cfg('structure.bodymatter') + cfg('structure.backmatter')).
-	uniq.each {|s| macro_alias s => :div }
+	each {|s| macro_alias s => :div }
 
 macro_alias :frontcover => :div
 macro_alias :titlepage => :div

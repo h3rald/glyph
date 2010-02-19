@@ -53,10 +53,11 @@ describe Glyph do
 			[["."], :escape],
 			[["--"], :comment],
 			[[:md], :markdown],
-			[[:frontcover, :titlepage, :halftitlepage, :frontmatter, :bodymatter, :backcover], :div]]
-		macros.each { |v| Glyph::MACROS[v.to_sym].should_not == nil }
+			[[:frontcover, :titlepage, :halftitlepage, :frontmatter, :bodymatter, :backmatter, :backcover], :div]]
+		total = 0
+		macros.each { |v| total+=1; Glyph::MACROS[v.to_sym].should_not == nil }
 		check_aliases = lambda do |arr, target|
-			arr.each {|v| Glyph::MACROS[v.to_sym].should == Glyph::MACROS[target.to_sym]}
+			arr.each {|v| total += 1; Glyph::MACROS[v.to_sym].should == Glyph::MACROS[target.to_sym]}
 		end
 		aliases.each { |v| check_aliases.call v[0], v[1] }
 		check_aliases.call cfg('structure.frontmatter'), :div
@@ -65,6 +66,7 @@ describe Glyph do
 		cfg('structure.frontmatter').length.should == 8
 		cfg('structure.bodymatter').length.should == 4
 		cfg('structure.backmatter').length.should == 12
+		total.should == (Glyph::MACROS.length - 4) # test, ref, -> and em (test-only)
 	end
 
 end
