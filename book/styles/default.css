@@ -29,15 +29,23 @@ body {
 /* Structure */
 
 .titlepage{
-	margin: 4em auto;
+	margin: auto;
 	text-align: center;
 }
 
 .title, h1{
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	line-height: 2em;
+	line-height: 1.5em;
 	font-size: 2.5em;
 	font-weight: normal;
+}
+
+.titlepage h2 {
+	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	font-size: 1.5em;
+	font-weight: normal;
+	font-style: italic;
+	prince-bookmark-level: none;
 }
 
 .author{
@@ -144,8 +152,6 @@ th {
 .code {
 	padding: 0.5em;
 	font-size: 0.9em;
-	border: 1px solid #5A635C;
-	background: #E8E8E8;
 	width: 600px;
 	margin: 1em auto;
 }

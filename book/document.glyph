@@ -4,7 +4,9 @@ document[
 		style[css3.css]]
 	body[
 		titlepage[
+			img[glyph.svg|25%|25%]
 			title[]
+			subtitle[]
 			author[]
 			pubdate[]
 		]

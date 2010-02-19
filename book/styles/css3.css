@@ -3,10 +3,6 @@
 	margin: 40pt 30pt 40pt 30pt;
 	@top { content: string(chapter-title);  }
   @bottom { content: counter(page, decimal); }
-	@footnotes {
-		border-top: solid black thin;
-		padding-top: 8pt;
-  }
 }
 
 @page frontmatter {
@@ -20,7 +16,8 @@
 }
 
 @page:first { 
-	padding-top: 40%;
+	padding-top: 20%;
+  @top { content: normal; }
   @bottom { content: normal; }
 }
 
@@ -98,6 +95,7 @@ h1 {
 
 .bodymatter h2::before {
 	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+	counter-reset: footnote;
 }
 
 .backmatter h2::before {
@@ -133,6 +131,10 @@ h2 {
 	page-break-before: always;
 }
 
+.titlepage h2 {
+	page-break-before: avoid;
+}
+
 .bodymatter h2{
 	counter-increment: h2;
 	counter-reset: h3;
@@ -158,4 +160,33 @@ h2 {
 }
 
 h2, h3, h4, h5 { page-break-after: avoid }
-table { page-break-inside: avoid }
+table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
+
+/* Footnotes */
+
+@page {
+	@footnotes {
+		border-top: 1px solid #000;
+	}
+}
+
+.fn {
+	font-size: 85%;
+	margin-left: 1.5em;
+  display: prince-footnote;
+  counter-increment: footnote;
+}
+
+.fn::footnote-call {
+	content: counter(footnote);
+	font-size: 85%;
+	vertical-align: super;
+	line-height: none;
+	font-weight: bold;
+	margin-left: 1pt;
+}
+
+.fn::footnote-marker {
+	font-weight: bold;
+	margin-right: 0.5em;
+}

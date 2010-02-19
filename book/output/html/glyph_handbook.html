@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 		<head>
-			<title>Glyph Handbook</title>
+			<title>Glyph</title>
 			<meta name="author" content="Fabio Cevasco" />
 			<meta name="copyright" content="Fabio Cevasco" />
 		<style type="text/css">
@@ -37,15 +37,23 @@ body {
 /* Structure */
 
 .titlepage{
-	margin: 4em auto;
+	margin: auto;
 	text-align: center;
 }
 
 .title, h1{
 	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	line-height: 2em;
+	line-height: 1.5em;
 	font-size: 2.5em;
 	font-weight: normal;
+}
+
+.titlepage h2 {
+	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	font-size: 1.5em;
+	font-weight: normal;
+	font-style: italic;
+	prince-bookmark-level: none;
 }
 
 .author{
@@ -152,8 +160,6 @@ th {
 .code {
 	padding: 0.5em;
 	font-size: 0.9em;
-	border: 1px solid #5A635C;
-	background: #E8E8E8;
 	width: 600px;
 	margin: 1em auto;
 }
@@ -219,10 +225,6 @@ code {
 	margin: 40pt 30pt 40pt 30pt;
 	@top { content: string(chapter-title);  }
   @bottom { content: counter(page, decimal); }
-	@footnotes {
-		border-top: solid black thin;
-		padding-top: 8pt;
-  }
 }
 
 @page frontmatter {
@@ -236,7 +238,8 @@ code {
 }
 
 @page:first { 
-	padding-top: 40%;
+	padding-top: 20%;
+  @top { content: normal; }
   @bottom { content: normal; }
 }
 
@@ -314,6 +317,7 @@ h1 {
 
 .bodymatter h2::before {
 	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+	counter-reset: footnote;
 }
 
 .backmatter h2::before {
@@ -349,6 +353,10 @@ h2 {
 	page-break-before: always;
 }
 
+.titlepage h2 {
+	page-break-before: avoid;
+}
+
 .bodymatter h2{
 	counter-increment: h2;
 	counter-reset: h3;
@@ -374,7 +382,36 @@ h2 {
 }
 
 h2, h3, h4, h5 { page-break-after: avoid }
-table { page-break-inside: avoid }
+table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
+
+/* Footnotes */
+
+@page {
+	@footnotes {
+		border-top: 1px solid #000;
+	}
+}
+
+.fn {
+	font-size: 85%;
+	margin-left: 1.5em;
+  display: prince-footnote;
+  counter-increment: footnote;
+}
+
+.fn::footnote-call {
+	content: counter(footnote);
+	font-size: 85%;
+	vertical-align: super;
+	line-height: none;
+	font-weight: bold;
+	margin-left: 1pt;
+}
+
+.fn::footnote-marker {
+	font-weight: bold;
+	margin-right: 0.5em;
+}
 
 		</style>
 		</head>
@@ -383,9 +420,17 @@ table { page-break-inside: avoid }
 		<body>
 		<div class="titlepage">
 
+		<img src="images/glyph.svg" width="25%" height="25%" alt="-"/>
+		
+			
 		<h1>
-			Glyph Handbook
+			Glyph
 		</h1>
+	
+			
+		<h2>
+			Writer's Guide
+		</h2>
 	
 			
 		<div class="author">
@@ -406,8 +451,8 @@ table { page-break-inside: avoid }
 <ol class="toc">
 			<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
 <li class="toc-chapter"><a href="#h_3">Basic Usage</a></li>
-<li><ol><li class="toc-section"><a href="#h_4">Installation</a></li>
-<li class="toc-section"><a href="#h_5">Document Structure</a></li>
+<li><ol><li class="toc-section"><a href="#h_4">Creating your first Glyph Project</a></li>
+<li class="toc-section"><a href="#struct">Document Structure</a></li>
 <li class="toc-section"><a href="#h_6">Writing your document</a></li>
 <li class="toc-section"><a href="#cfg">Project Configuration</a></li>
 <li class="toc-section"><a href="#h_8">Compiling your project</a></li>
@@ -469,13 +514,13 @@ table { page-break-inside: avoid }
 	
 				<p>This chapter explains how to install and use Glyph to create and manage documents.</p>
 <div class="section">
-		<h3 id="h_4">Installation</h3>
+		<h3 id="h_4">Creating your first Glyph Project</h3>
 
 <p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
-<p><code>mkdir</code> <em>my_glyph_project</em></p>
-<p><code>cd</code> <em>my_glyph_project</em></p>
+<p><code>mkdir</code> <em>test_document</em></p>
+<p><code>cd</code> <em>test_document</em></p>
 <p><code>glyph init</code></p>
-<p>That&#8217;s it. The <code>my_glyph_project</code> directory contains your brand new Glyph project. If you open the <code>document.glyph</code> file with  your favorite text editor, you can start writing your book or article right away.</p>
+<p>That&#8217;s it. You just created a new Glyph project in the <code>test_document</code> directory.</p>
 <div class="box">
 <p><span class="box-title">Glyph&#8217;s dependencies</span><br />
 		Glyph requires the following gems:</p>
@@ -492,9 +537,24 @@ table { page-break-inside: avoid }
 	<li>Haml (if you want to load .sass files with the <em>style</em> macro)</li>
 </ul>
 </div>
+
+<p>Every Glyph project is comprised of the following directories:</p>
+<ul>
+	<li><code>images/</code> &#8212; used to store the image files used in your document.</li>
+	<li><code>lib/</code> &#8212; used to store your custom Glyph macros and Rake tasks.</li>
+	<li><code>output/</code> &#8212; used to store your generated output files.</li>
+	<li><code>styles/</code> &#8212; used to store your stylesheets.</li>
+	<li><code>text/*</code> &#8212; used to store your source text files.</li>
+</ul>
+<p>Additionally, the following files are also created at top level:</p>
+<ul>
+	<li><code>config.yml</code> &#8212; containing your <a href="#cfg">Project Configuration</a>.</li>
+	<li><code>document.glyph</code> &#8212; containing your <a href="#struct">Document Structure</a></li>
+	<li><code>snippets.yml</code> &#8212; containing your text snippets.</li>
+</ul>
 </div>
 <div class="section">
-		<h3 id="h_5">Document Structure</h3>
+		<h3 id="struct">Document Structure</h3>
 
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
 generated automatically when creating a new project is the following:</p>
@@ -545,6 +605,8 @@ generated automatically when creating a new project is the following:</p>
 </div>
 <div class="section">
 		<h3 id="h_6">Writing your document</h3>
+
+<p>You&#8217;ll be glad to know that, besides in <code>document.glyph</code>, you probably won&#8217;t have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown.</p>
 </div>
 <div class="section">
 		<h3 id="cfg">Project Configuration</h3>

@@ -44,11 +44,6 @@ macro :biblio do
 	""
 end
 
-macro :fn do
-	# TODO
-	""
-end
-
 macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link

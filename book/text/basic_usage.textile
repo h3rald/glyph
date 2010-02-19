@@ -2,17 +2,17 @@ This chapter explains how to install and use Glyph to create and manage document
 
 todo[Expand...]
 
-section[header[Installation]
+section[header[Creating your first Glyph Project]
 
 To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
 
-@mkdir@ _==my_glyph_project==_
+@mkdir@ _==test_document==_
 
-@cd@ _==my_glyph_project==_
+@cd@ _==test_document==_
 
 @glyph init@
 
-That's it. The @my_glyph_project@ directory contains your brand new Glyph project. If you open the @document.glyph@ file with  your favorite text editor, you can start writing your book or article right away.
+That's it. You just created a new Glyph project in the @test_document@ directory.
 
 box[Glyph's dependencies|
 Glyph requires the following gems:
@@ -27,9 +27,21 @@ Additionally, some Glyph macros may require additional gems, such as:
 * Haml (if you want to load .sass files with the _style_ macro)
 ]
 
+Every Glyph project is comprised of the following directories:
+* @images/@ -- used to store the image files used in your document.
+* @lib/@ -- used to store your custom Glyph macros and Rake tasks.
+* @output/@ -- used to store your generated output files.
+* @styles/@ -- used to store your stylesheets.
+* @text/*@ -- used to store your source text files.
+
+Additionally, the following files are also created at top level:
+* @config.yml@ -- containing your =>[#cfg|Project Configuration].
+* @document.glyph@ -- containing your =>[#struct|Document Structure]
+* @snippets.yml@ -- containing your text snippets. todo[Link to Snippets section]
+
 ]
 
-section[header[Document Structure]
+section[header[Document Structure|struct]
 
 Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@
 generated automatically when creating a new project is the following:
@@ -83,7 +95,9 @@ Let's now analyze this @document.glyph@ more in detail.
 
 section[header[Writing your document]
 
-todo[...]
+You'll be glad to know that, besides in @document.glyph@, you probably won't have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown. 
+
+
 
 ]
 
