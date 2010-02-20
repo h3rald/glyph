@@ -42,11 +42,19 @@ command :compile do |c|
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 		Glyph.run "generate:#{target}"
+	end
+end
+
+GLI.desc 'Display all project TODO items'
+command :todo do |c|
+	c.action do |global_options, options, args|
 		unless Glyph::TODOS.blank?
 			info "*** TODOs: ***"
 			Glyph::TODOS.each do |t|
 				info t
 			end
+		else
+			info "Nothing left to do."
 		end
 	end
 end

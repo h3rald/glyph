@@ -1,0 +1,15 @@
+section[header[Writing your document]
+
+You'll be glad to know that, besides in @document.glyph@, you probably won't have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown. 
+
+
+
+]
+
+section[header[Compiling your project]
+
+todo[...]
+
+]
+
+

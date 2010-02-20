@@ -14,10 +14,8 @@
 	padding: 0;
 	margin: 0; }
 
-html, body {
+html {
 	height: 100%;
-	line-height: 1.3em;
-	text-align: justify;
 	background: #fff;}
 
 p, ol, ul {
@@ -31,6 +29,7 @@ table {
 body {
 	margin: 0;
 	padding: 0; 
+	line-height: 1.3em;
 	text-align: justify;
 	padding: 0 1em; }
 
@@ -42,17 +41,20 @@ body {
 }
 
 .title, h1{
-	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	line-height: 1.5em;
 	font-size: 2.5em;
-	font-weight: normal;
+	margin-bottom: 0.2em;
+	font-weight: bold;
 }
 
 .titlepage h2 {
-	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
-	font-size: 1.5em;
-	font-weight: normal;
+	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
+	font-size: 1.1em;
+	line-height: 1.2em;
+	margin-bottom: 0.5em;
 	font-style: italic;
+	font-weight: bold;
 	prince-bookmark-level: none;
 }
 
@@ -168,15 +170,15 @@ th {
 /* TEXT */
 body {
 	color: #000;
-	font-family: "Georgia", "Serif";
-	font-size: 0.9em; }
+	font-family: "Liberation Serif", "Palatino", "Book Antiqua", "Serif";
+	font-size: 1em; }
 
 h2 {
 	display: block;
 	line-height: 3em;
 	font-size: 2em;
 	font-weight: normal;
-	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	margin: 3em 0 0 0;
 	margin: 0; }
 
@@ -184,14 +186,14 @@ h3 {
 	line-height: 2.5em;
 	font-size: 1.6em;
 	font-weight: normal;
-	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
 h4 {
 	line-height: 2em;
 	font-size: 1.3em;
 	font-weight: normal;
-	font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Serif";
+	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	margin: 1em 0 0 0; }
 
 em {
@@ -206,15 +208,15 @@ a:hover {
 	color: #CF282D; }
 
 .highlight {
-	font-family: "Consolas", "Monaco", "Monospace";
+	font-family: "Consolas", "Monaco", "Courier", "Monospace";
 	border: 1px dashed #555555;
 	padding: 5px;
 	margin: 5px 0;
 	overflow: auto; }
 
 code {
-	font-family: "Consolas", "Monaco", "Monospace"; 
-	font-size: 0.9em;}
+	font-family: "Consolas", "Monaco", "Courier", "Monospace"; 
+	font-size: 1em;}
 
 		</style>
 	
@@ -382,7 +384,7 @@ h2 {
 }
 
 h2, h3, h4, h5 { page-break-after: avoid }
-table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
+table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid }
 
 /* Footnotes */
 
@@ -429,9 +431,11 @@ table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
 	
 			
 		<h2>
-			Writer's Guide
+			Rapid Document Authoring Framework
 		</h2>
 	
+			v0.1.0
+
 			
 		<div class="author">
 			by <em>Fabio Cevasco</em>
@@ -450,20 +454,22 @@ table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
 			<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li class="toc-chapter"><a href="#h_3">Basic Usage</a></li>
+<li class="toc-chapter"><a href="#h_3">Getting Started</a></li>
 <li><ol><li class="toc-section"><a href="#h_4">Creating your first Glyph Project</a></li>
 <li class="toc-section"><a href="#struct">Document Structure</a></li>
-<li class="toc-section"><a href="#h_6">Writing your document</a></li>
 <li class="toc-section"><a href="#cfg">Project Configuration</a></li>
-<li class="toc-section"><a href="#h_8">Compiling your project</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_9">Glyph Language</a></li>
-<li><ol><li class="toc-section"><a href="#h_10">Introducing Glyph Macros</a></li>
+<li class="toc-chapter"><a href="#h_7">Authoring Documents</a></li>
+<li><ol><li class="toc-section"><a href="#h_8">Writing your document</a></li>
+<li class="toc-section"><a href="#h_9">Compiling your project</a></li>
+</ol></li>
+<li class="toc-chapter"><a href="#h_10">Extending Glyph</a></li>
+<li><ol><li class="toc-section"><a href="#h_11">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_12">Creating and Editing Macros</a></li>
+<li class="toc-section"><a href="#h_13">Creating and Editing Macros</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#h_13">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_14">Macro Reference</a></li>
+<li class="toc-appendix"><a href="#h_14">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_15">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -510,7 +516,7 @@ table, .box, .note, .important, .tip, .code { page-break-inside: avoid }
 
 		<div class="chapter">
 
-		<h2 id="h_3">Basic Usage</h2>
+		<h2 id="h_3">Getting Started</h2>
 	
 				<p>This chapter explains how to install and use Glyph to create and manage documents.</p>
 <div class="section">
@@ -604,11 +610,6 @@ generated automatically when creating a new project is the following:</p>
 </ul>
 </div>
 <div class="section">
-		<h3 id="h_6">Writing your document</h3>
-
-<p>You&#8217;ll be glad to know that, besides in <code>document.glyph</code>, you probably won&#8217;t have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown.</p>
-</div>
-<div class="section">
 		<h3 id="cfg">Project Configuration</h3>
 
 <p>Glyph stores configuration settings in the following <span class="caps">YAML</span> files:</p>
@@ -666,18 +667,29 @@ generated automatically when creating a new project is the following:</p>
 </tr>
 </table>
 </div>
+
+		</div>
+			<div class="chapter">
+
+		<h2 id="h_7">Authoring Documents</h2>
+	
+				<div class="section">
+		<h3 id="h_8">Writing your document</h3>
+
+<p>You&#8217;ll be glad to know that, besides in <code>document.glyph</code>, you probably won&#8217;t have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown.</p>
+</div>
 <div class="section">
-		<h3 id="h_8">Compiling your project</h3>
+		<h3 id="h_9">Compiling your project</h3>
 </div>
 
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_9">Glyph Language</h2>
+		<h2 id="h_10">Extending Glyph</h2>
 	
 				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
 <div class="section">
-		<h3 id="h_10">Introducing Glyph Macros</h3>
+		<h3 id="h_11">Introducing Glyph Macros</h3>
 
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
@@ -689,7 +701,7 @@ generated automatically when creating a new project is the following:</p>
 		<h3 id="esc_quot">Escaping and Quoting</h3>
 </div>
 <div class="section">
-		<h3 id="h_12">Creating and Editing Macros</h3>
+		<h3 id="h_13">Creating and Editing Macros</h3>
 </div>
 
 		</div>
@@ -699,12 +711,12 @@ generated automatically when creating a new project is the following:</p>
 
 		<div class="appendix">
 
-		<h2 id="h_13">Command Reference</h2>
+		<h2 id="h_14">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_14">Macro Reference</h2>
+		<h2 id="h_15">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">

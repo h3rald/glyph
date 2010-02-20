@@ -93,14 +93,6 @@ Let's now analyze this @document.glyph@ more in detail.
 
 ]
 
-section[header[Writing your document]
-
-You'll be glad to know that, besides in @document.glyph@, you probably won't have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown. 
-
-
-
-]
-
 section[header[Project Configuration|cfg]
 
 Glyph stores configuration settings in the following YAML files:
@@ -162,12 +154,3 @@ table[
 ]
 
 ]
-
-
-section[header[Compiling your project]
-
-todo[...]
-
-]
-
-
