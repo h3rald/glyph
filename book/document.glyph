@@ -31,6 +31,10 @@ document[
 				header[Extending Glyph]
 				@[extending.textile]
 			]
+			chapter[
+				header[Troubleshooting]
+				--[=@[troubleshooting.textile]=]
+			]
 		]
 		backmatter[
 			appendix[

@@ -1,5 +1,7 @@
 --- 
 :glang: Glyph Language
+:macros: Glyph Macros
+:markups: Textile or Markdown
 :test: |-
   This is a 
   Test snippet

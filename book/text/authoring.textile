@@ -1,12 +1,77 @@
-section[header[Writing your document]
+section[header[Text Editing]
 
-You'll be glad to know that, besides in @document.glyph@, you probably won't have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown. 
+One of the aims of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with &[markups].
 
+section[header[Introducing &[macros]]
 
+By now you probably figured out what a macro looks like: it's an identifier of some kind that wraps a value within square brackets. More specifically:
+* The macro identifier can contain _any_ character except for: @\[@, @\]@, @\\@, @\|@ or spaces.
+* The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
+
+Macros can be nested within other macros: in this way it is possible to have sections within sections, links within headers and so on; actually, every Glyph document is contained within a single @document@ macro. 
 
 ]
 
+section[header[Escaping and Quoting|esc_quot]
+
+Glyph doesn't require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That's not _too_ bad if you think about it, unless you're writing programming code: in that case, escaping every single square bracket can be painful.
+
+If a portion of your text contains an excessive amount of square brackets, you may consider using the @escape@ macro (or better, its alias @.@) with @\[=@ and @=\]@ as delimiters. By itself, the escape macro doesn't do anything: it just evaluates to its contents, but the special delimiters act as a quote for any square bracket within them. As a consequence, any macro within @\[=@ and @=\]@ will _not_ be evaluated.
+
+You can use the quoting delimiters with _any_ macro identifier. Obviously, using them as delimiters for things like @section@ macros may not be a good idea, but they should really be mandatory with the @code@ macro, like this:
+
+code[=
+code\[=
+section[header[A section]
+
+This is a section.
+
+	section[header[A nested section]
+This is another section.
+	]
+]
+=\]
+=]
+
+note[Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.]
+
+]
+
+
+section[header[Sections and Headers]
+
+]
+
+section[header[Including Files and Snippets]
+
+]
+
+section[header[Links and Bookmarks]
+
+]
+
+section[header[Images and Figures]
+
+]
+
+
+] --[End of Text Editing section]
+
 section[header[Compiling your project]
+
+
+section[header[Adding Stylesheets]
+
+]
+
+
+section[header[HTML output]
+
+]
+
+section[header[PDF Output]
+
+]
 
 todo[...]
 

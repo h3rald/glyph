@@ -40,22 +40,22 @@ h1 {
 	counter-reset: toc2;
 }
 
-.toc ol li {
+.toc ol li[class] {
 	counter-increment: toc2;
 	counter-reset: toc3;
 }
 
-.toc ol ol li {
+.toc ol ol li[class] {
 	counter-increment: toc3;
 	counter-reset: toc4;
 }
 
-.toc ol ol ol li {
+.toc ol ol ol li[class] {
 	counter-increment: toc4;
 	counter-reset: toc5;
 }
 
-.toc ol ol ol ol li {
+.toc ol ol ol ol li[class] {
 	counter-increment: toc5;
 }
 
@@ -68,19 +68,19 @@ h1 {
 	content: counter(appendix1, upper-latin) ". ";
 }
 
-.toc ol li::before {
+.toc ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) " ";
 }
 
-.toc ol ol li::before {
+.toc ol ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 
-.toc ol ol ol li::before {
+.toc ol ol ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
-.toc ol ol ol ol li::before {
+.toc ol ol ol ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 

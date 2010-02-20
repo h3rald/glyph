@@ -1,7 +1,3 @@
-This chapter explains how to install and use Glyph to create and manage documents.
-
-todo[Expand...]
-
 section[header[Creating your first Glyph Project]
 
 To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
@@ -46,7 +42,7 @@ section[header[Document Structure|struct]
 Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@
 generated automatically when creating a new project is the following:
 
-textile.code[=
+code[=
 document[
   head[style[default.css]]
   body[

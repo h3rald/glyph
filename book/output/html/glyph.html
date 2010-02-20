@@ -83,7 +83,7 @@ dd {
 	font-style: italic; }
 p {
 	line-height: 1.5em;
-	margin: 1em 0; }
+	margin: 0.5em 0; }
 
 ol.toc {
 	margin-left: 1.5em;
@@ -139,24 +139,34 @@ th {
 	text-align: center;
 	margin: auto;
 }
-.note, .box {
+.note, 
+.important, 
+.tip, 
+.caution, 
+.box {
 	display: block;
 	border:1px solid #473F2B;
 	background: #FFF6AD;
-	padding: 0.5em;
+	padding: 0 0.5em;
 	color: #918058;
 	color: #665A3E;
 	width: 600px;
-	margin: 1em auto;
+	margin: 0.5em auto;
+}
+
+.box-title, 
+.note-title, 
+.important-title, 
+.tip-title, 
+.caution-title {
+	color: #473F2B;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 .box-title {
-	color: #473F2B;
-	height: 1em;
-	text-align: center;
 	display:block;
-	font-size: 1.2em;
-	font-weight: bold;
+	text-align: center;
 }
 
 .code {
@@ -177,7 +187,7 @@ h2 {
 	display: block;
 	line-height: 3em;
 	font-size: 2em;
-	font-weight: normal;
+	font-weight: bold;
 	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	margin: 3em 0 0 0;
 	margin: 0; }
@@ -264,22 +274,22 @@ h1 {
 	counter-reset: toc2;
 }
 
-.toc ol li {
+.toc ol li[class] {
 	counter-increment: toc2;
 	counter-reset: toc3;
 }
 
-.toc ol ol li {
+.toc ol ol li[class] {
 	counter-increment: toc3;
 	counter-reset: toc4;
 }
 
-.toc ol ol ol li {
+.toc ol ol ol li[class] {
 	counter-increment: toc4;
 	counter-reset: toc5;
 }
 
-.toc ol ol ol ol li {
+.toc ol ol ol ol li[class] {
 	counter-increment: toc5;
 }
 
@@ -292,19 +302,19 @@ h1 {
 	content: counter(appendix1, upper-latin) ". ";
 }
 
-.toc ol li::before {
+.toc ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) " ";
 }
 
-.toc ol ol li::before {
+.toc ol ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 
-.toc ol ol ol li::before {
+.toc ol ol ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
-.toc ol ol ol ol li::before {
+.toc ol ol ol ol li[class]::before {
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 
@@ -460,16 +470,27 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <li class="toc-section"><a href="#cfg">Project Configuration</a></li>
 </ol></li>
 <li class="toc-chapter"><a href="#h_7">Authoring Documents</a></li>
-<li><ol><li class="toc-section"><a href="#h_8">Writing your document</a></li>
-<li class="toc-section"><a href="#h_9">Compiling your project</a></li>
-</ol></li>
-<li class="toc-chapter"><a href="#h_10">Extending Glyph</a></li>
-<li><ol><li class="toc-section"><a href="#h_11">Introducing Glyph Macros</a></li>
+<li><ol><li class="toc-section"><a href="#h_8">Text Editing</a></li>
+<li><ol><li class="toc-section"><a href="#h_9">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_13">Creating and Editing Macros</a></li>
+<li class="toc-section"><a href="#h_11">Sections and Headers</a></li>
+<li class="toc-section"><a href="#h_12">Including Files and Snippets</a></li>
+<li class="toc-section"><a href="#h_13">Links and Bookmarks</a></li>
+<li class="toc-section"><a href="#h_14">Images and Figures</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#h_14">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_15">Macro Reference</a></li>
+<li class="toc-section"><a href="#h_15">Compiling your project</a></li>
+<li><ol><li class="toc-section"><a href="#h_16">Adding Stylesheets</a></li>
+<li class="toc-section"><a href="#h_17">HTML output</a></li>
+<li class="toc-section"><a href="#h_18">PDF Output</a></li>
+</ol></li>
+</ol></li>
+<li class="toc-chapter"><a href="#h_19">Extending Glyph</a></li>
+<li><ol><li class="toc-section"><a href="#h_20">Creating Glyph Macros</a></li>
+<li class="toc-section"><a href="#h_21">Creating Rake Tasks</a></li>
+</ol></li>
+<li class="toc-chapter"><a href="#h_22">Troubleshooting</a></li>
+<li class="toc-appendix"><a href="#h_23">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_24">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -479,7 +500,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 		<h2 id="h_1">Introduction</h2>
 	
 				<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
-<p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate files in a variety of output formats, such as <span class="caps">HTML</span> or <span class="caps">PDF</span>.</p>
+<p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate deliverables in different formats such as <span class="caps">HTML</span> or <span class="caps">PDF</span>.</p>
 <div class="section">
 		<h3 id="h_2">Rationale</h3>
 
@@ -518,8 +539,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 
 		<h2 id="h_3">Getting Started</h2>
 	
-				<p>This chapter explains how to install and use Glyph to create and manage documents.</p>
-<div class="section">
+				<div class="section">
 		<h3 id="h_4">Creating your first Glyph Project</h3>
 
 <p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
@@ -674,35 +694,83 @@ generated automatically when creating a new project is the following:</p>
 		<h2 id="h_7">Authoring Documents</h2>
 	
 				<div class="section">
-		<h3 id="h_8">Writing your document</h3>
+		<h3 id="h_8">Text Editing</h3>
 
-<p>You&#8217;ll be glad to know that, besides in <code>document.glyph</code>, you probably won&#8217;t have to use a lot of Glyph macros at all. In fact, you can write most of your documents using either Textile or Markdown.</p>
-</div>
+<p>One of the aims of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with Textile or Markdown.</p>
 <div class="section">
-		<h3 id="h_9">Compiling your project</h3>
-</div>
-
-		</div>
-			<div class="chapter">
-
-		<h2 id="h_10">Extending Glyph</h2>
-	
-				<p>Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.</p>
-<div class="section">
-		<h3 id="h_11">Introducing Glyph Macros</h3>
+		<h4 id="h_9">Introducing Glyph Macros</h4>
 
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
 <ul>
 	<li>The macro identifier can contain <em>any</em> character except for: <code>[</code>, <code>]</code>, <code>\</code>, <code>|</code> or spaces.</li>
 	<li>The delimiters can be either <code>[</code> and <code>]</code> or <code>[=</code> and <code>=]</code> (<span class="fmi">for more information on differences between delimiters, see <a href="#esc_quot">Escaping and Quoting</a></span>).</li>
 </ul>
+<p>Macros can be nested within other macros: in this way it is possible to have sections within sections, links within headers and so on; actually, every Glyph document is contained within a single <code>document</code> macro.</p>
 </div>
 <div class="section">
-		<h3 id="esc_quot">Escaping and Quoting</h3>
+		<h4 id="esc_quot">Escaping and Quoting</h4>
+
+<p>Glyph doesn&#8217;t require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That&#8217;s not <em>too</em> bad if you think about it, unless you&#8217;re writing programming code: in that case, escaping every single square bracket can be painful.</p>
+<p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <code>escape</code> macro (or better, its alias <code>.</code>) with <code>[=</code> and <code>=]</code> as delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as a quote for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
+<p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <code>section</code> macros may not be a good idea, but they should really be mandatory with the <code>code</code> macro, like this:</p>
+<div class="code"><pre><code>code[=
+section[header[A section]
+
+This is a section.
+
+	section[header[A nested section]
+This is another section.
+	]
+]
+=]</code></pre></div>
+<div class="note">
+<p><span class="note-title">Note</span><br />
+			Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.</p>
+</div>
 </div>
 <div class="section">
-		<h3 id="h_13">Creating and Editing Macros</h3>
+		<h4 id="h_11">Sections and Headers</h4>
 </div>
+<div class="section">
+		<h4 id="h_12">Including Files and Snippets</h4>
+</div>
+<div class="section">
+		<h4 id="h_13">Links and Bookmarks</h4>
+</div>
+<div class="section">
+		<h4 id="h_14">Images and Figures</h4>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_15">Compiling your project</h3>
+
+<div class="section">
+		<h4 id="h_16">Adding Stylesheets</h4>
+</div>
+<div class="section">
+		<h4 id="h_17"><span class="caps">HTML</span> output</h4>
+</div>
+<div class="section">
+		<h4 id="h_18"><span class="caps">PDF</span> Output</h4>
+</div>
+</div>
+
+		</div>
+			<div class="chapter">
+
+		<h2 id="h_19">Extending Glyph</h2>
+	
+				<div class="section">
+		<h3 id="h_20">Creating Glyph Macros</h3>
+</div>
+<div class="section">
+		<h3 id="h_21">Creating Rake Tasks</h3>
+</div>
+
+		</div>
+			<div class="chapter">
+
+		<h2 id="h_22">Troubleshooting</h2>
 
 		</div>
 
@@ -711,12 +779,12 @@ generated automatically when creating a new project is the following:</p>
 
 		<div class="appendix">
 
-		<h2 id="h_14">Command Reference</h2>
+		<h2 id="h_23">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_15">Macro Reference</h2>
+		<h2 id="h_24">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">

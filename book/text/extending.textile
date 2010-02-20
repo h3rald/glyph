@@ -1,23 +1,10 @@
-Glyph uses a simple macro language to perform advanced tasks like creating and validating links, generating Table of Contents and Indexes, and defining the document structure.
-
-todo[...]
-
-section[header[Introducing Glyph Macros]
-
-By now you probably figured out what a macro looks like: it's an identifier of some kind that wraps a value within square brackets. More specifically:
-* The macro identifier can contain _any_ character except for: @\[@, @\]@, @\\@, @\|@ or spaces.
-* The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
-
-
-]
-
-section[header[Escaping and Quoting|esc_quot]
+section[header[Creating Glyph Macros]
 
 todo[...]
 
 ]
 
-section[header[Creating and Editing Macros]
+section[header[Creating Rake Tasks]
 
 todo[...]
 
