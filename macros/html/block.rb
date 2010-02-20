@@ -1,27 +1,24 @@
 #!/usr/bin/env ruby
 
 macro :note do
-	%{
-		<div class="#{@name}">
-			<span class="note-title">#{@name.to_s.capitalize}</span>
+	%{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>
 			#{@value}
 
-		</div>
-	}
+		</div>}
 end
 
 macro :box do
-	%{
-		<div class="box">
-			<span class="box-title">#{@params[0]}</span>
+	%{<div class="box"><span class="box-title">#{@params[0]}</span>
 		#{@params[1]}
 
-		</div>
-	}
+		</div>}
 end
 
-macro :"textile.code" do
-	%{<div class="code"><notextile><pre><code>#{@value}</code></pre></notextile></div>}
+macro :code do
+	textile = @source.match /\.textile/ 
+	ntxt_open = (textile) ? "<notextile>" : ""
+	ntxt_close = (textile) ? "</notextile>" : ""
+	%{<div class="code">#{ntxt_open}<pre><code>#{@value}</code></pre>#{ntxt_close}</div>}
 end
 
 macro :title do

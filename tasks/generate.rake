@@ -4,7 +4,7 @@ namespace :generate do
 
 	desc "Process source"
 	task :document => ["load:all"] do
-		info "Generating document from '#{cfg('document.source')}'..."
+		info "Parsing '#{cfg('document.source')}'..."
 		text = file_load Glyph::PROJECT/cfg('document.source')
 		interpreter = Glyph::Interpreter.new text, :source => "file: #{cfg('document.source')}"
 		info "Processing..."

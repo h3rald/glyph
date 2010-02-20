@@ -38,7 +38,7 @@ describe Glyph do
 
 	it "should provide a set of default macros and aliases" do
 		Glyph.run! 'load:all'
-		macros = [:anchor, :link, :fmi, :note, :box, "textile.code", :title, :subtitle,
+		macros = [:anchor, :link, :fmi, :note, :box, :code, :title, :subtitle,
 		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet,
 		:include, :config, :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
 		:head, :style, :toc, :section]

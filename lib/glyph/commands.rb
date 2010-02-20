@@ -48,6 +48,7 @@ end
 GLI.desc 'Display all project TODO items'
 command :todo do |c|
 	c.action do |global_options, options, args|
+		Glyph.run "generate:document"
 		unless Glyph::TODOS.blank?
 			info "*** TODOs: ***"
 			Glyph::TODOS.each do |t|
