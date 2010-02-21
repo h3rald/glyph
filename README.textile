@@ -32,7 +32,7 @@ Glyph is 100% command line. Its interface "Git's":http://git-scm.com/ for its si
 * @glyph compile html@ -- to compile the current document into a single HTML file.
 * @glyph compile pdf@ -- to compile the current document into HTML and then transform it into PDF using =>[http://www.princexml.com|Prince].
 
-h3(#macros-nutshell). Glyph macros in a nutshell
+<h3 id="macros-nutshell">Glyph macros in a nutshell</h3>
 
 Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:
 
@@ -72,7 +72,7 @@ renderer like =>[http://www.princexml.com|Prince].
 
 h3. Resources
 
-* Project Home Page: =>[http://www.h3rald.com/glyph/].
-* Source Code Repository & Bug Tracking: =>[http://www.github.com/h3rald/glyph/]
-* Book (PDF): =>[http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf]
-* Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
+* Project Home Page: http://www.h3rald.com/glyph/
+* Source Code Repository & Bug Tracking: http://www.github.com/h3rald/glyph/
+* Book (PDF): http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf
+* Reference Documentation: http://yardoc.org/docs/h3rald-glyph/

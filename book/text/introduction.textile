@@ -79,7 +79,7 @@ code[=
 
 section[header[Resources]
 
-* Project Home Page: =>[http://www.h3rald.com/glyph/].
+* Project Home Page: =>[http://www.h3rald.com/glyph/]
 * Source Code Repository & Bug Tracking: =>[http://www.github.com/h3rald/glyph/]
 * Book (PDF): =>[http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf]
 * Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
