@@ -122,6 +122,13 @@ td {
 th {
 	border: 1px solid #555555; }
 
+sup {
+	font-weight: bold;
+	margin-left: -0.4em;
+	font-size:0.7em;
+
+}
+
 
 /* BLOCKS */
 
@@ -464,33 +471,33 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
 			<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li class="toc-chapter"><a href="#h_3">Getting Started</a></li>
-<li><ol><li class="toc-section"><a href="#h_4">Creating your first Glyph Project</a></li>
+<li class="toc-chapter"><a href="#h_4">Getting Started</a></li>
+<li><ol><li class="toc-section"><a href="#h_5">Creating your first Glyph Project</a></li>
 <li class="toc-section"><a href="#struct">Document Structure</a></li>
 <li class="toc-section"><a href="#cfg">Project Configuration</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_7">Authoring Documents</a></li>
-<li><ol><li class="toc-section"><a href="#h_8">Text Editing</a></li>
-<li><ol><li class="toc-section"><a href="#h_9">Introducing Glyph Macros</a></li>
+<li class="toc-chapter"><a href="#h_8">Authoring Documents</a></li>
+<li><ol><li class="toc-section"><a href="#h_9">Text Editing</a></li>
+<li><ol><li class="toc-section"><a href="#h_10">Introducing Glyph Macros</a></li>
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_11">Sections and Headers</a></li>
-<li class="toc-section"><a href="#h_12">Including Files and Snippets</a></li>
-<li class="toc-section"><a href="#h_13">Links and Bookmarks</a></li>
-<li class="toc-section"><a href="#h_14">Images and Figures</a></li>
+<li class="toc-section"><a href="#h_12">Sections and Headers</a></li>
+<li class="toc-section"><a href="#h_13">Including Files and Snippets</a></li>
+<li class="toc-section"><a href="#h_14">Links and Bookmarks</a></li>
+<li class="toc-section"><a href="#h_15">Images and Figures</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_15">Compiling your project</a></li>
-<li><ol><li class="toc-section"><a href="#h_16">Adding Stylesheets</a></li>
-<li class="toc-section"><a href="#h_17">HTML output</a></li>
-<li class="toc-section"><a href="#h_18">PDF Output</a></li>
+<li class="toc-section"><a href="#h_16">Compiling your project</a></li>
+<li><ol><li class="toc-section"><a href="#h_17">Adding Stylesheets</a></li>
+<li class="toc-section"><a href="#h_18">HTML output</a></li>
+<li class="toc-section"><a href="#h_19">PDF Output</a></li>
 </ol></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_19">Extending Glyph</a></li>
-<li><ol><li class="toc-section"><a href="#h_20">Creating Glyph Macros</a></li>
-<li class="toc-section"><a href="#h_21">Creating Rake Tasks</a></li>
+<li class="toc-chapter"><a href="#h_20">Extending Glyph</a></li>
+<li><ol><li class="toc-section"><a href="#h_21">Creating Glyph Macros</a></li>
+<li class="toc-section"><a href="#h_22">Creating Rake Tasks</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_22">Troubleshooting</a></li>
-<li class="toc-appendix"><a href="#h_23">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_24">Macro Reference</a></li>
+<li class="toc-chapter"><a href="#h_23">Troubleshooting</a></li>
+<li class="toc-appendix"><a href="#h_24">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_25">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -529,6 +536,9 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 	<li>Validating links</li>
 </ul>
 </div>
+<div class="section">
+		<h3 id="h_3">Main Features</h3>
+</div>
 
 		</div>
 
@@ -537,33 +547,27 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 
 		<div class="chapter">
 
-		<h2 id="h_3">Getting Started</h2>
+		<h2 id="h_4">Getting Started</h2>
 	
 				<div class="section">
-		<h3 id="h_4">Creating your first Glyph Project</h3>
+		<h3 id="h_5">Creating your first Glyph Project</h3>
 
 <p>To install Glyph, simply run <code>gem install glyph</code>, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:</p>
 <p><code>mkdir</code> <em>test_document</em></p>
 <p><code>cd</code> <em>test_document</em></p>
 <p><code>glyph init</code></p>
 <p>That&#8217;s it. You just created a new Glyph project in the <code>test_document</code> directory.</p>
-<div class="box">
-<p><span class="box-title">Glyph&#8217;s dependencies</span><br />
-		Glyph requires the following gems:</p>
-<ul>
-	<li>extlib</li>
-	<li>gli</li>
-	<li>treetop</li>
-	<li>rake</li>
-</ul>
-<p>Additionally, some Glyph macros may require additional gems, such as:</p>
-<ul>
-	<li>RedCloth (<em>textile</em> macro)</li>
-	<li>Maruku <em>or</em> Kramdown <em>or</em> BlueCloth (<em>markdown</em> macro)</li>
-	<li>Haml (if you want to load .sass files with the <em>style</em> macro)</li>
-</ul>
-</div>
-
+<div class="box"><span class="box-title">Glyph&#8217;s dependencies</span><br />
+		Glyph requires the following gems:<br />
+- extlib<br />
+- gli<br />
+- treetop<br />
+- rake<br />
+<br />
+Additionally, some Glyph macros may require additional gems, such as:<br />
+- RedCloth (<em>textile</em> macro)<br />
+- Maruku <em>or</em> Kramdown <em>or</em> BlueCloth (<em>markdown</em> macro)<br />
+- Haml (if you want to load .sass files with the <em>style</em> macro)		</div>
 <p>Every Glyph project is comprised of the following directories:</p>
 <ul>
 	<li><code>images/</code> &#8212; used to store the image files used in your document.</li>
@@ -584,7 +588,10 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
 generated automatically when creating a new project is the following:</p>
-<div class="code"><pre><code>document[
+<div class="code">
+<pre>
+<code>
+document[
   head[style[default.css]]
   body[
     titlepage[
@@ -612,7 +619,10 @@ generated automatically when creating a new project is the following:</p>
       ]
     ]
   ]
-]</code></pre></div>
+]
+</code>
+</pre>
+</div>
 <p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. <code>frontmatter[]</code>, <code>preface[]</code>, <code>chapter[]</code>, etc. are all Glyph <em>macros</em> used to define &#8212; in this case &#8212; some structural elements. In practice, this means that if you plan to generate an <span class="caps">HTML</span> document, they&#8217;ll be converted into <code>&lt;div&gt;</code> tags.</p>
 <p>Be aware that other macros, on the other hand, are used to do something completely different, e.g.:</p>
 <ul>
@@ -651,20 +661,16 @@ generated automatically when creating a new project is the following:</p>
 <p><code>glyph config document.author "John Smith"</code></p>
 <p>In this way, the document author will be set to <em>John Smith</em> for the current project. To save this setting globally, add a <code>-g</code> option, like this:</p>
 <p><code>glyph config -g document.author "John Smith"</code></p>
-<div class="box">
-<p><span class="box-title">Regarding configuration values and data types&#8230;</span><br />
-		Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:</p>
-<ul>
-	<li>is wrapped in quotes (<code>"</code> or <code>'</code>) &#8212; String</li>
-	<li>starts with a colon (<code>:</code>) &#8212; Symbol</li>
-	<li>is wrapped in square brackets (<code>[</code> and <code>]</code>) &#8212; Array</li>
-	<li>is wrapped in curly brackets (<code>\{</code> and <code>\}</code>) &#8212; Hash</li>
-	<li>is <em>true</em> or <em>false</em> &#8212; Boolean</li>
-	<li>If the value is <em>nil</em> &#8212; NilClass</li>
-</ul>
-<p>Note that this guessing is far from being foolproof: If you type something like <em>{:test, 2}</em>, for example, you&#8217;ll get an error.</p>
-</div>
-
+<div class="box"><span class="box-title">Regarding configuration values and data types&#8230;</span><br />
+		Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:<br />
+* is wrapped in quotes (<code>"</code> or <code>'</code>) &#8212; String<br />
+* starts with a colon (<code>:</code>) &#8212; Symbol<br />
+* is wrapped in square brackets (<code>[</code> and <code>]</code>) &#8212; Array<br />
+* is wrapped in curly brackets (<code>\{</code> and <code>\}</code>) &#8212; Hash<br />
+* is <em>true</em> or <em>false</em> &#8212; Boolean<br />
+* If the value is <em>nil</em> &#8212; NilClass<br />
+<br />
+Note that this guessing is far from being foolproof: If you type something like <em>{:test, 2}</em>, for example, you&#8217;ll get an error.		</div>
 <p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file). For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. Normally, you may just want to change the following ones:</p>
 		<table><tr><th>Setting		</th>
 
@@ -691,21 +697,21 @@ generated automatically when creating a new project is the following:</p>
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_7">Authoring Documents</h2>
+		<h2 id="h_8">Authoring Documents</h2>
 	
 				<div class="section">
-		<h3 id="h_8">Text Editing</h3>
+		<h3 id="h_9">Text Editing</h3>
 
 <p>One of the aims of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with Textile or Markdown.</p>
 <div class="section">
-		<h4 id="h_9">Introducing Glyph Macros</h4>
+		<h4 id="h_10">Introducing Glyph Macros</h4>
 
-<p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value within square brackets. More specifically:</p>
+<p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value or parameters within square brackets. More specifically:</p>
 <ul>
 	<li>The macro identifier can contain <em>any</em> character except for: <code>[</code>, <code>]</code>, <code>\</code>, <code>|</code> or spaces.</li>
 	<li>The delimiters can be either <code>[</code> and <code>]</code> or <code>[=</code> and <code>=]</code> (<span class="fmi">for more information on differences between delimiters, see <a href="#esc_quot">Escaping and Quoting</a></span>).</li>
+	<li>The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with <code>|</code>. For example, the <code>link</code> (<code>=&gt;</code>) macro can take an optional second parameter for the link text: <code>=&gt;[#link_id|This is the link text]</code>.</li>
 </ul>
-<p>Macros can be nested within other macros: in this way it is possible to have sections within sections, links within headers and so on; actually, every Glyph document is contained within a single <code>document</code> macro.</p>
 </div>
 <div class="section">
 		<h4 id="esc_quot">Escaping and Quoting</h4>
@@ -713,64 +719,181 @@ generated automatically when creating a new project is the following:</p>
 <p>Glyph doesn&#8217;t require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That&#8217;s not <em>too</em> bad if you think about it, unless you&#8217;re writing programming code: in that case, escaping every single square bracket can be painful.</p>
 <p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <code>escape</code> macro (or better, its alias <code>.</code>) with <code>[=</code> and <code>=]</code> as delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as a quote for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
 <p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <code>section</code> macros may not be a good idea, but they should really be mandatory with the <code>code</code> macro, like this:</p>
-<div class="code"><pre><code>code[=
+<div class="code">
+<pre>
+<code>
+code[=
 section[header[A section]
 
 This is a section.
 
-	section[header[A nested section]
+  section[header[A nested section]
 This is another section.
-	]
+  ]
 ]
-=]</code></pre></div>
-<div class="note">
-<p><span class="note-title">Note</span><br />
-			Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.</p>
+=]
+</code>
+</pre>
+</div>
+<div class="note"><span class="note-title">Note</span><br />
+			Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.		</div>
+<p>Besides square brackets, there are other characters that must or can be escaped with backslashes, as shown in the following table</p>
+		<table><tr><th>Escape Sequence		</th>
+
+		<th>Evaluates to&#8230;		</th>
+
+		<th>Notes		</th>	
+</tr>
+
+		<tr><td><code>\[</code>		</td>
+
+		<td><code>[</code>		</td>
+
+		<td>Square brackets must be escaped unless used as macro delimiters or within a quoting macro.		</td>	
+</tr>
+
+		<tr><td><code>\]</code>		</td>
+
+		<td><code>]</code>		</td>
+
+		<td>Square brackets must be escaped unless used as macro delimiters or within a quoting macro.		</td>	
+</tr>
+
+		<tr><td><code>\\</code>		</td>
+
+		<td><code>\</code>		</td>
+
+		<td>Backslashes do not have to be escaped by default, but an escaped backslash will evaluate to itself.		</td>	
+</tr>
+
+		<tr><td><code>\=</code>		</td>
+
+		<td><code>=</code>		</td>
+
+		<td>Equal signs do not have to be escaped by default, but an escaped equal sign will evaluate to iself.		</td>	
+</tr>
+
+		<tr><td><code>\|</code>		</td>
+
+		<td><code>|</code>		</td>
+
+		<td>Pipes must be escaped (even within quoting macros) unless they are used to separate two or more macro parameters.		</td>	
+</tr>
+
+		<tr><td><code>\.</code>		</td>
+
+<td>
+</td>
+
+		<td>An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:<br />
+<code>_=&gt;[#link|This is an emphasized link]_</code>		</td>	
+</tr>
+</table>
+</div>
+<div class="section">
+		<h4 id="h_12">Sections and Headers</h4>
+
+<p>Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the <code>section</code> macro, like so:</p>
+<div class="code">
+<pre>
+<code>
+section[
+  header[Section #1]
+
+Write the section contents here...
+
+  section[
+    header[Section #2]
+
+This section is nested into the previous one.
+
+  ] --[End of Section #2]
+] --[End of Section #1]
+</code>
+</pre>
+</div>
+<p>This example defines two nested sections, each with its own header. The header is <em>mandatory</em>: it will be displayed at the start of the section and in the Table of Contents.</p>
+<p>Note an important difference from <span class="caps">HTML</span>: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
+<div class="code">
+<pre>
+<code>
+&lt;div class="section"&gt;
+  &lt;h2&gt;Section #1&lt;/h2&gt;
+  &lt;p&gt;Write the section contents here...&lt;/p&gt;
+  &lt;div class="section"&gt;
+    &lt;h3&gt;Section #2&lt;/h3&gt;
+    &lt;p&gt;This section is nested in the previous one&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+</div>
+<p>By default, in Glyph the first header level is <em>2</em>, so the two headers are rendered as <code>h2</code> and <code>h3</code>, respectively (<code>--[...]</code> macros are <em>comments</em>, therefore they are not included in the final output).</p>
+<p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element of <a href="http://en.wikipedia.org/wiki/Book_design">Book Design</a>. Each one of them is a simple wrapper for a <code>div</code> tag with a class set to its name.</p>
+<p>The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:</p>
+		<table><tr><td><strong>Frontmatter</strong>		</td>
+
+		<td><code>imprint</code> <sup>†</sup>, <code>dedication</code> <sup>†</sup>, <code>inspiration</code> <sup>†</sup>, <code>foreword</code> <sup>‡</sup>, <code>introduction</code> <sup>‡</sup>, <code>acknowledgement</code> <sup>‡</sup>, <code>prologue</code> <sup>‡</sup>, <code>toc</code> <sup>*</sup>		</td>	
+</tr>
+
+		<tr><td><strong>Bodymatter</strong>		</td>
+
+		<td><code>volume</code>, <code>book</code>, <code>part</code>, <code>chapter</code>		</td>	
+</tr>
+
+		<tr><td><strong>Backmatter</strong>		</td>
+
+		<td><code>epilogue</code> <sup>‡</sup>, <code>afterword</code> <sup>‡</sup>, <code>postscript</code> <sup>†</sup>, <code>appendix</code>, <code>addendum</code> <sup>‡</sup>, <code>glossary</code> <sup>**‡</sup>, <code>colophon</code> <sup>†</sup>, <code>bibliography</code> <sup>**‡</sup>, <code>promotion</code> <sup>†</sup>, <code>references</code> <sup>**‡</sup>, <code>index</code> <sup>**‡</sup>, <code>lot</code> <sup>**‡</sup>, <code>lof</code> <sup>**‡</sup>		</td>	
+</tr>
+</table>
+
+<p>*: The <code>toc</code> macro is to generate the Table of Contents automatically, and it must be used with no contents (<code>toc[]</code>).</p>
+<p>**: This macro is likely to be extended in future versions to generate/aggregate content automatically.</p>
+<p>†: This section is not listed in the Table of Contents.</p>
+<p>‡: Any subsection of this section is not listed in the Table of Contents.</p>
+<div class="note"><span class="note-title">Note</span><br />
+			<code>frontmatter</code>, <code>bodymatter</code> and <code>backmatter</code> are also valid (and mandatory!) macro identifiers, typically already included in the default <code>document.glyph</code> file of every project.		</div>
+</div>
+<div class="section">
+		<h4 id="h_13">Including Files and Snippets</h4>
+</div>
+<div class="section">
+		<h4 id="h_14">Links and Bookmarks</h4>
+</div>
+<div class="section">
+		<h4 id="h_15">Images and Figures</h4>
 </div>
 </div>
 <div class="section">
-		<h4 id="h_11">Sections and Headers</h4>
-</div>
-<div class="section">
-		<h4 id="h_12">Including Files and Snippets</h4>
-</div>
-<div class="section">
-		<h4 id="h_13">Links and Bookmarks</h4>
-</div>
-<div class="section">
-		<h4 id="h_14">Images and Figures</h4>
-</div>
-</div>
-<div class="section">
-		<h3 id="h_15">Compiling your project</h3>
+		<h3 id="h_16">Compiling your project</h3>
 
 <div class="section">
-		<h4 id="h_16">Adding Stylesheets</h4>
+		<h4 id="h_17">Adding Stylesheets</h4>
 </div>
 <div class="section">
-		<h4 id="h_17"><span class="caps">HTML</span> output</h4>
+		<h4 id="h_18"><span class="caps">HTML</span> output</h4>
 </div>
 <div class="section">
-		<h4 id="h_18"><span class="caps">PDF</span> Output</h4>
+		<h4 id="h_19"><span class="caps">PDF</span> Output</h4>
 </div>
 </div>
 
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_19">Extending Glyph</h2>
+		<h2 id="h_20">Extending Glyph</h2>
 	
 				<div class="section">
-		<h3 id="h_20">Creating Glyph Macros</h3>
+		<h3 id="h_21">Creating Glyph Macros</h3>
 </div>
 <div class="section">
-		<h3 id="h_21">Creating Rake Tasks</h3>
+		<h3 id="h_22">Creating Rake Tasks</h3>
 </div>
 
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_22">Troubleshooting</h2>
+		<h2 id="h_23">Troubleshooting</h2>
 
 		</div>
 
@@ -779,12 +902,12 @@ This is another section.
 
 		<div class="appendix">
 
-		<h2 id="h_23">Command Reference</h2>
+		<h2 id="h_24">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_24">Macro Reference</h2>
+		<h2 id="h_25">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">

@@ -27,4 +27,8 @@ That's where Glyph comes in: Glyph uses a simple but effective macro language to
 
 ]
 
+section[header[Main Features]
+
+]
+
 todo[Expand...]

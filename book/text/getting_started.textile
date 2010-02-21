@@ -12,15 +12,15 @@ That's it. You just created a new Glyph project in the @test_document@ directory
 
 box[Glyph's dependencies|
 Glyph requires the following gems:
-* extlib
-* gli
-* treetop
-* rake
+- extlib
+- gli
+- treetop
+- rake
 
 Additionally, some Glyph macros may require additional gems, such as:
-* RedCloth (_textile_ macro)
-* Maruku _or_ Kramdown _or_ BlueCloth (_markdown_ macro)
-* Haml (if you want to load .sass files with the _style_ macro)
+- RedCloth (_textile_ macro)
+- Maruku _or_ Kramdown _or_ BlueCloth (_markdown_ macro)
+- Haml (if you want to load .sass files with the _style_ macro)
 ]
 
 Every Glyph project is comprised of the following directories:

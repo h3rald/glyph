@@ -114,6 +114,13 @@ td {
 th {
 	border: 1px solid #555555; }
 
+sup {
+	font-weight: bold;
+	margin-left: -0.4em;
+	font-size:0.7em;
+
+}
+
 
 /* BLOCKS */
 
