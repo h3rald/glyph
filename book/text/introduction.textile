@@ -1,34 +1,86 @@
 Glyph is a _Rapid Document Authoring Framework_. 
 
-Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF.
-
-section[header[Rationale]
-
-Glyph was created to provide an easy way to produce printable documents in HTML and PDF format, using technologies familiar to web developers like HTML and CSS, without using them explicitly. In this very specific context, you could consider Glyph as a possible alternative to LaTeX, bearing in mind that it offers far less features and it is not a typesetting system.
-
-At the time of writing, the most common ways to create a printable document like, say, a PDF file, are the following:
-# Use a word processor like Microsoft Word convert it to PDF, for example using Adobe Acrobat -- Perhaps the most user-friendly method, but relying on proprietary technologies and GUIs.
-# Use LaTeX -- It can be used to produce amazing documents, but it is not exactly the most user-friendly option: you have to learn LaTeX first, and you may not want to.
-# Use HTML and a 3rd party renderer like =>[http://www.princexml.com/|PrinceXML].
-
-The third option is arguably the best, because:
-* It allows web developers to use what they know best (HTML and CSS).
-* It does not rely necessarily on GUIs, thereby giving the author more control on the document formatting and its structure.
-
-The main problem with this method is that writing HTML code can be tedious, but luckily there are plenty of lightweight markup languages like Textile or Markdown that can make writing HTML a fun task. Unfortunately though, a markup language alone is not enough, because:
-* It is not a complete alternative to HTML: you have to fallback to HTML to do certain things like the document _head_ and _body_ tags, and often block-level elements like _div_ or _table_ are not supported at all.
-* They cannot be easily extended to provide additional functionalities, like creating a TOC automatically, for example.
-
-That's where Glyph comes in: Glyph uses a simple but effective macro language to handle those tasks that are not commonly managed by lightweight markup languages, such as:
-* Creating TOC, index and bibliography automatically
-* Defining the document structure
-* Managing text snippets, notes, ...
-* Validating links
-
-]
+Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through =>[http://www.princexml.com|Prince]).
 
 section[header[Main Features]
 
+Glyph uses a =>[#macros_nutshell|simple macro system] to perform a wide variety of advanced tasks:
+* Generate block-level HTML tags not commonly managed by lightweight markups, like @head@, @body@, @div@ and @table@.
+* Create and validate internal and external links.
+* Include and validate images and figures.
+* Automatically determine header levels based on the document structure.
+* Automatically generate a Table of Contents based on the document structure.
+* Store common snippets of text in a single YAML file and use them anywhere in your document, as many times as you need.
+* Store configuration settings in a YAML file and use them anywhere in your document, as many times as you need.
+* Evaluate Ruby code within your document.
+* Call macros from other macros (including snippets), carefully avoiding mutual calls.
+* Include text files in other text files.
+* Include the contents of configuration settings (author, title) in the document.
+* Filter input explicitly or implicitly, based on file extensions when including files. 
+* Manage comments and todo items.
 ]
 
-todo[Expand...]
+section[header[Installation]
+
+@sudo gem install glyph@ -- simple, as always.
+
+]
+
+section[header[Essential Glyph commands]
+
+Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's] for its simplicity and power (thanks to the =>[http://github.com/davetron5000/gli|Gli] gem). Here are some example commands: 
+
+* @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
+* @glyph add introduction.textile@ -- to create a new file called _introduction.textile_.
+* @glyph compile html@ -- to compile the current document into a single HTML file.
+* @glyph compile pdf@ -- to compile the current document into HTML and then transform it into PDF using =>[http://www.princexml.com|Prince].
+
+]
+
+section[header[Glyph macros in a nutshell|macros_nutshell]
+
+Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:
+
+**Glyph Source:**
+
+code[=
+section[header[Something about Glyph]
+You can use Glyph macros in conjunction
+ with _Textile_ or _Markdown_ to
+produce HTML files effortlessly.
+  section[header[What about PDFs?|pdf]
+Once you have a single, well-formatted HTML 
+file, converting it to PDF is
+extremely easy with a 3rd-party 
+renderer like =>[http://www.princexml.com|Prince].
+  ]   
+]
+=]
+
+**HTML Output:**
+
+code[=
+<div class="section">
+  <h2 id="h_1">Something about Glyph</h2>
+  <p>You can use Glyph macros in conjunction with 
+     <em>Textile</em> or <em>Markdown</em> to
+     produce HTML files effortlessly.</p>
+  <div class="section">
+   <h3 id="pdf">What about PDFs?</h3>
+   <p>Once you have a single, well-formatted HTML 
+      file, converting it to PDF is
+      extremely easy with a 3rd-party renderer 
+      like <a href="http://www.princexml.com">Prince</a>.</p>
+  </div>
+</div>
+=]
+
+]
+
+section[header[Resources]
+
+* Project Home Page: =>[http://www.h3rald.com/glyph/].
+* Source Code Repository & Bug Tracking: =>[http://www.github.com/h3rald/glyph/]
+* Book (PDF): =>[http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf]
+* Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
+]

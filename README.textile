@@ -1,0 +1,78 @@
+Glyph is a _Rapid Document Authoring Framework_. 
+
+Think of it like a sort of "Ruby On Rails":http://www.rubyonrails.org but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through "Prince":http://www.princexml.com).
+
+h3. Main Features
+
+Glyph uses a "simple macro system":#macros-nutshell to perform a wide variety of advanced tasks:
+* Generate block-level HTML tags not commonly managed by lightweight markups, like @head@, @body@, @div@ and @table@.
+* Create and validate internal and external links.
+* Include and validate images and figures.
+* Automatically determine header levels based on the document structure.
+* Automatically generate a Table of Contents based on the document structure.
+* Store common snippets of text in a single YAML file and use them anywhere in your document, as many times as you need.
+* Store configuration settings in a YAML file and use them anywhere in your document, as many times as you need.
+* Evaluate Ruby code within your document.
+* Call macros from other macros (including snippets), carefully avoiding mutual calls.
+* Include text files in other text files.
+* Include the contents of configuration settings (author, title) in the document.
+* Filter input explicitly or implicitly, based on file extensions when including files. 
+* Manage comments and todo items.
+
+h3. Installation
+
+@sudo gem install glyph@ -- simple, as always.
+
+h3. Essential Glyph Commands
+
+Glyph is 100% command line. Its interface "Git's":http://git-scm.com/ for its simplicity and power (thanks to the "Gli":http://github.com/davetron5000/gli gem). Here are some example commands: 
+
+* @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
+* @glyph add introduction.textile@ -- to create a new file called _introduction.textile_.
+* @glyph compile html@ -- to compile the current document into a single HTML file.
+* @glyph compile pdf@ -- to compile the current document into HTML and then transform it into PDF using =>[http://www.princexml.com|Prince].
+
+h3(#macros-nutshell). Glyph macros in a nutshell
+
+Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:
+
+**Glyph Source:**
+
+<pre><code>
+section[header[Something about Glyph]
+You can use Glyph macros in conjunction
+ with _Textile_ or _Markdown_ to
+produce HTML files effortlessly.
+  section[header[What about PDFs?|pdf]
+Once you have a single, well-formatted HTML 
+file, converting it to PDF is
+extremely easy with a 3rd-party 
+renderer like =>[http://www.princexml.com|Prince].
+  ]   
+]
+</code></pre>
+
+**HTML Output:**
+
+<pre><code>
+<div class="section">
+  <h2 id="h_1">Something about Glyph</h2>
+  <p>You can use Glyph macros in conjunction with 
+     <em>Textile</em> or <em>Markdown</em> to
+     produce HTML files effortlessly.</p>
+  <div class="section">
+   <h3 id="pdf">What about PDFs?</h3>
+   <p>Once you have a single, well-formatted HTML 
+      file, converting it to PDF is
+      extremely easy with a 3rd-party renderer 
+      like <a href="http://www.princexml.com">Prince</a>.</p>
+  </div>
+</div>
+</code></pre>
+
+h3. Resources
+
+* Project Home Page: =>[http://www.h3rald.com/glyph/].
+* Source Code Repository & Bug Tracking: =>[http://www.github.com/h3rald/glyph/]
+* Book (PDF): =>[http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf]
+* Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
