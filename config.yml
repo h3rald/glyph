@@ -24,6 +24,7 @@
     - :glossary
     - :bibliography
     - :references
+    - :index
     - :lot
     - :lof
   :frontmatter:
@@ -51,6 +52,7 @@
     - :bibliography
     - :promotion
     - :references
+    - :index
     - :lot
     - :lof
 :pdf_renderer: 'prince'

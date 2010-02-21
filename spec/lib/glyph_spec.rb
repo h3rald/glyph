@@ -65,7 +65,7 @@ describe Glyph do
 		check_aliases.call cfg('structure.backmatter'), :div
 		cfg('structure.frontmatter').length.should == 8
 		cfg('structure.bodymatter').length.should == 4
-		cfg('structure.backmatter').length.should == 12
+		cfg('structure.backmatter').length.should == 13
 		total.should == (Glyph::MACROS.length - 4) # test, ref, -> and em (test-only)
 	end
 

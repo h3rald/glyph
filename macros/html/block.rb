@@ -15,10 +15,13 @@ macro :box do
 end
 
 macro :code do
-	textile = @source.match /\.textile/ 
-	ntxt_open = (textile) ? "<notextile>" : ""
-	ntxt_close = (textile) ? "</notextile>" : ""
-	%{<div class="code">#{ntxt_open}<pre><code>#{@value}</code></pre>#{ntxt_close}</div>}
+	%{<div class="code">
+<pre>
+<code>
+#{@value}
+</code>
+</pre>
+		</div>}
 end
 
 macro :title do
