@@ -72,7 +72,9 @@ renderer like =>[http://www.princexml.com|Prince].
 
 h3. Resources
 
-* Project Home Page: "http://www.h3rald.com/glyph/":http://www.h3rald.com/glyph/
-* Source Code Repository & Bug Tracking: "http://www.github.com/h3rald/glyph/":http://www.github.com/h3rald/glyph/
+* Home Page: "http://www.h3rald.com/glyph/":http://www.h3rald.com/glyph/
+* Repository: "http://www.github.com/h3rald/glyph/":http://www.github.com/h3rald/glyph/
+* Bug Tracking: "http://www.github.com/h3rald/glyph/":http://www.github.com/h3rald/glyph/issues
 * Book (PDF): "http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf":http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf
 * Reference Documentation: "http://yardoc.org/docs/h3rald-glyph/":http://yardoc.org/docs/h3rald-glyph/
+* User Group: "http://groups.google.com/group/glyph-framework":http://groups.google.com/group/glyph-framework

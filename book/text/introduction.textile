@@ -59,9 +59,10 @@ renderer like =>[http://www.princexml.com|Prince].
 
 **HTML Output:**
 
+<notextile>
 code[=
 <div class="section">
-  <h2 id="h_1">Something about Glyph</h2>
+  <h2 id="h_10">Something about Glyph</h2>
   <p>You can use Glyph macros in conjunction with 
      <em>Textile</em> or <em>Markdown</em> to
      produce HTML files effortlessly.</p>
@@ -73,14 +74,15 @@ code[=
       like <a href="http://www.princexml.com">Prince</a>.</p>
   </div>
 </div>
-=]
-
+=]</notextile>
 ]
 
 section[header[Resources]
 
-* Project Home Page: =>[http://www.h3rald.com/glyph/]
-* Source Code Repository & Bug Tracking: =>[http://www.github.com/h3rald/glyph/]
+* Home Page: =>[http://www.h3rald.com/glyph/]
+* Repository: =>[http://www.github.com/h3rald/glyph/]
+* Bug Tracking: =>[http://www.github.com/h3rald/glyph/issues]
 * Book (PDF): =>[http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf]
 * Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
+* User Group: =>[http://groups.google.com/group/glyph-framework]
 ]
