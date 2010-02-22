@@ -31,14 +31,12 @@ body {
 	text-align: center;
 }
 .title, h1 {
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	font-size: 2.5em;
 	font-weight: bold;
 	line-height: 1.5em;
 	margin-bottom: 0.2em;
 }
 .titlepage h2 {
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	font-size: 1.1em;
 	font-style: italic;
 	font-weight: bold;
@@ -86,20 +84,20 @@ ol.toc {
 	color: #000;
 }
 table {
-	border: 1px solid #555555;
+	border: 1px solid #E6E6E6;
 }
 th {
-	background: #E8E8E8;
+	background: #EEE;
 }
 tr, td, th {
 	padding: 5px;
 }
 td {
-	border-left: 1px solid #555555;
-	border-right: 1px solid #555555;
+	border-left: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
 }
 th {
-	border: 1px solid #555555;
+	border: 1px solid #E6E6E6;
 }
 sup {
 	font-size: 0.7em;
@@ -119,35 +117,30 @@ sup {
 	margin: auto;
 	text-align: center;
 }
+
 .note, 
 .important, 
 .tip, 
 .caution, 
 .box {
-	background: #FFF6AD;
-	border: 1px solid #473F2B;
-	color: #918058;
-	color: #665A3E;
+	border: 1px solid #E6E6E6;
 	display: block;
 	margin: 0.5em auto;
 	padding: 0 0.5em;
 	width: 600px;
+	background: #EEE;
+	color: #1F1F1F;
 }
-.box-title, 
-.note-title, 
-.important-title, 
-.tip-title, 
-.caution-title {
-	color: #473F2B;
-	font-size: 1.2em;
+.note-title {
 	font-weight: bold;
+	margin-right: 1em;
 }
 .box-title {
 	display: block;
 	text-align: center;
+	font-weight: bold;
 }
 .code {
-	font-size: 0.9em;
 	margin: 1em auto;
 	padding: 0.5em;
 	width: 600px;
@@ -155,12 +148,10 @@ sup {
 /* TEXT */
 body {
 	color: #000;
-	font-family: "Liberation Serif", "Palatino", "Book Antiqua", "Serif";
 	font-size: 1em;
 }
 h2 {
 	display: block;
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	font-size: 2em;
 	font-weight: bold;
 	line-height: 3em;
@@ -168,14 +159,12 @@ h2 {
 	margin: 0;
 }
 h3 {
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	font-size: 1.6em;
 	font-weight: normal;
 	line-height: 2.5em;
 	margin: 1em 0 0 0;
 }
 h4 {
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	font-size: 1.3em;
 	font-weight: normal;
 	line-height: 2em;
@@ -191,15 +180,16 @@ a {
 a:hover {
 	color: #CF282D;
 }
-.highlight {
-	border: 1px dashed #555555;
-	font-family: "Consolas", "Monaco", "Courier", "Monospace";
-	margin: 5px 0;
-	overflow: auto;
-	padding: 5px;
-}
 code {
-	font-family: "Consolas", "Monaco", "Courier", "Monospace";
-	font-size: 1em;
+	font-size: 0.75em;
+}
+
+/* FONTS */
+body {
+	font-family: "Garamond", "Book Antiqua", "Times New Roman", "Serif";
+}
+
+code {
+	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
 }
 

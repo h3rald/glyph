@@ -1,17 +1,18 @@
 @page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
-	@top { content: string(chapter-title);  }
+	@top { 
+		content: string(book-title) " &#183; " string(book-subtitle) " &ndash; " string(chapter-title);  
+		font-style: italic;
+	}
   @bottom { content: counter(page, decimal); }
 }
 
 @page frontmatter {
-  @top { content: string(chapter-title); }
 	@bottom { content: counter(page, lower-roman); }
 }
 
 @page backmatter {
-  @top { content: string(chapter-title); }
 	@bottom { content: counter(page, decimal); }
 }
 
@@ -25,8 +26,12 @@
   content: leader('.') target-counter(attr(href), page);
 }
 
-h1 { 
+.titlepage h1 { 
 	string-set: book-title content();
+}
+
+.titlepage h2 {
+	string-set: book-subtitle content();
 }
 
 

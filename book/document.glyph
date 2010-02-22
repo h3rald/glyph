@@ -4,7 +4,7 @@ document[
 		style[css3.css]]
 	body[
 		titlepage[
-			img[glyph.svg|25%|25%]
+			img[glyph.svg|20%|20%]
 			title[]
 			subtitle[]
 			v\.ruby[Glyph::VERSION]

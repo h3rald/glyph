@@ -77,7 +77,7 @@ Even without knowing anything about &[glang], you can easily figure out that thi
 
 Be aware that other macros, on the other hand, are used to do something completely different, e.g.:
 * @toc\[\]@ generates the document's Table of Contents
-* <code>@\[\]</code> or its alias @include\[\]@ is used to copy the contents of another file stored anywhere in the @/text@ directory.
+* codeph[=@\[\]=] or its alias @include\[\]@ is used to copy the contents of another file stored anywhere in the @/text@ directory.
 
 Let's now analyze this @document.glyph@ more in detail.
 * The @document\[\]@ macro wraps every other macro. This is necessary to create the initial @<html>@ tag.

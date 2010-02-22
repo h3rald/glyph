@@ -7,233 +7,200 @@
 			<meta name="copyright" content="Fabio Cevasco" />
 		<style type="text/css">
 		* {
-	font-family: inherit;
-	font-style: inherit;
-	font-size: 100%;
 	border: none;
-	padding: 0;
-	margin: 0; }
-
-html {
-	height: 100%;
-	background: #fff;}
-
-p, ol, ul {
-	margin: 0.3em 0; }
-
-table {
-	margin: auto;
-	border-collapse: collapse;
-	border-spacing: 0; }
-
-body {
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
 	margin: 0;
-	padding: 0; 
+	padding: 0;
+}
+html {
+	background: #fff;
+	height: 100%;
+}
+p, ol, ul {
+	margin: 0.3em 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: auto;
+}
+body {
 	line-height: 1.3em;
+	margin: 0;
+	padding: 0;
+	padding: 0 1em;
 	text-align: justify;
-	padding: 0 1em; }
-
+}
 /* Structure */
-
-.titlepage{
+.titlepage {
 	margin: auto;
 	text-align: center;
 }
-
-.title, h1{
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
-	line-height: 1.5em;
+.title, h1 {
 	font-size: 2.5em;
-	margin-bottom: 0.2em;
 	font-weight: bold;
+	line-height: 1.5em;
+	margin-bottom: 0.2em;
 }
-
 .titlepage h2 {
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
 	font-size: 1.1em;
-	line-height: 1.2em;
-	margin-bottom: 0.5em;
 	font-style: italic;
 	font-weight: bold;
+	line-height: 1.2em;
+	margin-bottom: 0.5em;
 	prince-bookmark-level: none;
 }
-
-.author{
+.author {
 	font-size: 1em;
 }
-
-.pubdate{
+.pubdate {
 	font-size: 0.8em;
 }
-
 li {
-	margin-left: 1.5em;
 	list-style-type: square;
+	margin-left: 1.5em;
 }
-
-
 img {
 	margin: 0 5px;
-	padding: 2px; }
-
+	padding: 2px;
+}
 dt {
+	font-weight: bold;
 	margin-top: 1em;
-	font-weight: bold; }
+}
 dd {
-	font-style: italic; }
+	font-style: italic;
+}
 p {
 	line-height: 1.5em;
-	margin: 0.5em 0; }
-
+	margin: 0.5em 0;
+}
 ol.toc {
 	margin-left: 1.5em;
 }
-
 .toc > li[class] {
 	font-weight: bold;
 }
-
-
 .toc li {
 	line-height: 1.5em;
-	list-style-type: none; 
+	list-style-type: none;
 	margin-left: 0;
 }
-
 .toc li a, .toc li a:hover {
 	color: #000;
 }
-
 table {
-	border: 1px solid #555555; }
-
-th{
-	background: #E8E8E8;
-
+	border: 1px solid #E6E6E6;
 }
-
-tr, td, th {
-	padding: 5px; }
-
-td {
-	border-left: 1px solid #555555;
-	border-right: 1px solid #555555; }
-
 th {
-	border: 1px solid #555555; }
-
+	background: #EEE;
+}
+tr, td, th {
+	padding: 5px;
+}
+td {
+	border-left: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
+}
+th {
+	border: 1px solid #E6E6E6;
+}
 sup {
+	font-size: 0.7em;
 	font-weight: bold;
 	margin-left: -0.4em;
-	font-size:0.7em;
-
 }
-
-
 /* BLOCKS */
-
-.center{
-	text-align: center;
+.center {
 	margin: auto;
+	text-align: center;
 }
-
-.left{
+.left {
+	margin: auto;
 	text-align: left;
+}
+.right {
 	margin: auto;
+	text-align: center;
 }
 
-.right{
-	text-align: center;
-	margin: auto;
-}
 .note, 
 .important, 
 .tip, 
 .caution, 
 .box {
+	border: 1px solid #E6E6E6;
 	display: block;
-	border:1px solid #473F2B;
-	background: #FFF6AD;
-	padding: 0 0.5em;
-	color: #918058;
-	color: #665A3E;
-	width: 600px;
 	margin: 0.5em auto;
+	padding: 0 0.5em;
+	width: 600px;
+	background: #EEE;
+	color: #1F1F1F;
 }
-
-.box-title, 
-.note-title, 
-.important-title, 
-.tip-title, 
-.caution-title {
-	color: #473F2B;
-	font-size: 1.2em;
+.note-title {
+	font-weight: bold;
+	margin-right: 1em;
+}
+.box-title {
+	display: block;
+	text-align: center;
 	font-weight: bold;
 }
-
-.box-title {
-	display:block;
-	text-align: center;
-}
-
 .code {
-	padding: 0.5em;
-	font-size: 0.9em;
-	width: 600px;
 	margin: 1em auto;
+	padding: 0.5em;
+	width: 600px;
 }
-
-
 /* TEXT */
 body {
 	color: #000;
-	font-family: "Liberation Serif", "Palatino", "Book Antiqua", "Serif";
-	font-size: 1em; }
-
+	font-size: 1em;
+}
 h2 {
 	display: block;
-	line-height: 3em;
 	font-size: 2em;
 	font-weight: bold;
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
+	line-height: 3em;
 	margin: 3em 0 0 0;
-	margin: 0; }
-
+	margin: 0;
+}
 h3 {
-	line-height: 2.5em;
 	font-size: 1.6em;
 	font-weight: normal;
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
-	margin: 1em 0 0 0; }
-
+	line-height: 2.5em;
+	margin: 1em 0 0 0;
+}
 h4 {
-	line-height: 2em;
 	font-size: 1.3em;
 	font-weight: normal;
-	font-family: "Cardo", "Palatino", "Book Antiqua", "Serif";
-	margin: 1em 0 0 0; }
-
+	line-height: 2em;
+	margin: 1em 0 0 0;
+}
 em {
-	font-style: italic; }
-
-a{
+	font-style: italic;
+}
+a {
 	color: #8A1513;
 	text-decoration: none;
 }
-
 a:hover {
-	color: #CF282D; }
+	color: #CF282D;
+}
+code {
+	font-size: 0.75em;
+}
 
-.highlight {
-	font-family: "Consolas", "Monaco", "Courier", "Monospace";
-	border: 1px dashed #555555;
-	padding: 5px;
-	margin: 5px 0;
-	overflow: auto; }
+/* FONTS */
+body {
+	font-family: "Garamond", "Book Antiqua", "Times New Roman", "Serif";
+}
 
 code {
-	font-family: "Consolas", "Monaco", "Courier", "Monospace"; 
-	font-size: 1em;}
+	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
+}
+
 
 		</style>
 	
@@ -242,17 +209,18 @@ code {
 		@page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
-	@top { content: string(chapter-title);  }
+	@top { 
+		content: string(book-title) " &#183; " string(book-subtitle) " &ndash; " string(chapter-title);  
+		font-style: italic;
+	}
   @bottom { content: counter(page, decimal); }
 }
 
 @page frontmatter {
-  @top { content: string(chapter-title); }
 	@bottom { content: counter(page, lower-roman); }
 }
 
 @page backmatter {
-  @top { content: string(chapter-title); }
 	@bottom { content: counter(page, decimal); }
 }
 
@@ -266,8 +234,12 @@ code {
   content: leader('.') target-counter(attr(href), page);
 }
 
-h1 { 
+.titlepage h1 { 
 	string-set: book-title content();
+}
+
+.titlepage h2 {
+	string-set: book-subtitle content();
 }
 
 
@@ -439,7 +411,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 		<body>
 		<div class="titlepage">
 
-		<img src="images/glyph.svg" width="25%" height="25%" alt="-"/>
+		<img src="images/glyph.svg" width="20%" height="20%" alt="-"/>
 		
 			
 		<h1>
@@ -483,21 +455,22 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <li class="toc-section"><a href="#h_15">Sections and Headers</a></li>
 <li class="toc-section"><a href="#h_16">Including Files and Snippets</a></li>
 <li class="toc-section"><a href="#h_17">Links and Bookmarks</a></li>
-<li class="toc-section"><a href="#h_18">Images and Figures</a></li>
+<li class="toc-section"><a href="#h_18">Evaluating Ruby code and Configuration Settings</a></li>
+<li class="toc-section"><a href="#img_fig">Images and Figures</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_19">Compiling your project</a></li>
-<li><ol><li class="toc-section"><a href="#h_20">Adding Stylesheets</a></li>
-<li class="toc-section"><a href="#h_21">HTML output</a></li>
-<li class="toc-section"><a href="#h_22">PDF Output</a></li>
+<li class="toc-section"><a href="#h_20">Compiling your project</a></li>
+<li><ol><li class="toc-section"><a href="#h_21">Adding Stylesheets</a></li>
+<li class="toc-section"><a href="#h_22">HTML output</a></li>
+<li class="toc-section"><a href="#h_23">PDF Output</a></li>
 </ol></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_23">Extending Glyph</a></li>
-<li><ol><li class="toc-section"><a href="#h_24">Creating Glyph Macros</a></li>
-<li class="toc-section"><a href="#h_25">Creating Rake Tasks</a></li>
+<li class="toc-chapter"><a href="#h_24">Extending Glyph</a></li>
+<li><ol><li class="toc-section"><a href="#h_25">Creating Glyph Macros</a></li>
+<li class="toc-section"><a href="#h_26">Creating Rake Tasks</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_26">Troubleshooting</a></li>
-<li class="toc-appendix"><a href="#h_27">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_28">Macro Reference</a></li>
+<li class="toc-chapter"><a href="#h_27">Troubleshooting</a></li>
+<li class="toc-appendix"><a href="#h_28">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_29">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -549,9 +522,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 
 <p>Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:</p>
 <p><b>Glyph Source:</b></p>
-<div class="code">
-<pre>
-<code>
+<div class="code"><pre><code>
 section[header[Something about Glyph]
 You can use Glyph macros in conjunction
  with _Textile_ or _Markdown_ to
@@ -560,18 +531,14 @@ produce HTML files effortlessly.
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
 extremely easy with a 3rd-party 
-renderer like =&gt;[http://www.princexml.com|Prince].
+renderer like =&amp;gt;[http://www.princexml.com|Prince].
   ]   
 ]
-</code>
-</pre>
-</div>
+</code></pre></div>
 <p><b><span class="caps">HTML</span> Output:</b></p>
-<div class="code">
-<pre>
-<code>
+<div class="code"><pre><code>
 &lt;div class="section"&gt;
-  &lt;h2 id="h_1"&gt;Something about Glyph&lt;/h2&gt;
+  &lt;h2 id="h_10"&gt;Something about Glyph&lt;/h2&gt;
   &lt;p&gt;You can use Glyph macros in conjunction with 
      &lt;em&gt;Textile&lt;/em&gt; or &lt;em&gt;Markdown&lt;/em&gt; to
      produce HTML files effortlessly.&lt;/p&gt;
@@ -583,18 +550,17 @@ renderer like =&gt;[http://www.princexml.com|Prince].
       like &lt;a href="http://www.princexml.com"&gt;Prince&lt;/a&gt;.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-</code>
-</pre>
-</div>
-</div>
+</code></pre></div></div>
 <div class="section">
 		<h3 id="h_6">Resources</h3>
 
 <ul>
-	<li>Project Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a></li>
-	<li>Source Code Repository &amp; Bug Tracking: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a></li>
+	<li>Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a></li>
+	<li>Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a></li>
+	<li>Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a></li>
 	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf</a></li>
 	<li>Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a></li>
+	<li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
 </ul>
 </div>
 
@@ -646,9 +612,7 @@ Additionally, some Glyph macros may require additional gems, such as:<br />
 
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
 generated automatically when creating a new project is the following:</p>
-<div class="code">
-<pre>
-<code>
+<div class="code"><pre><code>
 document[
   head[style[default.css]]
   body[
@@ -678,9 +642,7 @@ document[
     ]
   ]
 ]
-</code>
-</pre>
-</div>
+</code></pre></div>
 <p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. <code>frontmatter[]</code>, <code>preface[]</code>, <code>chapter[]</code>, etc. are all Glyph <em>macros</em> used to define &#8212; in this case &#8212; some structural elements. In practice, this means that if you plan to generate an <span class="caps">HTML</span> document, they&#8217;ll be converted into <code>&lt;div&gt;</code> tags.</p>
 <p>Be aware that other macros, on the other hand, are used to do something completely different, e.g.:</p>
 <ul>
@@ -777,9 +739,7 @@ Note that this guessing is far from being foolproof: If you type something like 
 <p>Glyph doesn&#8217;t require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That&#8217;s not <em>too</em> bad if you think about it, unless you&#8217;re writing programming code: in that case, escaping every single square bracket can be painful.</p>
 <p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <code>escape</code> macro (or better, its alias <code>.</code>) with <code>[=</code> and <code>=]</code> as delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as a quote for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
 <p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <code>section</code> macros may not be a good idea, but they should really be mandatory with the <code>code</code> macro, like this:</p>
-<div class="code">
-<pre>
-<code>
+<div class="code"><pre><code>
 code[=
 section[header[A section]
 
@@ -790,11 +750,8 @@ This is another section.
   ]
 ]
 =]
-</code>
-</pre>
-</div>
-<div class="note"><span class="note-title">Note</span><br />
-			Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.		</div>
+</code></pre></div>
+<div class="note"><span class="note-title">Note</span>Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.		</div>
 <p>Besides square brackets, there are other characters that must or can be escaped with backslashes, as shown in the following table</p>
 		<table><tr><th>Escape Sequence		</th>
 
@@ -852,9 +809,7 @@ This is another section.
 		<h4 id="h_15">Sections and Headers</h4>
 
 <p>Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the <code>section</code> macro, like so:</p>
-<div class="code">
-<pre>
-<code>
+<div class="code"><pre><code>
 section[
   header[Section #1]
 
@@ -867,25 +822,19 @@ This section is nested into the previous one.
 
   ] --[End of Section #2]
 ] --[End of Section #1]
-</code>
-</pre>
-</div>
+</code></pre></div>
 <p>This example defines two nested sections, each with its own header. The header is <em>mandatory</em>: it will be displayed at the start of the section and in the Table of Contents.</p>
 <p>Note an important difference from <span class="caps">HTML</span>: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
-<div class="code">
-<pre>
-<code>
-&lt;div class="section"&gt;
-  &lt;h2&gt;Section #1&lt;/h2&gt;
-  &lt;p&gt;Write the section contents here...&lt;/p&gt;
-  &lt;div class="section"&gt;
-    &lt;h3&gt;Section #2&lt;/h3&gt;
-    &lt;p&gt;This section is nested in the previous one&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code>
-</pre>
-</div>
+<div class="code"><pre><code>
+&amp;lt;div class="section"&amp;gt;
+  &amp;lt;h2&amp;gt;Section #1&amp;lt;/h2&amp;gt;
+  &amp;lt;p&amp;gt;Write the section contents here...&amp;lt;/p&amp;gt;
+  &amp;lt;div class="section"&amp;gt;
+    &amp;lt;h3&amp;gt;Section #2&amp;lt;/h3&amp;gt;
+    &amp;lt;p&amp;gt;This section is nested in the previous one&amp;lt;/p&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+</code></pre></div>
 <p>By default, in Glyph the first header level is <em>2</em>, so the two headers are rendered as <code>h2</code> and <code>h3</code>, respectively (<code>--[...]</code> macros are <em>comments</em>, therefore they are not included in the final output).</p>
 <p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element of <a href="http://en.wikipedia.org/wiki/Book_design">Book Design</a>. Each one of them is a simple wrapper for a <code>div</code> tag with a class set to its name.</p>
 <p>The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:</p>
@@ -909,49 +858,85 @@ This section is nested into the previous one.
 <p>**: This macro is likely to be extended in future versions to generate/aggregate content automatically.</p>
 <p>†: This section is not listed in the Table of Contents.</p>
 <p>‡: Any subsection of this section is not listed in the Table of Contents.</p>
-<div class="note"><span class="note-title">Note</span><br />
-			<code>frontmatter</code>, <code>bodymatter</code> and <code>backmatter</code> are also valid (and mandatory!) macro identifiers, typically already included in the default <code>document.glyph</code> file of every project.		</div>
+<div class="note"><span class="note-title">Note</span><code>frontmatter</code>, <code>bodymatter</code> and <code>backmatter</code> are also valid (and mandatory!) macro identifiers, typically already included in the default <code>document.glyph</code> file of every project.		</div>
 </div>
 <div class="section">
 		<h4 id="h_16">Including Files and Snippets</h4>
+
+<p>If you&#8217;re authoring a user manual, a long article or a book, writing everything inside a single file (<code>document.glyph</code>) may not be optimal. For this reason, Glyph provides an <code>include</code> macro (aliased by <code>@</code>) that can be used to include the contents of any file within the <code>text/</code> directory:</p>
+<p><code>@[introduction.textile]</code></p>
+<p>The macro above loads the contents of the <code>introduction.textile</code> file, that can be stored <em>anywhere</em> within the <code>text/</code> directory.</p>
+<div class="note"><span class="note-title">Note</span>Unlike with <a href="img_fig">image and figures</a> that must be included with their <em>relative</em> path to the <code>images/</code> folder, you must not specify a relative path when including text files. This is due to the fact that images are copied <em>as they are</em> in the <code>output/&lt;format&gt;/images/</code> directory and they have to be linked from the output file.<br />
+<br />
+A possible downside of this behavior is that file names must be unique within the entire <code>text/</code> directory (or any of its subdirectories)		</div>
+<p>When including a text file, by default an input filter macro is applied to its contents based on the file extension used:</p>
+<ul>
+	<li><code>.textile</code> &rarr; <code>textile</code></li>
+	<li><code>.markdown</code> or <code>.md</code> &rarr; <code>markdown</code></li>
+</ul>
+<div class="tip"><span class="note-title">Tip</span>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>, like this:<br />
+<br />
+<code>glyph config filters.by_file_extensions false</code>		</div>
+<p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a <em>snippet</em> instead.</p>
+<p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <code>snippet</code> macro (or its alias <code>&amp;</code>).</p>
+<div class="box"><span class="box-title">Example</span><br />
+		Consider the following <code>snippets.yml</code> file:<br />
+<div class="code"><pre><code>
+--- 
+:glang: Glyph Language
+:macros: Glyph Macros
+:sq_esc: |-
+  Square brackets must be escaped 
+  unless used as macro delimiters or within a quoting macro.
+:markups: Textile or Markdown
+:test: |-
+  This is a 
+  Test snippet
+</code></pre></div>
+<p>You can use <code>&amp;[markups]</code> anywhere in your document instead of having to type &#8220;Textile or Markdown&#8221; every time. Additionally, later on you can change the value of the <code>markups</code> snippets only in the <code>snippets.yml</code> file to change it everywhere else in the document.</p>
+</div>
+<div class="tip"><span class="note-title">Tip</span>Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you if necessary.		</div>
 </div>
 <div class="section">
 		<h4 id="h_17">Links and Bookmarks</h4>
 </div>
 <div class="section">
-		<h4 id="h_18">Images and Figures</h4>
+		<h4 id="h_18">Evaluating Ruby code and Configuration Settings</h4>
+</div>
+<div class="section">
+		<h4 id="img_fig">Images and Figures</h4>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_19">Compiling your project</h3>
+		<h3 id="h_20">Compiling your project</h3>
 
 <div class="section">
-		<h4 id="h_20">Adding Stylesheets</h4>
+		<h4 id="h_21">Adding Stylesheets</h4>
 </div>
 <div class="section">
-		<h4 id="h_21"><span class="caps">HTML</span> output</h4>
+		<h4 id="h_22"><span class="caps">HTML</span> output</h4>
 </div>
 <div class="section">
-		<h4 id="h_22"><span class="caps">PDF</span> Output</h4>
+		<h4 id="h_23"><span class="caps">PDF</span> Output</h4>
 </div>
 </div>
 
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_23">Extending Glyph</h2>
+		<h2 id="h_24">Extending Glyph</h2>
 	
 				<div class="section">
-		<h3 id="h_24">Creating Glyph Macros</h3>
+		<h3 id="h_25">Creating Glyph Macros</h3>
 </div>
 <div class="section">
-		<h3 id="h_25">Creating Rake Tasks</h3>
+		<h3 id="h_26">Creating Rake Tasks</h3>
 </div>
 
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_26">Troubleshooting</h2>
+		<h2 id="h_27">Troubleshooting</h2>
 
 		</div>
 
@@ -960,12 +945,12 @@ This section is nested into the previous one.
 
 		<div class="appendix">
 
-		<h2 id="h_27">Command Reference</h2>
+		<h2 id="h_28">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_28">Macro Reference</h2>
+		<h2 id="h_29">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">
