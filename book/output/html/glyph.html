@@ -27,7 +27,7 @@ table {
 	margin: auto;
 }
 body {
-	line-height: 1.3em;
+	line-height: 1.2em;
 	margin: 0;
 	padding: 0;
 	padding: 0 1em;
@@ -60,6 +60,7 @@ body {
 }
 li {
 	list-style-type: square;
+	margin: 0.4em 0;
 	margin-left: 1.5em;
 }
 img {
@@ -74,8 +75,7 @@ dd {
 	font-style: italic;
 }
 p {
-	line-height: 1.5em;
-	margin: 0.5em 0;
+	margin: 1em 0;
 }
 ol.toc {
 	margin-left: 1.5em;
@@ -84,7 +84,6 @@ ol.toc {
 	font-weight: bold;
 }
 .toc li {
-	line-height: 1.5em;
 	list-style-type: none;
 	margin-left: 0;
 }
@@ -582,7 +581,7 @@ renderer like =&amp;gt;[http://www.princexml.com|Prince].
 <p><code>glyph init</code></p>
 <p>That&#8217;s it. You just created a new Glyph project in the <code>test_document</code> directory.</p>
 <div class="box"><span class="box-title">Glyph&#8217;s dependencies</span><br />
-		Glyph requires the following gems:<br />
+Glyph requires the following gems:<br />
 - extlib<br />
 - gli<br />
 - treetop<br />
@@ -682,13 +681,13 @@ document[
 <p>In this way, the document author will be set to <em>John Smith</em> for the current project. To save this setting globally, add a <code>-g</code> option, like this:</p>
 <p><code>glyph config -g document.author "John Smith"</code></p>
 <div class="box"><span class="box-title">Regarding configuration values and data types&#8230;</span><br />
-		Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:<br />
-* is wrapped in quotes (<code>"</code> or <code>'</code>) &#8212; String<br />
-* starts with a colon (<code>:</code>) &#8212; Symbol<br />
-* is wrapped in square brackets (<code>[</code> and <code>]</code>) &#8212; Array<br />
-* is wrapped in curly brackets (<code>\{</code> and <code>\}</code>) &#8212; Hash<br />
-* is <em>true</em> or <em>false</em> &#8212; Boolean<br />
-* If the value is <em>nil</em> &#8212; NilClass<br />
+Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:<br />
+- is wrapped in quotes (<code>"</code> or <code>'</code>) &rarr; String<br />
+- starts with a colon (<code>:</code>) &rarr; Symbol<br />
+- is wrapped in square brackets (<code>[</code> and <code>]</code>) &rarr; Array<br />
+- is wrapped in curly brackets (<code>\{</code> and <code>\}</code>) &rarr; Hash<br />
+- is <em>true</em> or <em>false</em> &rarr; Boolean<br />
+- If the value is <em>nil</em> &rarr; NilClass<br />
 <br />
 Note that this guessing is far from being foolproof: If you type something like <em>{:test, 2}</em>, for example, you&#8217;ll get an error.		</div>
 <p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file). For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. Normally, you may just want to change the following ones:</p>
@@ -826,14 +825,14 @@ This section is nested into the previous one.
 <p>This example defines two nested sections, each with its own header. The header is <em>mandatory</em>: it will be displayed at the start of the section and in the Table of Contents.</p>
 <p>Note an important difference from <span class="caps">HTML</span>: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
 <div class="code"><pre><code>
-&amp;lt;div class="section"&amp;gt;
-  &amp;lt;h2&amp;gt;Section #1&amp;lt;/h2&amp;gt;
-  &amp;lt;p&amp;gt;Write the section contents here...&amp;lt;/p&amp;gt;
-  &amp;lt;div class="section"&amp;gt;
-    &amp;lt;h3&amp;gt;Section #2&amp;lt;/h3&amp;gt;
-    &amp;lt;p&amp;gt;This section is nested in the previous one&amp;lt;/p&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/div&amp;gt;
+&lt;div class="section"&gt;
+  &lt;h2&gt;Section #1&lt;/h2&gt;
+  &lt;p&gt;Write the section contents here...&lt;/p&gt;
+  &lt;div class="section"&gt;
+    &lt;h3&gt;Section #2&lt;/h3&gt;
+    &lt;p&gt;This section is nested in the previous one&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre></div>
 <p>By default, in Glyph the first header level is <em>2</em>, so the two headers are rendered as <code>h2</code> and <code>h3</code>, respectively (<code>--[...]</code> macros are <em>comments</em>, therefore they are not included in the final output).</p>
 <p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element of <a href="http://en.wikipedia.org/wiki/Book_design">Book Design</a>. Each one of them is a simple wrapper for a <code>div</code> tag with a class set to its name.</p>
@@ -880,7 +879,7 @@ A possible downside of this behavior is that file names must be unique within th
 <p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a <em>snippet</em> instead.</p>
 <p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <code>snippet</code> macro (or its alias <code>&amp;</code>).</p>
 <div class="box"><span class="box-title">Example</span><br />
-		Consider the following <code>snippets.yml</code> file:<br />
+Consider the following <code>snippets.yml</code> file:<br />
 <div class="code"><pre><code>
 --- 
 :glang: Glyph Language

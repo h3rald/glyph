@@ -118,12 +118,12 @@ In this way, the document author will be set to _John Smith_ for the current pro
 
 box[Regarding configuration values and data types...|
 Glyph attempts to "guess" the data type of a configuration values by evaluation (@Kernel#instance_eval@) if the value:
-* is wrapped in quotes (@"@ or @'@) -- String
-* starts with a colon (@:@) -- Symbol
-* is wrapped in square brackets (@\[@ and @\]@) -- Array
-* is wrapped in curly brackets (@\{@ and @\}@) -- Hash
-* is _true_ or _false_ -- Boolean
-* If the value is _nil_ -- NilClass
+- is wrapped in quotes (@"@ or @'@) &rarr; String
+- starts with a colon (@:@) &rarr; Symbol
+- is wrapped in square brackets (@\[@ and @\]@) &rarr; Array
+- is wrapped in curly brackets (@\{@ and @\}@) &rarr; Hash
+- is _true_ or _false_ &rarr; Boolean
+- If the value is _nil_ &rarr; NilClass
 
 Note that this guessing is far from being foolproof: If you type something like _{:test, 2}_, for example, you'll get an error. 
 ]

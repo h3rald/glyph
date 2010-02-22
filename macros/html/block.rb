@@ -8,7 +8,7 @@ end
 
 macro :box do
 	%{<div class="box"><span class="box-title">#{@params[0]}</span>
-		#{@params[1]}
+#{@params[1]}
 
 		</div>}
 end

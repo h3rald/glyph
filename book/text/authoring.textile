@@ -101,6 +101,7 @@ This example defines two nested sections, each with its own header. The header i
 
 Note an important difference from HTML: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following HTML code:
 
+<notextile>
 code[=
 <div class="section">
   <h2>Section #1</h2>
@@ -111,6 +112,7 @@ code[=
   </div>
 </div>
 =]
+</notextile>
 
 By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--\[...\]@ macros are _comments_, therefore they are not included in the final output).
 

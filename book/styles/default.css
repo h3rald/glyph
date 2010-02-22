@@ -19,7 +19,7 @@ table {
 	margin: auto;
 }
 body {
-	line-height: 1.3em;
+	line-height: 1.2em;
 	margin: 0;
 	padding: 0;
 	padding: 0 1em;
@@ -52,6 +52,7 @@ body {
 }
 li {
 	list-style-type: square;
+	margin: 0.4em 0;
 	margin-left: 1.5em;
 }
 img {
@@ -66,8 +67,7 @@ dd {
 	font-style: italic;
 }
 p {
-	line-height: 1.5em;
-	margin: 0.5em 0;
+	margin: 1em 0;
 }
 ol.toc {
 	margin-left: 1.5em;
@@ -76,7 +76,6 @@ ol.toc {
 	font-weight: bold;
 }
 .toc li {
-	line-height: 1.5em;
 	list-style-type: none;
 	margin-left: 0;
 }
