@@ -46,7 +46,6 @@ describe "glyph" do
 
 	it "[compile] should compile the project" do
 		create_project
-		run_command_successfully(["compile", "wrong"]).should == false
 		run_command(["compile"]).match(/test_project\.html/m).should_not == nil
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
@@ -75,5 +74,10 @@ describe "glyph" do
 		res.match(/Bookmark 'valid' does not exist/).should == nil
 		res.match(/Snippet 'invalid3' does not exist/).should_not == nil
 	end
+
+	it "[compile] should not compile the project in case of an unknown output format" do
+		run_command_successfully(["compile", "-f", "wrong"]).should == false
+	end
+
 
 end

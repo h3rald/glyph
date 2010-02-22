@@ -13,7 +13,7 @@ describe "load" do
 
 	it "should raise an error unless PROJECT is a valid project directory" do
 		delete_project
-		lambda {Glyph.run! 'load:all' }.should raise_error
+		lambda { Glyph.run! 'load:all' }.should raise_error
 	end
 	
 	it "[snippets] should load snippet definitions" do

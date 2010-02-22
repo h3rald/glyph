@@ -25,19 +25,16 @@ arg_name "[output_target]"
 command :compile do |c|
 	c.desc "Specify a glyph file to compile (default: document.glyph)"
 	c.flag [:s, :source]
+	c.desc "Specify the format of the output file (default: html)"
+	c.flag [:f, :format]
 	c.action do |global_options, options, args|
+		Glyph.run 'load:config'
 		output_targets = Glyph::CONFIG.get('document.output_targets')
 		target = nil
-		case args.length
-		when 0 then
-			target = cfg('document.output')
-			target = nil if target.blank?
-			target ||= cfg('filters.target')
-		when 1 then
-			target = args[0]
-		else
-			raise ArgumentError, "Too many arguments."
-		end	
+		Glyph.config_override('document.output', options[:f]) if options[:f]
+		target = cfg('document.output')
+		target = nil if target.blank?
+		target ||= cfg('filters.target')
 		Glyph.config_override('document.source', options[:s]) if options[:s]
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
@@ -114,8 +111,8 @@ on_error do |exception|
 		false
 	else
 		if Glyph.const_defined? :DEBUG then
-			puts "error: #{exception.message}"
-			puts "backtrace:"
+			puts "Exception: #{exception.message}"
+			puts "Backtrace:"
 			exception.backtrace.each do |b|
 				puts b
 			end

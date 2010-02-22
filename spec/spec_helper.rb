@@ -56,7 +56,7 @@ def run_command(cmd)
 	$stdout = out
 	$stderr = out 
 	Glyph.config_override :quiet, false
-	GLI.run(cmd)
+	GLI.run cmd
 	Glyph.config_override :quiet, true
 	$stdout = old_stdout
 	$stderr = old_stderr
