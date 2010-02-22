@@ -14,7 +14,6 @@ describe Glyph::Macro do
 		@doc = create_doc @tree
 		@node = {:macro => :test, :value => "Testing...", :source => "--", :document => @doc}.to_node
 		@macro = Glyph::Macro.new @node
-
 	end
 
 	it "should raise macro errors" do
@@ -50,6 +49,8 @@ describe Glyph::Macro do
 	end
 
 	it "should detect mutual inclusion" do
+		delete_project
+		create_project
 		Glyph.run! 'load:macros'
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
 		@macro.interpret("&[inc] test").should == "Test [SNIPPET 'inc' NOT PROCESSED] test" 

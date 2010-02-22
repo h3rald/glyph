@@ -4,6 +4,7 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 describe Glyph::Interpreter do
 
 	before do
+		delete_project
 		create_project
 		Glyph.run! 'load:macros'
 		Glyph.run! 'load:snippets'

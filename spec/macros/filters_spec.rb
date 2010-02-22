@@ -4,6 +4,7 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 describe "Filter Macros" do
 
 	before do
+		delete_project
 		create_project
 		Glyph.run! 'load:macros'
 	end

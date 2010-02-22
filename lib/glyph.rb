@@ -76,9 +76,10 @@ module Glyph
 	end
 
 	# Returns true if the PROJECT constant is set to a valid Glyph project directory
-	def self.glyph_project?
-		children = ["config", "text", "output"]
-		PROJECT.children.map{|c| c.basename.to_s} & children == children
+	def self.project?
+		children = ["styles", "text", "output", "snippets.yml", "config.yml", "document.glyph"].sort
+		actual_children = PROJECT.children.map{|c| c.basename.to_s}.sort 
+		(actual_children & children) == children
 	end
 
 	# Enables a Rake task

@@ -37,6 +37,8 @@ describe Glyph do
 	end
 
 	it "should provide a set of default macros and aliases" do
+		delete_project
+		create_project
 		Glyph.run! 'load:macros'
 		macros = [:anchor, :link, :codeph, :fmi, :note, :box, :code, :title, :subtitle,
 		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet,
@@ -67,7 +69,7 @@ describe Glyph do
 		cfg('structure.bodymatter').length.should == 4
 		cfg('structure.backmatter').length.should == 13
 		#puts Glyph::MACROS.keys.map{|i| i.to_s}.sort.to_yaml
-		total.should == (Glyph::MACROS.length - 5) # count_tests, test, ref, -> and em (test-only)
+		total.should == Glyph::MACROS.length
 	end
 
 end

@@ -8,6 +8,7 @@ namespace :load do
 
 	desc "Load snippets"
 	task :snippets do
+		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
 		info "Loading snippets..."
 		snippets = yaml_load Glyph::PROJECT/'snippets.yml'
 		raise RuntimeError, "Invalid snippets file" unless snippets.blank? || snippets.is_a?(Hash)
@@ -16,6 +17,7 @@ namespace :load do
 
 	desc "Load macros"
 	task :macros do
+		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
 		info "Loading macros..."
 		load_macros = lambda do |macro_base|
 			macro_base.children.each do |c|
@@ -34,6 +36,7 @@ namespace :load do
 
 	desc "Load configuration files"
 	task :config do
+		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
 		# Save overrides set by commands...
 		overrides = Glyph::PROJECT_CONFIG.dup
 		Glyph::PROJECT_CONFIG.read

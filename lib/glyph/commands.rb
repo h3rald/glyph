@@ -63,10 +63,10 @@ end
 GLI.desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|
-	Glyph.run 'load:config'
 	c.desc "Save to global configuration"
 	c.switch [:g, :global]
 	c.action do |global_options,options,args|
+		Glyph.run 'load:config'
 		if options[:g] then
 			cfg = Glyph::GLOBAL_CONFIG
 		else
