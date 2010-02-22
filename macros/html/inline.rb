@@ -7,6 +7,10 @@ macro :anchor do
 	%{<a id="#{ident}">#{title}</a>}
 end
 
+macro :codeph do
+	%{<code>#@value</code>}
+end
+
 macro :link do
 	href, title = @params
 	if href.match /^#/ then

@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :note do
-	%{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>
-			#{@value}
+	%{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
 		</div>}
 end
@@ -15,13 +14,9 @@ macro :box do
 end
 
 macro :code do
-	%{<div class="code">
-<pre>
-<code>
-#{@value}
-</code>
-</pre>
-		</div>}
+	%{<div class="code"><pre><code>
+#{@value.gsub('>', '&gt;').gsub('<', '&lt;')}
+</code></pre></div>}
 end
 
 macro :title do
