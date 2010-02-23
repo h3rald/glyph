@@ -153,21 +153,17 @@ h2 {
 	display: block;
 	font-size: 2em;
 	font-weight: bold;
-	line-height: 3em;
-	margin: 3em 0 0 0;
-	margin: 0;
+	margin: 3em 0 1em 0;
 }
 h3 {
 	font-size: 1.6em;
 	font-weight: normal;
-	line-height: 2.5em;
-	margin: 1em 0 0 0;
+	margin: 3em 0 1em 0;
 }
 h4 {
 	font-size: 1.3em;
 	font-weight: normal;
-	line-height: 2em;
-	margin: 1em 0 0 0;
+	margin: 3em 0 1em 0;
 }
 em {
 	font-style: italic;
@@ -185,7 +181,7 @@ code {
 
 /* FONTS */
 body {
-	font-family: "Garamond", "Book Antiqua", "Times New Roman", "Serif";
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
 }
 
 code {
