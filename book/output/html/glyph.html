@@ -229,7 +229,7 @@ code {
   @bottom { content: normal; }
 }
 
-.toc a::after {
+.toc li a::after {
   content: leader('.') target-counter(attr(href), page);
 }
 
@@ -271,7 +271,6 @@ code {
 	counter-increment: toc5;
 }
 
-
 .toc li[class=toc-chapter]::before {
 	content: counter(toc1) ". ";
 }
@@ -280,19 +279,27 @@ code {
 	content: counter(appendix1, upper-latin) ". ";
 }
 
+.toc>li[class] {
+	margin: 1em 0;
+}
+
 .toc ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) " ";
 }
 
 .toc ol ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 
 .toc ol ol ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
 .toc ol ol ol ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 
