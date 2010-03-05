@@ -9,6 +9,8 @@ By now you probably figured out what a macro looks like: it's an identifier of s
 * The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
 * The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with @\|@. For example, the @link@ (@=>@) macro can take an optional second parameter for the link text: @\..[==>[#link_id|This is the link text]=]@.
 
+todo[Add info about macro aliases]
+
 ]
 
 section[header[Escaping and Quoting|esc_quot]
@@ -193,22 +195,120 @@ Snippets (or any other macro) can be nested within other snippets. Glyph takes c
 ] --[End Section]
 
 
-section[header[Links and Bookmarks]
+section[header[Links and Bookmarks|links]
+
+Lightweight markups let you create internal and external links in a very easy way, and you can still do so in Glyph. However, if you do so:
+* There is no built-in way to check if they are valid
+* There is no built-in way to determine the title of a link automatically
+
+If you care about link validation and you want to save some keystrokes, then you should use the following markup-agnostic &[macros]:
+* @link@ (aliased to @=>@) -- to create internal and external links.
+* @anchor@ (aliased to @#@) -- to create named anchors (bookmarks) within your document.
+
+box[Example|
+
+&[gcode]
+
+code[=
+This is a link to =>[#test].
+
+...
+
+This is =>[#wrong].
+
+This is a #[test\|test anchor].
+=]
+
+&[htmlcode]
+
+<notextile>
+code[=
+<p>This is a link to <a href="#test">test anchor</a>.</p>
+<p>...</p>
+<p>This is <a href="#wrong">#wrong</a>.</p>
+<p>This is a <a id="test">test anchor</a>.</p>
+=]
+</notextile>
+
+Additionally, the following warning message is displayed when =>[#compile|compiling]:
+
+<notextile>
+code[=
+warning: Bookmark 'wrong' does not exist
+ -> source: @: aurhoting.textile
+ -> path: document/body/bodymatter/chapter/@/textile/section/section/box/=>
+=]
+</notextile>
 
 ]
 
+Basically, if you use the @=>@ and @#@ macros, Glyph makes sure that:
+* All links point to valid anchors within the document (regardless if the anchors are before or after the link, in snippets or included files).
+* There are no duplicate anchors within the documents.
+* If no title is specified as second parameter for the @=>@ macro, the anchor's title is used as such.
+
+Besides using the @#@ macro, you can also create an anchor for a header by passing an extra parameter to the @header@ macro, like this: codeph[=header[Header Title|my_anchor]=].
+
+note[
+At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the @=>@ macro starts with a @#@). In the future, the macro could be extended to support external links as well. 
+]
+
+] --[End section]
+
 section[header[Evaluating Ruby code and Configuration Settings]
+
+&[glang] is not a full-blown programming language, as it does not provide control flow or variables, for example. 
+However, it is possible to evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
+* codeph[=%[2 + 2]=] &rarr; 4
+* codeph[=%[Time.now]=] &rarr; %[Time.now]
+* codeph[=%[Glyph::VERSION]=] &rarr; %[Glyph::VERSION]
+
+The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself). 
+
+Although it is possible to retrieve Glyph configuration settings in this way (e.g. codeph[=%[cfg('document.author')]=]), the @config@ macro (aliased to @$@) makes things slightly simpler (e.g. codeph[=$[document.author]=]).
 
 ]
 
 section[header[Images and Figures|img_fig]
 
+In a similar way to =>[#links|links], if you want you can include images and figures using &[markups]. If you want additional features, you can use the @img@ and @fig@ macros, as shown in the following example:
+
+box[Example|
+
+&[gcode]
+
+code[=
+img[glyph.svg\|20%\|20%]
+
+fig[example.png\|An example figure.]
+=]
+
+&[htmlcode]
+
+<notextile>
+code[=
+
+<img src="images/glyph.svg" width="20%" height="20%" alt="-" />
+
+<div class="figure">
+  <img src="images/example.png" alt="-"/>
+  <div class="caption">An example figure.</div>
+</div>
+=]
+</notextile>
+
 ]
+
+note[
+In future releases, figures will be numbered automatically and included in a _List of Figures_ section.
+]
+
+] --[End of section]
 
 
 ] --[End of Text Editing section]
 
-section[header[Compiling your project]
+section[header[Compiling your project|compile]
 
 
 section[header[Adding Stylesheets]

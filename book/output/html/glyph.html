@@ -161,21 +161,17 @@ h2 {
 	display: block;
 	font-size: 2em;
 	font-weight: bold;
-	line-height: 3em;
-	margin: 3em 0 0 0;
-	margin: 0;
+	margin: 3em 0 1em 0;
 }
 h3 {
 	font-size: 1.6em;
 	font-weight: normal;
-	line-height: 2.5em;
-	margin: 1em 0 0 0;
+	margin: 3em 0 1em 0;
 }
 h4 {
 	font-size: 1.3em;
 	font-weight: normal;
-	line-height: 2em;
-	margin: 1em 0 0 0;
+	margin: 3em 0 1em 0;
 }
 em {
 	font-style: italic;
@@ -193,7 +189,7 @@ code {
 
 /* FONTS */
 body {
-	font-family: "Garamond", "Book Antiqua", "Times New Roman", "Serif";
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
 }
 
 code {
@@ -430,7 +426,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 		</h2>
 	
 			v0.1.0
-
+ (draft)
 			
 		<div class="author">
 			by <em>Fabio Cevasco</em>
@@ -460,11 +456,11 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
 <li class="toc-section"><a href="#h_15">Sections and Headers</a></li>
 <li class="toc-section"><a href="#h_16">Including Files and Snippets</a></li>
-<li class="toc-section"><a href="#h_17">Links and Bookmarks</a></li>
+<li class="toc-section"><a href="#links">Links and Bookmarks</a></li>
 <li class="toc-section"><a href="#h_18">Evaluating Ruby code and Configuration Settings</a></li>
 <li class="toc-section"><a href="#img_fig">Images and Figures</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_20">Compiling your project</a></li>
+<li class="toc-section"><a href="#compile">Compiling your project</a></li>
 <li><ol><li class="toc-section"><a href="#h_21">Adding Stylesheets</a></li>
 <li class="toc-section"><a href="#h_22">HTML output</a></li>
 <li class="toc-section"><a href="#h_23">PDF Output</a></li>
@@ -564,7 +560,7 @@ renderer like =&amp;gt;[http://www.princexml.com|Prince].
 	<li>Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a></li>
 	<li>Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a></li>
 	<li>Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a></li>
-	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/tree/master/book/output/pdf/glyph.pdf</a></li>
+	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/h3rald/glyph/raw/master/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/master/book/output/pdf/glyph.pdf</a></li>
 	<li>Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a></li>
 	<li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
 </ul>
@@ -904,17 +900,93 @@ Consider the following <code>snippets.yml</code> file:<br />
 <div class="tip"><span class="note-title">Tip</span>Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you if necessary.		</div>
 </div>
 <div class="section">
-		<h4 id="h_17">Links and Bookmarks</h4>
+		<h4 id="links">Links and Bookmarks</h4>
+
+<p>Lightweight markups let you create internal and external links in a very easy way, and you can still do so in Glyph. However, if you do so:</p>
+<ul>
+	<li>There is no built-in way to check if they are valid</li>
+	<li>There is no built-in way to determine the title of a link automatically</li>
+</ul>
+<p>If you care about link validation and you want to save some keystrokes, then you should use the following markup-agnostic Glyph Macros:</p>
+<ul>
+	<li><code>link</code> (aliased to <code>=&gt;</code>) &#8212; to create internal and external links.</li>
+	<li><code>anchor</code> (aliased to <code>#</code>) &#8212; to create named anchors (bookmarks) within your document.</li>
+</ul>
+<div class="box"><span class="box-title">Example</span><br />
+The following Glyph code:<br />
+<br />
+<div class="code"><pre><code>
+This is a link to =&amp;gt;[#test].
+
+...
+
+This is =&amp;gt;[#wrong].
+
+This is a #[test|test anchor].
+</code></pre></div>
+<p>Is translated into the following <span class="caps">HTML</span> code:</p>
+<div class="code"><pre><code>
+&lt;p&gt;This is a link to &lt;a href="#test"&gt;test anchor&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;p&gt;This is &lt;a href="#wrong"&gt;#wrong&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is a &lt;a id="test"&gt;test anchor&lt;/a&gt;.&lt;/p&gt;
+</code></pre></div>
+<p>Additionally, the following warning message is displayed when <a href="#compile">compiling</a>:</p>
+<div class="code"><pre><code>
+warning: Bookmark 'wrong' does not exist
+ -&gt; source: @: aurhoting.textile
+ -&gt; path: document/body/bodymatter/chapter/@/textile/section/section/box/=&gt;
+</code></pre></div>
+</div>
+<p>Basically, if you use the <code>=&gt;</code> and <code>#</code> macros, Glyph makes sure that:</p>
+<ul>
+	<li>All links point to valid anchors within the document (regardless if the anchors are before or after the link, in snippets or included files).</li>
+	<li>There are no duplicate anchors within the documents.</li>
+	<li>If no title is specified as second parameter for the <code>=&gt;</code> macro, the anchor&#8217;s title is used as such.</li>
+</ul>
+<p>Besides using the <code>#</code> macro, you can also create an anchor for a header by passing an extra parameter to the <code>header</code> macro, like this: <code>header[Header Title|my_anchor]</code>.</p>
+<div class="note"><span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <code>=&gt;</code> macro starts with a <code>#</code>). In the future, the macro could be extended to support external links as well.		</div>
 </div>
 <div class="section">
 		<h4 id="h_18">Evaluating Ruby code and Configuration Settings</h4>
+
+<p>Glyph Language is not a full-blown programming language, as it does not provide control flow or variables, for example. <br />
+However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
+<ul>
+	<li><code>%[2 + 2]</code> &rarr; 4</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Feb 23 16:18:57 +0100 2010</li>
+	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
+</ul>
+<p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
+<p>Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <code>config</code> macro (aliased to <code>$</code>) makes things slightly simpler (e.g. <code>$[document.author]</code>).</p>
 </div>
 <div class="section">
 		<h4 id="img_fig">Images and Figures</h4>
+
+<p>In a similar way to <a href="#links">links</a>, if you want you can include images and figures using Textile or Markdown. If you want additional features, you can use the <code>img</code> and <code>fig</code> macros, as shown in the following example:</p>
+<div class="box"><span class="box-title">Example</span><br />
+The following Glyph code:<br />
+<br />
+<div class="code"><pre><code>
+img[glyph.svg|20%|20%]
+
+fig[example.png|An example figure.]
+</code></pre></div>
+<p>Is translated into the following <span class="caps">HTML</span> code:</p>
+<div class="code"><pre><code>
+&lt;img src="images/glyph.svg" width="20%" height="20%" alt="-" /&gt;
+
+&lt;div class="figure"&gt;
+  &lt;img src="images/example.png" alt="-"/&gt;
+  &lt;div class="caption"&gt;An example figure.&lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>
+</div>
+<div class="note"><span class="note-title">Note</span>In future releases, figures will be numbered automatically and included in a <em>List of Figures</em> section.		</div>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_20">Compiling your project</h3>
+		<h3 id="compile">Compiling your project</h3>
 
 <div class="section">
 		<h4 id="h_21">Adding Stylesheets</h4>

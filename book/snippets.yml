@@ -2,6 +2,8 @@
 :glang: Glyph Language
 :macros: Glyph Macros
 :sq_esc: Square brackets must be escaped unless used as macro delimiters or within a quoting macro.
+:gcode: "The following Glyph code:"
+:htmlcode: "Is translated into the following HTML code:"
 :markups: Textile or Markdown
 :test: |-
   This is a 
