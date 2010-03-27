@@ -1,11 +1,41 @@
-section[header[Creating Glyph Macros]
+Glyph was created wih extensibility in mind. You can freely extend &[glang] by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in @.rb@ files within the @/lib/macros@ folder of your project.
 
-todo[...]
+section[header[Anatomy of a Macro]
+
+This is the source code of a fairly simple macro used to format a note :
+
+<notextile>
+code[=
+macro :note do
+  %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
+
+    </div>}
+end
+=]
+</notextile>
+
+box[Why using @name instead of the actual name of the macro?|
 
 ]
 
-section[header[Creating Rake Tasks]
 
-todo[...]
+--[Macro variables...]
+
+]
+
+section[header[Bookmarks and Headers]
+
+]
+
+section[header[Using Placeholders]
+
+]
+
+section[header[Interpreting Glyph Code]
+
+
+]
+
+section[header[Further Reading]
 
 ]

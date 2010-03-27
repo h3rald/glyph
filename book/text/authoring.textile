@@ -310,21 +310,41 @@ In future releases, figures will be numbered automatically and included in a _Li
 
 section[header[Compiling your project|compile]
 
+By default, a Glyph project can be _compiled_ into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more formats are likely to be supported.
 
 section[header[Adding Stylesheets]
 
+Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS 3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.
+
+You can embed CSS files using the @style@ macro, like this:
+
+code[= style[default.css] =]
+
+In this case, the @style@ macro looks for a @default.css@ file in the @/styles@ folder of your Glyph project and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
+
 ]
 
-
 section[header[HTML output]
+
+To compile a Glyph project to an HTML document, use the @glyph compile@ command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. The name of the HTML file can be set in the configuration (@document.filename@ setting).
+
+If you don't want to compile the whole project, you can specify a different source, like this:
+
+code[= glyph compile -s myfile.textile =]
 
 ]
 
 section[header[PDF Output]
 
-]
+To generate a PDF document, you must specify @pdf@ as format, like this:
 
-todo[...]
+code[= glyph compile -f pdf =]
+
+The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.
+
+note[Glyph v\.%[Glyph::VERSION.strip] has been successfully tested with Prince v6.0, and the PDF version of this very book was generated with it.]
+
+]
 
 ]
 

@@ -5,6 +5,7 @@
 :gcode: "The following Glyph code:"
 :htmlcode: "Is translated into the following HTML code:"
 :markups: Textile or Markdown
+:prince: "=>[http://www.princexml.com/|Prince]"
 :test: |-
   This is a 
   Test snippet

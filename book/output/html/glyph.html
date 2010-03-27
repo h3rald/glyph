@@ -434,7 +434,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 	
 			
 		<div class="pubdate">
-			February 2010
+			March 2010
 		</div>
 
 		</div>
@@ -467,12 +467,15 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 </ol></li>
 </ol></li>
 <li class="toc-chapter"><a href="#h_24">Extending Glyph</a></li>
-<li><ol><li class="toc-section"><a href="#h_25">Creating Glyph Macros</a></li>
-<li class="toc-section"><a href="#h_26">Creating Rake Tasks</a></li>
+<li><ol><li class="toc-section"><a href="#h_25">Anatomy of a Macro</a></li>
+<li class="toc-section"><a href="#h_26">Bookmarks and Headers</a></li>
+<li class="toc-section"><a href="#h_27">Using Placeholders</a></li>
+<li class="toc-section"><a href="#h_28">Interpreting Glyph Code</a></li>
+<li class="toc-section"><a href="#h_29">Further Reading</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_27">Troubleshooting</a></li>
-<li class="toc-appendix"><a href="#h_28">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_29">Macro Reference</a></li>
+<li class="toc-chapter"><a href="#h_30">Troubleshooting</a></li>
+<li class="toc-appendix"><a href="#h_31">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_32">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -482,7 +485,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 		<h2 id="h_1">Introduction</h2>
 	
 				<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
-<p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate deliverables in different formats such as <span class="caps">HTML</span> or <span class="caps">PDF</span> (through <a href="http://www.princexml.com">Prince</a>).</p>
+<p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate deliverables in different formats such as <span class="caps">HTML</span> or <span class="caps">PDF</span> (through <a href="http://www.princexml.com/">Prince</a>).</p>
 <div class="section">
 		<h3 id="h_2">Main Features</h3>
 
@@ -516,7 +519,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 	<li><code>glyph init</code> &#8212; to initialize a new Glyph project in the current (empty) directory.</li>
 	<li><code>glyph add introduction.textile</code> &#8212; to create a new file called <em>introduction.textile</em>.</li>
 	<li><code>glyph compile</code> &#8212; to compile the current document into a single <span class="caps">HTML</span> file.</li>
-	<li><code>glyph compile -f pdf</code> &#8212; to compile the current document into <span class="caps">HTML</span> and then transform it into <span class="caps">PDF</span> using <a href="http://www.princexml.com">Prince</a>.</li>
+	<li><code>glyph compile -f pdf</code> &#8212; to compile the current document into <span class="caps">HTML</span> and then transform it into <span class="caps">PDF</span> using <a href="http://www.princexml.com/">Prince</a>.</li>
 </ul>
 </div>
 <div class="section">
@@ -954,7 +957,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Feb 23 16:18:57 +0100 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Mar 27 23:00:30 +0100 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -988,14 +991,35 @@ fig[example.png|An example figure.]
 <div class="section">
 		<h3 id="compile">Compiling your project</h3>
 
+<p>By default, a Glyph project can be <em>compiled</em> into an <span class="caps">HTML</span> document. Additionally, Glyph can also be used to produce <span class="caps">PDF</span> documents through <a href="http://www.princexml.com/">Prince</a>, and in future releases more formats are likely to be supported.</p>
 <div class="section">
 		<h4 id="h_21">Adding Stylesheets</h4>
+
+<p>Currently, Glyph does not provide any native way to format text and pages. The reason is that there&#8217;s absolutely no need for that: <span class="caps">CSS</span> does the job just fine. In particular, <span class="caps">CSS</span> 3 offers specific attributes and elements that can be used specifically for paginated documents. That&#8217;s no replacement for LaTeX by any means, but it is enough if you&#8217;re not looking for advanced typographical features.</p>
+<p>You can embed <span class="caps">CSS</span> files using the <code>style</code> macro, like this:</p>
+<div class="code"><pre><code>
+style[default.css]
+</code></pre></div>
+<p>In this case, the <code>style</code> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
 </div>
 <div class="section">
 		<h4 id="h_22"><span class="caps">HTML</span> output</h4>
+
+<p>To compile a Glyph project to an <span class="caps">HTML</span> document, use the <code>glyph compile</code> command within your Glyph project folder. Glyph parses the <code>document.glyph</code> file (and all included files and snippets); if no errors are found, Glyph creates an <span class="caps">HTML</span> document in the <code>/output/html</code> folder. The name of the <span class="caps">HTML</span> file can be set in the configuration (<code>document.filename</code> setting).</p>
+<p>If you don&#8217;t want to compile the whole project, you can specify a different source, like this:</p>
+<div class="code"><pre><code>
+glyph compile -s myfile.textile
+</code></pre></div>
 </div>
 <div class="section">
 		<h4 id="h_23"><span class="caps">PDF</span> Output</h4>
+
+<p>To generate a <span class="caps">PDF</span> document, you must specify <code>pdf</code> as format, like this:</p>
+<div class="code"><pre><code>
+glyph compile -f pdf
+</code></pre></div>
+<p>The command above will attempt to compile the project into an <span class="caps">HTML</span> document and then call Prince to generate a <span class="caps">PDF</span> document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It&#8217;s not open source, but the free version is fully functional, and it just adds a small logo on the first page.</p>
+<div class="note"><span class="note-title">Note</span>Glyph v0.1.0 has been successfully tested with Prince v6.0, and the <span class="caps">PDF</span> version of this very book was generated with it.		</div>
 </div>
 </div>
 
@@ -1004,17 +1028,37 @@ fig[example.png|An example figure.]
 
 		<h2 id="h_24">Extending Glyph</h2>
 	
-				<div class="section">
-		<h3 id="h_25">Creating Glyph Macros</h3>
+				<p>Glyph was created wih extensibility in mind. You can freely extend Glyph Language by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in <code>.rb</code> files within the <code>/lib/macros</code> folder of your project.</p>
+<div class="section">
+		<h3 id="h_25">Anatomy of a Macro</h3>
+
+<p>This is the source code of a fairly simple macro used to format a note :</p>
+<div class="code"><pre><code>
+macro :note do
+  %{&lt;div class="#{@name}"&gt;&lt;span class="note-title"&gt;#{@name.to_s.capitalize}&lt;/span&gt;#{@value}
+
+    &lt;/div&gt;}
+end
+</code></pre></div>
+<div class="box"><span class="box-title">Why using @name instead of the actual name of the macro?</span>		</div>
 </div>
 <div class="section">
-		<h3 id="h_26">Creating Rake Tasks</h3>
+		<h3 id="h_26">Bookmarks and Headers</h3>
+</div>
+<div class="section">
+		<h3 id="h_27">Using Placeholders</h3>
+</div>
+<div class="section">
+		<h3 id="h_28">Interpreting Glyph Code</h3>
+</div>
+<div class="section">
+		<h3 id="h_29">Further Reading</h3>
 </div>
 
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_27">Troubleshooting</h2>
+		<h2 id="h_30">Troubleshooting</h2>
 
 		</div>
 
@@ -1023,12 +1067,12 @@ fig[example.png|An example figure.]
 
 		<div class="appendix">
 
-		<h2 id="h_28">Command Reference</h2>
+		<h2 id="h_31">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_29">Macro Reference</h2>
+		<h2 id="h_32">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">
