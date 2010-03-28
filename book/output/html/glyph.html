@@ -102,11 +102,7 @@ th {
 tr, td, th {
 	padding: 5px;
 }
-td {
-	border-left: 1px solid #E6E6E6;
-	border-right: 1px solid #E6E6E6;
-}
-th {
+td, tr {
 	border: 1px solid #E6E6E6;
 }
 sup {
@@ -477,8 +473,12 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <li class="toc-section"><a href="#h_29">Further Reading</a></li>
 </ol></li>
 <li class="toc-chapter"><a href="#h_30">Troubleshooting</a></li>
-<li class="toc-appendix"><a href="#h_31">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_32">Macro Reference</a></li>
+<li><ol><li class="toc-section"><a href="#h_31">Generic Errors</a></li>
+<li class="toc-section"><a href="#h_32">Document Errors</a></li>
+<li class="toc-section"><a href="#h_33">Macro Errors</a></li>
+</ol></li>
+<li class="toc-appendix"><a href="#h_34">Command Reference</a></li>
+<li class="toc-appendix"><a href="#h_35">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -960,7 +960,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Mar 28 20:10:00 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Mar 28 20:33:01 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1165,6 +1165,54 @@ end
 			<div class="chapter">
 
 		<h2 id="h_30">Troubleshooting</h2>
+	
+				<div class="section">
+		<h3 id="h_31">Generic Errors</h3>
+
+<table>
+<tr>
+				<th>Error</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>Undefined macro &#8216;<em>macro_name</em>&#8217;</td>
+			<td>&#8230;</td>
+</tr>
+</table>
+</div>
+<div class="section">
+		<h3 id="h_32">Document Errors</h3>
+
+<table>
+<tr>
+				<th>Error</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>Document contains syntax errors</td>
+			<td>&#8230;</td>
+</tr>
+
+<tr>
+			<td>Document has not been analyzed</td>
+			<td>&#8230;</td>
+</tr>
+</table>
+</div>
+<div class="section">
+		<h3 id="h_33">Macro Errors</h3>
+
+<table>
+<tr>
+				<th>Error</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>Mutual inclusion</td>
+			<td>&#8230;</td>
+</tr>
+</table>
+</div>
 
 		</div>
 
@@ -1173,12 +1221,12 @@ end
 
 		<div class="appendix">
 
-		<h2 id="h_31">Command Reference</h2>
+		<h2 id="h_34">Command Reference</h2>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_32">Macro Reference</h2>
+		<h2 id="h_35">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">

@@ -33,7 +33,7 @@ document[
 			]
 			chapter[
 				header[Troubleshooting]
-				--[=@[troubleshooting.textile]=]
+				@[troubleshooting.textile]
 			]
 		]
 		backmatter[

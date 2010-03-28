@@ -1,0 +1,38 @@
+
+
+section[header[Generic Errors]
+
+error_table[
+ref_error[Undefined macro '_==macro_name==_'|
+...
+]
+]
+
+] --[End Generic Errors]
+
+section[header[Document Errors]
+
+
+error_table[
+
+ref_error[Document contains syntax errors|
+...
+--[If no Node is returned... -- parser error]
+]
+
+ref_error[Document has not been analyzed|
+...
+]
+]
+
+] --[End Document Errors]
+
+section[header[Macro Errors]
+
+error_table[
+ref_error[Mutual inclusion|
+...
+]
+]
+
+] --[End Macro Errors]
