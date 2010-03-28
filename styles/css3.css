@@ -1,17 +1,18 @@
 @page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
-	@top { content: string(chapter-title);  }
+	@top { 
+		content: string(book-title) " &#183; " string(book-subtitle) " &ndash; " string(chapter-title);  
+		font-style: italic;
+	}
   @bottom { content: counter(page, decimal); }
 }
 
 @page frontmatter {
-  @top { content: string(chapter-title); }
 	@bottom { content: counter(page, lower-roman); }
 }
 
 @page backmatter {
-  @top { content: string(chapter-title); }
 	@bottom { content: counter(page, decimal); }
 }
 
@@ -21,12 +22,16 @@
   @bottom { content: normal; }
 }
 
-.toc a::after {
+.toc li a::after {
   content: leader('.') target-counter(attr(href), page);
 }
 
-h1 { 
+.titlepage h1 { 
 	string-set: book-title content();
+}
+
+.titlepage h2 {
+	string-set: book-subtitle content();
 }
 
 
@@ -59,7 +64,6 @@ h1 {
 	counter-increment: toc5;
 }
 
-
 .toc li[class=toc-chapter]::before {
 	content: counter(toc1) ". ";
 }
@@ -68,19 +72,27 @@ h1 {
 	content: counter(appendix1, upper-latin) ". ";
 }
 
+.toc>li[class] {
+	margin: 1em 0;
+}
+
 .toc ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) " ";
 }
 
 .toc ol ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 
 .toc ol ol ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
 .toc ol ol ol ol li[class]::before {
+	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 

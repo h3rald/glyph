@@ -8,8 +8,8 @@ module Glyph
 		# Creates a new macro instance from a Node
 		# @param [Node] node a node populated with macro data
 		def initialize(node)
-			@name = node[:macro]
 			@node = node
+			@name = @node[:macro]
 			@value = @node[:value]
 			@source = @node[:source]
 			esc = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'

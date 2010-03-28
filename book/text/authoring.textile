@@ -118,7 +118,7 @@ code[=
 
 By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--\[...\]@ macros are _comments_, therefore they are not included in the final output).
 
-There are _a lot_ of macros that can be used in the same way as @section@, one for each element of =>[http://en.wikipedia.org/wiki/Book_design|Book Design]. Each one of them is a simple wrapper for a @div@ tag with a class set to its name.
+There are _a lot_ of macros that can be used in the same way as @section@, one for each element of =>[http://en.wikipedia.org/wiki/Book_design|Book Design]. Each one of them is a simple wrapper for a @<div>@ tag with a class set to its name.
 
 The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:
 

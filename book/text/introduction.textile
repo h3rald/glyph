@@ -22,7 +22,7 @@ Glyph uses a =>[#macros_nutshell|simple macro system] to perform a wide variety 
 
 section[header[Installation]
 
-@sudo gem install glyph@ -- simple, as always.
+@gem install glyph@ -- simple, as always.
 
 ]
 

@@ -10,32 +10,139 @@ macro :note do
   %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
     </div>}
-end
+end 
 =]
 </notextile>
 
-box[Why using @name instead of the actual name of the macro?|
+The @macro@ method takes a single Symbol or String parameter, corresponding to the name of the macro. In this case, the entire block (or _body_ of the macro) is a String corresponding to what we want the macro to evaluate to: a @<div>@ tag containing a note. 
 
-]
+The body of the macro is evaluated in the context of the =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Macro|Glyph::Macro] class, therefore its instance variables (like codeph[@name] or codeph[@value]) can be used directly.
 
+box[Why using codeph[@name] instead of just "note"?|
+For the @note@ macro, it absolutely makes no difference. However, by using codeph[@name] it is possible to re-use the same code for the @tip@, @important@ and @caution@ macros as well, which are in fact only aliases of the @note@ macro:
 
---[Macro variables...]
+@macro_alias :important => :note@
+@macro_alias :tip => :note@
+@macro_alias :caution => :note@
+] --[End box]
+
+The following table lists all the instance variables that can be used inside macros:
+
+table[
+  tr[
+    th[Variable]
+    th[Description]
+  ]
+  tr[
+    td[codeph[@node]]
+    td[A =>[http://yardoc.org/docs/h3rald-glyph/Node|Node] containing information about the macro, within the document syntax tree. Useful for accessing parent and child macros, and the current =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Document|document]. Normally, macro nodes contain the following keys:
+- @:name@, the name of the macro
+- @:value@, the value (i.e. the contents, within the delimiters) of the macro
+- @:source@, a String identifying the source of the macro (a file, a snippet, etc.) 
+- @:document@, the parsed document tree
+
+Note that the first three keys can also be accessed via instance variables.]
+  ]
+  tr[
+    td[codeph[@name]]
+    td[The name of the macro]
+  ]
+  tr[
+    td[codeph[@value]]
+    td[The full contents (including parameters and nested macros) within the macro delimiters.]
+  ]
+  tr[
+    td[codeph[@source]]
+    td[A String identifying the source of the macro (a file, a snippet, etc.) ]
+  ]
+  tr[
+    td[codeph[@params]]
+    td[The parameters passed to the macro. In other words, the value of the macro split by pipes (@|@).]
+  ]
+] --[End Table]
 
 ]
 
 section[header[Bookmarks and Headers]
 
+The =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Macro|Glyph::Macro] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the @anchor@ macro:
+
+<notextile>
+code[=
+macro :anchor do 
+  ident, title = @params
+  macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
+  bookmark :id => ident, :title => title
+  %{<a id="#{ident}">#{title}</a>}
+end
+=] </notextile>
+
+The @bookmark?@ method can be used to check the existance of a particular ID within the whole document, while the @bookmark@ method is used to store bookmark IDs and titles. In a similar way, you can use @header?@ and @header@ methods to check the existance of headers within the documents or store new ones.
+
 ]
 
 section[header[Using Placeholders]
 
+Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that's easy) or even _after_ the location of the link. 
+
+Here's the source code of the @link@ macro:
+
+<notextile>
+code[=
+macro :link do
+  href, title = @params
+  if href.match /^#/ then
+    anchor = href.gsub(/^#/, '').to_sym
+    bmk = bookmark? anchor
+    if bmk then
+      title ||= bmk[:title]
+    else
+      plac = placeholder do |document|
+        macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor] 
+        document.bookmarks[anchor][:title]
+      end
+      title ||= plac
+    end
+  end
+  title ||= href
+  %{<a href="#{href}">#{title}</a>}
+end
+=] </notextile>
+
+If there's already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the @placeholder@ method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.
+
+Within the @placeholder@ block, the @document@ parameter is, by all means, the fully analyzed document.
 ]
 
 section[header[Interpreting Glyph Code]
 
+What if you need to evaluate some Glyph code _within_ a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the @interpret@ method, as follows:
+
+<notextile>
+code[=
+macro :fmi do
+  topic, href = @params
+  link = placeholder do |document| 
+    interpret "link[#{href}]"
+  end
+  %{<span class="fmi">for more information on #{topic}, see #{link}</span>}
+end
+=] </notextile>
+
+When the @interpreter@ method is called, the following happens:
+# A new Glyph document is created from the String passed to the method.
+# The bookmarks, headers and placeholders are passed from the main document to the new one. Because they are stored in Arrays or Hashes, they are passed by reference, so for example any new bookmark stored in the new document will also become available in the main document.
+# Any macro included in the String is evaluated, and the resulting text is returned by the method. Note that this new document does not get finalized: in other words, placeholders will be left as they are, and they'll eventually be replaced when _the main document_ is finalized.
 
 ]
 
 section[header[Further Reading]
 
+For more examples on how to create more complex macros, have a look at the =>[http://github.com/h3rald/glyph/tree/master/macros/|source code] of the existing ones.
+
+To gain a deeper understanding on how macros are executed, have a look at the following Glyph classes:
+* =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Macro|Glyph::Macro]
+* =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Interpreter|Glyph::Interpreter]
+* =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Document|Glyph::Document]
+* =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Node|Node]
 ]

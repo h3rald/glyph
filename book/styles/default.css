@@ -55,6 +55,9 @@ li {
 	margin: 0.4em 0;
 	margin-left: 1.5em;
 }
+ol li{
+	list-style-type: decimal;
+}
 img {
 	margin: 0 5px;
 	padding: 2px;

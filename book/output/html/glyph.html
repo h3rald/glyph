@@ -63,6 +63,9 @@ li {
 	margin: 0.4em 0;
 	margin-left: 1.5em;
 }
+ol li{
+	list-style-type: decimal;
+}
 img {
 	margin: 0 5px;
 	padding: 2px;
@@ -509,7 +512,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <div class="section">
 		<h3 id="h_3">Installation</h3>
 
-<p><code>sudo gem install glyph</code> &#8212; simple, as always.</p>
+<p><code>gem install glyph</code> &#8212; simple, as always.</p>
 </div>
 <div class="section">
 		<h3 id="h_4">Essential Glyph commands</h3>
@@ -841,7 +844,7 @@ This section is nested into the previous one.
 &lt;/div&gt;
 </code></pre></div>
 <p>By default, in Glyph the first header level is <em>2</em>, so the two headers are rendered as <code>h2</code> and <code>h3</code>, respectively (<code>--[...]</code> macros are <em>comments</em>, therefore they are not included in the final output).</p>
-<p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element of <a href="http://en.wikipedia.org/wiki/Book_design">Book Design</a>. Each one of them is a simple wrapper for a <code>div</code> tag with a class set to its name.</p>
+<p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element of <a href="http://en.wikipedia.org/wiki/Book_design">Book Design</a>. Each one of them is a simple wrapper for a <code>&lt;div&gt;</code> tag with a class set to its name.</p>
 <p>The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:</p>
 		<table><tr><td><strong>Frontmatter</strong>		</td>
 
@@ -957,7 +960,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Mar 27 23:00:30 +0100 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Mar 28 20:10:00 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1040,19 +1043,122 @@ macro :note do
     &lt;/div&gt;}
 end
 </code></pre></div>
-<div class="box"><span class="box-title">Why using @name instead of the actual name of the macro?</span>		</div>
+<p>The <code>macro</code> method takes a single Symbol or String parameter, corresponding to the name of the macro. In this case, the entire block (or <em>body</em> of the macro) is a String corresponding to what we want the macro to evaluate to: a <code>&lt;div&gt;</code> tag containing a note.</p>
+<p>The body of the macro is evaluated in the context of the <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro">Glyph::Macro</a> class, therefore its instance variables (like <code>@name</code> or <code>@value</code>) can be used directly.</p>
+<div class="box"><span class="box-title">Why using <code>@name</code> instead of just &#8220;note&#8221;?</span><br />
+For the <code>note</code> macro, it absolutely makes no difference. However, by using <code>@name</code> it is possible to re-use the same code for the <code>tip</code>, <code>important</code> and <code>caution</code> macros as well, which are in fact only aliases of the <code>note</code> macro:<br />
+<br />
+<code>macro_alias :important =&gt; :note</code><br />
+<code>macro_alias :tip =&gt; :note</code><br />
+<code>macro_alias :caution =&gt; :note</code>		</div> 
+<p>The following table lists all the instance variables that can be used inside macros:</p>
+		<table><tr><th>Variable		</th>
+
+		<th>Description		</th>	
+</tr>
+
+		<tr><td><code>@node</code>		</td>
+
+		<td>A <a href="http://yardoc.org/docs/h3rald-glyph/Node">Node</a> containing information about the macro, within the document syntax tree. Useful for accessing parent and child macros, and the current <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Document">document</a>. Normally, macro nodes contain the following keys:<br />
+- <code>:name</code>, the name of the macro<br />
+- <code>:value</code>, the value (i.e. the contents, within the delimiters) of the macro<br />
+- <code>:source</code>, a String identifying the source of the macro (a file, a snippet, etc.) <br />
+- <code>:document</code>, the parsed document tree<br />
+<br />
+Note that the first three keys can also be accessed via instance variables.		</td>	
+</tr>
+
+		<tr><td><code>@name</code>		</td>
+
+		<td>The name of the macro		</td>	
+</tr>
+
+		<tr><td><code>@value</code>		</td>
+
+		<td>The full contents (including parameters and nested macros) within the macro delimiters.		</td>	
+</tr>
+
+		<tr><td><code>@source</code>		</td>
+
+		<td>A String identifying the source of the macro (a file, a snippet, etc.)		</td>	
+</tr>
+
+		<tr><td><code>@params</code>		</td>
+
+		<td>The parameters passed to the macro. In other words, the value of the macro split by pipes (<code>|</code>).		</td>	
+</tr>
+</table>
 </div>
 <div class="section">
 		<h3 id="h_26">Bookmarks and Headers</h3>
+
+<p>The <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro">Glyph::Macro</a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <code>anchor</code> macro:</p>
+<div class="code"><pre><code>
+macro :anchor do 
+  ident, title = @params
+  macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
+  bookmark :id =&gt; ident, :title =&gt; title
+  %{&lt;a id="#{ident}"&gt;#{title}&lt;/a&gt;}
+end
+</code></pre></div> <p>The <code>bookmark?</code> method can be used to check the existance of a particular ID within the whole document, while the <code>bookmark</code> method is used to store bookmark IDs and titles. In a similar way, you can use <code>header?</code> and <code>header</code> methods to check the existance of headers within the documents or store new ones.</p>
 </div>
 <div class="section">
 		<h3 id="h_27">Using Placeholders</h3>
+
+<p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the location of the link.</p>
+<p>Here&#8217;s the source code of the <code>link</code> macro:</p>
+<div class="code"><pre><code>
+macro :link do
+  href, title = @params
+  if href.match /^#/ then
+    anchor = href.gsub(/^#/, '').to_sym
+    bmk = bookmark? anchor
+    if bmk then
+      title ||= bmk[:title]
+    else
+      plac = placeholder do |document|
+        macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor] 
+        document.bookmarks[anchor][:title]
+      end
+      title ||= plac
+    end
+  end
+  title ||= href
+  %{&lt;a href="#{href}"&gt;#{title}&lt;/a&gt;}
+end
+</code></pre></div> <p>If there&#8217;s already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the <code>placeholder</code> method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.</p>
+<p>Within the <code>placeholder</code> block, the <code>document</code> parameter is, by all means, the fully analyzed document.</p>
 </div>
 <div class="section">
 		<h3 id="h_28">Interpreting Glyph Code</h3>
+
+<p>What if you need to evaluate some Glyph code <em>within</em> a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the <code>interpret</code> method, as follows:</p>
+<div class="code"><pre><code>
+macro :fmi do
+  topic, href = @params
+  link = placeholder do |document| 
+    interpret "link[#{href}]"
+  end
+  %{&lt;span class="fmi"&gt;for more information on #{topic}, see #{link}&lt;/span&gt;}
+end
+</code></pre></div> <p>When the <code>interpreter</code> method is called, the following happens:</p>
+<ol>
+	<li>A new Glyph document is created from the String passed to the method.</li>
+	<li>The bookmarks, headers and placeholders are passed from the main document to the new one. Because they are stored in Arrays or Hashes, they are passed by reference, so for example any new bookmark stored in the new document will also become available in the main document.</li>
+	<li>Any macro included in the String is evaluated, and the resulting text is returned by the method. Note that this new document does not get finalized: in other words, placeholders will be left as they are, and they&#8217;ll eventually be replaced when <em>the main document</em> is finalized.</li>
+</ol>
 </div>
 <div class="section">
 		<h3 id="h_29">Further Reading</h3>
+
+<p>For more examples on how to create more complex macros, have a look at the <a href="http://github.com/h3rald/glyph/tree/master/macros/">source code</a> of the existing ones.</p>
+<p>To gain a deeper understanding on how macros are executed, have a look at the following Glyph classes:</p>
+<ul>
+	<li><a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro">Glyph::Macro</a></li>
+	<li><a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Interpreter">Glyph::Interpreter</a></li>
+	<li><a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Document">Glyph::Document</a></li>
+	<li><a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Node">Node</a></li>
+</ul>
 </div>
 
 		</div>

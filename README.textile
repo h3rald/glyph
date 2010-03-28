@@ -21,7 +21,7 @@ Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 
 h3. Installation
 
-@sudo gem install glyph@ -- simple, as always.
+@gem install glyph@ -- simple, as always.
 
 h3. Essential Glyph Commands
 
