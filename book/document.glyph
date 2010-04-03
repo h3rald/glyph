@@ -28,7 +28,7 @@ document[
 				@[authoring.textile]
 			]
 			chapter[
-				header[Extending Glyph]
+				header[Extending Glyph|extending]
 				@[extending.textile]
 			]
 			chapter[
@@ -38,13 +38,16 @@ document[
 		]
 		backmatter[
 			appendix[
-				header[Command Reference]
+				header[Command Reference|cmd_ref]
+				@[ref_commands.textile]
 			]
 			appendix[
-				header[Macro Reference]
+				header[Macro Reference|macro_ref]
+				@[ref_macros.textile]
 			]
 			appendix[
 				header[Configuration Reference|cfg_ref]
+				@[ref_config.textile]
 			]
 		]
 	]

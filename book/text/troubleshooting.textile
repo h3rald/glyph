@@ -1,38 +1,118 @@
-
+This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you =>[#extending|extended] Glyph by creating your own macros.
 
 section[header[Generic Errors]
 
 error_table[
-ref_error[Undefined macro '_==macro_name==_'|
-...
-]
-]
+ref_error[Document contains syntax errors|
+This error is returned if the document was not parsed because of one or more syntax error. 
 
+*At present, no indication on the exact location of the error(s) is provided*, so the only way to determine what went wrong is to try compiling a single file at a time (@glyph compile -s source-file@), and examine more closely the source of the files that do not compile.
+]
+ref_error[Invalid alias: macro '_macro-name_' already exists|
+The alias name supplied to the @macro_alias@ method has already been used for another macro or alias.
+]
+ref_error[Undefined macro '_macro-name_'|
+The document contains a macro that does not exist, i.e. it is not a standard or used-defined =>[#macro_ref|Glyph macro or alias].
+]
+ref_error[An error occurred when generating _file-name_.pdf|
+Returned if Prince could not generate the PDF file or if Prince is not installed. Normally, Prince provides additional details on the specific error(s).
+]
+ref_error[Glyph cannot generate PDF. Please specify a valid pdf_renderer setting|
+Returned if the @pdf_renderer@ setting has not be set to a valid PDF renderer. Currently, the only supported value for this setting is @prince@.
+]
+ref_error[The current directory is not a valid Glyph project|
+Returned if a glyph command was executed outside a valid glyph project directory.
+]
+ref_error[Invalid snippet file|
+The @snippet.yml@ file contains invalid data. Most likely, it does not evaluate to a Ruby Hash.
+]
+ref_error[Directory '_directory-name_' is not empty|
+Returned when executing @glyph init@ in a directory that is not empty.
+]
+ref_error[File '_file-name_' already exists|
+Returned if the name of an existing file was specified as a parameter for the @glyph add@ command.
+]
+]
 ] --[End Generic Errors]
 
-section[header[Document Errors]
 
+
+section[header[Command Errors]
 
 error_table[
 
-ref_error[Document contains syntax errors|
-...
---[If no Node is returned... -- parser error]
+ref_error[Please specify a file name|
+No file name was specified for the @glyph add@ command.
 ]
 
-ref_error[Document has not been analyzed|
-...
-]
+ref_error[Output target not specified|
+Returned if no target was specified for the @glyph compile@ command _and_ if the @document.output@ configuration setting is not set.
 ]
 
-] --[End Document Errors]
+ref_error[Unknown output target '_target-name_'|
+An unsupported output target was specified for the @glyph compile@ command. Only the following output targets are supported:
+- @html@
+- @pdf@
+]
+
+ref_error[Too few/too many arguments|
+Returned if the @glyph config@ command was used with no arguments or more than two arguments respectively.
+]
+
+ref_error[Unknown setting '_setting-name_'|
+The name of an unknown setting was specified for the @glyph config@ command.
+]
+]
+] --[End Command Errors]
+
+
 
 section[header[Macro Errors]
 
-error_table[
-ref_error[Mutual inclusion|
-...
-]
-]
+The following errors are displayed in the form:
 
+_macro-path_ _message_
+
+Where:
+* _macro-path_ is the full path to the macro that returned the error, within the document syntax tree, e.g. @document/body/bodymatter/chapter/section/header/&@ if the error occurrent in a snippet within the header of a section in the @bodymatter@ part of the document.
+* _message_ is the error message.
+
+error_table[
+
+ref_error[Mutual inclusion|
+This error is returned if a catch-22 situation occurs with macro inclusion, for example if the body of a snippet includes a reference to the same snippet.
+]
+ref_error[Snippet '_snippet-id_' does not exist|
+Returned by the %>[snippet] if an invalid snippet was supplied.
+]
+ref_error[File '_file-name_' not found|
+Returned by the %>[include] if an invalid file was supplied.
+]
+ref_error[Filter macro '_macro-name_' not found|
+Returned by the %>[include] macro if the @filters.by_file_extension@ setting is set to @true@ but the file extension of the included file is not recognized as a filter macro.
+]
+ref_error[RedCloth gem not installed. Please run: gem insall RedCloth|
+Returned by the %>[textile] if the RedCloth gem is not installed.
+]
+ref_error[No MarkDown converter installed. Please run: gem insall bluecloth|
+Returned by the %>[markdown] if no valid Markup converter gem is installed. 
+
+Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.
+]
+ref_error[Image/Figure not found|
+Retured by the %>[image] or the %>[figure] respectively, if the specified image file could not be found within the @images/@ folder.
+]
+ref_error[Bookmark '_bookmark-name_' already exists|
+Returned by the %>[anchor] or by the %>[header] if the anchor ID supplied as parameter has already been used in the document.
+]
+ref_error[Bookmark '_bookmark-name_' already exists|
+Returned by the %>[link] if the anchor ID supplied as parameter has not been used in the document.
+]
+ref_error[Stylesheet '_file-name_' not found|
+Returned by the %>[style] if the .css or .sass file supplied as parameter was not found in the @styles/@ directory.
+]
+ref_error[Haml is not installed. Please run: gem install haml|
+Returned by the %>[style] macro if a .sass file was passed as parameter but the Haml gem is not installed.
+]
+]
 ] --[End Macro Errors]

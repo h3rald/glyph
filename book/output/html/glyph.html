@@ -433,7 +433,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 	
 			
 		<div class="pubdate">
-			March 2010
+			April 2010
 		</div>
 
 		</div>
@@ -465,7 +465,7 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <li class="toc-section"><a href="#h_23">PDF Output</a></li>
 </ol></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_24">Extending Glyph</a></li>
+<li class="toc-chapter"><a href="#extending">Extending Glyph</a></li>
 <li><ol><li class="toc-section"><a href="#h_25">Anatomy of a Macro</a></li>
 <li class="toc-section"><a href="#h_26">Bookmarks and Headers</a></li>
 <li class="toc-section"><a href="#h_27">Using Placeholders</a></li>
@@ -474,11 +474,27 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 </ol></li>
 <li class="toc-chapter"><a href="#h_30">Troubleshooting</a></li>
 <li><ol><li class="toc-section"><a href="#h_31">Generic Errors</a></li>
-<li class="toc-section"><a href="#h_32">Document Errors</a></li>
+<li class="toc-section"><a href="#h_32">Command Errors</a></li>
 <li class="toc-section"><a href="#h_33">Macro Errors</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#h_34">Command Reference</a></li>
-<li class="toc-appendix"><a href="#h_35">Macro Reference</a></li>
+<li class="toc-appendix"><a href="#cmd_ref">Command Reference</a></li>
+<li><ol><li class="toc-section"><a href="#h_35">Global Options</a></li>
+<li><ol><li class="toc-section"><a href="#h_36">-d, --debug</a></li>
+</ol></li>
+<li class="toc-section"><a href="#h_37">add</a></li>
+<li><ol><li class="toc-section"><a href="#h_38">Parameters</a></li>
+</ol></li>
+<li class="toc-section"><a href="#h_39">compile</a></li>
+<li><ol><li class="toc-section"><a href="#h_40">Options</a></li>
+</ol></li>
+<li class="toc-section"><a href="#h_41">config</a></li>
+<li><ol><li class="toc-section"><a href="#h_42">Options</a></li>
+<li class="toc-section"><a href="#h_43">Parameters</a></li>
+</ol></li>
+<li class="toc-section"><a href="#h_44">init</a></li>
+<li class="toc-section"><a href="#h_45">todo</a></li>
+</ol></li>
+<li class="toc-appendix"><a href="#macro_ref">Macro Reference</a></li>
 <li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
@@ -960,7 +976,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Mar 28 20:33:01 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Apr 03 22:04:21 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1029,7 +1045,7 @@ glyph compile -f pdf
 		</div>
 			<div class="chapter">
 
-		<h2 id="h_24">Extending Glyph</h2>
+		<h2 id="extending">Extending Glyph</h2>
 	
 				<p>Glyph was created wih extensibility in mind. You can freely extend Glyph Language by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in <code>.rb</code> files within the <code>/lib/macros</code> folder of your project.</p>
 <div class="section">
@@ -1166,50 +1182,169 @@ end
 
 		<h2 id="h_30">Troubleshooting</h2>
 	
-				<div class="section">
+				<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros.</p>
+<div class="section">
 		<h3 id="h_31">Generic Errors</h3>
 
-<table>
+<table style="width:100%;">
 <tr>
-				<th>Error</th>
-				<th>Description</th>
-</tr>
-<tr>
-			<td>Undefined macro &#8216;<em>macro_name</em>&#8217;</td>
-			<td>&#8230;</td>
-</tr>
-</table>
-</div>
-<div class="section">
-		<h3 id="h_32">Document Errors</h3>
-
-<table>
-<tr>
-				<th>Error</th>
+				<th style="width:30%">Error Message</th>
 				<th>Description</th>
 </tr>
 <tr>
 			<td>Document contains syntax errors</td>
-			<td>&#8230;</td>
+			<td>This error is returned if the document was not parsed because of one or more syntax error. <br />
+<br />
+<strong>At present, no indication on the exact location of the error(s) is provided</strong>, so the only way to determine what went wrong is to try compiling a single file at a time (<code>glyph compile -s source-file</code>), and examine more closely the source of the files that do not compile.</td>
 </tr>
 
 <tr>
-			<td>Document has not been analyzed</td>
-			<td>&#8230;</td>
+			<td>Invalid alias: macro &#8216;<em>macro-name</em>&#8217; already exists</td>
+			<td>The alias name supplied to the <code>macro_alias</code> method has already been used for another macro or alias.</td>
+</tr>
+
+<tr>
+			<td>Undefined macro &#8216;<em>macro-name</em>&#8217;</td>
+			<td>The document contains a macro that does not exist, i.e. it is not a standard or used-defined <a href="#macro_ref">Glyph macro or alias</a>.</td>
+</tr>
+
+<tr>
+			<td>An error occurred when generating <em>file-name</em>.pdf</td>
+			<td>Returned if Prince could not generate the <span class="caps">PDF</span> file or if Prince is not installed. Normally, Prince provides additional details on the specific error(s).</td>
+</tr>
+
+<tr>
+			<td>Glyph cannot generate <span class="caps">PDF</span>. Please specify a valid pdf_renderer setting</td>
+			<td>Returned if the <code>pdf_renderer</code> setting has not be set to a valid <span class="caps">PDF</span> renderer. Currently, the only supported value for this setting is <code>prince</code>.</td>
+</tr>
+
+<tr>
+			<td>The current directory is not a valid Glyph project</td>
+			<td>Returned if a glyph command was executed outside a valid glyph project directory.</td>
+</tr>
+
+<tr>
+			<td>Invalid snippet file</td>
+			<td>The <code>snippet.yml</code> file contains invalid data. Most likely, it does not evaluate to a Ruby Hash.</td>
+</tr>
+
+<tr>
+			<td>Directory &#8216;<em>directory-name</em>&#8217; is not empty</td>
+			<td>Returned when executing <code>glyph init</code> in a directory that is not empty.</td>
+</tr>
+
+<tr>
+			<td>File &#8216;<em>file-name</em>&#8217; already exists</td>
+			<td>Returned if the name of an existing file was specified as a parameter for the <code>glyph add</code> command.</td>
+</tr>
+</table>
+</div>
+<div class="section">
+		<h3 id="h_32">Command Errors</h3>
+
+<table style="width:100%;">
+<tr>
+				<th style="width:30%">Error Message</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>Please specify a file name</td>
+			<td>No file name was specified for the <code>glyph add</code> command.</td>
+</tr>
+
+<tr>
+			<td>Output target not specified</td>
+			<td>Returned if no target was specified for the <code>glyph compile</code> command <em>and</em> if the <code>document.output</code> configuration setting is not set.</td>
+</tr>
+
+<tr>
+			<td>Unknown output target &#8216;<em>target-name</em>&#8217;</td>
+			<td>An unsupported output target was specified for the <code>glyph compile</code> command. Only the following output targets are supported:<br />
+- <code>html</code><br />
+- <code>pdf</code></td>
+</tr>
+
+<tr>
+			<td>Too few/too many arguments</td>
+			<td>Returned if the <code>glyph config</code> command was used with no arguments or more than two arguments respectively.</td>
+</tr>
+
+<tr>
+			<td>Unknown setting &#8216;<em>setting-name</em>&#8217;</td>
+			<td>The name of an unknown setting was specified for the <code>glyph config</code> command.</td>
 </tr>
 </table>
 </div>
 <div class="section">
 		<h3 id="h_33">Macro Errors</h3>
 
-<table>
+<p>The following errors are displayed in the form:</p>
+<p><em>macro-path</em> <em>message</em></p>
+<p>Where:</p>
+<ul>
+	<li><em>macro-path</em> is the full path to the macro that returned the error, within the document syntax tree, e.g. <code>document/body/bodymatter/chapter/section/header/&amp;</code> if the error occurrent in a snippet within the header of a section in the <code>bodymatter</code> part of the document.</li>
+	<li><em>message</em> is the error message.</li>
+</ul>
+<table style="width:100%;">
 <tr>
-				<th>Error</th>
+				<th style="width:30%">Error Message</th>
 				<th>Description</th>
 </tr>
 <tr>
 			<td>Mutual inclusion</td>
-			<td>&#8230;</td>
+			<td>This error is returned if a catch-22 situation occurs with macro inclusion, for example if the body of a snippet includes a reference to the same snippet.</td>
+</tr>
+
+<tr>
+			<td>Snippet &#8216;<em>snippet-id</em>&#8217; does not exist</td>
+			<td>Returned by the <a href="#m_snippet">snippet</a> macro if an invalid snippet was supplied.</td>
+</tr>
+
+<tr>
+			<td>File &#8216;<em>file-name</em>&#8217; not found</td>
+			<td>Returned by the <a href="#m_include">include</a> macro if an invalid file was supplied.</td>
+</tr>
+
+<tr>
+			<td>Filter macro &#8216;<em>macro-name</em>&#8217; not found</td>
+			<td>Returned by the <a href="#m_include">include</a> macro macro if the <code>filters.by_file_extension</code> setting is set to <code>true</code> but the file extension of the included file is not recognized as a filter macro.</td>
+</tr>
+
+<tr>
+			<td>RedCloth gem not installed. Please run: gem insall RedCloth</td>
+			<td>Returned by the <a href="#m_textile">textile</a> macro if the RedCloth gem is not installed.</td>
+</tr>
+
+<tr>
+			<td>No MarkDown converter installed. Please run: gem insall bluecloth</td>
+			<td>Returned by the <a href="#m_markdown">markdown</a> macro if no valid Markup converter gem is installed. <br />
+<br />
+Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
+</tr>
+
+<tr>
+			<td>Image/Figure not found</td>
+			<td>Retured by the <a href="#m_image">image</a> macro or the <a href="#m_figure">figure</a> macro respectively, if the specified image file could not be found within the <code>images/</code> folder.</td>
+</tr>
+
+<tr>
+			<td>Bookmark &#8216;<em>bookmark-name</em>&#8217; already exists</td>
+			<td>Returned by the <a href="#m_anchor">anchor</a> macro or by the <a href="#m_header">header</a> macro if the anchor ID supplied as parameter has already been used in the document.</td>
+</tr>
+
+<tr>
+			<td>Bookmark &#8216;<em>bookmark-name</em>&#8217; already exists</td>
+			<td>Returned by the <a href="#m_link">link</a> macro if the anchor ID supplied as parameter has not been used in the document.</td>
+</tr>
+
+<tr>
+			<td>Stylesheet &#8216;<em>file-name</em>&#8217; not found</td>
+			<td>Returned by the <a href="#m_style">style</a> macro if the .css or .sass file supplied as parameter was not found in the <code>styles/</code> directory.</td>
+</tr>
+
+<tr>
+			<td>Haml is not installed. Please run: gem install haml</td>
+			<td>Returned by the <a href="#m_style">style</a> macro macro if a .sass file was passed as parameter but the Haml gem is not installed.</td>
 </tr>
 </table>
 </div>
@@ -1221,12 +1356,133 @@ end
 
 		<div class="appendix">
 
-		<h2 id="h_34">Command Reference</h2>
+		<h2 id="cmd_ref">Command Reference</h2>
+	
+				<p>Glyph&#8217;s command-line interface has been built using the <a href="http://github.com/davetron5000/gli">gli</a> (Git-like interface) gem. Therefore, Glyph commands are all written like this:</p>
+<p><code>glyph</code> <em>global-options</em> command <em>options</em> <em>parameters</em></p>
+<p>Where:</p>
+<ul>
+	<li><em>global-options</em> and <em>options</em> are in the form: <code>-n</code> <em>value</em> or <code>--name=</code><em>value</em>, e.g. <code>-f pdf</code> or <code>--format=pdf</code></li>
+	<li><em>parameters</em> are separated by whitespaces, and can be wrapped in quotes.</li>
+</ul>
+<div class="section">
+		<h3 id="h_35">Global Options</h3>
+
+<div class="section">
+		<h4 id="h_36"><code>-d</code>, <code>--debug</code></h4>
+<p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_37"><code>add</code></h3>
+<p>Creates a new text file in the <code>text/</code> folder.</p>
+<p><strong>Example:</strong> <code>glyph add introduction.textile</code></p>
+<div class="section">
+		<h4 id="h_38">Parameters</h4>
+
+<table style="width:100%;">
+<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>file-name</td>
+			<td>The name (or relative path) of the new file to be created.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_39"><code>compile</code></h3>
+<p>Compiles a Glyph document into an output file. If no options are specified, the <code>document.glyph</code> file is used as source to produce a standalone <span class="caps">HTML</span> file.</p>
+<p><strong>Example:</strong> <code>glyph compile -f pdf</code></p>
+<div class="section">
+		<h4 id="h_40">Options</h4>
+
+<table style="width:100%;">
+<tr>
+				<th style="width:30%">Option</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>-s (--source)</td>
+<td>
+<p>The source file to compile. <br />
+<strong>Default:</strong> <code>document.glyph</code></p>
+</td>
+</tr>
+
+<tr>
+			<td>-f (--format)</td>
+<td>
+<p>The format of the output file.<br />
+<strong>Default:</strong> <code>html</code><br />
+<strong>Possible Values:</strong> <code>html, pdf</code></p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_41"><code>config</code></h3>
+<p>Gets or sets a configuration setting in the project or global configuration file (<span class="fmi">for more information on configuration files, see <a href="#cfg">Project Configuration</a></span>).</p>
+<p><strong>Examples:</strong> <br />
+	<code>config document.filename</code><br />
+<code>config -g document.author "Fabio Cevasco"</code></p>
+
+<div class="section">
+		<h4 id="h_42">Options</h4>
+
+<table style="width:100%;">
+<tr>
+				<th style="width:30%">Option</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>-g (--global)</td>
+<td>
+<p>If specified, the global configuration file is processed instead of the project file.<br />
+<strong>Default:</strong> <code>false</code></p>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="section">
+		<h4 id="h_43">Parameters</h4>
+
+<table style="width:100%;">
+<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+</tr>
+<tr>
+			<td>setting</td>
+			<td>The name of a valid <a href="#cfg_ref">configuration setting</a>.</td>
+</tr>
+
+<tr>
+			<td>value</td>
+			<td>The new value of the configuration setting.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_44"><code>init</code></h3>
+<p>Creates a new Glyph project in the current directory (if empty).</p>
+<p><strong>Example:</strong> <code>glyph init</code></p>
+</div>
+<div class="section">
+		<h3 id="h_45"><code>todo</code></h3>
+<p>Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.</p>
+<p><strong>Example:</strong> <code>glyph todo</code></p>
+</div>
 
 		</div>
 			<div class="appendix">
 
-		<h2 id="h_35">Macro Reference</h2>
+		<h2 id="macro_ref">Macro Reference</h2>
 
 		</div>
 			<div class="appendix">

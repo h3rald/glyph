@@ -33,7 +33,7 @@ macro :include do
 		if cfg("filters.by_file_extension") then
 			begin
 				ext = @value.match(/\.(.*)$/)[1]
-				macro_error "Macro '#{ext}' not found" unless Glyph::MACROS.include?(ext.to_sym)
+				macro_error "Filter macro '#{ext}' not found" unless Glyph::MACROS.include?(ext.to_sym)
 				contents = "#{ext}[#{contents}]"
 			rescue MacroError => e
 				warning e.message

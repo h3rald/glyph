@@ -66,7 +66,7 @@ macro :style do
 			require 'sass'
 			style = Sass::Engine.new(file_load(file)).render
 		rescue LoadError
-			macro_erro "Haml is not installed. Please run: gem install haml"
+			macro_error "Haml is not installed. Please run: gem install haml"
 		rescue Exception
 			raise
 		end
@@ -82,7 +82,7 @@ end
 
 macro :toc do 
 	link_header = lambda do |header|
-		%{<a href="##{header[:id]}">#{header[:title]}</a>}
+		%{<a href="##{header[:id]}">#{header[:title].gsub(/@(.+?)@/, '\1')}</a>}
 	end
 	toc = placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
