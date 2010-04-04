@@ -16,7 +16,7 @@ If specified, the command is executed in debug mode and additional diagnostic in
 section[header[@add@]
 Creates a new text file in the @text/@ folder.
 
-example[add introduction.textile]
+example[glyph add introduction.textile]
 
 parameters[
 -p[file-name|The name (or relative path) of the new file to be created.]
@@ -26,7 +26,7 @@ parameters[
 section[header[@compile@]
 Compiles a Glyph document into an output file. If no options are specified, the @document.glyph@ file is used as source to produce a standalone HTML file.
 
-example[compile -f pdf]
+example[glyph compile -f pdf]
 
 options[
 -o[source|
@@ -45,8 +45,8 @@ section[header[@config@]
 Gets or sets a configuration setting in the project or global configuration file (\.fmi[configuration files|#cfg]).
 
 examples[
-config document.filename
-config -g document.author "Fabio Cevasco"
+glyph config document.filename
+glyph config -g document.author "Fabio Cevasco"
 ]
 
 options[
@@ -64,11 +64,11 @@ parameters[
 section[header[@init@]
 Creates a new Glyph project in the current directory (if empty).
 
-example[init]
+example[glyph init]
 ] --[End init]
 
-section[header[@todo@]
+section[header[@todo@|c_todo]
 Prints all the todo items saved using the %>[todo].
 
-example[todo]
+example[glyph todo]
 ] --[End todo]

@@ -25,7 +25,14 @@ macro :"%>" do
 	interpret "=>[#m_#@value|#@value] macro"
 end
 
+macro :"#>" do
+	interpret "=>[#c_#@value|#@value] command"
+end
 
+macro :"$>" do
+	val = @value.gsub /\./, "_"
+	interpret "=>[#s_#{val}|#@value] setting"
+end
 
 macro :"parameters" do
 	interpret %{
@@ -63,7 +70,7 @@ macro :values do
 end
 
 macro :example do
-	%{*Example:* @glyph #@value@}
+	%{*Example:* @#@value@}
 end
 
 macro :examples do
@@ -73,7 +80,19 @@ macro :examples do
 	}
 end
 
+macro :aliases do
+	%{*Aliases:* @#@value@}
+end
+
+macro :ref_macro do
+	m_name, m_value = @params
+	interpret %{
+	section[header[@#{m_name}@|m_#{m_name}]
+	#{m_value}
+	]
+	}
+end
+
 macro_alias :options => :parameters
-macro_alias '-e' => :ref_error
 macro_alias '-p' => :ref_error
 macro_alias '-o' => :option

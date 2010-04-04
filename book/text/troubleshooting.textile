@@ -100,7 +100,7 @@ Returned by the %>[markdown] if no valid Markup converter gem is installed.
 Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.
 ]
 ref_error[Image/Figure not found|
-Retured by the %>[image] or the %>[figure] respectively, if the specified image file could not be found within the @images/@ folder.
+Retured by the %>[img] or the %>[fig] respectively, if the specified image file could not be found within the @images/@ folder.
 ]
 ref_error[Bookmark '_bookmark-name_' already exists|
 Returned by the %>[anchor] or by the %>[header] if the anchor ID supplied as parameter has already been used in the document.
