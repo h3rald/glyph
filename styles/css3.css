@@ -34,13 +34,12 @@
 	string-set: book-subtitle content();
 }
 
-
-.toc li[class=toc-chapter] {
+.toc>li[class~=chapter] {
 	counter-increment: toc1;
 	counter-reset: toc2;
 }
 
-.toc li[class=toc-appendix] {
+.toc>li[class~=appendix] {
 	counter-increment: appendix1;
 	counter-reset: toc2;
 }
@@ -64,11 +63,12 @@
 	counter-increment: toc5;
 }
 
-.toc li[class=toc-chapter]::before {
+.toc>li[class~=chapter]::before {
 	content: counter(toc1) ". ";
 }
 
-.toc li[class=toc-appendix]::before {
+
+.toc>li[class~=appendix]::before {
 	content: counter(appendix1, upper-latin) ". ";
 }
 
@@ -76,32 +76,48 @@
 	margin: 1em 0;
 }
 
-.toc ol li[class]::before {
+.toc ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) " ";
 }
+.toc ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) " ";
+}
 
-.toc ol ol li[class]::before {
+
+.toc ol ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
+.toc ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) " ";
+}
 
-.toc ol ol ol li[class]::before {
+.toc ol ol ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
+.toc ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
+}
 
-.toc ol ol ol ol li[class]::before {
+.toc ol ol ol ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
+.toc ol ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
+}
 
-
-.frontmatter{
+div.frontmatter{
 	page: frontmatter;
 }
 
-.backmatter{
+div.backmatter{
 	page: backmatter;
 }
 
@@ -119,7 +135,7 @@
 }
 
 .backmatter h3::before {
-	content: counter(a2) "." counter(h3) " ";
+	content: counter(a2, upper-latin) "." counter(h3) " ";
 }
 
 .bodymatter h4::before {
@@ -127,7 +143,7 @@
 }
 
 .backmatter h4::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) " ";
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) " ";
 }
 
 .bodymatter h5::before {
@@ -135,7 +151,7 @@
 }
 
 .backmatter h5::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
 h2 { 

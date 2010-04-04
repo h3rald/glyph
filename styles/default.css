@@ -8,7 +8,6 @@
 }
 html {
 	background: #fff;
-	height: 100%;
 }
 p, ol, ul {
 	margin: 0.3em 0;
@@ -17,6 +16,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	margin: auto;
+	margin-top: 1em;
 }
 body {
 	line-height: 1.2em;
@@ -25,6 +25,7 @@ body {
 	padding: 0 1em;
 	text-align: justify;
 }
+
 /* Structure */
 .titlepage {
 	margin: auto;
@@ -94,11 +95,7 @@ th {
 tr, td, th {
 	padding: 5px;
 }
-td {
-	border-left: 1px solid #E6E6E6;
-	border-right: 1px solid #E6E6E6;
-}
-th {
+td, tr {
 	border: 1px solid #E6E6E6;
 }
 sup {

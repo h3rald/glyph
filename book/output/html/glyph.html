@@ -16,7 +16,6 @@
 }
 html {
 	background: #fff;
-	height: 100%;
 }
 p, ol, ul {
 	margin: 0.3em 0;
@@ -25,6 +24,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	margin: auto;
+	margin-top: 1em;
 }
 body {
 	line-height: 1.2em;
@@ -33,6 +33,7 @@ body {
 	padding: 0 1em;
 	text-align: justify;
 }
+
 /* Structure */
 .titlepage {
 	margin: auto;
@@ -236,13 +237,12 @@ code {
 	string-set: book-subtitle content();
 }
 
-
-.toc li[class=toc-chapter] {
+.toc>li[class~=chapter] {
 	counter-increment: toc1;
 	counter-reset: toc2;
 }
 
-.toc li[class=toc-appendix] {
+.toc>li[class~=appendix] {
 	counter-increment: appendix1;
 	counter-reset: toc2;
 }
@@ -266,11 +266,12 @@ code {
 	counter-increment: toc5;
 }
 
-.toc li[class=toc-chapter]::before {
+.toc>li[class~=chapter]::before {
 	content: counter(toc1) ". ";
 }
 
-.toc li[class=toc-appendix]::before {
+
+.toc>li[class~=appendix]::before {
 	content: counter(appendix1, upper-latin) ". ";
 }
 
@@ -278,32 +279,48 @@ code {
 	margin: 1em 0;
 }
 
-.toc ol li[class]::before {
+.toc ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) " ";
 }
+.toc ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) " ";
+}
 
-.toc ol ol li[class]::before {
+
+.toc ol ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
+.toc ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) " ";
+}
 
-.toc ol ol ol li[class]::before {
+.toc ol ol ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
+.toc ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
+}
 
-.toc ol ol ol ol li[class]::before {
+.toc ol ol ol ol li[class~=bodymatter]::before {
 	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
+.toc ol ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
+}
 
-
-.frontmatter{
+div.frontmatter{
 	page: frontmatter;
 }
 
-.backmatter{
+div.backmatter{
 	page: backmatter;
 }
 
@@ -321,7 +338,7 @@ code {
 }
 
 .backmatter h3::before {
-	content: counter(a2) "." counter(h3) " ";
+	content: counter(a2, upper-latin) "." counter(h3) " ";
 }
 
 .bodymatter h4::before {
@@ -329,7 +346,7 @@ code {
 }
 
 .backmatter h4::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) " ";
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) " ";
 }
 
 .bodymatter h5::before {
@@ -337,7 +354,7 @@ code {
 }
 
 .backmatter h5::before {
-	content: counter(a2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
 h2 { 
@@ -443,59 +460,59 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <div class="contents">
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
-			<li class="toc-introduction"><a href="#h_1">Introduction</a></li>
-<li class="toc-chapter"><a href="#h_7">Getting Started</a></li>
-<li><ol><li class="toc-section"><a href="#h_8">Creating your first Glyph Project</a></li>
-<li class="toc-section"><a href="#struct">Document Structure</a></li>
-<li class="toc-section"><a href="#cfg">Project Configuration</a></li>
+			<li class="frontmatter introduction"><a href="#h_1">Introduction</a></li>
+<li class="bodymatter chapter"><a href="#h_7">Getting Started</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_8">Creating your first Glyph Project</a></li>
+<li class="bodymatter section"><a href="#struct">Document Structure</a></li>
+<li class="bodymatter section"><a href="#cfg">Project Configuration</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_11">Authoring Documents</a></li>
-<li><ol><li class="toc-section"><a href="#h_12">Text Editing</a></li>
-<li><ol><li class="toc-section"><a href="#h_13">Introducing Glyph Macros</a></li>
-<li class="toc-section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="toc-section"><a href="#h_15">Sections and Headers</a></li>
-<li class="toc-section"><a href="#h_16">Including Files and Snippets</a></li>
-<li class="toc-section"><a href="#links">Links and Bookmarks</a></li>
-<li class="toc-section"><a href="#h_18">Evaluating Ruby code and Configuration Settings</a></li>
-<li class="toc-section"><a href="#img_fig">Images and Figures</a></li>
+<li class="bodymatter chapter"><a href="#h_11">Authoring Documents</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_12">Text Editing</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_13">Introducing Glyph Macros</a></li>
+<li class="bodymatter section"><a href="#esc_quot">Escaping and Quoting</a></li>
+<li class="bodymatter section"><a href="#h_15">Sections and Headers</a></li>
+<li class="bodymatter section"><a href="#h_16">Including Files and Snippets</a></li>
+<li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li>
+<li class="bodymatter section"><a href="#h_18">Evaluating Ruby code and Configuration Settings</a></li>
+<li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li>
 </ol></li>
-<li class="toc-section"><a href="#compile">Compiling your project</a></li>
-<li><ol><li class="toc-section"><a href="#h_21">Adding Stylesheets</a></li>
-<li class="toc-section"><a href="#h_22">HTML output</a></li>
-<li class="toc-section"><a href="#h_23">PDF Output</a></li>
+<li class="bodymatter section"><a href="#compile">Compiling your project</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_21">Adding Stylesheets</a></li>
+<li class="bodymatter section"><a href="#h_22">HTML output</a></li>
+<li class="bodymatter section"><a href="#h_23">PDF Output</a></li>
 </ol></li>
 </ol></li>
-<li class="toc-chapter"><a href="#extending">Extending Glyph</a></li>
-<li><ol><li class="toc-section"><a href="#h_25">Anatomy of a Macro</a></li>
-<li class="toc-section"><a href="#h_26">Bookmarks and Headers</a></li>
-<li class="toc-section"><a href="#h_27">Using Placeholders</a></li>
-<li class="toc-section"><a href="#h_28">Interpreting Glyph Code</a></li>
-<li class="toc-section"><a href="#h_29">Further Reading</a></li>
+<li class="bodymatter chapter"><a href="#extending">Extending Glyph</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_25">Anatomy of a Macro</a></li>
+<li class="bodymatter section"><a href="#h_26">Bookmarks and Headers</a></li>
+<li class="bodymatter section"><a href="#h_27">Using Placeholders</a></li>
+<li class="bodymatter section"><a href="#h_28">Interpreting Glyph Code</a></li>
+<li class="bodymatter section"><a href="#h_29">Further Reading</a></li>
 </ol></li>
-<li class="toc-chapter"><a href="#h_30">Troubleshooting</a></li>
-<li><ol><li class="toc-section"><a href="#h_31">Generic Errors</a></li>
-<li class="toc-section"><a href="#h_32">Command Errors</a></li>
-<li class="toc-section"><a href="#h_33">Macro Errors</a></li>
+<li class="bodymatter chapter"><a href="#h_30">Troubleshooting</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_31">Generic Errors</a></li>
+<li class="bodymatter section"><a href="#h_32">Command Errors</a></li>
+<li class="bodymatter section"><a href="#h_33">Macro Errors</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#cmd_ref">Command Reference</a></li>
-<li><ol><li class="toc-section"><a href="#h_35">Global Options</a></li>
-<li><ol><li class="toc-section"><a href="#h_36">-d, --debug</a></li>
+<li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li>
+<li><ol><li class="appendix section"><a href="#h_35">Global Options</a></li>
+<li><ol><li class="appendix section"><a href="#h_36">-d, --debug</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_37">add</a></li>
-<li><ol><li class="toc-section"><a href="#h_38">Parameters</a></li>
+<li class="appendix section"><a href="#h_37">add</a></li>
+<li><ol><li class="appendix section"><a href="#h_38">Parameters</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_39">compile</a></li>
-<li><ol><li class="toc-section"><a href="#h_40">Options</a></li>
+<li class="appendix section"><a href="#h_39">compile</a></li>
+<li><ol><li class="appendix section"><a href="#h_40">Options</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_41">config</a></li>
-<li><ol><li class="toc-section"><a href="#h_42">Options</a></li>
-<li class="toc-section"><a href="#h_43">Parameters</a></li>
+<li class="appendix section"><a href="#h_41">config</a></li>
+<li><ol><li class="appendix section"><a href="#h_42">Options</a></li>
+<li class="appendix section"><a href="#h_43">Parameters</a></li>
 </ol></li>
-<li class="toc-section"><a href="#h_44">init</a></li>
-<li class="toc-section"><a href="#h_45">todo</a></li>
+<li class="appendix section"><a href="#h_44">init</a></li>
+<li class="appendix section"><a href="#h_45">todo</a></li>
 </ol></li>
-<li class="toc-appendix"><a href="#macro_ref">Macro Reference</a></li>
-<li class="toc-appendix"><a href="#cfg_ref">Configuration Reference</a></li>
+<li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
+<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 
 </ol>
 </div>
@@ -976,7 +993,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Apr 03 22:04:21 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Apr 04 18:44:35 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1038,7 +1055,7 @@ glyph compile -s myfile.textile
 glyph compile -f pdf
 </code></pre></div>
 <p>The command above will attempt to compile the project into an <span class="caps">HTML</span> document and then call Prince to generate a <span class="caps">PDF</span> document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It&#8217;s not open source, but the free version is fully functional, and it just adds a small logo on the first page.</p>
-<div class="note"><span class="note-title">Note</span>Glyph v0.1.0 has been successfully tested with Prince v6.0, and the <span class="caps">PDF</span> version of this very book was generated with it.		</div>
+<div class="note"><span class="note-title">Note</span>Glyph v0.1.0 has been successfully tested with Prince v7.0, and the <span class="caps">PDF</span> version of this very book was generated with it.		</div>
 </div>
 </div>
 

@@ -94,7 +94,12 @@ macro :toc do
 					header_id = n2.children.select{|n| n[:header]}[0][:header] rescue nil
 					next if added_headers.include? header_id
 					added_headers << header_id
-					list << "<li class=\"toc-#{n2[:macro]}\">#{link_header.call(document.header?(header_id))}</li>\n" if header_id
+					# Check if part of frontmatter, bodymatter or backmatter
+					container = n2.find_parent{|node| node[:macro] == :frontmatter}[:macro] rescue nil
+					container ||= n2.find_parent{|node| node[:macro] == :bodymatter}[:macro] rescue nil
+					container ||= n2.find_parent{|node| node[:macro] == :appendix}[:macro] rescue nil
+					container ||= n2.find_parent{|node| node[:macro] == :backmatter}[:macro] rescue nil
+					list << "<li class=\"#{container} #{n2[:macro]}\">#{link_header.call(document.header?(header_id))}</li>\n" if header_id
 					child_list = ""
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)

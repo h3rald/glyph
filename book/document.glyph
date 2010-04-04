@@ -1,7 +1,8 @@
 document[
 	head[
 		style[default.css]
-		style[css3.css]]
+		style[css3.css]
+	]
 	body[
 		titlepage[
 			img[glyph.svg|20%|20%]

@@ -342,7 +342,7 @@ code[= glyph compile -f pdf =]
 
 The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.
 
-note[Glyph v\.%[Glyph::VERSION.strip] has been successfully tested with Prince v6.0, and the PDF version of this very book was generated with it.]
+note[Glyph v\.%[Glyph::VERSION.strip] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
 
 ]
 
