@@ -118,6 +118,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<yard>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
     else
       s.add_dependency(%q<gli>, [">= 0.3.1"])
       s.add_dependency(%q<extlib>, [">= 0.9.12"])
@@ -125,6 +126,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rake>, [">= 0.8.7"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<yard>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
     end
   else
     s.add_dependency(%q<gli>, [">= 0.3.1"])
@@ -133,6 +135,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rake>, [">= 0.8.7"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<yard>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
   end
 end
 
