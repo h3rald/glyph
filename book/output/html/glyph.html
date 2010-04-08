@@ -607,9 +607,9 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 	<li>Store common snippets of text in a single <span class="caps">YAML</span> file and use them anywhere in your document, as many times as you need.</li>
 	<li>Store configuration settings in a <span class="caps">YAML</span> file and use them anywhere in your document, as many times as you need.</li>
 	<li>Evaluate Ruby code within your document.</li>
-	<li>Call macros from other macros (including snippets), carefully avoiding mutual calls.</li>
+	<li>Call macros from other macros (including snippets), avoiding mutual calls.</li>
 	<li>Include text files in other text files.</li>
-	<li>Include the contents of configuration settings (author, title) in the document.</li>
+	<li>Include the value of any configuration setting (like author, title) in the document.</li>
 	<li>Filter input explicitly or implicitly, based on file extensions when including files.</li>
 	<li>Manage comments and todo items.</li>
 </ul>
@@ -704,9 +704,9 @@ Glyph requires the following gems:<br />
 - rake<br />
 <br />
 Additionally, some Glyph macros may require additional gems, such as:<br />
-- RedCloth (<em>textile</em> macro)<br />
-- Maruku <em>or</em> Kramdown <em>or</em> BlueCloth (<em>markdown</em> macro)<br />
-- Haml (if you want to load .sass files with the <em>style</em> macro)		</div>
+- RedCloth (<a href="#m_textile">textile</a> macro)<br />
+- BlueCloth <em>or</em> RDiscount <em>or</em> Maruku <em>or</em> Kramdown (<a href="#m_markdown">markdown</a> macro)<br />
+- Haml (if you want to load .sass files with the <a href="#m_style">style</a> macro)		</div>
 <p>Every Glyph project is comprised of the following directories:</p>
 <ul>
 	<li><code>images/</code> &#8212; used to store the image files used in your document.</li>
@@ -725,8 +725,7 @@ Additionally, some Glyph macros may require additional gems, such as:<br />
 <div class="section">
 		<h3 id="struct">Document Structure</h3>
 
-<p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code><br />
-generated automatically when creating a new project is the following:</p>
+<p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code> generated automatically when creating a new project is the following:</p>
 <div class="code"><pre><code>
 document[
   head[style[default.css]]
@@ -762,7 +761,7 @@ document[
 <p>Be aware that other macros, on the other hand, are used to do something completely different, e.g.:</p>
 <ul>
 	<li><code>toc[]</code> generates the document&#8217;s Table of Contents</li>
-	<li><code>@[]</code> or its alias <code>include[]</code> is used to copy the contents of another file stored anywhere in the <code>/text</code> directory.</li>
+	<li><code>@[]</code> or its alias <code>include[]</code> is used to copy the contents of another file stored anywhere in the <code>text/</code> directory.</li>
 </ul>
 <p>Let&#8217;s now analyze this <code>document.glyph</code> more in detail.</p>
 <ul>
@@ -788,8 +787,8 @@ document[
 	<li>A setting configured in the <em>Project Configuration</em> overrides the same setting in both Global and System configuration.</li>
 	<li>A setting configured in the <em>Global Configuration</em> overrides the same setting in the <em>System Configuration</em></li>
 </ul>
-<p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set &#8216;document.author&#8217; in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
-<p>Instead of editing your configuration settings directly, you can use the <code>glyph config</code> command, as follows:</p>
+<p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set the <a href="#s_document_author">document.author</a> setting in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
+<p>Instead of editing your configuration settings directly, you can use the <a href="#c_config">config</a> command, as follows:</p>
 <p><code>glyph config</code> <em>setting</em> <em>[value]</em></p>
 <p>If no <em>value</em> is specified, glyph just prints the value of the configuration setting, so typing <code>glyph config document.author</code> right after creating a project (assuming you didn&#8217;t set this in the Global Configuration) will print nothing, because this setting is blank by default.</p>
 <p>To change the value of a configuration setting, specify a value right after the setting, like this:</p>
@@ -798,15 +797,16 @@ document[
 <p><code>glyph config -g document.author "John Smith"</code></p>
 <div class="box"><span class="box-title">Regarding configuration values and data types&#8230;</span><br />
 Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:<br />
-- is wrapped in quotes (<code>"</code> or <code>'</code>) &rarr; String<br />
-- starts with a colon (<code>:</code>) &rarr; Symbol<br />
-- is wrapped in square brackets (<code>[</code> and <code>]</code>) &rarr; Array<br />
-- is wrapped in curly brackets (<code>\{</code> and <code>\}</code>) &rarr; Hash<br />
-- is <em>true</em> or <em>false</em> &rarr; Boolean<br />
-- If the value is <em>nil</em> &rarr; NilClass<br />
+- is wrapped in quotes (<code>"</code> or <code>'</code>) &rarr; <code>String</code><br />
+- starts with a colon (<code>:</code>) &rarr; <code>Symbol</code><br />
+- is wrapped in square brackets (<code>[</code> and <code>]</code>) &rarr; <code>Array</code><br />
+- is wrapped in curly brackets (<code>{</code> and <code>}</code>) &rarr; <code>Hash</code><br />
+- is <em>true</em> or <em>false</em> &rarr; <code>Boolean</code><br />
+- is <em>nil</em> &rarr; <code>NilClass</code><br />
 <br />
 Note that this guessing is far from being foolproof: If you type something like <em>{:test, 2}</em>, for example, you&#8217;ll get an error.		</div>
-<p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file). For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. Normally, you may just want to change the following ones:</p>
+<p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file).</p>
+<p>For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. Normally, you may just want to change the following ones:</p>
 		<table><tr><th>Setting		</th>
 
 		<th>Description		</th>	
@@ -1070,7 +1070,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Thu Apr 08 14:06:11 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Thu Apr 08 14:35:56 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
