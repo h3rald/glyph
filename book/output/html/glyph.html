@@ -498,20 +498,20 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 <li><ol><li class="appendix section"><a href="#h_35">Global Options</a></li>
 <li><ol><li class="appendix section"><a href="#h_36">-d, --debug</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_37">add</a></li>
+<li class="appendix section"><a href="#c_add">add</a></li>
 <li><ol><li class="appendix section"><a href="#h_38">Parameters</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_39">compile</a></li>
+<li class="appendix section"><a href="#c_compile">compile</a></li>
 <li><ol><li class="appendix section"><a href="#h_40">Options</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_41">config</a></li>
+<li class="appendix section"><a href="#c_config">config</a></li>
 <li><ol><li class="appendix section"><a href="#h_42">Options</a></li>
 <li class="appendix section"><a href="#h_43">Parameters</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_44">help</a></li>
+<li class="appendix section"><a href="#c_help">help</a></li>
 <li><ol><li class="appendix section"><a href="#h_45">Parameters</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_46">init</a></li>
+<li class="appendix section"><a href="#c_init">init</a></li>
 <li class="appendix section"><a href="#c_todo">todo</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
@@ -559,6 +559,32 @@ table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid
 </ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
+<li><ol><li class="appendix section"><a href="#h_87">document.*</a></li>
+<li><ol><li class="appendix section"><a href="#s_document_author">document.author</a></li>
+<li class="appendix section"><a href="#s_document_filename">document.filename</a></li>
+<li class="appendix section"><a href="#s_document_output">document.output</a></li>
+<li class="appendix section"><a href="#s_document_output_targets">document.output_targets</a></li>
+<li class="appendix section"><a href="#s_document_source">document.source</a></li>
+<li class="appendix section"><a href="#s_document_subtitle">document.subtitle</a></li>
+<li class="appendix section"><a href="#s_document_title">document.title</a></li>
+</ol></li>
+<li class="appendix section"><a href="#h_95">filters.*</a></li>
+<li><ol><li class="appendix section"><a href="#s_filters_by_file_extension">filters.by_file_extension</a></li>
+<li class="appendix section"><a href="#s_filters_markdown_converter">filters.markdown.converter</a></li>
+<li class="appendix section"><a href="#s_filters_redcloth_restrictions">filters.redcloth.restrictions</a></li>
+<li class="appendix section"><a href="#s_filters_target">filters.target</a></li>
+</ol></li>
+<li class="appendix section"><a href="#h_100">structure.*</a></li>
+<li><ol><li class="appendix section"><a href="#s_structure_backmatter">structure.backmatter</a></li>
+<li class="appendix section"><a href="#s_structure_bodymatter">structure.bodymatter</a></li>
+<li class="appendix section"><a href="#s_structure_frontmatter">structure.frontmatter</a></li>
+<li class="appendix section"><a href="#s_structure_hidden">structure.hidden</a></li>
+<li class="appendix section"><a href="#s_structure_special">structure.special</a></li>
+</ol></li>
+<li class="appendix section"><a href="#h_106">tools.*</a></li>
+<li><ol><li class="appendix section"><a href="#s_tools_pdf_generator">tools.pdf_generator</a></li>
+</ol></li>
+</ol></li>
 
 </ol>
 </div>
@@ -1044,7 +1070,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Thu Apr 08 11:56:38 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Thu Apr 08 14:06:11 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1442,7 +1468,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_37"><code>add</code></h3>
+		<h3 id="c_add"><code>add</code></h3>
 <p>Creates a new text file in the <code>text/</code> folder.</p>
 <p><strong>Example:</strong> <code>glyph add introduction.textile</code></p>
 <div class="section">
@@ -1461,7 +1487,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_39"><code>compile</code></h3>
+		<h3 id="c_compile"><code>compile</code></h3>
 <p>Compiles a Glyph document into an output file. If no options are specified, the <code>document.glyph</code> file is used as source to produce a standalone <span class="caps">HTML</span> file.</p>
 <p><strong>Example:</strong> <code>glyph compile -f pdf</code></p>
 <div class="section">
@@ -1476,7 +1502,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 			<td>-s (--source)</td>
 <td>
 <p>The source file to compile. <br />
-<strong>Default:</strong> <code>document.glyph</code></p>
+<strong>Default Value:</strong> <code>document.glyph</code></p>
 </td>
 </tr>
 
@@ -1484,7 +1510,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 			<td>-f (--format)</td>
 <td>
 <p>The format of the output file.<br />
-<strong>Default:</strong> <code>html</code><br />
+<strong>Default Value:</strong> <code>html</code><br />
 <strong>Possible Values:</strong> <code>html, pdf</code></p>
 </td>
 </tr>
@@ -1492,10 +1518,10 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_41"><code>config</code></h3>
+		<h3 id="c_config"><code>config</code></h3>
 <p>Gets or sets a configuration setting in the project or global configuration file (<span class="fmi">for more information on configuration files, see <a href="#cfg">Project Configuration</a></span>).</p>
 <p><strong>Examples:</strong> <br />
-	<code>glyph config document.filename</code><br />
+<code>glyph config document.filename</code><br />
 <code>glyph config -g document.author "Fabio Cevasco"</code></p>
 
 <div class="section">
@@ -1510,7 +1536,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 			<td>-g (--global)</td>
 <td>
 <p>If specified, the global configuration file is processed instead of the project file.<br />
-<strong>Default:</strong> <code>false</code></p>
+<strong>Default Value:</strong> <code>false</code></p>
 </td>
 </tr>
 </table>
@@ -1537,10 +1563,10 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_44"><code>help</code></h3>
+		<h3 id="c_help"><code>help</code></h3>
 <p>Prints information about all Glyph commands or about one specific command.</p>
 <p><strong>Examples:</strong> <br />
-	<code>glyph help</code><br />
+<code>glyph help</code><br />
 <code>glyph help compile</code></p>
 
 <div class="section">
@@ -1559,7 +1585,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 </div>
 <div class="section">
-		<h3 id="h_46"><code>init</code></h3>
+		<h3 id="c_init"><code>init</code></h3>
 <p>Creates a new Glyph project in the current directory (if empty).</p>
 <p><strong>Example:</strong> <code>glyph init</code></p>
 </div>
@@ -1610,7 +1636,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <p>Evaluates its value as Ruby code (using <code>Kernel#instance_eval</code>).</p>
 <p><strong>Aliases:</strong> <code>%</code></p>
 <p><strong>Examples:</strong> <br />
-	<code>%[Time.now]</code><br />
+<code>%[Time.now]</code><br />
 <code>%[Glyph::VERSION]</code></p>
 </div>
 
@@ -1675,7 +1701,7 @@ code[
 		<h4 id="m_fig"><code>fig</code></h4>
 <p>Includes an image in the document, with an optional caption.</p>
 <p><strong>Examples:</strong> <br />
-	<code>fig[diagram.png]</code><br />
+<code>fig[diagram.png]</code><br />
 <code>fig[graph.png|Monthly pageviews]</code></p>
 </div>
 
@@ -1690,7 +1716,7 @@ code[
 		<h4 id="m_img"><code>img</code></h4>
 <p>Includes an image in the document, optionally scaled according to the specified width and height. The image must be stored within the <code>images/</code> directory of the current project.</p>
 <p><strong>Examples:</strong> <br />
-	<code>img[icon.png]</code><br />
+<code>img[icon.png]</code><br />
 <code>img[holidays/landscape.jpg|70%]</code><br />
 <code>img[logo.svg|50%|50%]</code></p>
 </div>
@@ -1777,7 +1803,7 @@ table[
 <p>Creates an hyperlink (<span class="fmi">for more information on creating links, see <a href="#links">Links and Bookmarks</a></span>).</p>
 <p><strong>Aliases:</strong> <code>=&gt;</code></p>
 <p><strong>Examples:</strong> <br />
-	<code>=&gt;[#introduction]</code><br />
+<code>=&gt;[#introduction]</code><br />
 <code>=&gt;[#troub|Troubleshooting]</code><br />
 <code>=&gt;[http://www.h3rald.com|H3RALD.com]</code></p>
 </div>
@@ -1810,7 +1836,7 @@ table[
 		<h4 id="m_header"><code>header</code></h4>
 <p>Creates an <code>h2</code>, <code>h3</code>, <code>h4</code>, etc. header (<span class="fmi">for more information on using headers, see <a href="#sec_head">Sections and Headers</a></span>).</p>
 <p><strong>Examples:</strong> <br />
-	<code>header[Introduction]</code><br />
+<code>header[Introduction]</code><br />
 <code>header[Getting Started|gs]</code></p>
 </div>
 
@@ -1831,6 +1857,221 @@ table[
 			<div class="appendix">
 
 		<h2 id="cfg_ref">Configuration Reference</h2>
+	
+				<div class="section">
+		<h3 id="h_87"><code>document.*</code></h3>
+
+<p>The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.</p>
+<div class="section">
+		<h4 id="s_document_author"><code>document.author</code></h4>
+<p>The author of the document.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+""
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_document_filename"><code>document.filename</code></h4>
+<p>The name of the output file.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+""
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_document_output"><code>document.output</code></h4>
+<p>The format of the output file. It can be set to any value stored in the <a href="#s_document_output_targets">document.output_targets</a> setting.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+html
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_document_output_targets"><code>document.output_targets</code></h4>
+<p>An Array containing all the possible output formats. This setting should not be changed by the user.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+- :html
+- :pdf
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_document_source"><code>document.source</code></h4>
+<p>The main source file to compile. It can be also be overridden by calling the <a href="#c_compile">compile</a> command with the <code>-s</code> option.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+document.glyph
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_document_subtitle"><code>document.subtitle</code></h4>
+<p>The subtitle of the document, displayed using the <a href="#m_subtitle">subtitle</a> macro.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+""
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_document_title"><code>document.title</code></h4>
+<p>The title of the document, displayed using the <a href="#m_title">title</a> macro.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+""
+</code></pre></div></p>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_95"><code>filters.*</code></h3>
+
+<div class="section">
+		<h4 id="s_filters_by_file_extension"><code>filters.by_file_extension</code></h4>
+<p>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+true
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_filters_markdown_converter"><code>filters.markdown.converter</code></h4>
+<p>The name of the markdown converter to use with the <a href="#m_markdown">markdown</a> macro. It can be set to one of the following values:</p>
+<ul>
+	<li>BlueCloth</li>
+	<li>RDiscount</li>
+	<li>Maruku</li>
+	<li>Kramdown</li>
+</ul>
+<p>If not set, Glyph tests for the presence of each gem in the same order, until one is found.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+bluecloth
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_filters_redcloth_restrictions"><code>filters.redcloth.restrictions</code></h4>
+<p>An Array containing restrictions applied to RedCloth, used by the <a href="#m_textile">textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+[]
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_filters_target"><code>filters.target</code></h4>
+<p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+html
+</code></pre></div></p>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_100"><code>structure.*</code></h3>
+
+<p>The following configuration settings are used internally by Glyph and should not be changed by the user.</p>
+<div class="section">
+		<h4 id="s_structure_backmatter"><code>structure.backmatter</code></h4>
+<p>The section types used in the document backmatter.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+- :epilogue
+- :afterword
+- :postscript
+- :appendix
+- :addendum
+- :glossary
+- :colophon
+- :bibliography
+- :promotion
+- :references
+- :index
+- :lot
+- :lof
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_structure_bodymatter"><code>structure.bodymatter</code></h4>
+<p>The section types used in the document bodymatter.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+- :volume
+- :book
+- :part
+- :chapter
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_structure_frontmatter"><code>structure.frontmatter</code></h4>
+<p>The section types used in the document frontmatter.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+- :preface
+- :imprint
+- :dedication
+- :inspiration
+- :foreword
+- :introduction
+- :acknowledgement
+- :prologue
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_structure_hidden"><code>structure.hidden</code></h4>
+<p>The section types that will not be shown in the Table of Contents.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+- :imprint
+- :dedication
+- :inspiration
+- :postscript
+- :colophon
+- :promotion
+</code></pre></div></p>
+</div>
+
+<div class="section">
+		<h4 id="s_structure_special"><code>structure.special</code></h4>
+<p>The section types that will be considered <em>special</em> and whose children will not be included in the Table of Contents.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+- :preface
+- :foreword
+- :introduction
+- :acknowledgement
+- :prologue
+- :epilogue
+- :addendum
+- :glossary
+- :bibliography
+- :references
+- :index
+- :lot
+- :lof
+</code></pre></div></p>
+</div>
+</div>
+<div class="section">
+		<h3 id="h_106"><code>tools.*</code></h3>
+
+<div class="section">
+		<h4 id="s_tools_pdf_generator"><code>tools.pdf_generator</code></h4>
+<p>The external program used to generate <span class="caps">PDF</span> files. It can only be set to <code>prince</code>.</p>
+<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
+	<div class="code"><pre><code>
+prince
+</code></pre></div></p>
+</div>
+</div>
 
 		</div>
 

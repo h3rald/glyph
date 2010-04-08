@@ -2,6 +2,7 @@
   :source: 'document.glyph'
   :author: ""
   :title: ""
+  :subtitle: ""
   :filename: ""
   :output: 'html'
   :output_targets: [:html, :pdf]

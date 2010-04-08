@@ -21,7 +21,7 @@ end
 
 macro :markdown do
 	md = nil
-	markdown_converter = cfg "filters.markdown_converter"
+	markdown_converter = cfg("filters.markdown_converter").to_sym
 	if !markdown_converter then
 		begin
 			require 'bluecloth'

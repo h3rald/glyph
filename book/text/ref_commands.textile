@@ -13,7 +13,7 @@ If specified, the command is executed in debug mode and additional diagnostic in
 ]
 ]
 
-section[header[@add@]
+section[header[@add@|c_add]
 Creates a new text file in the @text/@ folder.
 
 example[glyph add introduction.textile]
@@ -23,7 +23,7 @@ parameters[
 ]
 ] --[End add]
 
-section[header[@compile@]
+section[header[@compile@|c_compile]
 Compiles a Glyph document into an output file. If no options are specified, the @document.glyph@ file is used as source to produce a standalone HTML file.
 
 example[glyph compile -f pdf]
@@ -41,7 +41,7 @@ values[html, pdf]
 ]
 ] --[End compile]
 
-section[header[@config@]
+section[header[@config@|c_config]
 Gets or sets a configuration setting in the project or global configuration file (\.fmi[configuration files|#cfg]).
 
 examples[
@@ -61,7 +61,7 @@ parameters[
 ]
 ] --[End config]
 
-section[header[@help@]
+section[header[@help@|c_help]
 Prints information about all Glyph commands or about one specific command.
 
 examples[
@@ -75,7 +75,7 @@ parameters[
 
 ] --[End help]
 
-section[header[@init@]
+section[header[@init@|c_init]
 Creates a new Glyph project in the current directory (if empty).
 
 example[glyph init]

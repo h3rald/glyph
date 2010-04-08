@@ -34,6 +34,10 @@ macro :"$>" do
 	interpret "=>[#s_#{val}|#@value] setting"
 end
 
+macro :default do
+	%{*Default Value:* @#@value@}
+end
+
 macro :"parameters" do
 	interpret %{
 		section[header[#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-1]}]
@@ -43,7 +47,7 @@ macro :"parameters" do
 				<th style="width:30%">#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-2]}</th>
 				<th>Description</th>
 			</tr>
-			#{@value}
+#{@value}
 		</table>
 		]
 	}
@@ -55,14 +59,10 @@ macro :option do
 		<tr>
 			<td><notextile>-#{ident[0..0]} (--#{ident})</notextile></td>
 			<td>
-				#{desc}
+#{desc}
 			</td>
 		</tr>
 	}
-end
-
-macro :default do
-	%{*Default:* @#@value@}
 end
 
 macro :values do
@@ -76,7 +76,7 @@ end
 macro :examples do
 	%{
 *Examples:* 
-	#{@value.split("\n").map{|i| "@#{i}@\n"}.to_s}
+#{@value.split("\n").map{|i| "@#{i}@\n"}.to_s}
 	}
 end
 
@@ -88,7 +88,22 @@ macro :ref_macro do
 	m_name, m_value = @params
 	interpret %{
 	section[header[@#{m_name}@|m_#{m_name}]
-	#{m_value}
+#{m_value}
+	]
+	}
+end
+
+macro :ref_config do
+	m_name, m_value = @params
+	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
+	interpret %{
+	section[header[@#{m_name}@|s_#{m_name.gsub(/\./, '_')}]
+#{m_value}
+
+	*Default (YAML):*
+	code[=
+#{default}
+	=]
 	]
 	}
 end
