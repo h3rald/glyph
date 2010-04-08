@@ -39,7 +39,7 @@ namespace :generate do
 		out = Glyph::PROJECT/"output/pdf"
 		out.mkpath
 		file = cfg('document.filename')
-		case cfg('pdf_renderer')
+		case cfg('tools.pdf_generator')
 		when 'prince' then
 			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
 			res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
@@ -50,7 +50,7 @@ namespace :generate do
 			end
 			# TODO: support other PDF renderers
 		else
-			warning "Glyph cannot generate PDF. Please specify a valid pdf_renderer setting."
+			warning "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
 		end
 	end
 

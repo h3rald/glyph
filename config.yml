@@ -3,7 +3,7 @@
   :author: ""
   :title: ""
   :filename: ""
-  :output: ""
+  :output: 'html'
   :output_targets: [:html, :pdf]
 :structure:
   :hidden:
@@ -55,9 +55,12 @@
     - :index
     - :lot
     - :lof
-:pdf_renderer: 'prince'
+:tools:
+  :pdf_generator: 'prince'
 :filters:
   :by_file_extension: true
   :target: 'html'
+  :markdown:
+    :converter: 'bluecloth'
   :redcloth:
     :restrictions: []
