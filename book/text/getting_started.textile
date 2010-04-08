@@ -18,9 +18,9 @@ Glyph requires the following gems:
 - rake
 
 Additionally, some Glyph macros may require additional gems, such as:
-- RedCloth (_textile_ macro)
-- Maruku _or_ Kramdown _or_ BlueCloth (_markdown_ macro)
-- Haml (if you want to load .sass files with the _style_ macro)
+- RedCloth (%>[textile])
+- BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (%>[markdown])
+- Haml (if you want to load .sass files with the %>[style])
 ]
 
 Every Glyph project is comprised of the following directories:
@@ -39,8 +39,7 @@ Additionally, the following files are also created at top level:
 
 section[header[Document Structure|struct]
 
-Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@
-generated automatically when creating a new project is the following:
+Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@ generated automatically when creating a new project is the following:
 
 code[=
 document[
@@ -77,7 +76,7 @@ Even without knowing anything about &[glang], you can easily figure out that thi
 
 Be aware that other macros, on the other hand, are used to do something completely different, e.g.:
 * @toc\[\]@ generates the document's Table of Contents
-* codeph[=@\[\]=] or its alias @include\[\]@ is used to copy the contents of another file stored anywhere in the @/text@ directory.
+* codeph[=@\[\]=] or its alias @include\[\]@ is used to copy the contents of another file stored anywhere in the @text/@ directory.
 
 Let's now analyze this @document.glyph@ more in detail.
 * The @document\[\]@ macro wraps every other macro. This is necessary to create the initial @<html>@ tag.
@@ -100,9 +99,9 @@ When compiling, Glyph loads all these configuration files and merges them accord
 * A setting configured in the _Project Configuration_ overrides the same setting in both Global and System configuration.
 * A setting configured in the _Global Configuration_ overrides the same setting in the _System Configuration_
 
-Typically, you should use the _Project Configuration_ for all project-specific settings and the _Global Configuration_ for settings affecting all your projects (for example, you may want to set 'document.author' in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The _System Configuration_ is best left untouched.
+Typically, you should use the _Project Configuration_ for all project-specific settings and the _Global Configuration_ for settings affecting all your projects (for example, you may want to set the $>[document.author] in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The _System Configuration_ is best left untouched.
 
-Instead of editing your configuration settings directly, you can use the @glyph config@ command, as follows:
+Instead of editing your configuration settings directly, you can use the #>[config], as follows:
 
 @glyph config@ _setting_ _\[value\]_
 
@@ -118,12 +117,12 @@ In this way, the document author will be set to _John Smith_ for the current pro
 
 box[Regarding configuration values and data types...|
 Glyph attempts to "guess" the data type of a configuration values by evaluation (@Kernel#instance_eval@) if the value:
-- is wrapped in quotes (@"@ or @'@) &rarr; String
-- starts with a colon (@:@) &rarr; Symbol
-- is wrapped in square brackets (@\[@ and @\]@) &rarr; Array
-- is wrapped in curly brackets (@\{@ and @\}@) &rarr; Hash
-- is _true_ or _false_ &rarr; Boolean
-- If the value is _nil_ &rarr; NilClass
+- is wrapped in quotes (@"@ or @'@) &rarr; @String@
+- starts with a colon (@:@) &rarr; @Symbol@
+- is wrapped in square brackets (@\[@ and @\]@) &rarr; @Array@
+- is wrapped in curly brackets (@{@ and @}@) &rarr; @Hash@
+- is _true_ or _false_ &rarr; @Boolean@
+- is _nil_ &rarr; @NilClass@
 
 Note that this guessing is far from being foolproof: If you type something like _{:test, 2}_, for example, you'll get an error. 
 ]

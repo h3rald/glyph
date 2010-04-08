@@ -13,9 +13,9 @@ Glyph uses a =>[#macros_nutshell|simple macro system] to perform a wide variety 
 * Store common snippets of text in a single YAML file and use them anywhere in your document, as many times as you need.
 * Store configuration settings in a YAML file and use them anywhere in your document, as many times as you need.
 * Evaluate Ruby code within your document.
-* Call macros from other macros (including snippets), carefully avoiding mutual calls.
+* Call macros from other macros (including snippets), avoiding mutual calls.
 * Include text files in other text files.
-* Include the contents of configuration settings (author, title) in the document.
+* Include the value of any configuration setting (like author, title) in the document.
 * Filter input explicitly or implicitly, based on file extensions when including files. 
 * Manage comments and todo items.
 ]

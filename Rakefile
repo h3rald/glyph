@@ -33,6 +33,7 @@ begin
 		s.add_dependency 'rake', '>= 0.8.7'
 		s.add_development_dependency 'rspec'
 		s.add_development_dependency 'yard'
+		s.add_development_dependency 'jeweler'
 	end
 	Jeweler::GemcutterTasks.new
 rescue LoadError
