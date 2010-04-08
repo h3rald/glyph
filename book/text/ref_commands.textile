@@ -61,6 +61,20 @@ parameters[
 ]
 ] --[End config]
 
+section[header[@help@]
+Prints information about all Glyph commands or about one specific command.
+
+examples[
+glyph help
+glyph help compile
+]
+
+parameters[
+-p[command|A valid Glyph command.]
+]
+
+] --[End help]
+
 section[header[@init@]
 Creates a new Glyph project in the current directory (if empty).
 

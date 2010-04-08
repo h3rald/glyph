@@ -3,3 +3,4 @@
   :title: "Glyph"
   :subtitle: "Rapid Document Authoring Framework"
   :filename: "glyph"
+  :output: 'pdf'

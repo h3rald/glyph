@@ -33,7 +33,7 @@ Every Glyph project is comprised of the following directories:
 Additionally, the following files are also created at top level:
 * @config.yml@ -- containing your =>[#cfg|Project Configuration].
 * @document.glyph@ -- containing your =>[#struct|Document Structure]
-* @snippets.yml@ -- containing your text snippets. todo[Link to Snippets section]
+* @snippets.yml@ -- containing your text =>[#incl|snippets].
 
 ]
 

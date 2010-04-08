@@ -9,7 +9,10 @@ By now you probably figured out what a macro looks like: it's an identifier of s
 * The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
 * The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with @\|@. For example, the @link@ (@=>@) macro can take an optional second parameter for the link text: @\..[==>[#link_id|This is the link text]=]@.
 
-todo[Add info about macro aliases]
+A macro can often have one or more alias, i.e. another name for it. For example, @=>@ is an alias for the %>[link], so the following macro calls are equivalent:
+
+codeph[=\.=>[#test|Test Section]=]
+codeph[=\.link[#test|Test Section]=]
 
 ]
 
@@ -149,7 +152,7 @@ note[@frontmatter@, @bodymatter@ and @backmatter@ are also valid (and mandatory!
 
 ] --[End section]
 
-section[header[Including Files and Snippets]
+section[header[Including Files and Snippets|incl]
 
 If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an @include@ macro (aliased by codeph[@]) that can be used to include the contents of any file within the @text/@ directory:
 

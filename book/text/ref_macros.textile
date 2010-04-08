@@ -7,17 +7,18 @@ aliases[--]
 example[--\[This is a comment. It will not be displayed in the output\]]
 ]
 
-ref_macro[todo|
-Saves the value as a TODO item, which can be printed using the #>[todo].
+ref_macro[config|
+Evaluates to the configuration setting referenced by its value.
 
-example[todo\[Remember to do this.\]]
+aliases[$]
+example[$\[document.author\]]
 ]
 
-ref_macro[snippet|
-Evaluates to the snippet referenced by its value.
+ref_macro[escape|
+Evaluates to its value. Commonly used with the escaping delimiters @\[=@ and @=\]@.
 
-aliases[&]
-example[&\[glang\]]
+aliases[.]
+example[.\[=Macros are escaped here =>\[#test\].=\]]
 ]
 
 ref_macro[include|
@@ -37,31 +38,22 @@ examples[
 ]
 ]
 
-ref_macro[config|
-Evaluates to the configuration setting referenced by its value.
+ref_macro[snippet|
+Evaluates to the snippet referenced by its value.
 
-aliases[$]
-example[$\[document.author\]]
+aliases[&]
+example[&\[glang\]]
 ]
 
-ref_macro[escape|
-Evaluates to its value. Commonly used with the escaping delimiters @\[=@ and @=\]@.
+ref_macro[todo|
+Saves the value as a TODO item, which can be printed using the #>[todo].
 
-aliases[.]
-example[.\[=Macros are escaped here =>\[#test\].=\]]
+example[todo\[Remember to do this.\]]
 ]
 
 ] --[End common macros]
 
 section[header[Filter Macros|f_macros]
-
-ref_macro[textile|
-Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the $>[filters.target]. 
-
-&[called_on_files] with a @.textile@ extension. 
-
-example[textile\[This is a *strong emphasis*.\]]
-]
 
 ref_macro[markdown|
 Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the $>[filters.target] is set to @html@.
@@ -71,16 +63,17 @@ Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transfor
 example[markdown\[This is *emphasized* text.\]]
 ]
 
+ref_macro[textile|
+Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the $>[filters.target]. 
+
+&[called_on_files] with a @.textile@ extension. 
+
+example[textile\[This is a *strong emphasis*.\]]
+]
+
 ] --[End filter macros]
 
 section[header[Block Macros]
-
-ref_macro[note|
-Creates a note @div@ containing the value.
-
-aliases[important, caution, tip]
-example[note\[This is a note.\]]
-]
 
 ref_macro[box|
 Creates a titled box @div@.
@@ -109,22 +102,20 @@ code\[
 
 ]
 
-ref_macro[title|
-Renders the title of the document (based on the $>[document.title]) within a @h1@ tag.
+ref_macro[fig|
+Includes an image in the document, with an optional caption.
 
-example[title\[\]]
+examples[
+fig\[diagram.png\]
+fig\[graph.png\|Monthly pageviews\]
+]
 ]
 
-ref_macro[subtitle|
-Renders the subtitle of the document (based on the $>[document.subtitle]) within a @h2@ tag.
+ref_macro[note|
+Creates a note @div@ containing the value.
 
-example[subtitle\[\]]
-]
-
-ref_macro[pubdate|
-Evaluates to a date string (in the format: _current-month_ _current-year_; or _%B_ _%Y_), within a @div@ tag.
-
-example[pubdate\[\]]
+aliases[important, caution, tip]
+example[note\[This is a note.\]]
 ]
 
 ref_macro[img|
@@ -137,13 +128,16 @@ img\[logo.svg\|50%\|50%\]
 ]
 ]
 
-ref_macro[fig|
-Includes an image in the document, with an optional caption.
+ref_macro[pubdate|
+Evaluates to a date string (in the format: _current-month_ _current-year_; or _%B_ _%Y_), within a @div@ tag.
 
-examples[
-fig\[diagram.png\]
-fig\[graph.png\|Monthly pageviews\]
+example[pubdate\[\]]
 ]
+
+ref_macro[subtitle|
+Renders the subtitle of the document (based on the $>[document.subtitle]) within a @h2@ tag.
+
+example[subtitle\[\]]
 ]
 
 ref_macro[table|
@@ -170,10 +164,16 @@ table\[
 
 ]
 
-ref_macro[tr|See =>[#m_table].]
-ref_macro[th|See =>[#m_table].]
 ref_macro[td|See =>[#m_table].]
 
+ref_macro[title|
+Renders the title of the document (based on the $>[document.title]) within a @h1@ tag.
+
+example[title\[\]]
+]
+
+ref_macro[th|See =>[#m_table].]
+ref_macro[tr|See =>[#m_table].]
 
 ] --[End block macros]
 
@@ -184,17 +184,6 @@ Creates a named anchor (or bookmark).
 
 aliases[bookmark, #]
 example[#\[test\|Test Bookmark\]]
-]
-
-ref_macro[link|
-Creates an hyperlink (\.fmi[creating links|#links]).
-
-aliases[=>]
-examples[
-=>\[#introduction\]
-=>\[#troub\|Troubleshooting\]
-=>\[http://www.h3rald.com\|H3RALD.com\]
-]
 ]
 
 ref_macro[codeph|
@@ -210,14 +199,37 @@ Creates a _For More Information_ link (for an example usage, see the %>[link]).
 example[fmi\[creating links\|#links\]]
 ]
 
+ref_macro[link|
+Creates an hyperlink (\.fmi[creating links|#links]).
+
+aliases[=>]
+examples[
+=>\[#introduction\]
+=>\[#troub\|Troubleshooting\]
+=>\[http://www.h3rald.com\|H3RALD.com\]
+]
+]
+
 ] --[End inline macros]
 
 section[header[Structure Macros]
 
+ref_macro[body|
+Creates a @body@ tag.
+]
+
 ref_macro[div|
 Creates a @div@ tag.
 
-*Aliases:* todo[List div aliases]
+*Aliases:* %["@#{cfg('structure').values.flatten.uniq.map{|a| a.to_s }.push("section").sort.join(', ')}@"]
+]
+
+ref_macro[document|
+The root macro used in every Glyph document.
+]
+
+ref_macro[head|
+Creates a @head@ tag, pre-populated with @title@ and author/copyright meta tags.
 ]
 
 ref_macro[header|
@@ -227,18 +239,6 @@ examples[
 header\[Introduction\]
 header\[Getting Started\|gs\]
 ]
-]
-
-ref_macro[document|
-The root macro used in every Glyph document.
-]
-
-ref_macro[body|
-Creates a @body@ tag.
-]
-
-ref_macro[head|
-Creates a @head@ tag, pre-populated with @title@ and author/copyright meta tags.
 ]
 
 ref_macro[style|
