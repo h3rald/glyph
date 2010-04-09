@@ -15,7 +15,7 @@ The format of the output file. It can be set to any value stored in the $>[docum
 ]
 
 ref_config[document.output_targets|
-An Array containing all the possible output formats. This setting should not be changed by the user. 
+An @Array@ containing all the possible output formats. This setting should not be changed by the user. 
 ]
 
 ref_config[document.source|
@@ -50,7 +50,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 ]
 
 ref_config[filters.redcloth.restrictions|
-An Array containing restrictions applied to RedCloth, used by the %>[textile] (see =>[http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html|RedCloth Documentation] for more information). 
+An @Array@ containing restrictions applied to RedCloth, used by the %>[textile] (see =>[http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html|RedCloth Documentation] for more information). 
 ]
 
 ref_config[filters.target|

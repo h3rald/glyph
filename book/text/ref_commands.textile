@@ -19,7 +19,7 @@ Creates a new text file in the @text/@ folder.
 example[glyph add introduction.textile]
 
 parameters[
--p[file-name|The name (or relative path) of the new file to be created.]
+-p[_file-name_|The name (or relative path) of the new file to be created.]
 ]
 ] --[End add]
 
@@ -56,8 +56,8 @@ default[false]
 ]
 ]
 parameters[
--p[setting|The name of a valid =>[#cfg_ref|configuration setting].]
--p[value|The new value of the configuration setting.]
+-p[_setting_|The name of a valid =>[#cfg_ref|configuration setting].]
+-p[_value_|The new value of the configuration setting.]
 ]
 ] --[End config]
 
@@ -70,7 +70,7 @@ glyph help compile
 ]
 
 parameters[
--p[command|A valid Glyph command.]
+-p[_command_|A valid Glyph command.]
 ]
 
 ] --[End help]

@@ -76,7 +76,7 @@ example[textile\[This is a *strong emphasis*.\]]
 section[header[Block Macros]
 
 ref_macro[box|
-Creates a titled box @div@.
+Creates a titled box (@<div>@ tag).
 
 *Example:*
 
@@ -88,7 +88,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 ]
 
 ref_macro[code|
-Used to render a block of code within @pre@ and @code@ tags. For inline code, see the %>[codeph].
+Used to render a block of code within @<pre>@ and @<code>@ tags. For inline code, see the %>[codeph].
 
 *Example:*
 
@@ -129,13 +129,13 @@ img\[logo.svg\|50%\|50%\]
 ]
 
 ref_macro[pubdate|
-Evaluates to a date string (in the format: _current-month_ _current-year_; or _%B_ _%Y_), within a @div@ tag.
+Evaluates to a date string (in the format: _current-month_ _current-year_; or _%B_ _%Y_), within a @<div>@ tag.
 
 example[pubdate\[\]]
 ]
 
 ref_macro[subtitle|
-Renders the subtitle of the document (based on the $>[document.subtitle]) within a @h2@ tag.
+Renders the subtitle of the document (based on the $>[document.subtitle]) within a @<h2>@ tag.
 
 example[subtitle\[\]]
 ]
@@ -167,7 +167,7 @@ table\[
 ref_macro[td|See =>[#m_table].]
 
 ref_macro[title|
-Renders the title of the document (based on the $>[document.title]) within a @h1@ tag.
+Renders the title of the document (based on the $>[document.title]) within a @<h1>@ tag.
 
 example[title\[\]]
 ]
@@ -187,7 +187,7 @@ example[#\[test\|Test Bookmark\]]
 ]
 
 ref_macro[codeph|
-Wraps the value in a @code@ tag.
+Wraps the value in a @<code>@ tag.
 
 example[codeph\[Kernel.instance_eval\]]
 
@@ -215,21 +215,21 @@ examples[
 section[header[Structure Macros]
 
 ref_macro[body|
-Creates a @body@ tag.
+Creates a @<body>@ tag.
 ]
 
 ref_macro[div|
-Creates a @div@ tag.
+Creates a @<div>@ tag.
 
 *Aliases:* %["@#{cfg('structure').values.flatten.uniq.map{|a| a.to_s }.push("section").sort.join(', ')}@"]
 ]
 
 ref_macro[document|
-The root macro used in every Glyph document.
+The root macro used in every Glyph document. It creates an @<html>@ tag.
 ]
 
 ref_macro[head|
-Creates a @head@ tag, pre-populated with @title@ and author/copyright meta tags.
+Creates a @<head>@ tag, pre-populated with @title@ and author/copyright @<meta>@ tags.
 ]
 
 ref_macro[header|
@@ -241,8 +241,10 @@ header\[Getting Started\|gs\]
 ]
 ]
 
+ref_macro[section|See =>[#m_div].]
+
 ref_macro[style|
-Embeds the content of a CSS or Sass file within a @style@ tag (\.fmi[stylesheets|#stylesheets]).
+Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).
 
 example[style\[default.css\]]
 ]

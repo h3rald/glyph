@@ -1,15 +1,15 @@
 section[header[Text Editing]
 
-One of the aims of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with &[markups].
+One of the main purposes of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with &[markups].
 
 section[header[Introducing &[macros]]
 
 By now you probably figured out what a macro looks like: it's an identifier of some kind that wraps a value or parameters within square brackets. More specifically:
 * The macro identifier can contain _any_ character except for: @\[@, @\]@, @\\@, @\|@ or spaces.
 * The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
-* The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with @\|@. For example, the @link@ (@=>@) macro can take an optional second parameter for the link text: @\..[==>[#link_id|This is the link text]=]@.
+* The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with @\|@. For example, the %>[link] can take an optional second parameter for the link text: @\..[=link[#link_id|This is the link text]=]@.
 
-A macro can often have one or more alias, i.e. another name for it. For example, @=>@ is an alias for the %>[link], so the following macro calls are equivalent:
+A macro can often have one or more aliases. For example, @=>@ is an alias for the %>[link], so the following macro calls are equivalent:
 
 codeph[=\.=>[#test|Test Section]=]
 codeph[=\.link[#test|Test Section]=]
@@ -18,11 +18,11 @@ codeph[=\.link[#test|Test Section]=]
 
 section[header[Escaping and Quoting|esc_quot]
 
-Glyph doesn't require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That's not _too_ bad if you think about it, unless you're writing programming code: in that case, escaping every single square bracket can be painful.
+Glyph doesn't require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That's not _too_ bad if you think about it, unless you're writing programming code, in which case escaping every single square bracket can be painful.
 
-If a portion of your text contains an excessive amount of square brackets, you may consider using the @escape@ macro (or better, its alias @.@) with @\[=@ and @=\]@ as delimiters. By itself, the escape macro doesn't do anything: it just evaluates to its contents, but the special delimiters act as a quote for any square bracket within them. As a consequence, any macro within @\[=@ and @=\]@ will _not_ be evaluated.
+If a portion of your text contains an excessive amount of square brackets, you may consider using the %>[escape] (or its alias @.@) with the @\[=@ and @=\]@ delimiters. By itself, the escape macro doesn't do anything: it just evaluates to its contents, but the special delimiters act as an escape for any square bracket within them. As a consequence, any macro within @\[=@ and @=\]@ will _not_ be evaluated.
 
-You can use the quoting delimiters with _any_ macro identifier. Obviously, using them as delimiters for things like @section@ macros may not be a good idea, but they should really be mandatory with the @code@ macro, like this:
+You can use the quoting delimiters with _any_ macro identifier. Obviously, using them as delimiters for things like %>[section]s may not be a good idea, but they should be more or less mandatory with the %>[code], like this:
 
 code[=
 code\[=
@@ -37,7 +37,7 @@ This is another section.
 =\]
 =]
 
-note[Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiter themselves.]
+note[Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiters themselves.]
 
 Besides square brackets, there are other characters that must or can be escaped with backslashes, as shown in the following table
 
@@ -70,13 +70,13 @@ table[
 	tr[
 		td[@\\\|@]
 		td[@\|@]
-		td[Pipes must be escaped (even within quoting macros) unless they are used to separate two or more macro parameters.]
+		td[Pipes must be escaped (even within quoting macros) unless they are used to separate macro parameters.]
 	]
 	tr[
 		td[@\\\..@]
 		td[]
 		td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:
-@\..[= _\.=>[#link|This is an emphasized link]_ =]@
+@\..[= _\\..=>[#link|This link is emphasized using Textile]_ =]@
 		]
 	]
 ]
@@ -85,7 +85,7 @@ table[
 
 section[header[Sections and Headers|sec_head]
 
-Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the @section@ macro, like so:
+Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section], like so:
 
 code[=
 section[
@@ -121,7 +121,7 @@ code[=
 
 By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--\[...\]@ macros are _comments_, therefore they are not included in the final output).
 
-There are _a lot_ of macros that can be used in the same way as @section@, one for each element of =>[http://en.wikipedia.org/wiki/Book_design|Book Design]. Each one of them is a simple wrapper for a @<div>@ tag with a class set to its name.
+There are _a lot_ of macros that can be used in the same way as @section@, one for each element commonly used in =>[http://en.wikipedia.org/wiki/Book_design|Book Design]. Each one of them is a simple wrapper for a @<div>@ tag with a @class@ attribute set to its name.
 
 The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:
 
@@ -140,7 +140,7 @@ table[
 	]
 ]
 
-<notextile>*</notextile>: The @toc@ macro is to generate the Table of Contents automatically, and it must be used with no contents (@toc\[\]@).
+<notextile>*</notextile>: The %>[toc] is used to generate the Table of Contents automatically, and it must be used with no contents (i.e.: @toc\[\]@).
 
 <notextile>**</notextile>: This macro is likely to be extended in future versions to generate/aggregate content automatically.
  
@@ -154,19 +154,19 @@ note[@frontmatter@, @bodymatter@ and @backmatter@ are also valid (and mandatory!
 
 section[header[Including Files and Snippets|incl]
 
-If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an @include@ macro (aliased by codeph[@]) that can be used to include the contents of any file within the @text/@ directory:
+If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an %>[include] (aliased by codeph[@]) that can be used to include the contents of any file within the @text/@ directory:
 
 codeph[=@[introduction.textile]=]
 
-The macro above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
+The macro call above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
 
 note[Unlike with =>[img_fig|image and figures] that must be included with their _relative_ path to the @images/@ folder, you must not specify a relative path when including text files. This is due to the fact that images are copied _as they are_ in the @output/<format>/images/@ directory and they have to be linked from the output file.
 
-A possible downside of this behavior is that file names must be unique within the entire @text/@ directory (or any of its subdirectories)]
+A possible downside of this behavior is that file names must be unique within the entire @text/@ directory and any of its subdirectories]
 
-When including a text file, by default an input filter macro is applied to its contents based on the file extension used:
-* @.textile@ &rarr; @textile@
-* @.markdown@ or @.md@ &rarr; @markdown@
+When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:
+* @.textile@ &rarr; %>[textile]
+* @.markdown@ or @.md@ &rarr; %>[markdown]
 
 tip[You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@, like this:
 
@@ -174,7 +174,7 @@ tip[You can override this behavior by setting the @filters.by_file_extensions@ c
 
 While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a _snippet_ instead.
 
-Snippets are text strings saved in YAML format in the @snippets.yml@ file. They can be included anywhere in your document using the @snippet@ macro (or its alias @&@). 
+Snippets are text strings saved in YAML format in the @snippets.yml@ file. They can be included anywhere in your document using the %>[snippet] (or its alias @&@). 
 
 box[Example|
 Consider the following @snippets.yml@ file:
@@ -193,7 +193,7 @@ code[=
 You can use codeph[=&[markups]=] anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the @markups@ snippets only in the @snippets.yml@ file to change it everywhere else in the document.
 ] --[End Example]
 tip[
-Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you if necessary.
+Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
 ]
 ] --[End Section]
 
@@ -204,7 +204,7 @@ Lightweight markups let you create internal and external links in a very easy wa
 * There is no built-in way to check if they are valid
 * There is no built-in way to determine the title of a link automatically
 
-If you care about link validation and you want to save some keystrokes, then you should use the following markup-agnostic &[macros]:
+If you care about link validation and you want to save some keystrokes, then you should use the following markup-agnostic macros:
 * @link@ (aliased to @=>@) -- to create internal and external links.
 * @anchor@ (aliased to @#@) -- to create named anchors (bookmarks) within your document.
 
@@ -213,14 +213,13 @@ box[Example|
 &[gcode]
 
 code[=
-This is a link to =>[#test].
+This is a link to link[#test].
 
 ...
 
-This is =>[#wrong].
+This is link[#wrong].
 
-This is a #[test\|test anchor].
-=]
+This is a #[test\|test anchor].=]
 
 &[htmlcode]
 
@@ -239,21 +238,21 @@ Additionally, the following warning message is displayed when =>[#compile|compil
 code[=
 warning: Bookmark 'wrong' does not exist
  -> source: @: aurhoting.textile
- -> path: document/body/bodymatter/chapter/@/textile/section/section/box/=>
+ -> path: document/body/bodymatter/chapter/@/textile/section/section/box/link
 =]
 </notextile>
 
 ]
 
-Basically, if you use the @=>@ and @#@ macros, Glyph makes sure that:
+Basically, if you use the %>[link] and the %>[anchor], Glyph makes sure that:
 * All links point to valid anchors within the document (regardless if the anchors are before or after the link, in snippets or included files).
 * There are no duplicate anchors within the documents.
-* If no title is specified as second parameter for the @=>@ macro, the anchor's title is used as such.
+* If no title is specified as second parameter for the %>[link], the anchor's title is used as such.
 
-Besides using the @#@ macro, you can also create an anchor for a header by passing an extra parameter to the @header@ macro, like this: codeph[=header[Header Title|my_anchor]=].
+Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an extra parameter to the %>[header], like this: codeph[=header[Header Title|my_anchor]=].
 
 note[
-At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the @=>@ macro starts with a @#@). In the future, the macro could be extended to support external links as well. 
+At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the %>[link] starts with a @#@). In the future, the macro could be extended to support external links as well. 
 ]
 
 ] --[End section]
@@ -268,13 +267,13 @@ However, it is possible to evaluate simple ruby code snippets using the @ruby@ m
 
 The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself). 
 
-Although it is possible to retrieve Glyph configuration settings in this way (e.g. codeph[=%[cfg('document.author')]=]), the @config@ macro (aliased to @$@) makes things slightly simpler (e.g. codeph[=$[document.author]=]).
+Although it is possible to retrieve Glyph configuration settings in this way (e.g. codeph[=%[cfg('document.author')]=]), the %>[config] (aliased to @$@) makes things slightly simpler (e.g. codeph[=$[document.author]=]).
 
 ]
 
 section[header[Images and Figures|img_fig]
 
-In a similar way to =>[#links|links], if you want you can include images and figures using &[markups]. If you want additional features, you can use the @img@ and @fig@ macros, as shown in the following example:
+Same as for =>[#links|links], you can also include images and figures using &[markups]. If you want additional features, you can use the %>[img] and the %>[fig], as shown in the following example:
 
 box[Example|
 
@@ -313,28 +312,25 @@ In future releases, figures will be numbered automatically and included in a _Li
 
 section[header[Compiling your project|compile]
 
-By default, a Glyph project can be _compiled_ into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more formats are likely to be supported.
+By default, a Glyph project can be _compiled_ into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more formats could be supported.
 
 section[header[Adding Stylesheets|stylesheets]
 
-Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS 3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.
+Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.
 
-You can embed CSS files using the @style@ macro, like this:
+You can embed CSS files using the %>[style], like this:
 
 code[= style[default.css] =]
 
-In this case, the @style@ macro looks for a @default.css@ file in the @/styles@ folder of your Glyph project and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
+In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
 
 ]
 
 section[header[HTML output]
 
-To compile a Glyph project to an HTML document, use the @glyph compile@ command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. The name of the HTML file can be set in the configuration (@document.filename@ setting).
+To compile a Glyph project to an HTML document, use the @glyph compile@ command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
 
-If you don't want to compile the whole project, you can specify a different source, like this:
-
-code[= glyph compile -s myfile.textile =]
-
+The name of the HTML file can be set in the configuration (@document.filename@ setting).
 ]
 
 section[header[PDF Output]
