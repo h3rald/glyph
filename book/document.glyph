@@ -8,7 +8,7 @@ document[
 			img[glyph.svg|20%|20%]
 			title[]
 			subtitle[]
-			v\.%[Glyph::VERSION] (draft)
+			v\.%[Glyph::VERSION]
 			author[]
 			pubdate[]
 		]
