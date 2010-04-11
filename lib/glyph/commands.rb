@@ -79,6 +79,7 @@ command :config do |c|
 		when 2 then
 			cfg.set args[0], args[1]
 			Glyph.reset_config
+			cfg.write
 		else
 			raise ArgumentError, "Too many arguments."
 		end

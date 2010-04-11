@@ -29,11 +29,15 @@ describe "glyph" do
 		create_project
 		run_command_successfully(["config", "test_setting", true]).should == true
 		Glyph::CONFIG.get(:test_setting).should == true
+		Glyph::PROJECT_CONFIG.read
 		Glyph::PROJECT_CONFIG.get('test_setting').should == true
+		Glyph::GLOBAL_CONFIG.read
 		Glyph::GLOBAL_CONFIG.get('test_setting').should_not == true
 		run_command_successfully(["config", "-g", "another.test", "something else"]).should == true
 		Glyph::CONFIG.get("another.test").should == "something else"
+		Glyph::PROJECT_CONFIG.read
 		Glyph::PROJECT_CONFIG.get('another.test').should_not == "something else"
+		Glyph::GLOBAL_CONFIG.read
 		Glyph::GLOBAL_CONFIG.get('another.test').should == "something else"
 		run_command_successfully(["config", "-g", "yet.another.test", "something else", "extra argument"]).should == false
 	end
