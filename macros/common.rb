@@ -15,11 +15,17 @@ macro :snippet do
 	begin
 		ident = @params[0].to_sym
 		macro_error "Snippet '#{ident}' does not exist" unless Glyph::SNIPPETS.has_key? ident
-		interpret Glyph::SNIPPETS[ident]
+		interpret Glyph::SNIPPETS[ident] 
 	rescue Exception => e
 		warning e.message
 		"[SNIPPET '#{@value}' NOT PROCESSED]"
 	end
+end
+
+macro "snippet:" do
+	ident, text = @params
+	Glyph::SNIPPETS[ident.to_sym] = text
+	""
 end
 
 macro :include do
@@ -60,6 +66,7 @@ end
 
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
+macro_alias '&:' => 'snippet:'
 macro_alias '@' => :include
 macro_alias '%' => :ruby
 macro_alias '$' => :config

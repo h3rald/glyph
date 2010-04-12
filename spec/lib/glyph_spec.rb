@@ -42,7 +42,7 @@ describe Glyph do
 		create_project
 		Glyph.run! 'load:macros'
 		macros = [:anchor, :link, :codeph, :fmi, :note, :box, :code, :title, :subtitle,
-		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet,
+		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet, "snippet:",
 		:include, :config, :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
 		:head, :style, :toc, :section]
 		aliases = [	
@@ -51,6 +51,7 @@ describe Glyph do
 			[[:important, :caution, :tip], :note],
 			[["@"], :include],
 			[["&"], :snippet],
+			[["&:"], "snippet:"],
 			[["$"], :config],
 			[["%"], :ruby],
 			[["."], :escape],

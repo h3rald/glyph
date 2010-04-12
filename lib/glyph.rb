@@ -106,7 +106,7 @@ module Glyph
 	# Defines a new macro
 	# @param name [Symbol, String] the name of the macro
 	def self.macro(name, &block)
-		MACROS[name] = block
+		MACROS[name.to_sym] = block
 	end
 
 	# Defines an alias for an existing macro

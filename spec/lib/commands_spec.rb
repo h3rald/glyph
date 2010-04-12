@@ -34,12 +34,14 @@ describe "glyph" do
 		Glyph::GLOBAL_CONFIG.read
 		Glyph::GLOBAL_CONFIG.get('test_setting').should_not == true
 		run_command_successfully(["config", "-g", "another.test", "something else"]).should == true
+		(Glyph::SPEC_DIR/'.glyphrc').exist?.should == true
 		Glyph::CONFIG.get("another.test").should == "something else"
 		Glyph::PROJECT_CONFIG.read
 		Glyph::PROJECT_CONFIG.get('another.test').should_not == "something else"
 		Glyph::GLOBAL_CONFIG.read
 		Glyph::GLOBAL_CONFIG.get('another.test').should == "something else"
 		run_command_successfully(["config", "-g", "yet.another.test", "something else", "extra argument"]).should == false
+		(Glyph::SPEC_DIR/'.glyphrc').unlink
 	end
 
 	it "[add] should create a new text file" do
