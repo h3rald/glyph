@@ -60,6 +60,12 @@ macro :config do
 	cfg @value
 end
 
+macro "config:" do
+	setting,value = @params
+	Glyph.config_override(setting, value)
+	nil
+end
+
 macro :escape do
 	@value
 end
@@ -111,5 +117,6 @@ macro_alias '&:' => 'snippet:'
 macro_alias '@' => :include
 macro_alias '%' => :ruby
 macro_alias '$' => :config
+macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias '?' => :condition

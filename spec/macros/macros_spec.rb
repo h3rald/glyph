@@ -125,6 +125,14 @@ describe "Macro:" do
 		interpret "test.setting = $[test.setting]"
 		@p.document.output.should == %{test.setting = TEST}
 	end
+	
+	it "config:" do
+		Glyph.config_override "test.setting", "TEST"
+		interpret "test.setting = $[test.setting]"
+		@p.document.output.should == %{test.setting = TEST}
+		interpret "test.setting = $:[test.setting|TEST2]$[test.setting]"
+		@p.document.output.should == %{test.setting = TEST2}
+	end
 
 	it "toc" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
