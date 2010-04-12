@@ -46,6 +46,29 @@ describe "Macro:" do
 		Glyph::SNIPPETS.delete :t1
 	end
 
+	it "condition" do
+		define_em_macro
+		interpret("?[$[document.invalid]|em[test]]")
+		@p.document.output.should == ""
+		interpret("?[$[document.output]|em[test]]")
+		@p.document.output.should == "<em>test</em>"
+		interpret("?[not[eq[$[document.output]|]]|em[test]]")
+		@p.document.output.should == "<em>test</em>"
+		interpret %{?[
+				or[
+					eq[$[document.target]|htmls]|
+					not[eq[$[document.author]|x]]
+				]|em[test]]}
+		@p.document.output.should == "<em>test</em>"
+		interpret("?[not[match[$[document.source]|/^docu/]]|em[test]]")
+		@p.document.output.should == ""
+		# Invalid regexp
+		lambda { interpret("?[match[$[document.source]|document]em[test]]").document.output }.should raise_error
+		# Outside condition
+		lambda { interpret("em[and[a|b]]").document.output }.should raise_error
+
+	end
+
 	it "section, chapter, header" do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
 		interpret text

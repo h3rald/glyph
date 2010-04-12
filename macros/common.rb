@@ -64,6 +64,47 @@ macro :escape do
 	@value
 end
 
+macro :condition do
+	cond, actual_value = @params
+	(interpret(cond).blank?) ? "" : actual_value
+end
+
+macro :eq do
+	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	a, b = @params
+	res_a = interpret(a.to_s) 
+	res_b = interpret(b.to_s)
+ 	(res_a == res_b)	? true : nil
+end
+
+macro :not do
+	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	interpret(@value).blank? ? true : nil 
+end
+
+macro :and do
+	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	a, b = @params
+	res_a = !interpret(a.to_s).blank?
+	res_b = !interpret(b.to_s).blank?
+	(res_a && res_b) ? true : nil
+end
+
+macro :or do
+	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	a, b = @params
+	res_a = !interpret(a.to_s).blank?
+	res_b = !interpret(b.to_s).blank?
+	(res_a || res_b) ? true : nil
+end
+
+macro :match do
+	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	val, regexp = @params
+	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
+	(interpret(val).match(instance_eval(regexp))) ? true : nil
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
@@ -71,3 +112,4 @@ macro_alias '@' => :include
 macro_alias '%' => :ruby
 macro_alias '$' => :config
 macro_alias '.' => :escape
+macro_alias '?' => :condition
