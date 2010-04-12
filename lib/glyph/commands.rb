@@ -27,6 +27,8 @@ command :compile do |c|
 	c.flag [:s, :source]
 	c.desc "Specify the format of the output file (default: html)"
 	c.flag [:f, :format]
+	c.desc "Auto-regenerate output on file changes"
+	c.switch :auto
 	c.action do |global_options, options, args|
 		Glyph.run 'load:config'
 		output_targets = Glyph::CONFIG.get('document.output_targets')
@@ -39,6 +41,37 @@ command :compile do |c|
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 		Glyph.run "generate:#{target}"
+
+		if options[:auto]
+			require 'directory_watcher'
+
+			info 'Auto-regenerating enabled'
+			info 'Use ^C to interrupt'
+
+			glob = ['*.glyph', 'config.yml', 'images/**/*', 'lib/**/*', 'snippets.yml', 'styles/**/*', 'text/**/*']
+			dw = DirectoryWatcher.new(Glyph::PROJECT,
+										:glob => glob,
+										:interval => 1,
+										:pre_load => true)
+
+			dw.add_observer do |*args|
+				info "Regeneration started: #{args.size} files changed"
+				Glyph.enable 'load:all'
+				Glyph.enable 'load:config'
+				Glyph.enable 'load:macros'
+				Glyph.enable 'load:snippets'
+				Glyph.enable 'generate:document'
+				Glyph::MACROS.clear
+				Glyph.run! "generate:#{target}"
+			end
+
+			dw.start
+			begin
+				sleep
+			rescue Interrupt
+			end
+			dw.stop
+		end
 	end
 end
 

@@ -10,10 +10,10 @@ describe "generate" do
 	after do
 		delete_project
 	end
-	
-	it ":document should generate Glyph::DOCUMENT" do
+
+	it ":document should generate Glyph.document" do
 		lambda { Glyph.run! 'generate:document'}.should_not raise_error
-		Glyph::DOCUMENT.structure.children.length.should > 0
+		Glyph.document.structure.children.length.should > 0
 	end
 
 	it ":html should generate a standalone html document" do

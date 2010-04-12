@@ -81,6 +81,41 @@ describe "glyph" do
 		res.match(/Snippet 'invalid3' does not exist/).should_not == nil
 	end
 
+	it "[compile] should regenerate output with auto switch set" do
+		create_project
+
+		compile_thread = Thread.new do
+			$res = run_command(['-d', 'compile', '--auto'])
+		end
+
+		output_file = (Glyph::PROJECT/'output/html/test_project.html')
+		loop do
+			break if output_file.file?
+			sleep 1
+		end
+		output = file_load output_file
+		output_file.unlink
+
+		text_file = (Glyph::PROJECT/'text/container.textile')
+		text_file.unlink
+
+		file_write text_file, "section[\nheader[Container section]\nThis is another test.\n]\n"
+
+		loop do
+			break if output_file.file?
+			sleep 1
+		end
+		compile_thread.raise Interrupt
+		compile_thread.join
+
+		output2 = file_load output_file
+		output.should_not == output2
+		output2.match(/<p>This is another test.<\/p>/).should_not == nil
+
+		$res.match(/Auto-regenerating enabled/).should_not == nil
+		$res.match(/Regeneration started: 1 files changed/).should_not == nil
+	end
+
 	it "[compile] should not compile the project in case of an unknown output format" do
 		run_command_successfully(["compile", "-f", "wrong"]).should == false
 	end
