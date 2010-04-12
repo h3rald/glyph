@@ -43,7 +43,7 @@ describe Glyph do
 		Glyph.run! 'load:macros'
 		macros = [:anchor, :link, :codeph, :fmi, :note, :box, :code, :title, :subtitle,
 		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet, "snippet:",
-		:include, :config, :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
+		:include, :config, "config:", :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
 		:head, :style, :toc, :section, :condition, :eq, :and, :or, :not, :match]
 		aliases = [	
 			[[:bookmark, "#"], :anchor],
@@ -54,6 +54,7 @@ describe Glyph do
 			[["&:"], "snippet:"],
 			[["?"], "condition"],
 			[["$"], :config],
+                        [["$:"], "config:"],
 			[["%"], :ruby],
 			[["."], :escape],
 			[["--"], :comment],
