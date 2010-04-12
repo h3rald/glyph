@@ -56,11 +56,5 @@ describe Glyph::Macro do
 		@macro.interpret("&[inc] test").should == "Test [SNIPPET 'inc' NOT PROCESSED] test" 
 	end
 
-	it "should define snippets" do
-		@macro.interpret("&[t1] - &:[t1|Test #1] - &[t1]").should == "[SNIPPET 't1' NOT PROCESSED] -  - Test #1"
-		Glyph::SNIPPETS[:t1].should == "Test #1"
-		Glyph::SNIPPETS.delete :t1
-	end
-
 end
 

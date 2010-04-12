@@ -39,6 +39,13 @@ describe "Macro:" do
 		@p.document.output.should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
 	end
 
+	it "snippet:" do
+		interpret("&[t1] - &:[t1|Test #1] - &[t1]")
+		@p.document.output.should == "[SNIPPET 't1' NOT PROCESSED] -  - Test #1"
+		Glyph::SNIPPETS[:t1].should == "Test #1"
+		Glyph::SNIPPETS.delete :t1
+	end
+
 	it "section, chapter, header" do
 		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
 		interpret text
