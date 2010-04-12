@@ -4,8 +4,12 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 describe Glyph::Macro do
 
 	before do
-		Glyph.macro :test do |node|
-			"Test: #{node[:value]}"
+		Glyph.macro :test do
+			"Test: #{@value}"
+		end
+		Glyph.macro :validated_test do
+			validate {	@node.parent[:macro] == :test }
+			"Validated Test: #{@value}"
 		end
 		create_tree = lambda {|text| }
 		create_doc = lambda {|tree| }
@@ -54,6 +58,11 @@ describe Glyph::Macro do
 		Glyph.run! 'load:macros'
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
 		@macro.interpret("&[inc] test").should == "Test [SNIPPET 'inc' NOT PROCESSED] test" 
+	end
+
+	it "should be validated" do
+		lambda { interpret("test[section[validated_test[invalid]]]").document.output }.should raise_error
+		interpret("test[validated_test[valid]]").document.output.should == "Test: Validated Test: valid" 
 	end
 
 end

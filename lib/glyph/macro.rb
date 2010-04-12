@@ -64,6 +64,10 @@ module Glyph
 			instance_exec(@node, &Glyph::MACROS[@name]).to_s
 		end
 
+		def validate(&block)
+			macro_error "Macro '#@name' is not allowed here." unless instance_eval(&block)
+		end
+
 	end
 
 end
