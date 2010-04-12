@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 

@@ -54,7 +54,7 @@ describe Glyph do
 			[["&:"], "snippet:"],
 			[["?"], "condition"],
 			[["$"], :config],
-                        [["$:"], "config:"],
+			[["$:"], "config:"],
 			[["%"], :ruby],
 			[["."], :escape],
 			[["--"], :comment],
