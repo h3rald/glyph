@@ -112,7 +112,7 @@ describe "glyph" do
 		output.should_not == output2
 		output2.match(/<p>This is another test.<\/p>/).should_not == nil
 
-		$res.match(/Auto-regenerating enabled/).should_not == nil
+		$res.match(/Auto-regeneration enabled/).should_not == nil
 		$res.match(/Regeneration started: 1 files changed/).should_not == nil
 	end
 

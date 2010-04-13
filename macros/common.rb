@@ -6,6 +6,7 @@ macro :comment do
 end
 
 macro :todo do
+	macro_error "Macro not available when compiling a single file." if Glyph.lite?
 	todo = "[#{@source}] -- #{@value}"
 	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
 	""
@@ -29,6 +30,7 @@ macro "snippet:" do
 end
 
 macro :include do
+	macro_error "Macro not available when compiling a single file." if Glyph.lite?
 	begin
 		file = nil
 		(Glyph::PROJECT/"text").find do |f|

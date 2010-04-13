@@ -21,18 +21,24 @@ namespace :generate do
 	desc "Create a standalone html file"
 	task :html => :document do
 		info "Generating HTML file..."
-		out = Glyph::PROJECT/"output/html"
+		if Glyph.lite? then
+			out = Pathname.new cfg('document.output_dir')
+		else
+			out = Glyph::PROJECT/"output/html"
+		end
 		out.mkpath
 		file = "#{cfg('document.filename')}.html"
 		file_write out/file, Glyph.document.output
 		info "'#{cfg('document.filename')}.html' generated successfully."
-		images = Glyph::PROJECT/'output/html/images'
-		images.mkpath
-		(Glyph::PROJECT/'images').find do |i|
-			if i.file? then
-				dest = "#{Glyph::PROJECT/'output/html/images'}/#{i.relative_path_from(Glyph::PROJECT/'images')}"
-				Pathname.new(dest).parent.mkpath
-				file_copy i.to_s, dest
+		unless Glyph.lite? then
+			images = Glyph::PROJECT/'output/html/images'
+			images.mkpath
+			(Glyph::PROJECT/'images').find do |i|
+				if i.file? then
+					dest = "#{Glyph::PROJECT/'output/html/images'}/#{i.relative_path_from(Glyph::PROJECT/'images')}"
+					Pathname.new(dest).parent.mkpath
+					file_copy i.to_s, dest
+				end
 			end
 		end
 	end
@@ -40,13 +46,17 @@ namespace :generate do
 	desc "Create a pdf file"
 	task :pdf => :html do
 		info "Generating PDF file..."
-		out = Glyph::PROJECT/"output/pdf"
+		if Glyph.lite? then
+			out = Pathname.new cfg('document.output_dir')
+		else
+			out = Glyph::PROJECT/"output/pdf"
+		end
 		out.mkpath
 		file = cfg('document.filename')
 		case cfg('tools.pdf_generator')
 		when 'prince' then
 			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
-			res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
+				res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
 			if res then
 				info "'#{file}.pdf' generated successfully."
 			else

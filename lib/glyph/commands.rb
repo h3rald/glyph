@@ -42,24 +42,27 @@ command :compile do |c|
 		Glyph.config_override('document.source', options[:s]) if options[:s]
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
+
+		# Lite mode
 		unless args.blank? then
-			# Lite mode
 			Glyph::LITE_MODE = true
 			source_file  = args[0]
 			filename = source_file.basename(source_file.extname).to_s
 			destination_file = Pathname(args[1]) rescue nil
 			destination_file ||= Pathname.new source_file.to_s.gsub(/#{Regexp.escape(source_file.extname)}$/, ".#{target}")
 			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? # TODO: add to docs
+			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s
 			Glyph.config_override('document.filename', filename)
 			Glyph.config_override('document.source', filename)
 			Glyph.config_override('document.output_dir', destination_file.parent.to_s) # System use only
 		end
 		Glyph.run "generate:#{target}"
 
-		if options[:auto]
+		# Auto-regeneration
+		if options[:auto] && !Glyph.lite? then
 			require 'directory_watcher'
 
-			info 'Auto-regenerating enabled'
+			info 'Auto-regeneration enabled'
 			info 'Use ^C to interrupt'
 
 			glob = ['*.glyph', 'config.yml', 'images/**/*', 'lib/**/*', 'snippets.yml', 'styles/**/*', 'text/**/*']

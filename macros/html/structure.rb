@@ -58,7 +58,7 @@ end
 
 macro :style do 
 	allowed_parents :head
-	file = Glyph::PROJECT/"styles/#{@value}"
+	file = Glyph.lite? ? @value : Glyph::PROJECT/"styles/#{@value}"
 	macro_error "Stylesheet '#{@value}' not found" unless file.exist?
 	style = ""
 	case file.extname

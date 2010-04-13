@@ -23,6 +23,7 @@ end
 def create_project
 	enable_all_tasks
 	create_project_dir
+	return if Glyph.lite?
 	Glyph.run! 'project:create', Glyph::PROJECT.to_s
 	file_copy Glyph::SPEC_DIR/'files/container.textile', Glyph::PROJECT/'text/container.textile'
 	(Glyph::PROJECT/'text/a/b/c').mkpath

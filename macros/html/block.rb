@@ -30,17 +30,15 @@ end
 macro :img do
 	image = @params[0]
 	width = @params[1]
+	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
+	dest_file = Glyph.lite? ? image : "images/#{image}"
  	w = (width) ? "width=\"#{width}\"" : ''
 	height = @params[2]
  	h = (height) ? "height=\"#{height}\"" : ''
-	if (Glyph::PROJECT/"images/#{image}").exist? then
-		%{
-			<img src="images/#{image}" #{w} #{h} alt="-"/>
-		}
-	else
-		warning "Image '#{image}' not found"
-		""
-	end
+	warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
+	%{
+		<img src="#{dest_file}" #{w} #{h} alt="-"/>
+	}
 end
 
 macro :fig do
@@ -48,17 +46,15 @@ macro :fig do
 	caption = @params[1] 
 	caption ||= nil
 	caption = %{<div class="caption">#{caption}</div>} if caption
-	if (Glyph::PROJECT/"images/#{image}").exist? then
-		%{
-			<div class="figure">
-				<img src="images/#{image}" alt="-"/>
-				#{caption}
-			</div>
-		}
-	else
-		warning "Figure '#{image}' not found"
-		""
-	end
+	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
+	dest_file = Glyph.lite? ? image : "images/#{image}"
+	warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
+	%{
+		<div class="figure">
+			<img src="images/#{image}" alt="-"/>
+			#{caption}
+		</div>
+	}
 end
 
 

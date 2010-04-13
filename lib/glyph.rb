@@ -49,9 +49,15 @@ module Glyph
 		const_defined? :TEST_MODE rescue false
 	end
 
+	@@lite_mode = false
+
+	def self.lite_mode=(mode)
+		@@lite_mode = mode
+	end
+	
 	# Returns true if Glyph is running in "lite" mode
 	def self.lite?
-		const_defined? :LITE_MODE rescue false
+		@@lite_mode
 	end
 
 	PROJECT = (Glyph.testing?) ? Glyph::SPEC_DIR/"test_project" : Pathname.new(Dir.pwd)
