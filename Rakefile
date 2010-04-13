@@ -44,6 +44,7 @@ begin
 	require 'spec/rake/spectask'
 	Spec::Rake::SpecTask.new('spec') do |t|
 		t.spec_files = FileList['spec/**/*_spec.rb']
+		t.spec_opts = ["--color"]
 	end
 rescue LoadError
 	puts "RSpec is not available. Install it with: gem install rspec"
