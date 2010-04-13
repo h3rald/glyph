@@ -42,9 +42,14 @@ module Glyph
 
 	ERRORS = []
 
-	# Returns true if Glyph is running in test mode
+	# Returns true if Glyph is running in "test" mode
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
+	end
+
+	# Returns true if Glyph is running in "lite" mode
+	def self.lite?
+		const_defined? :LITE_MODE rescue false
 	end
 
 	PROJECT = (Glyph.testing?) ? Glyph::SPEC_DIR/"test_project" : Pathname.new(Dir.pwd)
@@ -54,7 +59,7 @@ module Glyph
 	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
 	SYSTEM_CONFIG = Glyph::Config.new(:file => HOME/'config.yml')
 	GLOBAL_CONFIG = Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
-	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml')
+	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml') rescue Glyph::Config.new(:resettable => true, :mutable => true)
 
 	# Loads all Rake tasks
 	def self.setup

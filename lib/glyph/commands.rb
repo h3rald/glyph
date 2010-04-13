@@ -21,13 +21,15 @@ command :add do |c|
 end
 
 GLI.desc 'Compile the project'
-arg_name "[output_target]"
+arg_name "[source_file]"
+arg_name "[destination_file]"
 command :compile do |c|
 	c.desc "Specify a glyph file to compile (default: document.glyph)"
 	c.flag [:s, :source]
 	c.desc "Specify the format of the output file (default: html)"
 	c.flag [:f, :format]
 	c.action do |global_options, options, args|
+		raise ArgumentError, "Too many arguments" if args.length > 2 # TODO: add to docs
 		Glyph.run 'load:config'
 		output_targets = Glyph::CONFIG.get('document.output_targets')
 		target = nil
@@ -38,6 +40,18 @@ command :compile do |c|
 		Glyph.config_override('document.source', options[:s]) if options[:s]
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
+		unless args.blank? then
+			# Lite mode
+			Glyph::LITE_MODE = true
+			source_file  = args[0]
+			filename = source_file.basename(source_file.extname).to_s
+			destination_file = Pathname(args[1]) rescue nil
+			destination_file ||= Pathname.new source_file.to_s.gsub(/#{Regexp.escape(source_file.extname)}$/, ".#{target}")
+			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? # TODO: add to docs
+			Glyph.config_override('document.filename', filename)
+			Glyph.config_override('document.source', filename)
+			Glyph.config_override('document.output_dir', destination_file.parent.to_s) # System use only
+		end
 		Glyph.run "generate:#{target}"
 	end
 end

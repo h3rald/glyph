@@ -5,7 +5,11 @@ namespace :generate do
 	desc "Process source"
 	task :document => ["load:all"] do
 		info "Parsing '#{cfg('document.source')}'..."
-		text = file_load Glyph::PROJECT/cfg('document.source')
+		if Glyph.lite? then
+			text = Pathname.new cfg('document.source')
+		else
+			text = file_load Glyph::PROJECT/cfg('document.source')
+		end
 		interpreter = Glyph::Interpreter.new text, :source => "file: #{cfg('document.source')}"
 		info "Processing..."
 		interpreter.process

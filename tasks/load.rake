@@ -8,6 +8,7 @@ namespace :load do
 
 	desc "Load snippets"
 	task :snippets do
+		return if Glyph.lite?
 		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
 		info "Loading snippets..."
 		snippets = yaml_load Glyph::PROJECT/'snippets.yml'
@@ -17,7 +18,7 @@ namespace :load do
 
 	desc "Load macros"
 	task :macros do
-		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
+		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project? || Glyph.lite?
 		info "Loading macros..."
 		load_macros = lambda do |macro_base|
 			macro_base.children.each do |c|
@@ -31,15 +32,17 @@ namespace :load do
 			end
 		end
 		load_macros.call Glyph::HOME/"macros"
-		load_macros.call Glyph::PROJECT/"lib/macros" rescue nil
+		unless Glyph.lite? then
+			load_macros.call Glyph::PROJECT/"lib/macros" rescue nil
+		end
 	end
 
 	desc "Load configuration files"
 	task :config do
-		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
+		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project? || Glyph.lite?
 		# Save overrides set by commands...
 		overrides = Glyph::PROJECT_CONFIG.dup
-		Glyph::PROJECT_CONFIG.read
+		Glyph::PROJECT_CONFIG.read unless Glyph.lite?
 		Glyph::PROJECT_CONFIG.merge! overrides
 		Glyph::SYSTEM_CONFIG.read
 		Glyph::GLOBAL_CONFIG.read
