@@ -42,7 +42,9 @@ module Glyph
 
 	ERRORS = []
 
-	# Returns true if Glyph is running in "test" mode
+	@@document = nil
+
+	# Returns true if Glyph is running in test mode
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
 	end
@@ -74,6 +76,14 @@ module Glyph
 	def self.config_override(setting, value)
 		PROJECT_CONFIG.set setting, value
 		reset_config
+	end
+
+	def self.document
+		@@document
+	end
+
+	def self.document=(document)
+		@@document = document
 	end
 
 	# Resets Glyph configuration

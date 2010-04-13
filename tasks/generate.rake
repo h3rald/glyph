@@ -15,7 +15,7 @@ namespace :generate do
 		interpreter.process
 		info "Post-processing..."
 		interpreter.postprocess
-		Glyph::DOCUMENT = interpreter.document 
+		Glyph.document = interpreter.document
 	end
 
 	desc "Create a standalone html file"
@@ -24,7 +24,7 @@ namespace :generate do
 		out = Glyph::PROJECT/"output/html"
 		out.mkpath
 		file = "#{cfg('document.filename')}.html"
-		file_write out/file, Glyph::DOCUMENT.output
+		file_write out/file, Glyph.document.output
 		info "'#{cfg('document.filename')}.html' generated successfully."
 		images = Glyph::PROJECT/'output/html/images'
 		images.mkpath
