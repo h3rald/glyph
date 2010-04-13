@@ -120,5 +120,8 @@ describe "glyph" do
 		run_command_successfully(["compile", "-f", "wrong"]).should == false
 	end
 
+	it "[compile] should compile a single source file" 
+
+	it "[compile] should compile a single source file to a custom destination" 
 
 end

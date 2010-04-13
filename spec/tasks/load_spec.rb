@@ -22,6 +22,8 @@ describe "load" do
 		Glyph::SNIPPETS[:test].blank?.should == false
 	end
 
+	it "[snippets] should not load snippets.xml in Lite mode"
+
 	it "[macros] should load macro definitions" do
 		lambda { Glyph.run! 'load:macros'}.should_not raise_error
 		Glyph::MACROS[:note].blank?.should == false

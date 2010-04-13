@@ -102,6 +102,7 @@ describe "Macro:" do
 		}.gsub(/\n|\t|_\d{1,3}/, '')
 	end
 
+	it "include should not work in Lite mode"
 
 	it "document, head, style" do
 		interpret "document[head[style[test.sass]]]"
@@ -118,6 +119,8 @@ describe "Macro:" do
 		</html>
 		}.gsub(/\n|\t/, '')
 	end	
+
+	it "style should link files by absolute or relative path in Lite mode"
 
 	it "escape" do
 		define_em_macro
@@ -195,6 +198,8 @@ describe "Macro:" do
 		}.gsub(/\n|\t/, '')
 	end
 
+	it "img should link files by absolute or relative path in Lite mode"
+
 	it "fig" do
 		interpret "fig[ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
@@ -204,5 +209,7 @@ describe "Macro:" do
 			</div>
 		}.gsub(/\n|\t/, '')
 	end
+
+	it "fig should link files by absolute or relative path in Lite mode"
 
 end	
