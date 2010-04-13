@@ -46,7 +46,7 @@ def delete_project
 	Glyph::SNIPPETS.clear
 	Glyph::MACROS.clear
 	Glyph.config_override 'document.source', 'document.glyph'
-	Glyph.instance_eval { remove_const :DOCUMENT rescue nil }
+	Glyph.document = nil
 end
 
 def run_command(cmd)
