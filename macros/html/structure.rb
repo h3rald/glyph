@@ -36,6 +36,7 @@ macro :document do
 end
 
 macro :body do
+	allowed_parents :document
 	%{
 		<body>
 		#{@value}
@@ -44,6 +45,7 @@ macro :body do
 end
 
 macro :head do
+	allowed_parents :document
 	%{
 		<head>
 			<title>#{Glyph::CONFIG.get("document.title")}</title>
@@ -55,6 +57,7 @@ macro :head do
 end
 
 macro :style do 
+	allowed_parents :head
 	file = Glyph::PROJECT/"styles/#{@value}"
 	macro_error "Stylesheet '#{@value}' not found" unless file.exist?
 	style = ""

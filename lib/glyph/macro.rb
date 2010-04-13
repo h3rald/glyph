@@ -7,6 +7,8 @@ module Glyph
 	# useful methods to be used in macro definitions.
 	class Macro
 
+		include Validators
+
 		# Creates a new macro instance from a Node
 		# @param [Node] node a node populated with macro data
 		def initialize(node)
@@ -64,10 +66,6 @@ module Glyph
 		# Executes a macro definition in the context of self
 		def execute
 			instance_exec(@node, &Glyph::MACROS[@name]).to_s
-		end
-
-		def validate(&block)
-			macro_error "Macro '#@name' is not allowed here." unless instance_eval(&block)
 		end
 
 	end

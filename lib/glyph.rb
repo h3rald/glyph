@@ -22,6 +22,7 @@ module Glyph
 	require LIB/'node'
 	require LIB/'document'
 	require LIB/'glyph_language'
+	require LIB/'macro_validators'
 	require LIB/'macro'
 	require LIB/'interpreter'
 

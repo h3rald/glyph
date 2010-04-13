@@ -103,9 +103,20 @@ describe "Macro:" do
 	end
 
 
-	it "style" do
-		interpret "style[test.sass]"
-		@p.document.output.gsub(/\n|\t/, '').should == "<style type=\"text/css\">#main {  background-color: #0000ff; }</style>"
+	it "document, head, style" do
+		interpret "document[head[style[test.sass]]]"
+		@p.document.output.gsub(/\n|\t/, '').should == %{
+		<?xml version="1.0" encoding="utf-8"?>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+			<head>
+				<title>#{Glyph::CONFIG.get("document.title")}</title>
+				<meta name="author" content="#{cfg("document.author")}" />
+				<meta name="copyright" content="#{cfg("document.author")}" />
+				<style type=\"text/css\">#main {  background-color: #0000ff; }</style>
+			</head>
+		</html>
+		}.gsub(/\n|\t/, '')
 	end	
 
 	it "escape" do

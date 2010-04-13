@@ -94,6 +94,7 @@ macro :table do
 end
 
 macro :tr do
+	allowed_parents :table
 	%{
 		<tr>#{@value}	
 		</tr>
@@ -101,6 +102,7 @@ macro :tr do
 end
 
 macro :td do
+	allowed_parents :tr
 	%{
 		<td>#{@value}
 		</td>
@@ -108,6 +110,7 @@ macro :td do
 end
 
 macro :th do
+	allowed_parents :tr
 	%{
 		<th>#{@value}
 		</th>

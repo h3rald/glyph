@@ -76,7 +76,7 @@ macro :condition do
 end
 
 macro :eq do
-	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = interpret(a.to_s) 
 	res_b = interpret(b.to_s)
@@ -84,12 +84,12 @@ macro :eq do
 end
 
 macro :not do
-	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	allowed_ancestors :condition, '?'
 	interpret(@value).blank? ? true : nil 
 end
 
 macro :and do
-	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = !interpret(a.to_s).blank?
 	res_b = !interpret(b.to_s).blank?
@@ -97,7 +97,7 @@ macro :and do
 end
 
 macro :or do
-	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = !interpret(a.to_s).blank?
 	res_b = !interpret(b.to_s).blank?
@@ -105,7 +105,7 @@ macro :or do
 end
 
 macro :match do
-	validate { @node.find_parent { |n| n[:macro].in? [:condition, '?'.to_sym]}}
+	allowed_ancestors :condition, '?'
 	val, regexp = @params
 	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
 	(interpret(val).match(instance_eval(regexp))) ? true : nil
