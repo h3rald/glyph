@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
 macro :note do
+	exact_parameters 1
 	%{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
 		</div>}
 end
 
 macro :box do
+	exact_parameters 1
 	%{<div class="box"><span class="box-title">#{@params[0]}</span>
 #{@params[1]}
 
@@ -14,12 +16,14 @@ macro :box do
 end
 
 macro :code do
+	exact_parameters 1
 	%{<div class="code"><pre><code>
 #{@value.gsub('>', '&gt;').gsub('<', '&lt;')}
 </code></pre></div>}
 end
 
 macro :title do
+	no_parameters
 	%{
 		<h1>
 			#{cfg("document.title")}
@@ -28,6 +32,8 @@ macro :title do
 end
 
 macro :img do
+	min_parameters 1
+	max_parameters 3
 	image = @params[0]
 	width = @params[1]
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
@@ -42,6 +48,8 @@ macro :img do
 end
 
 macro :fig do
+	min_parameters 1
+	max_parameters 3
 	image = @params[0]
 	caption = @params[1] 
 	caption ||= nil
@@ -59,6 +67,7 @@ end
 
 
 macro :subtitle do
+	no_parameters
 	%{
 		<h2>
 			#{cfg("document.subtitle")}
@@ -67,6 +76,7 @@ macro :subtitle do
 end
 
 macro :author do
+	no_parameters
 	%{
 		<div class="author">
 			by <em>#{cfg("document.author")}</em>
@@ -75,6 +85,7 @@ macro :author do
 end
 
 macro :pubdate do
+	no_parameters
 	%{
 		<div class="pubdate">
 			#{Time.now.strftime("%B %Y")}
@@ -83,6 +94,7 @@ macro :pubdate do
 end
 
 macro :table do
+	exact_parameters 1
 	%{
 		<table>#{@value}
 		</table>
@@ -90,6 +102,7 @@ macro :table do
 end
 
 macro :tr do
+	exact_parameters 1
 	allowed_parents :table
 	%{
 		<tr>#{@value}	
@@ -98,6 +111,7 @@ macro :tr do
 end
 
 macro :td do
+	exact_parameters 1
 	allowed_parents :tr
 	%{
 		<td>#{@value}
@@ -106,6 +120,7 @@ macro :td do
 end
 
 macro :th do
+	exact_parameters 1
 	allowed_parents :tr
 	%{
 		<th>#{@value}

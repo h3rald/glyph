@@ -60,13 +60,15 @@ describe "Macro:" do
 					not[eq[$[document.author]|x]]
 				]|em[test]]}
 		@p.document.output.should == "<em>test</em>"
+		# "false" should be regarded as false
+		interpret(%{?[%["test".blank?]|---]})
+		@p.document.output.should == ""
 		interpret("?[not[match[$[document.source]|/^docu/]]|em[test]]")
 		@p.document.output.should == ""
 		# Invalid regexp
 		lambda { interpret("?[match[$[document.source]|document]em[test]]").document.output }.should raise_error
 		# Outside condition
 		lambda { interpret("em[and[a|b]]").document.output }.should raise_error
-
 	end
 
 	it "section, chapter, header" do

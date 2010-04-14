@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 macro :anchor do 
+	min_parameters 1
+	max_parameters 2
 	ident, title = @params
 	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
 	bookmark :id => ident, :title => title
@@ -12,6 +14,8 @@ macro :codeph do
 end
 
 macro :link do
+	min_parameters 1
+	max_parameters 2
 	href, title = @params
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
@@ -31,6 +35,7 @@ macro :link do
 end
 
 macro :fmi do
+	exact_parameters 2
 	topic, href = @params
 	link = placeholder do |document| 
 		interpret "link[#{href}]"
