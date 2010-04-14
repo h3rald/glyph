@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :div do 
+	exact_parameters 1
 	%{<div class="#{@name}">
 
 		#{@value}
@@ -9,6 +10,8 @@ macro :div do
 end
 
 macro :header do
+	min_parameters 1
+	max_parameters 2
 	title = @params[0]
 	level = 1
 	@node.ascend do |n| 
@@ -28,6 +31,7 @@ macro :header do
 end
 
 macro :document do
+	exact_parameters 1
 	%{<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -36,6 +40,7 @@ macro :document do
 end
 
 macro :body do
+	exact_parameters 1
 	allowed_parents :document
 	%{
 		<body>
@@ -45,6 +50,7 @@ macro :body do
 end
 
 macro :head do
+	exact_parameters 1
 	allowed_parents :document
 	%{
 		<head>
@@ -57,6 +63,7 @@ macro :head do
 end
 
 macro :style do 
+	exact_parameters 1
 	allowed_parents :head
 	file = Glyph::PROJECT/"styles/#{@value}"
 	macro_error "Stylesheet '#{@value}' not found" unless file.exist?
@@ -84,6 +91,7 @@ macro :style do
 end
 
 macro :toc do 
+	no_parameters
 	link_header = lambda do |header|
 		%{<a href="##{header[:id]}">#{header[:title].gsub(/@(.+?)@/, '\1')}</a>}
 	end

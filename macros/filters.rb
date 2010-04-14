@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :textile do
+	exact_parameters 1
 	rc = nil
 	begin
 		require 'RedCloth'
@@ -20,6 +21,7 @@ macro :textile do
 end
 
 macro :markdown do
+	exact_parameters 1
 	md = nil
 	markdown_converter = cfg("filters.markdown_converter").to_sym rescue nil
 	if !markdown_converter then

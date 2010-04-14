@@ -2,16 +2,19 @@
 
 
 macro :comment do
+	exact_parameters 1
 	""
 end
 
 macro :todo do
+	exact_parameters 1
 	todo = "[#{@source}] -- #{@value}"
 	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
 	""
 end
 
 macro :snippet do
+	exact_parameters 1
 	begin
 		ident = @params[0].to_sym
 		macro_error "Snippet '#{ident}' does not exist" unless Glyph::SNIPPETS.has_key? ident
@@ -23,12 +26,14 @@ macro :snippet do
 end
 
 macro "snippet:" do
+	exact_parameters 2
 	ident, text = @params
 	Glyph::SNIPPETS[ident.to_sym] = text
 	""
 end
 
 macro :include do
+	exact_parameters 1
 	begin
 		file = nil
 		(Glyph::PROJECT/"text").find do |f|
@@ -53,29 +58,37 @@ macro :include do
 end
 
 macro :ruby do
-	Kernel.instance_eval(@value)
+	exact_parameters 1
+	Glyph.instance_eval(@value)
 end
 
 macro :config do
+	exact_parameters 1
 	cfg @value
 end
 
 macro "config:" do
+	exact_parameters 2
 	setting,value = @params
 	Glyph.config_override(setting, value)
 	nil
 end
 
 macro :escape do
+	exact_parameters 1
 	@value
 end
 
 macro :condition do
+	exact_parameters 2
 	cond, actual_value = @params
-	(interpret(cond).blank?) ? "" : actual_value
+	res = interpret(cond)
+	(res.blank? || res == "false") ? "" : actual_value
 end
 
 macro :eq do
+	min_parameters 1
+	max_parameters 2
 	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = interpret(a.to_s) 
@@ -84,11 +97,14 @@ macro :eq do
 end
 
 macro :not do
+	max_parameters 1
 	allowed_ancestors :condition, '?'
 	interpret(@value).blank? ? true : nil 
 end
 
 macro :and do
+	min_parameters 1
+	max_parameters 2
 	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = !interpret(a.to_s).blank?
@@ -97,6 +113,8 @@ macro :and do
 end
 
 macro :or do
+	min_parameters 1
+	max_parameters 2
 	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = !interpret(a.to_s).blank?
@@ -105,6 +123,7 @@ macro :or do
 end
 
 macro :match do
+	exact_parameters 2
 	allowed_ancestors :condition, '?'
 	val, regexp = @params
 	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/

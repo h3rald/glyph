@@ -7,10 +7,6 @@ describe Glyph::Macro do
 		Glyph.macro :test do
 			"Test: #{@value}"
 		end
-		Glyph.macro :validated_test do
-			validate {	@node.parent[:macro] == :test }
-			"Validated Test: #{@value}"
-		end
 		create_tree = lambda {|text| }
 		create_doc = lambda {|tree| }
 		@text = "test[section[header[Test!|test]]]"
@@ -60,10 +56,4 @@ describe Glyph::Macro do
 		@macro.interpret("&[inc] test").should == "Test [SNIPPET 'inc' NOT PROCESSED] test" 
 	end
 
-	it "should be validated" do
-		lambda { interpret("test[section[validated_test[invalid]]]").document.output }.should raise_error
-		interpret("test[validated_test[valid]]").document.output.should == "Test: Validated Test: valid" 
-	end
-
 end
-
