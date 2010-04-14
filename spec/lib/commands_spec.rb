@@ -82,6 +82,7 @@ describe "glyph" do
 	end
 
 	it "[compile] should regenerate output with auto switch set" do
+		require 'timeout'
 		create_project
 		res = ''
 
@@ -90,10 +91,10 @@ describe "glyph" do
 		end
 
 		output_file = (Glyph::PROJECT/'output/html/test_project.html')
-		loop do
+		Timeout.timeout(5, StandardError) do loop do
 			break if output_file.file?
 			sleep 1
-		end
+		end end
 		output = file_load output_file
 		output_file.unlink
 
@@ -102,10 +103,10 @@ describe "glyph" do
 
 		file_write text_file, "section[\nheader[Container section]\nThis is another test.\n]\n"
 
-		loop do
+		Timeout.timeout(5, StandardError) do loop do
 			break if output_file.file?
 			sleep 1
-		end
+		end end
 		compile_thread.raise Interrupt
 		compile_thread.join
 
