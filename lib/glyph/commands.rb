@@ -31,8 +31,10 @@ command :compile do |c|
 	c.desc "Auto-regenerate output on file changes"
 	c.switch :auto
 	c.action do |global_options, options, args|
-		raise ArgumentError, "Too many arguments" if args.length > 2 # TODO: add to docs
-		Glyph.run 'load:config'
+		raise ArgumentError, "Too many arguments" if args.length > 2
+		Glyph.lite_mode = true unless args.blank? 
+		Glyph.run! 'load:config'
+		original_config = Glyph::CONFIG.dup
 		output_targets = Glyph::CONFIG.get('document.output_targets')
 		target = nil
 		Glyph.config_override('document.output', options[:f]) if options[:f]
@@ -44,22 +46,27 @@ command :compile do |c|
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 
 		# Lite mode
-		unless args.blank? then
-			Glyph::LITE_MODE = true
-			source_file  = args[0]
+		if Glyph.lite? then
+			source_file  = Pathname.new args[0]
 			filename = source_file.basename(source_file.extname).to_s
-			destination_file = Pathname(args[1]) rescue nil
-			destination_file ||= Pathname.new source_file.to_s.gsub(/#{Regexp.escape(source_file.extname)}$/, ".#{target}")
-			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? # TODO: add to docs
+			destination_file = Pathname.new(args[1]) rescue nil
+			src_extension = Regexp.escape(source_file.extname) 
+			dst_extension = ".#{cfg('document.output')}"
+			destination_file ||= Pathname.new(source_file.to_s.gsub(/#{src_extension}$/, dst_extension))
+			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? 
 			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s
 			Glyph.config_override('document.filename', filename)
-			Glyph.config_override('document.source', filename)
+			Glyph.config_override('document.source', source_file.to_s)
 			Glyph.config_override('document.output_dir', destination_file.parent.to_s) # System use only
+			Glyph.config_override('document.output_ext', destination_file.extname) # System use only
 		end
 		Glyph.run "generate:#{target}"
+		Glyph.remove_overrides
+
 
 		# Auto-regeneration
 		if options[:auto] && !Glyph.lite? then
+			Glyph.lite_mode = false
 			require 'directory_watcher'
 
 			info 'Auto-regeneration enabled'

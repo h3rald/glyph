@@ -104,7 +104,12 @@ describe "Macro:" do
 		}.gsub(/\n|\t|_\d{1,3}/, '')
 	end
 
-	it "include should not work in Lite mode"
+	it "include should not work in Lite mode" do
+		text = file_load(Glyph::PROJECT/'text/container.textile')
+		Glyph.lite_mode = true
+		lambda { interpret(text).document.output }.should raise_error MacroError
+		Glyph.lite_mode = false
+	end
 
 	it "document, head, style" do
 		interpret "document[head[style[test.sass]]]"
@@ -122,7 +127,26 @@ describe "Macro:" do
 		}.gsub(/\n|\t/, '')
 	end	
 
-	it "style should link files by absolute or relative path in Lite mode"
+	it "style should link files by absolute or relative path in Lite mode" do
+		result = %{
+		<?xml version="1.0" encoding="utf-8"?>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+			<head>
+				<title>#{Glyph::CONFIG.get("document.title")}</title>
+				<meta name="author" content="#{cfg("document.author")}" />
+				<meta name="copyright" content="#{cfg("document.author")}" />
+				<style type=\"text/css\">#main {  background-color: #0000ff; }</style>
+			</head>
+		</html>
+		}.gsub(/\n|\t/, '')
+		Glyph.lite_mode = true
+		interpret "document[head[style[styles/test.sass]]]"
+		@p.document.output.gsub(/\n|\t/, '').should == result
+		interpret "document[head[style[#{Dir.pwd}/styles/test.sass]]]"
+		@p.document.output.gsub(/\n|\t/, '').should == result
+		Glyph.lite_mode = false
+	end
 
 	it "escape" do
 		define_em_macro
@@ -200,7 +224,18 @@ describe "Macro:" do
 		}.gsub(/\n|\t/, '')
 	end
 
-	it "img should link files by absolute or relative path in Lite mode"
+	it "img should link files by absolute or relative path in Lite mode" do
+		result = %{
+			<img src="images/ligature.jpg" 
+			width="90%" height="90%" alt="-"/>
+		}.gsub(/\n|\t/, '')
+		Glyph.lite_mode = true
+		interpret "img[images/ligature.jpg|90%|90%]"
+		@p.document.output.gsub(/\t|\n/, '').should == result
+		interpret "img[#{Dir.pwd}/images/ligature.jpg|90%|90%]"
+		@p.document.output.gsub(/\t|\n/, '').gsub(Dir.pwd+'/', '').should == result
+		Glyph.lite_mode = false
+	end
 
 	it "fig" do
 		interpret "fig[ligature.jpg|Ligature]"
@@ -212,6 +247,20 @@ describe "Macro:" do
 		}.gsub(/\n|\t/, '')
 	end
 
-	it "fig should link files by absolute or relative path in Lite mode"
+	it "fig should link files by absolute or relative path in Lite mode" do
+		result = %{
+			<div class="figure">
+			<img src="images/ligature.jpg" alt="-"/>
+			<div class="caption">Ligature</div>
+			</div>
+		}.gsub(/\n|\t/, '')
+		Glyph.lite_mode = true
+		interpret "fig[images/ligature.jpg|Ligature]"
+		@p.document.output.gsub(/\t|\n/, '').should == result
+		interpret "fig[#{Dir.pwd}/images/ligature.jpg|Ligature]"
+		@p.document.output.gsub(/\t|\n/, '').gsub(Dir.pwd+'/', '').should == result
+		Glyph.lite_mode = false
+	end
+
 
 end	

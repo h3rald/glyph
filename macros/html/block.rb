@@ -8,7 +8,7 @@ macro :note do
 end
 
 macro :box do
-	exact_parameters 1
+	exact_parameters 2
 	%{<div class="box"><span class="box-title">#{@params[0]}</span>
 #{@params[1]}
 
@@ -49,7 +49,7 @@ end
 
 macro :fig do
 	min_parameters 1
-	max_parameters 3
+	max_parameters 2
 	image = @params[0]
 	caption = @params[1] 
 	caption ||= nil
@@ -59,7 +59,7 @@ macro :fig do
 	warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
 	%{
 		<div class="figure">
-			<img src="images/#{image}" alt="-"/>
+			<img src="#{dest_file}" alt="-"/>
 			#{caption}
 		</div>
 	}

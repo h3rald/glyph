@@ -8,12 +8,13 @@ namespace :load do
 
 	desc "Load snippets"
 	task :snippets do
-		return if Glyph.lite?
-		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
-		info "Loading snippets..."
-		snippets = yaml_load Glyph::PROJECT/'snippets.yml'
-		raise RuntimeError, "Invalid snippets file" unless snippets.blank? || snippets.is_a?(Hash)
-		Glyph::SNIPPETS.replace snippets
+		unless Glyph.lite? then
+			raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
+			info "Loading snippets..."
+			snippets = yaml_load Glyph::PROJECT/'snippets.yml'
+			raise RuntimeError, "Invalid snippets file" unless snippets.blank? || snippets.is_a?(Hash)
+			Glyph::SNIPPETS.replace snippets
+		end
 	end
 
 	desc "Load macros"
@@ -48,11 +49,11 @@ namespace :load do
 		Glyph::GLOBAL_CONFIG.read
 		Glyph.reset_config
 		Glyph.config_override("structure.headers", 
-										[:section] +
-										cfg('structure.frontmatter') + 
-										cfg('structure.backmatter') + 
-										cfg('structure.bodymatter') - 
-										cfg('structure.hidden'))
+													[:section] +
+													cfg('structure.frontmatter') + 
+													cfg('structure.backmatter') + 
+													cfg('structure.bodymatter') - 
+													cfg('structure.hidden'))
 	end
 
 end

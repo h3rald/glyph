@@ -83,9 +83,10 @@ describe "glyph" do
 
 	it "[compile] should regenerate output with auto switch set" do
 		create_project
+		res = ''
 
 		compile_thread = Thread.new do
-			$res = run_command(['-d', 'compile', '--auto'])
+			res = run_command(['-d', 'compile', '--auto'])
 		end
 
 		output_file = (Glyph::PROJECT/'output/html/test_project.html')
@@ -112,16 +113,38 @@ describe "glyph" do
 		output.should_not == output2
 		output2.match(/<p>This is another test.<\/p>/).should_not == nil
 
-		$res.match(/Auto-regeneration enabled/).should_not == nil
-		$res.match(/Regeneration started: 1 files changed/).should_not == nil
+		res.match(/Auto-regeneration enabled/).should_not == nil
+		res.match(/Regeneration started: 1 files changed/).should_not == nil
 	end
 
 	it "[compile] should not compile the project in case of an unknown output format" do
+		enable_all_tasks
 		run_command_successfully(["compile", "-f", "wrong"]).should == false
 	end
 
-	it "[compile] should compile a single source file" 
 
-	it "[compile] should compile a single source file to a custom destination" 
+	it "[compile] should compile a single source file" do
+		enable_all_tasks
+		file_copy "#{Dir.pwd}/../files/article.glyph", "#{Dir.pwd}/article.glyph"
+		file_copy "#{Dir.pwd}/../files/ligature.jpg", "#{Dir.pwd}/ligature.jpg"
+		run_command_successfully(["compile", "article.glyph"]).should == true
+		Glyph.lite_mode = false
+		Pathname.new('article.html').exist?.should == true
+		file_load('article.html').gsub(/\t|\n/, '').should == %{
+			<div class="section">
+				<img src="ligature.jpg"   alt="-"/>
+				Test -- Test Snippet
+			</div>
+		}.gsub(/\t|\n/, '')
+	end	
+
+	it "[compile] should compile a single source file to a custom destination" do 
+		enable_all_tasks
+		file_copy "#{Dir.pwd}/../files/article.glyph", "#{Dir.pwd}/article.glyph"
+		file_copy "#{Dir.pwd}/../files/ligature.jpg", "#{Dir.pwd}/ligature.jpg"
+		run_command_successfully(["compile", "article.glyph", "out/article.htm"]).should == true
+		Glyph.lite_mode = false
+		Pathname.new('out/article.htm').exist?.should == true
+	end
 
 end

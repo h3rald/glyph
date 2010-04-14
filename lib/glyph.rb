@@ -67,7 +67,7 @@ module Glyph
 	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
 	SYSTEM_CONFIG = Glyph::Config.new(:file => HOME/'config.yml')
 	GLOBAL_CONFIG = Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
-	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml') rescue Glyph::Config.new(:resettable => true, :mutable => true)
+	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml', :resettable => true) rescue Glyph::Config.new(:resettable => true, :mutable => true)
 
 	# Loads all Rake tasks
 	def self.setup
@@ -95,6 +95,13 @@ module Glyph
 	# Resets Glyph configuration
 	def self.reset_config
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
+	end
+
+	# Resets Glyph configuration and removes all internal overrides
+	def self.remove_overrides
+		Glyph::CONFIG.reset
+		Glyph::PROJECT_CONFIG.reset
+		Glyph.run! 'load:config'
 	end
 
 	# Returns true if the PROJECT constant is set to a valid Glyph project directory

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-04-09}
+  s.date = %q{2010-04-14}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -53,6 +53,7 @@ Gem::Specification.new do |s|
      "lib/glyph/glyph_language.treetop",
      "lib/glyph/interpreter.rb",
      "lib/glyph/macro.rb",
+     "lib/glyph/macro_validators.rb",
      "lib/glyph/node.rb",
      "lib/glyph/system_extensions.rb",
      "macros/common.rb",
@@ -73,6 +74,7 @@ Gem::Specification.new do |s|
      "spec/lib/glyph_spec.rb",
      "spec/lib/interpreter_spec.rb",
      "spec/lib/macro_spec.rb",
+     "spec/lib/macro_validators_spec.rb",
      "spec/lib/node_spec.rb",
      "spec/macros/filters_spec.rb",
      "spec/macros/macros_spec.rb",
@@ -98,6 +100,7 @@ Gem::Specification.new do |s|
      "spec/lib/glyph_spec.rb",
      "spec/lib/interpreter_spec.rb",
      "spec/lib/macro_spec.rb",
+     "spec/lib/macro_validators_spec.rb",
      "spec/lib/node_spec.rb",
      "spec/macros/filters_spec.rb",
      "spec/macros/macros_spec.rb",

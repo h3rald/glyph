@@ -1,0 +1,6 @@
+$:[document.author|Test]
+&:[test|Test Snippet]
+section[
+	img[ligature.jpg]
+	$[document.author] -- &[test]
+]

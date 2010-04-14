@@ -21,8 +21,6 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
-	it ":html should not copy images in Lite mode"
-
 	it "should copy images" do
 		dir = (Glyph::PROJECT/'images/test').mkpath
 		file_copy Glyph::HOME/'spec/files/ligature.jpg', Glyph::PROJECT/'images/test' 

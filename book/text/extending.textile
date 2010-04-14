@@ -57,7 +57,7 @@ Note that the first three keys can also be accessed via instance variables.]
   ]
   tr[
     td[codeph[@params]]
-    td[The parameters passed to the macro. In other words, the value of the macro split by pipes (@|@).]
+    td[The parameters passed to the macro. In other words, the value of the macro split by pipes (@\|@).]
   ]
 ] --[End Table]
 

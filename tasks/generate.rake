@@ -6,7 +6,7 @@ namespace :generate do
 	task :document => ["load:all"] do
 		info "Parsing '#{cfg('document.source')}'..."
 		if Glyph.lite? then
-			text = Pathname.new cfg('document.source')
+			text = file_load Pathname.new(cfg('document.source'))
 		else
 			text = file_load Glyph::PROJECT/cfg('document.source')
 		end
@@ -26,10 +26,12 @@ namespace :generate do
 		else
 			out = Glyph::PROJECT/"output/html"
 		end
+		extension = cfg('document.output_ext')
+		extension ||= '.html'
 		out.mkpath
-		file = "#{cfg('document.filename')}.html"
+		file = "#{cfg('document.filename')}#{extension}"
 		file_write out/file, Glyph.document.output
-		info "'#{cfg('document.filename')}.html' generated successfully."
+		info "'#{cfg('document.filename')}#{extension}' generated successfully."
 		unless Glyph.lite? then
 			images = Glyph::PROJECT/'output/html/images'
 			images.mkpath
