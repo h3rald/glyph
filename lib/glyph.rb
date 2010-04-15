@@ -151,6 +151,16 @@ module Glyph
 		end
 		MACROS[name] = MACROS[pair.values[0].to_sym]
 	end
+
+	def self.compile(src, out=nil)
+		dir = Pathname.new(src).parent
+		Dir.chdir dir.to_s	
+		GLI.run ["compile", src, out].compact	
+	end
+
+	def self.filter(text)
+		Glyph::Interpreter.new(text).document.output
+	end
 	
 end
 
