@@ -1,19 +1,5 @@
 #!/usr/bin/env ruby
 
-
-macro :comment do
-	exact_parameters 1
-	""
-end
-
-macro :todo do
-	macro_error "Macro not available when compiling a single file." if Glyph.lite?
-	exact_parameters 1
-	todo = "[#{@source}] -- #{@value}"
-	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
-	""
-end
-
 macro :snippet do
 	exact_parameters 1
 	begin
@@ -132,7 +118,6 @@ macro :match do
 	(interpret(val).match(instance_eval(regexp))) ? true : nil
 end
 
-macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
 macro_alias '@' => :include

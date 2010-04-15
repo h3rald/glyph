@@ -58,6 +58,7 @@ describe Glyph do
 			[["%"], :ruby],
 			[["."], :escape],
 			[["--"], :comment],
+			[["!"], :todo],
 			[[:md], :markdown],
 			[[:frontcover, :titlepage, :halftitlepage, :frontmatter, :bodymatter, :backmatter, :backcover], :div]]
 		total = 0

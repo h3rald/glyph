@@ -4,6 +4,7 @@
   :title: ""
   :subtitle: ""
   :filename: ""
+  :draft: false
   :output: 'html'
   :output_targets: [:html, :pdf]
 :structure:

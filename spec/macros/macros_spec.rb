@@ -264,5 +264,20 @@ describe "Macro:" do
 		Glyph.lite_mode = false
 	end
 
+	it "comment, todo" do
+		text1 = "--[comment!]"
+		text2 = "![todo!]"
+		interpret text1
+		@p.document.output.should == ""
+		interpret text2
+		@p.document.output.should == ""
+		Glyph.config_override 'document.draft', true
+		interpret text1
+		@p.document.output.should == %{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>comment!</span>}
+		interpret text2
+		@p.document.output.should == %{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>todo!</span>}
+		Glyph.config_override 'document.draft', false
+	end
+
 
 end	

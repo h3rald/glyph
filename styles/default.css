@@ -144,6 +144,26 @@ sup {
 	padding: 0.5em;
 	width: 600px;
 }
+.comment {
+	display: block;
+	border: 1px solid #004D00;
+	background: #7AFF7A;
+	padding: 3px;
+	margin: 1px;
+}
+.comment .comment-pre {
+	color: #004D00;
+}
+.todo {
+	display: block;
+	border: 1px solid #990000;
+	background: #FF9999;
+	padding: 3px;
+	margin: 1px;
+}
+.todo .todo-pre {
+	color: #990000;
+}
 /* TEXT */
 body {
 	color: #000;
