@@ -57,6 +57,7 @@ macro :head do
 			<title>#{Glyph::CONFIG.get("document.title")}</title>
 			<meta name="author" content="#{cfg("document.author")}" />
 			<meta name="copyright" content="#{cfg("document.author")}" />
+			<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 		#{@value}
 		</head>
 	}
@@ -66,6 +67,7 @@ macro :style do
 	exact_parameters 1
 	allowed_parents :head
 	file = Glyph.lite? ? Pathname.new(@value) : Glyph::PROJECT/"styles/#{@value}"
+	file = Pathname.new Glyph::HOME/'styles'/@value unless file.exist?
 	macro_error "Stylesheet '#{@value}' not found" unless file.exist?
 	style = ""
 	case file.extname
