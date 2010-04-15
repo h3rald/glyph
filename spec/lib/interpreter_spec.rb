@@ -87,4 +87,11 @@ describe Glyph::Interpreter do
 			{:"@" => 1}, {:markdown => 2},{:section => 3}, {:header => 4}]
 	end
 
+
+	it "should provide diagnostic information on errors" do
+		failure = "Syntax Error: Missing delimiter?\n -> -- [Line 1, Column 13]"
+		# This is probably the only type of error recognized which can occur at parser level
+		lambda { interpret "section[em[]" }.should raise_error(RuntimeError, failure)
+	end
+
 end

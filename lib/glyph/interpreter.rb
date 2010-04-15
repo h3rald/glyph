@@ -53,6 +53,14 @@ module Glyph
 			@parser = GlyphLanguageParser.new
 			@raw = @parser.parse text
 			@context = context
+			tf = @parser.terminal_failures
+			if !@raw.respond_to?(:evaluate) then
+				reason = "Syntax Error: Missing delimiter?"
+				line = @parser.failure_line
+				column = @parser.failure_column
+				location = @parser.input[@parser.index...@parser.failure_index]
+				raise RuntimeError, "#{reason}\n -> #{@context[:source]} [Line #{line}, Column #{column}]"
+			end
 			@document = Glyph::Document.new @raw, @context
 			@document.inherit_from @context[:document] if @context[:document]
 		end

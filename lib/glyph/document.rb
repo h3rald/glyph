@@ -25,7 +25,6 @@ module Glyph
 		# @param [Glyph::Node] context the context associated with the tree
 		# @raise [RuntimeError] unless tree responds to :evaluate
 		def initialize(tree, context)
-			raise RuntimeError, "Document contains syntax errors." unless tree.respond_to? :evaluate
 			@tree = tree
 			@context = context
 			@bookmarks = {}
