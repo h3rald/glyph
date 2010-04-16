@@ -7,14 +7,6 @@ module Glyph
 				macro_error message unless instance_eval(&block)
 			end
 
-			def allowed_ancestors(*args)
-				validate("Macro '#{@name}' is not allowed here (allowed ancestors: #{args.join(', ')})") { @node.find_parent { |n| n[:macro].in? args.map{|a| a.to_sym} }}
-			end
-
-			def allowed_parents(*args)
-				validate("Macro '#{@name}' is not allowed here (allowed parents: #{args.join(', ')})")  { @node.parent[:macro].in? args.map{|a| a.to_sym} }
-			end
-
 			def max_parameters(n)
 				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{@params.length} given)") { @params.length <= n }
 			end

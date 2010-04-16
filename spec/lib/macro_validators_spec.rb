@@ -6,7 +6,7 @@ describe Glyph::Macro::Validators do
 	before do
 		Glyph.run 'load:macros'
 		Glyph.macro :validated_test do
-			validate("Invalid Macro"){	@node.parent[:macro] == :chapter }
+			validate("Invalid Macro"){	@value == "valid" }
 			"Validated Test: #{@value}"
 		end
 	end
@@ -14,16 +14,6 @@ describe Glyph::Macro::Validators do
 	it "should provide custom validation" do
 		lambda { interpret("section[validated_test[invalid]]").document.output }.should raise_error
 		lambda { interpret("chapter[validated_test[valid]]").document.output }.should_not raise_error
-	end
-
-	it "should validate ancestors" do
-		lambda { interpret("section[eq[true]]").document.output }.should raise_error MacroError
-		lambda { interpret("?[eq[true]|something]").document.output }.should_not raise_error MacroError
-	end
-
-	it "should validate parents" do
-		lambda { interpret("table[td[tr[test]]]").document.output }.should raise_error MacroError
-		lambda { interpret("table[tr[td[test]]]").document.output }.should_not raise_error MacroError
 	end
 
 	it "should validate the number of parameters" do

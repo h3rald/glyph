@@ -77,7 +77,6 @@ end
 macro :eq do
 	min_parameters 1
 	max_parameters 2
-	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = interpret(a.to_s) 
 	res_b = interpret(b.to_s)
@@ -86,14 +85,12 @@ end
 
 macro :not do
 	max_parameters 1
-	allowed_ancestors :condition, '?'
 	interpret(@value).blank? ? true : nil 
 end
 
 macro :and do
 	min_parameters 1
 	max_parameters 2
-	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = !interpret(a.to_s).blank?
 	res_b = !interpret(b.to_s).blank?
@@ -103,7 +100,6 @@ end
 macro :or do
 	min_parameters 1
 	max_parameters 2
-	allowed_ancestors :condition, '?'
 	a, b = @params
 	res_a = !interpret(a.to_s).blank?
 	res_b = !interpret(b.to_s).blank?
@@ -112,7 +108,6 @@ end
 
 macro :match do
 	exact_parameters 2
-	allowed_ancestors :condition, '?'
 	val, regexp = @params
 	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
 	(interpret(val).match(instance_eval(regexp))) ? true : nil

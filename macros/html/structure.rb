@@ -41,7 +41,6 @@ end
 
 macro :body do
 	exact_parameters 1
-	allowed_parents :document
 	%{
 		<body>
 		#{@value}
@@ -51,7 +50,6 @@ end
 
 macro :head do
 	exact_parameters 1
-	allowed_parents :document
 	%{
 		<head>
 			<title>#{Glyph::CONFIG.get("document.title")}</title>
@@ -65,7 +63,6 @@ end
 
 macro :style do 
 	exact_parameters 1
-	allowed_parents :head
 	file = Glyph.lite? ? Pathname.new(@value) : Glyph::PROJECT/"styles/#{@value}"
 	file = Pathname.new Glyph::HOME/'styles'/@value unless file.exist?
 	macro_error "Stylesheet '#{@value}' not found" unless file.exist?

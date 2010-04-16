@@ -103,7 +103,6 @@ end
 
 macro :tr do
 	exact_parameters 1
-	allowed_parents :table
 	%{
 		<tr>#{@value}	
 		</tr>
@@ -112,7 +111,6 @@ end
 
 macro :td do
 	exact_parameters 1
-	allowed_parents :tr
 	%{
 		<td>#{@value}
 		</td>
@@ -121,7 +119,6 @@ end
 
 macro :th do
 	exact_parameters 1
-	allowed_parents :tr
 	%{
 		<th>#{@value}
 		</th>
