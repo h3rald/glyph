@@ -91,3 +91,7 @@ end
 def create_doc(tree)
 	Glyph::Document.new tree, {} 
 end
+
+def filter(text)
+	Glyph.filter text
+end

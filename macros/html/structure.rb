@@ -2,11 +2,9 @@
 
 macro :div do 
 	exact_parameters 1
-	%{<div class="#{@name}">
-
-		#{@value}
-
-		</div>}	
+%{<div class="#{@name}">
+#{@value}
+</div>}	
 end
 
 macro :header do

@@ -2,17 +2,20 @@
 
 macro :note do
 	exact_parameters 1
-	%{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
-
-		</div>}
+	%{<div class="#{@name}">
+<span class="note-title">#{@name.to_s.capitalize}</span>
+#{@value}
+</div>}
 end
 
 macro :box do
 	exact_parameters 2
-	%{<div class="box"><span class="box-title">#{@params[0]}</span>
+	%{<div class="box">
+<span class="box-title">
+#{@params[0]}
+#</span>
 #{@params[1]}
-
-		</div>}
+</div>}
 end
 
 macro :code do
@@ -24,11 +27,9 @@ end
 
 macro :title do
 	no_parameters
-	%{
-		<h1>
+	%{<h1>
 			#{cfg("document.title")}
-		</h1>
-	}
+</h1>}
 end
 
 macro :img do
@@ -42,9 +43,7 @@ macro :img do
 	height = @params[2]
  	h = (height) ? "height=\"#{height}\"" : ''
 	warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
-	%{
-		<img src="#{dest_file}" #{w} #{h} alt="-"/>
-	}
+	%{<img src="#{dest_file}" #{w} #{h} alt="-"/>}
 end
 
 macro :fig do
@@ -57,72 +56,60 @@ macro :fig do
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
 	warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
-	%{
-		<div class="figure">
-			<img src="#{dest_file}" alt="-"/>
-			#{caption}
-		</div>
-	}
+	%{<div class="figure">
+<img src="#{dest_file}" alt="-"/>
+#{caption}
+</div>}
 end
 
 
 macro :subtitle do
 	no_parameters
-	%{
-		<h2>
-			#{cfg("document.subtitle")}
-		</h2>
-	}
+	%{<h2>
+#{cfg("document.subtitle")}
+</h2>}
 end
 
 macro :author do
 	no_parameters
-	%{
-		<div class="author">
-			by <em>#{cfg("document.author")}</em>
-		</div>
-	}
+	%{<div class="author">
+by <em>#{cfg("document.author")}</em>
+</div>}
 end
 
 macro :pubdate do
 	no_parameters
-	%{
-		<div class="pubdate">
-			#{Time.now.strftime("%B %Y")}
-		</div>
-	}
+	%{<div class="pubdate">
+#{Time.now.strftime("%B %Y")}
+</div>}
 end
 
 macro :table do
 	exact_parameters 1
-	%{
-		<table>#{@value}
-		</table>
-	}
+	%{<table>
+#{@value}
+</table>}
 end
 
 macro :tr do
 	exact_parameters 1
-	%{
-		<tr>#{@value}	
-		</tr>
-	}
+	%{<tr>
+#{@value}	
+</tr>}
 end
 
 macro :td do
 	exact_parameters 1
-	%{
-		<td>#{@value}
-		</td>
-	}
+	%{<td>
+#{@value}
+</td>}
 end
 
 macro :th do
 	exact_parameters 1
-	%{
-		<th>#{@value}
-		</th>
-	}
+	%{<th>
+#{@value}
+</th>}
 end
 
 macro_alias :important => :note
