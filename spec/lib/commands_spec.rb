@@ -15,7 +15,6 @@ describe "glyph" do
 
 	it "[init] should create a project in the current directory" do
 		Glyph.enable "project:create"
-		run_command_successfully(['init']).should == false
 		Dir.chdir Glyph::PROJECT.to_s
 		run_command_successfully(['init']).should == true
 	end

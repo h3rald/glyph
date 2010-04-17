@@ -41,7 +41,7 @@ macro :markdown do
 						require 'kramdown'
 						markdown_converter = :Kramdown
 					rescue LoadError
-						macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"
+						macro_error "No MarkDown converter installed. Please run: gem install bluecloth"
 					end
 				end
 			end

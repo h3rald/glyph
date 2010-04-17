@@ -33,10 +33,10 @@ describe "Filter Macros" do
 - item 2
 - item 3
 
-...]"
+etc.]"
 		interpret text
 		@p.document.output.gsub(/\n|\t/, '').should == 
-			"<p>This is a test:</p><ul><li>item 1</li><li>item 2</li><li>item 3</li></ul><p>...</p>"
+			"<p>This is a test:</p><ul><li>item 1</li><li>item 2</li><li>item 3</li></ul><p>etc.</p>"
 	end
 
 end	

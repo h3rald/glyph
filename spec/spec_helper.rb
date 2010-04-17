@@ -39,7 +39,10 @@ def enable_all_tasks
 end
 
 def delete_project_dir
-	FileUtils.rm_rf Glyph::PROJECT.to_s
+	Glyph::PROJECT.children.each do |f|
+		FileUtils.rmtree f if f.directory? 
+		FileUtils.rm f if f.file?
+	end
 end
 
 def delete_project 
