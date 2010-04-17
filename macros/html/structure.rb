@@ -13,7 +13,7 @@ macro :header do
 	title = @params[0]
 	level = 1
 	@node.ascend do |n| 
-		if cfg("structure.headers").include? n[:macro] then
+		if Glyph["structure.headers"].include? n[:macro] then
 			level+=1
 		end
 	end
@@ -50,9 +50,9 @@ macro :head do
 	exact_parameters 1
 	%{
 		<head>
-			<title>#{Glyph::CONFIG.get("document.title")}</title>
-			<meta name="author" content="#{cfg("document.author")}" />
-			<meta name="copyright" content="#{cfg("document.author")}" />
+			<title>#{Glyph["document.title"]}</title>
+			<meta name="author" content="#{Glyph["document.author"]}" />
+			<meta name="copyright" content="#{Glyph["document.author"]}" />
 			<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 		#{@value}
 		</head>
@@ -97,8 +97,8 @@ macro :toc do
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
-				if cfg('structure.headers').include?(n2[:macro])
-					next if n2.find_parent{|node| cfg('structure.special').include? node[:macro] } 
+				if Glyph['structure.headers'].include?(n2[:macro])
+					next if n2.find_parent{|node| Glyph['structure.special'].include? node[:macro] } 
 					header_id = n2.children.select{|n| n[:header]}[0][:header] rescue nil
 					next if added_headers.include? header_id
 					added_headers << header_id
@@ -134,7 +134,7 @@ end
 
 macro_alias :section => :div
 
-(cfg('structure.frontmatter') + cfg('structure.bodymatter') + cfg('structure.backmatter')).
+(Glyph['structure.frontmatter'] + Glyph['structure.bodymatter'] + Glyph['structure.backmatter']).
 	each {|s| macro_alias s => :div }
 
 macro_alias :frontcover => :div

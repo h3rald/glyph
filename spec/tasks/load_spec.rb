@@ -38,7 +38,7 @@ describe "load" do
 	it "[config] should load configuration files and apply overrides" do
 		Glyph::PROJECT_CONFIG.blank?.should == false
 		Glyph::SYSTEM_CONFIG.blank?.should == false
-		cfg('structure.headers').class.to_s.should == "Array"
+		Glyph['structure.headers'].class.to_s.should == "Array"
 	end
 
 end

@@ -38,9 +38,9 @@ command :compile do |c|
 		output_targets = Glyph::CONFIG.get('document.output_targets')
 		target = nil
 		Glyph.config_override('document.output', options[:f]) if options[:f]
-		target = cfg('document.output')
+		target = Glyph['document.output']
 		target = nil if target.blank?
-		target ||= cfg('filters.target')
+		target ||= Glyph['filters.target']
 		Glyph.config_override('document.source', options[:s]) if options[:s]
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
@@ -51,7 +51,7 @@ command :compile do |c|
 			filename = source_file.basename(source_file.extname).to_s
 			destination_file = Pathname.new(args[1]) rescue nil
 			src_extension = Regexp.escape(source_file.extname) 
-			dst_extension = ".#{cfg('document.output')}"
+			dst_extension = ".#{Glyph['document.output']}"
 			destination_file ||= Pathname.new(source_file.to_s.gsub(/#{src_extension}$/, dst_extension))
 			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? 
 			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s
@@ -127,21 +127,21 @@ command :config do |c|
 	c.action do |global_options,options,args|
 		Glyph.run 'load:config'
 		if options[:g] then
-			cfg = Glyph::GLOBAL_CONFIG
+			config = Glyph::GLOBAL_CONFIG
 		else
-			cfg = Glyph::PROJECT_CONFIG
+			config = Glyph::PROJECT_CONFIG
 		end
 		case args.length
 		when 0 then
 			raise ArgumentError, "Too few arguments."
 		when 1 then # read current config
-			setting = cfg(args[0])
+			setting = Glyph[args[0]]
 			raise RuntimeError, "Unknown setting '#{args[0]}'" if setting.blank?
-			info Glyph::CONFIG.get(args[0])
+			info setting
 		when 2 then
-			cfg.set args[0], args[1]
+			config.set args[0], args[1]
 			Glyph.reset_config
-			cfg.write
+			config.write
 		else
 			raise ArgumentError, "Too many arguments."
 		end

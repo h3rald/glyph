@@ -118,8 +118,8 @@ describe "Macro:" do
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 			<head>
 				<title>#{Glyph::CONFIG.get("document.title")}</title>
-				<meta name="author" content="#{cfg("document.author")}" />
-				<meta name="copyright" content="#{cfg("document.author")}" />
+				<meta name="author" content="#{Glyph["document.author"]}" />
+				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 				<style type=\"text/css\">#main {  background-color: #0000ff; }</style>
 			</head>
@@ -134,8 +134,8 @@ describe "Macro:" do
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 			<head>
 				<title>#{Glyph::CONFIG.get("document.title")}</title>
-				<meta name="author" content="#{cfg("document.author")}" />
-				<meta name="copyright" content="#{cfg("document.author")}" />
+				<meta name="author" content="#{Glyph["document.author"]}" />
+				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 				<style type=\"text/css\">#main {  background-color: #0000ff; }</style>
 			</head>

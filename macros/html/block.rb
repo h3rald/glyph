@@ -28,7 +28,7 @@ end
 macro :title do
 	no_parameters
 	%{<h1>
-			#{cfg("document.title")}
+			#{Glyph["document.title"]}
 </h1>}
 end
 
@@ -66,14 +66,14 @@ end
 macro :subtitle do
 	no_parameters
 	%{<h2>
-#{cfg("document.subtitle")}
+#{Glyph["document.subtitle"]}
 </h2>}
 end
 
 macro :author do
 	no_parameters
 	%{<div class="author">
-by <em>#{cfg("document.author")}</em>
+by <em>#{Glyph["document.author"]}</em>
 </div>}
 end
 

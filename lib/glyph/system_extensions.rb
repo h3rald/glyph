@@ -3,18 +3,13 @@ module Kernel
 	# Prints a message
 	# @param [#to_s] message the message to print
 	def info(message)
-		puts "#{message}" unless cfg :quiet
+		puts "#{message}" unless Glyph[:quiet]
 	end
 
 	# Prints a warning
 	# @param [#to_s] message the message to print
 	def warning(message)
-		puts "warning: #{message}" unless cfg :quiet
-	end
-
-	# @see Glyph::Config#get
-	def cfg(setting)
-		Glyph::CONFIG.get(setting)
+		puts "warning: #{message}" unless Glyph[:quiet]
 	end
 
 	# Dumps and serialize an object to a YAML file

@@ -4,13 +4,13 @@ namespace :generate do
 
 	desc "Process source"
 	task :document => ["load:all"] do
-		info "Parsing '#{cfg('document.source')}'..."
+		info "Parsing '#{Glyph['document.source']}'..."
 		if Glyph.lite? then
-			text = file_load Pathname.new(cfg('document.source'))
+			text = file_load Pathname.new(Glyph['document.source'])
 		else
-			text = file_load Glyph::PROJECT/cfg('document.source')
+			text = file_load Glyph::PROJECT/Glyph['document.source']
 		end
-		interpreter = Glyph::Interpreter.new text, :source => "file: #{cfg('document.source')}"
+		interpreter = Glyph::Interpreter.new text, :source => "file: #{Glyph['document.source']}"
 		info "Processing..."
 		interpreter.process
 		info "Post-processing..."
@@ -22,16 +22,16 @@ namespace :generate do
 	task :html => :document do
 		info "Generating HTML file..."
 		if Glyph.lite? then
-			out = Pathname.new cfg('document.output_dir')
+			out = Pathname.new Glyph['document.output_dir']
 		else
 			out = Glyph::PROJECT/"output/html"
 		end
-		extension = cfg('document.output_ext')
+		extension = Glyph['document.output_ext']
 		extension ||= '.html'
 		out.mkpath
-		file = "#{cfg('document.filename')}#{extension}"
+		file = "#{Glyph['document.filename']}#{extension}"
 		file_write out/file, Glyph.document.output
-		info "'#{cfg('document.filename')}#{extension}' generated successfully."
+		info "'#{Glyph['document.filename']}#{extension}' generated successfully."
 		unless Glyph.lite? then
 			images = Glyph::PROJECT/'output/html/images'
 			images.mkpath
@@ -49,13 +49,13 @@ namespace :generate do
 	task :pdf => :html do
 		info "Generating PDF file..."
 		if Glyph.lite? then
-			out = Pathname.new cfg('document.output_dir')
+			out = Pathname.new Glyph['document.output_dir']
 		else
 			out = Glyph::PROJECT/"output/pdf"
 		end
 		out.mkpath
-		file = cfg('document.filename')
-		case cfg('tools.pdf_generator')
+		file = Glyph['document.filename']
+		case Glyph['tools.pdf_generator']
 		when 'prince' then
 			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
 				res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"

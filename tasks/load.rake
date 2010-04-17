@@ -25,7 +25,7 @@ namespace :load do
 			macro_base.children.each do |c|
 				Glyph.instance_eval file_load(c) unless c.directory?
 			end
-			macro_dir = macro_base/cfg("filters.target").to_s
+			macro_dir = macro_base/Glyph["filters.target"].to_s
 			if macro_dir.exist? then
 				macro_dir.children.each do |f|
 					Glyph.instance_eval file_load(f)
@@ -50,10 +50,10 @@ namespace :load do
 		Glyph.reset_config
 		Glyph.config_override("structure.headers", 
 													[:section] +
-													cfg('structure.frontmatter') + 
-													cfg('structure.backmatter') + 
-													cfg('structure.bodymatter') - 
-													cfg('structure.hidden'))
+													Glyph['structure.frontmatter'] + 
+													Glyph['structure.backmatter'] + 
+													Glyph['structure.bodymatter'] - 
+													Glyph['structure.hidden'])
 	end
 
 end

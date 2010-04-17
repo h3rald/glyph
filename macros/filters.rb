@@ -9,7 +9,7 @@ macro :textile do
 	rescue Exception
 		macro_error "RedCloth gem not installed. Please run: gem insall RedCloth"
 	end
-	target = cfg "filters.target"
+	target = Glyph["filters.target"]
 	case target.to_sym
 	when :html
 		rc.to_html.gsub /<p><\/p>/, ''
@@ -23,7 +23,7 @@ end
 macro :markdown do
 	exact_parameters 1
 	md = nil
-	markdown_converter = cfg("filters.markdown_converter").to_sym rescue nil
+	markdown_converter = Glyph["filters.markdown_converter"].to_sym rescue nil
 	if !markdown_converter then
 		begin
 			require 'bluecloth'
@@ -60,7 +60,7 @@ macro :markdown do
 	else
 	 macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"
 	end
-	target = cfg "filters.target"
+	target = Glyph["filters.target"]
 	if target.to_sym == :html then
 		md.to_html
 	else

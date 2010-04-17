@@ -67,12 +67,12 @@ describe Glyph do
 			arr.each {|v| total += 1; Glyph::MACROS[v.to_sym].should == Glyph::MACROS[target.to_sym]}
 		end
 		aliases.each { |v| check_aliases.call v[0], v[1] }
-		check_aliases.call cfg('structure.frontmatter'), :div
-		check_aliases.call cfg('structure.bodymatter'), :div
-		check_aliases.call cfg('structure.backmatter'), :div
-		cfg('structure.frontmatter').length.should == 8
-		cfg('structure.bodymatter').length.should == 4
-		cfg('structure.backmatter').length.should == 13
+		check_aliases.call Glyph['structure.frontmatter'], :div
+		check_aliases.call Glyph['structure.bodymatter'], :div
+		check_aliases.call Glyph['structure.backmatter'], :div
+		Glyph['structure.frontmatter'].length.should == 8
+		Glyph['structure.bodymatter'].length.should == 4
+		Glyph['structure.backmatter'].length.should == 13
 		#puts Glyph::MACROS.keys.map{|i| i.to_s}.sort.to_yaml
 		total.should == Glyph::MACROS.length
 	end

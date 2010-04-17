@@ -45,7 +45,7 @@ end
 
 macro :comment do
 	exact_parameters 1
-	if cfg('document.draft') then
+	if Glyph['document.draft'] then
 		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{@value}</span>}
 	else
 		""
@@ -56,7 +56,7 @@ macro :todo do
 	exact_parameters 1
 	todo = "[#{@source}] -- #{@value}"
 	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
-	if cfg('document.draft')  then
+	if Glyph['document.draft']  then
 	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{@value}</span>} 
 	else
 		""

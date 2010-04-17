@@ -87,6 +87,11 @@ module Glyph
 	def self.document
 		@@document
 	end
+	
+	# @see Glyph::Config#get
+	def self.[](setting)
+		Glyph::CONFIG.get(setting)
+	end
 
 	def self.document=(document)
 		@@document = document
