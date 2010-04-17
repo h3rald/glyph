@@ -31,9 +31,13 @@ begin
 		s.add_dependency 'extlib', '>= 0.9.12'
 		s.add_dependency 'treetop', '>= 0.4.3'
 		s.add_dependency 'rake', '>= 0.8.7'
-		s.add_development_dependency 'rspec'
-		s.add_development_dependency 'yard'
-		s.add_development_dependency 'jeweler'
+		s.add_development_dependency 'rspec', '>= 1.1.11'
+		s.add_development_dependency 'yard', '>= 1.5.4'
+		s.add_development_dependency 'jeweler', '1.4.0'
+		s.add_development_dependency 'directory_watcher', ">= 1.3.2"
+		s.add_development_dependency 'haml', ">= 2.2.3"
+		s.add_development_dependency 'RedCloth', ">= 4.2.3"
+		s.add_development_dependency 'bluecloth', ">= 2.0.7"
 	end
 	Jeweler::GemcutterTasks.new
 rescue LoadError

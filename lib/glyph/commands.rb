@@ -67,7 +67,12 @@ command :compile do |c|
 		# Auto-regeneration
 		if options[:auto] && !Glyph.lite? then
 			Glyph.lite_mode = false
-			require 'directory_watcher'
+			begin
+				require 'directory_watcher'
+			rescue LoadError
+				raise RuntimeError, "DirectoryWatcher is not available. Install it with: gem install directory_watcher"
+			end
+
 
 			info 'Auto-regeneration enabled'
 			info 'Use ^C to interrupt'

@@ -10,6 +10,7 @@ describe "Macro:" do
 	end
 
 	after do
+		Glyph.lite_mode = false
 		delete_project
 	end
 
@@ -141,11 +142,11 @@ describe "Macro:" do
 		</html>
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
+		Dir.chdir Glyph::PROJECT
 		interpret "document[head[style[styles/test.sass]]]"
 		@p.document.output.gsub(/\n|\t/, '').should == result
-		interpret "document[head[style[#{Dir.pwd}/styles/test.sass]]]"
+		interpret "document[head[style[#{Glyph::PROJECT}/styles/test.sass]]]"
 		@p.document.output.gsub(/\n|\t/, '').should == result
-		Glyph.lite_mode = false
 	end
 
 	it "escape" do
@@ -230,11 +231,11 @@ describe "Macro:" do
 			width="90%" height="90%" alt="-"/>
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
+		Dir.chdir Glyph::PROJECT
 		interpret "img[images/ligature.jpg|90%|90%]"
 		@p.document.output.gsub(/\t|\n/, '').should == result
-		interpret "img[#{Dir.pwd}/images/ligature.jpg|90%|90%]"
-		@p.document.output.gsub(/\t|\n/, '').gsub(Dir.pwd+'/', '').should == result
-		Glyph.lite_mode = false
+		interpret "img[#{Glyph::PROJECT}/images/ligature.jpg|90%|90%]"
+		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
 	end
 
 	it "fig" do
@@ -255,11 +256,11 @@ describe "Macro:" do
 			</div>
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
+		Dir.chdir Glyph::PROJECT
 		interpret "fig[images/ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == result
-		interpret "fig[#{Dir.pwd}/images/ligature.jpg|Ligature]"
-		@p.document.output.gsub(/\t|\n/, '').gsub(Dir.pwd+'/', '').should == result
-		Glyph.lite_mode = false
+		interpret "fig[#{Glyph::PROJECT}/images/ligature.jpg|Ligature]"
+		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
 	end
 
 	it "comment, todo" do

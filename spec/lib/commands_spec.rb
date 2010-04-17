@@ -9,6 +9,7 @@ describe "glyph" do
 	end
 
 	after do
+		Glyph.lite_mode = false
 		delete_project
 	end
 
@@ -103,10 +104,12 @@ describe "glyph" do
 
 		file_write text_file, "section[\nheader[Container section]\nThis is another test.\n]\n"
 
-		Timeout.timeout(5, StandardError) do loop do
-			break if output_file.file?
-			sleep 1
-		end end
+		Timeout.timeout(5, StandardError) do 
+			loop do
+				break if output_file.file?
+				sleep 1
+			end 
+		end
 		compile_thread.raise Interrupt
 		compile_thread.join
 
@@ -123,11 +126,11 @@ describe "glyph" do
 		run_command_successfully(["compile", "-f", "wrong"]).should == false
 	end
 
-
 	it "[compile] should compile a single source file" do
 		enable_all_tasks
-		file_copy "#{Dir.pwd}/../files/article.glyph", "#{Dir.pwd}/article.glyph"
-		file_copy "#{Dir.pwd}/../files/ligature.jpg", "#{Dir.pwd}/ligature.jpg"
+		Dir.chdir Glyph::PROJECT
+		file_copy "#{Glyph::PROJECT}/../files/article.glyph", "#{Glyph::PROJECT}/article.glyph"
+		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"
 		run_command_successfully(["compile", "article.glyph"]).should == true
 		Glyph.lite_mode = false
 		Pathname.new('article.html').exist?.should == true
@@ -141,8 +144,9 @@ describe "glyph" do
 
 	it "[compile] should compile a single source file to a custom destination" do 
 		enable_all_tasks
-		file_copy "#{Dir.pwd}/../files/article.glyph", "#{Dir.pwd}/article.glyph"
-		file_copy "#{Dir.pwd}/../files/ligature.jpg", "#{Dir.pwd}/ligature.jpg"
+		Dir.chdir Glyph::PROJECT
+		file_copy "#{Glyph::PROJECT}/../files/article.glyph", "#{Glyph::PROJECT}/article.glyph"
+		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"
 		run_command_successfully(["compile", "article.glyph", "out/article.htm"]).should == true
 		Glyph.lite_mode = false
 		Pathname.new('out/article.htm').exist?.should == true
