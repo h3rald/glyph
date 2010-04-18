@@ -17,7 +17,7 @@ class MacroNode < GlyphSyntaxNode
 
 	def evaluate(context, current=nil)
 		name = macro_name.text_value.to_sym
-		raise RuntimeError, "Undefined macro '#{name}'" unless Glyph::MACROS.include? name
+		raise RuntimeError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless Glyph::MACROS.include? name
 		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
 		current << @data
 		value = super(context, @data).strip 

@@ -60,7 +60,11 @@ command :compile do |c|
 			Glyph.config_override('document.output_dir', destination_file.parent.to_s) # System use only
 			Glyph.config_override('document.output_ext', destination_file.extname) # System use only
 		end
-		Glyph.run "generate:#{target}"
+		begin
+			Glyph.run "generate:#{target}"
+		rescue Exception => e
+			puts "error: #{e.message}"
+		end
 		Glyph.config_restore
 
 

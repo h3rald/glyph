@@ -32,6 +32,7 @@ module Glyph
 		def macro_error(msg, klass=MacroError)
 			message = "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
 			@node[:document].errors << message
+			message += "\n -> value:\n#{@value}" if Glyph.debug?
 			raise klass, message
 		end
 

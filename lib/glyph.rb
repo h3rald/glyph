@@ -48,6 +48,11 @@ module Glyph
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
 	end
+	
+	# Returns true if Glyph is running in debug mode
+	def self.debug?
+		const_defined? :DEBUG rescue false
+	end
 
 	def self.lite_mode=(mode)
 		@@lite_mode = mode
