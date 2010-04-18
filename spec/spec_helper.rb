@@ -39,6 +39,7 @@ def enable_all_tasks
 end
 
 def delete_project_dir
+ 	return unless	Glyph::PROJECT.exist?
 	Glyph::PROJECT.children.each do |f|
 		FileUtils.rmtree f if f.directory? 
 		FileUtils.rm f if f.file?

@@ -23,9 +23,7 @@ macro :header do
 	@node[:header] = h_id
 	macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
 	bookmark :id => h_id, :title => title
-	%{
-		<h#{level} id="#{h_id}">#{title}</h#{level}>
-	}	
+	%{<h#{level} id="#{h_id}">#{title}</h#{level}>}	
 end
 
 macro :document do
@@ -33,30 +31,27 @@ macro :document do
 	%{<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-		#{@value}
+#{@value}
 </html>}
 end
 
 macro :body do
 	exact_parameters 1
-	%{
-		<body>
-		#{@value}
-		</body>
-	}
+	%{<body>
+#{@value}
+</body>}
 end
 
 macro :head do
 	exact_parameters 1
-	%{
-		<head>
-			<title>#{Glyph["document.title"]}</title>
-			<meta name="author" content="#{Glyph["document.author"]}" />
-			<meta name="copyright" content="#{Glyph["document.author"]}" />
-			<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
-		#{@value}
-		</head>
-	}
+	%{<head>
+<title>#{Glyph["document.title"]}</title>
+<meta name="author" content="#{Glyph["document.author"]}" />
+<meta name="copyright" content="#{Glyph["document.author"]}" />
+<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
+#{@value}
+</head>
+}
 end
 
 macro :style do 
@@ -80,11 +75,9 @@ macro :style do
 	else
 		macro_error "Extension '#{file.extname}' not supported."
 	end
-	%{
-		<style type="text/css">
-		#{style}
-		</style>
-	}
+	%{<style type="text/css">
+#{style}
+</style>}
 end
 
 macro :toc do 
@@ -117,11 +110,10 @@ macro :toc do
 			end
 			list
 		end
-		%{
-<div class="contents">
+		%{<div class="contents">
 <h2 class="toc-header" id="h_toc">Table of Contents</h2>
 <ol class="toc">
-			#{descend_section.call(document.structure, nil)}
+#{descend_section.call(document.structure, nil)}
 </ol>
 </div>}
 	end

@@ -26,7 +26,7 @@ module Glyph
 	require LIB/'macro'
 	require LIB/'interpreter'
 
-	VERSION = file_load HOME/'VERSION'
+	VERSION = file_load(HOME/'VERSION').strip
 
 	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
 
