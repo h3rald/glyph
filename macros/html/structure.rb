@@ -4,6 +4,7 @@ macro :div do
 	exact_parameters 1
 %{<div class="#{@name}">
 #{@value}
+
 </div>}	
 end
 
@@ -32,6 +33,7 @@ macro :document do
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 #{@value}
+
 </html>}
 end
 
@@ -39,6 +41,7 @@ macro :body do
 	exact_parameters 1
 	%{<body>
 #{@value}
+
 </body>}
 end
 

@@ -43,6 +43,7 @@ module Glyph
 	@@document = nil
 
 	@@lite_mode = false
+	@@debug_mode = false
 
 	# Returns true if Glyph is running in test mode
 	def self.testing?
@@ -51,7 +52,11 @@ module Glyph
 	
 	# Returns true if Glyph is running in debug mode
 	def self.debug?
-		const_defined? :DEBUG rescue false
+		@debug_mode
+	end
+
+	def self.debug_mode=(mode)
+		@@debug_mode = mode
 	end
 
 	def self.lite_mode=(mode)

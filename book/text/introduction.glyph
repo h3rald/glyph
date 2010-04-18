@@ -18,6 +18,7 @@ Glyph uses a =>[#macros_nutshell|simple macro system] to perform a wide variety 
 * Include the value of any configuration setting (like author, title) in the document.
 * Filter input explicitly or implicitly, based on file extensions when including files. 
 * Manage comments and todo items.
+
 ]
 
 section[header[Installation]

@@ -12,6 +12,10 @@ module Kernel
 		puts "warning: #{message}" unless Glyph[:quiet]
 	end
 
+	def error(message)
+		puts "error: #{message}" unless Glyph[:quiet]
+	end
+
 	# Dumps and serialize an object to a YAML file
 	# @param [#to_s] file the file to write to
 	# @param [Object] obj the object to serialize

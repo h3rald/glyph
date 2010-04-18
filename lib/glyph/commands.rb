@@ -157,7 +157,7 @@ pre do |global,command,options,args|
 	# Return true to proceed; false to abourt and not call the
 	# chosen command
 	if global[:d] then
-		Glyph::DEBUG = true
+		Glyph.debug_mode = true
 	end
 	if !command || command.name == :help then
 		puts "====================================="
@@ -176,12 +176,13 @@ on_error do |exception|
 		warning exception.message
 		false
 	else
-		if Glyph.const_defined? :DEBUG then
+		if Glyph.debug? then
 			puts "Exception: #{exception.message}"
 			puts "Backtrace:"
 			exception.backtrace.each do |b|
 				puts b
 			end
+			Glyph.debug_mode = false
 		end
 		true
 	end
