@@ -5,7 +5,6 @@ module Glyph
 
 			def validate(message, &block)
 				unless instance_eval(&block) then
-					@node[:document].errors << message
 					macro_error message
 				end
 			end

@@ -20,11 +20,26 @@ module Glyph
 			@params = @value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
 		end
 
+		def path
+			macros = []
+			@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }
+			macros.reverse.join('/')
+		end
+
+		# Raises a macro error (preventing document post-processing)
+		# @param [String] msg the message to print
+		# @raise [MacroError]
+		def macro_error(msg, klass=MacroError)
+			message = "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
+			@node[:document].errors << message
+			raise klass, message
+		end
+
 		# Raises a macro error
 		# @param [String] msg the message to print
 		# @raise [MacroError]
-		def macro_error(msg)
-			raise MacroError.new @node, msg
+		def macro_warning(msg)
+			warning "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
 		end
 
 		# Instantiates a Glyph::Interpreter and interprets a string
@@ -32,9 +47,9 @@ module Glyph
 		# @return [String] the interpreted output
 		# @raise [MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
-			@node[:source] = "#{@name}: #{@value}"
+			@node[:source] = "#{@name}[#{@value}]"
 			@node[:embedded] = true
-			macro_error "Mutual inclusion" if @node.find_parent {|n| n[:source] == @node[:source] }
+			macro_error "Mutual inclusion", MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
 			Glyph::Interpreter.new(string, @node).document.output
 		end
 

@@ -63,7 +63,7 @@ describe "glyph" do
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
-	it "[compile] should continue execution in case of macro errors" do
+	it "[compile] should not continue execution in case of macro errors" do
 		create_project
 		text = %{
 			=>[#invalid1]
@@ -74,7 +74,7 @@ describe "glyph" do
 			#[valid|Valid bookmark]
 		}
 		file_write Glyph::PROJECT/'document.glyph', text
-		res = run_command(['-d', "compile"])
+		res = run_command(["compile"])
 		res.match(/Bookmark 'invalid1' does not exist/).should_not == nil
 		res.match(/Bookmark 'invalid2' does not exist/).should_not == nil
 		res.match(/Bookmark 'valid' does not exist/).should == nil
@@ -155,7 +155,7 @@ describe "glyph" do
 		create_project
 		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\n@[errors.glyph]]"
 		file_write Glyph::PROJECT/'text/errors.glyph', "section[a|b]"
-		err = "Document cannot be finalized due to previous errors."
+		err = "Document cannot be finalized due to previous errors"
 		res = run_command(["compile"])
 		res.match("error: #{err}").should_not == nil
 	end

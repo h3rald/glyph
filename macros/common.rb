@@ -2,12 +2,20 @@
 
 macro :snippet do
 	exact_parameters 1
-	begin
-		ident = @params[0].to_sym
-		macro_error "Snippet '#{ident}' does not exist" unless Glyph::SNIPPETS.has_key? ident
-		interpret Glyph::SNIPPETS[ident] 
-	rescue Exception => e
-		warning e.message
+	ident = @params[0].to_sym
+	if Glyph::SNIPPETS.has_key? ident then
+		begin
+			interpret Glyph::SNIPPETS[ident] 
+		rescue Exception => e
+			raise if e.is_a? MutualInclusionError
+			warning e.message
+			draft = Glyph['document.draft']
+			Glyph.config_override 'document.draft', true unless draft
+			interpret "![Correct errors in snippet '#{@value}']"
+			Glyph.config_override 'document.draft', false unless draft
+		end
+	else
+		macro_warning "Snippet '#{ident}' does not exist"
 		"[SNIPPET '#{@value}' NOT PROCESSED]"
 	end
 end
@@ -22,25 +30,32 @@ end
 macro :include do
 	macro_error "Macro not available when compiling a single file." if Glyph.lite?
 	exact_parameters 1
-	begin
-		file = nil
-		(Glyph::PROJECT/"text").find do |f|
-			file = f if f.to_s.match /\/#{@value}$/
-		end	
-		macro_error "File '#{@value}' no found." unless file
+	file = nil
+	(Glyph::PROJECT/"text").find do |f|
+		file = f if f.to_s.match /\/#{@value}$/
+	end	
+	if file then
 		contents = file_load file
 		ext = @value.match(/\.(.*)$/)[1]
 		if Glyph["filters.by_file_extension"] && ext != 'glyph' then
-			begin
-				macro_error "Filter macro '#{ext}' not found" unless Glyph::MACROS.include?(ext.to_sym)
+			if Glyph::MACROS.include?(ext.to_sym) then
 				contents = "#{ext}[#{contents}]"
-			rescue MacroError => e
-				warning e.message
+			else
+				macro_warning "Filter macro '#{ext}' not available"
 			end
 		end	
-		interpret contents
-	rescue MacroError => e
-		warning e
+		begin 
+			interpret contents
+		rescue Exception => e
+			raise if e.is_a? MutualInclusionError
+			warning e.message
+			draft = Glyph['document.draft']
+			Glyph.config_override 'document.draft', true unless draft
+			interpret "![Correct errors in file '#{@value}']"
+			Glyph.config_override 'document.draft', false unless draft
+		end
+	else
+		macro_warning "File '#{@value}' no found."
 		"[FILE '#{@value}' NOT FOUND]"
 	end
 end
@@ -80,7 +95,7 @@ macro :eq do
 	a, b = @params
 	res_a = interpret(a.to_s) 
 	res_b = interpret(b.to_s)
- 	(res_a == res_b)	? true : nil
+	(res_a == res_b)	? true : nil
 end
 
 macro :not do

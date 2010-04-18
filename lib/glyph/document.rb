@@ -110,7 +110,7 @@ module Glyph
 			raise RuntimeError, "Document has not been analyzed" unless analyzed?
 			raise RuntimeError, "Document has already been finalized" if finalized?
 			return (@state = :finalized) if @context[:embedded]
-			raise RuntimeError, "Document cannot be finalized due to previous errors." unless @errors.blank? 
+			raise RuntimeError, "Document cannot be finalized due to previous errors" unless @context[:document].errors.blank?
 			# Substitute placeholders
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 

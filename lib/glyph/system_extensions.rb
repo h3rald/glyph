@@ -60,13 +60,5 @@ module Kernel
 
 end
 
-class MacroError < RuntimeError
-	attr_reader :node
-	def initialize(node, msg)
-		@node = node
-		source = @node[:source] || "--"
-		macros = []
-		@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }
-		super("#{msg}\n -> source: #{source}\n -> path: #{macros.reverse.join('/')}")
-	end
-end
+class MacroError < RuntimeError; end
+class MutualInclusionError < MacroError; end

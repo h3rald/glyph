@@ -169,8 +169,7 @@ end
 
 on_error do |exception|
 	if exception.is_a? MacroError then
-		#warning exception.message
-		puts exception.message
+		warning exception.message
 		false
 	else
 		if Glyph.const_defined? :DEBUG then

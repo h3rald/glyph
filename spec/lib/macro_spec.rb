@@ -53,7 +53,8 @@ describe Glyph::Macro do
 		create_project
 		Glyph.run! 'load:macros'
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
-		@macro.interpret("&[inc] test").should == "Test [SNIPPET 'inc' NOT PROCESSED] test" 
+		lambda {@macro.interpret("&[inc] test")}.should raise_error(
+			MutualInclusionError, "Mutual inclusion\n -> source: &[inc]\n -> path: test/&/&")
 	end
 
 end
