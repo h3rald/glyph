@@ -40,8 +40,6 @@ module Glyph
 
 	TODOS = []
 
-	ERRORS = []
-
 	@@document = nil
 
 	@@lite_mode = false

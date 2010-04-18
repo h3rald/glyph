@@ -4,7 +4,10 @@ module Glyph
 		module Validators
 
 			def validate(message, &block)
-				macro_error message unless instance_eval(&block)
+				unless instance_eval(&block) then
+					@node[:document].errors << message
+					macro_error message
+				end
 			end
 
 			def max_parameters(n)

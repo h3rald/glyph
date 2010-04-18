@@ -151,4 +151,13 @@ describe "glyph" do
 		Pathname.new('out/article.htm').exist?.should == true
 	end
 
+	it "[compile] should not finalize the document in case of errors in included files" do
+		create_project
+		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\n@[errors.glyph]]"
+		file_write Glyph::PROJECT/'text/errors.glyph', "section[a|b]"
+		err = "Document cannot be finalized due to previous errors."
+		res = run_command(["compile"])
+		res.match("error: #{err}").should_not == nil
+	end
+
 end

@@ -33,7 +33,7 @@ module Glyph
 		# @raise [MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
 			@node[:source] = "#{@name}: #{@value}"
-			@node[:analyze_only] = true
+			@node[:embedded] = true
 			macro_error "Mutual inclusion" if @node.find_parent {|n| n[:source] == @node[:source] }
 			Glyph::Interpreter.new(string, @node).document.output
 		end

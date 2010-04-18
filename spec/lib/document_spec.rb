@@ -13,7 +13,6 @@ describe Glyph::Document do
 		create_doc = lambda {|tree| }
 		@tree = create_tree "test[test[test[Test\\|\\]...]]]"
 		@doc = create_doc @tree
-
 	end
 
 	it "should expose document data" do
@@ -96,7 +95,6 @@ describe Glyph::Document do
 		doc.finalize
 		doc.output.gsub(/\n|\t/, '')[0..14].should == "Total: 4 tests."
 	end
-
 
 end
 

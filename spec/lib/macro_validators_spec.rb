@@ -12,7 +12,7 @@ describe Glyph::Macro::Validators do
 	end
 
 	it "should provide custom validation" do
-		lambda { interpret("section[validated_test[invalid]]").document.output }.should raise_error
+		lambda { interpret("section[validated_test[invalid]]").document.output }.should raise_error MacroError
 		lambda { interpret("chapter[validated_test[valid]]").document.output }.should_not raise_error
 	end
 

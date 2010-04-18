@@ -62,11 +62,11 @@ namespace :generate do
 			if res then
 				info "'#{file}.pdf' generated successfully."
 			else
-				warning "An error occurred while generating #{file}.pdf"
+				error "An error occurred while generating #{file}.pdf"
 			end
 			# TODO: support other PDF renderers
 		else
-			warning "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
+			error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
 		end
 	end
 

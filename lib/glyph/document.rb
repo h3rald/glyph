@@ -18,7 +18,7 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders, :headers, :context
+		attr_reader :bookmarks, :placeholders, :headers, :context, :errors
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
@@ -30,6 +30,7 @@ module Glyph
 			@bookmarks = {}
 			@placeholders = {}
 			@headers = []
+			@errors = []
 			@state = :new
 		end
 
@@ -44,6 +45,7 @@ module Glyph
 		# Copies bookmarks, headers and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
 		def inherit_from(document)
+			@errors = document.errors
 			@bookmarks = document.bookmarks
 			@headers = document.headers
 			@placeholders = document.placeholders
@@ -102,12 +104,14 @@ module Glyph
 
 		# Finalizes the document by evaluating its @placeholders
 		# @return [:finalized]
-		# @raise [RuntimeError] unless the document the document is analyzed or
-		# 	if it is already finalized
+		# @raise [RuntimeError] if the document the document has not been analyzed,
+		# 	if it is already finalized or if errors occurred during analysis
 		def finalize
 			raise RuntimeError, "Document has not been analyzed" unless analyzed?
 			raise RuntimeError, "Document has already been finalized" if finalized?
-			return (@state = :finalized) if @context[:analyze_only]
+			return (@state = :finalized) if @context[:embedded]
+			raise RuntimeError, "Document cannot be finalized due to previous errors." unless @errors.blank? 
+			# Substitute placeholders
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 
 				begin

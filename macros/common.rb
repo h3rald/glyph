@@ -29,9 +29,9 @@ macro :include do
 		end	
 		macro_error "File '#{@value}' no found." unless file
 		contents = file_load file
-		if Glyph["filters.by_file_extension"] then
+		ext = @value.match(/\.(.*)$/)[1]
+		if Glyph["filters.by_file_extension"] && ext != 'glyph' then
 			begin
-				ext = @value.match(/\.(.*)$/)[1]
 				macro_error "Filter macro '#{ext}' not found" unless Glyph::MACROS.include?(ext.to_sym)
 				contents = "#{ext}[#{contents}]"
 			rescue MacroError => e
