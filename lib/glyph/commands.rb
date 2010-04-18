@@ -61,7 +61,7 @@ command :compile do |c|
 			Glyph.config_override('document.output_ext', destination_file.extname) # System use only
 		end
 		Glyph.run "generate:#{target}"
-		Glyph.remove_overrides
+		Glyph.config_restore
 
 
 		# Auto-regeneration
@@ -140,7 +140,7 @@ command :config do |c|
 			info setting
 		when 2 then
 			config.set args[0], args[1]
-			Glyph.reset_config
+			Glyph.config_reset
 			config.write
 		else
 			raise ArgumentError, "Too many arguments."

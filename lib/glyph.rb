@@ -44,12 +44,12 @@ module Glyph
 
 	@@document = nil
 
+	@@lite_mode = false
+
 	# Returns true if Glyph is running in test mode
 	def self.testing?
 		const_defined? :TEST_MODE rescue false
 	end
-
-	@@lite_mode = false
 
 	def self.lite_mode=(mode)
 		@@lite_mode = mode
@@ -76,34 +76,35 @@ module Glyph
 		end	
 	end
 
+	def self.document
+		@@document
+	end
+	
+
+	def self.document=(document)
+		@@document = document
+	end
+	
+	# Returns the value of a configuration setting
+	def self.[](setting)
+		Glyph::CONFIG.get(setting)
+	end
+
 	# Overrides a configuration setting
 	# @param setting [String, Symbol] the configuration setting to change
 	# @param value the new value
 	def self.config_override(setting, value)
 		PROJECT_CONFIG.set setting, value
-		reset_config
+		config_reset
 	end
 
-	def self.document
-		@@document
-	end
-	
-	# @see Glyph::Config#get
-	def self.[](setting)
-		Glyph::CONFIG.get(setting)
-	end
-
-	def self.document=(document)
-		@@document = document
-	end
-
-	# Resets Glyph configuration
-	def self.reset_config
+	# Resets Glyph configuration (keeping all overrides)
+	def self.config_reset
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
 	end
 
-	# Resets Glyph configuration and removes all internal overrides
-	def self.remove_overrides
+	# Resets Glyph configuration (removing all overrides)
+	def self.config_restore
 		Glyph::CONFIG.reset
 		Glyph::PROJECT_CONFIG.reset
 		Glyph.run! 'load:config'

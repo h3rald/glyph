@@ -47,7 +47,7 @@ namespace :load do
 		Glyph::PROJECT_CONFIG.merge! overrides
 		Glyph::SYSTEM_CONFIG.read
 		Glyph::GLOBAL_CONFIG.read
-		Glyph.reset_config
+		Glyph.config_reset
 		Glyph.config_override("structure.headers", 
 													[:section] +
 													Glyph['structure.frontmatter'] + 
