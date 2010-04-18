@@ -48,11 +48,11 @@ section[header[Something about Glyph]
 You can use Glyph macros in conjunction
  with _Textile_ or _Markdown_ to
 produce HTML files effortlessly.
-  section[header[What about PDFs?|pdf]
+  section[header[What about PDFs?\|pdf]
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
 extremely easy with a 3rd-party 
-renderer like =>[http://www.princexml.com|Prince].
+renderer like =>[http://www.princexml.com\|Prince].
   ]   
 ]
 =]

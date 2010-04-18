@@ -1,6 +1,29 @@
-:document:
-  :author: "Fabio Cevasco"
-  :title: "Glyph"
-  :subtitle: "Rapid Document Authoring Framework"
-  :filename: "glyph"
-  :output: 'pdf'
+--- 
+:structure: 
+  :headers: 
+  - :section
+  - :preface
+  - :foreword
+  - :introduction
+  - :acknowledgement
+  - :prologue
+  - :epilogue
+  - :afterword
+  - :appendix
+  - :addendum
+  - :glossary
+  - :bibliography
+  - :references
+  - :index
+  - :lot
+  - :lof
+  - :volume
+  - :book
+  - :part
+  - :chapter
+:document: 
+  :subtitle: Rapid Document Authoring Framework
+  :output: html
+  :filename: glyph
+  :author: Fabio Cevasco
+  :title: Glyph

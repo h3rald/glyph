@@ -16,39 +16,39 @@ document[
 			toc[]
 			introduction[
 				header[Introduction]
-				@[introduction.textile]
+				textile[@[introduction.glyph]]
 			]
 		]
 		bodymatter[
 			chapter[
 				header[Getting Started]
-				@[getting_started.textile]
+				textile[@[getting_started.glyph]]
 			]
 			chapter[
 				header[Authoring Documents]
-				@[authoring.textile]
+				textile[@[authoring.glyph]]
 			]
 			chapter[
 				header[Extending Glyph|extending]
-				@[extending.textile]
+				textile[@[extending.glyph]]
 			]
 			chapter[
 				header[Troubleshooting]
-				@[troubleshooting.textile]
+				textile[@[troubleshooting.glyph]]
 			]
 		]
 		backmatter[
 			appendix[
 				header[Command Reference|cmd_ref]
-				@[ref_commands.textile]
+				textile[@[ref_commands.glyph]]
 			]
 			appendix[
 				header[Macro Reference|macro_ref]
-				@[ref_macros.textile]
+				textile[@[ref_macros.glyph]]
 			]
 			appendix[
 				header[Configuration Reference|cfg_ref]
-				@[ref_config.textile]
+				textile[@[ref_config.glyph]]
 			]
 		]
 	]

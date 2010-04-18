@@ -95,16 +95,16 @@ macro :link do
     anchor = href.gsub(/^#/, '').to_sym
     bmk = bookmark? anchor
     if bmk then
-      title ||= bmk[:title]
+      title \|\|= bmk[:title]
     else
-      plac = placeholder do |document|
+      plac = placeholder do \|document\|
         macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor] 
         document.bookmarks[anchor][:title]
       end
-      title ||= plac
+      title \|\|= plac
     end
   end
-  title ||= href
+  title \|\|= href
   %{<a href="#{href}">#{title}</a>}
 end
 =] </notextile>
@@ -122,7 +122,7 @@ What if you need to evaluate some Glyph code _within_ a macro? Say for example y
 code[=
 macro :fmi do
   topic, href = @params
-  link = placeholder do |document| 
+  link = placeholder do \|document\| 
     interpret "link[#{href}]"
   end
   %{<span class="fmi">for more information on #{topic}, see #{link}</span>}

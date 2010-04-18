@@ -80,11 +80,11 @@ Creates a titled box (@<div>@ tag).
 
 *Example:*
 
-code[
-box\[Why boxes?\|
+code[=
+box[Why boxes?\|
 Boxes can be used to make a section of text stand out from the rest of the document.
-\]
 ]
+=]
 ]
 
 ref_macro[code|
@@ -107,7 +107,7 @@ Includes an image in the document, with an optional caption.
 
 examples[
 fig\[diagram.png\]
-fig\[graph.png\|Monthly pageviews\]
+fig\[graph.png\\\|Monthly pageviews\]
 ]
 ]
 
@@ -123,8 +123,8 @@ Includes an image in the document, optionally scaled according to the specified 
 
 examples[
 img\[icon.png\]
-img\[holidays/landscape.jpg\|70%\]
-img\[logo.svg\|50%\|50%\]
+img\[holidays/landscape.jpg\\\|70%\]
+img\[logo.svg\\\|50%\\\|50%\]
 ]
 ]
 
@@ -183,7 +183,7 @@ ref_macro[anchor|
 Creates a named anchor (or bookmark).
 
 aliases[bookmark, #]
-example[#\[test\|Test Bookmark\]]
+example[#\[test\\\|Test Bookmark\]]
 ]
 
 ref_macro[codeph|
@@ -196,7 +196,7 @@ example[codeph\[Kernel.instance_eval\]]
 ref_macro[fmi|
 Creates a _For More Information_ link (for an example usage, see the %>[link]).
 
-example[fmi\[creating links\|#links\]]
+example[fmi\[creating links\\\|#links\]]
 ]
 
 ref_macro[link|
@@ -205,8 +205,8 @@ Creates an hyperlink (\.fmi[creating links|#links]).
 aliases[=>]
 examples[
 =>\[#introduction\]
-=>\[#troub\|Troubleshooting\]
-=>\[http://www.h3rald.com\|H3RALD.com\]
+=>\[#troub\\\|Troubleshooting\]
+=>\[http://www.h3rald.com\\\|H3RALD.com\]
 ]
 ]
 
@@ -221,7 +221,7 @@ Creates a @<body>@ tag.
 ref_macro[div|
 Creates a @<div>@ tag.
 
-*Aliases:* %["@#{cfg('structure').values.flatten.uniq.map{|a| a.to_s }.push("section").sort.join(', ')}@"]
+*Aliases:* codeph[![Glyph\['structure'\].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')]]
 ]
 
 ref_macro[document|
@@ -237,7 +237,7 @@ Creates an @h2@, @h3@, @h4@, etc. header (\.fmi[using headers|#sec_head]).
 
 examples[
 header\[Introduction\]
-header\[Getting Started\|gs\]
+header\[Getting Started\\\|gs\]
 ]
 ]
 

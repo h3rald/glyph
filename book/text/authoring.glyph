@@ -7,12 +7,12 @@ section[header[Introducing &[macros]]
 By now you probably figured out what a macro looks like: it's an identifier of some kind that wraps a value or parameters within square brackets. More specifically:
 * The macro identifier can contain _any_ character except for: @\[@, @\]@, @\\@, @\|@ or spaces.
 * The delimiters can be either @\[@ and @\]@ or @\[=@ and @=\]@ (\.fmi[differences between delimiters|#esc_quot]). 
-* The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with @\|@. For example, the %>[link] can take an optional second parameter for the link text: @\..[=link[#link_id|This is the link text]=]@.
+* The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with @\|@. For example, the %>[link] can take an optional second parameter for the link text: @\..[=link[#link_id\|This is the link text]=]@.
 
 A macro can often have one or more aliases. For example, @=>@ is an alias for the %>[link], so the following macro calls are equivalent:
 
-codeph[=\.=>[#test|Test Section]=]
-codeph[=\.link[#test|Test Section]=]
+codeph[=\.=>[#test\|Test Section]=]
+codeph[=\.link[#test\|Test Section]=]
 
 ]
 
@@ -34,7 +34,7 @@ This is a section.
 This is another section.
   ]
 ]
-=\]
+\=]
 =]
 
 note[Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiters themselves.]
@@ -74,9 +74,9 @@ table[
 	]
 	tr[
 		td[@\\\..@]
-		td[]
+		td[&nbsp;]
 		td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:
-@\..[= _\\..=>[#link|This link is emphasized using Textile]_ =]@
+codeph[= _\\..=>[#link\|This link is emphasized using Textile]_ =]
 		]
 	]
 ]
@@ -182,11 +182,11 @@ code[=
 --- 
 :glang: Glyph Language
 :macros: Glyph Macros
-:sq_esc: \|-
+:sq_esc: \\\|-
   Square brackets must be escaped 
   unless used as macro delimiters or within a quoting macro.
 :markups: Textile or Markdown
-:test: \|-
+:test: \\\|-
   This is a 
   Test snippet
 =]
@@ -219,7 +219,7 @@ This is a link to link[#test].
 
 This is link[#wrong].
 
-This is a #[test\|test anchor].=]
+This is a #[test\\\|test anchor].=]
 
 &[htmlcode]
 
@@ -249,7 +249,7 @@ Basically, if you use the %>[link] and the %>[anchor], Glyph makes sure that:
 * There are no duplicate anchors within the documents.
 * If no title is specified as second parameter for the %>[link], the anchor's title is used as such.
 
-Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an extra parameter to the %>[header], like this: codeph[=header[Header Title|my_anchor]=].
+Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an extra parameter to the %>[header], like this: codeph[=header[Header Title\|my_anchor]=].
 
 note[
 At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the %>[link] starts with a @#@). In the future, the macro could be extended to support external links as well. 
@@ -280,9 +280,9 @@ box[Example|
 &[gcode]
 
 code[=
-img[glyph.svg\|20%\|20%]
+img[glyph.svg\\\|20%\\\|20%]
 
-fig[example.png\|An example figure.]
+fig[example.png\\\|An example figure.]
 =]
 
 &[htmlcode]
