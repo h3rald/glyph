@@ -17,7 +17,7 @@ module Glyph
 			@value = @node[:value]
 			@source = @node[:source]
 			esc = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
-			@params = @value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, '|'}
+			@params = @value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, "\\|"}
 		end
 
 		def path
