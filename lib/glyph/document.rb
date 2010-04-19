@@ -45,7 +45,6 @@ module Glyph
 		# Copies bookmarks, headers and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
 		def inherit_from(document)
-			@errors = document.errors
 			@bookmarks = document.bookmarks
 			@headers = document.headers
 			@placeholders = document.placeholders

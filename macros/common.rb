@@ -11,8 +11,9 @@ macro :snippet do
 			Glyph.warning e.message
 			draft = Glyph['document.draft']
 			Glyph.config_override 'document.draft', true unless draft
-			interpret "![Correct errors in snippet '#{@value}']"
+			res = interpret "![Correct errors in snippet '#{@value}']"
 			Glyph.config_override 'document.draft', false unless draft
+			res
 		end
 	else
 		macro_warning "Snippet '#{ident}' does not exist"
@@ -51,8 +52,9 @@ macro :include do
 			Glyph.warning e.message
 			draft = Glyph['document.draft']
 			Glyph.config_override 'document.draft', true unless draft
-			interpret "![Correct errors in file '#{@value}']"
+			res = interpret "![Correct errors in file '#{@value}']"
 			Glyph.config_override 'document.draft', false unless draft
+			res
 		end
 	else
 		macro_warning "File '#{@value}' no found."

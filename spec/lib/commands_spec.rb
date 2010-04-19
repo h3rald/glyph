@@ -153,13 +153,21 @@ describe "glyph" do
 		Pathname.new('out/article.htm').exist?.should == true
 	end
 
-	it "[compile] should not finalize the document in case of errors in included files" do
+	it "[compile] should finalize the document in case of errors in included files" do
 		create_project
-		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\n@[errors.glyph]]"
+		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\n@[errors.glyph]\n@[syntax_error.glyph]]"
 		file_write Glyph::PROJECT/'text/errors.glyph', "section[a|b]"
+		file_write Glyph::PROJECT/'text/syntax_error.glyph', "section[a|b]"
 		err = "Document cannot be finalized due to previous errors"
 		res = run_command(["compile"])
-		res.match("error: #{err}").should_not == nil
+		out = file_load Glyph::PROJECT/'output/html/test_project.html'
+		out.should == %{<div class="section">
+<h2 id="h_1">Test</h2>
+<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Correct errors in file 'errors.glyph'</span>
+<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Correct errors in file 'syntax_error.glyph'</span>
+
+</div>}
+		res.match("error: #{err}").should == nil
 	end
 
 end

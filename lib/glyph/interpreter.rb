@@ -59,7 +59,9 @@ module Glyph
 				line = @parser.failure_line
 				column = @parser.failure_column
 				location = @parser.input[@parser.index...@parser.failure_index]
-				raise RuntimeError, "#{reason}\n -> #{@context[:source]} [Line #{line}, Column #{column}]"
+				err = "#{reason}\n -> #{@context[:source]} [Line #{line}, Column #{column}]"
+				@context[:document].errors << err if @context[:document]
+				raise RuntimeError, err
 			end
 			@document = Glyph::Document.new @raw, @context
 			@document.inherit_from @context[:document] if @context[:document]
