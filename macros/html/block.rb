@@ -46,7 +46,7 @@ macro :img do
  	w = (width) ? "width=\"#{width}\"" : ''
 	height = @params[2]
  	h = (height) ? "height=\"#{height}\"" : ''
-	warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
+	Glyph.warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
 	%{<img src="#{dest_file}" #{w} #{h} alt="-"/>}
 end
 
@@ -59,7 +59,7 @@ macro :fig do
 	caption = %{<div class="caption">#{caption}</div>} if caption
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
-	warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
+	Glyph.warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
 	%{<div class="figure">
 <img src="#{dest_file}" alt="-"/>
 #{caption}

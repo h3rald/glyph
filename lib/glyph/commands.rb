@@ -63,7 +63,7 @@ command :compile do |c|
 		begin
 			Glyph.run "generate:#{target}"
 		rescue Exception => e
-			error e.message
+			Glyph.error e.message
 		end
 
 		# Auto-regeneration
@@ -74,12 +74,12 @@ command :compile do |c|
 			rescue LoadError
 				raise RuntimeError, "DirectoryWatcher is not available. Install it with: gem install directory_watcher"
 			end
-			info 'Auto-regeneration enabled'
-			info 'Use ^C to interrupt'
+			Glyph.info 'Auto-regeneration enabled'
+			Glyph.info 'Use ^C to interrupt'
 			glob = ['*.glyph', 'config.yml', 'images/**/*', 'lib/**/*', 'snippets.yml', 'styles/**/*', 'text/**/*']
 			dw = DirectoryWatcher.new(Glyph::PROJECT, :glob => glob, :interval => 1, :pre_load => true)
 			dw.add_observer do |*args|
-				info "Regeneration started: #{args.size} files changed"
+				Glyph.info "Regeneration started: #{args.size} files changed"
 				Glyph.enable 'load:all'
 				Glyph.enable 'load:config'
 				Glyph.enable 'load:macros'
@@ -103,12 +103,12 @@ command :todo do |c|
 	c.action do |global_options, options, args|
 		Glyph.run "generate:document"
 		unless Glyph::TODOS.blank?
-			info "*** TODOs: ***"
+			Glyph.info "*** TODOs: ***"
 			Glyph::TODOS.each do |t|
-				info t
+				Glyph.info t
 			end
 		else
-			info "Nothing left to do."
+			Glyph.info "Nothing left to do."
 		end
 	end
 end
@@ -131,7 +131,7 @@ command :config do |c|
 		when 1 then # read current config
 			setting = Glyph[args[0]]
 			raise RuntimeError, "Unknown setting '#{args[0]}'" if setting.blank?
-			info setting
+			Glyph.info setting
 		when 2 then
 			config.set args[0], args[1]
 			Glyph.config_restore
@@ -163,7 +163,7 @@ end
 
 on_error do |exception|
 	if exception.is_a? MacroError then
-		warning exception.message
+		Glyph.warning exception.message
 		false
 	else
 		if Glyph.debug? then

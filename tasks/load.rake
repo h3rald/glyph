@@ -10,7 +10,7 @@ namespace :load do
 	task :snippets do
 		unless Glyph.lite? then
 			raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
-			info "Loading snippets..."
+			Glyph.info "Loading snippets..."
 			snippets = yaml_load Glyph::PROJECT/'snippets.yml'
 			raise RuntimeError, "Invalid snippets file" unless snippets.blank? || snippets.is_a?(Hash)
 			Glyph::SNIPPETS.replace snippets
@@ -20,7 +20,7 @@ namespace :load do
 	desc "Load macros"
 	task :macros do
 		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project? || Glyph.lite?
-		info "Loading macros..."
+		Glyph.info "Loading macros..."
 		load_macros = lambda do |macro_base|
 			macro_base.children.each do |c|
 				Glyph.instance_eval file_load(c) unless c.directory?

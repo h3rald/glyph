@@ -8,7 +8,7 @@ macro :snippet do
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			raise if e.is_a? MutualInclusionError
-			warning e.message
+			Glyph.warning e.message
 			draft = Glyph['document.draft']
 			Glyph.config_override 'document.draft', true unless draft
 			interpret "![Correct errors in snippet '#{@value}']"
@@ -48,7 +48,7 @@ macro :include do
 			interpret contents
 		rescue Exception => e
 			raise if e.is_a? MutualInclusionError
-			warning e.message
+			Glyph.warning e.message
 			draft = Glyph['document.draft']
 			Glyph.config_override 'document.draft', true unless draft
 			interpret "![Correct errors in file '#{@value}']"

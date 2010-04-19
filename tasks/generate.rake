@@ -4,23 +4,23 @@ namespace :generate do
 
 	desc "Process source"
 	task :document => ["load:all"] do
-		info "Parsing '#{Glyph['document.source']}'..."
+		Glyph.info "Parsing '#{Glyph['document.source']}'..."
 		if Glyph.lite? then
 			text = file_load Pathname.new(Glyph['document.source'])
 		else
 			text = file_load Glyph::PROJECT/Glyph['document.source']
 		end
 		interpreter = Glyph::Interpreter.new text, :source => "file: #{Glyph['document.source']}"
-		info "Processing..."
+		Glyph.info "Processing..."
 		interpreter.process
-		info "Post-processing..."
+		Glyph.info "Post-processing..."
 		interpreter.postprocess
 		Glyph.document = interpreter.document
 	end
 
 	desc "Create a standalone html file"
 	task :html => :document do
-		info "Generating HTML file..."
+		Glyph.info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 		else
@@ -31,7 +31,7 @@ namespace :generate do
 		out.mkpath
 		file = "#{Glyph['document.filename']}#{extension}"
 		file_write out/file, Glyph.document.output
-		info "'#{Glyph['document.filename']}#{extension}' generated successfully."
+		Glyph.info "'#{Glyph['document.filename']}#{extension}' generated successfully."
 		unless Glyph.lite? then
 			images = Glyph::PROJECT/'output/html/images'
 			images.mkpath
@@ -47,7 +47,7 @@ namespace :generate do
 
 	desc "Create a pdf file"
 	task :pdf => :html do
-		info "Generating PDF file..."
+		Glyph.info "Generating PDF file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 		else
@@ -60,13 +60,13 @@ namespace :generate do
 			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
 				res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
 			if res then
-				info "'#{file}.pdf' generated successfully."
+				Glyph.info "'#{file}.pdf' generated successfully."
 			else
-				error "An error occurred while generating #{file}.pdf"
+				Glyph.error "An error occurred while generating #{file}.pdf"
 			end
 			# TODO: support other PDF renderers
 		else
-			error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
+			Glyph.error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
 		end
 	end
 

@@ -40,7 +40,7 @@ module Glyph
 		# @param [String] msg the message to print
 		# @raise [MacroError]
 		def macro_warning(msg)
-			warning "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
+			Glyph.warning "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
 		end
 
 		# Instantiates a Glyph::Interpreter and interprets a string

@@ -117,7 +117,7 @@ module Glyph
 				begin
 					@output.gsub! key.to_s, value.call(self).to_s
 				rescue Exception => e
-					warning e.message
+					Glyph.warning e.message
 				end
 			end
 			@state = :finalized

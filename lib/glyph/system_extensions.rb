@@ -1,21 +1,5 @@
 module Kernel
 
-	# Prints a message
-	# @param [#to_s] message the message to print
-	def info(message)
-		puts "#{message}" unless Glyph[:quiet]
-	end
-
-	# Prints a warning
-	# @param [#to_s] message the message to print
-	def warning(message)
-		puts "warning: #{message}" unless Glyph[:quiet]
-	end
-
-	def error(message)
-		puts "error: #{message}" unless Glyph[:quiet]
-	end
-
 	# Dumps and serialize an object to a YAML file
 	# @param [#to_s] file the file to write to
 	# @param [Object] obj the object to serialize

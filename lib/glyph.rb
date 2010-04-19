@@ -174,7 +174,7 @@ module Glyph
 		name = pair.keys[0].to_sym
 		found = MACROS[name]
 		if found then
-			warning "Invalid alias: macro '#{name}' already exists."
+			self.warning "Invalid alias: macro '#{name}' already exists."
 			return
 		end
 		MACROS[name] = MACROS[pair.values[0].to_sym]
@@ -200,6 +200,22 @@ module Glyph
 			self.lite_mode = false
 		end
 		result
+	end
+	
+	# Prints a message
+	# @param [#to_s] message the message to print
+	def self.info(message)
+		puts "#{message}" unless Glyph[:quiet]
+	end
+
+	# Prints a warning
+	# @param [#to_s] message the message to print
+	def self.warning(message)
+		puts "warning: #{message}" unless Glyph[:quiet]
+	end
+
+	def self.error(message)
+		puts "error: #{message}" unless Glyph[:quiet]
 	end
 	
 end

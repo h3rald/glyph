@@ -627,31 +627,30 @@ produce HTML files effortlessly.
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
 extremely easy with a 3rd-party 
-renderer like =&amp;gt;[http://www.princexml.com|Prince].
+renderer like =&gt;[http://www.princexml.com|Prince].
   ]   
 ]
-
 </code>
 </pre>
 </div>
 <p><b><span class="caps">HTML</span> Output:</b></p>
+
 <div class="code">
 <pre>
 <code>
-&lt;div class="section"&gt;
-  &lt;h2 id="h_10"&gt;Something about Glyph&lt;/h2&gt;
-  &lt;p&gt;You can use Glyph macros in conjunction with 
-     &lt;em&gt;Textile&lt;/em&gt; or &lt;em&gt;Markdown&lt;/em&gt; to
-     produce HTML files effortlessly.&lt;/p&gt;
-  &lt;div class="section"&gt;
-   &lt;h3 id="pdf"&gt;What about PDFs?&lt;/h3&gt;
-   &lt;p&gt;Once you have a single, well-formatted HTML 
+<div class="section">
+  <h2 id="h_10">Something about Glyph</h2>
+  <p>You can use Glyph macros in conjunction with 
+     <em>Textile</em> or <em>Markdown</em> to
+     produce HTML files effortlessly.</p>
+  <div class="section">
+   <h3 id="pdf">What about PDFs?</h3>
+   <p>Once you have a single, well-formatted HTML 
       file, converting it to PDF is
       extremely easy with a 3rd-party renderer 
-      like &lt;a href="http://www.princexml.com"&gt;Prince&lt;/a&gt;.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
+      like <a href="http://www.princexml.com">Prince</a>.</p>
+  </div>
+</div>
 </code>
 </pre>
 </div></div>
@@ -681,10 +680,8 @@ renderer like =&amp;gt;[http://www.princexml.com|Prince].
 <p><code>glyph init</code></p>
 <p>That&#8217;s it. You just created a new Glyph project in the <code>test_document</code> directory.</p>
 <div class="box">
-<p><span class="box-title"><br />
-Glyph&#8217;s dependencies</p>
-<p></span><br />
-Glyph requires the following gems:<br />
+<div class="box-title">Glyph&#8217;s dependencies</div>
+<p>Glyph requires the following gems:<br />
 - extlib<br />
 - gli<br />
 - treetop<br />
@@ -744,7 +741,6 @@ document[
     ]
   ]
 ]
-
 </code>
 </pre>
 </div>
@@ -786,10 +782,8 @@ document[
 <p>In this way, the document author will be set to <em>John Smith</em> for the current project. To save this setting globally, add a <code>-g</code> option, like this:</p>
 <p><code>glyph config -g document.author "John Smith"</code></p>
 <div class="box">
-<p><span class="box-title"><br />
-Regarding configuration values and data types&#8230;</p>
-<p></span><br />
-Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:<br />
+<div class="box-title">Regarding configuration values and data types&#8230;</div>
+<p>Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:<br />
 - is wrapped in quotes (<code>"</code> or <code>'</code>) &rarr; <code>String</code><br />
 - starts with a colon (<code>:</code>) &rarr; <code>Symbol</code><br />
 - is wrapped in square brackets (<code>[</code> and <code>]</code>) &rarr; <code>Array</code><br />
@@ -872,13 +866,11 @@ This is another section.
   ]
 ]
 =]
-
 </code>
 </pre>
 </div>
 <div class="note">
-<p><span class="note-title">Note</span><br />
-Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiters themselves.</p>
+<p><span class="note-title">Note</span>Although quoting delimiters allow you to use square brackets without escaping them, you must still escape them if you want to escape quoting delimiters themselves.</p>
 </div>
 <p>Besides square brackets, there are other characters that must or can be escaped with backslashes, as shown in the following table</p>
 <table>
@@ -980,24 +972,23 @@ This section is nested into the previous one.
 
   ] --[End of Section #2]
 ] --[End of Section #1]
-
 </code>
 </pre>
 </div>
 <p>This example defines two nested sections, each with its own header. The header is <em>mandatory</em>: it will be displayed at the start of the section and in the Table of Contents.</p>
 <p>Note an important difference from <span class="caps">HTML</span>: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
+
 <div class="code">
 <pre>
 <code>
-&lt;div class="section"&gt;
-  &lt;h2&gt;Section #1&lt;/h2&gt;
-  &lt;p&gt;Write the section contents here...&lt;/p&gt;
-  &lt;div class="section"&gt;
-    &lt;h3&gt;Section #2&lt;/h3&gt;
-    &lt;p&gt;This section is nested in the previous one&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
+<div class="section">
+  <h2>Section #1</h2>
+  <p>Write the section contents here...</p>
+  <div class="section">
+    <h3>Section #2</h3>
+    <p>This section is nested in the previous one</p>
+  </div>
+</div>
 </code>
 </pre>
 </div>
@@ -1035,8 +1026,7 @@ This section is nested into the previous one.
 <p>†: This section is not listed in the Table of Contents.</p>
 <p>‡: Any subsection of this section is not listed in the Table of Contents.</p>
 <div class="note">
-<p><span class="note-title">Note</span><br />
-<code>frontmatter</code>, <code>bodymatter</code> and <code>backmatter</code> are also valid (and mandatory!) macro identifiers, typically already included in the default <code>document.glyph</code> file of every project.</p>
+<p><span class="note-title">Note</span><code>frontmatter</code>, <code>bodymatter</code> and <code>backmatter</code> are also valid (and mandatory!) macro identifiers, typically already included in the default <code>document.glyph</code> file of every project.</p>
 </div>
 </div>
 <div class="section">
@@ -1045,8 +1035,7 @@ This section is nested into the previous one.
 <p><code>@[introduction.textile]</code></p>
 <p>The macro call above loads the contents of the <code>introduction.textile</code> file, that can be stored <em>anywhere</em> within the <code>text/</code> directory.</p>
 <div class="note">
-<p><span class="note-title">Note</span><br />
-Unlike with <a href="img_fig">image and figures</a> that must be included with their <em>relative</em> path to the <code>images/</code> folder, you must not specify a relative path when including text files. This is due to the fact that images are copied <em>as they are</em> in the <code>output/&lt;format&gt;/images/</code> directory and they have to be linked from the output file.</p>
+<p><span class="note-title">Note</span>Unlike with <a href="img_fig">image and figures</a> that must be included with their <em>relative</em> path to the <code>images/</code> folder, you must not specify a relative path when including text files. This is due to the fact that images are copied <em>as they are</em> in the <code>output/&lt;format&gt;/images/</code> directory and they have to be linked from the output file.</p>
 <p>A possible downside of this behavior is that file names must be unique within the entire <code>text/</code> directory and any of its subdirectories</p>
 </div>
 <p>When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:</p>
@@ -1055,19 +1044,16 @@ Unlike with <a href="img_fig">image and figures</a> that must be included with t
 	<li><code>.markdown</code> or <code>.md</code> &rarr; <a href="#m_markdown">markdown</a> macro</li>
 </ul>
 <div class="tip">
-<p><span class="note-title">Tip</span><br />
-You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>, like this:</p>
+<p><span class="note-title">Tip</span>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>, like this:</p>
 <p><code>glyph config filters.by_file_extensions false</code></p>
 </div>
 <p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a <em>snippet</em> instead.</p>
 <p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <a href="#m_snippet">snippet</a> macro (or its alias <code>&amp;</code>).</p>
 <div class="box">
-<p><span class="box-title"><br />
-Example</p>
-<p></span><br />
-Consider the following <code>snippets.yml</code> file:<br />
-<div class="code"><br />
-<pre><br />
+<div class="box-title">Example</div>
+<p>Consider the following <code>snippets.yml</code> file:</p>
+<div class="code">
+<pre>
 <code>
 --- 
 :glang: Glyph Language
@@ -1078,15 +1064,14 @@ Consider the following <code>snippets.yml</code> file:<br />
 :markups: Textile or Markdown
 :test: |-
   This is a 
-  Test snippet</p>
-<p></code><br />
-</pre></p>
+  Test snippet
+</code>
+</pre>
 </div>
 <p>You can use <code>&amp;[markups]</code> anywhere in your document instead of having to type &#8220;Textile or Markdown&#8221; every time. Additionally, later on you can change the value of the <code>markups</code> snippets only in the <code>snippets.yml</code> file to change it everywhere else in the document.</p>
 </div>
 <div class="tip">
-<p><span class="note-title">Tip</span><br />
-Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.</p>
+<p><span class="note-title">Tip</span>Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.</p>
 </div>
 </div>
 <div class="section">
@@ -1102,10 +1087,8 @@ Snippets (or any other macro) can be nested within other snippets. Glyph takes c
 	<li><code>anchor</code> (aliased to <code>#</code>) &#8212; to create named anchors (bookmarks) within your document.</li>
 </ul>
 <div class="box">
-<p><span class="box-title"><br />
-Example</p>
-<p></span><br />
-The following Glyph code:</p>
+<div class="box-title">Example</div>
+<p>The following Glyph code:</p>
 <div class="code">
 <pre>
 <code>
@@ -1116,30 +1099,29 @@ This is a link to link[#test].
 This is link[#wrong].
 
 This is a #[test|test anchor].
-
 </code>
 </pre>
 </div>
 <p>Is translated into the following <span class="caps">HTML</span> code:</p>
+
 <div class="code">
 <pre>
 <code>
-&lt;p&gt;This is a link to &lt;a href="#test"&gt;test anchor&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;...&lt;/p&gt;
-&lt;p&gt;This is &lt;a href="#wrong"&gt;#wrong&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This is a &lt;a id="test"&gt;test anchor&lt;/a&gt;.&lt;/p&gt;
-
+<p>This is a link to <a href="#test">test anchor</a>.</p>
+<p>...</p>
+<p>This is <a href="#wrong">#wrong</a>.</p>
+<p>This is a <a id="test">test anchor</a>.</p>
 </code>
 </pre>
 </div>
 <p>Additionally, the following warning message is displayed when <a href="#compile">compiling</a>:</p>
+
 <div class="code">
 <pre>
 <code>
 warning: Bookmark 'wrong' does not exist
- -&gt; source: @: aurhoting.textile
- -&gt; path: document/body/bodymatter/chapter/@/textile/section/section/box/link
-
+ -> source: @: aurhoting.textile
+ -> path: document/body/bodymatter/chapter/@/textile/section/section/box/link
 </code>
 </pre>
 </div>
@@ -1152,8 +1134,7 @@ warning: Bookmark 'wrong' does not exist
 </ul>
 <p>Besides using the <a href="#m_anchor">anchor</a> macro macro, you can also create an anchor for a header by passing an extra parameter to the <a href="#m_header">header</a> macro, like this: <code>header[Header Title|my_anchor]</code>.</p>
 <div class="note">
-<p><span class="note-title">Note</span><br />
-At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link">link</a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external links as well.</p>
+<p><span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link">link</a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external links as well.</p>
 </div>
 </div>
 <div class="section">
@@ -1162,7 +1143,7 @@ At present, link validation and automatic title retrieval only works with intern
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Apr 18 21:04:53 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Mon Apr 19 13:57:12 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1172,38 +1153,34 @@ However, it is possible to evaluate simple ruby code snippets using the <code>ru
 <h4 id="img_fig">Images and Figures</h4>
 <p>Same as for <a href="#links">links</a>, you can also include images and figures using Textile or Markdown. If you want additional features, you can use the <a href="#m_img">img</a> macro and the <a href="#m_fig">fig</a> macro, as shown in the following example:</p>
 <div class="box">
-<p><span class="box-title"><br />
-Example</p>
-<p></span><br />
-The following Glyph code:</p>
+<div class="box-title">Example</div>
+<p>The following Glyph code:</p>
 <div class="code">
 <pre>
 <code>
 img[glyph.svg|20%|20%]
 
 fig[example.png|An example figure.]
-
 </code>
 </pre>
 </div>
 <p>Is translated into the following <span class="caps">HTML</span> code:</p>
+
 <div class="code">
 <pre>
 <code>
-&lt;img src="images/glyph.svg" width="20%" height="20%" alt="-" /&gt;
+<img src="images/glyph.svg" width="20%" height="20%" alt="-" />
 
-&lt;div class="figure"&gt;
-  &lt;img src="images/example.png" alt="-"/&gt;
-  &lt;div class="caption"&gt;An example figure.&lt;/div&gt;
-&lt;/div&gt;
-
+<div class="figure">
+  <img src="images/example.png" alt="-"/>
+  <div class="caption">An example figure.</div>
+</div>
 </code>
 </pre>
 </div>
 </div>
 <div class="note">
-<p><span class="note-title">Note</span><br />
-In future releases, figures will be numbered automatically and included in a <em>List of Figures</em> section.</p>
+<p><span class="note-title">Note</span>In future releases, figures will be numbered automatically and included in a <em>List of Figures</em> section.</p>
 </div>
 </div>
 </div>
@@ -1218,7 +1195,6 @@ In future releases, figures will be numbered automatically and included in a <em
 <pre>
 <code>
 style[default.css]
-
 </code>
 </pre>
 </div>
@@ -1236,14 +1212,12 @@ style[default.css]
 <pre>
 <code>
 glyph compile -f pdf
-
 </code>
 </pre>
 </div>
 <p>The command above will attempt to compile the project into an <span class="caps">HTML</span> document and then call Prince to generate a <span class="caps">PDF</span> document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It&#8217;s not open source, but the free version is fully functional, and it just adds a small logo on the first page.</p>
 <div class="note">
-<p><span class="note-title">Note</span><br />
-Glyph v0.1.0 has been successfully tested with Prince v7.0, and the <span class="caps">PDF</span> version of this very book was generated with it.</p>
+<p><span class="note-title">Note</span>Glyph v0.1.0 has been successfully tested with Prince v7.0, and the <span class="caps">PDF</span> version of this very book was generated with it.</p>
 </div>
 </div>
 </div>
@@ -1255,25 +1229,23 @@ Glyph v0.1.0 has been successfully tested with Prince v7.0, and the <span class=
 <div class="section">
 <h3 id="h_25">Anatomy of a Macro</h3>
 <p>This is the source code of a fairly simple macro used to format a note :</p>
+
 <div class="code">
 <pre>
 <code>
 macro :note do
-  %{&lt;div class="#{@name}"&gt;&lt;span class="note-title"&gt;#{@name.to_s.capitalize}&lt;/span&gt;#{@value}
+  %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
-    &lt;/div&gt;}
+    </div>}
 end
-
 </code>
 </pre>
 </div>
 <p>The <code>macro</code> method takes a single  <code>Symbol</code> or <code>String</code> parameter, corresponding to the name of the macro. In this case, the entire block (or <em>body</em> of the macro) is a <code>String</code> corresponding to what we want the macro to evaluate to: a <code>&lt;div&gt;</code> tag containing a note.</p>
 <p>The body of the macro is evaluated in the context of the <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class, therefore its instance variables (like <code>@name</code> or <code>@value</code>) can be used directly.</p>
 <div class="box">
-<p><span class="box-title"><br />
-Why using <code>@name</code> instead of just &#8220;note&#8221;?</p>
-<p></span><br />
-For the <code>note</code> macro, it absolutely makes no difference. However, by using <code>@name</code> it is possible to re-use the same code for the <code>tip</code>, <code>important</code> and <code>caution</code> macros as well, which are in fact only aliases of the <code>note</code> macro:</p>
+<div class="box-title">Why using <code>@name</code> instead of just &#8220;note&#8221;?</div>
+<p>For the <code>note</code> macro, it absolutely makes no difference. However, by using <code>@name</code> it is possible to re-use the same code for the <code>tip</code>, <code>important</code> and <code>caution</code> macros as well, which are in fact only aliases of the <code>note</code> macro:</p>
 <p><code>macro_alias :important =&gt; :note</code><br />
 <code>macro_alias :tip =&gt; :note</code><br />
 <code>macro_alias :caution =&gt; :note</code></p>
@@ -1338,16 +1310,16 @@ For the <code>note</code> macro, it absolutely makes no difference. However, by 
 <div class="section">
 <h3 id="h_26">Bookmarks and Headers</h3>
 <p>The <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">anchor</a> macro:</p>
+
 <div class="code">
 <pre>
 <code>
 macro :anchor do 
   ident, title = @params
   macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
-  bookmark :id =&gt; ident, :title =&gt; title
-  %{&lt;a id="#{ident}"&gt;#{title}&lt;/a&gt;}
+  bookmark :id => ident, :title => title
+  %{<a id="#{ident}">#{title}</a>}
 end
-
 </code>
 </pre>
 </div> <p>The <code>bookmark?</code> method can be used to check the existance of a particular ID within the whole document, while the <code>bookmark</code> method is used to store bookmark IDs and titles. In a similar way, you can use <code>header?</code> and <code>header</code> methods to check the existance of headers within the documents or store new ones.</p>
@@ -1356,6 +1328,7 @@ end
 <h3 id="h_27">Using Placeholders</h3>
 <p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
 <p>Here&#8217;s the source code of the <a href="#m_link">link</a> macro:</p>
+
 <div class="code">
 <pre>
 <code>
@@ -1375,9 +1348,8 @@ macro :link do
     end
   end
   title ||= href
-  %{&lt;a href="#{href}"&gt;#{title}&lt;/a&gt;}
+  %{<a href="#{href}">#{title}</a>}
 end
-
 </code>
 </pre>
 </div> <p>If there&#8217;s already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the <code>placeholder</code> method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.</p>
@@ -1386,6 +1358,7 @@ end
 <div class="section">
 <h3 id="h_28">Interpreting Glyph Code</h3>
 <p>What if you need to evaluate some Glyph code <em>within</em> a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the <code>interpret</code> method, as follows:</p>
+
 <div class="code">
 <pre>
 <code>
@@ -1394,9 +1367,8 @@ macro :fmi do
   link = placeholder do |document| 
     interpret "link[#{href}]"
   end
-  %{&lt;span class="fmi"&gt;for more information on #{topic}, see #{link}&lt;/span&gt;}
+  %{<span class="fmi">for more information on #{topic}, see #{link}</span>}
 end
-
 </code>
 </pre>
 </div> <p>When the <code>interpret</code> method is called, the following happens:</p>
@@ -1809,14 +1781,10 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <pre>
 <code>
 &lt;div class="box"&gt;
-&lt;span class="box-title"&gt;
-Why boxes?
-
-&lt;/span&gt;
+&lt;div class="box-title"&gt;Why boxes?&lt;/div&gt;
 Boxes can be used to make a section of text stand out from the rest of the document.
 
 &lt;/div&gt;
-
 </code>
 </pre>
 </div>
@@ -1834,7 +1802,6 @@ code[
     puts "Hello World"
   end
 ]
-
 </code>
 </pre>
 </div>
@@ -1897,7 +1864,6 @@ table[
     td[2]
   ]
 ]
-
 </code>
 </pre>
 </div>
@@ -2013,92 +1979,92 @@ table[
 <div class="section">
 <h4 id="s_document_author"><code>document.author</code></h4>
 <p>The author of the document.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-""</p>
-<p></code><br />
-</pre></p>
+""
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_document_filename"><code>document.filename</code></h4>
 <p>The name of the output file.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-""</p>
-<p></code><br />
-</pre></p>
+""
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_document_output"><code>document.output</code></h4>
 <p>The format of the output file. It can be set to any value stored in the <a href="#s_document_output_targets">document.output_targets</a> setting.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-html</p>
-<p></code><br />
-</pre></p>
+html
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_document_output_targets"><code>document.output_targets</code></h4>
 <p>An <code>Array</code> containing all the possible output formats. This setting should not be changed by the user.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
 - :html
-- :pdf</p>
-<p></code><br />
-</pre></p>
+- :pdf
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_document_source"><code>document.source</code></h4>
 <p>The main source file to compile. It can be also be overridden by calling the <a href="#c_compile">compile</a> command with the <code>-s</code> option.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-document.glyph</p>
-<p></code><br />
-</pre></p>
+document.glyph
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_document_subtitle"><code>document.subtitle</code></h4>
 <p>The subtitle of the document, displayed using the <a href="#m_subtitle">subtitle</a> macro.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-""</p>
-<p></code><br />
-</pre></p>
+""
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_document_title"><code>document.title</code></h4>
 <p>The title of the document, displayed using the <a href="#m_title">title</a> macro.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-""</p>
-<p></code><br />
-</pre></p>
+""
+</code>
+</pre>
 </div>
 </div>
 </div>
@@ -2107,13 +2073,13 @@ document.glyph</p>
 <div class="section">
 <h4 id="s_filters_by_file_extension"><code>filters.by_file_extension</code></h4>
 <p>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-true</p>
-<p></code><br />
-</pre></p>
+true
+</code>
+</pre>
 </div>
 </div>
 
@@ -2127,39 +2093,39 @@ true</p>
 	<li>Kramdown</li>
 </ul>
 <p>If not set, Glyph tests for the presence of each gem in the same order, until one is found.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-bluecloth</p>
-<p></code><br />
-</pre></p>
+bluecloth
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_filters_redcloth_restrictions"><code>filters.redcloth.restrictions</code></h4>
 <p>An <code>Array</code> containing restrictions applied to RedCloth, used by the <a href="#m_textile">textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-[]</p>
-<p></code><br />
-</pre></p>
+[]
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_filters_target"><code>filters.target</code></h4>
 <p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-html</p>
-<p></code><br />
-</pre></p>
+html
+</code>
+</pre>
 </div>
 </div>
 </div>
@@ -2169,9 +2135,9 @@ html</p>
 <div class="section">
 <h4 id="s_structure_backmatter"><code>structure.backmatter</code></h4>
 <p>The section types used in the document backmatter.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
 - :epilogue
 - :afterword
@@ -2185,34 +2151,34 @@ html</p>
 - :references
 - :index
 - :lot
-- :lof</p>
-<p></code><br />
-</pre></p>
+- :lof
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_structure_bodymatter"><code>structure.bodymatter</code></h4>
 <p>The section types used in the document bodymatter.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
 - :volume
 - :book
 - :part
-- :chapter</p>
-<p></code><br />
-</pre></p>
+- :chapter
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_structure_frontmatter"><code>structure.frontmatter</code></h4>
 <p>The section types used in the document frontmatter.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
 - :preface
 - :imprint
@@ -2221,36 +2187,36 @@ html</p>
 - :foreword
 - :introduction
 - :acknowledgement
-- :prologue</p>
-<p></code><br />
-</pre></p>
+- :prologue
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_structure_hidden"><code>structure.hidden</code></h4>
 <p>The section types that will not be shown in the Table of Contents.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
 - :imprint
 - :dedication
 - :inspiration
 - :postscript
 - :colophon
-- :promotion</p>
-<p></code><br />
-</pre></p>
+- :promotion
+</code>
+</pre>
 </div>
 </div>
 
 <div class="section">
 <h4 id="s_structure_special"><code>structure.special</code></h4>
 <p>The section types that will be considered <em>special</em> and whose children will not be included in the Table of Contents.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
 - :preface
 - :foreword
@@ -2264,9 +2230,9 @@ html</p>
 - :references
 - :index
 - :lot
-- :lof</p>
-<p></code><br />
-</pre></p>
+- :lof
+</code>
+</pre>
 </div>
 </div>
 </div>
@@ -2275,13 +2241,13 @@ html</p>
 <div class="section">
 <h4 id="s_tools_pdf_generator"><code>tools.pdf_generator</code></h4>
 <p>The external program used to generate <span class="caps">PDF</span> files. It can only be set to <code>prince</code>.</p>
-<p><strong>Default (<span class="caps">YAML</span>):</strong><br />
-	<div class="code"><br />
-<pre><br />
+<p><strong>Default (<span class="caps">YAML</span>):</strong></p>
+<div class="code">
+<pre>
 <code>
-prince</p>
-<p></code><br />
-</pre></p>
+prince
+</code>
+</pre>
 </div>
 </div>
 </div>

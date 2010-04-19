@@ -19,7 +19,7 @@ namespace :project do
 	 	config[:document][:filename] = dir.basename.to_s
 		config[:document][:author] = ENV['USER'] || ENV['USERNAME'] 	
 		yaml_dump Glyph::PROJECT/'config.yml', config
-		info "Project '#{dir.basename}' created successfully."
+		Glyph.info "Project '#{dir.basename}' created successfully."
 	end
 
 	desc "Add a new text file to the project"
