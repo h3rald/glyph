@@ -52,7 +52,7 @@ module Glyph
 	
 	# Returns true if Glyph is running in debug mode
 	def self.debug?
-		@debug_mode
+		@@debug_mode
 	end
 
 	def self.debug_mode=(mode)
@@ -103,19 +103,20 @@ module Glyph
 	# @param value the new value
 	def self.config_override(setting, value)
 		PROJECT_CONFIG.set setting, value
-		config_reset
+		self.config_restore
 	end
 
-	# Resets Glyph configuration (keeping all overrides)
-	def self.config_reset
+	# Restores Glyph configuration (keeping all overrides and project settings)
+	def self.config_restore
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
 	end
 
-	# Resets Glyph configuration (removing all overrides)
-	def self.config_restore
+	# Resets Glyph configuration (removing all overrides and project settings)
+	def self.config_reset
 		Glyph::CONFIG.reset
 		Glyph::PROJECT_CONFIG.reset
-		Glyph.run! 'load:config'
+		self.config_restore
+		#Glyph.run! 'load:config'
 	end
 
 	# Returns true if the PROJECT constant is set to a valid Glyph project directory
@@ -123,6 +124,19 @@ module Glyph
 		children = ["styles", "text", "output", "snippets.yml", "config.yml", "document.glyph"].sort
 		actual_children = PROJECT.children.map{|c| c.basename.to_s}.sort 
 		(actual_children & children) == children
+	end
+
+	def self.reset
+		self.enable_all
+		self.config_reset
+		MACROS.clear
+		SNIPPETS.clear
+		TODOS.clear
+	end
+
+
+	def self.enable_all
+		Rake::Task.tasks.each {|t| t.reenable }
 	end
 
 	# Enables a Rake task
@@ -170,10 +184,22 @@ module Glyph
 		dir = Pathname.new(src).parent
 		Dir.chdir dir.to_s	
 		GLI.run ["compile", src, out].compact	
+		self.lite_mode = false
 	end
 
 	def self.filter(text)
-		Glyph::Interpreter.new(text).document.output
+		self.lite_mode = true
+		self.enable_all
+		Glyph.run 'load:all'
+		result = ""
+		begin
+			result = Interpreter.new(text).document.output
+		rescue Exception => e
+			raise if self.debug?
+		ensure
+			self.lite_mode = false
+		end
+		result
 	end
 	
 end

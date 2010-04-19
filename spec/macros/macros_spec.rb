@@ -5,8 +5,7 @@ describe "Macro:" do
 
 	before do
 		create_project
-		Glyph.run! 'load:macros'
-		Glyph.run! 'load:snippets'
+		Glyph.run! 'load:all'
 	end
 
 	after do

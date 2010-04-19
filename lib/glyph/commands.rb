@@ -63,10 +63,8 @@ command :compile do |c|
 		begin
 			Glyph.run "generate:#{target}"
 		rescue Exception => e
-			puts "error: #{e.message}"
+			error e.message
 		end
-		Glyph.config_restore
-
 
 		# Auto-regeneration
 		if options[:auto] && !Glyph.lite? then
@@ -76,17 +74,10 @@ command :compile do |c|
 			rescue LoadError
 				raise RuntimeError, "DirectoryWatcher is not available. Install it with: gem install directory_watcher"
 			end
-
-
 			info 'Auto-regeneration enabled'
 			info 'Use ^C to interrupt'
-
 			glob = ['*.glyph', 'config.yml', 'images/**/*', 'lib/**/*', 'snippets.yml', 'styles/**/*', 'text/**/*']
-			dw = DirectoryWatcher.new(Glyph::PROJECT,
-										:glob => glob,
-										:interval => 1,
-										:pre_load => true)
-
+			dw = DirectoryWatcher.new(Glyph::PROJECT, :glob => glob, :interval => 1, :pre_load => true)
 			dw.add_observer do |*args|
 				info "Regeneration started: #{args.size} files changed"
 				Glyph.enable 'load:all'
@@ -97,7 +88,6 @@ command :compile do |c|
 				Glyph::MACROS.clear
 				Glyph.run! "generate:#{target}"
 			end
-
 			dw.start
 			begin
 				sleep
@@ -144,7 +134,7 @@ command :config do |c|
 			info setting
 		when 2 then
 			config.set args[0], args[1]
-			Glyph.config_reset
+			Glyph.config_restore
 			config.write
 		else
 			raise ArgumentError, "Too many arguments."

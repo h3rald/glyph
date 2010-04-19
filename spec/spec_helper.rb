@@ -20,8 +20,13 @@ def create_project_dir
 	Glyph::PROJECT.mkpath
 end
 
+def reset_quiet
+	Glyph.reset
+	Glyph.config_override :quiet, true
+end
+
 def create_project
-	enable_all_tasks
+	reset_quiet
 	create_project_dir
 	return if Glyph.lite?
 	Glyph.run! 'project:create', Glyph::PROJECT.to_s
@@ -32,10 +37,6 @@ def create_project
 	file_copy Glyph::SPEC_DIR/'files/document.glyph', Glyph::PROJECT/'document.glyph'
 	file_copy Glyph::SPEC_DIR/'files/test.sass', Glyph::PROJECT/'styles/test.sass'
 	file_copy Glyph::SPEC_DIR/'files/ligature.jpg', Glyph::PROJECT/'images/ligature.jpg'
-end
-
-def enable_all_tasks
-	Rake::Task.tasks.each {|t| t.reenable }
 end
 
 def delete_project_dir

@@ -3,26 +3,30 @@
 macro :note do
 	exact_parameters 1
 	%{<div class="#{@name}">
-<span class="note-title">#{@name.to_s.capitalize}</span>
-#{@value}
+<span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
+
 </div>}
 end
 
 macro :box do
 	exact_parameters 2
 	%{<div class="box">
-<span class="box-title">
-#{@params[0]}
-#</span>
+<div class="box-title">#{@params[0]}</div>
 #{@params[1]}
+
 </div>}
 end
 
 macro :code do
 	exact_parameters 1
-	%{<div class="code"><pre><code>
-#{@value.gsub('>', '&gt;').gsub('<', '&lt;')}
-</code></pre></div>}
+	%{
+<div class="code">
+<pre>
+<code>
+#{@value}
+</code>
+</pre>
+</div>}
 end
 
 macro :title do
@@ -102,6 +106,7 @@ macro :td do
 	exact_parameters 1
 	%{<td>
 #{@value}
+
 </td>}
 end
 
@@ -109,6 +114,7 @@ macro :th do
 	exact_parameters 1
 	%{<th>
 #{@value}
+
 </th>}
 end
 

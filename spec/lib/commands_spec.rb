@@ -14,6 +14,7 @@ describe "glyph" do
 	end
 
 	it "[init] should create a project in the current directory" do
+		delete_project
 		Glyph.enable "project:create"
 		Dir.chdir Glyph::PROJECT.to_s
 		run_command_successfully(['init']).should == true
@@ -118,15 +119,16 @@ describe "glyph" do
 
 		res.match(/Auto-regeneration enabled/).should_not == nil
 		res.match(/Regeneration started: 1 files changed/).should_not == nil
+		reset_quiet
 	end
 
 	it "[compile] should not compile the project in case of an unknown output format" do
-		enable_all_tasks
+		reset_quiet
 		run_command_successfully(["compile", "-f", "wrong"]).should == false
 	end
 
 	it "[compile] should compile a single source file" do
-		enable_all_tasks
+		reset_quiet
 		Dir.chdir Glyph::PROJECT
 		file_copy "#{Glyph::PROJECT}/../files/article.glyph", "#{Glyph::PROJECT}/article.glyph"
 		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"
@@ -142,7 +144,7 @@ describe "glyph" do
 	end	
 
 	it "[compile] should compile a single source file to a custom destination" do 
-		enable_all_tasks
+		reset_quiet
 		Dir.chdir Glyph::PROJECT
 		file_copy "#{Glyph::PROJECT}/../files/article.glyph", "#{Glyph::PROJECT}/article.glyph"
 		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"

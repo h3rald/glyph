@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 describe Glyph::Macro::Validators do
 
 	before do
-		Glyph.run 'load:macros'
+		Glyph.run! 'load:all'
 		Glyph.macro :validated_test do
 			validate("Invalid Macro"){	@value == "valid" }
 			"Validated Test: #{@value}"
