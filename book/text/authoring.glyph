@@ -280,16 +280,14 @@ box[Example|
 &[gcode]
 
 code[=
-img[glyph.svg\\\|20%\\\|20%]
+img[glyph.svg\|20%\|20%]
 
-fig[example.png\\\|An example figure.]
+fig[example.png\|An example figure.]
 =]
 
 &[htmlcode]
 
-<notextile>
 code[=
-
 <img src="images/glyph.svg" width="20%" height="20%" alt="-" />
 
 <div class="figure">
@@ -297,8 +295,6 @@ code[=
   <div class="caption">An example figure.</div>
 </div>
 =]
-</notextile>
-
 ]
 
 note[

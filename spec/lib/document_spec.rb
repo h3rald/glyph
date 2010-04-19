@@ -96,7 +96,7 @@ describe Glyph::Document do
 		doc.output.gsub(/\n|\t/, '')[0..14].should == "Total: 4 tests."
 	end
 
-	it "should substitute escapes only when finalizing the document" do
+	it "should substitute escaped pipes only when finalizing the document" do
 		define_em_macro
 		define_ref_macro
 		text = %{em[ref[link with ref[fake \\| parameter]]]}
@@ -107,8 +107,7 @@ describe Glyph::Document do
 		doc = create_doc tree
 		doc.analyze
 		doc.finalize
-		doc.output.gsub(/\n|\t/, '').should == result.gsub(/\n|\t/, '')
+		doc.output.should == result
 	end
-
 end
 

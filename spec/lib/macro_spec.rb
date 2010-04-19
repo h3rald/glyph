@@ -25,6 +25,19 @@ describe Glyph::Macro do
 		@macro.interpret("test[--]").should == "Test: --"
 	end
 
+	it "should not interpret escaped macros" do
+		Glyph.macro :int_1 do
+			"->#{interpret(@value)}<-"
+		end
+		Glyph.macro :int_2 do
+			"=>#{interpret(@value)}<="
+		end
+		text1 = "int_1[int_2[Test]]"
+		text2 = "int_1[=int_2[Test]=]"
+		@macro.interpret(text1).should == "->=>Test<=<-"
+		@macro.interpret(text2).should == "->int_2[Test]<-"
+	end
+
 	it "should store and check bookmarks" do
 		h = { :id => "test2", :title => "Test 2" }
 		@macro.bookmark h
