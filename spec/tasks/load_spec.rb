@@ -36,7 +36,7 @@ describe "load" do
 	end
 
 	it "[config] should load configuration files and apply overrides" do
-		Glyph.config_restore
+        Glyph.config_refresh
 		lambda { Glyph.run! 'load:config'}.should_not raise_error
 		Glyph.config_override :quiet, true
 		Glyph::PROJECT_CONFIG.blank?.should == false

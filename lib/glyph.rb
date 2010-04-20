@@ -103,11 +103,11 @@ module Glyph
 	# @param value the new value
 	def self.config_override(setting, value)
 		PROJECT_CONFIG.set setting, value
-		self.config_restore
+		self.config_refresh
 	end
 
 	# Restores Glyph configuration (keeping all overrides and project settings)
-	def self.config_restore
+	def self.config_refresh
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
 	end
 
@@ -115,8 +115,7 @@ module Glyph
 	def self.config_reset
 		Glyph::CONFIG.reset
 		Glyph::PROJECT_CONFIG.reset
-		self.config_restore
-		#Glyph.run! 'load:config'
+		self.config_refresh
 	end
 
 	# Returns true if the PROJECT constant is set to a valid Glyph project directory

@@ -44,7 +44,7 @@ describe Glyph do
 		macros = [:anchor, :link, :codeph, :fmi, :note, :box, :code, :title, :subtitle,
 		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet, "snippet:",
 		:include, :config, "config:", :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
-		:head, :style, :toc, :section, :condition, :eq, :and, :or, :not, :match]
+		:head, :style, :toc, :section, :condition, :eq, :and, :or, :not, :match, :highlight]
 		aliases = [	
 			[[:bookmark, "#"], :anchor],
 			[["=>"], :link],

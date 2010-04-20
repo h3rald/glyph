@@ -133,9 +133,15 @@ command :config do |c|
 			raise RuntimeError, "Unknown setting '#{args[0]}'" if setting.blank?
 			Glyph.info setting
 		when 2 then
+			# Remove all overrides
+			Glyph.config_reset
+			# Reload current project config
+			config.read 
 			config.set args[0], args[1]
-			Glyph.config_restore
+			# Write changes to file
 			config.write
+			# Refresh configuration
+			Glyph.config_refresh
 		else
 			raise ArgumentError, "Too many arguments."
 		end

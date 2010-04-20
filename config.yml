@@ -59,6 +59,13 @@
     - :lof
 :tools:
   :pdf_generator: 'prince'
+:highlighters:
+  :target: 'html'
+  :current: 'coderay'
+  :coderay: {} # See options in http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html
+  :ultraviolet:
+    :line_numbers: true
+    :theme: 'iplastic'
 :filters:
   :by_file_extension: true
   :target: 'html'

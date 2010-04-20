@@ -27,19 +27,19 @@ macro :markdown do
 	if !markdown_converter then
 		begin
 			require 'bluecloth'
-			markdown_converter = :BlueCloth
+			markdown_converter = :bluecloth
 		rescue LoadError
 			begin 
 				require 'rdiscount'
-				markdown_converter = :RDiscount
+				markdown_converter = :rdiscount
 			rescue LoadError
 				begin 
 					require 'maruku'
-					markdown_converter = :Maruku
+					markdown_converter = :maruku
 				rescue LoadError
 					begin 
 						require 'kramdown'
-						markdown_converter = :Kramdown
+						markdown_converter = :kramdown
 					rescue LoadError
 						macro_error "No MarkDown converter installed. Please run: gem install bluecloth"
 					end
@@ -49,13 +49,17 @@ macro :markdown do
 		Glyph.config_override "filters.markdown_converter", markdown_converter
 	end
 	case markdown_converter
-	when :BlueCloth
+	when :bluecloth
+		require 'bluecloth'
 		md = BlueCloth.new @value
-	when :RDiscount
+	when :rdiscount
+		require 'rdiscount'
 		md = RDiscount.new @value
-	when :Maruku
+	when :maruku
+		require 'maruku'
 		md = Maruku.new @value
-	when :Kramdown
+	when :kramdown
+		require 'kramdown'
 		md = Kramdown::Document.new @value
 	else
 	 macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"

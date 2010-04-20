@@ -277,5 +277,18 @@ describe "Macro:" do
 		Glyph.config_override 'document.draft', false
 	end
 
+	it "highlight" do
+		Glyph.config_override 'highighters.current', 'coderay'
+		code = %{def test_method(a, b)
+				puts a+b
+			end}
+		result = %{<div class="CodeRay"> <div class="code"><pre><span style="color:#080;font-weight:bold">def</span>
+<span style="color:#06B;font-weight:bold">test_method</span>(a, b) 
+puts a+b
+<span style="color:#080;font-weight:bold">end</span></pre></div> </div>}
+		interpret("highlight[ruby|#{code}]")
+		@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
+	end
+
 
 end	

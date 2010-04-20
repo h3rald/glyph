@@ -18,7 +18,7 @@ macro :box do
 end
 
 macro :code do
-	exact_parameters 1
+	min_parameters 1 # "Relaxed" validator to allow unescaped pipes
 	%{
 <div class="code">
 <pre>
@@ -27,6 +27,50 @@ macro :code do
 </code>
 </pre>
 </div>}
+end
+
+macro :highlight do
+	min_parameters 2  # "Relaxed" validator to allow unescaped pipes
+	lang, text = @params
+	highlighter = Glyph["highlighters.current"].to_sym rescue nil
+	if !highlighter then
+		begin
+			require 'coderay'
+			highlighter = :codeRay
+		rescue LoadError
+			begin 
+				require 'ultraviolet'
+				highlighter = :ultraviolet
+			rescue LoadError
+				macro_error "No highlighter installed. Please run: gem install coderay"
+			end
+		end
+	end
+	Glyph.config_override "highlighter.current", highlighter
+	target = Glyph["highlighters.target"].to_sym
+	result = ""
+	case highlighter
+	when :coderay
+		begin
+			require 'coderay'
+			result = CodeRay.scan(text, lang).div(Glyph["highlighters.coderay"])
+		rescue Exception => e
+			macro_error e.message
+		end
+	when :ultraviolet
+		begin
+			require 'ultraviolet'
+			result = Uv.parse(text, target, lang, 
+							 Glyph["highlighters.ultraviolet.line_numbers"], 
+							 Glyph["highlighters.ultraviolet.theme"])
+		rescue Exception => e
+			macro_error e.message
+		end
+	else
+		macro_error "No highlighter installed. Please run: gem install coderay"
+	end
+	result = "<notextile>\n#{result}\n</notextile>" if @node.find_parent { |node| node[:macro] == :textile }
+	result
 end
 
 macro :title do

@@ -4,15 +4,13 @@ section[header[Anatomy of a Macro]
 
 This is the source code of a fairly simple macro used to format a note :
 
-<notextile>
-code[=
+highlight[=ruby|
 macro :note do
   %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
     </div>}
 end 
 =]
-</notextile>
 
 The @macro@ method takes a single  @Symbol@ or @String@ parameter, corresponding to the name of the macro. In this case, the entire block (or _body_ of the macro) is a @String@ corresponding to what we want the macro to evaluate to: a @<div>@ tag containing a note. 
 

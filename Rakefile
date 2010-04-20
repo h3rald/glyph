@@ -27,6 +27,8 @@ begin
 		s.email = "h3rald@h3rald.com"
 		s.homepage = "http://www.h3rald.com/glyph/"
 		s.authors = ["Fabio Cevasco"]
+		s.files.include "styles/**/*"
+		s.files.include "book/**/*"
 		s.add_dependency 'gli', '>= 0.3.1'
 		s.add_dependency 'extlib', '>= 0.9.12'
 		s.add_dependency 'treetop', '>= 0.4.3'

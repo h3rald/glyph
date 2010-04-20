@@ -153,6 +153,26 @@ sup {
 	padding: 0.5em;
 	width: 600px;
 }
+.comment {
+	display: block;
+	border: 1px solid #004D00;
+	background: #7AFF7A;
+	padding: 3px;
+	margin: 1px;
+}
+.comment .comment-pre {
+	color: #004D00;
+}
+.todo {
+	display: block;
+	border: 1px solid #990000;
+	background: #FF9999;
+	padding: 3px;
+	margin: 1px;
+}
+.todo .todo-pre {
+	color: #990000;
+}
 /* TEXT */
 body {
 	color: #000;
@@ -1143,7 +1163,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Apr 20 11:35:02 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Apr 20 14:54:42 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1228,18 +1248,14 @@ glyph compile -f pdf
 <div class="section">
 <h3 id="h_25">Anatomy of a Macro</h3>
 <p>This is the source code of a fairly simple macro used to format a note :</p>
+<div class="CodeRay">
+  <div class="code"><pre>macro <span style="color:#A60">:note</span> <span style="color:#080;font-weight:bold">do</span>
+  <span style="background-color:#fff0f0;color:#D20"><span style="color:#710">%{</span><span style="">&lt;div class=&quot;</span><span style="background:#ddd;color:black"><span style="background:#ddd;font-weight:bold;color:#666">#{</span><span style="color:#33B">@name</span><span style="background:#ddd;font-weight:bold;color:#666">}</span></span><span style="">&quot;&gt;&lt;span class=&quot;note-title&quot;&gt;</span><span style="background:#ddd;color:black"><span style="background:#ddd;font-weight:bold;color:#666">#{</span><span style="color:#33B">@name</span>.to_s.capitalize<span style="background:#ddd;font-weight:bold;color:#666">}</span></span><span style="">&lt;/span&gt;</span><span style="background:#ddd;color:black"><span style="background:#ddd;font-weight:bold;color:#666">#{</span><span style="color:#33B">@value</span><span style="background:#ddd;font-weight:bold;color:#666">}</span></span><span style="">
 
-<div class="code">
-<pre>
-<code>
-macro :note do
-  %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
-
-    </div>}
-end
-</code>
-</pre>
+    &lt;/div&gt;</span><span style="color:#710">}</span></span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
+
 <p>The <code>macro</code> method takes a single  <code>Symbol</code> or <code>String</code> parameter, corresponding to the name of the macro. In this case, the entire block (or <em>body</em> of the macro) is a <code>String</code> corresponding to what we want the macro to evaluate to: a <code>&lt;div&gt;</code> tag containing a note.</p>
 <p>The body of the macro is evaluated in the context of the <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class, therefore its instance variables (like <code>@name</code> or <code>@value</code>) can be used directly.</p>
 <div class="box">
