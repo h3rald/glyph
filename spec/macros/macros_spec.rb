@@ -87,7 +87,7 @@ describe "Macro:" do
 	end
 
 	it "include" do
-		Glyph.config_override "filters.by_extension", true
+		Glyph["filters.by_extension"] = true
 		text = file_load(Glyph::PROJECT/'text/container.textile')
 		interpret text
 		@p.document.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{
@@ -161,13 +161,13 @@ describe "Macro:" do
 	end
 
 	it "config" do
-		Glyph.config_override "test.setting", "TEST"
+		Glyph["test.setting"] = "TEST"
 		interpret "test.setting = $[test.setting]"
 		@p.document.output.should == %{test.setting = TEST}
 	end
 	
 	it "config:" do
-		Glyph.config_override "test.setting", "TEST"
+		Glyph["test.setting"] = "TEST"
 		interpret "test.setting = $[test.setting]"
 		@p.document.output.should == %{test.setting = TEST}
 		interpret "test.setting = $:[test.setting|TEST2]$[test.setting]"
@@ -269,16 +269,17 @@ describe "Macro:" do
 		@p.document.output.should == ""
 		interpret text2
 		@p.document.output.should == ""
-		Glyph.config_override 'document.draft', true
+		Glyph['document.draft'] = true
 		interpret text1
 		@p.document.output.should == %{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>comment!</span>}
 		interpret text2
 		@p.document.output.should == %{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>todo!</span>}
-		Glyph.config_override 'document.draft', false
+		@p.document.todos.length.should == 1
+		Glyph['document.draft'] = false
 	end
 
 	it "highlight" do
-		Glyph.config_override 'highighters.current', 'coderay'
+		Glyph['highighters.current'] = 'coderay'
 		code = %{def test_method(a, b)
 				puts a+b
 			end}

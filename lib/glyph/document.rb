@@ -18,7 +18,7 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders, :headers, :context, :errors
+		attr_reader :bookmarks, :placeholders, :headers, :context, :errors, :todos
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
@@ -31,6 +31,7 @@ module Glyph
 			@placeholders = {}
 			@headers = []
 			@errors = []
+			@todos = []
 			@state = :new
 		end
 
@@ -48,6 +49,7 @@ module Glyph
 			@bookmarks = document.bookmarks
 			@headers = document.headers
 			@placeholders = document.placeholders
+			@todos = document.todos
 		end
 
 		# Defines a placeholder block that will be evaluated after the whole document has been analyzed

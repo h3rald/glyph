@@ -14,7 +14,7 @@ end
 
 require "glyph"
 
-Glyph.config_override :quiet, true
+Glyph[:quiet] = true
 
 def create_project_dir
 	Glyph::PROJECT.mkpath
@@ -22,7 +22,7 @@ end
 
 def reset_quiet
 	Glyph.reset
-	Glyph.config_override :quiet, true
+	Glyph[:quiet] = true
 end
 
 def create_project
@@ -51,7 +51,7 @@ def delete_project
 	delete_project_dir
 	Glyph::SNIPPETS.clear
 	Glyph::MACROS.clear
-	Glyph.config_override 'document.source', 'document.glyph'
+	Glyph['document.source'] = 'document.glyph'
 	Glyph.document = nil
 end
 
@@ -61,9 +61,9 @@ def run_command(cmd)
 	old_stderr = $stderr
 	$stdout = out
 	$stderr = out 
-	Glyph.config_override :quiet, false
+	Glyph[:quiet] = false
 	GLI.run cmd
-	Glyph.config_override :quiet, true
+	Glyph[:quiet] = true
 	$stdout = old_stdout
 	$stderr = old_stderr
 	out.string

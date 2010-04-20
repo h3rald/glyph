@@ -10,9 +10,9 @@ macro :snippet do
 			raise if e.is_a? MutualInclusionError
 			Glyph.warning e.message
 			draft = Glyph['document.draft']
-			Glyph.config_override 'document.draft', true unless draft
+			Glyph['document.draft'] = true unless draft
 			res = interpret "![Correct errors in snippet '#{@value}']"
-			Glyph.config_override 'document.draft', false unless draft
+			Glyph['document.draft'] = false unless draft
 			res
 		end
 	else
@@ -51,9 +51,9 @@ macro :include do
 			raise if e.is_a? MutualInclusionError
 			Glyph.warning e.message
 			draft = Glyph['document.draft']
-			Glyph.config_override 'document.draft', true unless draft
+			Glyph['document.draft'] = true unless draft
 			res = interpret "![Correct errors in file '#{@value}']"
-			Glyph.config_override 'document.draft', false unless draft
+			Glyph['document.draft'] = false unless draft
 			res
 		end
 	else
@@ -75,7 +75,7 @@ end
 macro "config:" do
 	exact_parameters 2
 	setting,value = @params
-	Glyph.config_override(setting, value)
+	Glyph[setting] = value
 	nil
 end
 

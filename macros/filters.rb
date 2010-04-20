@@ -46,7 +46,7 @@ macro :markdown do
 				end
 			end
 		end
-		Glyph.config_override "filters.markdown_converter", markdown_converter
+		Glyph["filters.markdown_converter"] = markdown_converter
 	end
 	case markdown_converter
 	when :bluecloth

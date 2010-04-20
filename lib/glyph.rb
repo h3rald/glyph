@@ -38,10 +38,7 @@ module Glyph
 
 	MACROS = {}
 
-	TODOS = []
-
 	@@document = nil
-
 	@@lite_mode = false
 	@@debug_mode = false
 
@@ -73,9 +70,12 @@ module Glyph
 	CONFIG = Glyph::Config.new :resettable => true, :mutable => false
 
 	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
-	SYSTEM_CONFIG = Glyph::Config.new(:file => HOME/'config.yml')
-	GLOBAL_CONFIG = Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
-	PROJECT_CONFIG = Glyph::Config.new(:file => PROJECT/'config.yml', :resettable => true) rescue Glyph::Config.new(:resettable => true, :mutable => true)
+	SYSTEM_CONFIG = 
+		Glyph::Config.new(:file => HOME/'config.yml')
+	GLOBAL_CONFIG = 
+		Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
+	PROJECT_CONFIG = 
+		Glyph::Config.new(:file => PROJECT/'config.yml', :resettable => true) rescue Glyph::Config.new(:resettable => true, :mutable => true)
 
 	# Loads all Rake tasks
 	def self.setup
@@ -88,7 +88,6 @@ module Glyph
 		@@document
 	end
 	
-
 	def self.document=(document)
 		@@document = document
 	end
@@ -101,7 +100,7 @@ module Glyph
 	# Overrides a configuration setting
 	# @param setting [String, Symbol] the configuration setting to change
 	# @param value the new value
-	def self.config_override(setting, value)
+	def self.[]=(setting, value)
 		PROJECT_CONFIG.set setting, value
 		self.config_refresh
 	end
@@ -130,7 +129,6 @@ module Glyph
 		self.config_reset
 		MACROS.clear
 		SNIPPETS.clear
-		TODOS.clear
 	end
 
 

@@ -37,11 +37,11 @@ command :compile do |c|
 		original_config = Glyph::CONFIG.dup
 		output_targets = Glyph::CONFIG.get('document.output_targets')
 		target = nil
-		Glyph.config_override('document.output', options[:f]) if options[:f]
+		Glyph['document.output'] = options[:f] if options[:f]
 		target = Glyph['document.output']
 		target = nil if target.blank?
 		target ||= Glyph['filters.target']
-		Glyph.config_override('document.source', options[:s]) if options[:s]
+		Glyph['document.source'] = options[:s] if options[:s]
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 
@@ -55,10 +55,10 @@ command :compile do |c|
 			destination_file ||= Pathname.new(source_file.to_s.gsub(/#{src_extension}$/, dst_extension))
 			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? 
 			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s
-			Glyph.config_override('document.filename', filename)
-			Glyph.config_override('document.source', source_file.to_s)
-			Glyph.config_override('document.output_dir', destination_file.parent.to_s) # System use only
-			Glyph.config_override('document.output_ext', destination_file.extname) # System use only
+			Glyph['document.filename'] = filename
+			Glyph['document.source'] = source_file.to_s
+			Glyph['document.output_dir'] = destination_file.parent.to_s # System use only
+			Glyph['document.output_ext'] = destination_file.extname # System use only
 		end
 		begin
 			Glyph.run "generate:#{target}"
@@ -102,9 +102,9 @@ GLI.desc 'Display all project TODO items'
 command :todo do |c|
 	c.action do |global_options, options, args|
 		Glyph.run "generate:document"
-		unless Glyph::TODOS.blank?
+		unless Glyph.document.todos.blank?
 			Glyph.info "*** TODOs: ***"
-			Glyph::TODOS.each do |t|
+			Glyph.document.todos.each do |t|
 				Glyph.info t
 			end
 		else

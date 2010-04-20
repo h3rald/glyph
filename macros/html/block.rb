@@ -46,7 +46,7 @@ macro :highlight do
 			end
 		end
 	end
-	Glyph.config_override "highlighter.current", highlighter
+	Glyph["highlighter.current"] = highlighter
 	target = Glyph["highlighters.target"].to_sym
 	result = ""
 	case highlighter

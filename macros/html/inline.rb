@@ -55,7 +55,7 @@ end
 macro :todo do
 	exact_parameters 1
 	todo = "[#{@source}] -- #{@value}"
-	Glyph::TODOS << todo unless Glyph::TODOS.include? todo
+	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then
 	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{@value}</span>} 
 	else
