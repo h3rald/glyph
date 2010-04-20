@@ -85,8 +85,6 @@ Gem::Specification.new do |s|
      "spec/tasks/generate_spec.rb",
      "spec/tasks/load_spec.rb",
      "spec/tasks/project_spec.rb",
-     "styles/coderay_cycnus.css",
-     "styles/coderay_murphy.css",
      "styles/css3.css",
      "styles/default.css",
      "tasks/generate.rake",
