@@ -10,7 +10,7 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 		value
 	end
 
-end 
+end
 
 # @private
 class MacroNode < GlyphSyntaxNode
@@ -19,6 +19,7 @@ class MacroNode < GlyphSyntaxNode
 		name = macro_name.text_value.to_sym
 		raise RuntimeError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless Glyph::MACROS.include? name
 		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
+		@data[:escape] = true if is_a? EscapingMacroNode
 		current << @data
 		value = super(context, @data).strip 
 		@data[:value] = value
@@ -26,6 +27,9 @@ class MacroNode < GlyphSyntaxNode
 	end
 
 end
+
+# @private
+class EscapingMacroNode < MacroNode; end
 
 # @private
 class TextNode < GlyphSyntaxNode	

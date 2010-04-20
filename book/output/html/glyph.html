@@ -887,7 +887,7 @@ This is another section.
 </tr>
 <tr>
 <td>
-<p><code>\[</code></p>
+<p><code>[</code></p>
 </td>
 <td>
 <p><code>[</code></p>
@@ -898,7 +898,7 @@ This is another section.
 </tr>
 <tr>
 <td>
-<p><code>\]</code></p>
+<p><code>]</code></p>
 </td>
 <td>
 <p><code>]</code></p>
@@ -1143,7 +1143,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Mon Apr 19 17:02:02 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Apr 20 11:35:02 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1702,7 +1702,270 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 			<div class="appendix">
 <h2 id="macro_ref">Macro Reference</h2>
-				<p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>Correct errors in file &#8216;ref_macros.glyph&#8217;</span></p>
+				<div class="section">
+<h3 id="h_49">Common Macros</h3>
+<div class="section">
+<h4 id="m_comment"><code>comment</code></h4>
+<p>Evaluates to nothing. Used to add comments in a Glyph document that will not be displayed in output files.</p>
+<p><strong>Aliases:</strong> <code>--</code><br />
+<strong>Example:</strong> <code>--[This is a comment. It will not be displayed in the output]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_config"><code>config</code></h4>
+<p>Evaluates to the configuration setting referenced by its value.</p>
+<p><strong>Aliases:</strong> <code>$</code><br />
+<strong>Example:</strong> <code>$[document.author]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_escape"><code>escape</code></h4>
+<p>Evaluates to its value. Commonly used with the escaping delimiters <code>[=</code> and <code>=]</code>.</p>
+<p><strong>Aliases:</strong> <code>.</code><br />
+<strong>Example:</strong> <code>.[=Macros are escaped here =&gt;[#test].=]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_include"><code>include</code></h4>
+<p>Evaluates to the contents of a text file stored in the <code>text/</code> directory referenced by its value. If the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is <code>true</code>, filters the contents of the file using the <a href="#f_macros">filter macro</a> corresponding to the file extension.</p>
+<p><strong>Aliases:</strong> <code>@</code><br />
+<strong>Example:</strong> <code>@[introduction.textile]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_ruby"><code>ruby</code></h4>
+<p>Evaluates its value as Ruby code (using <code>Kernel#instance_eval</code>).</p>
+<p><strong>Aliases:</strong> <code>%</code></p>
+<p><strong>Examples:</strong> <br />
+<code>%[Time.now]</code><br />
+<code>%[Glyph::VERSION]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_snippet"><code>snippet</code></h4>
+<p>Evaluates to the snippet referenced by its value.</p>
+<p><strong>Aliases:</strong> <code>&amp;</code><br />
+<strong>Example:</strong> <code>&amp;[glang]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_todo"><code>todo</code></h4>
+<p>Saves the value as a <span class="caps">TODO</span> item, which can be printed using the <a href="#c_todo">todo</a> command.</p>
+<p><strong>Example:</strong> <code>todo[Remember to do this.]</code></p>
+</div>
+</div>
+<div class="section">
+<h3 id="f_macros">Filter Macros</h3>
+<div class="section">
+<h4 id="m_markdown"><code>markdown</code></h4>
+<p>Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into <span class="caps">HTML</span> if the <a href="#s_filters_target">filters.target</a> setting is set to <code>html</code>.</p>
+<p>If the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.markdown</code> or a <code>.md</code> extension.</p>
+<p><strong>Example:</strong> <code>markdown[This is *emphasized* text.]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_textile"><code>textile</code></h4>
+<p>Uses the RedCloth gem to transform the value into <span class="caps">HTML</span> or LaTeX, depending on the value of the <a href="#s_filters_target">filters.target</a> setting.</p>
+<p>If the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.textile</code> extension.</p>
+<p><strong>Example:</strong> <code>textile[This is a *strong emphasis*.]</code></p>
+</div>
+</div>
+<div class="section">
+<h3 id="h_60">Block Macros</h3>
+<div class="section">
+<h4 id="m_box"><code>box</code></h4>
+<p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
+<p><strong>Example:</strong></p>
+<div class="code">
+<pre>
+<code>
+box[Why boxes?|
+Boxes can be used to make a section of text stand out from the rest of the document.
+]
+</code>
+</pre>
+</div>
+</div>
+
+<div class="section">
+<h4 id="m_code"><code>code</code></h4>
+<p>Used to render a block of code within <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags. For inline code, see the <a href="#m_codeph">codeph</a> macro.</p>
+<p><strong>Example:</strong></p>
+<div class="code">
+<pre>
+<code>
+code[
+  def hello
+    puts "Hello World"
+  end
+]
+</code>
+</pre>
+</div>
+</div>
+
+<div class="section">
+<h4 id="m_fig"><code>fig</code></h4>
+<p>Includes an image in the document, with an optional caption.</p>
+<p><strong>Examples:</strong> <br />
+<code>fig[diagram.png]</code><br />
+<code>fig[graph.png|Monthly pageviews]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_note"><code>note</code></h4>
+<p>Creates a note <code>div</code> containing the value.</p>
+<p><strong>Aliases:</strong> <code>important, caution, tip</code><br />
+<strong>Example:</strong> <code>note[This is a note.]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_img"><code>img</code></h4>
+<p>Includes an image in the document, optionally scaled according to the specified width and height. The image must be stored within the <code>images/</code> directory of the current project.</p>
+<p><strong>Examples:</strong> <br />
+<code>img[icon.png]</code><br />
+<code>img[holidays/landscape.jpg|70%]</code><br />
+<code>img[logo.svg|50%|50%]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_pubdate"><code>pubdate</code></h4>
+<p>Evaluates to a date string (in the format: <em>current-month</em> <em>current-year</em>; or <em>%B</em> <em>%Y</em>), within a <code>&lt;div&gt;</code> tag.</p>
+<p><strong>Example:</strong> <code>pubdate[]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_subtitle"><code>subtitle</code></h4>
+<p>Renders the subtitle of the document (based on the <a href="#s_document_subtitle">document.subtitle</a> setting) within a <code>&lt;h2&gt;</code> tag.</p>
+<p><strong>Example:</strong> <code>subtitle[]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_table"><code>table</code></h4>
+<p>Evaluates to an <span class="caps">HTML</span> table. Used in conjunction with the <a href="#m_tr"><code>tr</code></a>, <a href="#m_td"><code>td</code></a> and <a href="#m_th"><code>th</code></a> macros.</p>
+<p><strong>Example:</strong></p>
+<div class="code">
+<pre>
+<code>
+table[
+  tr[
+    th[Name]
+    th[Value]
+  ]
+  tr[
+    td[A]
+    td[1]
+  ]
+  tr[
+    td[B]
+    td[2]
+  ]
+]
+</code>
+</pre>
+</div>
+</div>
+
+<div class="section">
+<h4 id="m_td"><code>td</code></h4>
+<p>See <a href="#m_table"><code>table</code></a>.</p>
+</div>
+
+<div class="section">
+<h4 id="m_title"><code>title</code></h4>
+<p>Renders the title of the document (based on the <a href="#s_document_title">document.title</a> setting) within a <code>&lt;h1&gt;</code> tag.</p>
+<p><strong>Example:</strong> <code>title[]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_th"><code>th</code></h4>
+<p>See <a href="#m_table"><code>table</code></a>.</p>
+</div>
+
+<div class="section">
+<h4 id="m_tr"><code>tr</code></h4>
+<p>See <a href="#m_table"><code>table</code></a>.</p>
+</div>
+</div>
+<div class="section">
+<h3 id="h_73">Inline Macros</h3>
+<div class="section">
+<h4 id="m_anchor"><code>anchor</code></h4>
+<p>Creates a named anchor (or bookmark).</p>
+<p><strong>Aliases:</strong> <code>bookmark, #</code><br />
+<strong>Example:</strong> <code>#[test|Test Bookmark]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_codeph"><code>codeph</code></h4>
+<p>Wraps the value in a <code>&lt;code&gt;</code> tag.</p>
+<p><strong>Example:</strong> <code>codeph[Kernel.instance_eval]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_fmi"><code>fmi</code></h4>
+<p>Creates a <em>For More Information</em> link (for an example usage, see the <a href="#m_link">link</a> macro).</p>
+<p><strong>Example:</strong> <code>fmi[creating links|#links]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_link"><code>link</code></h4>
+<p>Creates an hyperlink (<span class="fmi">for more information on creating links, see <a href="#links">Links and Bookmarks</a></span>).</p>
+<p><strong>Aliases:</strong> <code>=&gt;</code></p>
+<p><strong>Examples:</strong> <br />
+<code>=&gt;[#introduction]</code><br />
+<code>=&gt;[#troub|Troubleshooting]</code><br />
+<code>=&gt;[http://www.h3rald.com|H3RALD.com]</code></p>
+</div>
+</div>
+<div class="section">
+<h3 id="h_78">Structure Macros</h3>
+<div class="section">
+<h4 id="m_body"><code>body</code></h4>
+<p>Creates a <code>&lt;body&gt;</code> tag.</p>
+</div>
+
+<div class="section">
+<h4 id="m_div"><code>div</code></h4>
+<p>Creates a <code>&lt;div&gt;</code> tag.</p>
+<p><strong>Aliases:</strong> <code></code></p>
+</div>
+
+<div class="section">
+<h4 id="m_document"><code>document</code></h4>
+<p>The root macro used in every Glyph document. It creates an <code>&lt;html&gt;</code> tag.</p>
+</div>
+
+<div class="section">
+<h4 id="m_head"><code>head</code></h4>
+<p>Creates a <code>&lt;head&gt;</code> tag, pre-populated with <code>title</code> and author/copyright <code>&lt;meta&gt;</code> tags.</p>
+</div>
+
+<div class="section">
+<h4 id="m_header"><code>header</code></h4>
+<p>Creates an <code>h2</code>, <code>h3</code>, <code>h4</code>, etc. header (<span class="fmi">for more information on using headers, see <a href="#sec_head">Sections and Headers</a></span>).</p>
+<p><strong>Examples:</strong> <br />
+<code>header[Introduction]</code><br />
+<code>header[Getting Started|gs]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_section"><code>section</code></h4>
+<p>See <a href="#m_div"><code>div</code></a>.</p>
+</div>
+
+<div class="section">
+<h4 id="m_style"><code>style</code></h4>
+<p>Embeds the content of a <span class="caps">CSS</span> or Sass file within a <code>&lt;style&gt;</code> tag (<span class="fmi">for more information on stylesheets, see <a href="#stylesheets">Adding Stylesheets</a></span>).</p>
+<p><strong>Example:</strong> <code>style[default.css]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_toc"><code>toc</code></h4>
+<p>Generates a <em>Table of Contents</em> based on how sections and headers are nested in the current document.</p>
+<p><strong>Example:</strong> <code>toc[]</code></p>
+</div>
+</div>
 
 </div>
 			<div class="appendix">

@@ -34,8 +34,12 @@ describe Glyph::Macro do
 		end
 		text1 = "int_1[int_2[Test]]"
 		text2 = "int_1[=int_2[Test]=]"
+		text3 = "int_1[=int_2\\[Test\\]=]"
+		text4 = "int_2[int_1[=int_1[wrong_macro[Test]]=]]"
 		@macro.interpret(text1).should == "->=>Test<=<-"
-		@macro.interpret(text2).should == "->int_2[Test]<-"
+		@macro.interpret(text2).should == "->int_2\\[Test\\]<-"
+		@macro.interpret(text3).should == "->int_2\\[Test\\]<-"
+		@macro.interpret(text4).should == "=>->int_1\\[wrong_macro\\[Test\\]\\]<-<="
 	end
 
 	it "should store and check bookmarks" do

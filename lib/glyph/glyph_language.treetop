@@ -5,7 +5,7 @@ grammar GlyphLanguage
 	end	
 
 	rule escaping_macro
-		macro_name '[=' text '=]' <MacroNode> 
+		macro_name '[=' text '=]' <EscapingMacroNode> 
 	end
 
 	rule macro

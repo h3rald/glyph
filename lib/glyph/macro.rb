@@ -51,7 +51,8 @@ module Glyph
 			@node[:source] = "#{@name}[#{@value}]"
 			@node[:embedded] = true
 			macro_error "Mutual inclusion", MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
-			Glyph::Interpreter.new(string, @node).document.output
+			result = @node[:escape] ? string : Glyph::Interpreter.new(string, @node).document.output
+			result.gsub(/\\*([\[\]])/){"\\#$1"}
 		end
 
 		# @see Glyph::Document#placeholder
@@ -81,7 +82,8 @@ module Glyph
 
 		# Executes a macro definition in the context of self
 		def execute
-			instance_exec(@node, &Glyph::MACROS[@name]).to_s
+			res = instance_exec(@node, &Glyph::MACROS[@name]).to_s
+			@node[:escape] ? res.gsub(/\\*([\[\]])/){"\\#$1"} : res
 		end
 
 	end

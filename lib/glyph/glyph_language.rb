@@ -96,7 +96,7 @@ module GlyphLanguage
       end
     end
     if s0.last
-      r0 = instantiate_node(MacroNode,input, i0...index, s0)
+      r0 = instantiate_node(EscapingMacroNode,input, i0...index, s0)
       r0.extend(EscapingMacro0)
     else
       @index = i0

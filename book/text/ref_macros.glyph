@@ -4,51 +4,51 @@ ref_macro[comment|
 Evaluates to nothing. Used to add comments in a Glyph document that will not be displayed in output files.
 
 aliases[--]
-example[--\[This is a comment. It will not be displayed in the output\]]
+example[=--[This is a comment. It will not be displayed in the output]=]
 ]
 
 ref_macro[config|
 Evaluates to the configuration setting referenced by its value.
 
 aliases[$]
-example[$\[document.author\]]
+example[=$[document.author]=]
 ]
 
 ref_macro[escape|
-Evaluates to its value. Commonly used with the escaping delimiters @\[=@ and @=\]@.
+Evaluates to its value. Commonly used with the escaping delimiters codeph[\[\=] and codeph[\=\]].
 
 aliases[.]
-example[.\[=Macros are escaped here =>\[#test\].=\]]
+example[=.\[=Macros are escaped here =>[#test].=\]=]
 ]
 
 ref_macro[include|
 Evaluates to the contents of a text file stored in the @text/@ directory referenced by its value. If &[filter_by_ext], filters the contents of the file using the =>[#f_macros|filter macro] corresponding to the file extension.
 
 aliases[@]
-example[@\[introduction.textile\]]
+example[=@[introduction.textile]=]
 ]
 
 ref_macro[ruby|
 Evaluates its value as Ruby code (using @Kernel#instance_eval@).
 
 aliases[%]
-examples[
-%\[Time.now\]
-%\[Glyph::VERSION\]
-]
+examples[=
+%[Time.now]
+%[Glyph::VERSION]
+=]
 ]
 
 ref_macro[snippet|
 Evaluates to the snippet referenced by its value.
 
 aliases[&]
-example[&\[glang\]]
+example[=&[glang]=]
 ]
 
 ref_macro[todo|
 Saves the value as a TODO item, which can be printed using the #>[todo].
 
-example[todo\[Remember to do this.\]]
+example[=todo[Remember to do this.]=]
 ]
 
 ] --[End common macros]
@@ -60,7 +60,7 @@ Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transfor
 
 &[called_on_files] with a @.markdown@ or a @.md@ extension. 
 
-example[markdown\[This is *emphasized* text.\]]
+example[=markdown[This is *emphasized* text.]=]
 ]
 
 ref_macro[textile|
@@ -68,7 +68,7 @@ Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on th
 
 &[called_on_files] with a @.textile@ extension. 
 
-example[textile\[This is a *strong emphasis*.\]]
+example[=textile[This is a *strong emphasis*.]=]
 ]
 
 ] --[End filter macros]
@@ -80,11 +80,11 @@ Creates a titled box (@<div>@ tag).
 
 *Example:*
 
-code[
-box\[Why boxes?\|
+code[=
+box[Why boxes?\|
 Boxes can be used to make a section of text stand out from the rest of the document.
-\]
 ]
+=]
 ]
 
 ref_macro[code|
@@ -92,52 +92,52 @@ Used to render a block of code within @<pre>@ and @<code>@ tags. For inline code
 
 *Example:*
 
+code[=
 code[
-code\[
   def hello
     puts "Hello World"
   end
-\]
 ]
+=]
 
 ]
 
 ref_macro[fig|
 Includes an image in the document, with an optional caption.
 
-examples[
-fig\[diagram.png\]
-fig\[graph.png\\\|Monthly pageviews\]
-]
+examples[=
+fig[diagram.png]
+fig[graph.png\|Monthly pageviews]
+=]
 ]
 
 ref_macro[note|
 Creates a note @div@ containing the value.
 
 aliases[important, caution, tip]
-example[note\[This is a note.\]]
+example[=note[This is a note.]=]
 ]
 
 ref_macro[img|
 Includes an image in the document, optionally scaled according to the specified width and height. The image must be stored within the @images/@ directory of the current project.
 
-examples[
-img\[icon.png\]
-img\[holidays/landscape.jpg\|70%\]
-img\[logo.svg\|50%\|50%\]
-]
+examples[=
+img[icon.png]
+img[holidays/landscape.jpg\|70%]
+img[logo.svg\|50%\|50%]
+=]
 ]
 
 ref_macro[pubdate|
 Evaluates to a date string (in the format: _current-month_ _current-year_; or _%B_ _%Y_), within a @<div>@ tag.
 
-example[pubdate\[\]]
+example[=pubdate[]=]
 ]
 
 ref_macro[subtitle|
 Renders the subtitle of the document (based on the $>[document.subtitle]) within a @<h2>@ tag.
 
-example[subtitle\[\]]
+example[=subtitle[]=]
 ]
 
 ref_macro[table|
@@ -145,22 +145,22 @@ Evaluates to an HTML table. Used in conjunction with the =>[#m_tr|@tr@], =>[#m_t
 
 *Example:*
 
-code[
-table\[
-  tr\[
-    th\[Name\]
-    th\[Value\]
-  \]
-  tr\[
-    td\[A\]
-    td\[1\]
-  \]
-  tr\[
-    td\[B\]
-    td\[2\]
-  \]
-\]
+code[=
+table[
+  tr[
+    th[Name]
+    th[Value]
+  ]
+  tr[
+    td[A]
+    td[1]
+  ]
+  tr[
+    td[B]
+    td[2]
+  ]
 ]
+=]
 
 ]
 
@@ -169,7 +169,7 @@ ref_macro[td|See =>[#m_table].]
 ref_macro[title|
 Renders the title of the document (based on the $>[document.title]) within a @<h1>@ tag.
 
-example[title\[\]]
+example[=title[]=]
 ]
 
 ref_macro[th|See =>[#m_table].]
@@ -183,31 +183,31 @@ ref_macro[anchor|
 Creates a named anchor (or bookmark).
 
 aliases[bookmark, #]
-example[#\[test\|Test Bookmark\]]
+example[=#[test\|Test Bookmark]=]
 ]
 
 ref_macro[codeph|
 Wraps the value in a @<code>@ tag.
 
-example[codeph\[Kernel.instance_eval\]]
+example[=codeph[Kernel.instance_eval]=]
 
 ]
 
 ref_macro[fmi|
 Creates a _For More Information_ link (for an example usage, see the %>[link]).
 
-example[fmi\[creating links\|#links\]]
+example[=fmi[creating links\|#links]=]
 ]
 
 ref_macro[link|
 Creates an hyperlink (\.fmi[creating links|#links]).
 
-aliases[=>]
-examples[
-=>\[#introduction\]
-=>\[#troub\|Troubleshooting\]
-=>\[http://www.h3rald.com\|H3RALD.com\]
-]
+aliases[\.=>]
+examples[=
+=>[#introduction]
+=>[#troub\|Troubleshooting]
+=>[http://www.h3rald.com\|H3RALD.com]
+=]
 ]
 
 ] --[End inline macros]
@@ -221,7 +221,7 @@ Creates a @<body>@ tag.
 ref_macro[div|
 Creates a @<div>@ tag.
 
-*Aliases:* codeph[![Glyph\['structure'\].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')]]
+*Aliases:* codeph[![=Glyph['structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
 ]
 
 ref_macro[document|
@@ -235,10 +235,10 @@ Creates a @<head>@ tag, pre-populated with @title@ and author/copyright @<meta>@
 ref_macro[header|
 Creates an @h2@, @h3@, @h4@, etc. header (\.fmi[using headers|#sec_head]).
 
-examples[
-header\[Introduction\]
-header\[Getting Started\|gs\]
-]
+examples[=
+header[Introduction]
+header[Getting Started\|gs]
+=]
 ]
 
 ref_macro[section|See =>[#m_div].]
@@ -246,13 +246,13 @@ ref_macro[section|See =>[#m_div].]
 ref_macro[style|
 Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).
 
-example[style\[default.css\]]
+example[=style[default.css]=]
 ]
 
 ref_macro[toc|
 Generates a _Table of Contents_ based on how sections and headers are nested in the current document.
 
-example[toc\[\]]
+example[=toc[]=]
 ]
 
 ] --[End structure macros]
