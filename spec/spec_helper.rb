@@ -6,10 +6,10 @@ require "stringio"
 module Glyph; end
 
 begin
-	unless Glyph.const_defined? :TEST_MODE then
-		Glyph::TEST_MODE = true
+	unless Glyph.const_defined? :MODE then
+		Glyph::MODE = {:debug => false, :lite => false, :test => true} 
 	end
-rescue Exception => e
+rescue
 end
 
 require "glyph"

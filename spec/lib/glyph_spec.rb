@@ -8,7 +8,7 @@ describe Glyph do
 	end
 
 	it "should initialize a rake app and tasks" do
-		Glyph::APP.tasks.length.should > 0
+		Rake.application.tasks.length.should > 0
 	end
 
 	it "should run rake tasks" do

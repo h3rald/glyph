@@ -17,6 +17,10 @@ module Glyph
 
 	HOME = LIB/'../../'
 
+	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
+
+	TASKS_DIR = Pathname(__FILE__).dirname.expand_path/'../tasks'
+
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'
@@ -28,44 +32,43 @@ module Glyph
 
 	VERSION = file_load(HOME/'VERSION').strip
 
-	SPEC_DIR = Pathname(__FILE__).dirname.expand_path/'../spec'
-
-	TASKS_DIR = Pathname(__FILE__).dirname.expand_path/'../tasks'
-
-	APP = Rake.application
-
 	SNIPPETS = {}
 
 	MACROS = {}
 
+	begin
+		unless const_defined? :MODE then
+			MODE = {:debug => false, :lite => false, :test => false} 
+		end
+	rescue
+	end
+
 	@@document = nil
-	@@lite_mode = false
-	@@debug_mode = false
 
 	# Returns true if Glyph is running in test mode
-	def self.testing?
-		const_defined? :TEST_MODE rescue false
-	end
-	
-	# Returns true if Glyph is running in debug mode
-	def self.debug?
-		@@debug_mode
-	end
-
-	def self.debug_mode=(mode)
-		@@debug_mode = mode
-	end
-
-	def self.lite_mode=(mode)
-		@@lite_mode = mode
+	def self.test?
+		MODE[:test]
 	end
 	
 	# Returns true if Glyph is running in "lite" mode
 	def self.lite?
-		@@lite_mode
+		MODE[:lite]
 	end
 
-	PROJECT = (Glyph.testing?) ? Glyph::SPEC_DIR/"test_project" : Pathname.new(Dir.pwd)
+	# Returns true if Glyph is running in debug mode
+	def self.debug?
+		MODE[:debug]
+	end
+
+	def self.debug_mode=(mode)
+		MODE[:debug] = mode
+	end	
+
+	def self.lite_mode=(mode)
+		MODE[:lite] = mode
+	end
+
+	PROJECT = (Glyph.test?) ? Glyph::SPEC_DIR/"test_project" : Pathname.new(Dir.pwd)
 
 	CONFIG = Glyph::Config.new :resettable => true, :mutable => false
 
@@ -73,7 +76,7 @@ module Glyph
 	SYSTEM_CONFIG = 
 		Glyph::Config.new(:file => HOME/'config.yml')
 	GLOBAL_CONFIG = 
-		Glyph.testing? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
+		Glyph.test? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
 	PROJECT_CONFIG = 
 		Glyph::Config.new(:file => PROJECT/'config.yml', :resettable => true) rescue Glyph::Config.new(:resettable => true, :mutable => true)
 
@@ -87,11 +90,11 @@ module Glyph
 	def self.document
 		@@document
 	end
-	
+
 	def self.document=(document)
 		@@document = document
 	end
-	
+
 	# Returns the value of a configuration setting
 	def self.[](setting)
 		Glyph::CONFIG.get(setting)
@@ -198,7 +201,7 @@ module Glyph
 		end
 		result
 	end
-	
+
 	# Prints a message
 	# @param [#to_s] message the message to print
 	def self.info(message)
@@ -214,7 +217,7 @@ module Glyph
 	def self.error(message)
 		puts "error: #{message}" unless Glyph[:quiet]
 	end
-	
+
 end
 
 Glyph.setup
