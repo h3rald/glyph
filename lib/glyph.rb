@@ -212,6 +212,7 @@ module Glyph
 	end
 
 	# Converts a text containing Glyph markup language into the current Glyph output target.
+	#
 	# *Note* Only 'html' is supported as output target for now. 
 	# @param [String] text the text to convert
 	# @return [String] the converted text
@@ -236,19 +237,19 @@ module Glyph
 	end
 
 	# Prints a message
-	# @param [#to_s] message the message to print
+	# @param [String] message the message to print
 	def self.info(message)
 		puts "#{message}" unless Glyph[:quiet]
 	end
 
 	# Prints a warning
-	# @param [#to_s] message the message to print
+	# @param [String] message the message to print
 	def self.warning(message)
 		puts "\nwarning: #{message}" unless Glyph[:quiet]
 	end
 
 	# Prints an error
-	# @param [#to_s] message the message to print
+	# @param [String] message the message to print
 	def self.error(message)
 		puts "\nerror: #{message}" unless Glyph[:quiet]
 	end

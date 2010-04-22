@@ -49,6 +49,7 @@ module GlyphLanguage
     r0
   end
 
+	# @private
   module EscapingMacro0
     def macro_name
       elements[0]
@@ -108,6 +109,7 @@ module GlyphLanguage
     r0
   end
 
+	# @private
   module Macro0
     def macro_name
       elements[0]
@@ -167,9 +169,11 @@ module GlyphLanguage
     r0
   end
 
+	# @private
   module EscapedText0
   end
 
+	# @private
   module EscapedText1
     def macro_name
       elements[0]
@@ -177,6 +181,7 @@ module GlyphLanguage
 
   end
 
+	# @private
   module EscapedText2
   end
 
@@ -345,9 +350,11 @@ module GlyphLanguage
     r0
   end
 
+	# @private
   module Text0
   end
 
+	# @private
   module Text1
     def macro_name
       elements[0]
@@ -355,6 +362,7 @@ module GlyphLanguage
 
   end
 
+	# @private
   module Text2
   end
 

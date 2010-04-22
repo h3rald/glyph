@@ -20,6 +20,8 @@ module Glyph
 			@params = @value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, "\\|"}
 		end
 
+		# Returns the "path" to the macro within the syntax tree.
+		# @return [String] the macro path
 		def path
 			macros = []
 			@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }

@@ -9,7 +9,7 @@ task :default => :spec
 begin
 	require 'yard'
 	YARD::Rake::YardocTask.new(:yardoc) do |t|
-		t.files   = ['lib/**/*.rb', 'README.textile', 'lib/*.rb'] 
+		t.files   = ['lib/**/*.rb', './README.textile', 'lib/*.rb'] 
 		t.options = ['--no-private']
 	end
 rescue LoadError

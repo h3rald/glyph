@@ -43,13 +43,13 @@ module Glyph
 			@tree.data
 		end
 
-		# Copies bookmarks, headers and placeholders from another Glyph::Document
+		# Copies bookmarks, headers, todos and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
 		def inherit_from(document)
 			@bookmarks = document.bookmarks
 			@headers = document.headers
-			@placeholders = document.placeholders
 			@todos = document.todos
+			@placeholders = document.placeholders
 		end
 
 		# Defines a placeholder block that will be evaluated after the whole document has been analyzed
