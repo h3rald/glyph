@@ -221,14 +221,16 @@ module Glyph
 	def self.filter(text)
 		self.lite_mode = true
 		self.enable_all
-		Glyph.run 'load:all'
 		result = ""
 		begin
+			Glyph[:quiet] = true
+			Glyph.run 'load:all'
 			result = Interpreter.new(text).document.output
 		rescue Exception => e
 			raise if self.debug?
 		ensure
 			self.lite_mode = false
+			Glyph[:quiet] = false
 		end
 		result
 	end
@@ -242,13 +244,13 @@ module Glyph
 	# Prints a warning
 	# @param [#to_s] message the message to print
 	def self.warning(message)
-		puts "warning: #{message}" unless Glyph[:quiet]
+		puts "\nwarning: #{message}" unless Glyph[:quiet]
 	end
 
 	# Prints an error
 	# @param [#to_s] message the message to print
 	def self.error(message)
-		puts "error: #{message}" unless Glyph[:quiet]
+		puts "\nerror: #{message}" unless Glyph[:quiet]
 	end
 
 end

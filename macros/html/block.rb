@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :note do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<div class="#{@name}">
 <span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
@@ -9,7 +9,7 @@ macro :note do
 end
 
 macro :box do
-	exact_parameters 2
+	exact_parameters 2, :level => :warning
 	%{<div class="box">
 <div class="box-title">#{@params[0]}</div>
 #{@params[1]}
@@ -140,14 +140,14 @@ macro :table do
 end
 
 macro :tr do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<tr>
 #{@value}	
 </tr>}
 end
 
 macro :td do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<td>
 #{@value}
 
@@ -155,7 +155,7 @@ macro :td do
 end
 
 macro :th do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<th>
 #{@value}
 

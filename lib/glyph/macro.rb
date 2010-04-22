@@ -32,15 +32,16 @@ module Glyph
 		def macro_error(msg, klass=MacroError)
 			message = "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
 			@node[:document].errors << message
-			message += "\n -> value:\n#{@value}" if Glyph.debug?
+			message += "\n -> value:\n#{"-"*50}\n#{@value}\n#{"-"*50}" if Glyph.debug?
 			raise klass, message
 		end
 
 		# Raises a macro error
 		# @param [String] msg the message to print
 		# @raise [MacroError]
-		def macro_warning(msg)
-			Glyph.warning "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
+		def macro_warning(message)
+			Glyph.warning "#{message}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
+			message += %{\n -> value:\n#{"-"*50}\n#{@value}\n#{"-"*50}} if Glyph.debug?
 		end
 
 		# Instantiates a Glyph::Interpreter and interprets a string

@@ -63,7 +63,7 @@ macro :include do
 end
 
 macro :ruby do
-	exact_parameters 1
+	min_parameters 1
 	Glyph.instance_eval(@value)
 end
 

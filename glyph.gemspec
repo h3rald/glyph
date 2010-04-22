@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-04-20}
+  s.date = %q{2010-04-22}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -130,6 +130,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<haml>, [">= 2.2.3"])
       s.add_development_dependency(%q<RedCloth>, [">= 4.2.3"])
       s.add_development_dependency(%q<bluecloth>, [">= 2.0.7"])
+      s.add_development_dependency(%q<coderay>, [">= 0.9.3"])
     else
       s.add_dependency(%q<gli>, [">= 0.3.1"])
       s.add_dependency(%q<extlib>, [">= 0.9.12"])
@@ -142,6 +143,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<haml>, [">= 2.2.3"])
       s.add_dependency(%q<RedCloth>, [">= 4.2.3"])
       s.add_dependency(%q<bluecloth>, [">= 2.0.7"])
+      s.add_dependency(%q<coderay>, [">= 0.9.3"])
     end
   else
     s.add_dependency(%q<gli>, [">= 0.3.1"])
@@ -155,6 +157,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<haml>, [">= 2.2.3"])
     s.add_dependency(%q<RedCloth>, [">= 4.2.3"])
     s.add_dependency(%q<bluecloth>, [">= 2.0.7"])
+    s.add_dependency(%q<coderay>, [">= 0.9.3"])
   end
 end
 

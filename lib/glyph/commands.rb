@@ -64,6 +64,11 @@ command :compile do |c|
 			Glyph.run "generate:#{target}"
 		rescue Exception => e
 			Glyph.error e.message
+			if Glyph.debug? then
+				puts "-"*20+"[ Backtrace: ]"+"-"*20
+				puts e.backtrace
+				puts "-"*54
+			end
 		end
 
 		# Auto-regeneration
@@ -79,14 +84,19 @@ command :compile do |c|
 			glob = ['*.glyph', 'config.yml', 'images/**/*', 'lib/**/*', 'snippets.yml', 'styles/**/*', 'text/**/*']
 			dw = DirectoryWatcher.new(Glyph::PROJECT, :glob => glob, :interval => 1, :pre_load => true)
 			dw.add_observer do |*args|
+				puts "="*50
 				Glyph.info "Regeneration started: #{args.size} files changed"
-				Glyph.enable 'load:all'
-				Glyph.enable 'load:config'
-				Glyph.enable 'load:macros'
-				Glyph.enable 'load:snippets'
-				Glyph.enable 'generate:document'
-				Glyph::MACROS.clear
-				Glyph.run! "generate:#{target}"
+				Glyph.reset
+				begin
+					Glyph.run! "generate:#{target}"
+				rescue Exception => e
+					Glyph.error e.message
+					if Glyph.debug? then
+						puts "-"*20+"[ Backtrace: ]"+"-"*20
+						puts e.backtrace
+						pits "-"*54
+					end
+				end
 			end
 			dw.start
 			begin

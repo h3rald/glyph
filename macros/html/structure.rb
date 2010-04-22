@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :div do 
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 %{<div class="#{@name}">
 #{@value}
 
@@ -28,7 +28,7 @@ macro :header do
 end
 
 macro :document do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -38,7 +38,7 @@ macro :document do
 end
 
 macro :body do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<body>
 #{@value}
 
@@ -46,7 +46,7 @@ macro :body do
 end
 
 macro :head do
-	exact_parameters 1
+	exact_parameters 1, :level => :warning
 	%{<head>
 <title>#{Glyph["document.title"]}</title>
 <meta name="author" content="#{Glyph["document.author"]}" />

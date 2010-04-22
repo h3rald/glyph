@@ -35,7 +35,7 @@ macro :link do
 end
 
 macro :fmi do
-	exact_parameters 2
+	exact_parameters 2, :level => :warning
 	topic, href = @params
 	link = placeholder do |document| 
 		interpret "link[#{href}]"
@@ -44,7 +44,7 @@ macro :fmi do
 end
 
 macro :comment do
-	exact_parameters 1
+	min_parameters 1
 	if Glyph['document.draft'] then
 		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{@value}</span>}
 	else
@@ -53,7 +53,7 @@ macro :comment do
 end
 
 macro :todo do
-	exact_parameters 1
+	min_parameters 1
 	todo = "[#{@source}] -- #{@value}"
 	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then

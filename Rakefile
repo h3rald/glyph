@@ -29,17 +29,18 @@ begin
 		s.authors = ["Fabio Cevasco"]
 		s.files.include "styles/**/*"
 		s.files.include "book/**/*"
-		s.add_dependency 'gli', '>= 0.3.1'
-		s.add_dependency 'extlib', '>= 0.9.12'
-		s.add_dependency 'treetop', '>= 0.4.3'
-		s.add_dependency 'rake', '>= 0.8.7'
-		s.add_development_dependency 'rspec', '>= 1.1.11'
-		s.add_development_dependency 'yard', '>= 1.5.4'
-		s.add_development_dependency 'jeweler', '1.4.0'
-		s.add_development_dependency 'directory_watcher', ">= 1.3.2"
-		s.add_development_dependency 'haml', ">= 2.2.3"
-		s.add_development_dependency 'RedCloth', ">= 4.2.3"
-		s.add_development_dependency 'bluecloth', ">= 2.0.7"
+		s.add_dependency 'gli', '>= 0.3.1' # Command line interface
+		s.add_dependency 'extlib', '>= 0.9.12' # Extension methods
+		s.add_dependency 'treetop', '>= 0.4.3' # Glyph Language Parser
+		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks
+		s.add_development_dependency 'rspec', '>= 1.1.11' # Test suite
+		s.add_development_dependency 'yard', '>= 1.5.4' # Documentation suite
+		s.add_development_dependency 'jeweler', '1.4.0' # Gem management
+		s.add_development_dependency 'directory_watcher', ">= 1.3.2" # Auto-regeneration
+		s.add_development_dependency 'haml', ">= 2.2.3" # Sass filter
+		s.add_development_dependency 'RedCloth', ">= 4.2.3" # Textile filter
+		s.add_development_dependency 'bluecloth', ">= 2.0.7" # Markdown filter
+		s.add_development_dependency 'coderay', ">= 0.9.3" # Syntax Highlighting
 	end
 	Jeweler::GemcutterTasks.new
 rescue LoadError

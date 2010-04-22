@@ -18,13 +18,13 @@ describe Glyph::Macro::Validators do
 
 	it "should validate the number of parameters" do
 		# exact
-		lambda { interpret("section[]").document.output }.should raise_error MacroError
+		lambda { interpret("$[]").document.output }.should raise_error MacroError
 		# none
 		lambda { interpret("toc[test]").document.output }.should raise_error MacroError
 		# min
 		lambda { interpret("img[]").document.output }.should raise_error MacroError
 		# max
-		lambda { interpret("$[a|b|c]").document.output }.should raise_error MacroError
+		lambda { interpret("not[a|b|c]").document.output }.should raise_error MacroError
 		# correct
 		lambda { interpret("chapter[fmi[something|#something]]").document.output }.should_not raise_error MacroError
 	end
