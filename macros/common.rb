@@ -28,6 +28,15 @@ macro "snippet:" do
 	""
 end
 
+macro "macro:" do
+	exact_parameters 2
+	ident, code = @params
+	Glyph.macro(ident) do
+		instance_eval code
+	end
+	""
+end
+
 macro :include do
 	macro_error "Macro not available when compiling a single file." if Glyph.lite?
 	exact_parameters 1
@@ -132,6 +141,7 @@ end
 
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
+macro_alias '%:' => 'macro:'
 macro_alias '@' => :include
 macro_alias '%' => :ruby
 macro_alias '$' => :config

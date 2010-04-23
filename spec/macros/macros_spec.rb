@@ -309,5 +309,11 @@ describe "Macro:" do
 		check.call 'coderay', cr_result if cr
 	end
 
+	it "macro:" do
+		interpret '%:[e_macro|
+			"Test: #@value"]e_macro[OK!]'
+		@p.document.output.should == "Test: OK!"
+	end
+
 
 end	
