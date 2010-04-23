@@ -58,7 +58,6 @@ command :compile do |c|
 			Glyph['document.filename'] = filename
 			Glyph['document.source'] = source_file.to_s
 			Glyph['document.output_dir'] = destination_file.parent.to_s # System use only
-			Glyph['document.output_ext'] = destination_file.extname # System use only
 		end
 		begin
 			Glyph.run "generate:#{target}"

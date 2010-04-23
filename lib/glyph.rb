@@ -210,10 +210,19 @@ module Glyph
 	# @param [String] src the full or relative path to the source file
 	# @param [String] out the full or relative path to the output file
 	def self.compile(src, out=nil)
-		dir = Pathname.new(src).parent
-		Dir.chdir dir.to_s	
-		GLI.run ["compile", src, out].compact	
-		self.lite_mode = false
+		pwd = Dir.pwd
+		Dir.chdir Pathname.new(src).parent.to_s
+		begin
+			require 'glyph/commands'
+			Glyph[:quiet] = true
+			GLI.run ["compile", src.to_s, out].compact	
+		rescue Exception => e
+			raise 
+		ensure
+			Dir.chdir pwd
+			self.lite_mode = false
+			Glyph[:quiet] = false
+		end
 	end
 
 	# Converts a text containing Glyph markup language into the current Glyph output target.

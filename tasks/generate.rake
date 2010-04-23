@@ -26,8 +26,7 @@ namespace :generate do
 		else
 			out = Glyph::PROJECT/"output/html"
 		end
-		extension = Glyph['document.output_ext']
-		extension ||= '.html'
+		extension = '.html'
 		out.mkpath
 		file = "#{Glyph['document.filename']}#{extension}"
 		file_write out/file, Glyph.document.output
@@ -50,15 +49,17 @@ namespace :generate do
 		Glyph.info "Generating PDF file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
+			src = out/"#{Glyph['document.filename']}.html"
 		else
 			out = Glyph::PROJECT/"output/pdf"
+			src = Glyph::PROJECT/"output/html/#{file}.html"
 		end
 		out.mkpath
 		file = Glyph['document.filename']
 		case Glyph['tools.pdf_generator']
 		when 'prince' then
 			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
-				res = system "prince #{Glyph::PROJECT/"output/html/#{file}.html"} -o #{out/"#{file}.pdf"}"
+				res = system "prince #{src} -o #{out/"#{file}.pdf"}"
 			if res then
 				Glyph.info "'#{file}.pdf' generated successfully."
 			else

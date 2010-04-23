@@ -78,4 +78,16 @@ describe Glyph do
 		total.should == Glyph::MACROS.length
 	end
 
+	it "should provide a filter method to convert raw text into HTML" do
+		Glyph['document.title'] = "Test"
+		Glyph.filter("title[]").gsub(/\n|\t/, '').should == "<h1>Test</h1>"
+	end
+
+	it "should provide a compile method to compile files in lite mode" do
+		file_copy Glyph::PROJECT/'../files/article.glyph', Glyph::PROJECT/'article.glyph'
+		lambda { Glyph.compile Glyph::PROJECT/'article.glyph' }.should_not raise_error
+		reset_quiet
+		(Glyph::PROJECT/'article.html').exist?.should == true
+	end
+
 end
