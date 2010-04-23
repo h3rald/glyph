@@ -7,7 +7,7 @@ macro :snippet do
 		begin
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
-			raise if e.is_a? MutualInclusionError
+			raise if e.is_a? Glyph::MutualInclusionError
 			Glyph.warning e.message
 			draft = Glyph['document.draft']
 			Glyph['document.draft'] = true unless draft
@@ -48,7 +48,7 @@ macro :include do
 		begin 
 			interpret contents
 		rescue Exception => e
-			raise if e.is_a? MutualInclusionError
+			raise if e.is_a? Glyph::MutualInclusionError
 			Glyph.warning e.message
 			draft = Glyph['document.draft']
 			Glyph['document.draft'] = true unless draft

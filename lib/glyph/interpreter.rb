@@ -17,7 +17,7 @@ class MacroNode < GlyphSyntaxNode
 
 	def evaluate(context, current=nil)
 		name = macro_name.text_value.to_sym
-		raise RuntimeError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless Glyph::MACROS.include? name
+		raise Glyph::SyntaxError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless Glyph::MACROS.include? name
 		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
 		@data[:escape] = true if is_a? EscapingMacroNode
 		current << @data
@@ -59,12 +59,12 @@ module Glyph
 			@context = context
 			tf = @parser.terminal_failures
 			if !@raw.respond_to?(:evaluate) then
-				reason = "Syntax Error: Missing delimiter?"
+				reason = "Incorrect macro syntax"
 				line = @parser.failure_line
 				column = @parser.failure_column
 				err = "#{reason}\n -> #{@context[:source]} [Line #{line}, Column #{column}]"
 				@context[:document].errors << err if @context[:document]
-				raise RuntimeError, err
+				raise Glyph::SyntaxError, err
 			end
 			@document = Glyph::Document.new @raw, @context
 			@document.inherit_from @context[:document] if @context[:document]

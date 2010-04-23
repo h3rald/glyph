@@ -88,9 +88,9 @@ describe Glyph::Interpreter do
 
 
 	it "should provide diagnostic information on errors" do
-		failure = "Syntax Error: Missing delimiter?\n -> -- [Line 1, Column 13]"
+		failure = "Incorrect macro syntax\n -> -- [Line 1, Column 13]"
 		# This is probably the only type of error recognized which can occur at parser level
-		lambda { interpret "section[em[]" }.should raise_error(RuntimeError, failure)
+		lambda { interpret "section[em[]" }.should raise_error(Glyph::SyntaxError, failure)
 	end
 
 end

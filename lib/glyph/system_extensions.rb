@@ -47,6 +47,3 @@ module Kernel
 	end
 
 end
-
-class MacroError < RuntimeError; end
-class MutualInclusionError < MacroError; end

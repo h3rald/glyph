@@ -178,7 +178,7 @@ post do |global,command,options,args|
 end
 
 on_error do |exception|
-	if exception.is_a? MacroError then
+	if exception.is_a? Glyph::MacroError then
 		Glyph.warning exception.message
 		false
 	else

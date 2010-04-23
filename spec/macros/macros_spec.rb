@@ -18,7 +18,7 @@ describe "Macro:" do
 		doc = @p.document
 		doc.output.should == "this is a <a id=\"test\">test</a>."
 		doc.bookmarks.has_key?(:test).should == true 
-		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(MacroError)
+		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(Glyph::MacroError)
 	end
 
 	it "snippet" do
@@ -105,7 +105,7 @@ describe "Macro:" do
 	it "include should not work in Lite mode" do
 		text = file_load(Glyph::PROJECT/'text/container.textile')
 		Glyph.lite_mode = true
-		lambda { interpret(text).document.output }.should raise_error MacroError
+		lambda { interpret(text).document.output }.should raise_error Glyph::MacroError
 		Glyph.lite_mode = false
 	end
 

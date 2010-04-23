@@ -34,6 +34,11 @@ module Glyph
 	require LIB/'macro'
 	require LIB/'interpreter'
 
+	class Error < RuntimeError; end
+	class SyntaxError < Error; end
+	class MacroError < Error; end
+	class MutualInclusionError < MacroError; end
+
 	# The current version of Glyph
 	VERSION = file_load(HOME/'VERSION').strip
 
@@ -228,7 +233,7 @@ module Glyph
 			Glyph.run 'load:all'
 			result = Interpreter.new(text).document.output
 		rescue Exception => e
-			raise if self.debug?
+			raise 
 		ensure
 			self.lite_mode = false
 			Glyph[:quiet] = false

@@ -17,7 +17,7 @@ describe Glyph::Macro do
 	end
 
 	it "should raise macro errors" do
-		lambda { @macro.macro_error "Error!" }.should raise_error(MacroError)
+		lambda { @macro.macro_error "Error!" }.should raise_error(Glyph::MacroError)
 		
 	end
 
@@ -71,7 +71,7 @@ describe Glyph::Macro do
 		Glyph.run! 'load:macros'
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
 		lambda {@macro.interpret("&[inc] test")}.should raise_error(
-			MutualInclusionError, "Mutual inclusion\n -> source: &[inc]\n -> path: test/&/&")
+			Glyph::MutualInclusionError, "Mutual inclusion\n -> source: &[inc]\n -> path: test/&/&")
 	end
 
 end
