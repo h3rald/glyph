@@ -36,34 +36,40 @@ macro :highlight do
 	if !highlighter then
 		begin
 			require 'coderay'
-			highlighter = :codeRay
+			highlighter = :coderay
 		rescue LoadError
 			begin 
-				require 'ultraviolet'
+				require 'uv'
 				highlighter = :ultraviolet
 			rescue LoadError
 				macro_error "No highlighter installed. Please run: gem install coderay"
 			end
 		end
+		Glyph["highlighter.current"] = highlighter
 	end
-	Glyph["highlighter.current"] = highlighter
-	target = Glyph["highlighters.target"].to_sym
+	target = Glyph["highlighters.target"]
 	result = ""
-	case highlighter
+	case highlighter.to_sym
 	when :coderay
 		begin
 			require 'coderay'
 			result = CodeRay.scan(text, lang).div(Glyph["highlighters.coderay"])
+		rescue LoadError
+			macro_error "CodeRay highlighter not installed. Please run: gem install coderay"
 		rescue Exception => e
 			macro_error e.message
 		end
 	when :ultraviolet
 		begin
-			require 'ultraviolet'
-			result = Uv.parse(text, target, lang, 
+			require 'uv'
+			target = 'xhtml' if target == 'html'
+			result = Uv.parse(text.to_s, target.to_s, lang.to_s, 
 							 Glyph["highlighters.ultraviolet.line_numbers"], 
-							 Glyph["highlighters.ultraviolet.theme"])
+							 Glyph["highlighters.ultraviolet.theme"].to_s)
+		rescue LoadError
+			macro_error "UltraViolet highlighter not installed. Please run: gem install ultraviolet"
 		rescue Exception => e
+			puts e.backtrace
 			macro_error e.message
 		end
 	else

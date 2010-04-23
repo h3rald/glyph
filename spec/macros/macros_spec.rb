@@ -279,16 +279,34 @@ describe "Macro:" do
 	end
 
 	it "highlight" do
-		Glyph['highighters.current'] = 'coderay'
+		cr = false
+		uv = false
+		begin
+			require 'coderay'
+			cr = true
+		rescue Exception
+		end
+		begin
+			require 'uv'
+			uv = true
+		rescue Exception
+		end
 		code = %{def test_method(a, b)
 				puts a+b
 			end}
-		result = %{<div class="CodeRay"> <div class="code"><pre><span style="color:#080;font-weight:bold">def</span>
-<span style="color:#06B;font-weight:bold">test_method</span>(a, b) 
-puts a+b
-<span style="color:#080;font-weight:bold">end</span></pre></div> </div>}
-		interpret("highlight[ruby|#{code}]")
-		@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
+		cr_result = %{<div class=\"CodeRay\"> <div class=\"code\"><pre><span class=\"r\">def</span> 
+			<span class=\"fu\">test_method</span>(a, b) puts a+b <span class=\"r\">end</span></pre></div> </div>}
+		uv_result = %{<pre class=\"iplastic\"><span class=\"Keyword\">def</span> 
+			<span class=\"FunctionName\">test_method</span>(<span class=\"Arguments\">a<span class=\"Arguments\">,</span> b</span>) 
+			puts a<span class=\"Keyword\">+</span>b <span class=\"Keyword\">end</span> </pre>}
+		check = lambda do |hl, result|
+			Glyph["highlighters.current"] = hl
+			Glyph.debug_mode = true
+			interpret("highlight[ruby|#{code}]")
+			@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
+		end
+		check.call 'ultraviolet', uv_result if uv
+		check.call 'coderay', cr_result if cr
 	end
 
 

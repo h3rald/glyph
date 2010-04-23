@@ -62,9 +62,11 @@
 :highlighters:
   :target: 'html'
   :current: 'coderay'
-  :coderay: {} # See options in http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html
+  :coderay:
+    # See options at http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html
+    :css: :class 
   :ultraviolet:
-    :line_numbers: true
+    :line_numbers: false
     :theme: 'iplastic'
 :filters:
   :by_file_extension: true
