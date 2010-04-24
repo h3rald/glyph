@@ -62,12 +62,14 @@ command :compile do |c|
 		begin
 			Glyph.run "generate:#{target}"
 		rescue Exception => e
-			Glyph.error e.message
+			message = e.message
 			if Glyph.debug? then
-				puts "-"*20+"[ Backtrace: ]"+"-"*20
-				puts e.backtrace
-				puts "-"*54
+				message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
+				message << "\n"+e.backtrace
+				message << "\n"+"-"*54
 			end
+			raise RuntimeError, message if Glyph.library?
+			Glyph.error message
 		end
 
 		# Auto-regeneration

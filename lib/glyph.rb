@@ -51,7 +51,7 @@ module Glyph
 	begin
 		unless const_defined? :MODE then
 			# Glyph's modes: debug/lite/test
-			MODE = {:debug => false, :lite => false, :test => false} 
+			MODE = {:debug => false, :lite => false, :test => false, :library => false} 
 		end
 	rescue
 	end
@@ -74,6 +74,11 @@ module Glyph
 		MODE[:debug]
 	end
 
+	# Returns true if Glyph is running in library mode
+	def self.library?
+		MODE[:library]
+	end
+
 	# Enable/disables test mode
 	# @param [Boolean] mode whether test mode is enabled or not
 	def self.debug_mode=(mode)
@@ -84,6 +89,12 @@ module Glyph
 	# @param [Boolean] mode whether lite mode is enabled or not
 	def self.lite_mode=(mode)
 		MODE[:lite] = mode
+	end
+
+	# Enable/disables library mode (causes errors to be re-raised by the compile command)
+	# @param [Boolean] mode whether library mode is enabled or not
+	def self.library_mode=(mode)
+		MODE[:library] = mode
 	end
 
 	# The directory of the current Glyph project.
@@ -214,14 +225,16 @@ module Glyph
 		Dir.chdir Pathname.new(src).parent.to_s
 		begin
 			require 'glyph/commands'
-			Glyph[:quiet] = true
+			self[:quiet] = true
+			self.library_mode = true
 			GLI.run ["compile", src.to_s, out].compact	
 		rescue Exception => e
 			raise 
 		ensure
 			Dir.chdir pwd
+			self.library_mode = false
 			self.lite_mode = false
-			Glyph[:quiet] = false
+			self[:quiet] = false
 		end
 	end
 
@@ -238,14 +251,16 @@ module Glyph
 		self.enable_all
 		result = ""
 		begin
-			Glyph[:quiet] = true
-			Glyph.run 'load:all'
+			self[:quiet] = true
+			self.library_mode = true
+			self.run 'load:all'
 			result = Interpreter.new(text).document.output
 		rescue Exception => e
 			raise 
 		ensure
 			self.lite_mode = false
-			Glyph[:quiet] = false
+			self.library_mode = false
+			self[:quiet] = false
 		end
 		result
 	end
