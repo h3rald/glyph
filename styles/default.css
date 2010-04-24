@@ -73,6 +73,11 @@ dd {
 p {
 	margin: 1em 0;
 }
+blockquote {
+	margin: 1em 1em;
+	font-style: italic;
+	color: #121212;
+}
 ol.toc {
 	margin-left: 1.5em;
 }

@@ -2,7 +2,7 @@
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
 	@top { 
-		content: string(book-title) " &#183; " string(book-subtitle) " &ndash; " string(chapter-title);  
+		content: string(book-title) " - " string(book-subtitle) " - " string(chapter-title);  
 		font-style: italic;
 	}
   @bottom { content: counter(page, decimal); }
@@ -26,11 +26,11 @@
   content: leader('.') target-counter(attr(href), page);
 }
 
-.titlepage h1 { 
+.titlepage h1, .halftitlepage h1 { 
 	string-set: book-title content();
 }
 
-.titlepage h2 {
+.titlepage h2, .halftitlepage h2 {
 	string-set: book-subtitle content();
 }
 
