@@ -2,7 +2,7 @@
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
 	@top { 
-		content: string(book-title) " - " string(book-subtitle) " - " string(chapter-title);  
+		content: string(book-title) " - " string(chapter-title);  
 		font-style: italic;
 	}
   @bottom { content: counter(page, decimal); }
@@ -28,10 +28,6 @@
 
 .titlepage h1, .halftitlepage h1 { 
 	string-set: book-title content();
-}
-
-.titlepage h2, .halftitlepage h2 {
-	string-set: book-subtitle content();
 }
 
 .toc>li[class~=chapter] {
