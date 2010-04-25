@@ -1,0 +1,10 @@
+release[0.2.0|![Release date]|
+	features[
+		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet requireed).]
+		issue[76|It is now possible to use Glyph programmatically via the new codeph[Glyph#filter] and codeph[Glyph#compile] methods.]
+	]
+	--[bugs[]]
+]
+release[0.1.0|April 8th 2010|
+	Initial release.
+]
