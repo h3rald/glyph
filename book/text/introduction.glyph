@@ -60,7 +60,6 @@ renderer like =>[http://www.princexml.com\|Prince].
 
 **HTML Output:**
 
-<notextile>
 code[=
 <div class="section">
   <h2 id="h_10">Something about Glyph</h2>
@@ -75,7 +74,7 @@ code[=
       like <a href="http://www.princexml.com">Prince</a>.</p>
   </div>
 </div>
-=]</notextile>
+=]
 ]
 
 section[header[Resources]
@@ -83,6 +82,8 @@ section[header[Resources]
 * Home Page: =>[http://www.h3rald.com/glyph/]
 * Repository: =>[http://www.github.com/h3rald/glyph/]
 * Bug Tracking: =>[http://www.github.com/h3rald/glyph/issues]
+* Development Wiki =>[http://wiki.github.com/h3rald/glyph]
+* RubyGem Download =>[http://www.rubygems.org/gems/glyph]
 * Book (PDF): =>[http://github.com/h3rald/glyph/raw/\.%[Glyph::VERSION.strip]/book/output/pdf/glyph.pdf]
 * Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
 * User Group: =>[http://groups.google.com/group/glyph-framework]

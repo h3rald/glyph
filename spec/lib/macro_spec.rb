@@ -71,7 +71,7 @@ describe Glyph::Macro do
 		Glyph.run! 'load:macros'
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
 		lambda {@macro.interpret("&[inc] test")}.should raise_error(
-			Glyph::MutualInclusionError, "Mutual inclusion\n -> source: &[inc]\n -> path: test/&/&")
+			Glyph::MutualInclusionError, "Mutual inclusion\n -> source: &[...]\n -> path: test/&/&")
 	end
 
 end

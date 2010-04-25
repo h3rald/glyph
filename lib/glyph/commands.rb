@@ -65,7 +65,7 @@ command :compile do |c|
 			message = e.message
 			if Glyph.debug? then
 				message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
-				message << "\n"+e.backtrace
+				message << "\n"+e.backtrace.join("\n")
 				message << "\n"+"-"*54
 			end
 			raise RuntimeError, message if Glyph.library?

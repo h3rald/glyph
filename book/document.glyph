@@ -1,7 +1,8 @@
 document[
 	head[
 		style[default.css]
-		style[css3.css]
+		?[eq[$[document.output]|pdf]|style[css3.css]]
+		style[coderay.css]
 	]
 	body[
 		titlepage[
@@ -14,9 +15,11 @@ document[
 		]
 		frontmatter[
 			toc[]
-			introduction[
-				header[Introduction]
+			introduction[header[Introduction]
 				textile[@[introduction.glyph]]
+				section[header[Changelog]
+					@[changelog.glyph]
+				]
 			]
 		]
 		bodymatter[

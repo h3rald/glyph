@@ -108,6 +108,43 @@ macro :ref_config do
 	}
 end
 
+macro :issue do
+	exact_parameters 2
+	ident, desc = @params
+	interpret %{
+		tr[
+			td[=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}|##{ident}]]
+			td[#{desc}]
+		]
+	}
+end
+
+macro :features do
+	extra = (@name == :features) ? "Implemented" : "Fixed"
+	interpret %{
+		section[header[#{extra} #{@name.to_s.capitalize}]
+			table[
+				tr[
+					th[ID]
+					th[Description]
+				]
+				#@value
+			]
+		]
+	}
+end
+
+macro :release do
+	exact_parameters 3
+	number, date, contents = @params
+	interpret %{
+		section[header[#{date} &ndash; Release #{number}]
+			#{contents}
+		]
+	}
+end
+
 macro_alias :options => :parameters
 macro_alias '-p' => :ref_error
 macro_alias '-o' => :option
+macro_alias :bugs => :features

@@ -32,7 +32,10 @@ module Glyph
 		# @param [String] msg the message to print
 		# @raise [Glyph::MacroError]
 		def macro_error(msg, klass=Glyph::MacroError)
-			message = "#{msg}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
+			src = @node[:source_name]
+			src ||= @node[:source]
+			src ||= "--"
+			message = "#{msg}\n -> source: #{src}\n -> path: #{path}"
 			@node[:document].errors << message
 			message += "\n -> value:\n#{"-"*54}\n#{@value}\n#{"-"*54}" if Glyph.debug?
 			raise klass, message
@@ -42,7 +45,10 @@ module Glyph
 		# @param [String] msg the message to print
 		# @raise [Glyph::MacroError]
 		def macro_warning(message)
-			Glyph.warning "#{message}\n -> source: #{@node[:source]||"--"}\n -> path: #{path}"
+			src = @node[:source_name]
+			src ||= @node[:source]
+			src ||= "--"
+			Glyph.warning "#{message}\n -> source: #{src}\n -> path: #{path}"
 			message += %{\n -> value:\n#{"-"*54}\n#{@value}\n#{"-"*54}} if Glyph.debug?
 		end
 
@@ -51,7 +57,8 @@ module Glyph
 		# @return [String] the interpreted output
 		# @raise [Glyph::MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
-			@node[:source] = "#{@name}[#{@value}]"
+			@node[:source] = "#@name[#@value]"
+			@node[:source_name] = "#{@name}[...]"
 			@node[:embedded] = true
 			macro_error "Mutual inclusion", Glyph::MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
 			result = @node[:escape] ? string : Glyph::Interpreter.new(string, @node).document.output

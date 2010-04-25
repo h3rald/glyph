@@ -155,7 +155,7 @@ module Glyph
 
 	# Returns true if the PROJECT constant is set to a valid Glyph project directory
 	def self.project?
-		children = ["styles", "text", "output", "snippets.yml", "config.yml", "document.glyph"].sort
+		children = ["text", "output", "snippets.yml", "config.yml", "document.glyph"].sort
 		actual_children = PROJECT.children.map{|c| c.basename.to_s}.sort 
 		(actual_children & children) == children
 	end
@@ -274,13 +274,13 @@ module Glyph
 	# Prints a warning
 	# @param [String] message the message to print
 	def self.warning(message)
-		puts "\nwarning: #{message}" unless Glyph[:quiet]
+		puts "--> warning: #{message}" unless Glyph[:quiet]
 	end
 
 	# Prints an error
 	# @param [String] message the message to print
 	def self.error(message)
-		puts "\nerror: #{message}" unless Glyph[:quiet]
+		puts "==> error: #{message}" unless Glyph[:quiet]
 	end
 
 end
