@@ -122,7 +122,7 @@ end
 macro :features do
 	extra = (@name == :features) ? "Implemented" : "Fixed"
 	interpret %{
-		section[header[#{extra} #{@name.to_s.capitalize}]
+		section[header[#{extra} #{@name.to_s.capitalize}||5]
 			table[
 				tr[
 					th[ID]
@@ -138,7 +138,7 @@ macro :release do
 	exact_parameters 3
 	number, date, contents = @params
 	interpret %{
-		section[header[#{date} &ndash; Release #{number}]
+		section[header[v#{number} &ndash; #{date}]
 			#{contents}
 		]
 	}

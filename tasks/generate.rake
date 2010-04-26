@@ -52,7 +52,7 @@ namespace :generate do
 			src = out/"#{Glyph['document.filename']}.html"
 		else
 			out = Glyph::PROJECT/"output/pdf"
-			src = Glyph::PROJECT/"output/html/#{file}.html"
+			src = Glyph::PROJECT/"output/html/#{Glyph['document.filename']}.html"
 		end
 		out.mkpath
 		file = Glyph['document.filename']
