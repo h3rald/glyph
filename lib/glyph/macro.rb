@@ -59,9 +59,13 @@ module Glyph
 		def interpret(string)
 			@node[:source] = "#@name[#@value]"
 			@node[:source_name] = "#{@name}[...]"
-			@node[:embedded] = true
 			macro_error "Mutual inclusion", Glyph::MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
-			result = @node[:escape] ? string : Glyph::Interpreter.new(string, @node).document.output
+			if @node[:escape] then
+				result = string 
+			else
+				@node[:embedded] = true
+			 	result = Glyph::Interpreter.new(string, @node).document.output
+			end
 			result.gsub(/\\*([\[\]])/){"\\#$1"}
 		end
 

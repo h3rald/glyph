@@ -315,5 +315,33 @@ describe "Macro:" do
 		@p.document.output.should == "Test: OK!"
 	end
 
+	it "header should allow level override" do
+		Glyph.run! "load:all"
+		Glyph.macro :sec_1 do
+			interpret "section[header[Test1]\n#@value]"
+		end
+		Glyph.macro :sec_2 do
+			interpret "section[header[Test2||5]\n#@value]"
+		end
+		text = %{section[sec_1[section[sec_2[Test]]]]}
+		interpret text
+		@p.document.output.should == "<div class=\"section\">
+			<div class=\"section\">
+				<h3 id=\"h_2\">Test1</h3>
+				<div class=\"section\">
+					<div class=\"section\">
+						<h5 id=\"h_1\">Test2</h5>
+						Test
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>".gsub(/\t/, '')
+	end
+
+
 
 end	

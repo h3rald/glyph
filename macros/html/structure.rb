@@ -10,15 +10,19 @@ end
 
 macro :header do
 	min_parameters 1
-	max_parameters 2
+	max_parameters 3
 	title = @params[0]
-	level = 1
-	@node.ascend do |n| 
-		if Glyph["structure.headers"].include? n[:macro] then
-			level+=1
+	level = @params[2]
+	h_id = @params[1]
+	h_id = nil if h_id.blank?
+	unless level then
+		level = 1
+		@node.ascend do |n| 
+			if Glyph["structure.headers"].include? n[:macro] then
+				level+=1
+			end
 		end
 	end
-	h_id = @params[1]
 	h_id ||= "h_#{@node[:document].headers.length+1}".to_sym
 	header :title => title, :level => level, :id => h_id
 	@node[:header] = h_id
