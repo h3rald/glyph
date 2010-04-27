@@ -1,0 +1,176 @@
+
+
+		<div class="section">
+<h2 id="h_3">v0.2.0 &ndash; May 7th 2010 (?)</h2>
+			<div class="section">
+<h3 id="h_1">Implemented Features</h3>
+			<table>
+<tr>
+<th>
+ID
+
+</th>
+					<th>
+Description
+
+</th>	
+</tr>
+				<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/62">#62</a>
+
+</td>
+			<td>
+A new highlight macro is available to highlight source code (CodeRay or UltraViolet requireed).
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/76">#76</a>
+
+</td>
+			<td>
+It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/87">#87</a>
+
+</td>
+			<td>
+It is now possible to define snippets inside a glyph source file using the snippet: macro.
+
+</td>	
+</tr>
+		
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/88">#88</a>
+
+</td>
+			<td>
+It is now possible to change configuration settings inside a glyph source file using the config: macro macro (Jabbslad).
+
+</td>	
+</tr>
+		
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/89">#89</a>
+
+</td>
+			<td>
+It is now possible to compile a single .glyph source file without creating a Glyph project.
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/92">#92</a>
+
+</td>
+			<td>
+6 new macros have been defined to allow conditional processing (condition macro, eq macro, not macro, and macro, or macro, match macro)
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/94">#94</a>
+
+</td>
+			<td>
+It is now possible to add _validators_ to macros, for example to check the number of parameters they take.
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/97">#97</a>
+
+</td>
+			<td>
+The compile command command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed.
+
+</td>	
+</tr>
+</table>
+
+</div>
+	
+	
+		<div class="section">
+<h3 id="h_2">Fixed Bugs</h3>
+			<table>
+<tr>
+<th>
+ID
+
+</th>
+					<th>
+Description
+
+</th>	
+</tr>
+				<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/86">#86</a>
+
+</td>
+			<td>
+Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/93">#93</a>
+
+</td>
+			<td>
+Default css files were not copied when creating a new project. The issue has been resolved by allowing the style macro to reference Glyph's system styles.
+
+</td>	
+</tr>
+	
+		
+		<tr>
+<td>
+<a href="http://github.com/h3rald/glyph/issues/closed#issue/95">#95</a>
+
+</td>
+			<td>
+The config command did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.
+
+</td>	
+</tr>
+</table>
+
+</div>
+
+</div>
+	
+
+		<div class="section">
+<h2 id="h_4">v0.1.0 &ndash; April 8th 2010</h2>
+			Initial release.
+
+</div>
+	

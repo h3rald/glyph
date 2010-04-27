@@ -5,7 +5,7 @@ macro :issue do
 	interpret %{
 		tr[
 			td[\=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
-			td[textile[#{desc}]]
+			td[#{desc}]
 		]
 	}
 end
@@ -36,38 +36,21 @@ macro :release do
 	}
 end
 
-macro :changelog do 
-	if Glyph.lite? then
-		interpret %{document[
-				head[
-					title[]
-				]
-				body[
-#@value
-				]
-			]
-		}
-	else
-		interpret @value
-	end
-end
 
 macro_alias :bugs => :features
 
 =]--[-------------------
 	?[%[lite?]|.[=
-			$:[document.title\|Glyph Changelog]
-			$:[document.author\|Fabio Cevasco]
 			%:[%>\|"#@value macro"]
 			%:[#>\|"#@value command"]
 		=]
 	]
 	![Explain how to use condition macro with escapes...]
-]changelog[
+]
 release[0.2.0|May 7th 2010 (?)|
 	features[
 		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet requireed).]
-		issue[76|It is now possible to use Glyph programmatically via the new codeph[Glyph#filter] and codeph[Glyph#compile] methods.]
+		issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
 		issue[87|It is now possible to define snippets inside a glyph source file using the %>[snippet:].]	
 		issue[88|It is now possible to change configuration settings inside a glyph source file using the %>[config:] macro (Jabbslad).]	
 		issue[89|It is now possible to compile a single .glyph source file without creating a Glyph project. ![Add new section to document authoring]]
@@ -83,5 +66,4 @@ release[0.2.0|May 7th 2010 (?)|
 ]
 release[0.1.0|April 8th 2010|
 	Initial release.
-]
 ]

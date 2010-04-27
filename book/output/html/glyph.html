@@ -1067,7 +1067,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Apr 27 16:30:33 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Apr 27 17:19:34 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -2307,7 +2307,9 @@ prince
 </div>
 			<div class="appendix">
 <h2 id="h_92">Changelog</h2>
-				<div class="section">
+				
+
+		<div class="section">
 <h3 id="h_95">v0.2.0 &ndash; May 7th 2010 (?)</h3>
 			<div class="section">
 <h4 id="h_93">Implemented Features</h4>
@@ -2328,7 +2330,7 @@ Description
 
 </td>
 			<td>
-<p>A new <a href="#m_highlight">highlight</a> macro is available to highlight source code (CodeRay or UltraViolet requireed).</p>
+A new <a href="#m_highlight">highlight</a> macro is available to highlight source code (CodeRay or UltraViolet requireed).
 
 </td>	
 </tr>
@@ -2340,7 +2342,7 @@ Description
 
 </td>
 			<td>
-<p>It is now possible to use Glyph programmatically via the new <code>Glyph#filter</code> and <code>Glyph#compile</code> methods.</p>
+It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.
 
 </td>	
 </tr>
@@ -2352,7 +2354,7 @@ Description
 
 </td>
 			<td>
-<p>It is now possible to define snippets inside a glyph source file using the <a href="#m_snippet:">snippet:</a> macro.</p>
+It is now possible to define snippets inside a glyph source file using the <a href="#m_snippet:">snippet:</a> macro.
 
 </td>	
 </tr>
@@ -2364,7 +2366,7 @@ Description
 
 </td>
 			<td>
-<p>It is now possible to change configuration settings inside a glyph source file using the <a href="#m_config:">config:</a> macro macro (Jabbslad).</p>
+It is now possible to change configuration settings inside a glyph source file using the <a href="#m_config:">config:</a> macro macro (Jabbslad).
 
 </td>	
 </tr>
@@ -2376,7 +2378,7 @@ Description
 
 </td>
 			<td>
-<p>It is now possible to compile a single .glyph source file without creating a Glyph project.</p>
+It is now possible to compile a single .glyph source file without creating a Glyph project.
 
 </td>	
 </tr>
@@ -2388,7 +2390,7 @@ Description
 
 </td>
 			<td>
-<p>6 new macros have been defined to allow conditional processing (<a href="#m_condition">condition</a> macro, <a href="#m_eq">eq</a> macro, <a href="#m_not">not</a> macro, <a href="#m_and">and</a> macro, <a href="#m_or">or</a> macro, <a href="#m_match">match</a> macro)</p>
+6 new macros have been defined to allow conditional processing (<a href="#m_condition">condition</a> macro, <a href="#m_eq">eq</a> macro, <a href="#m_not">not</a> macro, <a href="#m_and">and</a> macro, <a href="#m_or">or</a> macro, <a href="#m_match">match</a> macro)
 
 </td>	
 </tr>
@@ -2400,7 +2402,7 @@ Description
 
 </td>
 			<td>
-<p>It is now possible to add <em>validators</em> to macros, for example to check the number of parameters they take.</p>
+It is now possible to add _validators_ to macros, for example to check the number of parameters they take.
 
 </td>	
 </tr>
@@ -2412,7 +2414,7 @@ Description
 
 </td>
 			<td>
-<p>The <a href="#c_compile">compile</a> command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed.</p>
+The <a href="#c_compile">compile</a> command command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed.
 
 </td>	
 </tr>
@@ -2440,7 +2442,7 @@ Description
 
 </td>
 			<td>
-<p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p>
+Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.
 
 </td>	
 </tr>
@@ -2452,7 +2454,7 @@ Description
 
 </td>
 			<td>
-<p>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style">style</a> macro to reference Glyph&#8217;s system styles.</p>
+Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style">style</a> macro to reference Glyph's system styles.
 
 </td>	
 </tr>
@@ -2464,7 +2466,7 @@ Description
 
 </td>
 			<td>
-<p>The <a href="#c_config">config</a> command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p>
+The <a href="#c_config">config</a> command did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.
 
 </td>	
 </tr>

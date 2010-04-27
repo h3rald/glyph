@@ -1,1 +1,1 @@
-glyph compile text/changelog.glyph ../CHANGELOG.html
+glyph compile text/changelog.glyph ../CHANGELOG.textile
