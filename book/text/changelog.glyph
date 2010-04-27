@@ -40,7 +40,6 @@ macro :changelog do
 	if Glyph.lite? then
 		interpret %{document[
 				head[
-					style[default.css]
 					title[]
 				]
 				body[
