@@ -6,7 +6,8 @@ document[
 	]
 	body[
 		titlepage[
-			img[glyph.svg|20%|20%]
+			?[eq[$[document.output]|pdf]|img[glyph.svg|20%|20%]]
+			?[eq[$[document.output]|html]|img[glyph.png|20%|20%]]
 			title[]
 			subtitle[]
 			v\.%[Glyph::VERSION]
@@ -17,9 +18,6 @@ document[
 			toc[]
 			introduction[header[Introduction]
 				textile[@[introduction.glyph]]
-				section[header[Changelog]
-					@[changelog.glyph]
-				]
 			]
 		]
 		bodymatter[
@@ -52,6 +50,9 @@ document[
 			appendix[
 				header[Configuration Reference|cfg_ref]
 				textile[@[ref_config.glyph]]
+			]
+			appendix[header[Changelog]
+				@[changelog.glyph]
 			]
 		]
 	]

@@ -97,14 +97,28 @@ macro :ref_config do
 	m_name, m_value = @params
 	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
 	interpret %{
-	section[header[@#{m_name}@|s_#{m_name.gsub(/\./, '_')}]
-#{m_value}
-
-	*Default (YAML):*
-	code[=
+	tr[
+		td[@#{m_name}@ #[s_#{m_name.gsub(/\./, '_')}]]
+		td[#{m_value}]
+		td[
+			code[=
 #{default}
-	=]
+			=]
+		]
 	]
+	}
+end
+
+macro :config_table do
+	interpret %{
+		table[
+			tr[
+				th[Name]
+				th[Description]
+				th[Default (YAML)]
+			]
+			#@value
+		]
 	}
 end
 
@@ -122,7 +136,7 @@ end
 macro :features do
 	extra = (@name == :features) ? "Implemented" : "Fixed"
 	interpret %{
-		section[header[#{extra} #{@name.to_s.capitalize}||5]
+		section[header[#{extra} #{@name.to_s.capitalize}||4]
 			table[
 				tr[
 					th[ID]
