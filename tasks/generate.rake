@@ -23,14 +23,15 @@ namespace :generate do
 		Glyph.info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
+			file = Glyph['document.output_file']
 		else
 			out = Glyph::PROJECT/"output/html"
+			file = "#{Glyph['document.filename']}.html"
 		end
 		extension = '.html'
 		out.mkpath
-		file = "#{Glyph['document.filename']}#{extension}"
 		file_write out/file, Glyph.document.output
-		Glyph.info "'#{Glyph['document.filename']}#{extension}' generated successfully."
+		Glyph.info "'#{file}' generated successfully."
 		unless Glyph.lite? then
 			images = Glyph::PROJECT/'output/html/images'
 			images.mkpath
@@ -50,20 +51,21 @@ namespace :generate do
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 			src = out/"#{Glyph['document.filename']}.html"
+			file = "#{Glyph['document.filename']}.pdf"
 		else
 			out = Glyph::PROJECT/"output/pdf"
 			src = Glyph::PROJECT/"output/html/#{Glyph['document.filename']}.html"
+			file = "#{Glyph['document.output_file']}.pdf"
 		end
 		out.mkpath
-		file = Glyph['document.filename']
 		case Glyph['tools.pdf_generator']
 		when 'prince' then
 			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
-				res = system "prince #{src} -o #{out/"#{file}.pdf"}"
+				res = system "prince #{src} -o #{out/"#{file}"}"
 			if res then
-				Glyph.info "'#{file}.pdf' generated successfully."
+				Glyph.info "'#{file}' generated successfully."
 			else
-				Glyph.error "An error occurred while generating #{file}.pdf"
+				Glyph.error "An error occurred while generating #{file}"
 			end
 			# TODO: support other PDF renderers
 		else

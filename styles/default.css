@@ -9,8 +9,14 @@
 html {
 	background: #fff;
 }
-p, ol, ul {
+ol, ul {
 	margin: 0.3em 0;
+}
+p {
+	margin: 1em 0;
+}
+td p, td ul, td ol {
+	margin: 0;
 }
 table {
 	border-collapse: collapse;
@@ -70,9 +76,7 @@ dt {
 dd {
 	font-style: italic;
 }
-p {
-	margin: 1em 0;
-}
+
 blockquote {
 	margin: 1em 1em;
 	font-style: italic;

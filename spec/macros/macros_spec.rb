@@ -67,6 +67,20 @@ describe "Macro:" do
 		@p.document.output.should == ""
 		# Invalid regexp
 		lambda { interpret("?[match[$[document.source]|document]em[test]]").document.output }.should raise_error
+		interpret "?[%[lite?]|test]"
+		@p.document.output.should == ""
+		interpret "?[%[!lite?]|test]"
+		@p.document.output.should == "test"
+		interpret "?[%[lite?]|%[\"test\"]]"
+		@p.document.output.should == ""
+		# Condition not satisfied...
+		interpret "?[%[lite?]|.[= %[ Glyph\\['test_config'\\] = true ] =]]"
+		@p.document.output.should == ""
+		Glyph['test_config'].should_not == true
+		# Condition satisfied...
+		interpret "?[%[!lite?]|.[= --[%[ Glyph\\['test_config'\\] = true ]] =]]"
+		@p.document.output.should == ""
+		Glyph['test_config'].should == true
 	end
 
 	it "section, chapter, header" do
@@ -158,6 +172,9 @@ describe "Macro:" do
 	it "ruby" do
 		interpret "2 + 2 = %[2+2]"
 		@p.document.output.should == %{2 + 2 = 4}
+		interpret "%[lite?]"
+		@p.document.output.should == %{false}
+		interpret "%[def test; end]"
 	end
 
 	it "config" do

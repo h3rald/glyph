@@ -73,7 +73,8 @@ end
 
 macro :ruby do
 	min_parameters 1
-	Glyph.instance_eval(@value)
+	res = Glyph.instance_eval(@value.gsub(/\\*([\[\]\|])/){$1})
+	res.is_a?(Proc) ? "" : res
 end
 
 macro :config do
@@ -89,15 +90,30 @@ macro "config:" do
 end
 
 macro :escape do
-	exact_parameters 1
 	@value
 end
 
 macro :condition do
-	exact_parameters 2
+	min_parameters 1
+	max_parameters 2
 	cond, actual_value = @params
 	res = interpret(cond)
-	(res.blank? || res == "false") ? "" : actual_value
+	escaped = nil
+	@node.children.each do |c|
+		if c[:escape] then
+			escaped = c[:value]
+			break
+		end
+	end
+	escape_regexp = /\\*([\[\]\|])/
+	if res.blank? || res == "false" then
+	 	"" 
+	else
+		if escaped.to_s.gsub(escape_regexp){$1} == actual_value.to_s.gsub(escape_regexp){$1} then
+			actual_value = interpret escaped.gsub(/\\\|/, '|')
+		end
+		actual_value
+	end
 end
 
 macro :eq do

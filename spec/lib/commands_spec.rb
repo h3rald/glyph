@@ -150,7 +150,7 @@ describe "glyph" do
 		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"
 		run_command_successfully(["compile", "article.glyph", "out/article.htm"]).should == true
 		Glyph.lite_mode = false
-		Pathname.new('out/article.html').exist?.should == true # Output extension is actually ignored...
+		Pathname.new('out/article.htm').exist?.should == true 
 	end
 
 	it "[compile] should finalize the document in case of errors in included files" do
