@@ -9,18 +9,19 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-04-27}
+  s.date = %q{2010-04-28}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
   s.executables = ["glyph"]
   s.extra_rdoc_files = [
-    "CHANGELOG.html",
+    "CHANGELOG.textile",
      "LICENSE.textile",
      "README.textile"
   ]
   s.files = [
     "AUTHORS.textile",
+     "CHANGELOG.textile",
      "LICENSE.textile",
      "README.textile",
      "Rakefile",

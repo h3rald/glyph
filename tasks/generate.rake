@@ -51,11 +51,11 @@ namespace :generate do
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 			src = out/"#{Glyph['document.filename']}.html"
-			file = "#{Glyph['document.filename']}.pdf"
+			file = "#{Glyph['document.output_file']}.pdf"
 		else
 			out = Glyph::PROJECT/"output/pdf"
 			src = Glyph::PROJECT/"output/html/#{Glyph['document.filename']}.html"
-			file = "#{Glyph['document.output_file']}.pdf"
+			file = "#{Glyph['document.filename']}.pdf"
 		end
 		out.mkpath
 		case Glyph['tools.pdf_generator']

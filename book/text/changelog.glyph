@@ -5,7 +5,7 @@ macro :issue do
 	interpret %{
 		tr[
 			td[\=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
-			td[#{desc}]
+			td[textile[#{desc}]]
 		]
 	}
 end

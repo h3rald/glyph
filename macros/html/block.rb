@@ -162,10 +162,7 @@ end
 
 macro :th do
 	exact_parameters 1, :level => :warning
-	%{<th>
-#{@value}
-
-</th>}
+	%{<th>#{@value}</th>}
 end
 
 macro_alias :important => :note

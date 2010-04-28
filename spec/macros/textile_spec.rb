@@ -81,6 +81,11 @@ Testing:
 		]
 	]
 ]]}
+		text4 = %{textile[table[
+	tr[
+		td[This is a _test_.]
+	]
+]]}
 		result = 
 %{<table>
 <tr>
@@ -89,9 +94,19 @@ Testing:
 </td>
 </tr>
 </table>}
+		result2 = 
+%{<table>
+<tr>
+<td>
+<p>This is a <em>test</em>.</p>
+</td>
+</tr>
+</table>}
 		filter(text1).should == result
 		filter(text2).should == result
 		filter(text3).should == result
+		##### Check inline textile
+		filter(text4).should == result2
 	end
 	
 	######################################

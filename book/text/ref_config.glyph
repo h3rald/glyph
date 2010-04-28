@@ -1,5 +1,6 @@
 section[header[@document.*@]
 The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.
+
 	config_table[
 		ref_config[document.author|
 The author of the document.
@@ -51,6 +52,7 @@ The output target for filters. It can be set to @html@ (for RedCloth and MarkDow
 
 section[header[@structure.*@]
 The following configuration settings are used internally by Glyph and should not be changed by the user.
+
 	config_table[
 		ref_config[structure.backmatter|
 The section types used in the document backmatter.
