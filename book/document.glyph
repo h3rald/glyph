@@ -18,6 +18,12 @@ document[
 			toc[]
 			introduction[header[Introduction]
 				textile[@[introduction.glyph]]
+				section[header[License]
+					textile[@[license.glyph]]
+				]
+			]
+			acknowledgement[header[Acknowledgement]
+				textile[@[acknowledgement.glyph]]
 			]
 		]
 		bodymatter[

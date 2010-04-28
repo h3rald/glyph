@@ -1,5 +1,8 @@
-Glyph was designed and developed by Fabio Cevasco (h3rald).
+Glyph was designed and developed by <a href="http://www.h3rald.com">Fabio Cevasco</a> (h3rald).
 
 Special thanks to the following individuals who contributed to Glyph by reporting and fixing issues and/or proposing and implementing new features:
-* Jamie Atkinson (Jabbslad)
-* Sebastian Staudt (koraktor)
+* <a href="http://www.jabbslad.com">Jamie Atkinson</a> (Jabbslad)
+* <a href="http://koraktor.github.com">Sebastian Staudt</a> (koraktor)
+
+
+    

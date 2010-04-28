@@ -99,7 +99,7 @@
 
 </td>
 			<td>
-<p>The compile command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed.</p>
+<p>The compile command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed (koraktor).</p>
 
 </td>	
 </tr>

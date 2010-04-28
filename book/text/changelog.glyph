@@ -56,7 +56,7 @@ release[0.2.0|May 7th 2010 (?)|
 		issue[89|It is now possible to compile a single .glyph source file without creating a Glyph project. ![Add new section to document authoring]]
 		issue[92|6 new macros have been defined to allow conditional processing (\.%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
 		issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
-		issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed.]
+		issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed (koraktor).]
 	]
 	bugs[
 		issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed. ![Link to troubleshooting section, expand]]
