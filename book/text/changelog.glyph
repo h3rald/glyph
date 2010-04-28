@@ -39,7 +39,7 @@ end
 
 macro_alias :bugs => :features
 
-=]--[-------------------
+=]--[
 	?[%[lite?]|.[=
 			%:[%>\|"#@value macro"]
 			%:[#>\|"#@value command"]

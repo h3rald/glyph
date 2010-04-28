@@ -6,14 +6,8 @@
 <h3 id="h_1">Implemented Features</h3>
 			<table>
 <tr>
-<th>
-ID
-
-</th>
-					<th>
-Description
-
-</th>	
+<th>ID</th>
+					<th>Description</th>	
 </tr>
 				<tr>
 <td>
@@ -21,7 +15,7 @@ Description
 
 </td>
 			<td>
-A new highlight macro is available to highlight source code (CodeRay or UltraViolet requireed).
+<p>A new highlight macro is available to highlight source code (CodeRay or UltraViolet requireed).</p>
 
 </td>	
 </tr>
@@ -33,7 +27,7 @@ A new highlight macro is available to highlight source code (CodeRay or UltraVio
 
 </td>
 			<td>
-It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.
+<p>It is now possible to use Glyph programmatically via the new <code>Glyph#filter</code> and <code>Glyph#compile</code> methods.</p>
 
 </td>	
 </tr>
@@ -45,7 +39,7 @@ It is now possible to use Glyph programmatically via the new @Glyph#filter@ and 
 
 </td>
 			<td>
-It is now possible to define snippets inside a glyph source file using the snippet: macro.
+<p>It is now possible to define snippets inside a glyph source file using the snippet: macro.</p>
 
 </td>	
 </tr>
@@ -57,7 +51,7 @@ It is now possible to define snippets inside a glyph source file using the snipp
 
 </td>
 			<td>
-It is now possible to change configuration settings inside a glyph source file using the config: macro macro (Jabbslad).
+<p>It is now possible to change configuration settings inside a glyph source file using the config: macro macro (Jabbslad).</p>
 
 </td>	
 </tr>
@@ -69,7 +63,7 @@ It is now possible to change configuration settings inside a glyph source file u
 
 </td>
 			<td>
-It is now possible to compile a single .glyph source file without creating a Glyph project.
+<p>It is now possible to compile a single .glyph source file without creating a Glyph project.</p>
 
 </td>	
 </tr>
@@ -81,7 +75,7 @@ It is now possible to compile a single .glyph source file without creating a Gly
 
 </td>
 			<td>
-6 new macros have been defined to allow conditional processing (condition macro, eq macro, not macro, and macro, or macro, match macro)
+<p>6 new macros have been defined to allow conditional processing (condition macro, eq macro, not macro, and macro, or macro, match macro)</p>
 
 </td>	
 </tr>
@@ -93,7 +87,7 @@ It is now possible to compile a single .glyph source file without creating a Gly
 
 </td>
 			<td>
-It is now possible to add _validators_ to macros, for example to check the number of parameters they take.
+<p>It is now possible to add <em>validators</em> to macros, for example to check the number of parameters they take.</p>
 
 </td>	
 </tr>
@@ -105,7 +99,7 @@ It is now possible to add _validators_ to macros, for example to check the numbe
 
 </td>
 			<td>
-The compile command command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed.
+<p>The compile command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed.</p>
 
 </td>	
 </tr>
@@ -118,14 +112,8 @@ The compile command command can now take an extra @--auto@ switch to trigger doc
 <h3 id="h_2">Fixed Bugs</h3>
 			<table>
 <tr>
-<th>
-ID
-
-</th>
-					<th>
-Description
-
-</th>	
+<th>ID</th>
+					<th>Description</th>	
 </tr>
 				<tr>
 <td>
@@ -133,7 +121,7 @@ Description
 
 </td>
 			<td>
-Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.
+<p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p>
 
 </td>	
 </tr>
@@ -145,7 +133,7 @@ Warning and error messages have been updated, and it is now possible to show add
 
 </td>
 			<td>
-Default css files were not copied when creating a new project. The issue has been resolved by allowing the style macro to reference Glyph's system styles.
+<p>Default css files were not copied when creating a new project. The issue has been resolved by allowing the style macro to reference Glyph&#8217;s system styles.</p>
 
 </td>	
 </tr>
@@ -157,7 +145,7 @@ Default css files were not copied when creating a new project. The issue has bee
 
 </td>
 			<td>
-The config command did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.
+<p>The config command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p>
 
 </td>	
 </tr>

@@ -5,7 +5,6 @@
 :gcode: "The following Glyph code:"
 :htmlcode: "Is translated into the following HTML code:"
 :markups: Textile or Markdown
-:prince: "=>[http://www.princexml.com/|Prince]"
 :filter_by_ext: "the $>[filters.by_file_extension] is @true@"
 :called_on_files: "If &[filter_by_ext], this macro is called automatically on =>[#m_include|included] files"
 :test: |-

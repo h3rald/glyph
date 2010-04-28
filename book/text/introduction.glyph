@@ -1,10 +1,13 @@
-Glyph is a _Rapid Document Authoring Framework_. 
+--[
+&:[prince|=>[http://www.princexml.com/|Prince]]
+
+]Glyph is a _Rapid Document Authoring Framework_. 
 
 Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through &[prince]).
 
 section[header[Main Features]
 
-Glyph uses a =>[#macros_nutshell|simple macro system] to perform a wide variety of advanced tasks:
+Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 * Generate block-level HTML tags not commonly managed by lightweight markups, like @head@, @body@, @div@ and @table@.
 * Create and validate internal and external links.
 * Include and validate images and figures.
@@ -29,12 +32,13 @@ section[header[Installation]
 
 section[header[Essential Glyph commands]
 
-Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's] for its simplicity and power (thanks to the =>[http://github.com/davetron5000/gli|Gli] gem). Here are some example commands: 
+Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's] for its simplicity and power (thanks to the =>[http://github.com/davetron5000/gli|gli] gem). Here are some example commands: 
 
 * @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
 * @glyph add introduction.textile@ -- to create a new file called _introduction.textile_.
 * @glyph compile@ -- to compile the current document into a single HTML file.
 * @glyph compile -f pdf@ -- to compile the current document into HTML and then transform it into PDF using &[prince].
+* @glyph compile readme.glyph@ -- to compile a _readme.glyph_ located in the current directory into a single HTML file.
 
 ]
 

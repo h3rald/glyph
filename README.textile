@@ -1,8 +1,9 @@
 Glyph is a _Rapid Document Authoring Framework_. 
 
-Think of it like a sort of "Ruby On Rails":http://www.rubyonrails.org but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through "Prince":http://www.princexml.com).
+Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through <a href="http://www.princexml.com/">Prince</a>).
 
-h3. Main Features
+<div class="section">
+<h2 id="h_1">Main Features</h2>
 
 Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 * Generate block-level HTML tags not commonly managed by lightweight markups, like @head@, @body@, @div@ and @table@.
@@ -13,32 +14,45 @@ Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 * Store common snippets of text in a single YAML file and use them anywhere in your document, as many times as you need.
 * Store configuration settings in a YAML file and use them anywhere in your document, as many times as you need.
 * Evaluate Ruby code within your document.
-* Call macros from other macros (including snippets), carefully avoiding mutual calls.
+* Call macros from other macros (including snippets), avoiding mutual calls.
 * Include text files in other text files.
-* Include the contents of configuration settings (author, title) in the document.
+* Include the value of any configuration setting (like author, title) in the document.
 * Filter input explicitly or implicitly, based on file extensions when including files. 
 * Manage comments and todo items.
 
-h3. Installation
+</div>
+
+<div class="section">
+<h2 id="h_2">Installation</h2>
 
 @gem install glyph@ -- simple, as always.
 
-h3. Essential Glyph Commands
+</div>
 
-Glyph is 100% command line. Its interface "Git's":http://git-scm.com/ for its simplicity and power (thanks to the "Gli":http://github.com/davetron5000/gli gem). Here are some example commands: 
+<div class="section">
+<h2 id="h_3">Essential Glyph commands</h2>
+
+Glyph is 100% command line. Its interface resambles <a href="http://git-scm.com/">Git's</a> for its simplicity and power (thanks to the <a href="http://github.com/davetron5000/gli">gli</a> gem). Here are some example commands: 
 
 * @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
 * @glyph add introduction.textile@ -- to create a new file called _introduction.textile_.
 * @glyph compile@ -- to compile the current document into a single HTML file.
-* @glyph compile -f pdf@ -- to compile the current document into HTML and then transform it into PDF using "Prince":http://www.princexml.com.
+* @glyph compile -f pdf@ -- to compile the current document into HTML and then transform it into PDF using <a href="http://www.princexml.com/">Prince</a>.
+* @glyph compile readme.glyph@ -- to compile a _readme.glyph_ located in the current directory into a single HTML file.
 
-h3. Glyph macros in a nutshell
+</div>
+
+<div class="section">
+<h2 id="macros_nutshell">Glyph macros in a nutshell</h2>
 
 Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:
 
 **Glyph Source:**
 
-<pre><code>
+
+<div class="code">
+<pre>
+<code>
 section[header[Something about Glyph]
 You can use Glyph macros in conjunction
  with _Textile_ or _Markdown_ to
@@ -50,13 +64,18 @@ extremely easy with a 3rd-party
 renderer like =>[http://www.princexml.com|Prince].
   ]   
 ]
-</code></pre>
+</code>
+</pre>
+</div>
 
 **HTML Output:**
 
-<pre><code>
+
+<div class="code">
+<pre>
+<code>
 <div class="section">
-  <h2 id="h_1">Something about Glyph</h2>
+  <h2 id="h_10">Something about Glyph</h2>
   <p>You can use Glyph macros in conjunction with 
      <em>Textile</em> or <em>Markdown</em> to
      produce HTML files effortlessly.</p>
@@ -68,13 +87,22 @@ renderer like =>[http://www.princexml.com|Prince].
       like <a href="http://www.princexml.com">Prince</a>.</p>
   </div>
 </div>
-</code></pre>
+</code>
+</pre>
+</div>
 
-h3. Resources
+</div>
 
-* Home Page: "http://www.h3rald.com/glyph/":http://www.h3rald.com/glyph/
-* Repository: "http://www.github.com/h3rald/glyph/":http://www.github.com/h3rald/glyph/
-* Bug Tracking: "http://www.github.com/h3rald/glyph/issues":http://www.github.com/h3rald/glyph/issues
-* Book (PDF): "http://github.com/h3rald/glyph/raw/0.1.0/book/output/pdf/glyph.pdf":http://github.com/h3rald/glyph/raw/0.1.0/book/output/pdf/glyph.pdf
-* Reference Documentation: "http://yardoc.org/docs/h3rald-glyph/":http://yardoc.org/docs/h3rald-glyph/
-* User Group: "http://groups.google.com/group/glyph-framework":http://groups.google.com/group/glyph-framework
+<div class="section">
+<h2 id="h_5">Resources</h2>
+
+* Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a>
+* Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a>
+* Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a>
+* Development Wiki <a href="http://wiki.github.com/h3rald/glyph">http://wiki.github.com/h3rald/glyph</a>
+* RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a>
+* Book (PDF): <a href="http://github.com/h3rald/glyph/raw/0.1.0/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/0.1.0/book/output/pdf/glyph.pdf</a>
+* Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a>
+* User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a>
+
+</div>

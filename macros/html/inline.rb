@@ -44,7 +44,6 @@ macro :fmi do
 end
 
 macro :comment do
-	min_parameters 1
 	if Glyph['document.draft'] then
 		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{@value}</span>}
 	else

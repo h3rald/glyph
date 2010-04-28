@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
      "book/output/html/images/glyph.png",
      "book/output/html/images/glyph.svg",
      "book/output/pdf/glyph.pdf",
+     "book/readme",
      "book/snippets.yml",
      "book/text/authoring.glyph",
      "book/text/changelog.glyph",
