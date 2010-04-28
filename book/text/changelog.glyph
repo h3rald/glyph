@@ -11,10 +11,11 @@ macro :issue do
 end
 
 macro :features do
-	extra = (@name == :features) ? "Implemented" : "Fixed"
+	verb = (@name == :features) ? "Implemented" : "Fixed"
+	total = @node.children.length
 	level = Glyph.lite? ? 3 : 4
 	interpret %{
-		section[header[#{extra} #{@name.to_s.capitalize}\|\|#{level}]
+		section[header[#{total} #{@name.to_s.capitalize} #{verb}:\|\|#{level}]
 			table[
 				tr[
 					th[ID]
@@ -51,17 +52,25 @@ release[0.2.0|May 7th 2010 (?)|
 	features[
 		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet requireed).]
 		issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
-		issue[87|It is now possible to define snippets inside a glyph source file using the %>[snippet:].]	
-		issue[88|It is now possible to change configuration settings inside a glyph source file using the %>[config:] macro (Jabbslad).]	
-		issue[89|It is now possible to compile a single .glyph source file without creating a Glyph project. ![Add new section to document authoring]]
+		issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]	
+		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] macro (Jabbslad).]	
+		issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project. ![Add new section to document authoring]]
 		issue[92|6 new macros have been defined to allow conditional processing (\.%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
 		issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
 		issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed (koraktor).]
+		issue[99|Added a @document.draft@ setting. If set to @true@, comments and TODOs are rendered in output files.]
+		issue[100|#[system_css]Glyph CSS files are no longer copied to new projects, but they can be referenced as if they were (see also =>[#css_not_copied|#93]).]
+		issue[108|It is now possible to define Glyph macros within Glyph source files using the %>[macro:].]
 	]
 	bugs[
 		issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed. ![Link to troubleshooting section, expand]]
-		issue[93|Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles. ![New paragraph about system styles]]
+		issue[93|#[css_not_copied]Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles (see also =>[#system_css|#100]). ![New paragraph about system styles]]
 		issue[95|The #>[config] did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.]
+		issue[98|Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.]
+		issue[101|Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.]
+		issue[103|Fixed a bug that caused test failures when deleting the test project directory.]
+		issue[104|Nested Glyph macros calling @Macro#interpret@ no longer ignore escape delimiters.]
+		issue[107|Added the possibility to force header level (3^rd^ parameter of the %>[header]).]
 	]
 ]
 release[0.1.0|April 8th 2010|
