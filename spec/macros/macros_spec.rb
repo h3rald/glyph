@@ -319,7 +319,7 @@ describe "Macro:" do
 		check = lambda do |hl, result|
 			Glyph["highlighters.current"] = hl
 			Glyph.debug_mode = true
-			interpret("highlight[ruby|#{code}]")
+			interpret("highlight[=ruby|\n#{code}=]")
 			@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
 		end
 		check.call 'ultraviolet', uv_result if uv

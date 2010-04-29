@@ -4,13 +4,14 @@ section[header[Anatomy of a Macro]
 
 This is the source code of a fairly simple macro used to format a note :
 
+<notextile>
 highlight[=ruby|
 macro :note do
   %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
     </div>}
-end 
-=]
+end=]
+</notextile>
 
 The @macro@ method takes a single  @Symbol@ or @String@ parameter, corresponding to the name of the macro. In this case, the entire block (or _body_ of the macro) is a @String@ corresponding to what we want the macro to evaluate to: a @<div>@ tag containing a note. 
 
@@ -34,10 +35,10 @@ table[
   tr[
     td[codeph[@node]]
     td[A =>[http://yardoc.org/docs/h3rald-glyph/Node|@Node@] containing information about the macro, within the document syntax tree. Useful for accessing parent and child macros, and the current =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Document|@Document@]. Normally, macro nodes contain the following keys:
-- @:name@, the name of the macro.
-- @:value@, the value (i.e. the contents, within the delimiters) of the macro
-- @:source@, a @String@ identifying the source of the macro (a file, a snippet, etc.) 
-- @:document@, the parsed document tree.
+* @:name@, the name of the macro.
+* @:value@, the value (i.e. the contents, within the delimiters) of the macro
+* @:source@, a @String@ identifying the source of the macro (a file, a snippet, etc.) 
+* @:document@, the parsed document tree.
 
 Note that the first three keys can also be accessed via instance variables.]
   ]
@@ -66,14 +67,15 @@ section[header[Bookmarks and Headers]
 The =>[http://yardoc.org/docs/h3rald-glyph/Glyph/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
 
 <notextile>
-code[=
+highlight[=ruby|
 macro :anchor do 
   ident, title = @params
   macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
   bookmark :id => ident, :title => title
   %{<a id="#{ident}">#{title}</a>}
 end
-=] </notextile>
+=] 
+</notextile>
 
 The @bookmark?@ method can be used to check the existance of a particular ID within the whole document, while the @bookmark@ method is used to store bookmark IDs and titles. In a similar way, you can use @header?@ and @header@ methods to check the existance of headers within the documents or store new ones.
 
@@ -86,7 +88,7 @@ Sometimes you may need to access some data that will not be available until the 
 Here's the source code of the %>[link]:
 
 <notextile>
-code[=
+highlight[=ruby|
 macro :link do
   href, title = @params
   if href.match /^#/ then
@@ -105,7 +107,8 @@ macro :link do
   title \|\|= href
   %{<a href="#{href}">#{title}</a>}
 end
-=] </notextile>
+=]
+</notextile>
 
 If there's already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the @placeholder@ method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.
 
@@ -117,7 +120,7 @@ section[header[Interpreting Glyph Code]
 What if you need to evaluate some Glyph code _within_ a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the @interpret@ method, as follows:
 
 <notextile>
-code[=
+highlight[=ruby|
 macro :fmi do
   topic, href = @params
   link = placeholder do \|document\| 
@@ -125,7 +128,8 @@ macro :fmi do
   end
   %{<span class="fmi">for more information on #{topic}, see #{link}</span>}
 end
-=] </notextile>
+=] 
+</notextile>
 
 When the @interpret@ method is called, the following happens:
 # A new Glyph document is created from the @String@ passed to the method.

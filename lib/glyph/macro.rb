@@ -97,7 +97,7 @@ module Glyph
 		# Executes a macro definition in the context of self
 		def execute
 			res = instance_exec(@node, &Glyph::MACROS[@name]).to_s
-			@node[:escape] ? res.gsub(/\\*([\[\]])/){"\\#$1"} : res
+			res.gsub(/\\*([\[\]\|])/){"\\#$1"}# : res
 		end
 
 	end

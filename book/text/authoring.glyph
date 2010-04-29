@@ -107,7 +107,7 @@ This example defines two nested sections, each with its own header. The header i
 Note an important difference from HTML: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following HTML code:
 
 <notextile>
-code[=
+highlight[=html|
 <div class="section">
   <h2>Section #1</h2>
   <p>Write the section contents here...</p>
@@ -178,7 +178,9 @@ Snippets are text strings saved in YAML format in the @snippets.yml@ file. They 
 
 box[Example|
 Consider the following @snippets.yml@ file:
-code[=
+
+<notextile>
+highlight[=yaml|
 --- 
 :glang: Glyph Language
 :macros: Glyph Macros
@@ -190,6 +192,8 @@ code[=
   This is a 
   Test snippet
 =]
+</notextile>
+
 You can use codeph[=&[markups]=] anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the @markups@ snippets only in the @snippets.yml@ file to change it everywhere else in the document.
 ] --[End Example]
 tip[
@@ -224,7 +228,7 @@ This is a #[test\\\|test anchor].=]
 &[htmlcode]
 
 <notextile>
-code[=
+highlight[=html|
 <p>This is a link to <a href="#test">test anchor</a>.</p>
 <p>...</p>
 <p>This is <a href="#wrong">#wrong</a>.</p>
@@ -287,7 +291,8 @@ fig[example.png\|An example figure.]
 
 &[htmlcode]
 
-code[=
+<notextile>
+highlight[=html|
 <img src="images/glyph.svg" width="20%" height="20%" alt="-" />
 
 <div class="figure">
@@ -295,6 +300,7 @@ code[=
   <div class="caption">An example figure.</div>
 </div>
 =]
+</notextile>
 ]
 
 note[

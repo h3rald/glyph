@@ -12,15 +12,15 @@ That's it. You just created a new Glyph project in the @test_document@ directory
 
 box[Glyph's dependencies|
 Glyph requires the following gems:
-- extlib
-- gli
-- treetop
-- rake
+* extlib
+* gli
+* treetop
+* rake
 
 Additionally, some Glyph macros may require additional gems, such as:
-- RedCloth (\.%>[textile])
-- BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (\.%>[markdown])
-- Haml (if you want to load .sass files with the %>[style])
+* RedCloth (\.%>[textile])
+* BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (\.%>[markdown])
+* Haml (if you want to load .sass files with the %>[style])
 ]
 
 Every Glyph project is comprised of the following directories:
@@ -41,6 +41,7 @@ section[header[Document Structure|struct]
 
 Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@ generated automatically when creating a new project is the following:
 
+<notextile>
 code[=
 document[
   head[style[default.css]]
@@ -71,6 +72,8 @@ document[
     ]
   ]
 ]=]
+</notextile>
+
 
 Even without knowing anything about &[glang], you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. @frontmatter\[\]@, @preface\[\]@, @chapter\[\]@, etc. are all Glyph _macros_ used to define -- in this case -- some structural elements. In practice, this means that if you plan to generate an HTML document, they'll be converted into @<div>@ tags.
 
@@ -117,12 +120,12 @@ In this way, the document author will be set to _John Smith_ for the current pro
 
 box[Regarding configuration values and data types...|
 Glyph attempts to "guess" the data type of a configuration values by evaluation (@Kernel#instance_eval@) if the value:
-- is wrapped in quotes (@"@ or @'@) &rarr; @String@
-- starts with a colon (@:@) &rarr; @Symbol@
-- is wrapped in square brackets (@\[@ and @\]@) &rarr; @Array@
-- is wrapped in curly brackets (@{@ and @}@) &rarr; @Hash@
-- is _true_ or _false_ &rarr; @Boolean@
-- is _nil_ &rarr; @NilClass@
+* is wrapped in quotes (@"@ or @'@) &rarr; @String@
+* starts with a colon (@:@) &rarr; @Symbol@
+* is wrapped in square brackets (@\[@ and @\]@) &rarr; @Array@
+* is wrapped in curly brackets (@{@ and @}@) &rarr; @Hash@
+* is _true_ or _false_ &rarr; @Boolean@
+* is _nil_ &rarr; @NilClass@
 
 Note that this guessing is far from being foolproof: If you type something like _{:test, 2}_, for example, you'll get an error. 
 ]
@@ -137,15 +140,15 @@ table[
 		th[Description]
 	]
 	tr[
-		td[*document.author*]
+		th[@document.author@]
 		td[The author of the document]
 	]
 	tr[
-		td[*document.title*]
+		th[@document.title@]
 		td[The title of the document]
 	]
 	tr[
-		td[*document.filename*]
+		th[@document.filename@]
 		td[The document file name]
 	]
 ]

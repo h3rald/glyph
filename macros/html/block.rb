@@ -18,7 +18,7 @@ macro :box do
 end
 
 macro :code do
-	min_parameters 1 # "Relaxed" validator to allow unescaped pipes
+	min_parameters 1 
 	%{
 <div class="code">
 <pre>
@@ -30,8 +30,10 @@ macro :code do
 end
 
 macro :highlight do
-	min_parameters 2  # "Relaxed" validator to allow unescaped pipes
-	lang, text = @params
+	min_parameters 2  
+	lang = @params[0]
+	text = @params[1..@params.length-1].join '\\|'
+	text.gsub!(/\\(.)/){$1}
 	highlighter = Glyph["highlighters.current"].to_sym rescue nil
 	if !highlighter then
 		begin
@@ -75,7 +77,6 @@ macro :highlight do
 	else
 		macro_error "No highlighter installed. Please run: gem install coderay"
 	end
-	result = "<notextile>\n#{result}\n</notextile>" if @node.find_parent { |node| node[:macro] == :textile }
 	result
 end
 
