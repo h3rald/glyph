@@ -81,7 +81,7 @@ end
 
 def define_ref_macro
 	Glyph.macro :ref do
-		%{<a href="#{@params[0]}">#{@params[1]}</a>}
+		%{<a href="#{params[0]}">#{params[1]}</a>}
 	end
 end
 

@@ -16,8 +16,21 @@ module Glyph
 			@name = @node[:macro]
 			@value = @node[:value]
 			@source = @node[:source]
-			esc = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
-			@params = @value.gsub(/\\\|/, esc).split('|').map{|p| p.strip.gsub esc, "\\|"}
+			@escaped_pipe = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
+		end
+
+		# Parses the macro parameters (stripping values)
+		# @return [Array] the macro parameters
+		def params
+			return @params if @params
+			@params = @value.gsub(/\\\|/, @escaped_pipe).split('|').map{|p| p.strip.gsub @escaped_pipe, "\\|"}
+		end
+
+		# Parses the macro parameters (without stripping values)
+		# @return [Array] the macro parameters
+		def raw_params
+			return @raw_params if @raw_params
+			@params = @value.gsub(/\\\|/, @escaped_pipe).split('|').map{|p| p.gsub @escaped_pipe, "\\|"}
 		end
 
 		# Returns the "path" to the macro within the syntax tree.
@@ -26,6 +39,17 @@ module Glyph
 			macros = []
 			@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }
 			macros.reverse.join('/')
+		end
+		
+		# Returns a todo message to include in the document in case of errors.
+		# @param [String] message the message to include in the document
+		# @return [String] the resulting todo message
+		def macro_todo(message)
+			draft = Glyph['document.draft']
+			Glyph['document.draft'] = true unless draft
+			res = interpret "![#{message}]"
+			Glyph['document.draft'] = false unless draft
+			res
 		end
 
 		# Raises a macro error (preventing document post-processing)

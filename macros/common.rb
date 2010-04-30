@@ -1,19 +1,14 @@
 #!/usr/bin/env ruby
 
 macro :snippet do
-	exact_parameters 1
-	ident = @params[0].to_sym
+	ident = @value.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
 			Glyph.warning e.message
-			draft = Glyph['document.draft']
-			Glyph['document.draft'] = true unless draft
-			res = interpret "![Correct errors in snippet '#{@value}']"
-			Glyph['document.draft'] = false unless draft
-			res
+			macro_todo "Correct errors in snippet '#{@value}'"
 		end
 	else
 		macro_warning "Snippet '#{ident}' does not exist"
@@ -23,14 +18,14 @@ end
 
 macro "snippet:" do
 	exact_parameters 2
-	ident, text = @params
+	ident, text = params
 	Glyph::SNIPPETS[ident.to_sym] = text
 	""
 end
 
 macro "macro:" do
 	exact_parameters 2
-	ident, code = @params
+	ident, code = params
 	Glyph.macro(ident) do
 		instance_eval code
 	end
@@ -39,7 +34,6 @@ end
 
 macro :include do
 	macro_error "Macro not available when compiling a single file." if Glyph.lite?
-	exact_parameters 1
 	file = nil
 	(Glyph::PROJECT/"text").find do |f|
 		file = f if f.to_s.match /\/#{@value}$/
@@ -59,11 +53,7 @@ macro :include do
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
 			Glyph.warning e.message
-			draft = Glyph['document.draft']
-			Glyph['document.draft'] = true unless draft
-			res = interpret "![Correct errors in file '#{@value}']"
-			Glyph['document.draft'] = false unless draft
-			res
+			macro_todo "Correct errors in file '#{@value}'"
 		end
 	else
 		macro_warning "File '#{@value}' no found."
@@ -72,19 +62,17 @@ macro :include do
 end
 
 macro :ruby do
-	min_parameters 1
 	res = Glyph.instance_eval(@value.gsub(/\\*([\[\]\|])/){$1})
 	res.is_a?(Proc) ? "" : res
 end
 
 macro :config do
-	exact_parameters 1
 	Glyph[@value]
 end
 
 macro "config:" do
 	exact_parameters 2
-	setting,value = @params
+	setting,value = params
 	Glyph[setting] = value
 	nil
 end
@@ -96,7 +84,7 @@ end
 macro :condition do
 	min_parameters 1
 	max_parameters 2
-	cond, actual_value = @params
+	cond, actual_value = params
 	res = interpret(cond)
 	escaped = nil
 	@node.children.each do |c|
@@ -119,7 +107,7 @@ end
 macro :eq do
 	min_parameters 1
 	max_parameters 2
-	a, b = @params
+	a, b = params
 	res_a = interpret(a.to_s) 
 	res_b = interpret(b.to_s)
 	(res_a == res_b)	? true : nil
@@ -127,13 +115,14 @@ end
 
 macro :not do
 	max_parameters 1
-	interpret(@value).blank? ? true : nil 
+	v = interpret(@value)
+	(v.blank? || v == "false") ? true : nil 
 end
 
 macro :and do
 	min_parameters 1
 	max_parameters 2
-	a, b = @params
+	a, b = params
 	res_a = !interpret(a.to_s).blank?
 	res_b = !interpret(b.to_s).blank?
 	(res_a && res_b) ? true : nil
@@ -142,7 +131,7 @@ end
 macro :or do
 	min_parameters 1
 	max_parameters 2
-	a, b = @params
+	a, b = params
 	res_a = !interpret(a.to_s).blank?
 	res_b = !interpret(b.to_s).blank?
 	(res_a || res_b) ? true : nil
@@ -150,7 +139,7 @@ end
 
 macro :match do
 	exact_parameters 2
-	val, regexp = @params
+	val, regexp = params
 	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
 	(interpret(val).match(instance_eval(regexp))) ? true : nil
 end

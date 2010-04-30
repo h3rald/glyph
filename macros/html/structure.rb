@@ -11,9 +11,9 @@ end
 macro :header do
 	min_parameters 1
 	max_parameters 3
-	title = @params[0]
-	level = @params[2]
-	h_id = @params[1]
+	title = params[0]
+	level = params[2]
+	h_id = params[1]
 	h_id = nil if h_id.blank?
 	unless level then
 		level = 1
@@ -62,7 +62,6 @@ macro :head do
 end
 
 macro :style do 
-	exact_parameters 1
 	file = Glyph.lite? ? Pathname.new(@value) : Glyph::PROJECT/"styles/#{@value}"
 	file = Pathname.new Glyph::HOME/'styles'/@value unless file.exist?
 	macro_error "Stylesheet '#{@value}' not found" unless file.exist?

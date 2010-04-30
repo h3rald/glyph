@@ -157,7 +157,7 @@ describe "glyph" do
 		create_project
 		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\n@[errors.glyph]\n@[syntax_error.glyph]]"
 		file_write Glyph::PROJECT/'text/errors.glyph', "not[a|b]"
-		file_write Glyph::PROJECT/'text/syntax_error.glyph', "$[a|b]"
+		file_write Glyph::PROJECT/'text/syntax_error.glyph', "$[a"
 		err = "Document cannot be finalized due to previous errors"
 		res = run_command(["compile"])
 		out = file_load Glyph::PROJECT/'output/html/test_project.html'

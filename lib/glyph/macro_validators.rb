@@ -19,27 +19,27 @@ module Glyph
 			# @param [Integer] n the maximum number of parameters allowed for the macro.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			def max_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{@params.length} given)", options) { @params.length <= n }
+				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{params.length} given)", options) { params.length <= n }
 			end
 
 			# Ensures that the macro receives at least _n_ parameters.
 			# @param [Integer] n the minimum number of parameters allowed for the macro.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			def min_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes at least #{n} parameter(s) (#{@params.length} given)", options) { @params.length >= n }
+				validate("Macro '#{@name}' takes at least #{n} parameter(s) (#{params.length} given)", options) { params.length >= n }
 			end
 
 			# Ensures that the macro receives exactly _n_ parameters.
 			# @param [Integer] n the number of parameters allowed for the macro.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			def exact_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{@params.length} given)", options) { @params.length == n }
+				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{params.length} given)", options) { params.length == n }
 			end
 
 			# Ensures that the macro receives no parameters.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			def no_parameters(options={:level=>:error})
-				validate("Macro '#{@name}' takes have parameter(s) (#{@params.length} given)", options) { @params.length == 0 }
+				validate("Macro '#{@name}' takes have parameter(s) (#{params.length} given)", options) { params.length == 0 }
 			end
 
 		end

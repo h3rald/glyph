@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 macro :note do
-	exact_parameters 1, :level => :warning
 	%{<div class="#{@name}">
 <span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
 
@@ -11,8 +10,8 @@ end
 macro :box do
 	exact_parameters 2, :level => :warning
 	%{<div class="box">
-<div class="box-title">#{@params[0]}</div>
-#{@params[1]}
+<div class="box-title">#{params[0]}</div>
+#{params[1]}
 
 </div>}
 end
@@ -31,8 +30,8 @@ end
 
 macro :highlight do
 	min_parameters 2  
-	lang = @params[0]
-	text = @params[1..@params.length-1].join '\\|'
+	lang = params[0]
+	text = raw_params[1..raw_params.length-1].join '\\|'
 	text.gsub!(/\\(.)/){$1}
 	highlighter = Glyph["highlighters.current"].to_sym rescue nil
 	if !highlighter then
@@ -90,12 +89,12 @@ end
 macro :img do
 	min_parameters 1
 	max_parameters 3
-	image = @params[0]
-	width = @params[1]
+	image = params[0]
+	width = params[1]
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
  	w = (width) ? "width=\"#{width}\"" : ''
-	height = @params[2]
+	height = params[2]
  	h = (height) ? "height=\"#{height}\"" : ''
 	Glyph.warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
 	%{<img src="#{dest_file}" #{w} #{h} alt="-"/>}
@@ -104,8 +103,8 @@ end
 macro :fig do
 	min_parameters 1
 	max_parameters 2
-	image = @params[0]
-	caption = @params[1] 
+	image = params[0]
+	caption = params[1] 
 	caption ||= nil
 	caption = %{<div class="caption">#{caption}</div>} if caption
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"

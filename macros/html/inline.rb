@@ -3,7 +3,7 @@
 macro :anchor do 
 	min_parameters 1
 	max_parameters 2
-	ident, title = @params
+	ident, title = params
 	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
 	bookmark :id => ident, :title => title
 	%{<a id="#{ident}">#{title}</a>}
@@ -16,7 +16,7 @@ end
 macro :link do
 	min_parameters 1
 	max_parameters 2
-	href, title = @params
+	href, title = params
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
 		bmk = bookmark? anchor
@@ -36,7 +36,7 @@ end
 
 macro :fmi do
 	exact_parameters 2, :level => :warning
-	topic, href = @params
+	topic, href = params
 	link = placeholder do |document| 
 		interpret "link[#{href}]"
 	end
