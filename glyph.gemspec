@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-04-30}
+  s.date = %q{2010-05-04}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -27,19 +27,25 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/glyph",
-     "book/authors",
-     "book/changelog",
      "book/config.yml",
      "book/document.glyph",
      "book/images/glyph.png",
      "book/images/glyph.svg",
      "book/lib/macros/reference.rb",
-     "book/license",
      "book/output/html/glyph.html",
      "book/output/html/images/glyph.png",
      "book/output/html/images/glyph.svg",
      "book/output/pdf/glyph.pdf",
-     "book/readme",
+     "book/script/authors",
+     "book/script/changelog",
+     "book/script/compile.rb",
+     "book/script/license",
+     "book/script/prof",
+     "book/script/prof_results.htm",
+     "book/script/prof_results_1.htm",
+     "book/script/prof_results_2.htm",
+     "book/script/prof_results_3.htm",
+     "book/script/readme",
      "book/snippets.yml",
      "book/text/acknowledgement.glyph",
      "book/text/authoring.glyph",
@@ -162,6 +168,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<RedCloth>, [">= 4.2.3"])
       s.add_development_dependency(%q<bluecloth>, [">= 2.0.7"])
       s.add_development_dependency(%q<coderay>, [">= 0.9.3"])
+      s.add_development_dependency(%q<ruby-prof>, [">= 0.8.1"])
     else
       s.add_dependency(%q<gli>, [">= 0.3.1"])
       s.add_dependency(%q<extlib>, [">= 0.9.12"])
@@ -175,6 +182,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<RedCloth>, [">= 4.2.3"])
       s.add_dependency(%q<bluecloth>, [">= 2.0.7"])
       s.add_dependency(%q<coderay>, [">= 0.9.3"])
+      s.add_dependency(%q<ruby-prof>, [">= 0.8.1"])
     end
   else
     s.add_dependency(%q<gli>, [">= 0.3.1"])
@@ -189,6 +197,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<RedCloth>, [">= 4.2.3"])
     s.add_dependency(%q<bluecloth>, [">= 2.0.7"])
     s.add_dependency(%q<coderay>, [">= 0.9.3"])
+    s.add_dependency(%q<ruby-prof>, [">= 0.8.1"])
   end
 end
 

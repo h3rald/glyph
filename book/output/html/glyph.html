@@ -369,7 +369,7 @@ Rapid Document Authoring Framework
 by <em>Fabio Cevasco</em>
 </div>
 			<div class="pubdate">
-April 2010
+May 2010
 </div>
 
 </div>
@@ -934,7 +934,8 @@ This section is nested into the previous one.
 <p>This example defines two nested sections, each with its own header. The header is <em>mandatory</em>: it will be displayed at the start of the section and in the Table of Contents.</p>
 <p>Note an important difference from <span class="caps">HTML</span>: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
 <div class="CodeRay">
-  <div class="code"><pre><span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">section</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
+  <div class="code"><pre>
+<span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">section</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
   <span class="ta">&lt;h2&gt;</span>Section #1<span class="ta">&lt;/h2&gt;</span>
   <span class="ta">&lt;p&gt;</span>Write the section contents here...<span class="ta">&lt;/p&gt;</span>
   <span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">section</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
@@ -1005,7 +1006,8 @@ This section is nested into the previous one.
 <div class="box-title">Example</div>
 <p>Consider the following <code>snippets.yml</code> file:</p>
 <div class="CodeRay">
-  <div class="code"><pre><span class="head"><span class="head">---</span></span> 
+  <div class="code"><pre>
+<span class="head"><span class="head">---</span></span> 
 <span class="sy">:glang</span>: <span class="er">Glyph Language</span>
 <span class="sy">:macros</span>: <span class="er">Glyph Macros</span>
 <span class="sy">:sq_esc</span>: <span class="er">|-</span>
@@ -1053,7 +1055,8 @@ This is a #[test|test anchor].
 </div>
 <p>Is translated into the following <span class="caps">HTML</span> code:</p>
 <div class="CodeRay">
-  <div class="code"><pre><span class="ta">&lt;p&gt;</span>This is a link to <span class="ta">&lt;a</span> <span class="an">href</span>=<span class="s"><span class="dl">&quot;</span><span class="k">#test</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>test anchor<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span>
+  <div class="code"><pre>
+<span class="ta">&lt;p&gt;</span>This is a link to <span class="ta">&lt;a</span> <span class="an">href</span>=<span class="s"><span class="dl">&quot;</span><span class="k">#test</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>test anchor<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span>
 <span class="ta">&lt;p&gt;</span>...<span class="ta">&lt;/p&gt;</span>
 <span class="ta">&lt;p&gt;</span>This is <span class="ta">&lt;a</span> <span class="an">href</span>=<span class="s"><span class="dl">&quot;</span><span class="k">#wrong</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>#wrong<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span>
 <span class="ta">&lt;p&gt;</span>This is a <span class="ta">&lt;a</span> <span class="an">id</span>=<span class="s"><span class="dl">&quot;</span><span class="k">test</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>test anchor<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span></pre></div>
@@ -1088,7 +1091,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Thu Apr 29 15:50:56 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue May 04 14:14:45 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.1.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1111,7 +1114,8 @@ fig[example.png|An example figure.]
 </div>
 <p>Is translated into the following <span class="caps">HTML</span> code:</p>
 <div class="CodeRay">
-  <div class="code"><pre><span class="ta">&lt;img</span> <span class="an">src</span>=<span class="s"><span class="dl">&quot;</span><span class="k">images/glyph.svg</span><span class="dl">&quot;</span></span> <span class="an">width</span>=<span class="s"><span class="dl">&quot;</span><span class="k">20%</span><span class="dl">&quot;</span></span> <span class="an">height</span>=<span class="s"><span class="dl">&quot;</span><span class="k">20%</span><span class="dl">&quot;</span></span> <span class="an">alt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">-</span><span class="dl">&quot;</span></span> <span class="ta">/&gt;</span>
+  <div class="code"><pre>
+<span class="ta">&lt;img</span> <span class="an">src</span>=<span class="s"><span class="dl">&quot;</span><span class="k">images/glyph.svg</span><span class="dl">&quot;</span></span> <span class="an">width</span>=<span class="s"><span class="dl">&quot;</span><span class="k">20%</span><span class="dl">&quot;</span></span> <span class="an">height</span>=<span class="s"><span class="dl">&quot;</span><span class="k">20%</span><span class="dl">&quot;</span></span> <span class="an">alt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">-</span><span class="dl">&quot;</span></span> <span class="ta">/&gt;</span>
 
 <span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">figure</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
   <span class="ta">&lt;img</span> <span class="an">src</span>=<span class="s"><span class="dl">&quot;</span><span class="k">images/example.png</span><span class="dl">&quot;</span></span> <span class="an">alt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">-</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>
@@ -1171,7 +1175,8 @@ glyph compile -f pdf
 <h3 id="h_27">Anatomy of a Macro</h3>
 <p>This is the source code of a fairly simple macro used to format a note :</p>
 <div class="CodeRay">
-  <div class="code"><pre>macro <span class="sy">:note</span> <span class="r">do</span>
+  <div class="code"><pre>
+macro <span class="sy">:note</span> <span class="r">do</span>
   <span class="s"><span class="dl">%{</span><span class="k">&lt;div class=&quot;</span><span class="il"><span class="idl">#{</span><span class="iv">@name</span><span class="idl">}</span></span><span class="k">&quot;&gt;&lt;span class=&quot;note-title&quot;&gt;</span><span class="il"><span class="idl">#{</span><span class="iv">@name</span>.to_s.capitalize<span class="idl">}</span></span><span class="k">&lt;/span&gt;</span><span class="il"><span class="idl">#{</span><span class="iv">@value</span><span class="idl">}</span></span><span class="k">
 
     &lt;/div&gt;</span><span class="dl">}</span></span>
@@ -1246,7 +1251,8 @@ glyph compile -f pdf
 <h3 id="h_28">Bookmarks and Headers</h3>
 <p>The <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">anchor</a> macro:</p>
 <div class="CodeRay">
-  <div class="code"><pre>macro <span class="sy">:anchor</span> <span class="r">do</span> 
+  <div class="code"><pre>
+macro <span class="sy">:anchor</span> <span class="r">do</span> 
   ident, title = <span class="iv">@params</span>
   macro_error <span class="s"><span class="dl">&quot;</span><span class="k">Bookmark '</span><span class="il"><span class="idl">#{</span>ident<span class="idl">}</span></span><span class="k">' already exists</span><span class="dl">&quot;</span></span> <span class="r">if</span> bookmark? ident
   bookmark <span class="sy">:id</span> =&gt; ident, <span class="sy">:title</span> =&gt; title
@@ -1261,7 +1267,8 @@ glyph compile -f pdf
 <p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
 <p>Here&#8217;s the source code of the <a href="#m_link">link</a> macro:</p>
 <div class="CodeRay">
-  <div class="code"><pre>macro <span class="sy">:link</span> <span class="r">do</span>
+  <div class="code"><pre>
+macro <span class="sy">:link</span> <span class="r">do</span>
   href, title = <span class="iv">@params</span>
   <span class="r">if</span> href.match <span class="rx"><span class="dl">/</span><span class="k">^#</span><span class="dl">/</span></span> <span class="r">then</span>
     anchor = href.gsub(<span class="rx"><span class="dl">/</span><span class="k">^#</span><span class="dl">/</span></span>, <span class="s"><span class="dl">'</span><span class="dl">'</span></span>).to_sym
@@ -1288,7 +1295,8 @@ glyph compile -f pdf
 <h3 id="h_30">Interpreting Glyph Code</h3>
 <p>What if you need to evaluate some Glyph code <em>within</em> a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the <code>interpret</code> method, as follows:</p>
 <div class="CodeRay">
-  <div class="code"><pre>macro <span class="sy">:fmi</span> <span class="r">do</span>
+  <div class="code"><pre>
+macro <span class="sy">:fmi</span> <span class="r">do</span>
   topic, href = <span class="iv">@params</span>
   link = placeholder <span class="r">do</span> |document| 
     interpret <span class="s"><span class="dl">&quot;</span><span class="k">link[</span><span class="il"><span class="idl">#{</span>href<span class="idl">}</span></span><span class="k">]</span><span class="dl">&quot;</span></span>

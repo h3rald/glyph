@@ -12,7 +12,7 @@ macro :error_table do
 end
 
 macro :ref_error do
-	error, description = @params
+	error, description = params
 	%{
 		<tr>
 			<td>#{error}</td>
@@ -54,7 +54,7 @@ macro :"parameters" do
 end
 
 macro :option do
-	ident, desc = @params
+	ident, desc = params
 	%{
 		<tr>
 			<td><notextile>-#{ident[0..0]} (--#{ident})</notextile></td>
@@ -85,7 +85,7 @@ macro :aliases do
 end
 
 macro :ref_macro do
-	m_name, m_value = @params
+	m_name, m_value = params
 	interpret %{
 	section[header[@#{m_name}@|m_#{m_name}]
 #{m_value}
@@ -94,7 +94,7 @@ macro :ref_macro do
 end
 
 macro :ref_config do
-	m_name, m_value = @params
+	m_name, m_value = params
 	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
 	interpret %{tr[
 		td[codeph[#{m_name}] #[s_#{m_name.gsub(/\./, '_')}]]

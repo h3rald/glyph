@@ -41,6 +41,7 @@ begin
 		s.add_development_dependency 'RedCloth', ">= 4.2.3" # Textile filter
 		s.add_development_dependency 'bluecloth', ">= 2.0.7" # Markdown filter
 		s.add_development_dependency 'coderay', ">= 0.9.3" # Syntax Highlighting
+		s.add_development_dependency 'ruby-prof', ">= 0.8.1" # Code profiling
 	end
 	Jeweler::GemcutterTasks.new
 rescue LoadError

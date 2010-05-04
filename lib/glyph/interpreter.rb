@@ -6,8 +6,7 @@ class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode
 	def evaluate(context, current=nil)
 		current ||= context.to_node
 		@data ||= current.to_node
-		value = elements.map { |e| e.evaluate(context, current) if e.respond_to? :evaluate }.join 
-		value
+		elements.map { |e| e.evaluate(context, current) if e.respond_to? :evaluate }.join 
 	end
 
 end
@@ -21,8 +20,7 @@ class MacroNode < GlyphSyntaxNode
 		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
 		@data[:escape] = true if is_a? EscapingMacroNode
 		current << @data
-		value = super(context, @data).strip 
-		@data[:value] = value
+		@data[:value] = super(context, @data).strip
 		Glyph::Macro.new(@data).execute
 	end
 
@@ -49,20 +47,19 @@ module Glyph
 	# * Analyzes and finalizes the document
 	class Interpreter
 
+		PARSER = GlyphLanguageParser.new
+
 		# Creates a new Glyph::Interpreter object.
 		# @param [String] text the string to interpret
 		# @param [Hash] context the context to pass along when evaluating macros
 		def initialize(text, context=nil)
 			context ||= {:source => '--'}
-			@parser = GlyphLanguageParser.new
-			@raw = @parser.parse text
+			@raw = PARSER.parse text
 			@context = context
-			tf = @parser.terminal_failures
+			tf = PARSER.terminal_failures
 			if !@raw.respond_to?(:evaluate) then
 				reason = "Incorrect macro syntax"
-				line = @parser.failure_line
-				column = @parser.failure_column
-				err = "#{reason}\n -> #{@context[:source]} [Line #{line}, Column #{column}]"
+				err = "#{reason}\n -> #{@context[:source]} [Line #{PARSER.failure_line}, Column #{PARSER.failure_column}]"
 				@context[:document].errors << err if @context[:document] && !@context[:embedded]
 				raise Glyph::SyntaxError, err
 			end
