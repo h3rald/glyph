@@ -275,7 +275,7 @@ Although it is possible to retrieve Glyph configuration settings in this way (e.
 
 ]
 
-section[header[Conditional Macros]
+section[header[Conditional Macros|cond_macros]
 
 Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see $>[document.draft]), or use a particular stylesheet only if when you generate a PDF document.
 
