@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{glyph}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-05-04}
+  s.date = %q{2010-05-06}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -41,10 +41,6 @@ Gem::Specification.new do |s|
      "book/script/compile.rb",
      "book/script/license",
      "book/script/prof",
-     "book/script/prof_results.htm",
-     "book/script/prof_results_1.htm",
-     "book/script/prof_results_2.htm",
-     "book/script/prof_results_3.htm",
      "book/script/readme",
      "book/snippets.yml",
      "book/text/acknowledgement.glyph",
