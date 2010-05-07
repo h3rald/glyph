@@ -22,7 +22,7 @@ macro :ref_error do
 end
 
 macro :"%>" do
-	interpret "=>[#m_#@value|#@value] macro"
+	interpret "=>[#m_#{@value.gsub(/[^a-z0-1_-]/, '_')}|#@value] macro"
 end
 
 macro :"#>" do
@@ -87,7 +87,7 @@ end
 macro :ref_macro do
 	m_name, m_value = params
 	interpret %{
-	section[header[@#{m_name}@|m_#{m_name}]
+	section[header[@#{m_name}@|m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
 #{m_value}
 	]
 	}

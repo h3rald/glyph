@@ -36,6 +36,15 @@ aliases[$]
 example[=$[document.author]=]
 ]
 
+ref_macro[config:|
+Sets the value of a configuration setting.
+
+aliases[$:]
+
+example[=$:[document.draft\|true]=]
+
+]
+
 ref_macro[eq|
 Conditional equality operator, to be used with the %>[condition].
 
@@ -60,6 +69,17 @@ ref_macro[match|
 Evaluates to @true@ if the first parameter matches the second, an empty string otherwise. The second parameter must be a valid Ruby-compatible regular expression. This macro must be used with the %>[condition].
 
 example[=?[match[Hello!\|/^hell/i]\|This is always displayed]=]
+]
+
+ref_macro[macro:|
+Defines a macro.
+
+note[The new macro &[only_after_declaration].]
+
+aliases[%:]
+
+example[=%:[test\|"<em>test: #@value</em>"]=]
+
 ]
 
 ref_macro[not|
@@ -89,6 +109,17 @@ Evaluates to the snippet referenced by its value.
 
 aliases[&]
 example[=&[glang]=]
+]
+
+ref_macro[snippet:|
+Defines a snippet.
+
+note[The new snippet &[only_after_declaration].]
+
+aliases[&:]
+
+example[=&:[test\|This is a test]=]
+
 ]
 
 ref_macro[todo|

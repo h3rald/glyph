@@ -1,1 +1,1 @@
-glyph compile ../text/acknowledgement.glyph ../../AUTHORS.textile
+glyph compile text/acknowledgement.glyph ../AUTHORS.textile

@@ -114,6 +114,8 @@ To change the value of a configuration setting, specify a value right after the 
 
 @glyph config document.author "John Smith"@
 
+tip[It is also possible to change configuration settings inside your document, using the %>[config:].]
+
 In this way, the document author will be set to _John Smith_ for the current project. To save this setting globally, add a @-g@ option, like this:
 
 @glyph config -g document.author "John Smith"@

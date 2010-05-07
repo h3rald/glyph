@@ -452,21 +452,24 @@ May 2010
 <li class="appendix section"><a href="#m_comment">comment</a></li>
 <li class="appendix section"><a href="#m_condition">condition</a></li>
 <li class="appendix section"><a href="#m_config">config</a></li>
+<li class="appendix section"><a href="#m_config_">config:</a></li>
 <li class="appendix section"><a href="#m_eq">eq</a></li>
 <li class="appendix section"><a href="#m_escape">escape</a></li>
 <li class="appendix section"><a href="#m_include">include</a></li>
 <li class="appendix section"><a href="#m_match">match</a></li>
+<li class="appendix section"><a href="#m_macro_">macro:</a></li>
 <li class="appendix section"><a href="#m_not">not</a></li>
 <li class="appendix section"><a href="#m_or">or</a></li>
 <li class="appendix section"><a href="#m_ruby">ruby</a></li>
 <li class="appendix section"><a href="#m_snippet">snippet</a></li>
+<li class="appendix section"><a href="#m_snippet_">snippet:</a></li>
 <li class="appendix section"><a href="#m_todo">todo</a></li>
 </ol></li>
 <li class="appendix section"><a href="#f_macros">Filter Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_markdown">markdown</a></li>
 <li class="appendix section"><a href="#m_textile">textile</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_73">Block Macros</a></li>
+<li class="appendix section"><a href="#h_76">Block Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_box">box</a></li>
 <li class="appendix section"><a href="#m_code">code</a></li>
 <li class="appendix section"><a href="#m_fig">fig</a></li>
@@ -480,13 +483,13 @@ May 2010
 <li class="appendix section"><a href="#m_th">th</a></li>
 <li class="appendix section"><a href="#m_tr">tr</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_86">Inline Macros</a></li>
+<li class="appendix section"><a href="#h_89">Inline Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_anchor">anchor</a></li>
 <li class="appendix section"><a href="#m_codeph">codeph</a></li>
 <li class="appendix section"><a href="#m_fmi">fmi</a></li>
 <li class="appendix section"><a href="#m_link">link</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_91">Structure Macros</a></li>
+<li class="appendix section"><a href="#h_94">Structure Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_body">body</a></li>
 <li class="appendix section"><a href="#m_div">div</a></li>
 <li class="appendix section"><a href="#m_document">document</a></li>
@@ -498,16 +501,16 @@ May 2010
 </ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_101">document.*</a></li>
-<li class="appendix section"><a href="#h_102">filters.*</a></li>
-<li class="appendix section"><a href="#h_103">structure.*</a></li>
-<li class="appendix section"><a href="#h_104">tools.*</a></li>
+<li><ol><li class="appendix section"><a href="#h_104">document.*</a></li>
+<li class="appendix section"><a href="#h_105">filters.*</a></li>
+<li class="appendix section"><a href="#h_106">structure.*</a></li>
+<li class="appendix section"><a href="#h_107">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_105">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_106">11 Features Implemented:</a></li>
-<li class="appendix section"><a href="#h_107">8 Bugs Fixed:</a></li>
-<li class="appendix section"><a href="#h_108">v0.2.0 &ndash; May 7th 2010 (?)</a></li>
-<li class="appendix section"><a href="#h_109">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="backmatter appendix"><a href="#h_108">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_109">11 Features Implemented:</a></li>
+<li class="appendix section"><a href="#h_110">8 Bugs Fixed:</a></li>
+<li class="appendix section"><a href="#h_111">v0.2.0 &ndash; May 7th 2010 (?)</a></li>
+<li class="appendix section"><a href="#h_112">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -762,6 +765,9 @@ document[
 <p>If no <em>value</em> is specified, glyph just prints the value of the configuration setting, so typing <code>glyph config document.author</code> right after creating a project (assuming you didn&#8217;t set this in the Global Configuration) will print nothing, because this setting is blank by default.</p>
 <p>To change the value of a configuration setting, specify a value right after the setting, like this:</p>
 <p><code>glyph config document.author "John Smith"</code></p>
+<div class="tip">
+<p><span class="note-title">Tip</span>It is also possible to change configuration settings inside your document, using the <a href="#m_config_">config:</a> macro.</p>
+</div>
 <p>In this way, the document author will be set to <em>John Smith</em> for the current project. To save this setting globally, add a <code>-g</code> option, like this:</p>
 <p><code>glyph config -g document.author "John Smith"</code></p>
 <div class="box">
@@ -1015,6 +1021,9 @@ This section is nested into the previous one.
 </div>
 <p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a <em>snippet</em> instead.</p>
 <p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <a href="#m_snippet">snippet</a> macro (or its alias <code>&amp;</code>).</p>
+<div class="tip">
+<p><span class="note-title">Tip</span>Besides storing snippets in the <code>snippets.yml</code> file, you can also define them right in your document, using the <a href="#m_snippet_">snippet:</a> macro.</p>
+</div>
 <div class="box">
 <div class="box-title">Example</div>
 <p>Consider the following <code>snippets.yml</code> file:</p>
@@ -1104,7 +1113,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Thu May 06 17:06:28 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Fri May 07 14:04:21 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1155,7 +1164,7 @@ This is the official version of the Glyph Book]
 <p>In this case, the <code>css3.css</code> stylesheet is included only when you&#8217;re generating a <span class="caps">PDF</span> document using Prince <span class="caps">XML</span>.</p>
 <div class="section">
 <h5 id="h_22">Using macros inside the condition macro</h5>
-<p>Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a <a href="#m_condition">condition</a> macro are <em>always</em> parsed and <em>executed</em>, even <em>before</em> that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you&#8217;re the <a href="#m_config:">config:</a> macro or the <a href="#m_ruby">ruby</a> macro, for example: because in that case a configuration setting or a piece of Ruby code is always executed&#8230;</p>
+<p>Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a <a href="#m_condition">condition</a> macro are <em>always</em> parsed and <em>executed</em>, even <em>before</em> that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you&#8217;re the <a href="#m_config_">config:</a> macro or the <a href="#m_ruby">ruby</a> macro, for example: because in that case a configuration setting or a piece of Ruby code is always executed&#8230;</p>
 <p>To avoid this potentially dangerous side effect, you can <em>escape</em> the second parameter of the condition macro, like this:</p>
 <div class="code">
 <pre>
@@ -1255,9 +1264,9 @@ glyph compile -f pdf
 <h4 id="h_30">Limitations</h4>
 <p>This sort of &#8220;lite&#8221; mode comes with a few minor limitations:</p>
 <ul>
-	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet:">snippet:</a> macro macro.</li>
-	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config:">config:</a> macro macro.</li>
-	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro:">macro:</a> macro macro.</li>
+	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet_">snippet:</a> macro macro.</li>
+	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">config:</a> macro macro.</li>
+	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_">macro:</a> macro macro.</li>
 	<li>Images must be linked with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.</li>
 	<li>Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph system stylesheet .</li>
 	<li>The <a href="#m_include">include</a> macro cannot be used (if you need to include other text files, you should probably use a Glyph project&#8230;)</li>
@@ -1269,6 +1278,9 @@ glyph compile -f pdf
 			<div class="chapter">
 <h2 id="extending">Extending Glyph</h2>
 				<p>Glyph was created wih extensibility in mind. You can freely extend Glyph Language by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in <code>.rb</code> files within the <code>lib/macros/</code> folder of your project.</p>
+<div class="tip">
+<p><span class="note-title">Tip</span>Alternatively, you can also define macros right in your document, using the <a href="#m_macro_">macro:</a> macro.</p>
+</div>
 <div class="section">
 <h3 id="h_32">Anatomy of a Macro</h3>
 <p>This is the source code of a fairly simple macro used to format a note :</p>
@@ -1773,6 +1785,13 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 
 <div class="section">
+<h4 id="m_config_"><code>config:</code></h4>
+<p>Sets the value of a configuration setting.</p>
+<p><strong>Aliases:</strong> <code>$:</code></p>
+<p><strong>Example:</strong> <code>$:[document.draft|true]</code></p>
+</div>
+
+<div class="section">
 <h4 id="m_eq"><code>eq</code></h4>
 <p>Conditional equality operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[eq[$[document.draft]|true]|This is displayed only in draft documents.]</code></p>
@@ -1796,6 +1815,16 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <h4 id="m_match"><code>match</code></h4>
 <p>Evaluates to <code>true</code> if the first parameter matches the second, an empty string otherwise. The second parameter must be a valid Ruby-compatible regular expression. This macro must be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[match[Hello!|/^hell/i]|This is always displayed]</code></p>
+</div>
+
+<div class="section">
+<h4 id="m_macro_"><code>macro:</code></h4>
+<p>Defines a macro.</p>
+<div class="note">
+<p><span class="note-title">Note</span>The new macro can only be used <em>after</em> its declaration.</p>
+</div>
+<p><strong>Aliases:</strong> <code>%:</code></p>
+<p><strong>Example:</strong> <code>%:[test|"&lt;em&gt;test: #</code>value</em>&quot;]@</p>
 </div>
 
 <div class="section">
@@ -1827,6 +1856,16 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 
 <div class="section">
+<h4 id="m_snippet_"><code>snippet:</code></h4>
+<p>Defines a snippet.</p>
+<div class="note">
+<p><span class="note-title">Note</span>The new snippet can only be used <em>after</em> its declaration.</p>
+</div>
+<p><strong>Aliases:</strong> <code>&amp;:</code></p>
+<p><strong>Example:</strong> <code>&amp;:[test|This is a test]</code></p>
+</div>
+
+<div class="section">
 <h4 id="m_todo"><code>todo</code></h4>
 <p>Saves the value as a <span class="caps">TODO</span> item, which can be printed using the <a href="#c_todo">todo</a> command.</p>
 <p><strong>Example:</strong> <code>todo[Remember to do this.]</code></p>
@@ -1849,7 +1888,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 </div>
 <div class="section">
-<h3 id="h_73">Block Macros</h3>
+<h3 id="h_76">Block Macros</h3>
 <div class="section">
 <h4 id="m_box"><code>box</code></h4>
 <p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
@@ -1966,7 +2005,7 @@ table[
 </div>
 </div>
 <div class="section">
-<h3 id="h_86">Inline Macros</h3>
+<h3 id="h_89">Inline Macros</h3>
 <div class="section">
 <h4 id="m_anchor"><code>anchor</code></h4>
 <p>Creates a named anchor (or bookmark).</p>
@@ -1997,7 +2036,7 @@ table[
 </div>
 </div>
 <div class="section">
-<h3 id="h_91">Structure Macros</h3>
+<h3 id="h_94">Structure Macros</h3>
 <div class="section">
 <h4 id="m_body"><code>body</code></h4>
 <p>Creates a <code>&lt;body&gt;</code> tag.</p>
@@ -2049,7 +2088,7 @@ table[
 			<div class="appendix">
 <h2 id="cfg_ref">Configuration Reference</h2>
 				<div class="section">
-<h3 id="h_101"><code>document.*</code></h3>
+<h3 id="h_104"><code>document.*</code></h3>
 <p>The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.</p>
 <table>
 <tr>
@@ -2180,7 +2219,7 @@ document.glyph
 </table>
 </div>
 <div class="section">
-<h3 id="h_102"><code>filters.*</code></h3>
+<h3 id="h_105"><code>filters.*</code></h3>
 <table>
 <tr>
 <th>Name</th>
@@ -2265,7 +2304,7 @@ html
 </table>
 </div>
 <div class="section">
-<h3 id="h_103"><code>structure.*</code></h3>
+<h3 id="h_106"><code>structure.*</code></h3>
 <p>The following configuration settings are used internally by Glyph and should not be changed by the user.</p>
 <table>
 <tr>
@@ -2398,7 +2437,7 @@ html
 </table>
 </div>
 <div class="section">
-<h3 id="h_104"><code>tools.*</code></h3>
+<h3 id="h_107"><code>tools.*</code></h3>
 <table>
 <tr>
 <th>Name</th>
@@ -2427,13 +2466,13 @@ prince
 
 </div>
 			<div class="appendix">
-<h2 id="h_105">Changelog</h2>
+<h2 id="h_108">Changelog</h2>
 				
 
 		<div class="section">
-<h3 id="h_108">v0.2.0 &ndash; May 7th 2010 (?)</h3>
+<h3 id="h_111">v0.2.0 &ndash; May 7th 2010 (?)</h3>
 			<div class="section">
-<h4 id="h_106">11 Features Implemented:</h4>
+<h4 id="h_109">11 Features Implemented:</h4>
 			<table>
 <tr>
 <th>ID</th>
@@ -2469,7 +2508,7 @@ prince
 
 </td>
 			<td>
-<p>It is now possible to define snippets inside a Glyph source file using the <a href="#m_snippet:">snippet:</a> macro.</p>
+<p>It is now possible to define snippets inside a Glyph source file using the <a href="#m_snippet_">snippet:</a> macro.</p>
 
 </td>	
 </tr>
@@ -2481,7 +2520,7 @@ prince
 
 </td>
 			<td>
-<p>It is now possible to change configuration settings inside a Glyph source file using the <a href="#m_config:">config:</a> macro macro (Jabbslad).</p>
+<p>It is now possible to change configuration settings inside a Glyph source file using the <a href="#m_config_">config:</a> macro macro (Jabbslad).</p>
 
 </td>	
 </tr>
@@ -2565,7 +2604,7 @@ prince
 
 </td>
 			<td>
-<p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro:">macro:</a> macro.</p>
+<p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro_">macro:</a> macro.</p>
 
 </td>	
 </tr>
@@ -2575,7 +2614,7 @@ prince
 	
 	
 		<div class="section">
-<h4 id="h_107">8 Bugs Fixed:</h4>
+<h4 id="h_110">8 Bugs Fixed:</h4>
 			<table>
 <tr>
 <th>ID</th>
@@ -2683,7 +2722,7 @@ prince
 	
 
 		<div class="section">
-<h3 id="h_109">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_112">v0.1.0 &ndash; April 8th 2010</h3>
 			Initial release.
 
 </div>

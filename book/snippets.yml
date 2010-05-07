@@ -7,6 +7,4 @@
 :markups: Textile or Markdown
 :filter_by_ext: "the $>[filters.by_file_extension] is @true@"
 :called_on_files: "If &[filter_by_ext], this macro is called automatically on =>[#m_include|included] files"
-:test: |-
-  This is a 
-  Test snippet
+:only_after_declaration: "can only be used _after_ its declaration"

@@ -176,6 +176,8 @@ While including the context of an entire file is definitely a useful feature for
 
 Snippets are text strings saved in YAML format in the @snippets.yml@ file. They can be included anywhere in your document using the %>[snippet] (or its alias @&@). 
 
+tip[Besides storing snippets in the @snippets.yml@ file, you can also define them right in your document, using the %>[snippet:].]
+
 box[Example|
 Consider the following @snippets.yml@ file:
 
@@ -199,6 +201,7 @@ You can use codeph[=&[markups]=] anywhere in your document instead of having to 
 tip[
 Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
 ]
+
 ] --[End Section]
 
 

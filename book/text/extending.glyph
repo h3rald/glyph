@@ -1,5 +1,7 @@
 Glyph was created wih extensibility in mind. You can freely extend &[glang] by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in @.rb@ files within the @lib/macros/@ folder of your project.
 
+tip[Alternatively, you can also define macros right in your document, using the %>[macro:].]
+
 section[header[Anatomy of a Macro]
 
 This is the source code of a fairly simple macro used to format a note :

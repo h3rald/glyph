@@ -241,7 +241,7 @@
 
 </td>
 			<td>
-<p>Added the possibility to force header level (3rd parameter of the header macro).</p>
+<p>Added the possibility to force header level (3^rd^ parameter of the header macro).</p>
 
 </td>	
 </tr>
