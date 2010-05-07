@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-05-06}
+  s.date = %q{2010-05-07}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -97,8 +97,8 @@ Gem::Specification.new do |s|
      "spec/tasks/load_spec.rb",
      "spec/tasks/project_spec.rb",
      "styles/coderay.css",
-     "styles/css3.css",
      "styles/default.css",
+     "styles/pagination.css",
      "styles/ultraviolet/active4d.css",
      "styles/ultraviolet/all_hallows_eve.css",
      "styles/ultraviolet/amy.css",

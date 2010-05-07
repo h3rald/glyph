@@ -91,19 +91,7 @@ blockquote {
 	font-style: italic;
 	color: #121212;
 }
-ol.toc {
-	margin-left: 1.5em;
-}
-.toc > li[class] {
-	font-weight: bold;
-}
-.toc li {
-	list-style-type: none;
-	margin-left: 0;
-}
-.toc li a, .toc li a:hover {
-	color: #000;
-}
+
 table {
 	border: 1px solid #E6E6E6;
 }
@@ -1113,7 +1101,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Fri May 07 14:04:21 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Fri May 07 17:08:34 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1824,7 +1812,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <p><span class="note-title">Note</span>The new macro can only be used <em>after</em> its declaration.</p>
 </div>
 <p><strong>Aliases:</strong> <code>%:</code></p>
-<p><strong>Example:</strong> <code>%:[test|"&lt;em&gt;test: #</code>value</em>&quot;]@</p>
+<p><strong>Example:</strong> <code>%:[test|"&lt;em&gt;test: #@value&lt;/em&gt;"]</code></p>
 </div>
 
 <div class="section">

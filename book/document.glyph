@@ -1,7 +1,7 @@
 document[
 	head[
 		style[default.css]
-		?[eq[$[document.output]|pdf]|style[css3.css]]
+		?[eq[$[document.output]|pdf]|style[pagination.css]]
 		style[coderay.css]
 	]
 	body[

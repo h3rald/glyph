@@ -70,7 +70,7 @@ macro :values do
 end
 
 macro :example do
-	%{*Example:* @#@value@}
+	%{*Example:* <code>#@value</code>}
 end
 
 macro :examples do

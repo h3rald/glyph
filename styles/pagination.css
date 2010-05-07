@@ -22,6 +22,20 @@
   @bottom { content: normal; }
 }
 
+ol.toc {
+	margin-left: 1.5em;
+}
+.toc > li[class] {
+	font-weight: bold;
+}
+.toc li {
+	list-style-type: none;
+	margin-left: 0;
+}
+.toc li a, .toc li a:hover {
+	color: #000;
+}
+
 .toc li a::after {
   content: leader('.') target-counter(attr(href), page);
 }

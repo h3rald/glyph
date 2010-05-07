@@ -82,19 +82,7 @@ blockquote {
 	font-style: italic;
 	color: #121212;
 }
-ol.toc {
-	margin-left: 1.5em;
-}
-.toc > li[class] {
-	font-weight: bold;
-}
-.toc li {
-	list-style-type: none;
-	margin-left: 0;
-}
-.toc li a, .toc li a:hover {
-	color: #000;
-}
+
 table {
 	border: 1px solid #E6E6E6;
 }
