@@ -77,8 +77,20 @@ macro "config:" do
 	nil
 end
 
+macro :comment do
+	""
+end
+
 macro :escape do
 	@value
+end
+
+macro :encode do
+	encode @value
+end
+
+macro :decode do
+	decode @value
 end
 
 macro :condition do
@@ -86,23 +98,13 @@ macro :condition do
 	max_parameters 2
 	cond, actual_value = params
 	res = interpret(cond)
-	escaped = nil
-	@node.children.each do |c|
-		if c[:escape] then
-			escaped = c[:value]
-			break
-		end
-	end
-	escape_regexp = /\\*([\[\]\|])/
 	if res.blank? || res == "false" then
 	 	"" 
 	else
-		if escaped.to_s.gsub(escape_regexp){$1} == actual_value.to_s.gsub(escape_regexp){$1} then
-			actual_value = interpret escaped.gsub(/\\\|/, '|')
-		end
-		actual_value
+		interpret(decode(actual_value))
 	end
 end
+
 
 macro :eq do
 	min_parameters 1
@@ -144,6 +146,9 @@ macro :match do
 	(interpret(val).match(instance_eval(regexp))) ? true : nil
 end
 
+macro_alias '--' => :comment
+macro_alias '*' => :encode
+macro_alias '**' => :decode
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
 macro_alias '%:' => 'macro:'

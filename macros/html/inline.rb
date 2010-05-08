@@ -43,7 +43,7 @@ macro :fmi do
 	%{<span class="fmi">for more information on #{topic}, see #{link}</span>}
 end
 
-macro :comment do
+macro :draftcomment do
 	if Glyph['document.draft'] then
 		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{@value}</span>}
 	else
@@ -65,5 +65,5 @@ end
 macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link
-macro_alias '--' => :comment
 macro_alias '!' => :todo
+macro_alias :dc => :draftcomment

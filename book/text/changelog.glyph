@@ -2,7 +2,7 @@
 macro :issue do
 	exact_parameters 2
 	ident, desc = @params
-	interpret %{
+	encode %{
 		tr[
 			td[\=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
 			td[textile[#{desc}]]
@@ -13,9 +13,8 @@ end
 macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
 	total = @node.children.length
-	level = Glyph.lite? ? 3 : 4
-	interpret %{
-		section[header[#{total} #{@name.to_s.capitalize} #{verb}:\|\|#{level}]
+	encode %{
+		section[header[#{total} #{@name.to_s.capitalize} #{verb}]
 			table[
 				tr[
 					th[ID]
@@ -32,7 +31,7 @@ macro :release do
 	number, date, contents = @params
 	interpret %{
 		section[header[v#{number} &ndash; #{date}]
-			#{contents}
+			#{decode contents}
 		]
 	}
 end
@@ -41,12 +40,11 @@ end
 macro_alias :bugs => :features
 
 =]--[
-	?[%[lite?]|.[=
-			%:[%>\|"#@value macro"]
-			%:[#>\|"#@value command"]
+	?[%[lite?]|*[=
+			%:[%>|"#@value macro"]
+			%:[#>|"#@value command"]
 		=]
 	]
-	![Explain how to use condition macro with escapes...]
 ]
 release[0.2.0|May 7th 2010 (?)|
 	features[
@@ -70,7 +68,7 @@ release[0.2.0|May 7th 2010 (?)|
 		issue[101|Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.]
 		issue[103|Fixed a bug that caused test failures when deleting the test project directory.]
 		issue[104|Nested Glyph macros calling @Macro#interpret@ no longer ignore escape delimiters.]
-		issue[107|Added the possibility to force header level (3^rd^ parameter of the %>[header]).]
+		issue[107|Added the possibility to encode (using the %>[encode]) and decode (using the %>[decode]) macros so that they can be interpreted later.]
 	]
 ]
 release[0.1.0|April 8th 2010|

@@ -10,17 +10,14 @@ end
 
 macro :header do
 	min_parameters 1
-	max_parameters 3
+	max_parameters 2
 	title = params[0]
-	level = params[2]
 	h_id = params[1]
 	h_id = nil if h_id.blank?
-	unless level then
-		level = 1
-		@node.ascend do |n| 
-			if Glyph["structure.headers"].include? n[:macro] then
-				level+=1
-			end
+	level = 1
+	@node.ascend do |n| 
+		if Glyph["structure.headers"].include? n[:macro] then
+			level+=1
 		end
 	end
 	h_id ||= "h_#{@node[:document].headers.length+1}".to_sym
@@ -102,10 +99,7 @@ macro :toc do
 					next if added_headers.include? header_id
 					added_headers << header_id
 					# Check if part of frontmatter, bodymatter or backmatter
-					container = n2.find_parent{|node| node[:macro] == :frontmatter}[:macro] rescue nil
-					container ||= n2.find_parent{|node| node[:macro] == :bodymatter}[:macro] rescue nil
-					container ||= n2.find_parent{|node| node[:macro] == :appendix}[:macro] rescue nil
-					container ||= n2.find_parent{|node| node[:macro] == :backmatter}[:macro] rescue nil
+					container = n2.find_parent{|node| node[:macro].in? [:frontmatter, :bodymatter, :appendix, :backmatter]}[:macro] rescue nil
 					list << "<li class=\"#{container} #{n2[:macro]}\">#{link_header.call(document.header?(header_id))}</li>\n" if header_id
 					child_list = ""
 					n2.children.each do |c|

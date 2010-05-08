@@ -74,11 +74,11 @@ describe "Macro:" do
 		interpret "?[%[lite?]|%[\"test\"]]"
 		@p.document.output.should == ""
 		# Condition not satisfied...
-		interpret "?[%[lite?]|.[= %[ Glyph\\['test_config'\\] = true ] =]]"
+		interpret "?[%[lite?]|*[= %[ Glyph\\['test_config'\\] = true ] =]]"
 		@p.document.output.should == ""
 		Glyph['test_config'].should_not == true
 		# Condition satisfied...
-		interpret "?[%[!lite?]|.[= --[%[ Glyph\\['test_config'\\] = true ]] =]]"
+		interpret "?[%[!lite?]|*[= --[%[ Glyph\\['test_config'\\] = true ]] =]]"
 		@p.document.output.should == ""
 		Glyph['test_config'].should == true
 	end
@@ -279,8 +279,8 @@ describe "Macro:" do
 		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
 	end
 
-	it "comment, todo" do
-		text1 = "--[comment!]"
+	it "draftcomment, todo" do
+		text1 = "dc[comment!]"
 		text2 = "![todo!]"
 		interpret text1
 		@p.document.output.should == ""
@@ -313,7 +313,7 @@ describe "Macro:" do
 			end}
 		cr_result = %{<div class=\"CodeRay\"> <div class=\"code\"><pre> <span class=\"r\">def</span> 
 			<span class=\"fu\">test_method</span>(a, b) puts a+b <span class=\"r\">end</span></pre></div> </div>}
-		uv_result = %{<pre class=\"iplastic\"><span class=\"Keyword\">def</span> 
+		uv_result = %{<pre class=\"iplastic\"> <span class=\"Keyword\">def</span> 
 			<span class=\"FunctionName\">test_method</span>(<span class=\"Arguments\">a<span class=\"Arguments\">,</span> b</span>) 
 			puts a<span class=\"Keyword\">+</span>b <span class=\"Keyword\">end</span> </pre>}
 		check = lambda do |hl, result|
@@ -331,34 +331,5 @@ describe "Macro:" do
 			"Test: #@value"]e_macro[OK!]'
 		@p.document.output.should == "Test: OK!"
 	end
-
-	it "header should allow level override" do
-		Glyph.run! "load:all"
-		Glyph.macro :sec_1 do
-			interpret "section[header[Test1]\n#@value]"
-		end
-		Glyph.macro :sec_2 do
-			interpret "section[header[Test2||5]\n#@value]"
-		end
-		text = %{section[sec_1[section[sec_2[Test]]]]}
-		interpret text
-		@p.document.output.should == "<div class=\"section\">
-			<div class=\"section\">
-				<h3 id=\"h_2\">Test1</h3>
-				<div class=\"section\">
-					<div class=\"section\">
-						<h5 id=\"h_1\">Test2</h5>
-						Test
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>".gsub(/\t/, '')
-	end
-
-
 
 end	

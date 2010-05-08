@@ -14,7 +14,7 @@ end
 # @private
 class MacroNode < GlyphSyntaxNode
 
-	def evaluate(context, current=nil)
+	def evaluate(context, current)
 		name = macro_name.text_value.to_sym
 		raise Glyph::SyntaxError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless Glyph::MACROS.include? name
 		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node

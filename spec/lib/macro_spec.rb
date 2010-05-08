@@ -18,7 +18,6 @@ describe Glyph::Macro do
 
 	it "should raise macro errors" do
 		lambda { @macro.macro_error "Error!" }.should raise_error(Glyph::MacroError)
-		
 	end
 
 	it "should interpret strings" do
@@ -70,8 +69,40 @@ describe Glyph::Macro do
 		create_project
 		Glyph.run! 'load:macros'
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
-		lambda {@macro.interpret("&[inc] test")}.should raise_error(
-			Glyph::MutualInclusionError, "Mutual inclusion\n -> source: &[...]\n -> path: test/&/&")
+		lambda {interpret("&[inc] test").document}.should raise_error(Glyph::MutualInclusionError)
+	end
+
+	it "should encode and decode text" do
+		Glyph.run! "load:all"
+		Glyph.macro :sec_1 do
+			res = decode "section[header[Test1]\n#{@value}]"
+			interpret res
+		end
+		Glyph.macro :sec_2 do
+			encode "section[section[header[Test2]\n#@value]]"
+		end
+		text1 = %{sec_1[sec_2[Test]]}
+		interpret text1
+		res1 = @p.document.output.gsub(/\t/, '')
+		text2 = %{section[header[Test1]
+			section[section[header[Test2]
+			Test]]]}
+		interpret text2
+		res2 = @p.document.output.gsub(/\t/, '')
+		result = "<div class=\"section\">
+				<h2 id=\"h_1\">Test1</h2>
+				<div class=\"section\">
+					<div class=\"section\">
+						<h4 id=\"h_2\">Test2</h4>
+						Test
+
+					</div>
+
+				</div>
+
+			</div>".gsub(/\t/, '')
+		res1.should == result
+		res2.should == result
 	end
 
 end

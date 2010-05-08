@@ -55,6 +55,15 @@ class Node < Hash
 		@children << ht
 	end
 
+	# Removes a child node from self
+	# @param [node] node the child node to remove
+	# @raise [ArgumentError] unless an existing child node is passed as parameter
+	def >>(node)
+		raise ArgumentError, "Unknown child node" unless @children.include? node
+		node.parent = nil
+		@children.delete node
+	end
+
 	# Returns a child by its index
 	# @return [Node] the child node or nil
 	# @param [Integer] index the child index
@@ -62,7 +71,10 @@ class Node < Hash
 		@children[index]
 	end
 
-	alias >> child 
+	# See Node#child.
+	def &(index)
+	 	@children[index]
+	end	
 
 	# Iterates through children
 	# @yieldparam [Node] c the child node

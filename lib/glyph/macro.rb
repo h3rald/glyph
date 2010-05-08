@@ -93,6 +93,22 @@ module Glyph
 			result.gsub(/\\*([\[\]])/){"\\#$1"}
 		end
 
+		# Encodes all macros in a string so that it can be encoded
+		# (and interpreted) later on
+		# @param [String] string the string to encode
+		# @return [String] the encoded string
+		def encode(string)
+			string.gsub(/([\[\]\|])/) { "‡‡¤#{$1.bytes.to_a[0]}¤‡‡" }
+		end
+
+		# Decodes a previously encoded string 
+		# so that it can be interpreted
+		# @param [String] string the string to decode
+		# @return [String] the decoded string
+		def decode(string)
+			string.gsub(/‡‡¤(91|93|124)¤‡‡/) { $1.to_i.chr }
+		end
+
 		# @see Glyph::Document#placeholder
 		def placeholder(&block)
 			@node[:document].placeholder &block
@@ -121,7 +137,8 @@ module Glyph
 		# Executes a macro definition in the context of self
 		def execute
 			res = instance_exec(@node, &Glyph::MACROS[@name]).to_s
-			res.gsub(/\\*([\[\]\|])/){"\\#$1"}# : res
+			res.gsub!(/\\*([\[\]\|])/){"\\#$1"} 
+			res
 		end
 
 	end

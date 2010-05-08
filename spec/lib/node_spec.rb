@@ -26,7 +26,15 @@ describe Node do
 		lambda { @ht << {:e => 5, :f => 6}.to_node }.should_not raise_error
 		@ht.child(1) << {:g => 7, :h => 8}
 		@ht.child(1) << {:i => 9, :j => 10}
-		((@ht>>1>>1)[:j]).should == 10
+		((@ht&1&1)[:j]).should == 10
+		l = (@ht&1).length
+		orphan = @ht&1&0
+		orphan.parent.should == @ht&1
+		(@ht&1).children.include?(orphan).should == true
+		(@ht&1) >> orphan
+		(@ht&1).children.length.should == l-1 
+		orphan.parent.should == nil
+		(@ht&1).children.include?(orphan).should == false
 	end
 	
 	it "should support iteration" do
@@ -55,8 +63,8 @@ describe Node do
 		@ht << {:e => 5, :f => 6}
 		@ht.child(1) << {:g => 7, :h => 8}
 		@ht.child(1).child(0) << {:i => 9, :j => 10}
-		(@ht>>1>>0>>0).parent.should == @ht>>1>>(0)
-		(@ht>>1>>0>>0).root.should == @ht
+		(@ht&1&0&0).parent.should == @ht&1&0
+		(@ht&1&0&0).root.should == @ht
 	end
 
 	it "should find child nodes" do
