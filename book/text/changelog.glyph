@@ -46,13 +46,13 @@ macro_alias :bugs => :features
 		=]
 	]
 ]
-release[0.2.0|May 7th 2010 (?)|
+release[0.2.0|May 9th 2010|
 	features[
 		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet requireed).]
 		issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
 		issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]	
 		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] macro (Jabbslad).]	
-		issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project. ![Add new section to document authoring describing lite mode]]
+		issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project.]
 		issue[92|6 new macros have been defined to allow conditional processing (\.%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
 		issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
 		issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed (koraktor).]
@@ -62,7 +62,7 @@ release[0.2.0|May 7th 2010 (?)|
 	]
 	bugs[
 		issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed. ![Link to troubleshooting section, expand (new warnings, additional debug info)]]
-		issue[93|#[css_not_copied]Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles (see also =>[#system_css|#100]). ![New paragraph about system styles]]
+		issue[93|#[css_not_copied]Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles (see also =>[#system_css|#100]).]
 		issue[95|The #>[config] did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.]
 		issue[98|Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.]
 		issue[101|Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.]

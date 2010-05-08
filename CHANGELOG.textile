@@ -1,7 +1,7 @@
 
 
 		<div class="section">
-<h2 id="h_1">v0.2.0 &ndash; May 7th 2010 (?)</h2>
+<h2 id="h_1">v0.2.0 &ndash; May 9th 2010</h2>
 			<div class="section">
 <h3 id="h_2">11 Features Implemented</h3>
 			<table>

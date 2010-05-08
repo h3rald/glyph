@@ -192,8 +192,16 @@ a {
 a:hover {
 	color: #CF282D;
 }
-code {
+code, pre {
 	font-size: 0.75em;
+}
+pre{
+	margin: 1em;
+	padding: 1em;
+}
+
+pre>code {
+	font-size: 1em;
 }
 
 /* FONTS */
@@ -201,7 +209,7 @@ body {
 	font-family: "Book Antiqua", "Times New Roman", "Serif";
 }
 
-code {
+code, pre {
 	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
 }
 

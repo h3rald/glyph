@@ -96,6 +96,7 @@ end
 macro :ref_config do
 	m_name, m_value = params
 	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
+	default = "nil" if default.blank?
 	interpret %{tr[
 		td[codeph[#{m_name}] #[s_#{m_name.gsub(/\./, '_')}]]
 		td[#{m_value}]

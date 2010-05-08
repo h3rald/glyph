@@ -2,7 +2,8 @@ document[
 	head[
 		style[default.css]
 		?[eq[$[document.output]|pdf]|style[pagination.css]]
-		style[coderay.css]
+		?[eq[$[highlighters.current]|coderay]|style[coderay.css]]
+		?[eq[$[highlighters.current]|ultraviolet]|style[ultraviolet/blackboard.css]]
 	]
 	body[
 		titlepage[

@@ -1,7 +1,11 @@
 --- 
+:highlighters: 
+  :current: ultraviolet
+  :ultraviolet: 
+    :theme: blackboard
 :document: 
-  :title: Glyph
-  :author: Fabio Cevasco
   :output: html
+  :title: Glyph
   :subtitle: Rapid Document Authoring Framework
+  :author: Fabio Cevasco
   :filename: glyph

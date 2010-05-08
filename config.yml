@@ -59,13 +59,13 @@
   :pdf_generator: 'prince'
 :highlighters:
   :target: 'html'
-  :current: 'coderay'
+  :current: nil
   :coderay:
     # See options at http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html
     :css: :class 
   :ultraviolet:
     :line_numbers: false
-    :theme: 'iplastic'
+    :theme: 'blackboard'
 :filters:
   :by_file_extension: true
   :target: 'html'

@@ -50,6 +50,29 @@ The output target for filters. It can be set to @html@ (for RedCloth and MarkDow
 	]
 ] --[End filters section]
 
+
+section[header[@highlighters.*@|s_highlighters]
+
+	config_table[
+		ref_config[highlighters.coderay.*|
+Some &[coderay]-specific =>[http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html|options].
+		]
+		ref_config[highlighters.current|
+The current highlighter to use. It can be set to @coderay@ or @ultraviolet@
+		]
+		ref_config[highlighters.target|
+The target output of the =>[#s_highlighters_current|current highlighter]. It can be set to anything the highlighter supports.
+		]
+		ref_config[highlighters.ultraviolet.line_numbers|
+Whether the &[uv] highlighter should display line numbers or not.
+		]
+		ref_config[highlighters.ultraviolet.theme|
+The theme used by the &[uv] highlighter.
+		]
+	]
+
+] --[End highlighters section]
+
 section[header[@structure.*@]
 The following configuration settings are used internally by Glyph and should not be changed by the user.
 
