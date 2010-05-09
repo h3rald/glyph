@@ -51,7 +51,7 @@ release[0.2.0|May 9th 2010|
 		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet requireed).]
 		issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
 		issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]	
-		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] macro (Jabbslad).]	
+		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] (Jabbslad).]	
 		issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project.]
 		issue[92|6 new macros have been defined to allow conditional processing (\.%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
 		issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
