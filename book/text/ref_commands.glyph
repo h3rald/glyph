@@ -8,7 +8,7 @@ Where:
 
 section[header[Global Options]
 
-section[header[@-d@, @--debug@]
+section[header[@-d@, @--debug@|debug_switch]
 If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.
 ]
 ]

@@ -39,7 +39,7 @@ module Glyph
 			# Ensures that the macro receives no parameters.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			def no_parameters(options={:level=>:error})
-				validate("Macro '#{@name}' takes have parameter(s) (#{params.length} given)", options) { params.length == 0 }
+				validate("Macro '#{@name}' takes no parameters (#{params.length} given)", options) { params.length == 0 }
 			end
 
 		end

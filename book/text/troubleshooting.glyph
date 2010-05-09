@@ -1,12 +1,12 @@
-This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you =>[#extending|extended] Glyph by creating your own macros.
+This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you =>[#extending|extended] Glyph by creating your own macros or you're embedding Ruby code using the %>[ruby] macro.
+
+tip[As a general rule, more diagnostic information is provided if Glyph is run in =>[#debug_switch|debug mode].]
 
 section[header[Generic Errors]
 
 error_table[
-ref_error[Document contains syntax errors|
-This error is returned if the document was not parsed because of one or more syntax error. 
-
-*At present, no indication on the exact location of the error(s) is provided*, so the only way to determine what went wrong is to try compiling a single file at a time by commenting out files included within @document.glyph@ as necessary, and examine more closely the source of the files that do not compile.
+ref_error[Incorrect macro syntax|
+This error is returned if the parsing of the document (or one of its included files) failed. In 99% of the cases, this means there is an extra or missing macro delimiter somewhere.
 ]
 ref_error[Invalid alias: macro '_macro-name_' already exists|
 The alias name supplied to the @macro_alias@ method has already been used for another macro or alias.
@@ -41,6 +41,22 @@ section[header[Command Errors]
 
 error_table[
 
+ref_error[Source file '_source-file_' does not exist|
+Returned if Glyph is running in =>[#lite_mode|lite mode] and the specified source file was not found.
+]
+
+ref_error[Source and destination file are the same|
+Returned if Glyph is running in =>[#lite_mode|lite mode] and you specified the same source and destination files.
+]
+
+ref_error[DirectoryWatcher is not available. Install it with: gem install directory_watcher|
+Returned if =>[#auto_regeneration|auto regeneration] is enabled but the @directory_watcher@ gem in not installed.
+]
+
+ref_error[Document cannot be finalized due to previous errors|
+Returned if one or more errors occurred in the document prevented finalization.
+]
+
 ref_error[Please specify a file name|
 No file name was specified for the #>[add].
 ]
@@ -71,16 +87,61 @@ section[header[Macro Errors]
 
 The following errors are displayed in the form:
 
-_macro-path_ _message_
+_message_
+-> source: _macro-source_
+-> path: _macro-path_ 
+-> value: _macro-value_
 
 Where:
-* _macro-path_ is the full path to the macro that returned the error, within the document syntax tree, e.g. @document/body/bodymatter/chapter/section/header/&@ if the error occurrent in a snippet within the header of a section in the @bodymatter@ part of the document.
 * _message_ is the error message.
+* _macro-source_ is the file or snippet where the error occurred.
+* _macro-path_ is the full path to the macro that returned the error, within the document syntax tree, e.g. @document/body/bodymatter/chapter/section/header/&@ if the error occurrent in a snippet within the header of a section in the @bodymatter@ part of the document.
+* _macro-value_ is the value of the macro (shown only if Glyph is running in =>[#debug_switch|debug mode]).
 
 error_table[
 
+ref_error[Macro '_name_' takes up to _x_ parameter(s) (_y_ given)|
+Returned if the macro was called with extra parameters.
+]
+
+ref_error[Macro '_name_' takes at least _x_ parameter(s) (_y_ given)|
+Returned if the macro was called with fewer parameters than expected.
+]
+
+ref_error[Macro '_name_' takes exactly _x_ parameter(s) (_y_ given)|
+Returned if the macro was called with a different number of parameters than.
+]
+
+ref_error[Macro not available when compiling a single file.|
+Returned by the %>[include] if used in =>[#lite_mode|lite mode].
+]
+
+ref_error[Filter macro '_extension_' not available|
+Returned by a filter macro if $>[filters.by_file_extension] is set to @true@, but the extension was not recognized.
+]
+
+ref_error[Invalid regular expression: _regexp_|
+Returned by the %>[match] macro if an invalid regular expression was supplied.
+]
+
+ref_error[Macro '_name_' takes no parameters (_x_ given)|
+Returned if the macro was called with parameters but none are requested.
+]
+
+ref_error[No highlighter installed. Please run: gem install coderay|
+Returned by the %>[highlight] macro if no highlighters are installed.
+]
+
+ref_error[CodeRay highlighter not installed. Please run: gem install coderay|
+Returned by the %>[highlight] macro if $>[highlighters.current] is set to @coderay@ but &[coderay] is not installed.
+]
+
+ref_error[UltraViolet highlighter not installed. Please run: gem install ultraviolet|
+Returned by the %>[highlight] macro if $>[highlighters.current] is set to @ultraviolet@ but &[uv] is not installed.
+]
+
 ref_error[Mutual inclusion|
-This error is returned if a catch-22 situation occurs with macro inclusion, for example if the body of a snippet includes a reference to the same snippet.
+Returned if a catch-22 situation occurs with macro inclusion, for example if the body of a snippet includes a reference to the same snippet.
 ]
 ref_error[Snippet '_snippet-id_' does not exist|
 Returned by the %>[snippet] if an invalid snippet was supplied.

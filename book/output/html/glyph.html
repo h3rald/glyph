@@ -406,7 +406,7 @@ May 2010
 </ol></li>
 <li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li>
 <li><ol><li class="appendix section"><a href="#h_50">Global Options</a></li>
-<li><ol><li class="appendix section"><a href="#h_51">-d, --debug</a></li>
+<li><ol><li class="appendix section"><a href="#debug_switch">-d, --debug</a></li>
 </ol></li>
 <li class="appendix section"><a href="#c_add">add</a></li>
 <li><ol><li class="appendix section"><a href="#h_53">Parameters</a></li>
@@ -1096,7 +1096,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun May 09 14:40:05 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun May 09 15:14:06 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1286,15 +1286,15 @@ style[default.css]
 </tr>
 <tr>
 <td>
-<p>default.css</p>
+<p><code>default.css</code></p>
 </td>
 <td>
-<p>The default stylesheet used by this book.</p>
+<p>The default stylesheet used for this book.</p>
 </td>
 </tr>
 <tr>
 <td>
-<p>pagination.css</p>
+<p><code>pagination.css</code></p>
 </td>
 <td>
 <p>A CSS3-compliant stylesheet used for pagination, suitable for <span class="caps">PDF</span> generation using Prince.</p>
@@ -1302,7 +1302,7 @@ style[default.css]
 </tr>
 <tr>
 <td>
-<p>coderay.css</p>
+<p><code>coderay.css</code></p>
 </td>
 <td>
 <p>The default <a href="http://coderay.rubychan.de/">Coderay</a> stylesheet, used for syntax highlighting.</p>
@@ -1310,10 +1310,10 @@ style[default.css]
 </tr>
 <tr>
 <td>
-<p>ultraviolet/*</p>
+<p><code>ultraviolet/*</code></p>
 </td>
 <td>
-<p>This folder contains the followind <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> stylesheets, used for syntax highlighting: <code>active4d.css, all_hallows_eve.css, amy.css, blackboard.css, brilliance_black.css, brilliance_dull.css, cobalt.css, dawn.css, eiffel.css, espresso_libre.css, idle.css, iplastic.css, lazy.css, mac_classic.css, magicwb_amiga.css, pastels_on_dark.css, slush_poppies.css, spacecadet.css, sunburst.css, twilight.css, zenburnesque.css</code></p>
+<p>This folder contains the following <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> stylesheets, used for syntax highlighting: <code>active4d.css, all_hallows_eve.css, amy.css, blackboard.css, brilliance_black.css, brilliance_dull.css, cobalt.css, dawn.css, eiffel.css, espresso_libre.css, idle.css, iplastic.css, lazy.css, mac_classic.css, magicwb_amiga.css, pastels_on_dark.css, slush_poppies.css, spacecadet.css, sunburst.css, twilight.css, zenburnesque.css</code></p>
 </td>
 </tr>
 </table>
@@ -1607,7 +1607,10 @@ macro <span class="Constant"><span class="Constant">:</span>release</span> <span
 </div>
 			<div class="chapter">
 <h2 id="h_45">Troubleshooting</h2>
-				<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros.</p>
+				<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">ruby</a> macro macro.</p>
+<div class="tip">
+<p><span class="note-title">Tip</span>As a general rule, more diagnostic information is provided if Glyph is run with <a href="#debug_switch">&#8212;debug</a>.</p>
+</div>
 <div class="section">
 <h3 id="h_46">Generic Errors</h3>
 <table style="width:100%;">
@@ -1616,10 +1619,8 @@ macro <span class="Constant"><span class="Constant">:</span>release</span> <span
 				<th>Description</th>
 </tr>
 <tr>
-			<td>Document contains syntax errors</td>
-			<td>This error is returned if the document was not parsed because of one or more syntax error. <br />
-<br />
-<strong>At present, no indication on the exact location of the error(s) is provided</strong>, so the only way to determine what went wrong is to try compiling a single file at a time by commenting out files included within <code>document.glyph</code> as necessary, and examine more closely the source of the files that do not compile.</td>
+			<td>Incorrect macro syntax</td>
+			<td>This error is returned if the parsing of the document (or one of its included files) failed. In 99% of the cases, this means there is an extra or missing macro delimiter somewhere.</td>
 </tr>
 
 <tr>
@@ -1671,6 +1672,26 @@ macro <span class="Constant"><span class="Constant">:</span>release</span> <span
 				<th>Description</th>
 </tr>
 <tr>
+			<td>Source file &#8216;<em>source-file</em>&#8217; does not exist</td>
+			<td>Returned if Glyph is running in <a href="#lite_mode">lite mode</a> and the specified source file was not found.</td>
+</tr>
+
+<tr>
+			<td>Source and destination file are the same</td>
+			<td>Returned if Glyph is running in <a href="#lite_mode">lite mode</a> and you specified the same source and destination files.</td>
+</tr>
+
+<tr>
+			<td>DirectoryWatcher is not available. Install it with: gem install directory_watcher</td>
+			<td>Returned if <a href="#auto_regeneration">auto regeneration</a> is enabled but the <code>directory_watcher</code> gem in not installed.</td>
+</tr>
+
+<tr>
+			<td>Document cannot be finalized due to previous errors</td>
+			<td>Returned if one or more errors occurred in the document prevented finalization.</td>
+</tr>
+
+<tr>
 			<td>Please specify a file name</td>
 			<td>No file name was specified for the <a href="#c_add">add</a> command.</td>
 </tr>
@@ -1701,11 +1722,16 @@ macro <span class="Constant"><span class="Constant">:</span>release</span> <span
 <div class="section">
 <h3 id="h_48">Macro Errors</h3>
 <p>The following errors are displayed in the form:</p>
-<p><em>macro-path</em> <em>message</em></p>
+<p><em>message</em><br />
+&#8594; source: <em>macro-source</em><br />
+&#8594; path: <em>macro-path</em> <br />
+&#8594; value: <em>macro-value</em></p>
 <p>Where:</p>
 <ul>
-	<li><em>macro-path</em> is the full path to the macro that returned the error, within the document syntax tree, e.g. <code>document/body/bodymatter/chapter/section/header/&amp;</code> if the error occurrent in a snippet within the header of a section in the <code>bodymatter</code> part of the document.</li>
 	<li><em>message</em> is the error message.</li>
+	<li><em>macro-source</em> is the file or snippet where the error occurred.</li>
+	<li><em>macro-path</em> is the full path to the macro that returned the error, within the document syntax tree, e.g. <code>document/body/bodymatter/chapter/section/header/&amp;</code> if the error occurrent in a snippet within the header of a section in the <code>bodymatter</code> part of the document.</li>
+	<li><em>macro-value</em> is the value of the macro (shown only if Glyph is running in <a href="#debug_switch">debug mode</a>).</li>
 </ul>
 <table style="width:100%;">
 <tr>
@@ -1713,8 +1739,58 @@ macro <span class="Constant"><span class="Constant">:</span>release</span> <span
 				<th>Description</th>
 </tr>
 <tr>
+			<td>Macro &#8216;<em>name</em>&#8217; takes up to <em>x</em> parameter(s) (<em>y</em> given)</td>
+			<td>Returned if the macro was called with extra parameters.</td>
+</tr>
+
+<tr>
+			<td>Macro &#8216;<em>name</em>&#8217; takes at least <em>x</em> parameter(s) (<em>y</em> given)</td>
+			<td>Returned if the macro was called with fewer parameters than expected.</td>
+</tr>
+
+<tr>
+			<td>Macro &#8216;<em>name</em>&#8217; takes exactly <em>x</em> parameter(s) (<em>y</em> given)</td>
+			<td>Returned if the macro was called with a different number of parameters than.</td>
+</tr>
+
+<tr>
+			<td>Macro not available when compiling a single file.</td>
+			<td>Returned by the <a href="#m_include">include</a> macro if used in <a href="#lite_mode">lite mode</a>.</td>
+</tr>
+
+<tr>
+			<td>Filter macro &#8216;<em>extension</em>&#8217; not available</td>
+			<td>Returned by a filter macro if <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is set to <code>true</code>, but the extension was not recognized.</td>
+</tr>
+
+<tr>
+			<td>Invalid regular expression: <em>regexp</em></td>
+			<td>Returned by the <a href="#m_match">match</a> macro macro if an invalid regular expression was supplied.</td>
+</tr>
+
+<tr>
+			<td>Macro &#8216;<em>name</em>&#8217; takes no parameters (<em>x</em> given)</td>
+			<td>Returned if the macro was called with parameters but none are requested.</td>
+</tr>
+
+<tr>
+			<td>No highlighter installed. Please run: gem install coderay</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if no highlighters are installed.</td>
+</tr>
+
+<tr>
+			<td>CodeRay highlighter not installed. Please run: gem install coderay</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>coderay</code> but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
+</tr>
+
+<tr>
+			<td>UltraViolet highlighter not installed. Please run: gem install ultraviolet</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>ultraviolet</code> but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
+</tr>
+
+<tr>
 			<td>Mutual inclusion</td>
-			<td>This error is returned if a catch-22 situation occurs with macro inclusion, for example if the body of a snippet includes a reference to the same snippet.</td>
+			<td>Returned if a catch-22 situation occurs with macro inclusion, for example if the body of a snippet includes a reference to the same snippet.</td>
 </tr>
 
 <tr>
@@ -1787,7 +1863,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <div class="section">
 <h3 id="h_50">Global Options</h3>
 <div class="section">
-<h4 id="h_51"><code>-d</code>, <code>--debug</code></h4>
+<h4 id="debug_switch"><code>-d</code>, <code>--debug</code></h4>
 <p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
 </div>
 </div>
