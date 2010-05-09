@@ -450,7 +450,35 @@ You can embed CSS files using the %>[style], like this:
 
 code[= style[default.css] =]
 
-In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
+In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
+
+section[header[Default Stylesheets|default_styles]
+Glyph provides the following default stylesheets, that can be referenced directly using the %>[style] macro:
+
+	table[
+		tr[
+			th[File name]
+			th[Notes]
+		]
+		tr[
+			td[@default.css@]
+			td[The default stylesheet used for this book.]
+		]
+		tr[
+			td[@pagination.css@]
+			td[A CSS3-compliant stylesheet used for pagination, suitable for PDF generation using Prince.]
+		]
+		tr[
+			td[@coderay.css@]
+			td[The default &[coderay] stylesheet, used for syntax highlighting.]
+		]
+		tr[
+			td[@ultraviolet/*@]
+			td[This folder contains the following &[uv] stylesheets, used for syntax highlighting: codeph[%[(Glyph::HOME/"styles/ultraviolet").children.sort.map{|c| c.basename}.join(", ")]]]
+		]
+	]
+
+]
 
 ]
 
