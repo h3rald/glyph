@@ -140,7 +140,7 @@ example[=&:[test\|This is a test]=]
 ]
 
 ref_macro[todo|
-Saves the value as a TODO item, which can be printed using the #>[todo].
+Saves the value as a TODO item, which can be printed using the #>[todo] or included in the document if the $>[document.draft] is set to @true@.
 
 example[=todo[Remember to do this.]=]
 ]
@@ -301,6 +301,15 @@ ref_macro[codeph|
 Wraps the value in a @<code>@ tag.
 
 example[=codeph[Kernel.instance_eval]=]
+
+]
+
+ref_macro[draftcomment|
+If the $>[document.draft] is set to @true@, displays a draft comment within the document.
+
+aliases[dc]
+
+example[=dc[This is printed only in draft documents.]=]
 
 ]
 

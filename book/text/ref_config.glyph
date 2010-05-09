@@ -5,6 +5,9 @@ The following configuration settings are related to the current Glyph document. 
 		ref_config[document.author|
 The author of the document.
 		]
+		ref_config[document.draft|
+If set to @true@, the document is considered a draft, so =>[#m_draftcomment|draft comments] and =>[#m_todo|todo items] will be displayed.
+		]
 		ref_config[document.filename|
 The name of the output file.
 		]
