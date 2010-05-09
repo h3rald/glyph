@@ -316,6 +316,7 @@ describe "Macro:" do
 		uv_result = %{<pre class=\"iplastic\"> <span class=\"Keyword\">def</span> 
 			<span class=\"FunctionName\">test_method</span>(<span class=\"Arguments\">a<span class=\"Arguments\">,</span> b</span>) 
 			puts a<span class=\"Keyword\">+</span>b <span class=\"Keyword\">end</span> </pre>}
+		Glyph['highlighters.ultraviolet.theme'] = 'iplastic'
 		check = lambda do |hl, result|
 			Glyph["highlighters.current"] = hl
 			Glyph.debug_mode = true

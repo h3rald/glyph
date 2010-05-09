@@ -133,14 +133,19 @@ describe "glyph" do
 		file_copy "#{Glyph::PROJECT}/../files/article.glyph", "#{Glyph::PROJECT}/article.glyph"
 		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"
 		run_command_successfully(["compile", "article.glyph"]).should == true
-		Glyph.lite_mode = false
 		Pathname.new('article.html').exist?.should == true
 		file_load('article.html').gsub(/\t|\n/, '').should == %{
 			<div class="section">
-				<img src="ligature.jpg"   alt="-"/>
 				Test -- Test Snippet
 			</div>
 		}.gsub(/\t|\n/, '')
+		Glyph.enable 'generate:html'
+		(Glyph::PROJECT/'article.html').unlink
+		Glyph['document.output'] = 'pdf'
+		run_command_successfully(["compile", "article.glyph"]).should == true
+		(Glyph::PROJECT/'article.html').exist?.should == true
+		(Glyph::PROJECT/'article.pdf').exist?.should == true
+		Glyph.lite_mode = false
 	end	
 
 	it "[compile] should compile a single source file to a custom destination" do 

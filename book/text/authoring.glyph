@@ -484,7 +484,7 @@ Glyph provides the following default stylesheets, that can be referenced directl
 
 section[header[HTML output]
 
-To compile a Glyph project to an HTML document, use the #>[compile] command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
+To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
 
 The name of the HTML file can be set in the configuration (@document.filename@ setting).
 ]

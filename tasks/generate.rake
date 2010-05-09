@@ -23,7 +23,7 @@ namespace :generate do
 		Glyph.info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
-			file = Glyph['document.output_file']
+			file = (Glyph['document.output'] == 'pdf') ? Glyph['document.filename']+".html" : Glyph['document.output_file']
 		else
 			out = Glyph::PROJECT/"output/html"
 			file = "#{Glyph['document.filename']}.html"
@@ -51,7 +51,7 @@ namespace :generate do
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 			src = out/"#{Glyph['document.filename']}.html"
-			file = "#{Glyph['document.output_file']}.pdf"
+			file = Glyph['document.output_file']
 		else
 			out = Glyph::PROJECT/"output/pdf"
 			src = Glyph::PROJECT/"output/html/#{Glyph['document.filename']}.html"
