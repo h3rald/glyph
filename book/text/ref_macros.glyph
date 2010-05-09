@@ -365,7 +365,6 @@ ref_macro[section|See =>[#m_div].]
 
 ref_macro[style|
 Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).
-![Document the default stylesheets.]
 
 example[=style[default.css]=]
 ]

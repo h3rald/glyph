@@ -15,9 +15,7 @@ ol, ul {
 p {
 	margin: 1em 0;
 }
-td p, td ul, td ol, td div, td pre, td code {
-	margin: 0;
-}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -205,6 +203,14 @@ pre{
 
 pre>code {
 	font-size: 1em;
+}
+td p, td ul, td ol {
+	margin: 0;
+}
+td>div.code, td>code {
+	width: auto;
+	margin: 0.2em;
+	padding: 0.2em;
 }
 
 /* FONTS */

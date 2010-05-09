@@ -24,9 +24,7 @@ ol, ul {
 p {
 	margin: 1em 0;
 }
-td p, td ul, td ol, td div, td pre, td code {
-	margin: 0;
-}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -215,6 +213,14 @@ pre{
 pre>code {
 	font-size: 1em;
 }
+td p, td ul, td ol {
+	margin: 0;
+}
+td>div.code, td>code {
+	width: auto;
+	margin: 0.2em;
+	padding: 0.2em;
+}
 
 /* FONTS */
 body {
@@ -227,7 +233,257 @@ code, pre {
 
 
 </style>
-		
+		<style type="text/css">
+/* FONTS */
+
+@font-face {
+	font-family: "Serif"
+	src: local("Book Antiqua")
+}
+
+@font-face {
+	font-family: "Monospace"
+	src: local("Droid Sans Mono")
+}
+body {
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
+}
+
+code, pre {
+	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
+}
+@page {
+	size: A4;
+	margin: 40pt 30pt 40pt 30pt;
+	@top { 
+		content: string(book-title) " - " string(chapter-title);  
+		font-style: italic;
+	}
+  @bottom { content: counter(page, decimal); }
+}
+
+@page frontmatter {
+	@bottom { content: counter(page, lower-roman); }
+}
+
+@page backmatter {
+	@bottom { content: counter(page, decimal); }
+}
+
+@page:first { 
+	padding-top: 10%;
+  @top { content: normal; }
+  @bottom { content: normal; }
+}
+
+ol.toc {
+	margin-left: 1.5em;
+}
+.toc > li[class] {
+	font-weight: bold;
+}
+.toc li {
+	list-style-type: none;
+	margin-left: 0;
+}
+.toc li a, .toc li a:hover {
+	color: #000;
+}
+
+.toc li a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+
+.titlepage h1, .halftitlepage h1 { 
+	string-set: book-title content();
+}
+
+.toc>li[class~=chapter] {
+	counter-increment: toc1;
+	counter-reset: toc2;
+}
+
+.toc>li[class~=appendix] {
+	counter-increment: appendix1;
+	counter-reset: toc2;
+}
+
+.toc ol li[class] {
+	counter-increment: toc2;
+	counter-reset: toc3;
+}
+
+.toc ol ol li[class] {
+	counter-increment: toc3;
+	counter-reset: toc4;
+}
+
+.toc ol ol ol li[class] {
+	counter-increment: toc4;
+	counter-reset: toc5;
+}
+
+.toc ol ol ol ol li[class] {
+	counter-increment: toc5;
+}
+
+.toc>li[class~=chapter]::before {
+	content: counter(toc1) ". ";
+}
+
+
+.toc>li[class~=appendix]::before {
+	content: counter(appendix1, upper-latin) ". ";
+}
+
+.toc>li[class] {
+	margin: 1em 0;
+}
+
+.toc ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) " ";
+}
+.toc ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) " ";
+}
+
+
+.toc ol ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
+}
+.toc ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) " ";
+}
+
+.toc ol ol ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
+}
+.toc ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
+}
+
+.toc ol ol ol ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
+}
+.toc ol ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
+}
+
+div.frontmatter{
+	page: frontmatter;
+}
+
+div.backmatter{
+	page: backmatter;
+}
+
+.bodymatter h2::before {
+	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+	counter-reset: footnote;
+}
+
+.backmatter h2::before {
+	content: "Appendix " counter(a2, upper-latin) " &ndash; ";
+}
+
+.bodymatter h3::before {
+	content: counter(h2) "." counter(h3) " ";
+}
+
+.backmatter h3::before {
+	content: counter(a2, upper-latin) "." counter(h3) " ";
+}
+
+.bodymatter h4::before {
+	content: counter(h2) "." counter(h3) "." counter(h4) " ";
+}
+
+.backmatter h4::before {
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) " ";
+}
+
+.bodymatter h5::before {
+	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+}
+
+.backmatter h5::before {
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+}
+
+h2 { 
+	string-set: chapter-title content();
+	page-break-before: always;
+}
+
+.titlepage h2 {
+	page-break-before: avoid;
+}
+
+.bodymatter h2{
+	counter-increment: h2;
+	counter-reset: h3;
+}
+
+.backmatter h2{
+	counter-increment: a2;
+	counter-reset: h3;
+}
+
+.bodymatter h3, .backmatter h3 {
+	counter-increment: h3;
+	counter-reset: h4;
+}	
+
+.bodymatter h4, .backmatter h4 {
+	counter-increment: h4;
+	counter-reset: h5;
+}	
+
+.bodymatter h5, .backmatter h5 {
+	counter-increment: h5;
+}
+
+h2, h3, h4, h5 { page-break-after: avoid }
+table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid }
+
+/* Footnotes */
+
+@page {
+	@footnotes {
+		border-top: 1px solid #000;
+	}
+}
+
+.fn {
+	font-size: 85%;
+	margin-left: 1.5em;
+  display: prince-footnote;
+  counter-increment: footnote;
+}
+
+.fn::footnote-call {
+	content: counter(footnote);
+	font-size: 85%;
+	vertical-align: super;
+	line-height: none;
+	font-weight: bold;
+	margin-left: 1pt;
+}
+
+.fn::footnote-marker {
+	font-weight: bold;
+	margin-right: 0.5em;
+}
+
+</style>
 		
 		<style type="text/css">
 pre.blackboard .LatexSupport {
@@ -324,7 +580,8 @@ pre.blackboard .Comment {
 
 	<body>
 <div class="titlepage">
-<img src="images/glyph.png" width="20%" height="20%" alt="-"/>
+<img src="images/glyph.svg" width="20%" height="20%" alt="-"/>
+			
 			<h1>
 			Glyph
 </h1>
@@ -1096,7 +1353,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun May 09 15:14:06 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun May 09 15:39:56 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1140,11 +1397,11 @@ This is the official version of the Glyph Book]
     eq[$[tools.pdf_generator]|prince]
     ]
   |
-  style[css3.css]]
+  style[pagination.css]]
 </code>
 </pre>
 </div>
-<p>In this case, the <code>css3.css</code> stylesheet is included only when you&#8217;re generating a <span class="caps">PDF</span> document using Prince <span class="caps">XML</span>.</p>
+<p>In this case, the <code>pagination.css</code> stylesheet is included only when you&#8217;re generating a <span class="caps">PDF</span> document using Prince <span class="caps">XML</span>.</p>
 <div class="section">
 <h5 id="h_22">Using macros inside the condition macro</h5>
 <p>Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a <a href="#m_condition">condition</a> macro are <em>always</em> parsed and <em>executed</em>, even <em>before</em> that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you&#8217;re the <a href="#m_config_">config:</a> macro or the <a href="#m_ruby">ruby</a> macro, for example: because in that case a configuration setting or a piece of Ruby code is always executed&#8230;</p>
@@ -1253,7 +1510,7 @@ highlight[=ruby|
 <div class="box">
 <div class="box-title">Some Remarks</div>
 <ul>
-	<li>Highlighters require some configuration. <span class="fmi">for more information on relevant configuration settings, see <a href="#s_highlighters">@highlighters.*@</a></span>.</li>
+	<li>Highlighters require some configuration. For more information on relevant configuration settings, see the <code>highlighters.*</code> configuration settings.</li>
 	<li>If you&#8217;re using the <a href="#m_highlight">highlight</a> macro together with <a href="#m_textile">textile</a> macro, you must wrap the macro call within <code>&lt;notextile&gt;</code> tags.</li>
 	<li>You must always escape pipes (<code>|</code>) with the code or the highlight macro.</li>
 </ul>
@@ -1397,7 +1654,8 @@ glyph compile -f pdf
 <p>This is the source code of a fairly simple macro used to format a note :</p>
 <pre class="blackboard">
 macro <span class="Constant"><span class="Constant">:</span>note</span> <span class="Keyword">do</span>
-  <span class="String"><span class="String">%{</span>&lt;div class=&quot;<span class="String"><span class="String">#{</span><span class="Variable"><span class="Variable">@</span>name</span><span class="String">}</span></span>&quot;&gt;&lt;span class=&quot;note-title&quot;&gt;<span class="String"><span class="String">#{</span><span class="Variable"><span class="Variable">@</span>name</span><span class="String"><span class="String">.</span><span class="Entity">to_s</span></span><span class="String"><span class="String">.</span><span class="Entity">capitalize</span></span><span class="String">}</span></span>&lt;/span&gt;<span class="String"><span class="String">#{</span><span class="Variable"><span class="Variable">@</span>value</span><span class="String">}</span></span></span>
+  <span class="String"><span class="String">%{</span>&lt;div class=&quot;<span class="String"><span class="String">#{</span><span class="Variable"><span class="Variable">@</span>name</span><span class="String">}</span></span>&quot;&gt;&lt;span class=&quot;note-title&quot;&gt;<span class="String"><span class="String">#{</span><span class="Variable"><span class="Variable">@</span>name</span><span class="String"><span class="String">.</span><span class="Entity">to_s</span></span><span class="String"><span class="String">.</span><span class="Entity">capitalize</span></span><span class="String">}</span></span>&lt;/span&gt;</span>
+<span class="String">		<span class="String"><span class="String">#{</span><span class="Variable"><span class="Variable">@</span>value</span><span class="String">}</span></span></span>
 <span class="String"></span>
 <span class="String">    &lt;/div&gt;<span class="String">}</span></span>
 <span class="Keyword">end</span>
@@ -1487,14 +1745,14 @@ macro <span class="Constant"><span class="Constant">:</span>anchor</span> <span 
 macro <span class="Constant"><span class="Constant">:</span>link</span> <span class="Keyword">do</span>
   href, title <span class="Keyword">=</span> <span class="Variable"><span class="Variable">@</span>params</span>
   <span class="Keyword">if</span> href.<span class="Entity">match</span> <span class="String"><span class="String">/</span></span><span class="String">^#</span><span class="String"><span class="String">/</span></span> <span class="Keyword">then</span>
-    anchor <span class="Keyword">=</span> href.<span class="Entity">gsub</span>(<span class="String"><span class="String">/</span></span><span class="String">^#</span><span class="String"><span class="String">/</span></span>, <span class="String"><span class="String">'</span><span class="String">'</span></span>).<span class="Entity">to_sym</span>
-    bmk <span class="Keyword">=</span> bookmark? anchor
+    anc <span class="Keyword">=</span> href.<span class="Entity">gsub</span>(<span class="String"><span class="String">/</span></span><span class="String">^#</span><span class="String"><span class="String">/</span></span>, <span class="String"><span class="String">'</span><span class="String">'</span></span>).<span class="Entity">to_sym</span>
+    bmk <span class="Keyword">=</span> bookmark? anc
     <span class="Keyword">if</span> bmk <span class="Keyword">then</span>
       title <span class="Keyword">||=</span> bmk[<span class="Constant"><span class="Constant">:</span>title</span>]
     <span class="Keyword">else</span>
       plac <span class="Keyword">=</span> placeholder <span class="Keyword">do </span>|<span class="Variable">document</span>|
-        macro_error <span class="String"><span class="String">&quot;</span>Bookmark '<span class="String"><span class="String">#{</span>anchor<span class="String">}</span></span>' does not exist<span class="String">&quot;</span></span> <span class="Keyword">unless</span> document.<span class="Entity">bookmarks</span>[anchor] 
-        document.<span class="Entity">bookmarks</span>[anchor][<span class="Constant"><span class="Constant">:</span>title</span>]
+        macro_error <span class="String"><span class="String">&quot;</span>Bookmark '<span class="String"><span class="String">#{</span>anc<span class="String">}</span></span>' does not exist<span class="String">&quot;</span></span> <span class="Keyword">unless</span> document.<span class="Entity">bookmarks</span>[anc] 
+        document.<span class="Entity">bookmarks</span>[anc][<span class="Constant"><span class="Constant">:</span>title</span>]
       <span class="Keyword">end</span>
       title <span class="Keyword">||=</span> plac
     <span class="Keyword">end</span>
@@ -1609,7 +1867,7 @@ macro <span class="Constant"><span class="Constant">:</span>release</span> <span
 <h2 id="h_45">Troubleshooting</h2>
 				<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">ruby</a> macro macro.</p>
 <div class="tip">
-<p><span class="note-title">Tip</span>As a general rule, more diagnostic information is provided if Glyph is run with <a href="#debug_switch">&#8212;debug</a>.</p>
+<p><span class="note-title">Tip</span>As a general rule, more diagnostic information is provided if Glyph is run in <a href="#debug_switch">debug mode</a>.</p>
 </div>
 <div class="section">
 <h3 id="h_46">Generic Errors</h3>
@@ -3056,7 +3314,7 @@ prince
 
 </td>	
 </tr>
-	
+	 
 		
 		<tr>
 <td>

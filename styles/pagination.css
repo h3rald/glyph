@@ -1,3 +1,21 @@
+/* FONTS */
+
+@font-face {
+	font-family: "Serif"
+	src: local("Book Antiqua")
+}
+
+@font-face {
+	font-family: "Monospace"
+	src: local("Droid Sans Mono")
+}
+body {
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
+}
+
+code, pre {
+	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
+}
 @page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;

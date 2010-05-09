@@ -61,7 +61,7 @@ release[0.2.0|May 9th 2010|
 		issue[108|It is now possible to define Glyph macros within Glyph source files using the %>[macro:].]
 	]
 	bugs[
-		issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed. ![Link to troubleshooting section, expand (new warnings, additional debug info)]]
+		issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.] 
 		issue[93|#[css_not_copied]Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles (see also =>[#system_css|#100]).]
 		issue[95|The #>[config] did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.]
 		issue[98|Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.]
