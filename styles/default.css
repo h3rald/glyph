@@ -65,6 +65,9 @@ li {
 ol li{
 	list-style-type: decimal;
 }
+.contents li {
+	list-style-type: none;
+}
 img {
 	margin: 0 5px;
 	padding: 2px;

@@ -44,6 +44,23 @@ aliases[$:]
 example[=$:[document.draft\|true]=]
 
 ]
+ref_macro[decode|
+Decodes some text that was previously encoded (see %>[encode]). fmi[this topic|#encode_decode].
+
+aliases[**]
+
+example[=*[\=note‡\.‡¤\.91\.¤‡\.‡This will not be evaluated‡\.‡¤\.93\.¤‡\.‡\=]=]
+
+]
+
+ref_macro[encode|
+Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the %>[decode]). fmi[this topic|#encode_decode].
+
+aliases[*]
+
+example[=*[\=note[This will not be evaluated]\=]=]
+
+]
 
 ref_macro[eq|
 Conditional equality operator, to be used with the %>[condition].
