@@ -15,7 +15,7 @@ ol, ul {
 p {
 	margin: 1em 0;
 }
-td p, td ul, td ol {
+td p, td ul, td ol, td div, td pre, td code {
 	margin: 0;
 }
 table {

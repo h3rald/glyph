@@ -456,7 +456,7 @@ In this case, the %>[style] looks for a @default.css@ file in the @/styles@ fold
 
 section[header[HTML output]
 
-To compile a Glyph project to an HTML document, use the @glyph compile@ command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
+To compile a Glyph project to an HTML document, use the #>[compile] command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
 
 The name of the HTML file can be set in the configuration (@document.filename@ setting).
 ]
@@ -470,6 +470,13 @@ code[= glyph compile -f pdf =]
 The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.
 
 note[Glyph v\.%[Glyph::VERSION.strip] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
+
+]
+
+section[header[Auto Regeneration|auto_regeneration]
+You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed. 
+
+note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
 
 ]
 

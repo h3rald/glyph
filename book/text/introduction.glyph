@@ -16,11 +16,14 @@ Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 * Store common snippets of text in a single YAML file and use them anywhere in your document, as many times as you need.
 * Store configuration settings in a YAML file and use them anywhere in your document, as many times as you need.
 * Evaluate Ruby code within your document.
+* Include content only if certain conditions are satisfied.
+* Define macros, snippets and configuration settings directly within your document.
+* Highlight source code.
 * Call macros from other macros (including snippets), avoiding mutual calls.
 * Include text files in other text files.
 * Include the value of any configuration setting (like author, title) in the document.
 * Filter input explicitly or implicitly, based on file extensions when including files. 
-* Manage comments and todo items.
+* Manage draft comments and todo items.
 
 ]
 
@@ -37,6 +40,7 @@ Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's
 * @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
 * @glyph add introduction.textile@ -- to create a new file called _introduction.textile_.
 * @glyph compile@ -- to compile the current document into a single HTML file.
+* @glyph compile --auto@ -- to keep recompiling the current document every time a file is changed.
 * @glyph compile -f pdf@ -- to compile the current document into HTML and then transform it into PDF using &[prince].
 * @glyph compile readme.glyph@ -- to compile a _readme.glyph_ located in the current directory into a single HTML file.
 

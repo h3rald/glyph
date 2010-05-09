@@ -28,6 +28,11 @@ Compiles a Glyph document into an output file. If no options are specified, the 
 
 example[glyph compile -f pdf]
 
+parameters[
+-p[_source_|The source glyph file to compile _(Optional)_.]
+-p[_destination_|The destination file _(Optional)_.]
+]
+
 options[
 -o[source|
 The source file to compile. 
@@ -37,6 +42,9 @@ default[document.glyph]
 The format of the output file.
 default[html]
 values[html, pdf]
+]
+-o[auto|
+If specified, enable =>[#auto_regeneration|auto regeneration] (requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed).
 ]
 ]
 ] --[End compile]
