@@ -475,7 +475,7 @@ note[Glyph v\.%[Glyph::VERSION.strip] has been successfully tested with Prince v
 
 ]
 
-section[header[Compiling single Glyph files]
+section[header[Compiling single Glyph files|lite_mode]
 Glyph's primary goal is to author complex documents like books or manuals. In order to do so, a Glyph project is required to keep everything organized and automated via a set of predefined conventions, exactly like Ruby on Rails or other similar frameworks do.
 
 If you want to write a one-page article or a short draft, however, creating and managing Glyph projects can be an unnecessary burden. Luckily, you don't have to: you can use Glyph to compile single files containing Glyph code, by adding one parameter (or two if you want to specify a custom destination file) to the #>[compile], like this:
@@ -484,7 +484,7 @@ codeph[glyph compile source.glyph destination.htm]
 
 This command will process a file called @source.glyph@ and produce an HTML file called @destination.htm@.
 
-section[header[Limitations]
+section[header[Limitations|lite_limitations]
 &:[only_defined_through|can only be defined inside the source file, using the]
 This sort of "lite" mode comes with a few minor limitations: 
 * Snippets &[only_defined_through] %>[snippet:] macro.
@@ -494,4 +494,20 @@ This sort of "lite" mode comes with a few minor limitations:
 * Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph system stylesheet ![link to system stylesheet list].
 * The %>[include] cannot be used (if you need to include other text files, you should probably use a Glyph project...)
 ]
+]
+
+section[header[Using Glyph programmatically]
+Besides using Glyph from the command line, you can also use it straight from your code. Glyph's public =>[http://yardoc.org/docs/glyph/Glyph|API] is simple and can be used to:
+* Retrieve and update configuration settings (using @Glyph\[\]@ and @Glyph\[\]=@)
+* Filter text to HTML (using @Glyph#filter@)
+* Compile Glyph source files into HTML or PDF files (using @Glyph#compile@)
+
+That's pretty much it. Of course, both the @filter@ and @compile@ method cause Glyph to run in =>[#lite_mode|_lite_ mode], so the same =>[#lite_limitations|limitations] apply. 
+
+tip[For an example on how to use Glyph programmatically (specifically in conjunction with the =>[http://nanoc.stoneship.org/|nanoc] static site generator), see =>[http://github.com/h3rald/h3rald|h3rald.com source code], in particular:
+* =>[http://github.com/h3rald/h3rald/blob/master/lib/glyph-data.rb|lib/glyph-data.rb] -- updating configuration settings.
+* =>[http://github.com/h3rald/h3rald/blob/master/lib/glyph-filter.rb|lib/glyph-data.rb] -- using the @Glyph#filter@ method.
+* =>[http://github.com/h3rald/h3rald/blob/master/Rules|Rules] -- using the @Glyph#compile@ method to generate PDF files.
+]
+
 ]
