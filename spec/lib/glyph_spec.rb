@@ -40,12 +40,13 @@ describe Glyph do
 	it "should provide a set of default macros and aliases" do
 		delete_project
 		create_project
+		reset_quiet
 		Glyph.run! 'load:macros'
 		macros = [:anchor, :link, :codeph, :fmi, :note, :box, :code, :title, :subtitle,
 		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet, "snippet:",
 		:include, :config, "config:", :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
 		:head, :style, :toc, :section, :condition, :eq, :and, :or, :not, :match, :highlight, "macro:", 
-		:encode, :decode, :draftcomment]
+		:encode, :decode, :draftcomment, "==xml"]
 		aliases = [	
 			[[:bookmark, "#"], :anchor],
 			[["=>"], :link],

@@ -16,8 +16,25 @@ class MacroNode < GlyphSyntaxNode
 
 	def evaluate(context, current)
 		name = macro_name.text_value.to_sym
-		raise Glyph::SyntaxError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless Glyph::MACROS.include? name
+		known_macro = Glyph::MACROS.include? name
+		xml_element = nil
+		case
+			# Use XML syntax
+		when Glyph['language.macros'] == 'xml' then
+			xml_element = name
+			name = :"==xml"
+			# Fallback to XML syntax
+		when Glyph['language.options.xml_fallback'] then
+			unless known_macro then
+				xml_element = name
+				name = :"==xml" 
+			end
+		else
+			# Unknown macro
+			raise Glyph::SyntaxError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless known_macro
+		end
 		@data = {:macro => name, :source => context[:source], :document => context[:document]}.to_node
+		@data[:xml_element] = xml_element if xml_element
 		@data[:escape] = true if is_a? EscapingMacroNode
 		current << @data
 		@data[:value] = super(context, @data).strip

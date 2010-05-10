@@ -89,6 +89,10 @@ def interpret(text)
 	@p = Glyph::Interpreter.new(text)
 end
 
+def output_for(text)
+	Glyph::Interpreter.new(text).document.output
+end
+
 def create_tree(text)
 	GlyphLanguageParser.new.parse text 
 end

@@ -7,6 +7,11 @@
   :draft: false
   :output: 'html'
   :output_targets: [:html, :pdf]
+:language:
+  :macros: 'glyph' # xml
+  :options:
+    :xml_fallback: true
+    :common_macros: true
 :system:
   :quiet: false
   :structure:
