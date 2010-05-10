@@ -198,7 +198,7 @@ module Glyph
 		Dir.chdir Pathname.new(src).parent.to_s
 		begin
 			require 'glyph/commands'
-			self[:quiet] = true
+			self['system.quiet'] = true
 			self.library_mode = true
 			GLI.run ["compile", src.to_s, out].compact	
 		rescue Exception => e
@@ -207,7 +207,7 @@ module Glyph
 			Dir.chdir pwd
 			self.library_mode = false
 			self.lite_mode = false
-			self[:quiet] = false
+			self['system.quiet'] = false
 		end
 	end
 
@@ -224,7 +224,7 @@ module Glyph
 		self.enable_all
 		result = ""
 		begin
-			self[:quiet] = true
+			self['system.quiet'] = true
 			self.library_mode = true
 			self.run 'load:all'
 			result = Interpreter.new(text).document.output
@@ -233,7 +233,7 @@ module Glyph
 		ensure
 			self.lite_mode = false
 			self.library_mode = false
-			self[:quiet] = false
+			self['system.quiet'] = false
 		end
 		result
 	end
@@ -241,19 +241,19 @@ module Glyph
 	# Prints a message
 	# @param [String] message the message to print
 	def self.info(message)
-		puts "#{message}" unless Glyph[:quiet]
+		puts "#{message}" unless Glyph['system.quiet']
 	end
 
 	# Prints a warning
 	# @param [String] message the message to print
 	def self.warning(message)
-		puts "--> warning: #{message}" unless Glyph[:quiet]
+		puts "--> warning: #{message}" unless Glyph['system.quiet']
 	end
 
 	# Prints an error
 	# @param [String] message the message to print
 	def self.error(message)
-		puts "==> error: #{message}" unless Glyph[:quiet]
+		puts "==> error: #{message}" unless Glyph['system.quiet']
 	end
 
 end

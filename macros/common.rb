@@ -67,7 +67,11 @@ macro :ruby do
 end
 
 macro :config do
-	Glyph[@value]
+	if @value.match /^system\..+/ then
+		macro_warning "Cannot reset '#@value' setting (system use only)."
+	else
+		Glyph[@value]
+	end
 end
 
 macro "config:" do

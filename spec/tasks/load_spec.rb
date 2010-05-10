@@ -38,10 +38,10 @@ describe "load" do
 	it "[config] should load configuration files and apply overrides" do
         Glyph.config_refresh
 		lambda { Glyph.run! 'load:config'}.should_not raise_error
-		Glyph[:quiet] = true
+		Glyph['system.quiet'] = true
 		Glyph::PROJECT_CONFIG.blank?.should == false
 		Glyph::SYSTEM_CONFIG.blank?.should == false
-		Glyph['structure.headers'].class.to_s.should == "Array"
+		Glyph['system.structure.headers'].class.to_s.should == "Array"
 	end
 
 end

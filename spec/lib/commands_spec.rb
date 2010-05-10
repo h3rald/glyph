@@ -45,6 +45,13 @@ describe "glyph" do
 		(Glyph::SPEC_DIR/'.glyphrc').unlink
 	end
 
+	it "[config] should not overwrite system settings" do
+		create_project
+		Glyph['system.test_setting'] = false
+		run_command(["config", "system.test_setting", true]).match(/warning.+\(system use only\)/m).should_not == nil
+		Glyph['system.test_setting'].should == false
+	end
+
 	it "[add] should create a new text file" do
 		create_project
 		run_command_successfully(["add", "test.textile"]).should == true

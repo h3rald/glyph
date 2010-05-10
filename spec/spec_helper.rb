@@ -14,7 +14,7 @@ end
 
 require "glyph"
 
-Glyph[:quiet] = true
+Glyph['system.quiet'] = true
 
 def create_project_dir
 	Glyph::PROJECT.mkpath
@@ -22,7 +22,7 @@ end
 
 def reset_quiet
 	Glyph.reset
-	Glyph[:quiet] = true
+	Glyph['system.quiet'] = true
 end
 
 def create_project
@@ -61,9 +61,9 @@ def run_command(cmd)
 	old_stderr = $stderr
 	$stdout = out
 	$stderr = out 
-	Glyph[:quiet] = false
+	Glyph['system.quiet'] = false
 	GLI.run cmd
-	Glyph[:quiet] = true
+	Glyph['system.quiet'] = true
 	$stdout = old_stdout
 	$stderr = old_stderr
 	out.string

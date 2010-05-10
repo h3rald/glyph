@@ -1,3 +1,4 @@
+![Remove system settings from documentation]
 section[header[@document.*@]
 The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.
 

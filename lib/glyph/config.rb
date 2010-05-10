@@ -77,9 +77,9 @@ module Glyph
 		# @raise [ArgumentError] if the setting refers to an invalid namespace
 		# @example
 		# 	cfg = Glyph::Config.new
-		# 	cfg.set "quiet", true 								# Sets :quiet => true
+		# 	cfg.set "system.quiet", true 								# Sets "system.quiet" => true
 		# 	cfg.set "test.test_value", "[1,2,3]" # Sets :test => {:test_value => [1,2,3]}
-		# 	cfg.sef :quiet, "false" 							# Sets :quiet => false
+		# 	cfg.set "system.quiet", "false" 							# Sets "system.quiet" => false
 		def set(setting, value)
 			raise RuntimeError, "Configuration cannot be changed" unless @options[:mutable]
 			if value.is_a?(String) && value.match(/^(["'].*["']|:.+|\[.*\]|\{.*\}|true|false|nil)$/) then
@@ -122,7 +122,7 @@ module Glyph
 		# @see Glyph::Config#set
 		# @example
 		# 	cfg = Glyph::Config.new
-		# 	cfg.get :quiet							# true
+		# 	cfg.get "system.quiet"							# true
 		# 	cfg.get "test.test_value"	# [1,2,3]
 		def get(setting)
 			@data.instance_eval "self#{setting.to_s.split(".").map{|key| "[:#{key}]" }.join}" rescue nil

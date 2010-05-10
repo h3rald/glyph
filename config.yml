@@ -7,54 +7,56 @@
   :draft: false
   :output: 'html'
   :output_targets: [:html, :pdf]
-:structure:
-  :hidden:
-    - :imprint
-    - :dedication
-    - :inspiration
-    - :postscript
-    - :colophon
-    - :promotion
-  :special:
-    - :foreword
-    - :acknowledgement
-    - :prologue
-    - :epilogue
-    - :addendum
-    - :glossary
-    - :bibliography
-    - :references
-    - :index
-    - :lot
-    - :lof
-  :frontmatter:
-    - :preface
-    - :imprint
-    - :dedication
-    - :inspiration
-    - :foreword
-    - :introduction
-    - :acknowledgement
-    - :prologue
-  :bodymatter:
-    - :volume
-    - :book
-    - :part
-    - :chapter
-  :backmatter:
-    - :epilogue
-    - :afterword
-    - :postscript
-    - :appendix
-    - :addendum
-    - :glossary
-    - :colophon
-    - :bibliography
-    - :promotion
-    - :references
-    - :index
-    - :lot
-    - :lof
+:system:
+  :quiet: false
+  :structure:
+    :hidden:
+      - :imprint
+      - :dedication
+      - :inspiration
+      - :postscript
+      - :colophon
+      - :promotion
+    :special:
+      - :foreword
+      - :acknowledgement
+      - :prologue
+      - :epilogue
+      - :addendum
+      - :glossary
+      - :bibliography
+      - :references
+      - :index
+      - :lot
+      - :lof
+    :frontmatter:
+      - :preface
+      - :imprint
+      - :dedication
+      - :inspiration
+      - :foreword
+      - :introduction
+      - :acknowledgement
+      - :prologue
+    :bodymatter:
+      - :volume
+      - :book
+      - :part
+      - :chapter
+    :backmatter:
+      - :epilogue
+      - :afterword
+      - :postscript
+      - :appendix
+      - :addendum
+      - :glossary
+      - :colophon
+      - :bibliography
+      - :promotion
+      - :references
+      - :index
+      - :lot
+      - :lof
 :tools:
   :pdf_generator: 'prince'
 :highlighters:

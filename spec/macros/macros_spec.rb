@@ -189,6 +189,9 @@ describe "Macro:" do
 		@p.document.output.should == %{test.setting = TEST}
 		interpret "test.setting = $:[test.setting|TEST2]$[test.setting]"
 		@p.document.output.should == %{test.setting = TEST2}
+		Glyph['system.test'] = false
+		interpret "$:[system.test|true]"
+		# TODO
 	end
 
 	it "toc" do

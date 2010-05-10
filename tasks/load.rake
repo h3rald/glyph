@@ -48,11 +48,11 @@ namespace :load do
 		Glyph::SYSTEM_CONFIG.read
 		Glyph::GLOBAL_CONFIG.read
         Glyph.config_refresh
-		Glyph["structure.headers"] = [:section] +
-													Glyph['structure.frontmatter'] + 
-													Glyph['structure.backmatter'] + 
-													Glyph['structure.bodymatter'] - 
-													Glyph['structure.hidden']
+		Glyph["system.structure.headers"] = [:section] +
+													Glyph['system.structure.frontmatter'] + 
+													Glyph['system.structure.backmatter'] + 
+													Glyph['system.structure.bodymatter'] - 
+													Glyph['system.structure.hidden']
 	end
 
 end

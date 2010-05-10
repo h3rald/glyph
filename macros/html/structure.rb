@@ -16,7 +16,7 @@ macro :header do
 	h_id = nil if h_id.blank?
 	level = 1
 	@node.ascend do |n| 
-		if Glyph["structure.headers"].include? n[:macro] then
+		if Glyph["system.structure.headers"].include? n[:macro] then
 			level+=1
 		end
 	end
@@ -93,8 +93,8 @@ macro :toc do
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
-				if Glyph['structure.headers'].include?(n2[:macro])
-					next if n2.find_parent{|node| Glyph['structure.special'].include? node[:macro] } 
+				if Glyph['system.structure.headers'].include?(n2[:macro])
+					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:macro] } 
 					header_id = n2.children.select{|n| n[:header]}[0][:header] rescue nil
 					next if added_headers.include? header_id
 					added_headers << header_id
@@ -126,7 +126,7 @@ end
 
 macro_alias :section => :div
 
-(Glyph['structure.frontmatter'] + Glyph['structure.bodymatter'] + Glyph['structure.backmatter']).
+(Glyph['system.structure.frontmatter'] + Glyph['system.structure.bodymatter'] + Glyph['system.structure.backmatter']).
 	each {|s| macro_alias s => :div }
 
 macro_alias :frontcover => :div
