@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-05-09}
+  s.date = %q{2010-05-15}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -73,6 +73,7 @@ Gem::Specification.new do |s|
      "macros/html/block.rb",
      "macros/html/inline.rb",
      "macros/html/structure.rb",
+     "macros/xml.rb",
      "spec/files/article.glyph",
      "spec/files/container.textile",
      "spec/files/document.glyph",
@@ -92,6 +93,7 @@ Gem::Specification.new do |s|
      "spec/macros/filters_spec.rb",
      "spec/macros/macros_spec.rb",
      "spec/macros/textile_spec.rb",
+     "spec/macros/xml_spec.rb",
      "spec/spec_helper.rb",
      "spec/tasks/generate_spec.rb",
      "spec/tasks/load_spec.rb",
@@ -132,6 +134,7 @@ Gem::Specification.new do |s|
   s.test_files = [
     "spec/macros/filters_spec.rb",
      "spec/macros/textile_spec.rb",
+     "spec/macros/xml_spec.rb",
      "spec/macros/macros_spec.rb",
      "spec/lib/interpreter_spec.rb",
      "spec/lib/commands_spec.rb",

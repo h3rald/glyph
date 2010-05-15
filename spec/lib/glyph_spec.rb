@@ -44,7 +44,7 @@ describe Glyph do
 		Glyph.run! 'load:macros'
 		macros = [:anchor, :link, :codeph, :fmi, :note, :box, :code, :title, :subtitle,
 		:img, :fig, :author, :pubdate, :table, :td, :tr, :th, :comment, :todo, :snippet, "snippet:",
-		:include, :config, "config:", :ruby, :escape, :textile, :markdown, :div, :header, :document, :body,
+		:include, :config, "config:", :ruby, :escape, :textile, :markdown, :header, :document, :body,
 		:head, :style, :toc, :section, :condition, :eq, :and, :or, :not, :match, :highlight, "macro:", 
 		:encode, :decode, :draftcomment, "|xml|", "|param|"]
 		aliases = [	
@@ -66,16 +66,16 @@ describe Glyph do
 			[["*"], :encode],
 			[["**"], :decode],
 			[[:md], :markdown],
-			[[:frontcover, :titlepage, :halftitlepage, :frontmatter, :bodymatter, :backmatter, :backcover], :div]]
+			[[:frontcover, :titlepage, :halftitlepage, :frontmatter, :bodymatter, :backmatter, :backcover], :section]]
 		total = 0
 		macros.each { |v| total+=1; Glyph::MACROS[v.to_sym].should_not == nil }
 		check_aliases = lambda do |arr, target|
 			arr.each {|v| total += 1; Glyph::MACROS[v.to_sym].should == Glyph::MACROS[target.to_sym]}
 		end
 		aliases.each { |v| check_aliases.call v[0], v[1] }
-		check_aliases.call Glyph['system.structure.frontmatter'], :div
-		check_aliases.call Glyph['system.structure.bodymatter'], :div
-		check_aliases.call Glyph['system.structure.backmatter'], :div
+		check_aliases.call Glyph['system.structure.frontmatter'], :section
+		check_aliases.call Glyph['system.structure.bodymatter'], :section
+		check_aliases.call Glyph['system.structure.backmatter'], :section
 		Glyph['system.structure.frontmatter'].length.should == 8
 		Glyph['system.structure.bodymatter'].length.should == 4
 		Glyph['system.structure.backmatter'].length.should == 13

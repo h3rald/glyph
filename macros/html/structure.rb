@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-macro :div do 
+macro :section do 
 	exact_parameters 1, :level => :warning
 %{<div class="#{@name}">
 #{raw_value}
@@ -124,15 +124,13 @@ end
 #  http://microformats.org/wiki/book-brainstorming
 #  http://en.wikipedia.org/wiki/Book_design
 
-macro_alias :section => :div
-
 (Glyph['system.structure.frontmatter'] + Glyph['system.structure.bodymatter'] + Glyph['system.structure.backmatter']).
-	each {|s| macro_alias s => :div }
+	each {|s| macro_alias s => :section }
 
-macro_alias :frontcover => :div
-macro_alias :titlepage => :div
-macro_alias :halftitlepage => :div
-macro_alias :frontmatter => :div
-macro_alias :bodymatter => :div
-macro_alias :backmatter => :div
-macro_alias :backcover => :div
+macro_alias :frontcover => :section
+macro_alias :titlepage => :section
+macro_alias :halftitlepage => :section
+macro_alias :frontmatter => :section
+macro_alias :bodymatter => :section
+macro_alias :backmatter => :section
+macro_alias :backcover => :section
