@@ -2,7 +2,7 @@
 
 macro :note do
 	%{<div class="#{@name}">
-<span class="note-title">#{@name.to_s.capitalize}</span>#{@value}
+<span class="note-title">#{@name.to_s.capitalize}</span>#{value}
 
 </div>}
 end
@@ -22,7 +22,7 @@ macro :code do
 <div class="code">
 <pre>
 <code>
-#{@value}
+#{raw_value}
 </code>
 </pre>
 </div>}
@@ -31,7 +31,7 @@ end
 macro :highlight do
 	min_parameters 2  
 	lang = params[0]
-	text = raw_params[1..raw_params.length-1].join '\\|'
+	text = params(:strip => false)[1..params.length-1].join '\\|'
 	text.gsub!(/\\(.)/){$1}
 	highlighter = Glyph["highlighters.current"].to_sym rescue nil
 	if !highlighter then
@@ -141,28 +141,28 @@ end
 macro :table do
 	exact_parameters 1
 	%{<table>
-#{@value}
+#{value}
 </table>}
 end
 
 macro :tr do
 	exact_parameters 1, :level => :warning
 	%{<tr>
-#{@value}	
+#{value}	
 </tr>}
 end
 
 macro :td do
 	exact_parameters 1, :level => :warning
 	%{<td>
-#{@value}
+#{value}
 
 </td>}
 end
 
 macro :th do
 	exact_parameters 1, :level => :warning
-	%{<th>#{@value}</th>}
+	%{<th>#{value}</th>}
 end
 
 macro_alias :important => :note

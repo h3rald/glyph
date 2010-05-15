@@ -1,18 +1,18 @@
 #!/usr/bin/env ruby
 
 macro :snippet do
-	ident = @value.to_sym
+	ident = raw_value.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
 			Glyph.warning e.message
-			macro_todo "Correct errors in snippet '#{@value}'"
+			macro_todo "Correct errors in snippet '#{raw_value}'"
 		end
 	else
 		macro_warning "Snippet '#{ident}' does not exist"
-		"[SNIPPET '#{@value}' NOT PROCESSED]"
+		"[SNIPPET '#{raw_value}' NOT PROCESSED]"
 	end
 end
 
@@ -36,11 +36,11 @@ macro :include do
 	macro_error "Macro not available when compiling a single file." if Glyph.lite?
 	file = nil
 	(Glyph::PROJECT/"text").find do |f|
-		file = f if f.to_s.match /\/#{@value}$/
+		file = f if f.to_s.match /\/#{raw_value}$/
 	end	
 	if file then
 		contents = file_load file
-		ext = @value.match(/\.(.*)$/)[1]
+		ext = raw_value.match(/\.(.*)$/)[1]
 		if Glyph["filters.by_file_extension"] && ext != 'glyph' then
 			if Glyph::MACROS.include?(ext.to_sym) then
 				contents = "#{ext}[#{contents}]"
@@ -53,24 +53,24 @@ macro :include do
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
 			Glyph.warning e.message
-			macro_todo "Correct errors in file '#{@value}'"
+			macro_todo "Correct errors in file '#{raw_value}'"
 		end
 	else
-		macro_warning "File '#{@value}' no found."
-		"[FILE '#{@value}' NOT FOUND]"
+		macro_warning "File '#{raw_value}' no found."
+		"[FILE '#{raw_value}' NOT FOUND]"
 	end
 end
 
 macro :ruby do
-	res = Glyph.instance_eval(@value.gsub(/\\*([\[\]\|])/){$1})
+	res = Glyph.instance_eval(raw_value.gsub(/\\*([\[\]\|])/){$1})
 	res.is_a?(Proc) ? "" : res
 end
 
 macro :config do
-	if @value.match /^system\..+/ then
-		macro_warning "Cannot reset '#@value' setting (system use only)."
+	if raw_value.match /^system\..+/ then
+		macro_warning "Cannot reset '#{raw_value}' setting (system use only)."
 	else
-		Glyph[@value]
+		Glyph[raw_value]
 	end
 end
 
@@ -86,15 +86,15 @@ macro :comment do
 end
 
 macro :escape do
-	@value
+	raw_value
 end
 
 macro :encode do
-	encode @value
+	encode raw_value
 end
 
 macro :decode do
-	decode @value
+	decode raw_value
 end
 
 macro :condition do
@@ -121,7 +121,7 @@ end
 
 macro :not do
 	max_parameters 1
-	v = interpret(@value)
+	v = interpret(raw_value)
 	(v.blank? || v == "false") ? true : nil 
 end
 
@@ -148,6 +148,15 @@ macro :match do
 	val, regexp = params
 	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
 	(interpret(val).match(instance_eval(regexp))) ? true : nil
+end
+
+macro "|param|" do
+	@node.parent[:params][@node[:element]] = { 
+		:name => @node[:element], 
+		:value => raw_value,
+		:order => @node.parent[:params].keys.length
+	}
+	nil
 end
 
 macro_alias '--' => :comment

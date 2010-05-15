@@ -5,7 +5,7 @@ describe Glyph::Macro do
 
 	before do
 		Glyph.macro :test do
-			"Test: #{@value}"
+			"Test: #{raw_value}"
 		end
 		create_tree = lambda {|text| }
 		create_doc = lambda {|tree| }
@@ -26,10 +26,10 @@ describe Glyph::Macro do
 
 	it "should not interpret escaped macros" do
 		Glyph.macro :int_1 do
-			"->#{interpret(@value)}<-"
+			"->#{interpret(value)}<-"
 		end
 		Glyph.macro :int_2 do
-			"=>#{interpret(@value)}<="
+			"=>#{interpret(value)}<="
 		end
 		text1 = "int_1[int_2[Test]]"
 		text2 = "int_1[=int_2[Test]=]"
@@ -75,11 +75,11 @@ describe Glyph::Macro do
 	it "should encode and decode text" do
 		Glyph.run! "load:all"
 		Glyph.macro :sec_1 do
-			res = decode "section[header[Test1]\n#{@value}]"
+			res = decode "section[header[Test1]\n#{value}]"
 			interpret res
 		end
 		Glyph.macro :sec_2 do
-			encode "section[section[header[Test2]\n#@value]]"
+			encode "section[section[header[Test2]\n#{value}]]"
 		end
 		text1 = %{sec_1[sec_2[Test]]}
 		interpret text1
@@ -103,6 +103,16 @@ describe Glyph::Macro do
 			</div>".gsub(/\t/, '')
 		res1.should == result
 		res2.should == result
+	end
+
+	it "should support a way to access parameters by name or position" do
+		node = {:macro => :test, :value => "Testing...", :source => "--", :params => {}}.to_node
+		node[:params][:test] = {:value => "test", :position => 1}
+		macro = Glyph::Macro.new node
+		macro.param(0).should == "test"
+		macro.param(1).should == "Testing..."
+		macro.param(:test).should == "test"
+		macro.param("test").should == "test"
 	end
 
 end

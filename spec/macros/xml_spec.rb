@@ -9,7 +9,7 @@ describe "Glyph Language" do
 
 	after do
 		Glyph.lite_mode = false
-		Glyph['language.macros'] = 'glyph'
+		Glyph['language.set'] = 'glyph'
 		delete_project
 	end
 
@@ -29,28 +29,32 @@ describe "Glyph Language" do
 				</code>
 				</pre>
 		</div>}.gsub(/\s+/, '')
+		output_for(%{
+			=code[test...]
+		}).gsub(/\s/, '').should == %{<code>test...</code>}
 	end
 
 	it "should support XML macros" do
-		reset_quiet
-		Glyph.run 'load:config'
-		Glyph['language.macros'] = 'xml'
-		Glyph.run 'load:macros'
+		language('xml')
 		output_for("pre[code[test]]").should == "<pre><code>test</code></pre>"
 	end
 
-	it "should allow only common macros to be loaded" do
-		reset_quiet
-		Glyph.run 'load:config'
-		Glyph['language.macros'] = nil
-		Glyph['language.options.common_macros'] = true
-		Glyph.run 'load:macros'
-		output_for("--[test $:[language.macros|glyph]]").blank?.should == true
-		Glyph['language.macros'].should == 'glyph'
+	it "should support XML attributes" do
+		language('xml')
+		output_for("span[@class[test] @style[color:red;] test...]").should == %{
+			<span class="test" style="color:red;">test...</span>
+		}.strip
 	end
 
-	it "should support XML attributes"
+	it "should detect invalid characters for XML elements and attributes" do
+		language('xml')
+		interpret("!&test[test]").should raise_error
+		output_for("span[@class[test]@.[test]test]").should == %{<span class="test">test</span>}
+	end
 
-	it "should detect invalid characters for XML elements and attributes"
+	it "should assign default attribute names to parameters passed by position" do
+		language('xml')
+		output_for("test[a|b|@class[test] test]").should == %{<test class="test" p1="a" p2="b">test</test>}
+	end
 
 end	

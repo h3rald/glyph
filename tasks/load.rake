@@ -21,32 +21,32 @@ namespace :load do
 	task :macros do
 		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project? || Glyph.lite?
 		Glyph.info "Loading macros..."
-		load_macros = lambda do |macro_base, exclude|
-			macro_base.children.each do |c|
-				Glyph.instance_eval file_load(c) unless c.directory? || c.basename(c.extname).in?(exclude)
-			end
-			macro_dir = macro_base/Glyph["filters.target"].to_s
-			if macro_dir.exist? then
-				macro_dir.children.each do |f|
-					Glyph.instance_eval file_load(f)
+		load_macros_from_dir = lambda do |dir|
+			if dir.exist? then
+				dir.children.each do |c|
+					Glyph.instance_eval file_load(c) unless c.directory?
 				end
 			end
 		end
-		case  Glyph['language.macros']
-		# load glyph macros
+		case  Glyph['language.set']
 		when 'glyph' then
-			load_macros.call(Glyph::HOME/"macros", ['xml'])
-		# load xml macros
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb')
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb')
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb')
+			load_macros_from_dir.call Glyph::HOME/"macros"/Glyph["filters.target"].to_s
 		when 'xml' then
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb') 
-		end
-		# load common macros
-		if Glyph['language.options.common_macros'] && Glyph['language.macros'] != 'glyph'  then
+		when 'filters' then
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 
+		when 'bare' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
 		end
 		# load project macros
 		unless Glyph.lite? then
-			load_macros.call(Glyph::PROJECT/"lib/macros", []) rescue nil
+			load_macros_from_dir.call Glyph::PROJECT/"lib/macros"
 		end
 	end
 

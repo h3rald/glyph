@@ -5,7 +5,7 @@ macro :textile do
 	rc = nil
 	begin
 		require 'RedCloth'
-		rc = RedCloth.new @value, Glyph::CONFIG.get("filters.redcloth.restrictions")
+		rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
 	rescue Exception
 		macro_error "RedCloth gem not installed. Please run: gem insall RedCloth"
 	end
@@ -51,16 +51,16 @@ macro :markdown do
 	case markdown_converter
 	when :bluecloth
 		require 'bluecloth'
-		md = BlueCloth.new @value
+		md = BlueCloth.new value
 	when :rdiscount
 		require 'rdiscount'
-		md = RDiscount.new @value
+		md = RDiscount.new value
 	when :maruku
 		require 'maruku'
-		md = Maruku.new @value
+		md = Maruku.new value
 	when :kramdown
 		require 'kramdown'
-		md = Kramdown::Document.new @value
+		md = Kramdown::Document.new value
 	else
 	 macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"
 	end

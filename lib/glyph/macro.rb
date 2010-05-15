@@ -14,23 +14,67 @@ module Glyph
 		def initialize(node)
 			@node = node
 			@name = @node[:macro]
-			@value = @node[:value]
 			@source = @node[:source]
 			@escaped_pipe = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
 		end
 
-		# Parses the macro parameters (stripping values)
-		# @return [Array] the macro parameters
-		def params
-			return @params if @params
-			@params = @value.gsub(/\\\|/, @escaped_pipe).split('|').map{|p| p.strip.gsub @escaped_pipe, "\\|"}
+		# Returns the value of the macro (i.e. the last parameter)
+		# @param [Hash] options a Hash of options
+		# @return [string] the macro value
+		# @since 0.3.0
+		def value(options={:strip => true})
+			split_params(options).last
 		end
 
-		# Parses the macro parameters (without stripping values)
-		# @return [Array] the macro parameters
-		def raw_params
-			return @raw_params if @raw_params
-			@params = @value.gsub(/\\\|/, @escaped_pipe).split('|').map{|p| p.gsub @escaped_pipe, "\\|"}
+		# Returns the raw value of the macro 
+		# (i.e. everything within its delimiters)
+		# @return [string] the raw macro value
+		# @since 0.3.0
+		def raw_value
+			@node[:value]
+		end
+
+		# Parses the macro parameters 
+		# @param [Hash] options a Hash of options
+		# @return [Array] the macro parameter values
+		def params(options={:strip => true})
+			return @params if @params
+			@params = sort_named_params options
+			@params.concat split_params options
+		end
+
+		# Parses the macro parameters 
+		# #param [Hash] options a Hash of options
+		# @return [Hash] the macro parameter hashes (:name, :value, :order)
+		# @since 0.3.0
+		def named_params(options={:strip => true})
+			return @named_params if @named_params
+			@node[:params].values.map{|e| e[:value].strip! } if options[:strip]
+			@named_params = @node[:params]
+			# Add positional parameters
+			pars = split_params(options)
+			pars.pop # The last parameter is the value
+			pars.each do |p|
+				order = @named_params.values.length
+				name = :"p#{order}"
+				@named_params[name] = {:name => name, :value => p, :order => order}
+			end
+			@named_params
+		end
+
+		# Returns a macro parameter by name or position
+		# @param [String, Symbol, Numeric] ident the parameter to retrieve
+		# @return [String] the macro parameter
+		# @since 0.3.0
+		def param(ident)
+			case
+			when ident.is_a?(String) then
+				named_params[ident.to_sym][:value].strip rescue nil
+			when ident.is_a?(Symbol) then
+				named_params[ident][:value].strip rescue nil
+			when ident.is_a?(Numeric) then
+				params[ident]
+			end
 		end
 
 		# Returns the "path" to the macro within the syntax tree.
@@ -44,6 +88,7 @@ module Glyph
 		# Returns a todo message to include in the document in case of errors.
 		# @param [String] message the message to include in the document
 		# @return [String] the resulting todo message
+		# @since 0.2.0
 		def macro_todo(message)
 			draft = Glyph['document.draft']
 			Glyph['document.draft'] = true unless draft
@@ -61,19 +106,20 @@ module Glyph
 			src ||= "--"
 			message = "#{msg}\n -> source: #{src}\n -> path: #{path}"
 			@node[:document].errors << message
-			message += "\n -> value:\n#{"-"*54}\n#{@value}\n#{"-"*54}" if Glyph.debug?
+			message += "\n -> value:\n#{"-"*54}\n#{raw_value}\n#{"-"*54}" if Glyph.debug?
 			raise klass, message
 		end
 
 		# Raises a macro error
 		# @param [String] msg the message to print
 		# @raise [Glyph::MacroError]
+		# @since 0.2.0
 		def macro_warning(message)
 			src = @node[:source_name]
 			src ||= @node[:source]
 			src ||= "--"
 			Glyph.warning "#{message}\n -> source: #{src}\n -> path: #{path}"
-			message += %{\n -> value:\n#{"-"*54}\n#{@value}\n#{"-"*54}} if Glyph.debug?
+			message += %{\n -> value:\n#{"-"*54}\n#{raw_value}\n#{"-"*54}} if Glyph.debug?
 		end
 
 		# Instantiates a Glyph::Interpreter and interprets a string
@@ -81,7 +127,7 @@ module Glyph
 		# @return [String] the interpreted output
 		# @raise [Glyph::MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
-			@node[:source] = "#@name[#@value]"
+			@node[:source] = "#@name[#{raw_value}]"
 			@node[:source_name] = "#{@name}[...]"
 			macro_error "Mutual inclusion", Glyph::MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
 			if @node[:escape] then
@@ -97,6 +143,7 @@ module Glyph
 		# (and interpreted) later on
 		# @param [String] string the string to encode
 		# @return [String] the encoded string
+		# @since 0.2.0
 		def encode(string)
 			string.gsub(/([\[\]\|])/) { "‡‡¤#{$1.bytes.to_a[0]}¤‡‡" }
 		end
@@ -105,6 +152,7 @@ module Glyph
 		# so that it can be interpreted
 		# @param [String] string the string to decode
 		# @return [String] the decoded string
+		# @since 0.2.0
 		def decode(string)
 			string.gsub(/‡‡¤(91|93|124)¤‡‡/) { $1.to_i.chr }
 		end
@@ -136,9 +184,29 @@ module Glyph
 
 		# Executes a macro definition in the context of self
 		def execute
-			res = instance_exec(@node, &Glyph::MACROS[@name]).to_s
+			block = Glyph::MACROS[@name]
+			macro_error "Undefined macro '#@name'}" unless block
+			res = instance_exec(@node, &block).to_s
 			res.gsub!(/\\*([\[\]\|])/){"\\#$1"} 
 			res
+		end
+
+		protected
+
+		def sort_named_params(options={:strip => true})
+			attributes = @node[:params].values.sort do |a,b| 
+				a[:order] <=> b[:order]
+			end.map do |e| 
+				e[:value].strip! if options[:strip]
+				e[:value] 
+			end
+		end
+
+		def split_params(options={:strip => true})
+			raw_value.gsub(/\\\|/, @escaped_pipe).split('|').map do |p| 
+				p.strip! if options[:strip]
+				p.gsub @escaped_pipe, "\\|"
+			end
 		end
 
 	end

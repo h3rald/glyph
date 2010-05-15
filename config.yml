@@ -8,10 +8,9 @@
   :output: 'html'
   :output_targets: [:html, :pdf]
 :language:
-  :macros: 'glyph' # xml
+  :set: 'glyph' # xml, bare, filters
   :options:
     :xml_fallback: true
-    :common_macros: true
 :system:
   :quiet: false
   :structure:

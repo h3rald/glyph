@@ -10,7 +10,7 @@ macro :anchor do
 end
 
 macro :codeph do
-	%{<code>#@value</code>}
+	%{<code>#{raw_value}</code>}
 end
 
 macro :link do
@@ -45,7 +45,7 @@ end
 
 macro :draftcomment do
 	if Glyph['document.draft'] then
-		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{@value}</span>}
+		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{raw_value}</span>}
 	else
 		""
 	end
@@ -53,10 +53,10 @@ end
 
 macro :todo do
 	min_parameters 1
-	todo = "[#{@source}] -- #{@value}"
+	todo = "[#{@source}] -- #{raw_value}"
 	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then
-	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{@value}</span>} 
+	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{raw_value}</span>} 
 	else
 		""
 	end

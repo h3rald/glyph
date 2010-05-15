@@ -75,7 +75,7 @@ end
 
 def define_em_macro
 	Glyph.macro :em do
-		%{<em>#{@value}</em>}
+		%{<em>#{value}</em>}
 	end
 end
 
@@ -83,6 +83,13 @@ def define_ref_macro
 	Glyph.macro :ref do
 		%{<a href="#{params[0]}">#{params[1]}</a>}
 	end
+end
+
+def language(set)
+	reset_quiet
+	Glyph.run 'load:config'
+	Glyph['language.set'] = set
+	Glyph.run 'load:macros'
 end
 
 def interpret(text)

@@ -3,7 +3,7 @@
 macro :div do 
 	exact_parameters 1, :level => :warning
 %{<div class="#{@name}">
-#{@value}
+#{raw_value}
 
 </div>}	
 end
@@ -33,7 +33,7 @@ macro :document do
 	%{<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-#{@value}
+#{value}
 
 </html>}
 end
@@ -41,7 +41,7 @@ end
 macro :body do
 	exact_parameters 1, :level => :warning
 	%{<body>
-#{@value}
+#{value}
 
 </body>}
 end
@@ -53,15 +53,15 @@ macro :head do
 <meta name="author" content="#{Glyph["document.author"]}" />
 <meta name="copyright" content="#{Glyph["document.author"]}" />
 <meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
-#{@value}
+#{value}
 </head>
 }
 end
 
 macro :style do 
-	file = Glyph.lite? ? Pathname.new(@value) : Glyph::PROJECT/"styles/#{@value}"
-	file = Pathname.new Glyph::HOME/'styles'/@value unless file.exist?
-	macro_error "Stylesheet '#{@value}' not found" unless file.exist?
+	file = Glyph.lite? ? Pathname.new(raw_value) : Glyph::PROJECT/"styles/#{raw_value}"
+	file = Pathname.new Glyph::HOME/'styles'/raw_value unless file.exist?
+	macro_error "Stylesheet '#{raw_value}' not found" unless file.exist?
 	style = ""
 	case file.extname
 	when ".css"

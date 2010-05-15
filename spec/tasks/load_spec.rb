@@ -35,6 +35,17 @@ describe "load" do
 		Glyph::MACROS[:"#"].blank?.should == false
 	end
 
+	it "[macros] should be able to load only common macros" do
+		language 'bare'
+		output_for("--[test $:[language.set|glyph]]").blank?.should == true
+		Glyph['language.set'].should == 'glyph'
+	end
+	
+	it "[macros] should be able to load only filter macros" do
+		language 'filters'
+		output_for("textile[*test*]").should == "<p><strong>test</strong></p>"
+	end
+
 	it "[config] should load configuration files and apply overrides" do
         Glyph.config_refresh
 		lambda { Glyph.run! 'load:config'}.should_not raise_error

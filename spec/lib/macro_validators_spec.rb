@@ -6,8 +6,8 @@ describe Glyph::Macro::Validators do
 	before do
 		Glyph.run! 'load:all'
 		Glyph.macro :validated_test do
-			validate("Invalid Macro"){	@value == "valid" }
-			"Validated Test: #{@value}"
+			validate("Invalid Macro"){	value == "valid" }
+			"Validated Test: #{value}"
 		end
 	end
 
@@ -27,6 +27,17 @@ describe Glyph::Macro::Validators do
 		lambda { interpret("not[a|b|c]").document.output }.should raise_error Glyph::MacroError
 		# correct
 		lambda { interpret("chapter[fmi[something|#something]]").document.output }.should_not raise_error Glyph::MacroError
+	end
+
+	it "should validate XML elements" do
+		language 'xml'
+		lambda { interpret("<test[test]").document}.should raise_error
+		lambda { interpret("_test[test]").document}.should_not raise_error
+	end
+
+	it "should validate XML attributes" do
+		language 'xml'
+		output_for("test[test @.test[test]]").should == "<test>test</test>"
 	end
 
 end
