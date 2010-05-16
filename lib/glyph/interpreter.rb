@@ -91,9 +91,13 @@ module Glyph
 		# @param [String] text the string to interpret
 		# @param [Hash] context the context to pass along when evaluating macros
 		def initialize(text, context=nil)
-			context ||= {:source => '--'}
-			@raw = PARSER.parse text
 			@context = context
+			@context ||= {:source => '--'}
+			@text = text
+		end
+
+		def parse
+			@raw = PARSER.parse @text
 			tf = PARSER.terminal_failures
 			if !@raw.respond_to?(:evaluate) then
 				reason = "Incorrect macro syntax"
@@ -107,6 +111,7 @@ module Glyph
 
 		# @see Glyph::Document#analyze
 		def process
+			parse unless @raw
 			@document.analyze
 		end
 
@@ -118,6 +123,7 @@ module Glyph
 		# Returns the finalized @document (calls self#process and self#postprocess if necessary)
 		# @return [Glyph::Document] the finalized document
 		def document
+			parse unless @raw
 			return @document if @document.finalized?
 			process if @document.new?
 			postprocess if @document.analyzed?

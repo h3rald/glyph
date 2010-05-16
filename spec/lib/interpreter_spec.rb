@@ -90,7 +90,7 @@ describe Glyph::Interpreter do
 	it "should provide diagnostic information on errors" do
 		failure = "Incorrect macro syntax\n -> -- [Line 1, Column 13]"
 		# This is probably the only type of error recognized which can occur at parser level
-		lambda { interpret "section[em[]" }.should raise_error(Glyph::SyntaxError, failure)
+		lambda { interpret("section[em[]").document }.should raise_error(Glyph::SyntaxError, failure)
 	end
 
 end

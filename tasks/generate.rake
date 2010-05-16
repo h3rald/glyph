@@ -4,13 +4,14 @@ namespace :generate do
 
 	desc "Process source"
 	task :document => ["load:all"] do
-		Glyph.info "Parsing '#{Glyph['document.source']}'..."
 		if Glyph.lite? then
 			text = file_load Pathname.new(Glyph['document.source'])
 		else
 			text = file_load Glyph::PROJECT/Glyph['document.source']
 		end
 		interpreter = Glyph::Interpreter.new text, :source => "file: #{Glyph['document.source']}"
+		Glyph.info "Parsing '#{Glyph['document.source']}'..."
+		interpreter.parse
 		Glyph.info "Processing..."
 		interpreter.process
 		Glyph.info "Post-processing..."
