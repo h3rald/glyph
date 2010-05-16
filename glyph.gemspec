@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "README.textile",
      "Rakefile",
      "VERSION",
+     "benchmark.rb",
      "bin/glyph",
      "book/config.yml",
      "book/document.glyph",

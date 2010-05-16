@@ -136,7 +136,7 @@ module Glyph
 		# @raise [Glyph::MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
 			@node[:source] = "#@name[#{raw_value}]"
-			@node[:source_name] = "#{@name}[...]"
+			@node[:source_name] = (raw_value.length > 50 || raw_value.match(/\n/)) ? "#{@name}[...]" : @node[:source]
 			macro_error "Mutual inclusion", Glyph::MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
 			if @node[:escape] then
 				result = string 

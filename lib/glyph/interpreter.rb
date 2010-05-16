@@ -53,7 +53,8 @@ class MacroNode < GlyphSyntaxNode
 			:macro => name.to_sym, 
 			:source => context[:source], 
 			:document => context[:document], 
-			:params => {} 
+			:params => {},
+			:info => context[:info]
 		}.to_node
 		@data[:element] = element if element
 		@data[:escape] = true if is_a?(EscapingMacroNode)
@@ -97,13 +98,19 @@ module Glyph
 		end
 
 		def parse
-			@raw = PARSER.parse @text
-			tf = PARSER.terminal_failures
-			if !@raw.respond_to?(:evaluate) then
-				reason = "Incorrect macro syntax"
-				err = "#{reason}\n -> #{@context[:source]} [Line #{PARSER.failure_line}, Column #{PARSER.failure_column}]"
-				@context[:document].errors << err if @context[:document] && !@context[:embedded]
-				raise Glyph::SyntaxError, err
+			if @text.match /[^\[\]\|\\\s]+\[/ then
+				Glyph.info "  -> Interpreting: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
+				@raw = PARSER.parse @text
+				tf = PARSER.terminal_failures
+				if !@raw.respond_to?(:evaluate) then
+					reason = "Incorrect macro syntax"
+					err = "#{reason}\n -> #{@context[:source]} [Line #{PARSER.failure_line}, Column #{PARSER.failure_column}]"
+					@context[:document].errors << err if @context[:document] && !@context[:embedded]
+					raise Glyph::SyntaxError, err
+				end
+			else
+				# Don't bother parsing...
+				@raw = @text
 			end
 			@document = Glyph::Document.new @raw, @context
 			@document.inherit_from @context[:document] if @context[:document]
