@@ -1,1 +1,0 @@
-ruby-prof script/compile.rb -p graph_html -m 5 -f script/prof_results.htm

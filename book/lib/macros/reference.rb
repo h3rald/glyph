@@ -6,7 +6,7 @@ macro :error_table do
 				<th style="width:30%">Error Message</th>
 				<th>Description</th>
 			</tr>
-			#{@value}
+			#{raw_value}
 		</table>
 	}
 end
@@ -22,20 +22,20 @@ macro :ref_error do
 end
 
 macro :"%>" do
-	interpret "=>[#m_#{@value.gsub(/[^a-z0-1_-]/, '_')}|#@value] macro"
+	interpret "=>[#m_#{raw_value.gsub(/[^a-z0-1_-]/, '_')}|##{raw_value}] macro"
 end
 
 macro :"#>" do
-	interpret "=>[#c_#@value|#@value] command"
+	interpret "=>[#c_#{raw_value}|#{raw_value}] command"
 end
 
 macro :"$>" do
-	val = @value.gsub /\./, "_"
-	interpret "=>[#s_#{val}|#@value] setting"
+	val = raw_value.gsub /\./, "_"
+	interpret "=>[#s_#{val}|#{raw_value}] setting"
 end
 
 macro :default do
-	%{*Default Value:* @#@value@}
+	%{*Default Value:* @#{raw_value}@}
 end
 
 macro :"parameters" do
@@ -47,7 +47,7 @@ macro :"parameters" do
 				<th style="width:30%">#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-2]}</th>
 				<th>Description</th>
 			</tr>
-#{@value}
+#{raw_value}
 		</table>
 		]
 	}
@@ -66,22 +66,22 @@ macro :option do
 end
 
 macro :values do
-	%{*Possible Values:* @#@value@}
+	%{*Possible Values:* @#{value}@}
 end
 
 macro :example do
-	%{*Example:* <code>#@value</code>}
+	%{*Example:* <code>#{value}</code>}
 end
 
 macro :examples do
 	%{
 *Examples:* 
-#{@value.split("\n").map{|i| "@#{i}@\n"}.to_s}
+#{value.split("\n").map{|i| "@#{i}@\n"}.to_s}
 	}
 end
 
 macro :aliases do
-	%{*Aliases:* @#@value@}
+	%{*Aliases:* @#{value}@}
 end
 
 macro :ref_macro do
@@ -115,7 +115,7 @@ macro :config_table do
 				th[Description]
 				th[Default (YAML)]
 			]
-			#@value
+			#{raw_value}
 		]}
 end
 

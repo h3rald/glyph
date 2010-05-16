@@ -341,7 +341,7 @@ Creates a @<body>@ tag.
 ref_macro[div|
 Creates a @<div>@ tag.
 
-*Aliases:* codeph[%[=Glyph['structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
+*Aliases:* codeph[%[=Glyph['system.structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
 ]
 
 ref_macro[document|

@@ -110,16 +110,24 @@ module Glyph
 			raise klass, message
 		end
 
-		# Raises a macro error
+		# Prints a macro earning
 		# @param [String] msg the message to print
-		# @raise [Glyph::MacroError]
+		# @param [Exception] e the exception raised
 		# @since 0.2.0
-		def macro_warning(message)
+		def macro_warning(msg, e=nil)
 			src = @node[:source_name]
 			src ||= @node[:source]
 			src ||= "--"
-			Glyph.warning "#{message}\n -> source: #{src}\n -> path: #{path}"
-			message += %{\n -> value:\n#{"-"*54}\n#{raw_value}\n#{"-"*54}} if Glyph.debug?
+			message = "#{msg}\n -> source: #{src}\n -> path: #{path}"
+			if Glyph.debug? then
+				message << %{\n -> value:\n#{"-"*54}\n#{raw_value}\n#{"-"*54}} 
+				if e then
+					message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
+					message << "\n"+e.backtrace.join("\n")
+					message << "\n"+"-"*54
+				end
+			end
+			Glyph.warning message
 		end
 
 		# Instantiates a Glyph::Interpreter and interprets a string

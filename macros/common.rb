@@ -7,7 +7,7 @@ macro :snippet do
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
-			Glyph.warning e.message
+			macro_warning e.message, e
 			macro_todo "Correct errors in snippet '#{raw_value}'"
 		end
 	else
@@ -52,7 +52,7 @@ macro :include do
 			interpret contents
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
-			Glyph.warning e.message
+			macro_warning e.message, e
 			macro_todo "Correct errors in file '#{raw_value}'"
 		end
 	else

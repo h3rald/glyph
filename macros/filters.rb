@@ -62,7 +62,7 @@ macro :markdown do
 		require 'kramdown'
 		md = Kramdown::Document.new value
 	else
-	 macro_error "No MarkDown converter installed. Please run: gem insall bluecloth"
+	 macro_error "No MarkDown converter installed. Please run: gem install bluecloth"
 	end
 	target = Glyph["filters.target"]
 	if target.to_sym == :html then
