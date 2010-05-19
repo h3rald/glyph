@@ -18,6 +18,10 @@ describe Glyph::Parser do
 		}
 	end
 
+	def parse_text(text)
+		Glyph::Parser.new(text).parse
+	end
+
 	it "should parse macros" do
 		text = %{
 test #1
@@ -43,14 +47,25 @@ Contents]
 		(tree&1&4&1) << text_node("Another test")
 		(tree&1&4) << text_node("\nContents")
 		(tree&1) << text_node("\n")
-		Glyph::Parser.new(text).parse.should == tree
+		parse_text(text).should == tree
 	end
 
-	it "should not parse quoted macros"
+	it "should recognize escape sequences" do
+		text = "section[This is a test test\\[\\]\\]\\[ ]"
+		tree = {:type => :document}.to_node
+		tree << macro_node(:section)
+		(tree&0) << text_node("This is a test test\\[\\]\\]\\[ ")
+		parse_text(text).should == tree
+	end
 
-	it "should raise an error if a macro is not closed"
+	it "should raise an error if a standard macro is not closed" do
+		text = "test\nsection[test\\]\ntest"
+		lambda { parse_text(text) }.should	raise_error(Glyph::SyntaxError, "Macro 'section' not closed")
+	end
 
-	it "should parse escape sequences"
+	it "should not parse macros within escaping macros"
+	
+	it "should raise an error if an escaping macro is not closed"
 
 	it "should parse positional parameters"
 
@@ -58,6 +73,8 @@ Contents]
 
 	it "should raise an error if a named parameter is within a positional parameter"
 
-	it "should not raise an error if quoted contents are nested"
+	it "should not raise an error if escaped contents are nested"
+
+	it "should include line numbers to localize errors"
 
 end

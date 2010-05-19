@@ -22,9 +22,23 @@ module Glyph
 		protected
 
 		def parse_contents
-			parse_macro || parse_text
+			parse_escaping_macro || parse_macro || parse_text
 		end
 
+		def parse_escaping_macro
+			if @input.scan(/[^\[\]\|\\\s]+\[\=/) then
+				name = @input.matched
+				name.chop!
+				node = {:type => :macro, :name => name.to_sym, :escape => true, :params => {}, :order => []}.to_node
+				while contents = parse_contents do
+					node << contents
+				end
+				@input.scan(/\=\]/) or error "Macro '#{name}' not closed"		
+				node
+			else
+				nil
+			end
+		end
 
 		def parse_macro
 			if @input.scan(/[^\[\]\|\\\s]+\[/) then
@@ -43,8 +57,9 @@ module Glyph
 
 		def parse_text
 			start_p = @input.pos
-			res = @input.scan_until /\]|[^\[\]\|\\\s]+\[|\Z/
-				@input.pos = @input.pos - @input.matched.length rescue @input.pos
+			res = @input.scan_until /\A\]|[^\\]\]|[^\[\]\|\\\s]+\[|\Z/
+			offset = @input.matched.match(/^[^\\]\]$/) ? 1 : @input.matched.length
+			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
 			match = @input.string[start_p..@input.pos-1]
 			if match.length > 0 then
@@ -52,6 +67,9 @@ module Glyph
 			else
 				nil
 			end
+		end
+
+		def parse_escaped_text
 		end
 
 		def error(msg)
