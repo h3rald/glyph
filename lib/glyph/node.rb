@@ -135,4 +135,26 @@ class Node < Hash
 		ascend(parent) {|e| return e unless e.parent }
 	end
 
+	# Converts self to a hash
+	# @return [Hash] the converted hash
+	def to_hash
+		{}.merge(self)
+	end
+
+	# @return [String] a textual representation of self
+	def inspect
+		string = ""
+		descend do |e, level|
+			puts e.to_hash.inspect
+			string << "  "*level+e.to_hash.inspect+"\n"
+		end
+		string
+	end
+	
+	# @return (Boolean) true if the nodes are equal
+	def ==(node)
+		return false unless node.is_a? Node
+	 	self.to_hash == node.to_hash && self.children == node.children
+	end
+
 end

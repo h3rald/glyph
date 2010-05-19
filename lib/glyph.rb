@@ -32,6 +32,7 @@ module Glyph
 	require LIB/'glyph_language'
 	require LIB/'macro_validators'
 	require LIB/'macro'
+	require LIB/'parser'
 	require LIB/'interpreter'
 
 	class Error < RuntimeError; end
