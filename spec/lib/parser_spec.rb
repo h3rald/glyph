@@ -43,7 +43,6 @@ Contents]
 		(tree&1&4&1) << text_node("Another test")
 		(tree&1&4) << text_node("\nContents")
 		(tree&1) << text_node("\n")
-		# TODO: define Node equality properly...
 		Glyph::Parser.new(text).parse.should == tree
 	end
 

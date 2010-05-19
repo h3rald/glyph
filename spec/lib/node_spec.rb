@@ -74,11 +74,36 @@ describe Node do
 		result = @ht.find_child do |node|
 			node[:d] == 4
 		end
-		result.should == {:c => 3, :d => 4}
+		result.to_hash.should == {:c => 3, :d => 4}
 		result2 = @ht.find_child do |node|
 			node[:q] == 7
 		end
 		result2.should == nil
+	end
+
+	it "should expose a dedicated inspect method" do
+		create_node
+		@ht << {:c => 3, :d => 4}
+		@ht << {:e => 5, :f => 6}
+		@ht.inspect.should == "#{@ht.to_hash.inspect}\n  #{(@ht&0).to_hash.inspect}\n  #{(@ht&1).to_hash.inspect}"
+	end
+
+	it "should be convertable into a hash" do
+		create_node
+		@ht.to_hash.should == {:a => 1, :b => 2}
+		lambda { @ht.to_hash.children }.should raise_error
+	end
+
+	it "should check equality of children as well" do
+		create_node
+		@ht << {:c => 3, :d => 4}
+		@ht << {:e => 5, :f => 6}
+		@ht2 = {:a => 1, :b => 2}.to_node
+		@ht2 << {:c => 3, :d => 4}
+		@ht2 << {:e => 5, :f => 6}
+		(@ht==@ht2).should == true
+		(@ht&1)[:c] = 47
+		(@ht==@ht2).should == false
 	end
 
 end
