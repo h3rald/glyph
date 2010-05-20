@@ -5,9 +5,11 @@ module Glyph
 
 	class Parser
 
-		def initialize(text)
+		def initialize(text, source_name="--")
 			@input = StringScanner.new text
 			@output = {:type => :document}.to_node
+			@source_name = source_name
+			@current_macro = nil
 		end
 
 		def parse
@@ -29,11 +31,19 @@ module Glyph
 			if @input.scan(/[^\[\]\|\\\s]+\[\=/) then
 				name = @input.matched
 				name.chop!
-				node = {:type => :macro, :name => name.to_sym, :escape => true, :params => {}, :order => []}.to_node
-				while contents = parse_contents do
+				name.chop!
+				node = {
+					:type => :macro, 
+					:name => name.to_sym, 
+					:escape => true, 
+					:attributes => {}, 
+					:partitions => []
+				}.to_node
+				@current_macro = node
+				while contents = parse_escaped_text do
 					node << contents
 				end
-				@input.scan(/\=\]/) or error "Macro '#{name}' not closed"		
+				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
 				node
 			else
 				nil
@@ -44,7 +54,14 @@ module Glyph
 			if @input.scan(/[^\[\]\|\\\s]+\[/) then
 				name = @input.matched
 				name.chop!
-				node = {:type => :macro, :name => name.to_sym, :escape => false, :params => {}, :order => []}.to_node
+				node = {
+					:type => :macro, 
+					:name => name.to_sym, 
+					:escape => false, 
+					:attributes => {}, 
+					:partitions => []
+				}.to_node
+				@current_macro = node
 				while contents = parse_contents do
 					node << contents
 				end
@@ -70,10 +87,28 @@ module Glyph
 		end
 
 		def parse_escaped_text
+			start_p = @input.pos
+			res = @input.scan_until /\A\=\]|[^\\]\=\]|\Z/
+			offset = @input.matched.match(/^[^\\]\=\]$/) ? 2 : @input.matched.length
+			@input.pos = @input.pos - offset rescue @input.pos
+			return nil if @input.pos == start_p
+			match = @input.string[start_p..@input.pos-1]
+			illegal_nesting = match.match(/([^\[\]\|\\\s]+)\[\=/)[1] rescue nil
+			if illegal_nesting then
+				error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{@current_macro[:name]}'"
+			end
+			if match.length > 0 then
+				{:type => :text, :value => match, :escaped => true}
+			else
+				nil
+			end
 		end
 
 		def error(msg)
-			raise Glyph::SyntaxError.new(msg)
+			lines = @input.string[0..@input.pos].split(/\n/)
+			line = lines.length
+			column = lines.last.length
+			raise Glyph::SyntaxError.new("#{@source_name} [#{line}, #{column}] "+msg)
 		end
 
 	end
