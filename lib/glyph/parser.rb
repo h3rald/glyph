@@ -30,11 +30,11 @@ module Glyph
 		protected
 
 		def parse_contents
-			partition_delimiter || escaping_macro || macro || text
+			segment_delimiter || escaping_macro || macro || text
 		end
 
 		def parse_escaped_contents
-			partition_delimiter || escaped_text
+			segment_delimiter || escaped_text
 		end
 
 		def escaping_macro
@@ -47,14 +47,14 @@ module Glyph
 					:name => name.to_sym, 
 					:escape => true, 
 					:attributes => {}, 
-					:partitions => []
+					:segments => []
 				}.to_node
 				@current_macro = node
 				while contents = parse_escaped_contents do
 					node << contents
 				end
 				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
-				aggregate_partitions node
+				aggregate_segments node
 				node
 			else
 				nil
@@ -70,14 +70,14 @@ module Glyph
 					:name => name.to_sym, 
 					:escape => false, 
 					:attributes => {}, 
-					:partitions => []
+					:segments => []
 				}.to_node
 				@current_macro = node
 				while contents = parse_contents do
 					node << contents
 				end
 				@input.scan(/\]/) or error "Macro '#{name}' not closed"		
-				aggregate_partitions node
+				aggregate_segments node
 				node
 			else
 				nil
@@ -124,43 +124,43 @@ module Glyph
 			end
 		end
 
-		def partition_delimiter
+		def segment_delimiter
 			if @input.scan(/\|/) then
 				unless @current_macro then
 					@input.pos = @input.pos-1
-					error "Partition delimiter '|' not allowed here"  
+					error "Segment delimiter '|' not allowed here"  
 				end
-				{:partition => true}
+				{:segment => true}
 			else
 				nil
 			end
 		end
 
-		def aggregate_partitions(node)
+		def aggregate_segments(node)
 			indices = []
 			count = 0
 			node.children.each do |n|
-				indices << count if n[:partition]
+				indices << count if n[:segment]
 				count += 1
 			end
-			# No partition found
+			# No segment found
 			return false if indices == []
-			# Partitions found
+			# Segments found
 			current_index = 0
-			save_partition = lambda do |max_index|
-				partition = {:type => :partition}.to_node
+			save_segment = lambda do |max_index|
+				segment = {:type => :segment}.to_node
 				current_index.upto(max_index) do |index|
-					partition << (node & index)
+					segment << (node & index)
 				end
-				node[:partitions] << partition
+				node[:segments] << segment
 			end
 			indices.each do |i|
-				save_partition.call(i-1)
+				save_segment.call(i-1)
 				current_index = i+1
 			end
-			save_partition.call(node.children.length-1)
+			save_segment.call(node.children.length-1)
 			node.children.clear
-			node[:partitions]
+			node[:segments]
 		end
 
 		def illegal_macro_delimiter?(start_p, string)

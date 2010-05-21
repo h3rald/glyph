@@ -13,7 +13,7 @@ describe Glyph::Parser do
 			:type => :macro, 
 			:name => name, 
 			:escape => false,
-			:partitions => [],
+			:segments => [],
 			:attributes => {},
 		}.merge options
 	end
@@ -89,25 +89,25 @@ Contents]
 		lambda { puts parse_text(" test[[...]] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 7] Macro delimiter '[' not escaped")
 	end
 
-	it "should parse positional parameters (partitions)" do
+	it "should parse positional parameters (segments)" do
 		text = "test[aaa =>[test2[...]|test3[...]].]"
 		tree = {:type => :document}.to_node
 		tree << macro_node(:test)
 		(tree&0) << text_node("aaa ")
 		(tree&0) << macro_node(:"=>")
-		(tree&0&1)[:partitions] << {:type => :partition}.to_node
-		(tree&0&1)[:partitions][0] << macro_node(:test2)
-		((tree&0&1)[:partitions][0]&0) << text_node("...")
-		(tree&0&1)[:partitions] << {:type => :partition}.to_node
-		(tree&0&1)[:partitions][1] << macro_node(:test3)
-		((tree&0&1)[:partitions][1]&0) << text_node("...")
+		(tree&0&1)[:segments] << {:type => :segment}.to_node
+		(tree&0&1)[:segments][0] << macro_node(:test2)
+		((tree&0&1)[:segments][0]&0) << text_node("...")
+		(tree&0&1)[:segments] << {:type => :segment}.to_node
+		(tree&0&1)[:segments][1] << macro_node(:test3)
+		((tree&0&1)[:segments][1]&0) << text_node("...")
 		(tree&0) << text_node(".")
 		parse_text(text).should == tree
 	end
 
-	it "should not allow partitions outside macros" do
+	it "should not allow segments outside macros" do
 		text = "... | test[...]"
-		lambda { puts parse_text(text).inspect }.should raise_error(Glyph::SyntaxError, "-- [1, 5] Partition delimiter '|' not allowed here")
+		lambda { puts parse_text(text).inspect }.should raise_error(Glyph::SyntaxError, "-- [1, 5] Segment delimiter '|' not allowed here")
 	end
 
 	it "should recognize escaped pipes" do
@@ -115,15 +115,15 @@ Contents]
 		tree = {:type => :document}.to_node
 		tree << text_node("\\| test \\| ")
 		tree << macro_node(:test, :escape => true)
-		(tree&1)[:partitions] << {:type => :partition}.to_node
-		(tree&1)[:partitions][0] << text_node("this \\| is", :escaped => true) 
-		(tree&1)[:partitions] << {:type => :partition}.to_node
-		(tree&1)[:partitions][1] << text_node("a \\|test", :escaped => true) 
+		(tree&1)[:segments] << {:type => :segment}.to_node
+		(tree&1)[:segments][0] << text_node("this \\| is", :escaped => true) 
+		(tree&1)[:segments] << {:type => :segment}.to_node
+		(tree&1)[:segments][1] << text_node("a \\|test", :escaped => true) 
 		parse_text(text).should == tree
 	end
 
 	it "should parse named parameters (attributes)"
 
-	it "should parse attributes inside partitions"
+	it "should parse attributes inside segments"
 
 end
