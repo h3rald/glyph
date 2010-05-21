@@ -81,8 +81,49 @@ Contents]
 		lambda { parse_text(text) }.should	raise_error(Glyph::SyntaxError, "-- [2, 10] Escaping macro 'test1' not closed")
 	end
 
-	it "should parse positional parameters (partitions)"
+	it "should raise errors if unescaped brackets are found" do
+		lambda { puts parse_text(" ] test[...] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 2] Macro delimiter ']' not escaped")
+		lambda { puts parse_text("[ test[...] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 1] Macro delimiter '[' not escaped")
+		lambda { puts parse_text(" test[...] [dgdsg]").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 12] Macro delimiter '[' not escaped")
+		lambda { puts parse_text(" test[...] dgdsg [").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 18] Macro delimiter '[' not escaped")
+		lambda { puts parse_text(" test[[...]] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 7] Macro delimiter '[' not escaped")
+	end
+
+	it "should parse positional parameters (partitions)" do
+		text = "test[aaa =>[test2[...]|test3[...]].]"
+		tree = {:type => :document}.to_node
+		tree << macro_node(:test)
+		(tree&0) << text_node("aaa ")
+		(tree&0) << macro_node(:"=>")
+		(tree&0&1)[:partitions] << {:type => :partition}.to_node
+		(tree&0&1)[:partitions][0] << macro_node(:test2)
+		((tree&0&1)[:partitions][0]&0) << text_node("...")
+		(tree&0&1)[:partitions] << {:type => :partition}.to_node
+		(tree&0&1)[:partitions][1] << macro_node(:test3)
+		((tree&0&1)[:partitions][1]&0) << text_node("...")
+		(tree&0) << text_node(".")
+		parse_text(text).should == tree
+	end
+
+	it "should not allow partitions outside macros" do
+		text = "... | test[...]"
+		lambda { puts parse_text(text).inspect }.should raise_error(Glyph::SyntaxError, "-- [1, 5] Partition delimiter '|' not allowed here")
+	end
+
+	it "should recognize escaped pipes" do
+		text = "\\| test \\| test[=this \\| is|a \\|test=]"
+		tree = {:type => :document}.to_node
+		tree << text_node("\\| test \\| ")
+		tree << macro_node(:test, :escape => true)
+		(tree&1)[:partitions] << {:type => :partition}.to_node
+		(tree&1)[:partitions][0] << text_node("this \\| is", :escaped => true) 
+		(tree&1)[:partitions] << {:type => :partition}.to_node
+		(tree&1)[:partitions][1] << text_node("a \\|test", :escaped => true) 
+		parse_text(text).should == tree
+	end
 
 	it "should parse named parameters (attributes)"
+
+	it "should parse attributes inside partitions"
 
 end
