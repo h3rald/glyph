@@ -10,6 +10,7 @@ module Glyph
 			@output = {:type => :document}.to_node
 			@source_name = source_name
 			@current_macro = nil
+			@current_attribute = nil
 		end
 
 		def parse
@@ -30,7 +31,7 @@ module Glyph
 		protected
 
 		def parse_contents
-			segment_delimiter || escaping_macro || macro || text
+			segment_delimiter || escaping_attribute || escaping_macro || attribute || macro || text
 		end
 
 		def parse_escaped_contents
@@ -51,10 +52,31 @@ module Glyph
 				}.to_node
 				@current_macro = node
 				while contents = parse_escaped_contents do
-					node << contents
+					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
 				aggregate_segments node
+				node
+			else
+				nil
+			end
+		end
+
+		def escaping_attribute
+			if @input.scan(/@[^\[\]\|\\\s]+\[\=/) then
+				error "Attributes cannot be nested" if @current_attribute
+				name = @input.matched[1..@input.matched.length-3]
+				node = {
+					:type => :attribute, 
+					:escape => true, 
+				}.to_node
+				@current_attribute = node
+				while contents = parse_escaped_contents do
+					node << contents
+				end
+				@current_attribute = nil
+				@current_macro[:attributes][name.to_sym] = node
+				@input.scan(/\=\]/) or error "Attribute '#{name}' not closed"		
 				node
 			else
 				nil
@@ -74,10 +96,31 @@ module Glyph
 				}.to_node
 				@current_macro = node
 				while contents = parse_contents do
-					node << contents
+					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\]/) or error "Macro '#{name}' not closed"		
 				aggregate_segments node
+				node
+			else
+				nil
+			end
+		end
+
+		def attribute
+			if @input.scan(/@[^\[\]\|\\\s]+\[/) then
+				error "Attributes cannot be nested" if @current_attribute
+				name = @input.matched[1..@input.matched.length-2]
+				node = {
+					:type => :attribute, 
+					:escape => false, 
+				}.to_node
+				@current_attribute = node
+				while contents = parse_contents do
+					node << contents
+				end
+				@current_attribute = nil
+				@current_macro[:attributes][name.to_sym] = node
+				@input.scan(/\]/) or error "Attribute '#{name}' not closed"		
 				node
 			else
 				nil
@@ -126,7 +169,8 @@ module Glyph
 
 		def segment_delimiter
 			if @input.scan(/\|/) then
-				unless @current_macro then
+				# Segments are not allowed outside macros or inside attributes
+				if !@current_macro || @current_attribute then
 					@input.pos = @input.pos-1
 					error "Segment delimiter '|' not allowed here"  
 				end
