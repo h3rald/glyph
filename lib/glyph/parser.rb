@@ -5,9 +5,11 @@ module Glyph
 
 	class Parser
 
+		class SyntaxNode < Node; end
+
 		def initialize(text, source_name="--")
 			@input = StringScanner.new text
-			@output = {:type => :document}.to_node
+			@output = create_node :type => :document, :name => source_name.to_sym
 			@source_name = source_name
 			@current_macro = nil
 			@current_attribute = nil
@@ -43,13 +45,13 @@ module Glyph
 				name = @input.matched
 				name.chop!
 				name.chop!
-				node = {
+				node = create_node({
 					:type => :macro, 
 					:name => name.to_sym, 
 					:escape => true, 
 					:attributes => {}, 
 					:segments => []
-				}.to_node
+				})
 				@current_macro = node
 				while contents = parse_escaped_contents do
 					node << contents unless contents[:type] == :attribute
@@ -66,10 +68,11 @@ module Glyph
 			if @input.scan(/@[^\[\]\|\\\s]+\[\=/) then
 				error "Attributes cannot be nested" if @current_attribute
 				name = @input.matched[1..@input.matched.length-3]
-				node = {
+				node = create_node({
 					:type => :attribute, 
 					:escape => true, 
-				}.to_node
+					:name => "@#{name}".to_sym
+				})
 				@current_attribute = node
 				while contents = parse_escaped_contents do
 					node << contents
@@ -87,13 +90,13 @@ module Glyph
 			if @input.scan(/[^\[\]\|\\\s]+\[/) then
 				name = @input.matched
 				name.chop!
-				node = {
+				node = create_node({
 					:type => :macro, 
 					:name => name.to_sym, 
 					:escape => false, 
 					:attributes => {}, 
 					:segments => []
-				}.to_node
+				})
 				@current_macro = node
 				while contents = parse_contents do
 					node << contents unless contents[:type] == :attribute
@@ -110,10 +113,11 @@ module Glyph
 			if @input.scan(/@[^\[\]\|\\\s]+\[/) then
 				error "Attributes cannot be nested" if @current_attribute
 				name = @input.matched[1..@input.matched.length-2]
-				node = {
+				node = create_node({
 					:type => :attribute, 
 					:escape => false, 
-				}.to_node
+					:name => "@#{name}".to_sym
+				})
 				@current_attribute = node
 				while contents = parse_contents do
 					node << contents
@@ -136,7 +140,7 @@ module Glyph
 			match = @input.string[start_p..@input.pos-1]
 			illegal_macro_delimiter? start_p, match
 			if match.length > 0 then
-				{:type => :text, :value => match}
+				create_node :type => :text, :value => match
 			else
 				nil
 			end
@@ -161,7 +165,7 @@ module Glyph
 				error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{@current_macro[:name]}'"
 			end
 			if match.length > 0 then
-				{:type => :text, :value => match, :escaped => true}
+				create_node :type => :text, :value => match, :escaped => true
 			else
 				nil
 			end
@@ -174,7 +178,7 @@ module Glyph
 					@input.pos = @input.pos-1
 					error "Segment delimiter '|' not allowed here"  
 				end
-				{:segment => true}
+				create_node :segment => true
 			else
 				nil
 			end
@@ -191,8 +195,10 @@ module Glyph
 			return false if indices == []
 			# Segments found
 			current_index = 0
+			total_segments = 0
 			save_segment = lambda do |max_index|
-				segment = {:type => :segment}.to_node
+				segment = create_node :type => :segment, :name => "|#{total_segments}|".to_sym
+				total_segments +=1
 				current_index.upto(max_index) do |index|
 					segment << (node & index)
 				end
@@ -221,6 +227,10 @@ module Glyph
 			line = lines.length
 			column = lines.last.length
 			raise Glyph::SyntaxError.new("#{@source_name} [#{line}, #{column}] "+msg)
+		end
+
+		def create_node(hash={})
+			Glyph::Parser::SyntaxNode.new.merge hash
 		end
 
 	end

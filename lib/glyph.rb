@@ -7,7 +7,6 @@ require 'pathname'
 require 'yaml'
 require 'gli'
 require 'extlib'
-require 'treetop'
 require 'rake'
 
 # Glyph is a Rapid Document Authoring Framework able to produce structured documents 	effortlessly.
@@ -29,7 +28,6 @@ module Glyph
 	require LIB/'config'
 	require LIB/'node'
 	require LIB/'document'
-	require LIB/'glyph_language'
 	require LIB/'macro_validators'
 	require LIB/'macro'
 	require LIB/'parser'

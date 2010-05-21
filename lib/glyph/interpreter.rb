@@ -1,84 +1,61 @@
-# @private
-class GlyphSyntaxNode < Treetop::Runtime::SyntaxNode 
+module Glyph
 
-	attr_reader :data
+	module Language
 
-	def evaluate(context, current=nil)
-		current ||= context.to_node
-		@data ||= current.to_node
-		elements.map { |e| e.evaluate(context, current) if e.respond_to? :evaluate }.join 
-	end
+		def evaluate(context)
+			case self[:type]
+			when :macro then
+				expand_macro(context)
+			when :text
+				self[:value]
+			end
+		end
 
-end
+		def expand_macro(context)
+			set_xml_element	
+			self.merge!({
+				:macro => name.to_sym, 
+				:source => context[:source], 
+				:document => context[:document], 
+				:info => context[:info]
+			})
+			self[:value] = ""
+			self.children.each do |child|
+				self[:value] << child.evaluate
+			end
+			Glyph::Macro.new(self).expand
+		end
 
-# @private
-class MacroNode < GlyphSyntaxNode
-
-	def evaluate(context, current)
-		name = macro_name.text_value
-		known_macro = Glyph::MACROS.include? name.to_sym
-		element = nil
-		parameter = nil
-		unless known_macro then
-			case 
-			when name.match(/^=(.+)/) then
+		def set_xml_element
+			known_macro = Glyph::MACROS.include? self[:name]
+			name = self[:name].to_s
+			element = nil
+			if !known_macro && name.match(/^=(.+)/) then
 				# Force tag name override if macro starts with a '='
 				name.gsub! /^=(.+)/, '\1' 
-			when name.match(/^@(.+)/) then
-				# Parameter
-				name.gsub! /^@(.+)/, '\1' 
-				parameter = true
+			end
+			case
+				# Use XML syntax
+			when Glyph['language.set'] == 'xml' then
+				self[:element] = name
+				self[:name] = :"|xml|" 
+				# Fallback to XML syntax
+			when Glyph['language.options.xml_fallback'] then
+				unless known_macro then
+					self[:element] = name
+					self[:name] = :"|xml|" 
+				end
+			else
+				# Unknown macro
+				raise Glyph::RuntimeError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless known_macro
 			end
 		end
-		case
-			# Parameter macro
-		when parameter then
-			element = name
-			name = :"|param|"
-			# Use XML syntax
-		when Glyph['language.set'] == 'xml' then
-			element = name
-			name = :"|xml|" 
-			# Fallback to XML syntax
-		when Glyph['language.options.xml_fallback'] then
-			unless known_macro then
-				element = name
-				name = :"|xml|" 
-			end
-		else
-			# Unknown macro
-			raise Glyph::SyntaxError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless known_macro
-		end
-		@data = {
-			:macro => name.to_sym, 
-			:source => context[:source], 
-			:document => context[:document], 
-			:params => {},
-			:info => context[:info]
-		}.to_node
-		@data[:element] = element if element
-		@data[:escape] = true if is_a?(EscapingMacroNode)
-		current << @data
-		@data[:value] = super(context, @data).strip
-		Glyph::Macro.new(@data).execute
+
 	end
 
-end
-
-# @private
-class EscapingMacroNode < MacroNode; end
-
-# @private
-class TextNode < GlyphSyntaxNode	
-
-	def evaluate(context, current=nil)
-		text_value
+	class Parser::SyntaxNode
+		include Glyph::Language
 	end
-
-end
-
-
-module Glyph
 
 	# A Glyph::Interpreter object perform the following actions:
 	# * Parses a string of text containing Glyph macros
@@ -86,39 +63,19 @@ module Glyph
 	# * Analyzes and finalizes the document
 	class Interpreter
 
-		PARSER = GlyphLanguageParser.new
-
 		# Creates a new Glyph::Interpreter object.
 		# @param [String] text the string to interpret
-		# @param [Hash] context the context to pass along when evaluating macros
+		# @param [Hash] context the context to pass along when expanding macros
 		def initialize(text, context=nil)
 			@context = context
-			@context ||= {:source => '--'}
+			@context.merge! :source => '--'
+			@parser = Glyph::Parser.new text, @context[:source]
 			@text = text
-		end
-
-		def parse
-			if @text.match /[^\[\]\|\\\s]+\[/ then
-				Glyph.info "  -> Interpreting: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
-				@raw = PARSER.parse @text
-				tf = PARSER.terminal_failures
-				if !@raw.respond_to?(:evaluate) then
-					reason = "Incorrect macro syntax"
-					err = "#{reason}\n -> #{@context[:source]} [Line #{PARSER.failure_line}, Column #{PARSER.failure_column}]"
-					@context[:document].errors << err if @context[:document] && !@context[:embedded]
-					raise Glyph::SyntaxError, err
-				end
-			else
-				# Don't bother parsing...
-				@raw = @text
-			end
-			@document = Glyph::Document.new @raw, @context
-			@document.inherit_from @context[:document] if @context[:document]
 		end
 
 		# @see Glyph::Document#analyze
 		def process
-			parse unless @raw
+			parse unless @tree
 			@document.analyze
 		end
 
@@ -130,16 +87,28 @@ module Glyph
 		# Returns the finalized @document (calls self#process and self#postprocess if necessary)
 		# @return [Glyph::Document] the finalized document
 		def document
-			parse unless @raw
+			parse unless @tree
 			return @document if @document.finalized?
 			process if @document.new?
 			postprocess if @document.analyzed?
 			@document
 		end
 
+		protected
+
+		def parse
+			if @text.match /[^\[\]\|\\\s]+\[/ then
+				Glyph.info "  -> Parsing: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
+				@tree = @parser.parse
+			else
+				# Don't bother parsing...
+				@tree = @text
+			end
+			@document = Glyph::Document.new @tree, @context
+			@document.inherit_from @context[:document] if @context[:document]
+		end
 	
 	end
-
 end
 
 

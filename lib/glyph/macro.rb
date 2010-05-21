@@ -13,75 +13,37 @@ module Glyph
 		# @param [Node] node a node populated with macro data
 		def initialize(node)
 			@node = node
-			@name = @node[:macro]
+			@name = @node[:name]
 			@source = @node[:source]
-			@escaped_pipe = '‡‡‡‡‡ESCAPED¤PIPE‡‡‡‡‡'
 		end
 
-		# Returns the value of the macro (i.e. the last parameter)
-		# @param [Hash] options a Hash of options
-		# @return [string] the macro value
-		# @since 0.3.0
-		def value(options={:strip => true})
-			split_params(options).last
+		def attributes
+			return @attributes if @attributes
+			@attributes = {}
+			@node[:attributes].each_pair do |key, value|
+				@attributes[key] = value.evaluate
+			end
+			@attributes
 		end
 
-		# Returns the raw value of the macro 
-		# (i.e. everything within its delimiters)
-		# @return [string] the raw macro value
-		# @since 0.3.0
-		def raw_value
+		def segments
+			return @segments if @segments
+			@segments = []
+			@node[:segments].each do |value|
+				@segments << value.evaluate
+			end
+			@segments
+		end
+
+		def value
 			@node[:value]
-		end
-
-		# Parses the macro parameters 
-		# @param [Hash] options a Hash of options
-		# @return [Array] the macro parameter values
-		def params(options={:strip => true})
-			return @params if @params
-			@params = sort_named_params options
-			@params.concat split_params options
-		end
-
-		# Parses the macro parameters 
-		# #param [Hash] options a Hash of options
-		# @return [Hash] the macro parameter hashes (:name, :value, :order)
-		# @since 0.3.0
-		def named_params(options={:strip => true})
-			return @named_params if @named_params
-			@node[:params].values.map{|e| e[:value].strip! } if options[:strip]
-			@named_params = @node[:params]
-			# Add positional parameters
-			pars = split_params(options)
-			pars.pop # The last parameter is the value
-			pars.each do |p|
-				order = @named_params.values.length
-				name = :"p#{order}"
-				@named_params[name] = {:name => name, :value => p, :order => order}
-			end
-			@named_params
-		end
-
-		# Returns a macro parameter by name or position
-		# @param [String, Symbol, Numeric] ident the parameter to retrieve
-		# @return [String] the macro parameter
-		# @since 0.3.0
-		def param(ident)
-			case
-			when ident.is_a?(String) then
-				named_params[ident.to_sym][:value].strip rescue nil
-			when ident.is_a?(Symbol) then
-				named_params[ident][:value].strip rescue nil
-			when ident.is_a?(Numeric) then
-				params[ident]
-			end
 		end
 
 		# Returns the "path" to the macro within the syntax tree.
 		# @return [String] the macro path
 		def path
 			macros = []
-			@node.ascend {|n| macros << n[:macro].to_s if n[:macro] }
+			@node.ascend {|n| macros << n[:name].to_s }
 			macros.reverse.join('/')
 		end
 		
@@ -191,7 +153,7 @@ module Glyph
 		end
 
 		# Executes a macro definition in the context of self
-		def execute
+		def expand
 			block = Glyph::MACROS[@name]
 			macro_error "Undefined macro '#@name'}" unless block
 			res = instance_exec(@node, &block).to_s
@@ -200,22 +162,6 @@ module Glyph
 		end
 
 		protected
-
-		def sort_named_params(options={:strip => true})
-			attributes = @node[:params].values.sort do |a,b| 
-				a[:order] <=> b[:order]
-			end.map do |e| 
-				e[:value].strip! if options[:strip]
-				e[:value] 
-			end
-		end
-
-		def split_params(options={:strip => true})
-			raw_value.gsub(/\\\|/, @escaped_pipe).split('|').map do |p| 
-				p.strip! if options[:strip]
-				p.gsub @escaped_pipe, "\\|"
-			end
-		end
 
 	end
 
