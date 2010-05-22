@@ -9,7 +9,7 @@ module Glyph
 			when :attribute then
 				self[:value] = ""
 				self.children.each {|c| self[:value] << c.evaluate(context) }
-			when :segment then
+			when :parameter then
 				self[:value] = ""
 				self.children.each {|c| self[:value] << c.evaluate(context) }
 			when :document then

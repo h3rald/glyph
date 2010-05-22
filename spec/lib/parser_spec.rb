@@ -16,8 +16,8 @@ describe Glyph::Parser do
 		{:type => :attribute, :name => :"@#{name}", :escape => false}.merge(options).to_node
 	end
 
-	def segment_node(n)
-		{:type => :segment, :name => :"|#{n}|"}.to_node
+	def parameter_node(n)
+		{:type => :parameter, :name => :"|#{n}|"}.to_node
 	end
 
 	def macro_node(name, options={})
@@ -25,7 +25,7 @@ describe Glyph::Parser do
 			:type => :macro, 
 			:name => name, 
 			:escape => false,
-			:segments => [],
+			:parameters => [],
 			:attributes => {},
 		}.merge options
 	end
@@ -101,23 +101,23 @@ Contents]
 		lambda { puts parse_text(" test[[...]] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 7] Macro delimiter '[' not escaped")
 	end
 
-	it "should parse positional parameters (segments)" do
+	it "should parse positional parameters (parameters)" do
 		text = "test[aaa =>[test2[...]|test3[...]].]"
 		tree = document_node
 		tree << macro_node(:test)
 		(tree&0) << text_node("aaa ")
 		(tree&0) << macro_node(:"=>")
-		(tree&0&1)[:segments] << {:type => :segment, :name =>:"|0|" }.to_node
-		(tree&0&1)[:segments][0] << macro_node(:test2)
-		((tree&0&1)[:segments][0]&0) << text_node("...")
-		(tree&0&1)[:segments] << {:type => :segment, :name => :"|1|"}.to_node
-		(tree&0&1)[:segments][1] << macro_node(:test3)
-		((tree&0&1)[:segments][1]&0) << text_node("...")
+		(tree&0&1)[:parameters] << {:type => :parameter, :name =>:"|0|" }.to_node
+		(tree&0&1)[:parameters][0] << macro_node(:test2)
+		((tree&0&1)[:parameters][0]&0) << text_node("...")
+		(tree&0&1)[:parameters] << {:type => :parameter, :name => :"|1|"}.to_node
+		(tree&0&1)[:parameters][1] << macro_node(:test3)
+		((tree&0&1)[:parameters][1]&0) << text_node("...")
 		(tree&0) << text_node(".")
 		parse_text(text).should == tree
 	end
 
-	it "should not allow segments outside macros" do
+	it "should not allow parameters outside macros" do
 		text = "... | test[...]"
 		lambda { puts parse_text(text).inspect }.should raise_error(Glyph::SyntaxError, "-- [1, 5] Segment delimiter '|' not allowed here")
 	end
@@ -127,10 +127,10 @@ Contents]
 		tree = document_node
 		tree << text_node("\\| test \\| ")
 		tree << macro_node(:test, :escape => true)
-		(tree&1)[:segments] << {:type => :segment, :name => :"|0|"}.to_node
-		(tree&1)[:segments][0] << text_node("this \\| is", :escaped => true) 
-		(tree&1)[:segments] << {:type => :segment, :name => :"|1|"}.to_node
-		(tree&1)[:segments][1] << text_node("a \\|test", :escaped => true) 
+		(tree&1)[:parameters] << {:type => :parameter, :name => :"|0|"}.to_node
+		(tree&1)[:parameters][0] << text_node("this \\| is", :escaped => true) 
+		(tree&1)[:parameters] << {:type => :parameter, :name => :"|1|"}.to_node
+		(tree&1)[:parameters][1] << text_node("a \\|test", :escaped => true) 
 		parse_text(text).should == tree
 	end
 
@@ -147,21 +147,21 @@ Contents]
 		parse_text(text).should == tree
 	end
 
-	it "should not parse segments inside attributes" do
+	it "should not parse parameters inside attributes" do
 		text = "test[@attr[test|...]]"
 		lambda { puts parse_text(text).inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 16] Segment delimiter '|' not allowed here")
 	end
 
-	it "should parse attributes inside segments" do
-		text = "test[segment 1|@par[...] test]"
+	it "should parse attributes inside parameters" do
+		text = "test[parameter 1|@par[...] test]"
 		tree = document_node
 		tree << macro_node(:test)
-		(tree&0)[:segments] << {:type => :segment, :name => :"|0|"}.to_node
-		(tree&0)[:segments][0] << text_node("segment 1") 
-		(tree&0)[:segments] << {:type => :segment, :name => :"|1|"}.to_node
+		(tree&0)[:parameters] << {:type => :parameter, :name => :"|0|"}.to_node
+		(tree&0)[:parameters][0] << text_node("parameter 1") 
+		(tree&0)[:parameters] << {:type => :parameter, :name => :"|1|"}.to_node
 		(tree&0)[:attributes][:par] = {:type => :attribute, :escape => false, :name => :@par}.to_node
 		(tree&0)[:attributes][:par] << text_node("...")
-		(tree&0)[:segments][1] << text_node(" test") 
+		(tree&0)[:parameters][1] << text_node(" test") 
 		parse_text(text).should == tree
 	end
 
@@ -183,20 +183,20 @@ Contents]
 		parse_text(text).should == tree
 	end
 
-	it "should parse segments in nested macros" do
+	it "should parse parameters in nested macros" do
 		text = "test[...|test1[a|b]|...]"
 		tree = document_node
 		tree << macro_node(:test)
-		(tree&0)[:segments][0] = segment_node(0)
-		(tree&0)[:segments][0] << text_node("...")
-		(tree&0)[:segments][1] = segment_node(1)
-		(tree&0)[:segments][1] << macro_node(:test1)
-		((tree&0)[:segments][1]&0)[:segments][0] = segment_node(0)
-		((tree&0)[:segments][1]&0)[:segments][0] << text_node("a")
-		((tree&0)[:segments][1]&0)[:segments][1] = segment_node(1)
-		((tree&0)[:segments][1]&0)[:segments][1] << text_node("b")
-		(tree&0)[:segments][2] = segment_node(2)
-		(tree&0)[:segments][2] << text_node("...")
+		(tree&0)[:parameters][0] = parameter_node(0)
+		(tree&0)[:parameters][0] << text_node("...")
+		(tree&0)[:parameters][1] = parameter_node(1)
+		(tree&0)[:parameters][1] << macro_node(:test1)
+		((tree&0)[:parameters][1]&0)[:parameters][0] = parameter_node(0)
+		((tree&0)[:parameters][1]&0)[:parameters][0] << text_node("a")
+		((tree&0)[:parameters][1]&0)[:parameters][1] = parameter_node(1)
+		((tree&0)[:parameters][1]&0)[:parameters][1] << text_node("b")
+		(tree&0)[:parameters][2] = parameter_node(2)
+		(tree&0)[:parameters][2] << text_node("...")
 		parse_text(text).should == tree
 	end
 

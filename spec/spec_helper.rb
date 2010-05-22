@@ -81,7 +81,7 @@ end
 
 def define_ref_macro
 	Glyph.macro :ref do
-		%{<a href="#{segment(0).to_s.strip}">#{segment(1).to_s.strip}</a>}
+		%{<a href="#{parameter(0).to_s.strip}">#{parameter(1).to_s.strip}</a>}
 	end
 end
 

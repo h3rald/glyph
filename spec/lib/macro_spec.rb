@@ -108,7 +108,7 @@ describe Glyph::Macro do
 	end
 =end
 
-	it "should support access to segments and attributes" do
+	it "should support access to parameters and attributes" do
 		Glyph.macro :test do
 			"test: #{value}"
 		end
@@ -120,22 +120,22 @@ describe Glyph::Macro do
 		end
 		node = syntaxnode.call :name => :test, :type => :macro, :escape => false
 		node[:attributes] = {}
-		node[:segments] = []
-		node[:segments] << syntaxnode.call(:type => :segment, :name => :"|0|")
-		node[:segments][0] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
-		(node[:segments][0]&0) << syntaxnode.call(:type => :text, :value =>"...")
-		node[:segments] << syntaxnode.call(:type => :segment, :name => :"|1|")
-		node[:segments][1] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
-		(node[:segments][1]&0) << syntaxnode.call(:type => :text, :value =>"---")
+		node[:parameters] = []
+		node[:parameters] << syntaxnode.call(:type => :parameter, :name => :"|0|")
+		node[:parameters][0] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
+		(node[:parameters][0]&0) << syntaxnode.call(:type => :text, :value =>"...")
+		node[:parameters] << syntaxnode.call(:type => :parameter, :name => :"|1|")
+		node[:parameters][1] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
+		(node[:parameters][1]&0) << syntaxnode.call(:type => :text, :value =>"---")
 		node[:attributes][:a] = syntaxnode.call(:type => :attribute, :name => :@a)
 		node[:attributes][:a] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
 		(node[:attributes][:a]&0) << syntaxnode.call(:type => :text, :value =>"...")
 		m = Glyph::Macro.new(node)
-		m.segments.should == ["test1: ...", "test1: ---"]
+		m.parameters.should == ["test1: ...", "test1: ---"]
 		m.attributes.should == {:a => "test1: ..."}
-		m.segment(0).should == "test1: ..."
-		m.segment(1).should == "test1: ---"
-		m.segment(2).should == nil
+		m.parameter(0).should == "test1: ..."
+		m.parameter(1).should == "test1: ---"
+		m.parameter(2).should == nil
 		m.attribute(:a).should == "test1: ..."
 		m.attribute(:b).should == nil
 	end

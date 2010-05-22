@@ -33,11 +33,11 @@ module Glyph
 		protected
 
 		def parse_contents(current)
-			segment_delimiter(current) || escaping_attribute(current) || escaping_macro(current) || attribute(current) || macro(current) || text(current)
+			parameter_delimiter(current) || escaping_attribute(current) || escaping_macro(current) || attribute(current) || macro(current) || text(current)
 		end
 
 		def parse_escaped_contents(current)
-			segment_delimiter(current) || escaped_text(current)
+			parameter_delimiter(current) || escaped_text(current)
 		end
 
 		def escaping_macro(current)
@@ -50,13 +50,13 @@ module Glyph
 					:name => name.to_sym, 
 					:escape => true, 
 					:attributes => {}, 
-					:segments => []
+					:parameters => []
 				})
 				while contents = parse_escaped_contents(node) do
 					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
-				aggregate_segments node
+				aggregate_parameters node
 				node
 			else
 				nil
@@ -92,13 +92,13 @@ module Glyph
 					:name => name.to_sym, 
 					:escape => false, 
 					:attributes => {}, 
-					:segments => []
+					:parameters => []
 				})
 				while contents = parse_contents(node) do
 					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\]/) or error "Macro '#{name}' not closed"		
-				aggregate_segments node
+				aggregate_parameters node
 				node
 			else
 				nil
@@ -165,46 +165,46 @@ module Glyph
 			end
 		end
 
-		def segment_delimiter(current)
+		def parameter_delimiter(current)
 			if @input.scan(/\|/) then
 				# Segments are not allowed outside macros or inside attributes
 				if current[:type] == :document || current[:type] == :attribute then
 					@input.pos = @input.pos-1
 					error "Segment delimiter '|' not allowed here"  
 				end
-				create_node :segment => true
+				create_node :parameter => true
 			else
 				nil
 			end
 		end
 
-		def aggregate_segments(node)
+		def aggregate_parameters(node)
 			indices = []
 			count = 0
 			node.children.each do |n|
-				indices << count if n[:segment]
+				indices << count if n[:parameter]
 				count += 1
 			end
-			# No segment found
+			# No parameter found
 			return false if indices == []
 			# Segments found
 			current_index = 0
-			total_segments = 0
-			save_segment = lambda do |max_index|
-				segment = create_node :type => :segment, :name => "|#{total_segments}|".to_sym
-				total_segments +=1
+			total_parameters = 0
+			save_parameter = lambda do |max_index|
+				parameter = create_node :type => :parameter, :name => "|#{total_parameters}|".to_sym
+				total_parameters +=1
 				current_index.upto(max_index) do |index|
-					segment << (node & index)
+					parameter << (node & index)
 				end
-				node[:segments] << segment
+				node[:parameters] << parameter
 			end
 			indices.each do |i|
-				save_segment.call(i-1)
+				save_parameter.call(i-1)
 				current_index = i+1
 			end
-			save_segment.call(node.children.length-1)
+			save_parameter.call(node.children.length-1)
 			node.children.clear
-			node[:segments]
+			node[:parameters]
 		end
 
 		def illegal_macro_delimiter?(start_p, string)

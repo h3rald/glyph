@@ -21,8 +21,8 @@ module Glyph
 			@node[:attributes][name].evaluate(@node) rescue nil
 		end
 
-		def segment(n)
-			@node[:segments][n].evaluate(@node) rescue nil
+		def parameter(n)
+			@node[:parameters][n].evaluate(@node) rescue nil
 		end
 
 		def attributes
@@ -34,13 +34,13 @@ module Glyph
 			@attributes
 		end
 
-		def segments
-			return @segments if @segments
-			@segments = []
-			@node[:segments].each do |value|
-				@segments << value.evaluate(@node)
+		def parameters
+			return @parameters if @parameters
+			@parameters = []
+			@node[:parameters].each do |value|
+				@parameters << value.evaluate(@node)
 			end
-			@segments
+			@parameters
 		end
 
 		def value
@@ -117,7 +117,7 @@ module Glyph
 					tree.find_child do |c|
 						if c[:name] == node[:name] then
 							if c.children.blank? then
-								c[:segments] == node[:segment]
+								c[:parameters] == node[:parameters]
 							else
 								c.children == node.children
 							end
