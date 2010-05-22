@@ -17,7 +17,7 @@ module Glyph
 
 		def parse
 			count = 0
-			while result = parse_contents do
+			while result = parse_contents(@output) do
 				@output << result
 				count +=1
 			end
@@ -32,15 +32,15 @@ module Glyph
 
 		protected
 
-		def parse_contents
-			segment_delimiter || escaping_attribute || escaping_macro || attribute || macro || text
+		def parse_contents(current)
+			segment_delimiter(current) || escaping_attribute(current) || escaping_macro(current) || attribute(current) || macro(current) || text(current)
 		end
 
-		def parse_escaped_contents
-			segment_delimiter || escaped_text
+		def parse_escaped_contents(current)
+			segment_delimiter(current) || escaped_text(current)
 		end
 
-		def escaping_macro
+		def escaping_macro(current)
 			if @input.scan(/[^\[\]\|\\\s]+\[\=/) then
 				name = @input.matched
 				name.chop!
@@ -52,8 +52,7 @@ module Glyph
 					:attributes => {}, 
 					:segments => []
 				})
-				@current_macro = node
-				while contents = parse_escaped_contents do
+				while contents = parse_escaped_contents(node) do
 					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
@@ -64,7 +63,7 @@ module Glyph
 			end
 		end
 
-		def escaping_attribute
+		def escaping_attribute(current)
 			if @input.scan(/@[^\[\]\|\\\s]+\[\=/) then
 				error "Attributes cannot be nested" if @current_attribute
 				name = @input.matched[1..@input.matched.length-3]
@@ -73,12 +72,10 @@ module Glyph
 					:escape => true, 
 					:name => "@#{name}".to_sym
 				})
-				@current_attribute = node
-				while contents = parse_escaped_contents do
+				while contents = parse_escaped_contents(node) do
 					node << contents
 				end
-				@current_attribute = nil
-				@current_macro[:attributes][name.to_sym] = node
+				current[:attributes][name.to_sym] = node
 				@input.scan(/\=\]/) or error "Attribute '#{name}' not closed"		
 				node
 			else
@@ -86,7 +83,7 @@ module Glyph
 			end
 		end
 
-		def macro
+		def macro(current)
 			if @input.scan(/[^\[\]\|\\\s]+\[/) then
 				name = @input.matched
 				name.chop!
@@ -97,8 +94,7 @@ module Glyph
 					:attributes => {}, 
 					:segments => []
 				})
-				@current_macro = node
-				while contents = parse_contents do
+				while contents = parse_contents(node) do
 					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\]/) or error "Macro '#{name}' not closed"		
@@ -109,21 +105,19 @@ module Glyph
 			end
 		end
 
-		def attribute
+		def attribute(current)
 			if @input.scan(/@[^\[\]\|\\\s]+\[/) then
-				error "Attributes cannot be nested" if @current_attribute
+				error "Attributes cannot be nested" if current[:type] == :attribute
 				name = @input.matched[1..@input.matched.length-2]
 				node = create_node({
 					:type => :attribute, 
 					:escape => false, 
 					:name => "@#{name}".to_sym
 				})
-				@current_attribute = node
-				while contents = parse_contents do
+				while contents = parse_contents(node) do
 					node << contents
 				end
-				@current_attribute = nil
-				@current_macro[:attributes][name.to_sym] = node
+				current[:attributes][name.to_sym] = node
 				@input.scan(/\]/) or error "Attribute '#{name}' not closed"		
 				node
 			else
@@ -131,7 +125,7 @@ module Glyph
 			end
 		end
 
-		def text
+		def text(current)
 			start_p = @input.pos
 			res = @input.scan_until /(\A(\]|\|)|[^\\](\]|\|)|[^\[\]\|\\\s]+\[|\Z)/
 			offset = @input.matched.match(/^[^\\](\]|\|)$/) ? 1 : @input.matched.length
@@ -146,7 +140,7 @@ module Glyph
 			end
 		end
 
-		def escaped_text
+		def escaped_text(current)
 			start_p = @input.pos
 			res = @input.scan_until /(\A(\=\]|\|)|[^\\](\=\]|\|)|\Z)/
 			case 
@@ -162,7 +156,7 @@ module Glyph
 			match = @input.string[start_p..@input.pos-1]
 			illegal_nesting = match.match(/([^\[\]\|\\\s]+)\[\=/)[1] rescue nil
 			if illegal_nesting then
-				error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{@current_macro[:name]}'"
+				error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{current[:name]}'"
 			end
 			if match.length > 0 then
 				create_node :type => :text, :value => match, :escaped => true
@@ -171,10 +165,10 @@ module Glyph
 			end
 		end
 
-		def segment_delimiter
+		def segment_delimiter(current)
 			if @input.scan(/\|/) then
 				# Segments are not allowed outside macros or inside attributes
-				if !@current_macro || @current_attribute then
+				if current[:type] == :document || current[:type] == :attribute then
 					@input.pos = @input.pos-1
 					error "Segment delimiter '|' not allowed here"  
 				end

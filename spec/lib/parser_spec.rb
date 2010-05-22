@@ -12,6 +12,14 @@ describe Glyph::Parser do
 		{:type => :document, :name => "--".to_sym}.to_node
 	end
 
+	def attribute_node(name, options={})
+		{:type => :attribute, :name => :"@#{name}", :escape => false}.merge(options).to_node
+	end
+
+	def segment_node(n)
+		{:type => :segment, :name => :"|#{n}|"}.to_node
+	end
+
 	def macro_node(name, options={})
 		{
 			:type => :macro, 
@@ -160,6 +168,36 @@ Contents]
 	it "should not allow attribute nesting" do
 		text = "... test[@par1[@par2[...]...]]"
 		lambda { puts parse_text(text).inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 22] Attributes cannot be nested")
+	end
+
+	it "should parse macros nested in attributes" do
+		text = "test[@a[test1[@b[...]@c[...]]]]"
+		tree = document_node
+		tree << macro_node(:test)
+		(tree&0)[:attributes][:a] = attribute_node(:a)
+		(tree&0)[:attributes][:a] << macro_node(:test1)
+		((tree&0)[:attributes][:a]&0)[:attributes][:b] = attribute_node(:b)
+		((tree&0)[:attributes][:a]&0)[:attributes][:b] << text_node("...")
+		((tree&0)[:attributes][:a]&0)[:attributes][:c] = attribute_node(:c)
+		((tree&0)[:attributes][:a]&0)[:attributes][:c] << text_node("...")
+		parse_text(text).should == tree
+	end
+
+	it "should parse segments in nested macros" do
+		text = "test[...|test1[a|b]|...]"
+		tree = document_node
+		tree << macro_node(:test)
+		(tree&0)[:segments][0] = segment_node(0)
+		(tree&0)[:segments][0] << text_node("...")
+		(tree&0)[:segments][1] = segment_node(1)
+		(tree&0)[:segments][1] << macro_node(:test1)
+		((tree&0)[:segments][1]&0)[:segments][0] = segment_node(0)
+		((tree&0)[:segments][1]&0)[:segments][0] << text_node("a")
+		((tree&0)[:segments][1]&0)[:segments][1] = segment_node(1)
+		((tree&0)[:segments][1]&0)[:segments][1] << text_node("b")
+		(tree&0)[:segments][2] = segment_node(2)
+		(tree&0)[:segments][2] << text_node("...")
+		parse_text(text).should == tree
 	end
 
 end
