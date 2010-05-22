@@ -33,11 +33,17 @@ module Glyph
 		protected
 
 		def parse_contents(current)
-			parameter_delimiter(current) || escaping_attribute(current) || escaping_macro(current) || attribute(current) || macro(current) || text(current)
+			escape_sequence(current) || 
+				parameter_delimiter(current) || 
+				escaping_attribute(current) || 
+				escaping_macro(current) || 
+				attribute(current) || 
+				macro(current) || 
+				text(current)
 		end
 
 		def parse_escaped_contents(current)
-			parameter_delimiter(current) || escaped_text(current)
+			escape_sequence(current) || parameter_delimiter(current) || escaped_text(current)
 		end
 
 		def escaping_macro(current)
@@ -127,8 +133,8 @@ module Glyph
 
 		def text(current)
 			start_p = @input.pos
-			res = @input.scan_until /(\A(\]|\|)|[^\\](\]|\|)|[^\[\]\|\\\s]+\[|\Z)/
-			offset = @input.matched.match(/^[^\\](\]|\|)$/) ? 1 : @input.matched.length
+			res = @input.scan_until /(\\.)|(\A(\]|\|)|[^\\](\]|\|)|[^\[\]\|\\\s]+\[|\Z)/
+				offset = @input.matched.match(/^[^\\](\]|\|)$/) ? 1 : @input.matched.length
 			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
 			match = @input.string[start_p..@input.pos-1]
@@ -142,39 +148,45 @@ module Glyph
 
 		def escaped_text(current)
 			start_p = @input.pos
-			res = @input.scan_until /(\A(\=\]|\|)|[^\\](\=\]|\|)|\Z)/
-			case 
-			when @input.matched.match(/^[^\\]\=\]$/) then
-				offset = 2
-			when @input.matched.match(/^[^\\]\|$/) then
-				offset = 1
-			else
-				offset = @input.matched.length
-			end
+			res = @input.scan_until /(\\.)|(\A(\=\]|\|)|[^\\](\=\]|\|)|\Z)/
+				case 
+				when @input.matched.match(/^[^\\]\=\]$/) then
+					offset = 2
+				when @input.matched.match(/^[^\\]\|$/) then
+					offset = 1
+				else
+					offset = @input.matched.length
+				end
 			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
 			match = @input.string[start_p..@input.pos-1]
 			illegal_nesting = match.match(/([^\[\]\|\\\s]+)\[\=/)[1] rescue nil
-			if illegal_nesting then
-				error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{current[:name]}'"
-			end
-			if match.length > 0 then
-				create_node :type => :text, :value => match, :escaped => true
+				if illegal_nesting then
+					error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{current[:name]}'"
+				end
+				if match.length > 0 then
+					create_node :type => :text, :value => match, :escaped => true
+				else
+					nil
+				end
+		end
+
+		def parameter_delimiter(current)
+			if @input.scan(/\|/) then
+				# Parameters are not allowed outside macros or inside attributes
+				if current[:type] == :document || current[:type] == :attribute then
+					@input.pos = @input.pos-1
+					error "Parameter delimiter '|' not allowed here"  
+				end
+				create_node :parameter => true
 			else
 				nil
 			end
 		end
 
-		def parameter_delimiter(current)
-			if @input.scan(/\|/) then
-				# Segments are not allowed outside macros or inside attributes
-				if current[:type] == :document || current[:type] == :attribute then
-					@input.pos = @input.pos-1
-					error "Segment delimiter '|' not allowed here"  
-				end
-				create_node :parameter => true
-			else
-				nil
+		def escape_sequence(current)
+			if @input.scan(/\\./) then
+				create_node :type => :escape, :value => @input.matched, :escaped => true
 			end
 		end
 
@@ -186,23 +198,29 @@ module Glyph
 				count += 1
 			end
 			# No parameter found
-			return false if indices == []
-			# Segments found
-			current_index = 0
-			total_parameters = 0
-			save_parameter = lambda do |max_index|
-				parameter = create_node :type => :parameter, :name => "|#{total_parameters}|".to_sym
-				total_parameters +=1
-				current_index.upto(max_index) do |index|
-					parameter << (node & index)
+			if indices == [] then
+				node[:parameters][0] = create_node :type => :parameter, :name => :"|0|"
+				node.children.each do |c|
+					node[:parameters][0] << c
 				end
-				node[:parameters] << parameter
+			else
+				# Parameters found
+				current_index = 0
+				total_parameters = 0
+				save_parameter = lambda do |max_index|
+					parameter = create_node :type => :parameter, :name => "|#{total_parameters}|".to_sym
+						total_parameters +=1
+					current_index.upto(max_index) do |index|
+						parameter << (node & index)
+					end
+					node[:parameters] << parameter
+				end
+				indices.each do |i|
+					save_parameter.call(i-1)
+					current_index = i+1
+				end
+				save_parameter.call(node.children.length-1)
 			end
-			indices.each do |i|
-				save_parameter.call(i-1)
-				current_index = i+1
-			end
-			save_parameter.call(node.children.length-1)
 			node.children.clear
 			node[:parameters]
 		end
