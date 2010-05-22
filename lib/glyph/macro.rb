@@ -17,11 +17,19 @@ module Glyph
 			@source = @node[:source]
 		end
 
+		def attribute(name)
+			@node[:attributes][name].evaluate(@node) rescue nil
+		end
+
+		def segment(n)
+			@node[:segments][n].evaluate(@node) rescue nil
+		end
+
 		def attributes
 			return @attributes if @attributes
 			@attributes = {}
 			@node[:attributes].each_pair do |key, value|
-				@attributes[key] = value.evaluate
+				@attributes[key] = value.evaluate(@node)
 			end
 			@attributes
 		end
@@ -30,7 +38,7 @@ module Glyph
 			return @segments if @segments
 			@segments = []
 			@node[:segments].each do |value|
-				@segments << value.evaluate
+				@segments << value.evaluate(@node)
 			end
 			@segments
 		end
@@ -97,18 +105,32 @@ module Glyph
 		# @return [String] the interpreted output
 		# @raise [Glyph::MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
-			@node[:source] = "#@name[#{raw_value}]"
-			@node[:source_name] = (raw_value.length > 50 || raw_value.match(/\n/)) ? "#{@name}[...]" : @node[:source]
-			macro_error "Mutual inclusion", Glyph::MutualInclusionError if @node.find_parent {|n| n[:source] == @node[:source] }
 			if @node[:escape] then
 				result = string 
 			else
-				@node[:embedded] = true
-			 	result = Glyph::Interpreter.new(string, @node).document.output
+				context = {}
+				context[:source] = "#@name[...]"
+				context[:embedded] = true
+				interpreter = Glyph::Interpreter.new string, context
+				subtree = interpreter.parse
+				included_node = lambda do |node, tree|
+					tree.find_child do |c|
+						if c[:name] == node[:name] then
+							if c.children.blank? then
+								c[:segments] == node[:segment]
+							else
+								c.children == node.children
+							end
+						end
+					end
+				end
+				macro_error "Mutual inclusion", Glyph::MutualInclusionError if included_node.call @node, subtree
+				result = interpreter.document.output
 			end
 			result.gsub(/\\*([\[\]])/){"\\#$1"}
 		end
 
+=begin
 		# Encodes all macros in a string so that it can be encoded
 		# (and interpreted) later on
 		# @param [String] string the string to encode
@@ -126,6 +148,7 @@ module Glyph
 		def decode(string)
 			string.gsub(/‡‡¤(91|93|124)¤‡‡/) { $1.to_i.chr }
 		end
+=end
 
 		# @see Glyph::Document#placeholder
 		def placeholder(&block)

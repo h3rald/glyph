@@ -75,13 +75,13 @@ end
 
 def define_em_macro
 	Glyph.macro :em do
-		%{<em>#{value}</em>}
+		%{<em>#{value.strip}</em>}
 	end
 end
 
 def define_ref_macro
 	Glyph.macro :ref do
-		%{<a href="#{params[0]}">#{params[1]}</a>}
+		%{<a href="#{segment(0).to_s.strip}">#{segment(1).to_s.strip}</a>}
 	end
 end
 
@@ -101,7 +101,7 @@ def output_for(text)
 end
 
 def create_tree(text)
-	GlyphLanguageParser.new.parse text 
+	Glyph::Interpreter.new(text).parse
 end
 
 def create_doc(tree)

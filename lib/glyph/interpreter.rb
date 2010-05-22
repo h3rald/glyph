@@ -8,13 +8,13 @@ module Glyph
 				self[:value] = expand_macro(context)
 			when :attribute then
 				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(self) }
+				self.children.each {|c| self[:value] << c.evaluate(context) }
 			when :segment then
 				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(self) }
+				self.children.each {|c| self[:value] << c.evaluate(context) }
 			when :document then
 				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(self) }
+				self.children.each {|c| self[:value] << c.evaluate(context) }
 			end
 			self[:value]
 		end
@@ -102,13 +102,8 @@ module Glyph
 		end
 
 		def parse
-			if @text.match /[^\[\]\|\\\s]+\[/ then
-				Glyph.info "  -> Parsing: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
-				@tree = @parser.parse
-			else
-				# Don't bother parsing...
-				@tree = @text
-			end
+			Glyph.info "  -> Parsing: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
+			@tree = @parser.parse
 			@document = Glyph::Document.new @tree, @context
 			@document.inherit_from @context[:document] if @context[:document]
 			@tree

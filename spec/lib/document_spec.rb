@@ -72,7 +72,7 @@ describe Glyph::Document do
 			n = placeholder do |document|
 				count = 0
 				document.structure.descend do |node, level|
-					count +=1 if node[:macro] == :test
+					count +=1 if node[:name] == :test
 				end
 				count
 			end
@@ -99,10 +99,10 @@ describe Glyph::Document do
 	it "should substitute escaped pipes only when finalizing the document" do
 		define_em_macro
 		define_ref_macro
-		text = %{em[ref[link with ref[fake \\| parameter]]]}
+		text = %{em[ref[link with ref[fake \\| parameter|.]|.]]}
 		# Nevermind the absurdity. It's just to test that the escaped pipes 
 		# are handled properly.
-		result = %{<em><a href="link with <a href="fake | parameter"></a>"></a></em>}
+		result = %{<em><a href="link with <a href="fake | parameter">.</a>">.</a></em>}
 		tree = create_tree text
 		doc = create_doc tree
 		doc.analyze

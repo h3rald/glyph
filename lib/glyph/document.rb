@@ -46,7 +46,7 @@ module Glyph
 		# @raise [RuntimeError] unless the document has been analized
 		def structure
 			raise RuntimeError, "Document has not been analyzed" unless analyzed? || finalized?
-			@tree.data
+			@tree
 		end
 
 		# Copies bookmarks, headers, todos and placeholders from another Glyph::Document
@@ -105,7 +105,7 @@ module Glyph
 		def analyze
 			raise RuntimeError, "Document is #{@state}" if analyzed? || finalized?
 			@context[:document] = self
-			@output = @tree.evaluate @context, nil
+			@output = @tree.evaluate @context
 			@state = :analyzed
 		end
 

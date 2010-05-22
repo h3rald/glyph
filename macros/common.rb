@@ -1,18 +1,18 @@
 #!/usr/bin/env ruby
 
 macro :snippet do
-	ident = raw_value.to_sym
+	ident = value.strip.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
 			macro_warning e.message, e
-			macro_todo "Correct errors in snippet '#{raw_value}'"
+			macro_todo "Correct errors in snippet '#{ident}'"
 		end
 	else
 		macro_warning "Snippet '#{ident}' does not exist"
-		"[SNIPPET '#{raw_value}' NOT PROCESSED]"
+		"[SNIPPET '#{ident}' NOT PROCESSED]"
 	end
 end
 
