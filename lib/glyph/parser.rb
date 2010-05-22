@@ -62,7 +62,7 @@ module Glyph
 					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
-				aggregate_parameters node
+				organize_children_for node
 				node
 			else
 				nil
@@ -76,7 +76,8 @@ module Glyph
 				node = create_node({
 					:type => :attribute, 
 					:escape => true, 
-					:name => "@#{name}".to_sym
+					:name => "@#{name}".to_sym,
+					:order => current[:attributes].length
 				})
 				while contents = parse_escaped_contents(node) do
 					node << contents
@@ -95,8 +96,8 @@ module Glyph
 				name.chop!
 				node = create_node({
 					:type => :macro, 
-					:name => name.to_sym, 
 					:escape => false, 
+					:name => name.to_sym, 
 					:attributes => {}, 
 					:parameters => []
 				})
@@ -104,7 +105,7 @@ module Glyph
 					node << contents unless contents[:type] == :attribute
 				end
 				@input.scan(/\]/) or error "Macro '#{name}' not closed"		
-				aggregate_parameters node
+				organize_children_for node
 				node
 			else
 				nil
@@ -118,7 +119,8 @@ module Glyph
 				node = create_node({
 					:type => :attribute, 
 					:escape => false, 
-					:name => "@#{name}".to_sym
+					:name => "@#{name}".to_sym,
+					:order => current[:attributes].length
 				})
 				while contents = parse_contents(node) do
 					node << contents
@@ -190,7 +192,7 @@ module Glyph
 			end
 		end
 
-		def aggregate_parameters(node)
+		def aggregate_parameters_for(node)
 			indices = []
 			count = 0
 			node.children.each do |n|
@@ -221,8 +223,18 @@ module Glyph
 				end
 				save_parameter.call(node.children.length-1)
 			end
-			node.children.clear
 			node[:parameters]
+		end
+
+		def organize_children_for(node)
+			aggregate_parameters_for node
+			node.children.clear
+			node[:parameters].each do |p|
+				node << p
+			end
+			node[:attributes].values.sort{|a,b| a[:order] <=> b[:order]}.each do |a|
+				node << a
+			end
 		end
 
 		def illegal_macro_delimiter?(start_p, string)

@@ -17,7 +17,11 @@ describe Glyph::Parser do
 	end
 
 	def a_node(node, name, options={})
-		node[:attributes][name.to_sym] = {:type => :attribute, :name => :"@#{name}", :escape => false}.merge(options).to_node
+		node[:attributes][name.to_sym] = {
+			:type => :attribute, 
+			:name => :"@#{name}", 
+			:escape => false, 
+			:order => node[:attributes].length}.merge(options).to_node
 	end
 
 	def p_node(node, n)
@@ -29,8 +33,8 @@ describe Glyph::Parser do
 			:type => :macro, 
 			:name => name.to_sym, 
 			:escape => false,
-			:parameters => [],
 			:attributes => {},
+			:parameters => []
 		}.merge options
 	end
 
@@ -53,19 +57,24 @@ Contents]
 		tree << macro_node(:section)
 		macro_0 = p_node tree&1, 0
 		macro_0 << macro_node(:header)
+		(tree&1) << macro_0
 		macro_00 = p_node macro_0&0, 0
 		macro_00 << text_node("Testing...")
+		(macro_0&0) << macro_00
 		macro_0 << text_node("\n\t")
 		macro_0 << macro_node("=>")
 		macro_01 = p_node macro_0&2, 0
 		macro_01 << text_node("#something")
+		(macro_0&2) << macro_01
 		macro_0 << text_node("\n\tTest.\n\t")
 		macro_0 << macro_node(:section)
 		macro_02 = p_node macro_0&4, 0
 		macro_02 << text_node("\n\t\t")
 		macro_02 << macro_node(:header)
+		(macro_0&4) << macro_02
 		macro_020 = p_node macro_02&1, 0
 		macro_020 << text_node("Another test")
+		(macro_02&1) << macro_020
 		macro_02 << text_node("\nContents")
 		macro_0 << text_node("\n")
 		parse_text(text).should == tree
@@ -82,6 +91,7 @@ Contents]
 		macro_0 << escape_node("\\]")
 		macro_0 << escape_node("\\[")
 		macro_0 << text_node(" ")
+		(tree&0) << macro_0
 		parse_text(text).should == tree
 	end
 
@@ -94,7 +104,9 @@ Contents]
 		text = "test1[= abc test2[This macro is escaped]\n cde=]"
 		tree = document_node
 		tree << macro_node(:test1, :escape => true)
-		p_node(tree&0, 0) << text_node(" abc test2[This macro is escaped]\n cde", :escaped => true)
+		macro_0 = p_node(tree&0, 0) 
+		macro_0 << text_node(" abc test2[This macro is escaped]\n cde", :escaped => true)
+		(tree&0) << macro_0
 		parse_text(text).should == tree
 	end
 
@@ -123,16 +135,20 @@ Contents]
 		macro_0 = p_node tree&0, 0
 		macro_0 << text_node('aaa ')
 		macro_0 << macro_node("=>")
+		(tree&0) << macro_0
 		macro_01_p0 = p_node macro_0&1, 0
 		macro_01_p0 << macro_node(:test2)
+		(macro_0&1) << macro_01_p0
 		macro_010 = p_node macro_01_p0&0, 0
 		macro_010 << text_node("...")
+		(macro_01_p0&0) << macro_010
 		macro_01_p1 = p_node macro_0&1, 1
 		macro_01_p1 << macro_node(:test3)
+		(macro_0&1) << macro_01_p1
 		macro_011 = p_node macro_01_p1&0, 0
 		macro_011 << text_node("...")
+		(macro_01_p1&0) << macro_011
 		macro_0 << text_node(".")
-
 		parse_text(text).should == tree
 	end
 
@@ -153,10 +169,12 @@ Contents]
 		(tree&4)[:parameters][0] << text_node("this ", :escaped => true) 
 		(tree&4)[:parameters][0] << escape_node("\\|")
 		(tree&4)[:parameters][0] << text_node(" is", :escaped => true) 
+		(tree&4) << (tree&4)[:parameters][0]
 		(tree&4)[:parameters] << {:type => :parameter, :name => :"|1|"}.to_node
 		(tree&4)[:parameters][1] << text_node("a ", :escaped => true) 
 		(tree&4)[:parameters][1] << escape_node("\\|")
 		(tree&4)[:parameters][1] << text_node("test", :escaped => true) 
+		(tree&4) << (tree&4)[:parameters][1]
 		parse_text(text).should == tree
 	end
 
@@ -171,6 +189,9 @@ Contents]
 		macro_0 << text_node(".")
 		second = a_node tree&0, :second, :escape=> true
 		second << text_node("test2[...]", :escaped => true)
+		(tree&0) << macro_0
+		(tree&0) << first
+		(tree&0) << second
 		parse_text(text).should == tree
 	end
 
@@ -186,9 +207,12 @@ Contents]
 		(tree&0)[:parameters] << {:type => :parameter, :name => :"|0|"}.to_node
 		(tree&0)[:parameters][0] << text_node("parameter 1") 
 		(tree&0)[:parameters] << {:type => :parameter, :name => :"|1|"}.to_node
-		(tree&0)[:attributes][:par] = {:type => :attribute, :escape => false, :name => :@par}.to_node
+		(tree&0)[:attributes][:par] = {:type => :attribute, :escape => false, :name => :@par, :order =>0}.to_node
 		(tree&0)[:attributes][:par] << text_node("...")
 		(tree&0)[:parameters][1] << text_node(" test") 
+		(tree&0) << (tree&0)[:parameters][0]
+		(tree&0) << (tree&0)[:parameters][1]
+		(tree&0) << (tree&0)[:attributes][:par]
 		parse_text(text).should == tree
 	end
 
@@ -204,11 +228,15 @@ Contents]
 		p_node tree&0, 0 
 		a = a_node tree&0, :a
 		a << macro_node(:test1)
-		p_node a&0, 0 
+		(tree&0) << a
+		macro_01 = p_node a&0, 0 
+		(a&0) << macro_01
 		b = a_node a&0, :b
 		b << text_node('...')
+		(a&0) << b
 		c = a_node a&0, :c
 		c << text_node('...')
+		(a&0) << c
 		parse_text(text).should == tree
 	end
 
@@ -218,14 +246,19 @@ Contents]
 		tree << macro_node(:test)
 		macro_0_p0 = p_node tree&0, 0
 		macro_0_p0 << text_node("...")
+		(tree&0) << macro_0_p0
 		macro_0_p1 = p_node tree&0, 1
 		macro_0_p1 << macro_node(:test1)
+		(tree&0) << macro_0_p1
 		macro_01_p0 = p_node macro_0_p1&0, 0
 		macro_01_p0 << text_node('a')
+		(macro_0_p1&0) << macro_01_p0
 		macro_01_p1 = p_node macro_0_p1&0, 1
 		macro_01_p1 << text_node('b')
+		(macro_0_p1&0) << macro_01_p1
 		macro_0_p2 = p_node tree&0, 2
 		macro_0_p2 << text_node("...")
+		(tree&0) << macro_0_p2
 		parse_text(text).should == tree
 	end
 
@@ -235,7 +268,9 @@ Contents]
 		tree << text_node("abc")
 		tree << escape_node("\\.")
 		tree << macro_node(:test)
-		p_node(tree&2, 0) << text_node("...")
+		macro_0 = p_node(tree&2, 0) 
+		macro_0 << text_node("...")
+		(tree&2) << macro_0
 		parse_text(text).should == tree
 	end
 
