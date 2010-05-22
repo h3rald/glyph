@@ -18,10 +18,12 @@ module Glyph
 		end
 
 		def attribute(name)
+			return @attributes[name.to_sym] if @attributes
 			@node[:attributes][name].evaluate(@node) rescue nil
 		end
 
 		def parameter(n)
+			return @parameters[n] if @parameters
 			@node[:parameters][n].evaluate(@node) rescue nil
 		end
 
@@ -44,7 +46,7 @@ module Glyph
 		end
 
 		def value
-			@node[:value]
+			parameter(0)
 		end
 
 		# Returns the "path" to the macro within the syntax tree.

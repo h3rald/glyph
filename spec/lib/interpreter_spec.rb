@@ -65,7 +65,7 @@ describe Glyph::Interpreter do
 			node.ascend do |n| 
 				count+=1
 			end
-			node.parent[:name]
+			node.parent_macro[:name]
 		end
 		text = %{Test em[test_node[em[test_node[---]]]].}
 		interpret text

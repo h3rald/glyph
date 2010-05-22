@@ -24,12 +24,9 @@ module Glyph
 			self.merge!({
 				:source => context[:source], 
 				:document => context[:document], 
-				:info => context[:info]
+				:info => context[:info],
+				:value => ""
 			})
-			self[:value] = ""
-			self.children.each do |child|
-				self[:value] << child.evaluate(self)
-			end
 			Glyph::Macro.new(self).expand
 		end
 
