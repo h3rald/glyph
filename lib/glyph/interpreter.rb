@@ -5,23 +5,30 @@ module Glyph
 		def evaluate(context)
 			case self[:type]
 			when :macro then
-				expand_macro(context)
-			when :text
-				self[:value]
+				self[:value] = expand_macro(context)
+			when :attribute then
+				self[:value] = ""
+				self.children.each {|c| self[:value] << c.evaluate(self) }
+			when :segment then
+				self[:value] = ""
+				self.children.each {|c| self[:value] << c.evaluate(self) }
+			when :document then
+				self[:value] = ""
+				self.children.each {|c| self[:value] << c.evaluate(self) }
 			end
+			self[:value]
 		end
 
 		def expand_macro(context)
 			set_xml_element	
 			self.merge!({
-				:macro => name.to_sym, 
 				:source => context[:source], 
 				:document => context[:document], 
 				:info => context[:info]
 			})
 			self[:value] = ""
 			self.children.each do |child|
-				self[:value] << child.evaluate
+				self[:value] << child.evaluate(self)
 			end
 			Glyph::Macro.new(self).expand
 		end
@@ -66,7 +73,7 @@ module Glyph
 		# Creates a new Glyph::Interpreter object.
 		# @param [String] text the string to interpret
 		# @param [Hash] context the context to pass along when expanding macros
-		def initialize(text, context=nil)
+		def initialize(text, context={})
 			@context = context
 			@context.merge! :source => '--'
 			@parser = Glyph::Parser.new text, @context[:source]
@@ -94,8 +101,6 @@ module Glyph
 			@document
 		end
 
-		protected
-
 		def parse
 			if @text.match /[^\[\]\|\\\s]+\[/ then
 				Glyph.info "  -> Parsing: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
@@ -106,6 +111,7 @@ module Glyph
 			end
 			@document = Glyph::Document.new @tree, @context
 			@document.inherit_from @context[:document] if @context[:document]
+			@tree
 		end
 	
 	end
