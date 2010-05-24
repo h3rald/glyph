@@ -55,7 +55,7 @@ module Glyph
 					:type => :macro, 
 					:name => name.to_sym, 
 					:escape => true, 
-					:attributes => {}, 
+					:attributes => [], 
 					:parameters => []
 				})
 				while contents = parse_escaped_contents(node) do
@@ -76,13 +76,12 @@ module Glyph
 				node = create_node({
 					:type => :attribute, 
 					:escape => true, 
-					:name => "@#{name}".to_sym,
-					:order => current[:attributes].length
+					:name => "@#{name}".to_sym
 				})
 				while contents = parse_escaped_contents(node) do
 					node << contents
 				end
-				current[:attributes][name.to_sym] = node
+				current[:attributes] << node
 				@input.scan(/\=\]/) or error "Attribute '#{name}' not closed"		
 				node
 			else
@@ -98,7 +97,7 @@ module Glyph
 					:type => :macro, 
 					:escape => false, 
 					:name => name.to_sym, 
-					:attributes => {}, 
+					:attributes => [], 
 					:parameters => []
 				})
 				while contents = parse_contents(node) do
@@ -119,13 +118,12 @@ module Glyph
 				node = create_node({
 					:type => :attribute, 
 					:escape => false, 
-					:name => "@#{name}".to_sym,
-					:order => current[:attributes].length
+					:name => "@#{name}".to_sym
 				})
 				while contents = parse_contents(node) do
 					node << contents
 				end
-				current[:attributes][name.to_sym] = node
+				current[:attributes] << node
 				@input.scan(/\]/) or error "Attribute '#{name}' not closed"		
 				node
 			else
@@ -232,9 +230,11 @@ module Glyph
 			node[:parameters].each do |p|
 				node << p
 			end
-			node[:attributes].values.sort{|a,b| a[:order] <=> b[:order]}.each do |a|
+			node.delete(:parameters)
+			node[:attributes].each do |a|
 				node << a
 			end
+			node.delete(:attributes)
 		end
 
 		def illegal_macro_delimiter?(start_p, string)
