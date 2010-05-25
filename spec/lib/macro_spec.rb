@@ -123,4 +123,8 @@ describe Glyph::Macro do
 		m.attribute(:b).should == nil
 	end
 
+	it "should not evaluate attributes unless specifically requested"
+
+	it "should not evaluate parameters unless specifically requested"
+
 end

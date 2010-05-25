@@ -17,30 +17,39 @@ module Glyph
 			@source = @node[:source]
 		end
 
+		def raw_attributes
+			return @raw_attributes if @raw_attributes
+			@raw_attributes = {}
+			@node.children.select{|node| node[:type] == :attribute}.each do |v|
+				@raw_attributes[v[:name]] = v
+			end
+			@raw_attributes
+		end
+
+		def raw_parameters
+			return @raw_parameters if @raw_parameters
+			@raw_parameters = @node.children.select{|node| node[:type] == :parameter}
+		end
+
 		def attribute(name)
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
-			begin
-				@attributes = {} unless @attributes
-				@attributes[name] = @node.children.select{|n| n[:type] == :attribute}[name].evaluate(@node)
-				@attributes[name]
-			rescue Exception => e
-				nil
-			end
+			return nil unless raw_attributes[name]
+			@attributes = {} unless @attributes
+			@attributes[name] = raw_attributes[name].evaluate(@node, :attrs => true)
 		end
 
 		def parameter(n)
 			return @parameters[n] if @parameters && @parameters[n]
-			p_nodes = @node.children.select{|node| node[:type] == :parameter}
-			return nil unless p_nodes[n]
-			@parameters = Array.new(p_nodes.length) unless @parameters
-			@parameters[n] = p_nodes[n].evaluate(@node)
+			return nil unless raw_parameters[n]
+			@parameters = Array.new(raw_parameters.length) unless @parameters
+			@parameters[n] = raw_parameters[n].evaluate(@node, :params => true)
 		end
 
 		def attributes
 			return @attributes if @attributes
 			@attributes = {}
-			@node.children.select{|n| n[:type] == :attribute}.each do |value|
-				@attributes[value[:name]] = value.evaluate(@node)
+			raw_attributes.each_pair do |key, value|
+				@attributes[key] = value.evaluate(@node, :attrs => true)
 			end
 			@attributes
 		end
@@ -48,8 +57,8 @@ module Glyph
 		def parameters
 			return @parameters if @parameters
 			@parameters = []
-			@node.children.select{|n| n[:type] == :parameter}.each do |value|
-				@parameters << value.evaluate(@node)
+			raw_parameters.each do |value|
+				@parameters << value.evaluate(@node, :params => true)
 			end
 			@parameters
 		end

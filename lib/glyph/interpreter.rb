@@ -2,16 +2,16 @@ module Glyph
 
 	module Language
 
-		def evaluate(context)
+		def evaluate(context, options={:attrs => false, :params => false})
 			case self[:type]
 			when :macro then
 				self[:value] = expand_macro(context)
 			when :attribute then
 				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(context) }
+				self.children.each {|c| self[:value] << c.evaluate(context) } if options[:attrs]
 			when :parameter then
 				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(context) }
+				self.children.each {|c| self[:value] << c.evaluate(context) } if options[:params]
 			when :document then
 				self[:value] = ""
 				self.children.each {|c| self[:value] << c.evaluate(context) }
