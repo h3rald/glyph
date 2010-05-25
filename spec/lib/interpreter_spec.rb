@@ -60,17 +60,12 @@ describe Glyph::Interpreter do
 	it "should store syntax node information in context" do
 		define_em_macro
 		define_ref_macro
-		count = 0
 		Glyph.macro :test_node do |node|
-			node.ascend do |n| 
-				count+=1
-			end
 			node.parent_macro[:name]
 		end
 		text = %{Test em[test_node[em[test_node[---]]]].}
 		interpret text
 		@p.document.output.should == "Test <em>em</em>."
-		count.should == 8
 	end
 
 	it "should provide diagnostic information on errors" do

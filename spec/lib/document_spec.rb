@@ -7,7 +7,7 @@ describe Glyph::Document do
 
 	before do
 		Glyph.macro :test do |node|
-			"Test: #{node[:value]}"
+			"Test: #{value}"
 		end
 		create_tree = lambda {|text| }
 		create_doc = lambda {|tree| }

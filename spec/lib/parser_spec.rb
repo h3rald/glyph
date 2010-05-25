@@ -19,7 +19,7 @@ describe Glyph::Parser do
 	def a_node(name, options={})
 		{
 			:type => :attribute, 
-			:name => :"@#{name}", 
+			:name => :"#{name}", 
 			:escape => false}.merge(options).to_node
 	end
 

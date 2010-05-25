@@ -19,6 +19,10 @@ module Glyph
 			self[:value]
 		end
 
+		def parent_macro
+			find_parent{|n| n[:type] == :macro}
+		end
+
 		def expand_macro(context)
 			set_xml_element	
 			self.merge!({

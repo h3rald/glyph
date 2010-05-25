@@ -76,13 +76,13 @@ module Glyph
 				node = create_node({
 					:type => :attribute, 
 					:escape => true, 
-					:name => "@#{name}".to_sym
+					:name => name.to_sym
 				})
 				while contents = parse_escaped_contents(node) do
 					node << contents
 				end
 				current[:attributes] << node
-				@input.scan(/\=\]/) or error "Attribute '#{name}' not closed"		
+				@input.scan(/\=\]/) or error "Attribute @#{name} not closed"		
 				node
 			else
 				nil
@@ -118,13 +118,13 @@ module Glyph
 				node = create_node({
 					:type => :attribute, 
 					:escape => false, 
-					:name => "@#{name}".to_sym
+					:name => name.to_sym
 				})
 				while contents = parse_contents(node) do
 					node << contents
 				end
 				current[:attributes] << node
-				@input.scan(/\]/) or error "Attribute '#{name}' not closed"		
+				@input.scan(/\]/) or error "Attribute @#{name} not closed"		
 				node
 			else
 				nil

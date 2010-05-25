@@ -18,20 +18,29 @@ module Glyph
 		end
 
 		def attribute(name)
-			return @attributes[name.to_sym] if @attributes
-			@node[:attributes][name].evaluate(@node) rescue nil
+			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
+			begin
+				@attributes = {} unless @attributes
+				@attributes[name] = @node.children.select{|n| n[:type] == :attribute}[name].evaluate(@node)
+				@attributes[name]
+			rescue Exception => e
+				nil
+			end
 		end
 
 		def parameter(n)
-			return @parameters[n] if @parameters
-			@node[:parameters][n].evaluate(@node) rescue nil
+			return @parameters[n] if @parameters && @parameters[n]
+			p_nodes = @node.children.select{|node| node[:type] == :parameter}
+			return nil unless p_nodes[n]
+			@parameters = Array.new(p_nodes.length) unless @parameters
+			@parameters[n] = p_nodes[n].evaluate(@node)
 		end
 
 		def attributes
 			return @attributes if @attributes
 			@attributes = {}
-			@node[:attributes].each_pair do |key, value|
-				@attributes[key] = value.evaluate(@node)
+			@node.children.select{|n| n[:type] == :attribute}.each do |value|
+				@attributes[value[:name]] = value.evaluate(@node)
 			end
 			@attributes
 		end
@@ -39,7 +48,7 @@ module Glyph
 		def parameters
 			return @parameters if @parameters
 			@parameters = []
-			@node[:parameters].each do |value|
+			@node.children.select{|n| n[:type] == :parameter}.each do |value|
 				@parameters << value.evaluate(@node)
 			end
 			@parameters
@@ -114,19 +123,7 @@ module Glyph
 				context[:source] = "#@name[...]"
 				context[:embedded] = true
 				interpreter = Glyph::Interpreter.new string, context
-				subtree = interpreter.parse
-				included_node = lambda do |node, tree|
-					tree.find_child do |c|
-						if c[:name] == node[:name] then
-							if c.children.blank? then
-								c[:parameters] == node[:parameters]
-							else
-								c.children == node.children
-							end
-						end
-					end
-				end
-				macro_error "Mutual inclusion", Glyph::MutualInclusionError if included_node.call @node, subtree
+				interpreter.parse
 				result = interpreter.document.output
 			end
 			result.gsub(/\\*([\[\]])/){"\\#$1"}

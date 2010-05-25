@@ -12,7 +12,9 @@ describe Glyph::Macro do
 		@text = "test[section[header[Test!|test]]]"
 		@tree = create_tree @text 
 		@doc = create_doc @tree
-		@node = {:name => :test, :value => "Testing...", :source => "--", :document => @doc}.to_node
+		@node = Glyph::Parser::SyntaxNode.new.from({:name => :test, :type=>:macro, :source => "--", :document => @doc})
+		@node << Glyph::Parser::SyntaxNode.new.from({:type => :parameter, :name => :"|0|"})
+		(@node&0) << Glyph::Parser::SyntaxNode.new.from({:type => :text, :value => "Testing..."})
 		@macro = Glyph::Macro.new @node
 	end
 
@@ -64,14 +66,6 @@ describe Glyph::Macro do
 		@macro.expand.should == "Test: Testing..."
 	end
 
-	it "should detect mutual inclusion" do
-		delete_project
-		create_project
-		Glyph.run! 'load:macros'
-		Glyph::SNIPPETS[:inc] = "Test &[inc]"
-		lambda {interpret("&[inc] test").document}.should raise_error(Glyph::MutualInclusionError)
-	end
-
 	it "should encode and decode text" 
 =begin
 	do
@@ -118,19 +112,8 @@ describe Glyph::Macro do
 		syntaxnode = lambda do |hash|
 			Glyph::Parser::SyntaxNode.new.from hash
 		end
-		node = syntaxnode.call :name => :test, :type => :macro, :escape => false
-		node[:attributes] = {}
-		node[:parameters] = []
-		node[:parameters] << syntaxnode.call(:type => :parameter, :name => :"|0|")
-		node[:parameters][0] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
-		(node[:parameters][0]&0) << syntaxnode.call(:type => :text, :value =>"...")
-		node[:parameters] << syntaxnode.call(:type => :parameter, :name => :"|1|")
-		node[:parameters][1] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
-		(node[:parameters][1]&0) << syntaxnode.call(:type => :text, :value =>"---")
-		node[:attributes][:a] = syntaxnode.call(:type => :attribute, :name => :@a)
-		node[:attributes][:a] << syntaxnode.call(:name => :test1, :type => :macro, :escape => false)
-		(node[:attributes][:a]&0) << syntaxnode.call(:type => :text, :value =>"...")
-		m = Glyph::Macro.new(node)
+		node = Glyph::Parser.new("test[@a[test1[...]]test1[...]|test1[---]]").parse
+		m = Glyph::Macro.new(node&0)
 		m.parameters.should == ["test1: ...", "test1: ---"]
 		m.attributes.should == {:a => "test1: ..."}
 		m.parameter(0).should == "test1: ..."
