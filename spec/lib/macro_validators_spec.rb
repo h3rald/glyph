@@ -29,6 +29,8 @@ describe Glyph::Macro::Validators do
 		lambda { interpret("chapter[fmi[something|#something]]").document.output }.should_not raise_error Glyph::MacroError
 	end
 
+	it "should check for mutual inclusion"
+
 	it "should validate XML elements" do
 		language 'xml'
 		lambda { interpret("<test[test]").document}.should raise_error
