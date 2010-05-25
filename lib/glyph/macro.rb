@@ -54,6 +54,11 @@ module Glyph
 			@parameters
 		end
 
+		alias params parameters
+		alias param parameter
+		alias attrs attributes
+		alias attr attribute
+
 		def value
 			parameter(0)
 		end
