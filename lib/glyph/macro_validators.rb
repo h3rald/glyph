@@ -53,7 +53,7 @@ module Glyph
 			# @return [Boolean] whether the validation passed or not
 			# @since 0.3.0
 			def valid_xml_attribute(name, options={:level => :warning})
-				valid_parameter_name(name, /^([^[:punct:]0-9<>]|_)[^<>"']*/, "Invalid XML attribute '#{param(name)}'", options)
+				valid_parameter_name(name, /^([^[:punct:]0-9<>]|_)[^<>"']*/, "Invalid XML attribute '#{attr(name)}'", options)
 			end
 
 			# Ensures that the macro receives up to _n_ parameters.

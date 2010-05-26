@@ -10,8 +10,8 @@ end
 macro :box do
 	exact_parameters 2, :level => :warning
 	%{<div class="box">
-<div class="box-title">#{params[0]}</div>
-#{params[1]}
+<div class="box-title">#{param(0)}</div>
+#{params(1)}
 
 </div>}
 end
@@ -103,8 +103,8 @@ end
 macro :fig do
 	min_parameters 1
 	max_parameters 2
-	image = params[0]
-	caption = params[1] 
+	image = param(0)
+	caption = param(1) 
 	caption ||= nil
 	caption = %{<div class="caption">#{caption}</div>} if caption
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"

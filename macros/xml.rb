@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-# TODO add attributes support and character validation
 macro "|xml|" do
+	max_parameters 1
 	valid_xml_element
 	name = @node[:element]
-	attributes = named_params.values.
-		sort{|a,b| a[:order] <=> b[:order]}.
+	attributes # evaluate attributes
+	xml_attributes = @node.children.select{|node| node[:type] == :attribute}.
 		map do |e| 
 			if valid_xml_attribute(e[:name]) then
 				%|#{e[:name]}="#{e[:value]}"|
@@ -13,6 +13,6 @@ macro "|xml|" do
 				nil
 			end
 		end.compact.join(" ")
-	attributes = " "+attributes unless attributes.blank?
-	%{<#{name}#{attributes}>#{params.last}</#{name}>}
+	xml_attributes = " "+xml_attributes unless xml_attributes.blank?
+	%{<#{name}#{xml_attributes}>#{param(0)}</#{name}>}
 end

@@ -222,12 +222,9 @@ Contents]
 		text = "test[@a[test1[@b[...]@c[...]]]]"
 		tree = document_node
 		tree << macro_node(:test)
-		(tree&0) << p_node(0) 
 		a = a_node :a
 		a << macro_node(:test1)
 		(tree&0) << a
-		macro_01 = p_node 0 
-		(a&0) << macro_01
 		b = a_node :b
 		b << text_node('...')
 		(a&0) << b
@@ -268,6 +265,13 @@ Contents]
 		macro_0 = p_node(0) 
 		macro_0 << text_node("...")
 		(tree&2) << macro_0
+		parse_text(text).should == tree
+	end
+
+	it "should ignore parameters for empty macros" do
+		text = "toc[]"
+		tree = document_node
+		tree << macro_node(:toc)
 		parse_text(text).should == tree
 	end
 

@@ -231,6 +231,13 @@ module Glyph
 			node[:parameters].each do |p|
 				node << p
 			end
+			empty_parameter = 
+				node.children.length == 1 && 
+				((node&0).children.length == 0 || 
+				 (node&0).children.length == 0 &&
+				 (node&0&0)[:type] == :text && 
+				 (node&0&0)[:value].blank?)
+			node.children.clear if empty_parameter
 			node.delete(:parameters)
 			node[:attributes].each do |a|
 				node << a

@@ -44,7 +44,7 @@ describe Glyph::Macro::Validators do
 
 	it "should validate XML attributes" do
 		language 'xml'
-		output_for("test[test @.test[test]]").should == "<test>test</test>"
+		output_for("test[test @.test[test]]").should == "<test>test </test>"
 	end
 
 end

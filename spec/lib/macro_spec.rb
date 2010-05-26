@@ -178,7 +178,7 @@ describe Glyph::Macro do
 				test2[@a[x[]]]
 			]
 		]}).parse
-		node = tree&1&1&1&0&1&1&0
+		node = tree&1&1&1&0&1&0&0
 		m = Glyph::Macro.new(node)
 		m.path.should == "test1/1/b/test2/@a/x"
 	end
