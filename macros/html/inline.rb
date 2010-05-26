@@ -3,20 +3,22 @@
 macro :anchor do 
 	min_parameters 1
 	max_parameters 2
-	ident, title = params
+	ident = param(0).strip
+	title = param(1).strip
 	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
 	bookmark :id => ident, :title => title
 	%{<a id="#{ident}">#{title}</a>}
 end
 
 macro :codeph do
-	%{<code>#{raw_value}</code>}
+	%{<code>#{value}</code>}
 end
 
 macro :link do
 	min_parameters 1
 	max_parameters 2
-	href, title = params
+	href = param(0).strip
+	title = param(1)
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
 		bmk = bookmark? anchor
@@ -31,7 +33,7 @@ macro :link do
 		end
 	end
 	title ||= href
-	%{<a href="#{href}">#{title}</a>}
+	%{<a href="#{href}">#{title.strip}</a>}
 end
 
 macro :fmi do
@@ -45,7 +47,7 @@ end
 
 macro :draftcomment do
 	if Glyph['document.draft'] then
-		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{raw_value}</span>}
+		%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>#{value}</span>}
 	else
 		""
 	end
@@ -53,10 +55,10 @@ end
 
 macro :todo do
 	min_parameters 1
-	todo = "[#{@source}] -- #{raw_value}"
+	todo = "[#{@source}] -- #{value.strip}"
 	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then
-	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{raw_value}</span>} 
+	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{value.strip}</span>} 
 	else
 		""
 	end

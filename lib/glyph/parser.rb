@@ -25,7 +25,6 @@ module Glyph
 				current_char = @input.string[@input.pos].chr
 				illegal_delimiter = current_char.match(/\]|\[/) rescue nil
 				error "Macro delimiter '#{current_char}' not escaped" if illegal_delimiter
-				error "Parsing was not completed"
 			end
 			@output
 		end
@@ -51,6 +50,7 @@ module Glyph
 				name = @input.matched
 				name.chop!
 				name.chop!
+				error "#{name}[...] - A macro cannot start with '@' or a digit." if name.match(/^[0-1@]/)
 				node = create_node({
 					:type => :macro, 
 					:name => name.to_sym, 
@@ -93,6 +93,7 @@ module Glyph
 			if @input.scan(/[^\[\]\|\\\s]+\[/) then
 				name = @input.matched
 				name.chop!
+				error "#{name}[...] - A macro cannot start with '@' or a digit." if name.match(/^[0-1@]/)
 				node = create_node({
 					:type => :macro, 
 					:escape => false, 
@@ -199,7 +200,7 @@ module Glyph
 			end
 			# No parameter found
 			if indices == [] then
-				node[:parameters][0] = create_node :type => :parameter, :name => :"|0|"
+				node[:parameters][0] = create_node :type => :parameter, :name => :"0"
 				node.children.each do |c|
 					node[:parameters][0] << c
 				end
@@ -208,7 +209,7 @@ module Glyph
 				current_index = 0
 				total_parameters = 0
 				save_parameter = lambda do |max_index|
-					parameter = create_node :type => :parameter, :name => "|#{total_parameters}|".to_sym
+					parameter = create_node :type => :parameter, :name => "#{total_parameters}".to_sym
 						total_parameters +=1
 					current_index.upto(max_index) do |index|
 						parameter << (node & index)

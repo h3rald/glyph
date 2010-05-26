@@ -24,7 +24,7 @@ describe Glyph::Parser do
 	end
 
 	def p_node(n)
-		{:type => :parameter, :name => :"|#{n}|"}.to_node
+		{:type => :parameter, :name => :"#{n}"}.to_node
 	end
 
 	def macro_node(name, options={})

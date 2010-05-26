@@ -4,11 +4,16 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 describe Glyph::Macro::Validators do
 
 	before do
+		create_project
 		Glyph.run! 'load:all'
 		Glyph.macro :validated_test do
 			validate("Invalid Macro"){	value == "valid" }
 			"Validated Test: #{value}"
 		end
+	end
+
+	after do
+		delete_project
 	end
 
 	it "should provide custom validation" do

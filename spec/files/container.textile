@@ -1,5 +1,5 @@
 section[
-header[Container section]
+	header[Container section]
 This is a test.
-@[included.textile]
+	include[included.textile]
 ]

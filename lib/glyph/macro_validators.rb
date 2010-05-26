@@ -61,7 +61,7 @@ module Glyph
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def max_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{params.length} given)", options) { params.length <= n }
+				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{raw_parameters.length} given)", options) { raw_parameters.length <= n }
 			end
 
 			# Ensures that the macro receives at least _n_ parameters.
@@ -69,7 +69,7 @@ module Glyph
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def min_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes at least #{n} parameter(s) (#{params.length} given)", options) { params.length >= n }
+				validate("Macro '#{@name}' takes at least #{n} parameter(s) (#{raw_parameters.length} given)", options) { raw_parameters.length >= n }
 			end
 
 			# Ensures that the macro receives exactly _n_ parameters.
@@ -77,14 +77,14 @@ module Glyph
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def exact_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{params.length} given)", options) { params.length == n }
+				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{raw_parameters.length} given)", options) { raw_parameters.length == n }
 			end
 
 			# Ensures that the macro receives no parameters.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def no_parameters(options={:level=>:error})
-				validate("Macro '#{@name}' takes no parameters (#{params.length} given)", options) { params.length == 0 }
+				validate("Macro '#{@name}' takes no parameters (#{raw_parameters.length} given)", options) { raw_parameters.length == 0 }
 			end
 
 		end

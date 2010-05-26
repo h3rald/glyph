@@ -13,7 +13,7 @@ describe Glyph::Macro do
 		@tree = create_tree @text 
 		@doc = create_doc @tree
 		@node = Glyph::Parser::SyntaxNode.new.from({:name => :test, :type=>:macro, :source => "--", :document => @doc})
-		@node << Glyph::Parser::SyntaxNode.new.from({:type => :parameter, :name => :"|0|"})
+		@node << Glyph::Parser::SyntaxNode.new.from({:type => :parameter, :name => :"0"})
 		(@node&0) << Glyph::Parser::SyntaxNode.new.from({:type => :text, :value => "Testing..."})
 		@macro = Glyph::Macro.new @node
 	end
@@ -127,14 +127,14 @@ describe Glyph::Macro do
 		syntaxnode = lambda do |hash|
 			Glyph::Parser::SyntaxNode.new.from hash
 		end
-		p0 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		p0 = syntaxnode.call :type => :parameter, :name => :"0"
 		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p00 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		p00 = syntaxnode.call :type => :parameter, :name => :"0"
 		(p0&0) << p00
 		p00 << syntaxnode.call(:type => :text, :value => "...")
-		p1 = syntaxnode.call :type => :parameter, :name => :"|1|"
+		p1 = syntaxnode.call :type => :parameter, :name => :"1"
 		p1 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p10 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		p10 = syntaxnode.call :type => :parameter, :name => :"0"
 		(p1&0) << p10
 		p10 << syntaxnode.call(:type => :text, :value => "---")
 		m.raw_parameters.should == [p0, p1]
@@ -154,12 +154,12 @@ describe Glyph::Macro do
 		end
 		p0 = syntaxnode.call :type => :attribute, :name => :a, :escape => false
 		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p00 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		p00 = syntaxnode.call :type => :parameter, :name => :"0"
 		(p0&0) << p00
 		p00 << syntaxnode.call(:type => :text, :value => "...")
 		p1 = syntaxnode.call :type => :attribute, :name => :b, :escape => false
 		p1 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p10 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		p10 = syntaxnode.call :type => :parameter, :name => :"0"
 		(p1&0) << p10
 		p10 << syntaxnode.call(:type => :text, :value => "---")
 		m.raw_attributes.should == {:a => p0, :b => p1}
@@ -168,6 +168,19 @@ describe Glyph::Macro do
 		m.attribute(:a).should == "<em>...</em>"
 		m.raw_attributes[:a][:value].should == "<em>...</em>"
 		m.raw_attributes[:b][:value].should == nil
+	end
+
+	it "should expose a path method to determine its location" do
+		tree = Glyph::Parser.new(%{
+		test1[
+			a[...]|
+			b[
+				test2[@a[x[]]]
+			]
+		]}).parse
+		node = tree&1&1&1&0&1&1&0
+		m = Glyph::Macro.new(node)
+		m.path.should == "test1/1/b/test2/@a/x"
 	end
 
 end

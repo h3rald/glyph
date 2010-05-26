@@ -19,14 +19,14 @@ end
 macro "snippet:" do
 	exact_parameters 2
 	ident, text = params
-	Glyph::SNIPPETS[ident.strip.to_sym] = text.strip
+	Glyph::SNIPPETS[ident.to_sym] = text
 	""
 end
 
 macro "macro:" do
 	exact_parameters 2
 	ident, code = params
-	Glyph.macro(ident.strip) do
+	Glyph.macro(ident) do
 		instance_eval code
 	end
 	""
@@ -53,7 +53,7 @@ macro :include do
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
 			macro_warning e.message, e
-			macro_todo "Correct errors in file '#{value}'"
+			macro_todo "Correct errors in file '#{value.strip}'"
 		end
 	else
 		macro_warning "File '#{value.strip}' no found."
@@ -62,7 +62,7 @@ macro :include do
 end
 
 macro :ruby do
-	res = Glyph.instance_eval(value.strip.gsub(/\\*([\[\]\|])/){$1})
+	res = Glyph.instance_eval(value.gsub(/\\*([\[\]\|])/){$1})
 	res.is_a?(Proc) ? "" : res
 end
 
@@ -76,8 +76,8 @@ end
 
 macro "config:" do
 	exact_parameters 2
-	setting,value = params
-	Glyph[setting.strip] = value.strip
+	setting, val = params
+	Glyph[setting.strip] = val.strip
 	nil
 end
 
@@ -86,68 +86,61 @@ macro :comment do
 end
 
 macro :escape do
-	value
+	value.strip
 end
 
+=begin
 macro :encode do
-	encode value
+	encode raw_value
 end
 
 macro :decode do
-	decode value
+	decode raw_value
 end
+=end
 
 macro :condition do
 	min_parameters 1
 	max_parameters 2
 	res = param(0)
-	puts res
-	if res.blank? || res == "false" then
-	 	"" 
-	else
-		param(1).strip
-	end
+	(res.blank? || res == "false") ? "" : param(1)
 end
 
 
 macro :eq do
 	min_parameters 1
 	max_parameters 2
-	a, b = params
-	res_a = interpret(a.to_s.strip) 
-	res_b = interpret(b.to_s.strip)
-	(res_a == res_b)	? true : nil
+	(param(0) == param(1))	? true : nil
 end
 
 macro :not do
 	max_parameters 1
-	v = interpret(value.strip)
+	v = param(0)
 	(v.blank? || v == "false") ? true : nil 
 end
 
 macro :and do
 	min_parameters 1
 	max_parameters 2
-	a, b = params
-	res_a = !interpret(a.to_s.strip).blank?
-	res_b = !interpret(b.to_s.strip).blank?
+	res_a = !param(0).blank?
+	res_b = !param(1).blank?
 	(res_a && res_b) ? true : nil
 end
 
 macro :or do
 	min_parameters 1
 	max_parameters 2
-	a, b = params
-	res_a = !interpret(a.to_s.strip).blank?
-	res_b = !interpret(b.to_s.strip).blank?
+	res_a = !param(0).blank?
+	res_b = !param(1).blank?
 	(res_a || res_b) ? true : nil
 end
 
 macro :match do
 	exact_parameters 2
-	val, regexp = params
-	macro_error "Invalid regular expression: #{regexp.strip}" unless regexp.strip.match /^\/.*\/[a-z]?$/
-	(interpret(val.strip).match(instance_eval(regexp.strip))) ? true : nil
+	val = param(0).strip
+	regexp = param(1).strip
+	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
+	val.match(instance_eval(regexp)) ? true : nil
 end
 
 macro_alias '--' => :comment
@@ -156,7 +149,6 @@ macro_alias '**' => :decode
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
 macro_alias '%:' => 'macro:'
-macro_alias '@' => :include
 macro_alias '%' => :ruby
 macro_alias '$' => :config
 macro_alias '$:' => 'config:'

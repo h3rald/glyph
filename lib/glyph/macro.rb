@@ -76,8 +76,24 @@ module Glyph
 		# @return [String] the macro path
 		def path
 			macros = []
-			@node.ascend {|n| macros << n[:name].to_s }
-			macros.reverse.join('/')
+			@node.ascend do |n|
+				case n[:type]
+				when :macro then
+					name = n[:name].to_s
+				when :parameter then
+					if n.parent.children.select{|node| node[:type] == :parameter}.length == 1 then
+						name = nil
+					else
+						name = n[:name].to_s
+					end
+				when :attribute then
+					name = "@#{n[:name]}"
+				else
+					name = nil
+				end
+				macros << name
+			end
+			macros.reverse.compact.join('/')
 		end
 		
 		# Returns a todo message to include in the document in case of errors.
@@ -136,6 +152,7 @@ module Glyph
 				context = {}
 				context[:source] = "#@name[...]"
 				context[:embedded] = true
+				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context
 				interpreter.parse
 				result = interpreter.document.output

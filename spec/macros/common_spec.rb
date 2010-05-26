@@ -27,8 +27,7 @@ describe "Macro:" do
 		# Check snippets with links
 		Glyph::SNIPPETS[:c] = "This is a link to something afterwards: =>[#other]"
 		text = "Test. &[c]. #[other|Test]."
-		interpret text
-		@p.document.output.should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
+		output_for(text).should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
 		# Check mutual inclusion
 		Glyph::SNIPPETS[:inc] = "Test &[inc]"
 		lambda {interpret("&[inc] test").document}.should raise_error(Glyph::MutualInclusionError)
@@ -73,9 +72,14 @@ describe "Macro:" do
 		@p.document.output.should == ""
 		Glyph['test_config'].should_not == true
 		# Condition satisfied...
-		interpret "?[%[!lite?]|--[%[ Glyph\\['test_config'\\] = true ]]]"
-		@p.document.output.should == ""
+		interpret "?[%[!lite?]|%[ Glyph\\['test_config'\\] = true ]]"
+		@p.document.output.should == "true"
 		Glyph['test_config'].should == true
+	end
+
+	it "comment" do
+		output_for("--[config:[some_random_setting|test]]").should == ""
+		Glyph[:some_random_setting].should == nil
 	end
 
 	it "include" do

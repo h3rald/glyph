@@ -77,7 +77,7 @@ module Glyph
 		def initialize(text, context={})
 			@context = context
 			@context.merge! :source => '--'
-			@parser = Glyph::Parser.new text, @context[:source]
+		@parser = Glyph::Parser.new text, @context[:source]
 			@text = text
 		end
 
