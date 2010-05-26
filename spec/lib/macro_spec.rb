@@ -109,9 +109,6 @@ describe Glyph::Macro do
 		Glyph.macro :test1 do
 			"test1: #{value}"
 		end
-		syntaxnode = lambda do |hash|
-			Glyph::Parser::SyntaxNode.new.from hash
-		end
 		node = Glyph::Parser.new("test[@a[test1[...]]test1[...]|test1[---]]").parse
 		m = Glyph::Macro.new(node&0)
 		m.parameters.should == ["test1: ...", "test1: ---"]
@@ -123,8 +120,54 @@ describe Glyph::Macro do
 		m.attribute(:b).should == nil
 	end
 
-	it "should not evaluate attributes unless specifically requested"
+	it "should not evaluate attributes unless specifically requested" do
+		define_em_macro
+		node = Glyph::Parser.new("par0[em[...]|em[---]]").parse
+		m = Glyph::Macro.new(node&0)
+		syntaxnode = lambda do |hash|
+			Glyph::Parser::SyntaxNode.new.from hash
+		end
+		p0 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
+		p00 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		(p0&0) << p00
+		p00 << syntaxnode.call(:type => :text, :value => "...")
+		p1 = syntaxnode.call :type => :parameter, :name => :"|1|"
+		p1 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
+		p10 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		(p1&0) << p10
+		p10 << syntaxnode.call(:type => :text, :value => "---")
+		m.raw_parameters.should == [p0, p1]
+		m.raw_parameters[0][:value].should == nil
+		m.raw_parameters[1][:value].should == nil
+		m.parameter(0).should == "<em>...</em>"
+		m.raw_parameters[0][:value].should == "<em>...</em>"
+		m.raw_parameters[1][:value].should == nil
+	end
 
-	it "should not evaluate parameters unless specifically requested"
+	it "should not evaluate parameters unless specifically requested" do
+		define_em_macro
+		node = Glyph::Parser.new("par0[@a[em[...]]@b[em[---]]]").parse
+		m = Glyph::Macro.new(node&0)
+		syntaxnode = lambda do |hash|
+			Glyph::Parser::SyntaxNode.new.from hash
+		end
+		p0 = syntaxnode.call :type => :attribute, :name => :a, :escape => false
+		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
+		p00 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		(p0&0) << p00
+		p00 << syntaxnode.call(:type => :text, :value => "...")
+		p1 = syntaxnode.call :type => :attribute, :name => :b, :escape => false
+		p1 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
+		p10 = syntaxnode.call :type => :parameter, :name => :"|0|"
+		(p1&0) << p10
+		p10 << syntaxnode.call(:type => :text, :value => "---")
+		m.raw_attributes.should == {:a => p0, :b => p1}
+		m.raw_attributes[:a][:value].should == nil
+		m.raw_attributes[:b][:value].should == nil
+		m.attribute(:a).should == "<em>...</em>"
+		m.raw_attributes[:a][:value].should == "<em>...</em>"
+		m.raw_attributes[:b][:value].should == nil
+	end
 
 end
