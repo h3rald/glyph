@@ -84,6 +84,7 @@ macro :style do
 end
 
 macro :toc do 
+=begin
 	no_parameters
 	link_header = lambda do |header|
 		%{<a href="##{header[:id]}">#{header[:title].gsub(/@(.+?)@/, '\1')}</a>}
@@ -118,6 +119,7 @@ macro :toc do
 </div>}
 	end
 	toc
+=end
 end
 
 # See:
