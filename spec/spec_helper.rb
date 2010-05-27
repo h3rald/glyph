@@ -75,7 +75,7 @@ end
 
 def define_em_macro
 	Glyph.macro :em do
-		%{<em>#{value.strip}</em>}
+		%{<em>#{value.to_s.strip}</em>}
 	end
 end
 

@@ -33,7 +33,7 @@ macro :link do
 		end
 	end
 	title ||= href
-	%{<a href="#{href}">#{title.strip}</a>}
+	%{<a href="#{href}">#{title.to_s.strip}</a>}
 end
 
 macro :fmi do

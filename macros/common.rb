@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :snippet do
+	no_mutual_inclusion_in 0	
 	ident = value.strip.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin

@@ -28,9 +28,6 @@ describe "Macro:" do
 		Glyph::SNIPPETS[:c] = "This is a link to something afterwards: =>[#other]"
 		text = "Test. &[c]. #[other|Test]."
 		output_for(text).should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
-		# Check mutual inclusion
-		Glyph::SNIPPETS[:inc] = "Test &[inc]"
-		lambda {interpret("&[inc] test").document}.should raise_error(Glyph::MutualInclusionError)
 	end
 
 	it "snippet:" do

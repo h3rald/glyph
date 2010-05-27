@@ -154,7 +154,8 @@ module Glyph
 				context[:embedded] = true
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context
-				interpreter.parse
+				subtree = interpreter.parse
+				@node << subtree
 				result = interpreter.document.output
 			end
 			result.gsub(/\\*([\[\]])/){"\\#$1"}

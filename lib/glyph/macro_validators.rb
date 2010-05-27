@@ -87,7 +87,31 @@ module Glyph
 				validate("Macro '#{@name}' takes no parameters (#{raw_parameters.length} given)", options) { raw_parameters.length == 0 }
 			end
 
+			def no_mutual_inclusion_in(arg)
+				check_type = arg.is_a?(Symbol) ? :attribute : :parameter
+				check_value = nil
+				found = @node.find_parent do |n|
+					if n[:type] == :macro && Glyph::MACROS[n[:name]] == Glyph::MACROS[@name] then
+						case check_type
+						when :attribute then
+							check_value = n.children.select do |node| 
+								node[:type] == :attribute && node[:name] == arg
+							end[0][:value] rescue nil
+							check_value == attr(arg) 
+						when :parameter then
+							check_value = n.children.select do |node| 
+								node[:type] == :parameter && node[:name] == :"#{arg}"
+							end[0][:value] rescue nil
+							check_value == param(arg) 
+						end
+					end
+				end
+				if found then
+					macro_error "Mutual Inclusion in #{check_type}(#{arg}): '#{check_value}'", Glyph::MutualInclusionError 
+				end
+			end
 		end
 
 	end
+
 end
