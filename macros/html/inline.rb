@@ -4,7 +4,7 @@ macro :anchor do
 	min_parameters 1
 	max_parameters 2
 	ident = param(0).strip
-	title = param(1).strip
+	title = param(1).strip rescue nil
 	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
 	bookmark :id => ident, :title => title
 	%{<a id="#{ident}">#{title}</a>}
@@ -18,7 +18,7 @@ macro :link do
 	min_parameters 1
 	max_parameters 2
 	href = param(0).strip
-	title = param(1)
+	title = param(1).strip rescue nil
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
 		bmk = bookmark? anchor
@@ -38,7 +38,8 @@ end
 
 macro :fmi do
 	exact_parameters 2, :level => :warning
-	topic, href = params
+	topic = param(0) .strip
+	href = param(1).strip
 	link = placeholder do |document| 
 		interpret "link[#{href}]"
 	end
@@ -54,7 +55,7 @@ macro :draftcomment do
 end
 
 macro :todo do
-	min_parameters 1
+	exact_parameters 1
 	todo = "[#{@source}] -- #{value.strip}"
 	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then

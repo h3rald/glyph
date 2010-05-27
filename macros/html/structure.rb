@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :section do 
-	exact_parameters 1, :level => :warning
+	exact_parameters 1
 %{<div class="#{@name}">
 #{value.strip}
 
@@ -11,9 +11,8 @@ end
 macro :header do
 	min_parameters 1
 	max_parameters 2
-	title = param(0)
-	h_id = param(1)
-	h_id = nil if h_id.blank?
+	title = param(0).strip
+	h_id = param(1).strip rescue nil
 	level = 1
 	@node.ascend do |n| 
 		if n[:type] == :macro && Glyph["system.structure.headers"].include?(n[:name]) then
@@ -29,7 +28,7 @@ macro :header do
 end
 
 macro :document do
-	exact_parameters 1, :level => :warning
+	exact_parameters 1
 	%{<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -39,7 +38,7 @@ macro :document do
 end
 
 macro :body do
-	exact_parameters 1, :level => :warning
+	exact_parameters 1
 	%{<body>
 #{value}
 
@@ -47,7 +46,7 @@ macro :body do
 end
 
 macro :head do
-	exact_parameters 1, :level => :warning
+	exact_parameters 1
 	%{<head>
 <title>#{Glyph["document.title"]}</title>
 <meta name="author" content="#{Glyph["document.author"]}" />
@@ -59,6 +58,7 @@ macro :head do
 end
 
 macro :style do 
+	exact_parameters 1
 	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value.strip}"
 	file = Pathname.new Glyph::HOME/'styles'/value.strip unless file.exist?
 	macro_error "Stylesheet '#{value.strip}' not found" unless file.exist?

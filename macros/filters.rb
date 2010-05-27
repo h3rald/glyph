@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 macro :textile do
-	exact_parameters 1, :level => :warning
+	exact_parameters 1
 	rc = nil
 	begin
 		require 'RedCloth'

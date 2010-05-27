@@ -2,16 +2,16 @@
 
 macro :note do
 	%{<div class="#{@name}">
-<span class="note-title">#{@name.to_s.capitalize}</span>#{value}
+<span class="note-title">#{@name.to_s.capitalize}</span>#{value.strip}
 
 </div>}
 end
 
 macro :box do
-	exact_parameters 2, :level => :warning
+	exact_parameters 2
 	%{<div class="box">
-<div class="box-title">#{param(0)}</div>
-#{params(1)}
+<div class="box-title">#{param(0).strip}</div>
+#{param(1).strip}
 
 </div>}
 end
@@ -22,7 +22,7 @@ macro :code do
 <div class="code">
 <pre>
 <code>
-#{value}
+#{value.strip}
 </code>
 </pre>
 </div>}
@@ -38,12 +38,12 @@ end
 macro :img do
 	min_parameters 1
 	max_parameters 3
-	image = params[0]
-	width = params[1]
+	image = param(0).strip
+	width = param(1).strip rescue nil
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
  	w = (width) ? "width=\"#{width}\"" : ''
-	height = params[2]
+	height = param(2).strip rescue nil
  	h = (height) ? "height=\"#{height}\"" : ''
 	Glyph.warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
 	%{<img src="#{dest_file}" #{w} #{h} alt="-"/>}
@@ -52,9 +52,8 @@ end
 macro :fig do
 	min_parameters 1
 	max_parameters 2
-	image = param(0)
-	caption = param(1) 
-	caption ||= nil
+	image = param(0).strip
+	caption = param(1).strip rescue nil
 	caption = %{<div class="caption">#{caption}</div>} if caption
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
@@ -90,28 +89,28 @@ end
 macro :table do
 	exact_parameters 1
 	%{<table>
-#{value}
+#{value.strip}
 </table>}
 end
 
 macro :tr do
 	exact_parameters 1, :level => :warning
 	%{<tr>
-#{value}	
+#{value.strip}	
 </tr>}
 end
 
 macro :td do
 	exact_parameters 1, :level => :warning
 	%{<td>
-#{value}
+#{value.strip}
 
 </td>}
 end
 
 macro :th do
 	exact_parameters 1, :level => :warning
-	%{<th>#{value}</th>}
+	%{<th>#{value.strip}</th>}
 end
 
 macro_alias :important => :note
