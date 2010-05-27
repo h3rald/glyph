@@ -115,9 +115,9 @@ module Glyph
 			src = @node[:source_name]
 			src ||= @node[:source]
 			src ||= "--"
-			message = "#{msg}\n -> source: #{src}\n -> path: #{path}"
+			message = "#{msg}\n   source: #{src}\n -> path: #{path}"
 			@node[:document].errors << message
-			message += "\n -> value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}" if Glyph.debug?
+			message += "\n   value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}" if Glyph.debug?
 			raise klass, message
 		end
 
@@ -129,9 +129,9 @@ module Glyph
 			src = @node[:source_name]
 			src ||= @node[:source]
 			src ||= "--"
-			message = "#{msg}\n -> source: #{src}\n -> path: #{path}"
+			message = "#{msg}\n   source: #{src}\n -> path: #{path}"
 			if Glyph.debug? then
-				message << %{\n -> value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}} 
+				message << %{\n   value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}} 
 				if e then
 					message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
 					message << "\n"+e.backtrace.join("\n")

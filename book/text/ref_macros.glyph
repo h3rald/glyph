@@ -1,4 +1,4 @@
-section[header[Common Macros]
+﻿section[header[Common Macros]
 
 ref_macro[and|
 Conditional @and@ operator, to be used with the %>[condition].
@@ -79,7 +79,7 @@ ref_macro[include|
 Evaluates to the contents of a text file stored in the @text/@ directory referenced by its value. If &[filter_by_ext], filters the contents of the file using the =>[#f_macros|filter macro] corresponding to the file extension.
 
 aliases[@]
-example[=@[introduction.textile]=]
+example[=include[introduction.textile]=]
 ]
 
 ref_macro[match|

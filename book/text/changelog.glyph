@@ -1,8 +1,8 @@
 %[=
 macro :issue do
 	exact_parameters 2
-	ident, desc = @params
-	encode %{
+	ident, desc = params
+	interpret %{
 		tr[
 			td[\=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
 			td[textile[#{desc}]]
@@ -13,14 +13,14 @@ end
 macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
 	total = @node.children.length
-	encode %{
+	interpret %{
 		section[header[#{total} #{@name.to_s.capitalize} #{verb}]
 			table[
 				tr[
 					th[ID]
 					th[Description]
 				]
-				#@value
+				##{value}
 			]
 		]
 	}
@@ -28,10 +28,10 @@ end
 
 macro :release do
 	exact_parameters 3
-	number, date, contents = @params
+	number, date, contents = params
 	interpret %{
 		section[header[v#{number} &ndash; #{date}]
-			#{decode contents}
+			#{contents}
 		]
 	}
 end
@@ -39,12 +39,11 @@ end
 
 macro_alias :bugs => :features
 
-=]--[
-	?[%[lite?]|*[=
-			%:[%>|"#@value macro"]
-			%:[#>|"#@value command"]
-		=]
-	]
+=]
+?[%[lite?]|*[=
+		%:[%>|"#@value macro"]
+		%:[#>|"#@value command"]
+	=]
 ]
 release[0.2.0|May 9th 2010|
 	features[

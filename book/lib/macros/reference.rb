@@ -6,7 +6,7 @@ macro :error_table do
 				<th style="width:30%">Error Message</th>
 				<th>Description</th>
 			</tr>
-			#{raw_value}
+			#{value}
 		</table>
 	}
 end
@@ -15,23 +15,23 @@ macro :ref_error do
 	error, description = params
 	%{
 		<tr>
-			<td>#{error}</td>
-			<td>#{description}</td>
+			<td>#{error.strip}</td>
+			<td>#{description.strip}</td>
 		</tr>
 	}
 end
 
 macro :"%>" do
-	interpret "=>[#m_#{raw_value.gsub(/[^a-z0-1_-]/, '_')}|##{raw_value}] macro"
+	interpret "=>[#m_#{value.strip.gsub(/[^a-z0-1_-]/, '_')}|##{value.strip}] macro"
 end
 
 macro :"#>" do
-	interpret "=>[#c_#{raw_value}|#{raw_value}] command"
+	interpret "=>[#c_#{value.strip}|#{value.strip}] command"
 end
 
 macro :"$>" do
-	val = raw_value.gsub /\./, "_"
-	interpret "=>[#s_#{val}|#{raw_value}] setting"
+	val = value.strip.gsub /\./, "_"
+	interpret "=>[#s_#{val}|#{value.strip}] setting"
 end
 
 macro :default do
@@ -47,14 +47,15 @@ macro :"parameters" do
 				<th style="width:30%">#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-2]}</th>
 				<th>Description</th>
 			</tr>
-#{raw_value}
+#{value.strip}
 		</table>
 		]
 	}
 end
 
 macro :option do
-	ident, desc = params
+	ident = param(0).strip
+	desc = param(1).strip
 	%{
 		<tr>
 			<td><notextile>-#{ident[0..0]} (--#{ident})</notextile></td>
@@ -66,26 +67,27 @@ macro :option do
 end
 
 macro :values do
-	%{*Possible Values:* @#{value}@}
+	%{*Possible Values:* @#{value.strip}@}
 end
 
 macro :example do
-	%{*Example:* <code>#{value}</code>}
+	%{*Example:* <code>#{value.strip}</code>}
 end
 
 macro :examples do
 	%{
 *Examples:* 
-#{value.split("\n").map{|i| "@#{i}@\n"}.to_s}
+#{value.strip.split("\n").map{|i| "@#{i}@\n"}.to_s}
 	}
 end
 
 macro :aliases do
-	%{*Aliases:* @#{value}@}
+	%{*Aliases:* @#{value.strip}@}
 end
 
 macro :ref_macro do
-	m_name, m_value = params
+	m_name = param(0).strip
+ 	m_value = param(1).strip
 	interpret %{
 	section[header[@#{m_name}@|m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
 #{m_value}
@@ -94,7 +96,8 @@ macro :ref_macro do
 end
 
 macro :ref_config do
-	m_name, m_value = params
+	m_name = param(0).strip
+	m_value = param(1).strip
 	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
 	default = "nil" if default.blank?
 	interpret %{tr[
@@ -115,7 +118,7 @@ macro :config_table do
 				th[Description]
 				th[Default (YAML)]
 			]
-			#{raw_value}
+			#{value.strip}
 		]}
 end
 

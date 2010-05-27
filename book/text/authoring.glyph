@@ -1,4 +1,4 @@
-section[header[Text Editing]
+﻿section[header[Text Editing]
 
 One of the main purposes of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with &[markups].
 
@@ -156,7 +156,7 @@ section[header[Including Files and Snippets|incl]
 
 If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an %>[include] (aliased by codeph[@]) that can be used to include the contents of any file within the @text/@ directory:
 
-codeph[=@[introduction.textile]=]
+codeph[=include[introduction.textile]=]
 
 The macro call above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
 

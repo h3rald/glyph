@@ -31,7 +31,6 @@ begin
 		s.files.include "book/**/*"
 		s.add_dependency 'gli', '>= 0.3.1' # Command line interface
 		s.add_dependency 'extlib', '>= 0.9.12' # Extension methods
-		s.add_dependency 'treetop', '>= 0.4.3' # Glyph Language Parser
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks
 		s.add_development_dependency 'rspec', '>= 1.1.11' # Test suite
 		s.add_development_dependency 'yard', '>= 1.5.4' # Documentation suite
@@ -41,7 +40,6 @@ begin
 		s.add_development_dependency 'RedCloth', ">= 4.2.3" # Textile filter
 		s.add_development_dependency 'bluecloth', ">= 2.0.7" # Markdown filter
 		s.add_development_dependency 'coderay', ">= 0.9.3" # Syntax Highlighting
-		s.add_development_dependency 'ruby-prof', ">= 0.8.1" # Code profiling
 	end
 	Jeweler::GemcutterTasks.new
 rescue LoadError
