@@ -25,7 +25,7 @@ describe Glyph::Macro::Validators do
 		# exact
 		lambda { interpret("table[]").document.output }.should raise_error Glyph::MacroError
 		# none
-		lambda { interpret("toc[test]").document.output }.should raise_error Glyph::MacroError
+		lambda { interpret("title[test]").document.output }.should raise_error Glyph::MacroError
 		# min
 		lambda { interpret("img[]").document.output }.should raise_error Glyph::MacroError
 		# max
@@ -47,7 +47,7 @@ describe Glyph::Macro::Validators do
 
 	it "should validate XML attributes" do
 		language 'xml'
-		output_for("test[test @.test[test]]").should == "<test>test </test>"
+		output_for("test[test @.test[test]]").should == "<test>test</test>"
 	end
 
 end

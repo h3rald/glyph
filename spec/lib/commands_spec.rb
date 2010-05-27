@@ -167,7 +167,7 @@ describe "glyph" do
 
 	it "[compile] should finalize the document in case of errors in included files" do
 		create_project
-		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\n@[errors.glyph]\n@[syntax_error.glyph]]"
+		file_write Glyph::PROJECT/'document.glyph', "section[header[Test]\ninclude[errors.glyph]\ninclude[syntax_error.glyph]]"
 		file_write Glyph::PROJECT/'text/errors.glyph', "not[a|b]"
 		file_write Glyph::PROJECT/'text/syntax_error.glyph', "$[a"
 		err = "Document cannot be finalized due to previous errors"
