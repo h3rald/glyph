@@ -12,7 +12,7 @@ describe "Filter Macros" do
 	after do
 		delete_project
 	end
-	
+
 	it "should filter textile input" do
 		text = "textile[This is a _TEST_(TM).]"
 		interpret text
@@ -34,9 +34,42 @@ describe "Filter Macros" do
 - item 3
 
 etc.]"
-		interpret text
-		@p.document.output.gsub(/\n|\t/, '').should == 
-			"<p>This is a test:</p><ul><li>item 1</li><li>item 2</li><li>item 3</li></ul><p>etc.</p>"
+interpret text
+@p.document.output.gsub(/\n|\t/, '').should == 
+	"<p>This is a test:</p><ul><li>item 1</li><li>item 2</li><li>item 3</li></ul><p>etc.</p>"
 	end
+
+	it "highlight" do
+		cr = false
+		uv = false
+		begin
+			require 'coderay'
+			cr = true
+		rescue Exception
+		end
+		begin
+			require 'uv'
+			uv = true
+		rescue Exception
+		end
+		code = %{def test_method(a, b)
+				puts a+b
+			end}
+			cr_result = %{<div class=\"CodeRay\"> <div class=\"code\"><pre><span class=\"r\">def</span> 
+			<span class=\"fu\">test_method</span>(a, b) puts a+b <span class=\"r\">end</span></pre></div> </div>}
+			uv_result = %{<pre class=\"iplastic\"><span class=\"Keyword\">def</span> 
+			<span class=\"FunctionName\">test_method</span>(<span class=\"Arguments\">a<span class=\"Arguments\">,</span> b</span>) 
+			puts a<span class=\"Keyword\">+</span>b <span class=\"Keyword\">end</span> </pre>}
+			Glyph['highlighters.ultraviolet.theme'] = 'iplastic'
+			check = lambda do |hl, result|
+				Glyph["highlighters.current"] = hl
+				Glyph.debug_mode = true
+				interpret("highlight[=ruby|\n#{code}=]")
+				@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
+			end
+			check.call 'ultraviolet', uv_result if uv
+			check.call 'coderay', cr_result if cr
+	end
+
 
 end	

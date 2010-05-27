@@ -19,14 +19,16 @@ end
 
 macro "snippet:" do
 	exact_parameters 2
-	ident, text = params
+	ident = param(0).strip
+	text = param(1).strip
 	Glyph::SNIPPETS[ident.to_sym] = text
 	""
 end
 
 macro "macro:" do
 	exact_parameters 2
-	ident, code = params
+	ident = param(0).strip
+	code = param(1).strip
 	Glyph.macro(ident) do
 		instance_eval code
 	end
@@ -34,14 +36,17 @@ macro "macro:" do
 end
 
 macro :include do
+	exact_parameters 1
+	no_mutual_inclusion_in 0
+	v = value.strip
 	macro_error "Macro not available when compiling a single file." if Glyph.lite?
 	file = nil
 	(Glyph::PROJECT/"text").find do |f|
-		file = f if f.to_s.match /\/#{value.strip}$/
+		file = f if f.to_s.match /\/#{v}$/
 	end	
 	if file then
 		contents = file_load file
-		ext = value.strip.match(/\.(.*)$/)[1]
+		ext = v.match(/\.(.*)$/)[1]
 		if Glyph["filters.by_file_extension"] && ext != 'glyph' then
 			if Glyph::MACROS.include?(ext.to_sym) then
 				contents = "#{ext}[#{contents}]"
@@ -63,22 +68,24 @@ macro :include do
 end
 
 macro :ruby do
-	res = Glyph.instance_eval(value.gsub(/\\*([\[\]\|])/){$1})
+	max_parameters 1
+	res = Glyph.instance_eval(value.strip.gsub(/\\*([\[\]\|])/){$1})
 	res.is_a?(Proc) ? "" : res
 end
 
 macro :config do
-	if value.strip.match /^system\..+/ then
-		macro_warning "Cannot reset '#{value.strip}' setting (system use only)."
-	else
-		Glyph[value.strip]
-	end
+	Glyph[value.strip]
 end
 
 macro "config:" do
-	exact_parameters 2
-	setting, val = params
-	Glyph[setting.strip] = val.strip
+	max_parameters 2
+	setting = param(0).strip
+	v = param(1).strip rescue nil
+	if setting.match /^system\..+/ then
+		macro_warning "Cannot reset '#{setting}' setting (system use only)."
+	else
+		Glyph[setting] = v
+	end
 	nil
 end
 
@@ -104,19 +111,19 @@ macro :condition do
 	min_parameters 1
 	max_parameters 2
 	res = param(0)
-	(res.blank? || res == "false") ? "" : param(1)
+	(res.blank? || res == "false") ? "" : param(1).to_s.strip
 end
 
 
 macro :eq do
 	min_parameters 1
 	max_parameters 2
-	(param(0) == param(1))	? true : nil
+	(param(0).to_s.strip == param(1).to_s.strip)	? true : nil
 end
 
 macro :not do
 	max_parameters 1
-	v = param(0)
+	v = param(0).to_s.strip
 	(v.blank? || v == "false") ? true : nil 
 end
 
@@ -138,8 +145,8 @@ end
 
 macro :match do
 	exact_parameters 2
-	val = param(0).strip
-	regexp = param(1).strip
+	val = param(0).to_s.strip
+	regexp = param(1).to_s.strip
 	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
 	val.match(instance_eval(regexp)) ? true : nil
 end

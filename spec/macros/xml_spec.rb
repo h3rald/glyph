@@ -52,9 +52,4 @@ describe "Glyph Language" do
 		output_for("span[@class[test]@.[test]test]").should == %{<span class="test">test</span>}
 	end
 
-	it "should assign default attribute names to parameters passed by position" do
-		language('xml')
-		output_for("test[a|b|@class[test] test]").should == %{<test class="test" p1="a" p2="b">test</test>}
-	end
-
 end	
