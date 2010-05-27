@@ -51,7 +51,7 @@ Benchmark.bm(30) do |x|
 	sep
 	puts " => Core Classes"
 	rep(x, "Glyph::Interpreter.new.parse") {Glyph::Interpreter.new(text).parse}
-	rep(x, "GlyphLanguageParser.parse") {GlyphLanguageParser.new.parse(text)}
+	rep(x, "Glyph::Parser.new(text).parse") {Glyph::Parser.new(text).parse}
 	sep
 	puts " => Macro Set: Glyph"
 	sep
