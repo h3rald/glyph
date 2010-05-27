@@ -1,2 +1,2 @@
-@[container.textile]
-@[markdown.markdown]
+include[container.textile]
+include[markdown.markdown]
