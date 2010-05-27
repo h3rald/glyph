@@ -114,7 +114,6 @@ macro :highlight do
 		rescue LoadError
 			macro_error "UltraViolet highlighter not installed. Please run: gem install ultraviolet"
 		rescue Exception => e
-			puts e.backtrace
 			macro_error e.message
 		end
 	else

@@ -14,7 +14,7 @@ module Glyph
 		def initialize(node)
 			@node = node
 			@name = @node[:name]
-			@source = @node[:source]
+			@source = @node[:source] || "--"
 		end
 
 		def raw_attributes
@@ -112,12 +112,9 @@ module Glyph
 		# @param [String] msg the message to print
 		# @raise [Glyph::MacroError]
 		def macro_error(msg, klass=Glyph::MacroError)
-			src = @node[:source_name]
-			src ||= @node[:source]
-			src ||= "--"
-			message = "#{msg}\n   source: #{src}\n -> path: #{path}"
+			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
 			@node[:document].errors << message
-			message += "\n   value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}" if Glyph.debug?
+			message += "\n    value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}" if Glyph.debug?
 			raise klass, message
 		end
 
@@ -126,12 +123,9 @@ module Glyph
 		# @param [Exception] e the exception raised
 		# @since 0.2.0
 		def macro_warning(msg, e=nil)
-			src = @node[:source_name]
-			src ||= @node[:source]
-			src ||= "--"
-			message = "#{msg}\n   source: #{src}\n -> path: #{path}"
+			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
 			if Glyph.debug? then
-				message << %{\n   value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}} 
+				message << %{\n    value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}} 
 				if e then
 					message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
 					message << "\n"+e.backtrace.join("\n")
@@ -150,7 +144,7 @@ module Glyph
 				result = string 
 			else
 				context = {}
-				context[:source] = "#@name[...]"
+				context[:source] = @node[:source] || "#@name[...]"
 				context[:embedded] = true
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context

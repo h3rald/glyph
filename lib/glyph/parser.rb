@@ -8,9 +8,9 @@ module Glyph
 		class SyntaxNode < Node; end
 
 		def initialize(text, source_name="--")
+			@source_name = source_name || "--"
 			@input = StringScanner.new text
-			@output = create_node :type => :document, :name => source_name.to_sym
-			@source_name = source_name
+			@output = create_node :type => :document, :name => @source_name.to_sym
 			@current_macro = nil
 			@current_attribute = nil
 		end

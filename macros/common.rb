@@ -5,6 +5,7 @@ macro :snippet do
 	ident = value.strip.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
+			@node[:source] = "#{@name}[#{ident}]"
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError
@@ -55,6 +56,7 @@ macro :include do
 			end
 		end	
 		begin 
+			@node[:source] = "#{@name}[#{v}]"
 			interpret contents
 		rescue Exception => e
 			raise if e.is_a? Glyph::MutualInclusionError

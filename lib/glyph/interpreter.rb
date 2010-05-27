@@ -76,7 +76,6 @@ module Glyph
 		# @param [Hash] context the context to pass along when expanding macros
 		def initialize(text, context={})
 			@context = context
-			@context.merge! :source => '--'
 		@parser = Glyph::Parser.new text, @context[:source]
 			@text = text
 		end
