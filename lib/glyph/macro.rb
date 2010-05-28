@@ -90,16 +90,16 @@ module Glyph
 		def path
 			macros = []
 			@node.ascend do |n|
-				case n[:type]
-				when :macro then
+				case 
+				when n.is_a?(Glyph::MacroNode) then
 					name = n[:name].to_s
-				when :parameter then
-					if n.parent.children.select{|node| node[:type] == :parameter}.length == 1 then
+				when n.is_a?(Glyph::ParameterNode) then
+					if n.parent.parameters.length == 1 then
 						name = nil
 					else
 						name = n[:name].to_s
 					end
-				when :attribute then
+				when n.is_a?(Glyph::AttributeNode) then
 					name = "@#{n[:name]}"
 				else
 					name = nil

@@ -113,31 +113,29 @@ def filter(text)
 end
 
 def text_node(value, options={})
-	Glyph::TextNode.new.from({:type => :text, :value => value}.merge options)
+	Glyph::TextNode.new.from({:value => value}.merge options)
 end
 
 def escape_node(value, options={})
-	Glyph::EscapeNode.new.from({:type => :escape, :value => value, :escaped => true})
+	Glyph::EscapeNode.new.from({:value => value, :escaped => true})
 end
 
 def document_node
-	Glyph::DocumentNode.new.from({:type => :document, :name => "--".to_sym})
+	Glyph::DocumentNode.new.from({:name => "--".to_sym})
 end
 
 def a_node(name, options={})
 	Glyph::AttributeNode.new.from({
-		:type => :attribute, 
 		:name => :"#{name}", 
 		:escape => false}.merge(options))
 end
 
 def p_node(n)
-	Glyph::ParameterNode.new.from({:type => :parameter, :name => :"#{n}"})
+	Glyph::ParameterNode.new.from({:name => :"#{n}"})
 end
 
 def macro_node(name, options={})
 	Glyph::MacroNode.new.from({
-		:type => :macro, 
 		:name => name.to_sym, 
 		:escape => false
 	}.merge options)

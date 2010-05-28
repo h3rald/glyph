@@ -12,9 +12,9 @@ describe Glyph::Macro do
 		@text = "test[section[header[Test!|test]]]"
 		@tree = create_tree @text 
 		@doc = create_doc @tree
-		@node = Glyph::MacroNode.new.from({:name => :test, :type=>:macro, :source => "--", :document => @doc})
-		@node << Glyph::ParameterNode.new.from({:type => :parameter, :name => :"0"})
-		(@node&0) << Glyph::TextNode.new.from({:type => :text, :value => "Testing..."})
+		@node = Glyph::MacroNode.new.from({:name => :test, :source => "--", :document => @doc})
+		@node << Glyph::ParameterNode.new.from({:name => :"0"})
+		(@node&0) << Glyph::TextNode.new.from({:value => "Testing..."})
 		@macro = Glyph::Macro.new @node
 	end
 
@@ -129,16 +129,16 @@ describe Glyph::Macro do
 		syntaxnode = lambda do |hash|
 			Glyph::SyntaxNode.new.from hash
 		end
-		p0 = syntaxnode.call :type => :parameter, :name => :"0"
-		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p00 = syntaxnode.call :type => :parameter, :name => :"0"
+		p0 = p_node 0
+		p0 << macro_node(:em, :escape => false)
+		p00 = p_node 0
 		(p0&0) << p00
-		p00 << syntaxnode.call(:type => :text, :value => "...")
-		p1 = syntaxnode.call :type => :parameter, :name => :"1"
-		p1 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p10 = syntaxnode.call :type => :parameter, :name => :"0"
+		p00 << text_node("...")
+		p1 = p_node 1
+		p1 << macro_node(:em, :escape => false)
+		p10 = p_node 0
 		(p1&0) << p10
-		p10 << syntaxnode.call(:type => :text, :value => "---")
+		p10 << text_node("---")
 		m.raw_parameters.should == [p0, p1]
 		m.raw_parameters[0][:value].should == nil
 		m.raw_parameters[1][:value].should == nil
@@ -154,16 +154,16 @@ describe Glyph::Macro do
 		syntaxnode = lambda do |hash|
 			Glyph::SyntaxNode.new.from hash
 		end
-		p0 = syntaxnode.call :type => :attribute, :name => :a, :escape => false
-		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p00 = syntaxnode.call :type => :parameter, :name => :"0"
+		p0 = a_node :a, :escape => false
+		p0 << macro_node(:em, :escape => false)
+		p00 = p_node 0
 		(p0&0) << p00
-		p00 << syntaxnode.call(:type => :text, :value => "...")
-		p1 = syntaxnode.call :type => :attribute, :name => :b, :escape => false
-		p1 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
-		p10 = syntaxnode.call :type => :parameter, :name => :"0"
+		p00 << text_node("...")
+		p1 = a_node :b, :escape => false
+		p1 << macro_node(:em, :escape => false)
+		p10 = p_node 0
 		(p1&0) << p10
-		p10 << syntaxnode.call(:type => :text, :value => "---")
+		p10 << text_node("---")
 		m.raw_attributes.should == [p0, p1]
 		m.raw_attribute(:a)[:value].should == nil
 		m.raw_attribute(:b)[:value].should == nil

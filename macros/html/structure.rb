@@ -15,7 +15,7 @@ macro :header do
 	h_id = param(1).strip rescue nil
 	level = 1
 	@node.ascend do |n| 
-		if n[:type] == :macro && Glyph["system.structure.headers"].include?(n[:name]) then
+		if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
 			level+=1
 		end
 	end

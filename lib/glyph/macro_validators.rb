@@ -91,16 +91,16 @@ module Glyph
 				check_type = arg.is_a?(Symbol) ? :attribute : :parameter
 				check_value = nil
 				found = @node.find_parent do |n|
-					if n[:type] == :macro && Glyph::MACROS[n[:name]] == Glyph::MACROS[@name] then
+					if n.is_a?(Glyph::MacroNode) && Glyph::MACROS[n[:name]] == Glyph::MACROS[@name] then
 						case check_type
 						when :attribute then
 							check_value = n.children.select do |node| 
-								node[:type] == :attribute && node[:name] == arg
+								node.is_a?(Glyph::AttributeNode) && node[:name] == arg
 							end[0][:value] rescue nil
 							check_value == attr(arg) 
 						when :parameter then
 							check_value = n.children.select do |node| 
-								node[:type] == :parameter && node[:name] == :"#{arg}"
+								node.is_a?(Glyph::ParameterNode) && node[:name] == :"#{arg}"
 							end[0][:value] rescue nil
 							check_value == param(arg) 
 						end

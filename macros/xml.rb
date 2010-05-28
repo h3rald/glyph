@@ -5,7 +5,7 @@ macro "|xml|" do
 	valid_xml_element
 	name = @node[:element]
 	attributes # evaluate attributes
-	xml_attributes = @node.children.select{|node| node[:type] == :attribute}.
+	xml_attributes = @node.children.select{|node| node.is_a?(Glyph::AttributeNode)}.
 		map do |e| 
 			if valid_xml_attribute(e[:name]) then
 				%|#{e[:name]}="#{e[:value]}"|

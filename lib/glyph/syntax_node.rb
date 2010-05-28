@@ -11,7 +11,7 @@ module Glyph
 		end
 
 		def parent_macro
-			find_parent{|n| n[:type] == :macro}
+			find_parent{|n| n.is_a?(MacroNode)}
 		end
 
 	end
