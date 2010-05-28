@@ -66,6 +66,16 @@ describe Glyph::Macro do
 		@macro.expand.should == "Test: Testing..."
 	end
 
+	it "should support rewriting" do
+		Glyph.rewrite :rw1 do
+		 	%{em[em[#{value}]]}
+		end
+		Glyph.rewrite :rw2 do
+		 	%{rw1[---#{value}---]}
+		end
+		output_for("rw2[test]").should == "<em></em>---test---</rm></em>"
+	end
+
 	it "should encode and decode text" 
 =begin
 	do

@@ -175,6 +175,12 @@ module Glyph
 		MACROS[name.to_sym] = block
 	end
 
+	def self.rewrite(name, &block)
+		MACROS[name.to_sym] = lambda do
+			rewrite &block
+		end
+	end
+
 	# Defines an alias for an existing macro
 	# @param [Hash] text the single-key hash defining the alias
 	# @example

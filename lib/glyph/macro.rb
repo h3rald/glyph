@@ -31,6 +31,14 @@ module Glyph
 			@raw_parameters = @node.children.select{|node| node[:type] == :parameter}
 		end
 
+		def raw_parameter(n)
+			raw_parameters[n]
+		end
+
+		def raw_attribute(name)
+			raw_attributes.select{|n| b[:name] == name}
+		end
+
 		def attribute(name)
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
 			return nil unless raw_attributes[name]
@@ -67,9 +75,17 @@ module Glyph
 		alias param parameter
 		alias attrs attributes
 		alias attr attribute
+		alias raw_params raw_parameters
+		alias raw_param raw_parameter
+		alias raw_attrs raw_attributes
+		alias raw_attr raw_attribute
 
 		def value
 			parameter(0)
+		end
+
+		def raw_value
+			raw_parameter(0)
 		end
 
 		# Returns the "path" to the macro within the syntax tree.
