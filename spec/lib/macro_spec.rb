@@ -12,9 +12,9 @@ describe Glyph::Macro do
 		@text = "test[section[header[Test!|test]]]"
 		@tree = create_tree @text 
 		@doc = create_doc @tree
-		@node = Glyph::Parser::SyntaxNode.new.from({:name => :test, :type=>:macro, :source => "--", :document => @doc})
-		@node << Glyph::Parser::SyntaxNode.new.from({:type => :parameter, :name => :"0"})
-		(@node&0) << Glyph::Parser::SyntaxNode.new.from({:type => :text, :value => "Testing..."})
+		@node = Glyph::MacroNode.new.from({:name => :test, :type=>:macro, :source => "--", :document => @doc})
+		@node << Glyph::ParameterNode.new.from({:type => :parameter, :name => :"0"})
+		(@node&0) << Glyph::TextNode.new.from({:type => :text, :value => "Testing..."})
 		@macro = Glyph::Macro.new @node
 	end
 
@@ -62,22 +62,14 @@ describe Glyph::Macro do
 		@doc.placeholders.length.should == 1
 	end
 
-	it "should execute" do
+	it "should expand" do
 		@macro.expand.should == "Test: Testing..."
 	end
 
-	it "should support rewriting" do
-		Glyph.rewrite :rw1 do
-		 	%{em[em[#{value}]]}
-		end
-		Glyph.rewrite :rw2 do
-		 	%{rw1[---#{value}---]}
-		end
-		output_for("rw2[test]").should == "<em></em>---test---</rm></em>"
-	end
+	it "should support rewriting"
 
-	it "should encode and decode text" 
 =begin
+	it "should encode and decode text" 
 	do
 		Glyph.run! "load:all"
 		Glyph.macro :sec_1 do
@@ -135,7 +127,7 @@ describe Glyph::Macro do
 		node = Glyph::Parser.new("par0[em[...]|em[---]]").parse
 		m = Glyph::Macro.new(node&0)
 		syntaxnode = lambda do |hash|
-			Glyph::Parser::SyntaxNode.new.from hash
+			Glyph::SyntaxNode.new.from hash
 		end
 		p0 = syntaxnode.call :type => :parameter, :name => :"0"
 		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
@@ -160,7 +152,7 @@ describe Glyph::Macro do
 		node = Glyph::Parser.new("par0[@a[em[...]]@b[em[---]]]").parse
 		m = Glyph::Macro.new(node&0)
 		syntaxnode = lambda do |hash|
-			Glyph::Parser::SyntaxNode.new.from hash
+			Glyph::SyntaxNode.new.from hash
 		end
 		p0 = syntaxnode.call :type => :attribute, :name => :a, :escape => false
 		p0 << syntaxnode.call(:type => :macro, :name => :em, :escape => false)
@@ -172,12 +164,12 @@ describe Glyph::Macro do
 		p10 = syntaxnode.call :type => :parameter, :name => :"0"
 		(p1&0) << p10
 		p10 << syntaxnode.call(:type => :text, :value => "---")
-		m.raw_attributes.should == {:a => p0, :b => p1}
-		m.raw_attributes[:a][:value].should == nil
-		m.raw_attributes[:b][:value].should == nil
+		m.raw_attributes.should == [p0, p1]
+		m.raw_attribute(:a)[:value].should == nil
+		m.raw_attribute(:b)[:value].should == nil
 		m.attribute(:a).should == "<em>...</em>"
-		m.raw_attributes[:a][:value].should == "<em>...</em>"
-		m.raw_attributes[:b][:value].should == nil
+		m.raw_attribute(:a)[:value].should == "<em>...</em>"
+		m.raw_attribute(:b)[:value].should == nil
 	end
 
 	it "should expose a path method to determine its location" do

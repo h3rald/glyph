@@ -20,15 +20,12 @@ module Glyph
 		def raw_attributes
 			return @raw_attributes if @raw_attributes
 			@raw_attributes = {}
-			@node.children.select{|node| node[:type] == :attribute}.each do |v|
-				@raw_attributes[v[:name]] = v
-			end
-			@raw_attributes
+			@raw_attributes = @node.attributes
 		end
 
 		def raw_parameters
 			return @raw_parameters if @raw_parameters
-			@raw_parameters = @node.children.select{|node| node[:type] == :parameter}
+			@raw_parameters = @node.parameters
 		end
 
 		def raw_parameter(n)
@@ -36,28 +33,28 @@ module Glyph
 		end
 
 		def raw_attribute(name)
-			raw_attributes.select{|n| b[:name] == name}
+			raw_attributes.select{|n| n[:name] == name}[0]
 		end
 
 		def attribute(name)
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
-			return nil unless raw_attributes[name]
+			return nil unless raw_attribute(name)
 			@attributes = {} unless @attributes
-			@attributes[name] = raw_attributes[name].evaluate(@node, :attrs => true)
+			@attributes[name] = raw_attribute(name).evaluate(@node, :attrs => true)
 		end
 
 		def parameter(n)
 			return @parameters[n] if @parameters && @parameters[n]
-			return nil unless raw_parameters[n]
+			return nil unless raw_parameter(n)
 			@parameters = Array.new(raw_parameters.length) unless @parameters
-			@parameters[n] = raw_parameters[n].evaluate(@node, :params => true)
+			@parameters[n] = raw_parameter(n).evaluate(@node, :params => true)
 		end
 
 		def attributes
 			return @attributes if @attributes
 			@attributes = {}
-			raw_attributes.each_pair do |key, value|
-				@attributes[key] = value.evaluate(@node, :attrs => true)
+			raw_attributes.each do |value|
+				@attributes[value[:name]] = value.evaluate(@node, :attrs => true)
 			end
 			@attributes
 		end

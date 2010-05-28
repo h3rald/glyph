@@ -3,38 +3,6 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe Glyph::Parser do
 
-
-	def text_node(value, options={})
-		{:type => :text, :value => value}.merge options
-	end
-
-	def escape_node(value, options={})
-		{:type => :escape, :value => value, :escaped => true}.merge options
-	end
-
-	def document_node
-		{:type => :document, :name => "--".to_sym}.to_node
-	end
-
-	def a_node(name, options={})
-		{
-			:type => :attribute, 
-			:name => :"#{name}", 
-			:escape => false}.merge(options).to_node
-	end
-
-	def p_node(n)
-		{:type => :parameter, :name => :"#{n}"}.to_node
-	end
-
-	def macro_node(name, options={})
-		{
-			:type => :macro, 
-			:name => name.to_sym, 
-			:escape => false
-		}.merge options
-	end
-
 	def parse_text(text)
 		Glyph::Parser.new(text).parse
 	end

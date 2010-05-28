@@ -40,7 +40,7 @@ def create_project
 end
 
 def delete_project_dir
- 	return unless	Glyph::PROJECT.exist?
+	return unless	Glyph::PROJECT.exist?
 	Glyph::PROJECT.children.each do |f|
 		FileUtils.rmtree f if f.directory? 
 		FileUtils.rm f if f.file?
@@ -110,4 +110,35 @@ end
 
 def filter(text)
 	Glyph.filter text
+end
+
+def text_node(value, options={})
+	Glyph::TextNode.new.from({:type => :text, :value => value}.merge options)
+end
+
+def escape_node(value, options={})
+	Glyph::EscapeNode.new.from({:type => :escape, :value => value, :escaped => true})
+end
+
+def document_node
+	Glyph::DocumentNode.new.from({:type => :document, :name => "--".to_sym})
+end
+
+def a_node(name, options={})
+	Glyph::AttributeNode.new.from({
+		:type => :attribute, 
+		:name => :"#{name}", 
+		:escape => false}.merge(options))
+end
+
+def p_node(n)
+	Glyph::ParameterNode.new.from({:type => :parameter, :name => :"#{n}"})
+end
+
+def macro_node(name, options={})
+	Glyph::MacroNode.new.from({
+		:type => :macro, 
+		:name => name.to_sym, 
+		:escape => false
+	}.merge options)
 end
