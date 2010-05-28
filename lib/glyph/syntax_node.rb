@@ -2,20 +2,11 @@ module Glyph
 
 	class SyntaxNode < Node
 
-		def evaluate(context, options={:attrs => false, :params => false})
-			case self[:type]
-			when :macro then
-				self[:value] = expand_macro(context)
-			when :attribute then
-				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(context) } if options[:attrs]
-			when :parameter then
-				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(context) } if options[:params]
-			when :document then
-				self[:value] = ""
-				self.children.each {|c| self[:value] << c.evaluate(context) }
-			end
+		def to_s
+			""
+		end
+
+		def evaluate(context, options={})
 			self[:value]
 		end
 
@@ -27,10 +18,12 @@ module Glyph
 
 	class DocumentNode < SyntaxNode
 
-		def to_s
-			""
+		def evaluate(context)
+			self[:value] = ""
+			self.children.each {|c| self[:value] << c.evaluate(context) }
+			self[:value]
 		end
-
+			
 	end
 
 	class MacroNode < SyntaxNode
@@ -38,6 +31,10 @@ module Glyph
 		def to_s
 			e = self[:escape] ? "=" : ""
 			"#{self[:name]}["+e+attributes.join+parameters.join("|")+e+"]"
+		end
+
+		def evaluate(context, options={})
+			self[:value] = expand(context)
 		end
 
 		def parameters
@@ -56,8 +53,8 @@ module Glyph
 			attributes.select{|n| n[:name] == name}[0]
 		end
 
-		def expand_macro(context)
-			set_xml_element	
+		def expand(context)
+			xml_element	
 			self.merge!({
 				:source => context[:source], 
 				:document => context[:document], 
@@ -67,7 +64,7 @@ module Glyph
 			Glyph::Macro.new(self).expand
 		end
 
-		def set_xml_element
+		def xml_element
 			known_macro = Glyph::MACROS.include? self[:name]
 			name = self[:name].to_s
 			element = nil
@@ -108,6 +105,12 @@ module Glyph
 			children.join
 		end
 
+		def evaluate(context, options={:params => false})
+			self[:value] = ""
+			self.children.each {|c| self[:value] << c.evaluate(context) } if options[:params]
+			self[:value]
+		end
+
 	end
 
 	class AttributeNode < SyntaxNode
@@ -115,6 +118,12 @@ module Glyph
 		def to_s
 			e = self[:escape] ? "=" : ""
 			"@#{self[:name]}["+e+children.join+e+"]"
+		end
+
+		def evaluate(context, options={:attrs => false})
+			self[:value] = ""
+			self.children.each {|c| self[:value] << c.evaluate(context) } if options[:attrs]
+			self[:value]
 		end
 
 	end
