@@ -7,6 +7,10 @@ describe Glyph do
 		Glyph.enable 'project:create'
 	end
 
+	after do
+		delete_project
+	end
+
 	it "should initialize a rake app and tasks" do
 		Rake.application.tasks.length.should > 0
 	end
@@ -31,6 +35,7 @@ describe Glyph do
 
 	it "should support macro aliases" do
 		define_ref_macro
+		define_em_macro
 		lambda { Glyph.macro_alias("->" => :ref)}.should_not raise_error
 		Glyph::MACROS[:"->"].should == Glyph::MACROS[:ref]
 		Glyph.macro_alias :em => :ref
@@ -92,9 +97,9 @@ describe Glyph do
 	end
 
 	it "should provide a compile method to compile files in lite mode" do
+		reset_quiet
 		file_copy Glyph::PROJECT/'../files/article.glyph', Glyph::PROJECT/'article.glyph'
 		lambda { Glyph.compile Glyph::PROJECT/'article.glyph' }.should_not raise_error
-		reset_quiet
 		(Glyph::PROJECT/'article.html').exist?.should == true
 	end
 

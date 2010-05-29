@@ -13,6 +13,7 @@ describe Glyph::Macro::Validators do
 	end
 
 	after do
+		reset_quiet
 		delete_project
 	end
 

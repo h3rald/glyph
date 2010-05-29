@@ -10,6 +10,7 @@ describe "Macro:" do
 
 	after do
 		Glyph.lite_mode = false
+		reset_quiet
 		delete_project
 	end
 
@@ -49,7 +50,7 @@ describe "Macro:" do
 				<meta name="author" content="#{Glyph["document.author"]}" />
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
-				<style type=\"text/css\">#main {  background-color: #0000ff; }</style>
+				<style type=\"text/css\">#main {  background-color: blue; }</style>
 			</head>
 		</html>
 		}.gsub(/\n|\t/, '')
@@ -65,7 +66,7 @@ describe "Macro:" do
 				<meta name="author" content="#{Glyph["document.author"]}" />
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
-				<style type=\"text/css\">#main {  background-color: #0000ff; }</style>
+				<style type=\"text/css\">#main {  background-color: blue; }</style>
 			</head>
 		</html>
 		}.gsub(/\n|\t/, '')

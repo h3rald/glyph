@@ -8,8 +8,8 @@ describe "Glyph Language" do
 	end
 
 	after do
-		Glyph.lite_mode = false
-		Glyph['language.set'] = 'glyph'
+		reset_quiet
+		language('glyph')
 		delete_project
 	end
 

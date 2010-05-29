@@ -11,6 +11,7 @@ describe Glyph::Interpreter do
 
 
 	after do
+		reset_quiet
 		delete_project
 	end
 

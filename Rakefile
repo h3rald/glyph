@@ -36,7 +36,7 @@ begin
 		s.add_development_dependency 'yard', '>= 1.5.4' # Documentation suite
 		s.add_development_dependency 'jeweler', '1.4.0' # Gem management
 		s.add_development_dependency 'directory_watcher', ">= 1.3.2" # Auto-regeneration
-		s.add_development_dependency 'haml', ">= 2.2.3" # Sass filter
+		s.add_development_dependency 'haml', ">= 3.0.6" # Sass filter
 		s.add_development_dependency 'RedCloth', ">= 4.2.3" # Textile filter
 		s.add_development_dependency 'bluecloth', ">= 2.0.7" # Markdown filter
 		s.add_development_dependency 'coderay', ">= 0.9.3" # Syntax Highlighting

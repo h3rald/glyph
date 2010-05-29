@@ -184,6 +184,7 @@ post do |global,command,options,args|
 end
 
 on_error do |exception|
+	raise if Glyph.library?
 	if exception.is_a? Glyph::MacroError then
 		Glyph.warning exception.message
 		false

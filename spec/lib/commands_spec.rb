@@ -9,7 +9,7 @@ describe "glyph" do
 	end
 
 	after do
-		Glyph.lite_mode = false
+		reset_quiet
 		delete_project
 	end
 
