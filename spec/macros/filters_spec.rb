@@ -35,7 +35,7 @@ describe "Filter Macros" do
 
 etc.]"
 interpret text
-@p.document.output.gsub(/\n|\t/, '').should == 
+@p.document.output.gsub(/\n|\t|\s{2}/, '').should == 
 	"<p>This is a test:</p><ul><li>item 1</li><li>item 2</li><li>item 3</li></ul><p>etc.</p>"
 	end
 
