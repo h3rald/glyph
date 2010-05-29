@@ -20,7 +20,7 @@ macro :features do
 					th[ID]
 					th[Description]
 				]
-				##{value}
+				#{value}
 			]
 		]
 	}

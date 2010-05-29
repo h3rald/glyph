@@ -45,6 +45,10 @@ module Glyph
 			parameters[n]
 		end
 
+		def value
+			parameter(0)
+		end
+
 		def attributes
 			children.select{|n| n.is_a? AttributeNode }
 		end
@@ -52,6 +56,11 @@ module Glyph
 		def attribute(name)
 			attributes.select{|n| n[:name] == name}[0]
 		end
+
+		alias attr attribute
+		alias param parameter
+		alias attrs attributes
+		alias params parameters
 
 		def expand(context)
 			xml_element	

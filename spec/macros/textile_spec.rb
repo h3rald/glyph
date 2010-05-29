@@ -179,31 +179,31 @@ Testing:
 		text1 = %{textile[
 			section[header[Test]
 #@textile
-			code[#{code}]
+			codeblock[#{code}]
 ]]}
 		text2 = %{textile[
 			section[header[Test]
 #@textile
-			code[#{code}
+			codeblock[#{code}
 		]
 	]
 ]}
 		text3 = %{textile[
 			section[header[Test]
 #@textile
-			code[
+			codeblock[
 #{code}]
 ]]}
 		text4 = %{textile[
 			section[header[Test]
 #@textile
-			code[
+			codeblock[
 #{code}
 ]]]}
 		text5 = %{textile[
 			section[header[Test]
 #@textile
-			code[
+			codeblock[
 #{code}
 	]
 	]]}

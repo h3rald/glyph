@@ -99,23 +99,12 @@ macro :escape do
 	value.strip
 end
 
-=begin
-macro :encode do
-	encode raw_value
-end
-
-macro :decode do
-	decode raw_value
-end
-=end
-
 macro :condition do
 	min_parameters 1
 	max_parameters 2
 	res = param(0)
 	(res.blank? || res == "false") ? "" : param(1).to_s.strip
 end
-
 
 macro :eq do
 	min_parameters 1

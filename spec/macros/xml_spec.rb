@@ -22,16 +22,9 @@ describe "Glyph Language" do
 			]
 		}).gsub(/\s+/, '').should == %{
 		<i>test</i>
-		<div class="code">
-			<pre>
 				<code>
 					test
-				</code>
-				</pre>
-		</div>}.gsub(/\s+/, '')
-		output_for(%{
-			=code[test...]
-		}).gsub(/\s/, '').should == %{<code>test...</code>}
+				</code>}.gsub(/\s+/, '')
 	end
 
 	it "should support XML macros" do

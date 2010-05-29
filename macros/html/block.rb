@@ -16,7 +16,7 @@ macro :box do
 </div>}
 end
 
-macro :code do
+macro :codeblock do
 	exact_parameters 1 
 	%{
 <div class="code">

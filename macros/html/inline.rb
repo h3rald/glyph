@@ -10,10 +10,6 @@ macro :anchor do
 	%{<a id="#{ident}">#{title}</a>}
 end
 
-macro :codeph do
-	%{<code>#{value}</code>}
-end
-
 macro :link do
 	min_parameters 1
 	max_parameters 2

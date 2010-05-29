@@ -66,43 +66,47 @@ describe Glyph::Macro do
 		@macro.expand.should == "Test: Testing..."
 	end
 
-	it "should support rewriting"
-
-=begin
-	it "should encode and decode text" 
-	do
-		Glyph.run! "load:all"
-		Glyph.macro :sec_1 do
-			res = decode "section[header[Test1]\n#{value}]"
-			interpret res
+	it "should support rewriting" do
+		test = 0
+		Glyph.macro :test do
+			interpret "#{@node.value}-#{test+=1}"
 		end
-		Glyph.macro :sec_2 do
-			encode "section[section[header[Test2]\n#{value}]]"
+		Glyph.macro :release do
+			interpret "Release\n#{@node.value}"
 		end
-		text1 = %{sec_1[sec_2[Test]]}
-		interpret text1
-		res1 = @p.document.output.gsub(/\t/, '')
-		text2 = %{section[header[Test1]
-			section[section[header[Test2]
-			Test]]]}
-		interpret text2
-		res2 = @p.document.output.gsub(/\t/, '')
-		result = "<div class=\"section\">
-				<h2 id=\"h_1\">Test1</h2>
-				<div class=\"section\">
-					<div class=\"section\">
-						<h4 id=\"h_2\">Test2</h4>
-						Test
-
-					</div>
-
-				</div>
-
-			</div>".gsub(/\t/, '')
-		res1.should == result
-		res2.should == result
+		Glyph.macro :features do
+			interpret "\n\ntest[Features: \n#{@node.value}]"
+		end
+		Glyph.macro :feature do
+			interpret "test[#{@node.value}]\n"
+		end
+		text = %{
+			release[
+				features[
+					feature[a]
+					feature[b]
+					feature[c]
+				]
+			]
+		}
+		output_for(text).gsub(/\n|\t/, '').should == 
+			"ReleaseFeatures: a-2b-3c-4-1"
+		test = 0
+		Glyph.macro :test do
+			interpret "#{value}-#{test+=1}"
+		end
+		Glyph.macro :release do
+			interpret "Release\n#{value}"
+		end
+		Glyph.macro :features do
+			interpret "\n\ntest[Features: \n#{value}]"
+		end
+		Glyph.macro :feature do
+			interpret "test[#{value}]\n"
+		end
+		output_for(text).gsub(/\n|\t/, '').should == 
+			"ReleaseFeatures: a-1b-2c-3-4"
 	end
-=end
 
 	it "should support access to parameters and attributes" do
 		Glyph.macro :test do
