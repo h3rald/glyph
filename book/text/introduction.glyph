@@ -1,7 +1,5 @@
---[
 &:[prince|=>[http://www.princexml.com/|Prince]]
-
-]Glyph is a _Rapid Document Authoring Framework_. 
+Glyph is a _Rapid Document Authoring Framework_. 
 
 Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through &[prince]).
 

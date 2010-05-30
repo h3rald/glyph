@@ -36,34 +36,40 @@ module Glyph
 			raw_attributes.select{|n| n[:name] == name}[0]
 		end
 
-		def attribute(name)
+		def attribute(name, options={:strip => true})
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
 			return nil unless raw_attribute(name)
 			@attributes = {} unless @attributes
-			@attributes[name] = raw_attribute(name).evaluate(@node, :attrs => true)
+			@attributes[name] = raw_attribute(name).evaluate(@node, :attrs => true).to_s
+			@attributes[name].strip! if options[:strip]
+			@attributes[name]
 		end
 
-		def parameter(n)
+		def parameter(n, options={:strip => true})
 			return @parameters[n] if @parameters && @parameters[n]
 			return nil unless raw_parameter(n)
 			@parameters = Array.new(raw_parameters.length) unless @parameters
-			@parameters[n] = raw_parameter(n).evaluate(@node, :params => true)
+			@parameters[n] = raw_parameter(n).evaluate(@node, :params => true).to_s
+			@parameters[n].strip! if options[:strip]
+			@parameters[n]
 		end
 
-		def attributes
+		def attributes(options={:strip => true})
 			return @attributes if @attributes
 			@attributes = {}
 			raw_attributes.each do |value|
 				@attributes[value[:name]] = value.evaluate(@node, :attrs => true)
+				@attributes[value[:name]].strip! if options[:strip]
 			end
 			@attributes
 		end
 
-		def parameters
+		def parameters(options={:strip => true})
 			return @parameters if @parameters
 			@parameters = []
 			raw_parameters.each do |value|
 				@parameters << value.evaluate(@node, :params => true)
+				@parameters.last.strip! if options[:strip]
 			end
 			@parameters
 		end

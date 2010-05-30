@@ -1,10 +1,11 @@
 %[=
 macro :issue do
 	exact_parameters 2
-	ident, desc = params
+	ident = @node.param 0
+	desc = @node.param 1
 	interpret %{
 		tr[
-			td[\=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
+			td[\\.=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
 			td[textile[#{desc}]]
 		]
 	}
@@ -12,7 +13,7 @@ end
 
 macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
-	total = @node.children.length
+	total = @node.children[0].children.length
 	interpret %{
 		section[header[#{total} #{@name.to_s.capitalize} #{verb}]
 			table[
@@ -20,7 +21,7 @@ macro :features do
 					th[ID]
 					th[Description]
 				]
-				#{value}
+				#{@node.value}
 			]
 		]
 	}
@@ -28,7 +29,9 @@ end
 
 macro :release do
 	exact_parameters 3
-	number, date, contents = params
+	number = @node.param 0
+	date = @node.param 1
+  contents = @node.param 2
 	interpret %{
 		section[header[v#{number} &ndash; #{date}]
 			#{contents}

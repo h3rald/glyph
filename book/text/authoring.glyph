@@ -11,8 +11,8 @@ By now you probably figured out what a macro looks like: it's an identifier of s
 
 A macro can often have one or more aliases. For example, @=>@ is an alias for the %>[link], so the following macro calls are equivalent:
 
-codeph[=\.=>[#test\|Test Section]=]
-codeph[=\.link[#test\|Test Section]=]
+code[=\.=>[#test\|Test Section]=]
+code[=\.link[#test\|Test Section]=]
 
 ]
 
@@ -24,7 +24,7 @@ If a portion of your text contains an excessive amount of square brackets, you m
 
 You can use the quoting delimiters with _any_ macro identifier. Obviously, using them as delimiters for things like %>[section]s may not be a good idea, but they should be more or less mandatory with the %>[code], like this:
 
-code[=
+codeblock[=
 code\[=
 section[header[A section]
 
@@ -76,7 +76,7 @@ table[
     td[@\\\..@]
     td[&nbsp;]
     td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:
-codeph[= _\\..=>[#link\|This link is emphasized using Textile]_ =]
+code[= _\\..=>[#link\|This link is emphasized using Textile]_ =]
     ]
   ]
 ]
@@ -87,7 +87,7 @@ section[header[Sections and Headers|sec_head]
 
 Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section], like so:
 
-code[=
+codeblock[=
 section[
   header[Section #1]
 
@@ -154,9 +154,9 @@ note[@frontmatter@, @bodymatter@ and @backmatter@ are also valid (and mandatory!
 
 section[header[Including Files and Snippets|incl]
 
-If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an %>[include] (aliased by codeph[@]) that can be used to include the contents of any file within the @text/@ directory:
+If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an %>[include] (aliased by code[@]) that can be used to include the contents of any file within the @text/@ directory:
 
-codeph[=include[introduction.textile]=]
+code[=include[introduction.textile]=]
 
 The macro call above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
 
@@ -196,7 +196,7 @@ highlight[=yaml|
 =]
 </notextile>
 
-You can use codeph[=&[markups]=] anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the @markups@ snippets only in the @snippets.yml@ file to change it everywhere else in the document.
+You can use code[=&[markups]=] anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the @markups@ snippets only in the @snippets.yml@ file to change it everywhere else in the document.
 ] --[End Example]
 tip[
 Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
@@ -219,7 +219,7 @@ box[Example|
 
 &[gcode]
 
-code[=
+codeblock[=
 This is a link to link[#test].
 
 ...
@@ -242,7 +242,7 @@ highlight[=html|
 Additionally, the following warning message is displayed when =>[#compile|compiling]:
 
 <notextile>
-code[=
+codeblock[=
 warning: Bookmark 'wrong' does not exist
  -> source: @: aurhoting.textile
  -> path: document/body/bodymatter/chapter/@/textile/section/section/box/link
@@ -256,7 +256,7 @@ Basically, if you use the %>[link] and the %>[anchor], Glyph makes sure that:
 * There are no duplicate anchors within the documents.
 * If no title is specified as second parameter for the %>[link], the anchor's title is used as such.
 
-Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an extra parameter to the %>[header], like this: codeph[=header[Header Title\|my_anchor]=].
+Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an extra parameter to the %>[header], like this: code[=header[Header Title\|my_anchor]=].
 
 note[
 At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the %>[link] starts with a @#@). In the future, the macro could be extended to support external links as well. 
@@ -268,13 +268,13 @@ section[header[Evaluating Ruby code and Configuration Settings]
 
 &[glang] is not a full-blown programming language, as it does not provide control flow or variables, for example. 
 However, it is possible to evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
-* codeph[=%[2 + 2]=] &rarr; 4
-* codeph[=%[Time.now]=] &rarr; %[Time.now]
-* codeph[=%[Glyph::VERSION]=] &rarr; %[Glyph::VERSION]
+* code[=%[2 + 2]=] &rarr; 4
+* code[=%[Time.now]=] &rarr; %[Time.now]
+* code[=%[Glyph::VERSION]=] &rarr; %[Glyph::VERSION]
 
 The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself). 
 
-Although it is possible to retrieve Glyph configuration settings in this way (e.g. codeph[=%[cfg('document.author')]=]), the %>[config] (aliased to @$@) makes things slightly simpler (e.g. codeph[=$[document.author]=]).
+Although it is possible to retrieve Glyph configuration settings in this way (e.g. code[=%[cfg('document.author')]=]), the %>[config] (aliased to @$@) makes things slightly simpler (e.g. code[=$[document.author]=]).
 
 ]
 
@@ -291,7 +291,7 @@ To do so, you can use the %>[condition] (aliased by @?@), and a set of additiona
 
 Consider the following code:
 
-code[=
+codeblock[=
 ?[$[document.draft]\|
 This is a first draft of the Glyph Book]
 ?[not[$[document.draft]]\|
@@ -306,7 +306,7 @@ The %>[condition] takes two parameters:
 
 Note that _both_ parameters can contain macros, of course, so you can write things like:
 
-code[=
+codeblock[=
 ?[and[
     eq[$[document.output]\|pdf]
     \|
@@ -323,9 +323,9 @@ Conditionals are not implemented at parser level. This means that macros specifi
 
 To avoid this potentially dangerous side effect, you can _\.=>[#m_encode|encode]_ the second parameter of the condition macro, like this:
 
-code[=
+codeblock[=
 ?[$[document.draft]\|
-*\[\= $:[document.output|html] \=\]]
+*\[\= $:[document.output\|html] \=\]]
 =]
 
 If you do so, if the condition is satisfied, the condition macro decodes the second parameter and interprets its contents. In this way, if @document.draft@ is true, @document.output@ will be set to @html@, otherwise it will be left unchanged.
@@ -347,7 +347,7 @@ box[Example|
 
 &[gcode]
 
-code[=
+codeblock[=
 img[glyph.svg\|20%\|20%]
 
 fig[example.png\|An example figure.]
@@ -377,7 +377,7 @@ section[header[Source code|source_code]
 If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph providers different ways to format source code, as described in the following sections.
 
 section[header[Inline code]
-The %>[codeph] can be used to format inline code. That's exactly the same as using @<code>@ tags, just remember to use =>[#esc_quot|escaping delimiters] and to escape pipes. 
+The %>[code] can be used to format inline code. That's exactly the same as using @<code>@ tags, just remember to use =>[#esc_quot|escaping delimiters] and to escape pipes. 
 ]
 
 section[header[Code block]
@@ -385,7 +385,7 @@ For code blocks, you have two choices: the %>[code], which simply wraps text int
 
 Cosider the following piece of ruby code:
 
-code[=
+codeblock[=
   def find_child(&block)
     children.each do \|c\|
       c.descend do \|node, level\|
@@ -398,7 +398,7 @@ code[=
 
 It can be wrapped in a highlight macro, like so:
 
-code[=
+codeblock[=
 highlight[\=ruby\|
   def find_child(&block)
     children.each do \\\.\|c\\\.\|
@@ -474,7 +474,7 @@ Glyph provides the following default stylesheets, that can be referenced directl
 		]
 		tr[
 			td[@ultraviolet/*@]
-			td[This folder contains the following &[uv] stylesheets, used for syntax highlighting: codeph[%[(Glyph::HOME/"styles/ultraviolet").children.sort.map{|c| c.basename}.join(", ")]]]
+			td[This folder contains the following &[uv] stylesheets, used for syntax highlighting: code[%[(Glyph::HOME/"styles/ultraviolet").children.sort.map{\|c\| c.basename}.join(", ")]]]
 		]
 	]
 
@@ -515,7 +515,7 @@ Glyph's primary goal is to author complex documents like books or manuals. In or
 
 If you want to write a one-page article or a short draft, however, creating and managing Glyph projects can be an unnecessary burden. Luckily, you don't have to: you can use Glyph to compile single files containing Glyph code, by adding one parameter (or two if you want to specify a custom destination file) to the #>[compile], like this:
 
-codeph[glyph compile source.glyph destination.htm]
+code[glyph compile source.glyph destination.htm]
 
 This command will process a file called @source.glyph@ and produce an HTML file called @destination.htm@.
 
