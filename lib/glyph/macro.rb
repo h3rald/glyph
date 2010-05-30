@@ -101,6 +101,7 @@ module Glyph
 					if n[:name] == :"|xml|" then
 						name = "xml[#{n[:element]}]"
 					else
+						break if n[:name] == :include
 						name = n[:name].to_s
 					end
 				when n.is_a?(Glyph::ParameterNode) then

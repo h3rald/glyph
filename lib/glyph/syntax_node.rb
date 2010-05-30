@@ -63,7 +63,7 @@ module Glyph
 		alias params parameters
 
 		def expand(context)
-			xml_element	
+			xml_element(context)	
 			self.merge!({
 				:source => context[:source], 
 				:document => context[:document], 
@@ -73,10 +73,9 @@ module Glyph
 			Glyph::Macro.new(self).expand
 		end
 
-		def xml_element
+		def xml_element(context)
 			known_macro = Glyph::MACROS.include? self[:name]
 			name = self[:name].to_s
-			element = nil
 			if !known_macro && name.match(/^=(.+)/) then
 				# Force tag name override if macro starts with a '='
 				name.gsub! /^=(.+)/, '\1' 
@@ -94,7 +93,7 @@ module Glyph
 				end
 			else
 				# Unknown macro
-				raise Glyph::RuntimeError, "Undefined macro '#{name}'\n -> source: #{current[:source]}" unless known_macro
+				raise Glyph::RuntimeError, "Undefined macro '#{name}'\n -> source: #{context[:source]}" unless known_macro
 			end
 		end
 

@@ -1,4 +1,5 @@
-﻿section[
+﻿
+section[
 @title[Text Editing]
 
 One of the main purposes of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with &[markups].
@@ -19,7 +20,7 @@ code[=\.link[#test\|Test Section]=]
 ]
 
 section[
-@header[Escaping and Quoting]
+@title[Escaping and Quoting]
 @id[esc_quot]
 
 Glyph doesn't require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That's not _too_ bad if you think about it, unless you're writing programming code, in which case escaping every single square bracket can be painful.

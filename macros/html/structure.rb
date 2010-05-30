@@ -5,6 +5,7 @@ macro :section do
 	h = ""
 	h_title = attr :title
 	h_id = attr :id
+	macro_warning "Please specify a title for section ##{h_id}" if h_id && !h_title
 	if h_title then
 		level = 1
 		@node.ascend do |n| 
@@ -12,7 +13,8 @@ macro :section do
 				level+=1
 			end
 		end
-		h_id ||= "h_#{@node[:document].headers.length+1}".to_sym
+		h_id ||= "h_#{@node[:document].headers.length+1}"
+		h_id = h_id.to_sym
 		header :title => h_title, :level => level, :id => h_id
 		@node[:header] = h_id
 		macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
