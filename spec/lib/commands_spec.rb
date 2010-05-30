@@ -182,4 +182,45 @@ describe "glyph" do
 		res.match("error: #{err}").should == nil
 	end
 
+	it "[outline] should display the document outline" do
+		create_project
+		start = %{Loading snippets...
+Loading macros...
+Parsing 'document.glyph'...
+Processing...
+Post-processing...
+=====================================
+test_project - Outline
+=====================================}
+		c_file = "----- file: container.textile"
+		i_file = "----- file: included.textile"
+		m_file = "----- file: markdown.markdown"
+		c_title = "Container section "
+		i_title = "Test Section "
+		m_title = "Markdown "
+		c_id = "[#h_1]"
+		i_id = "[#h_2]"
+		m_id = "[#md]"
+		run_command(["outline"]).should == %{#{start}
+  #{c_title}
+    #{i_title}
+  #{m_title}
+}
+		reset_quiet
+		run_command(["outline", "-li"]).should == %{#{start}
+  h2: #{c_id}
+    h3: #{i_id}
+  h2: #{m_id}
+}
+		reset_quiet
+		run_command(["outline", "-lift"]).should == %{#{start}
+#{c_file}
+  h2: #{c_title}#{c_id}
+#{i_file}
+    h3: #{i_title}#{i_id}
+#{m_file}
+  h2: #{m_title}#{m_id}
+}
+	end
+
 end

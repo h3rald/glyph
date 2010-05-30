@@ -125,6 +125,44 @@ command :todo do |c|
 	end
 end
 
+GLI.desc 'Display the document outline'
+command :outline do |c|
+	c.desc "Show file names"
+	c.switch :f, :files
+	c.desc "Show levels"
+	c.switch :l, :levels
+	c.desc "Show titles"
+	c.switch :t, :titles
+	c.desc "Show IDs"
+	c.switch :i, :ids
+	c.action do |global_options, options, args|
+		levels = options[:l]
+		ids = options[:i]
+		files = options[:f]
+		titles = options[:t]
+		titles = true if !ids && !levels && !files || levels && !ids
+		Glyph.run "generate:document"
+		puts "====================================="
+		puts "#{Glyph['document.title']} - Outline"
+		puts "====================================="
+		Glyph.document.structure.descend do |n, level|
+			if n.is_a?(Glyph::MacroNode) then
+				case
+				when n[:name].in?(Glyph['system.structure.headers']) then
+					header = Glyph.document.header?(n[:header])
+					last_level = header[:level]
+					h_id = ids ? "[##{header[:id]}]" : ""
+					h_level = levels ? "h#{header[:level]}: " : ""
+					h_title = titles ? "#{header[:title]} " : ""
+					puts ("  "*(header[:level]-1))+h_level+h_title+h_id
+				when n[:name] == :include then
+					puts "----- file: #{n.param(0)}" if files
+				end	
+			end
+		end
+	end
+end
+
 GLI.desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|
