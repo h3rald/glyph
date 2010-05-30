@@ -123,32 +123,30 @@ describe "Macro:" do
 			see <a href="#test">Test</a></span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
 	end	
 
-	it "img" do
-		interpret "img[ligature.jpg|90%|90%]"
+	it "image" do
+		interpret "image[@width[90%]@height[90%]@alt[-]ligature.jpg]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
-			<img src="images/ligature.jpg" 
-			width="90%" height="90%" alt="-"/>
+			<img src="images/ligature.jpg" width="90%" height="90%" alt="-" />
 		}.gsub(/\n|\t/, '')
 	end
 
-	it "img should link files by absolute or relative path in Lite mode" do
+	it "image should link files by absolute or relative path in Lite mode" do
 		result = %{
-			<img src="images/ligature.jpg" 
-			width="90%" height="90%" alt="-"/>
+			<img src="images/ligature.jpg" width="90%" height="90%" />
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
-		interpret "img[images/ligature.jpg|90%|90%]"
+		interpret "image[@width[90%]@height[90%]images/ligature.jpg]"
 		@p.document.output.gsub(/\t|\n/, '').should == result
-		interpret "img[#{Glyph::PROJECT}/images/ligature.jpg|90%|90%]"
+		interpret "image[@width[90%]@height[90%]#{Glyph::PROJECT}/images/ligature.jpg]"
 		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
 	end
 
-	it "fig" do
-		interpret "fig[ligature.jpg|Ligature]"
+	it "figure" do
+		interpret "figure[@alt[ligature]ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
 			<div class="figure">
-			<img src="images/ligature.jpg" alt="-"/>
+			<img src="images/ligature.jpg" alt="ligature" />
 			<div class="caption">Ligature</div>
 			</div>
 		}.gsub(/\n|\t/, '')
@@ -157,15 +155,15 @@ describe "Macro:" do
 	it "fig should link files by absolute or relative path in Lite mode" do
 		result = %{
 			<div class="figure">
-			<img src="images/ligature.jpg" alt="-"/>
+			<img src="images/ligature.jpg" />
 			<div class="caption">Ligature</div>
 			</div>
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
-		interpret "fig[images/ligature.jpg|Ligature]"
+		interpret "figure[images/ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == result
-		interpret "fig[#{Glyph::PROJECT}/images/ligature.jpg|Ligature]"
+		interpret "figure[#{Glyph::PROJECT}/images/ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
 	end
 

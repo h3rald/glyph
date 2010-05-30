@@ -35,33 +35,29 @@ macro :title do
 </h1>}
 end
 
-macro :img do
+macro :image do
 	min_parameters 1
 	max_parameters 3
 	image = param(0)
-	width = param(1) rescue nil
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
- 	w = (width) ? "width=\"#{width}\"" : ''
-	height = param(2) rescue nil
- 	h = (height) ? "height=\"#{height}\"" : ''
 	Glyph.warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
-	%{<img src="#{dest_file}" #{w} #{h} alt="-"/>}
+	interpret "img[@src[#{dest_file}]#{@node.attrs.join}]"
 end
 
-macro :fig do
+macro :figure do
 	min_parameters 1
 	max_parameters 2
 	image = param(0)
 	caption = param(1) rescue nil
-	caption = %{<div class="caption">#{caption}</div>} if caption
+	caption = "div[@class[caption]#{caption}]" if caption
 	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
 	Glyph.warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
-	%{<div class="figure">
-<img src="#{dest_file}" alt="-"/>
+	interpret %{div[@class[figure]
+img[@src[#{dest_file}]#{@node.attrs.join}]
 #{caption}
-</div>}
+]}
 end
 
 

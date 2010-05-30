@@ -28,7 +28,7 @@ describe Glyph::Macro::Validators do
 		# none
 		lambda { interpret("title[test]").document.output }.should raise_error Glyph::MacroError
 		# min
-		lambda { interpret("img[]").document.output }.should raise_error Glyph::MacroError
+		lambda { interpret("?[]").document.output }.should raise_error Glyph::MacroError
 		# max
 		lambda { interpret("not[a|b|c]").document.output }.should raise_error Glyph::MacroError
 		# correct

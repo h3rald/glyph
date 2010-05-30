@@ -29,7 +29,7 @@ describe "Glyph Language" do
 
 	it "should support XML macros" do
 		language('xml')
-		output_for("pre[code[test]]").should == "<pre><code>test</code></pre>"
+		output_for("pre[code[test]]").should == "<pre>\n<code>test</code>\n</pre>"
 	end
 
 	it "should support XML attributes" do
