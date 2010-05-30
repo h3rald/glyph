@@ -3,7 +3,7 @@
 macro :section do 
 	exact_parameters 1
 %{<div class="#{@name}">
-#{value.strip}
+#{value}
 
 </div>}	
 end
@@ -11,8 +11,8 @@ end
 macro :header do
 	min_parameters 1
 	max_parameters 2
-	title = param(0).strip
-	h_id = param(1).strip rescue nil
+	title = param(0)
+	h_id = param(1) rescue nil
 	level = 1
 	@node.ascend do |n| 
 		if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
@@ -59,9 +59,9 @@ end
 
 macro :style do 
 	exact_parameters 1
-	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value.strip}"
-	file = Pathname.new Glyph::HOME/'styles'/value.strip unless file.exist?
-	macro_error "Stylesheet '#{value.strip}' not found" unless file.exist?
+	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value}"
+	file = Pathname.new Glyph::HOME/'styles'/value unless file.exist?
+	macro_error "Stylesheet '#{value}' not found" unless file.exist?
 	style = ""
 	case file.extname
 	when ".css"

@@ -5,7 +5,7 @@ macro :textile do
 	rc = nil
 	begin
 		require 'RedCloth'
-		rc = RedCloth.new value.strip, Glyph::CONFIG.get("filters.redcloth.restrictions")
+		rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
 	rescue Exception
 		macro_error "RedCloth gem not installed. Please run: gem insall RedCloth"
 	end
@@ -51,16 +51,16 @@ macro :markdown do
 	case markdown_converter
 	when :bluecloth
 		require 'bluecloth'
-		md = BlueCloth.new value.strip
+		md = BlueCloth.new value
 	when :rdiscount
 		require 'rdiscount'
-		md = RDiscount.new value.strip
+		md = RDiscount.new value
 	when :maruku
 		require 'maruku'
-		md = Maruku.new value.strip
+		md = Maruku.new value
 	when :kramdown
 		require 'kramdown'
-		md = Kramdown::Document.new value.strip
+		md = Kramdown::Document.new value
 	else
 	 macro_error "No MarkDown converter installed. Please run: gem install bluecloth"
 	end
@@ -74,8 +74,8 @@ end
 
 macro :highlight do
 	exact_parameters 2  
-	lang = param(0).strip
-	text = param(1).strip
+	lang = param(0)
+	text = param(1)
 	text.gsub!(/\\(.)/){$1}
 	highlighter = Glyph["highlighters.current"].to_sym rescue nil
 	if !highlighter then

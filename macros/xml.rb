@@ -14,5 +14,5 @@ macro "|xml|" do
 			end
 		end.compact.join(" ")
 	xml_attributes = " "+xml_attributes unless xml_attributes.blank?
-	%{<#{name}#{xml_attributes}>#{param(0).to_s.strip}</#{name}>}
+	%{<#{name}#{xml_attributes}>#{param(0)}</#{name}>}
 end

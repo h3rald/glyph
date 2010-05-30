@@ -3,8 +3,8 @@
 macro :anchor do 
 	min_parameters 1
 	max_parameters 2
-	ident = param(0).strip
-	title = param(1).strip rescue nil
+	ident = param(0)
+	title = param(1) rescue nil
 	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
 	bookmark :id => ident, :title => title
 	%{<a id="#{ident}">#{title}</a>}
@@ -13,8 +13,8 @@ end
 macro :link do
 	min_parameters 1
 	max_parameters 2
-	href = param(0).strip
-	title = param(1).strip rescue nil
+	href = param(0)
+	title = param(1) rescue nil
 	if href.match /^#/ then
 		anchor = href.gsub(/^#/, '').to_sym
 		bmk = bookmark? anchor
@@ -29,13 +29,13 @@ macro :link do
 		end
 	end
 	title ||= href
-	%{<a href="#{href}">#{title.to_s.strip}</a>}
+	%{<a href="#{href}">#{title.to_s}</a>}
 end
 
 macro :fmi do
 	exact_parameters 2, :level => :warning
-	topic = param(0) .strip
-	href = param(1).strip
+	topic = param(0) 
+	href = param(1)
 	link = placeholder do |document| 
 		interpret "link[#{href}]"
 	end
@@ -52,10 +52,10 @@ end
 
 macro :todo do
 	exact_parameters 1
-	todo = "[#{@source}] -- #{value.strip}"
+	todo = "[#{@source}] -- #{value}"
 	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then
-	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{value.strip}</span>} 
+	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{value}</span>} 
 	else
 		""
 	end
