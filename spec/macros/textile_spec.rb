@@ -36,11 +36,11 @@ Testing:
 	
 	it "should be embeddable in section macros" do
 		text1 = 
-%{textile[section[header[Test]
+%{textile[section[@title[Test]
 #@textile
 ]]}
 		text2 = 
-%{textile[section[header[Test]#@textile
+%{textile[section[@title[Test]#@textile
 ]]}
 		result =
 %{<div class="section">
@@ -48,7 +48,7 @@ Testing:
 #@html
 </div>}
 		filter(text1).should == result
-		filter(text2).gsub(/<\/h2>/, "</h2>\n").should == result
+		filter(text2).gsub(/<\/h2>/, "</h2>").should == result
 	end
 
 	######################################
@@ -177,31 +177,31 @@ Testing:
 </div>
 </div>}
 		text1 = %{textile[
-			section[header[Test]
+			section[@title[Test]
 #@textile
 			codeblock[#{code}]
 ]]}
 		text2 = %{textile[
-			section[header[Test]
+			section[@title[Test]
 #@textile
 			codeblock[#{code}
 		]
 	]
 ]}
 		text3 = %{textile[
-			section[header[Test]
+			section[@title[Test]
 #@textile
 			codeblock[
 #{code}]
 ]]}
 		text4 = %{textile[
-			section[header[Test]
+			section[@title[Test]
 #@textile
 			codeblock[
 #{code}
 ]]]}
 		text5 = %{textile[
-			section[header[Test]
+			section[@title[Test]
 #@textile
 			codeblock[
 #{code}

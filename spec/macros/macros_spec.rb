@@ -23,15 +23,15 @@ describe "Macro:" do
 	end
 
 	it "section, chapter, header" do
-		text = "chapter[header[Chapter X] ... section[header[Section Y|sec-y] ... section[header[Another section] ...]]]"
+		text = "chapter[@title[Chapter X] ... section[@title[Section Y]@id[sec-y] ... section[@title[Another section] ...]]]"
 		interpret text
 		doc = @p.document
 		doc.output.gsub(/\n|\t/, '').should == %{<div class="chapter">
-					<h2 id="h_1">Chapter X</h2> ... 
+					<h2 id="h_1">Chapter X</h2>... 
 					<div class="section">
-					<h3 id="sec-y">Section Y</h3> ... 
+					<h3 id="sec-y">Section Y</h3>... 
 						<div class="section">
-						<h4 id="h_3">Another section</h4> ...
+						<h4 id="h_3">Another section</h4>...
 						</div>
 					</div>
 				</div>

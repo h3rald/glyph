@@ -2,29 +2,27 @@
 
 macro :section do 
 	exact_parameters 1
-%{<div class="#{@name}">
-#{value}
+	h = ""
+	h_title = attr :title
+	h_id = attr :id
+	if h_title then
+		level = 1
+		@node.ascend do |n| 
+			if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
+				level+=1
+			end
+		end
+		h_id ||= "h_#{@node[:document].headers.length+1}".to_sym
+		header :title => h_title, :level => level, :id => h_id
+		@node[:header] = h_id
+		macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
+		bookmark :id => h_id, :title => h_title
+		h = %{<h#{level} id="#{h_id}">#{h_title}</h#{level}>\n}	
+	end
+	%{<div class="#{@name}">
+#{h}#{value}
 
 </div>}	
-end
-
-macro :header do
-	min_parameters 1
-	max_parameters 2
-	title = param(0)
-	h_id = param(1) rescue nil
-	level = 1
-	@node.ascend do |n| 
-		if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
-			level+=1
-		end
-	end
-	h_id ||= "h_#{@node[:document].headers.length+1}".to_sym
-	header :title => title, :level => level, :id => h_id
-	@node[:header] = h_id
-	macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
-	bookmark :id => h_id, :title => title
-	%{<h#{level} id="#{h_id}">#{title}</h#{level}>}	
 end
 
 macro :document do

@@ -174,26 +174,6 @@ module Glyph
 			result.gsub(/\\*([\[\]])/){"\\#$1"}
 		end
 
-=begin
-		# Encodes all macros in a string so that it can be encoded
-		# (and interpreted) later on
-		# @param [String] string the string to encode
-		# @return [String] the encoded string
-		# @since 0.2.0
-		def encode(string)
-			string.gsub(/([\[\]\|])/) { "‡‡¤#{$1.bytes.to_a[0]}¤‡‡" }
-		end
-
-		# Decodes a previously encoded string 
-		# so that it can be interpreted
-		# @param [String] string the string to decode
-		# @return [String] the decoded string
-		# @since 0.2.0
-		def decode(string)
-			string.gsub(/‡‡¤(91|93|124)¤‡‡/) { $1.to_i.chr }
-		end
-=end
-
 		# @see Glyph::Document#placeholder
 		def placeholder(&block)
 			@node[:document].placeholder &block

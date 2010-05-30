@@ -1,5 +1,6 @@
 section[
-	header[Markdown|md]
+	@title[Markdown]
+	@id[md]
 This contains markdown text.
 
 - item 1

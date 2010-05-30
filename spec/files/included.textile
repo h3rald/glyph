@@ -1,4 +1,4 @@
 section[
-header[Test Section]
+@title[Test Section]
 ...
 ]
