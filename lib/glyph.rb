@@ -247,19 +247,19 @@ module Glyph
 	# Prints a message
 	# @param [String] message the message to print
 	def self.info(message)
-		puts "#{message}" unless Glyph['system.quiet']
+		puts "-- #{message}" unless Glyph['system.quiet']
 	end
 
 	# Prints a warning
 	# @param [String] message the message to print
 	def self.warning(message)
-		puts "warning: #{message}" unless Glyph['system.quiet']
+		puts "-> warning: #{message}" unless Glyph['system.quiet']
 	end
 
 	# Prints an error
 	# @param [String] message the message to print
 	def self.error(message)
-		puts "error: #{message}" unless Glyph['system.quiet']
+		puts "=> error: #{message}" unless Glyph['system.quiet']
 	end
 
 end
