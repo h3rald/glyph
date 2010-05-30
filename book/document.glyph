@@ -1,70 +1,66 @@
-document[
-	head[
+book[
+	@head[
 		style[default.css]
 		?[eq[$[document.output]|pdf]|style[pagination.css]]
 		?[eq[$[highlighters.current]|coderay]|style[coderay.css]]
 		?[eq[$[highlighters.current]|ultraviolet]|style[ultraviolet/blackboard.css]]
 	]
-	body[
-		titlepage[
-			?[eq[$[document.output]|pdf]|image[@width[20%]@height[20%]glyph.svg]]
-			?[eq[$[document.output]|html]|image[@width[20%]@height[20%]glyph.png]]
-			title[]
-			subtitle[]
-			v\.%[Glyph::VERSION]
-			author[]
-			pubdate[]
-		]
-		frontmatter[
-			toc[]
-			introduction[@title[Introduction]
-                textile[include[introduction.glyph]]
-				section[@title[License]
-                    textile[include[license.glyph]]
-				]
-			]
-			acknowledgement[@title[Acknowledgement]
-                textile[include[acknowledgement.glyph]]
+	@logo[
+		?[eq[$[document.output]|pdf]|image[@width[20%]@height[20%]glyph.svg]]
+		?[eq[$[document.output]|html]|image[@width[20%]@height[20%]glyph.png]]
+	]
+	@frontmatter[
+		toc[]
+		introduction[
+			@title[Introduction]
+			textile[include[introduction.glyph]]
+			section[
+				@title[License]
+				textile[include[license.glyph]]
 			]
 		]
-		bodymatter[
-			chapter[
-				@title[Getting Started]
-                textile[include[getting_started.glyph]]
-			]
-			chapter[
-				@title[Authoring Documents]
-                textile[include[authoring.glyph]]
-			]
-			chapter[
-				@title[Extending Glyph]
-				@id[extending]
-                textile[include[extending.glyph]]
-			]
-			chapter[
-				@title[Troubleshooting]
-                textile[include[troubleshooting.glyph]]
-			]
+		acknowledgement[
+			@title[Acknowledgement]
+			textile[include[acknowledgement.glyph]]
 		]
-		backmatter[
-			appendix[
-				@title[Command Reference]
-				@id[cmd_ref]
-                textile[include[ref_commands.glyph]]
-			]
-			appendix[
-				@title[Macro Reference]
-				@id[macro_ref]
-                textile[include[ref_macros.glyph]]
-			]
-			appendix[
-				@title[Configuration Reference]
-				@id[cfg_ref]
-                textile[include[ref_config.glyph]]
-			]
-			appendix[@title[Changelog]
-                include[changelog.glyph]
-			]
+	]
+	@bodymatter[
+		chapter[
+			@title[Getting Started]
+			textile[include[getting_started.glyph]]
+		]
+		chapter[
+			@title[Authoring Documents]
+			textile[include[authoring.glyph]]
+		]
+		chapter[
+			@title[Extending Glyph]
+			@id[extending]
+			textile[include[extending.glyph]]
+		]
+		chapter[
+			@title[Troubleshooting]
+			textile[include[troubleshooting.glyph]]
+		]
+	]
+	@backmatter[
+		appendix[
+			@title[Command Reference]
+			@id[cmd_ref]
+			textile[include[ref_commands.glyph]]
+		]
+		appendix[
+			@title[Macro Reference]
+			@id[macro_ref]
+			textile[include[ref_macros.glyph]]
+		]
+		appendix[
+			@title[Configuration Reference]
+			@id[cfg_ref]
+			textile[include[ref_config.glyph]]
+		]
+		appendix[@title[Changelog]
+		include[changelog.glyph]
 		]
 	]
 ]

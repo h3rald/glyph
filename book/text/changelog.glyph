@@ -15,7 +15,8 @@ macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
 	total = @node.children[0].children.length
 	interpret %{
-		section[header[#{total} #{@name.to_s.capitalize} #{verb}]
+		section[
+			@title[#{total} #{@name.to_s.capitalize} #{verb}]
 			table[
 				tr[
 					th[ID]
@@ -33,7 +34,8 @@ macro :release do
 	date = @node.param 1
   contents = @node.param 2
 	interpret %{
-		section[header[v#{number} &ndash; #{date}]
+		section[
+			@title[v#{number} &ndash; #{date}]
 			#{contents}
 		]
 	}

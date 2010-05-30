@@ -27,6 +27,66 @@ macro :section do
 </div>}	
 end
 
+macro :article do
+	head = @node.attr(:head).contents rescue nil
+ 	head ||= %{style[default.css]}
+	logo = @node.attr(:logo).contents rescue nil
+	halftitlepage = @node.attr(:halftitlepage).contents rescue nil
+	halftitlepage ||= %{
+			#{logo}
+			title[]
+			author[]
+			pubdate[]
+	}
+	interpret %{
+document[
+	head[#{head}]
+	body[
+		halftitlepage[
+			#{halftitlepage}
+		]
+		#{@node.value}
+	]
+]}	
+end
+
+macro :book do
+	head = @node.attr(:head).contents rescue nil 
+	head ||= %{style[default.css]}
+	logo = @node.attr(:logo).contents rescue nil
+	titlepage = @node.attr(:titlepage).contents rescue nil
+	titlepage ||= %{
+			#{logo}
+			title[]
+			subtitle[]
+			revision[]
+			author[]
+			pubdate[]
+	}
+	frontmatter = @node.attr(:frontmatter).contents rescue nil
+	bodymatter = @node.attr(:bodymatter).contents rescue nil
+	backmatter = @node.attr(:backmatter).contents rescue nil
+	frontmatter = "frontmatter[\n#{frontmatter}\n]" if frontmatter
+	bodymatter = "bodymatter[\n#{bodymatter}\n]" if bodymatter
+	backmatter = "backmatter[\n#{backmatter}\n]" if backmatter
+	interpret %{
+document[
+	head[#{head}]
+	body[
+		titlepage[
+			#{titlepage}
+		]
+		#{frontmatter}
+		#{bodymatter}
+		#{backmatter}
+	]
+]}	
+end
+
+macro :revision do
+	%{<div class="revision">#{Glyph['document.revision']}</div>}
+end
+
 macro :document do
 	exact_parameters 1
 	%{<?xml version="1.0" encoding="utf-8"?>

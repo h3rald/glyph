@@ -4,6 +4,7 @@
   :title: ""
   :subtitle: ""
   :filename: ""
+  :revision: "1.0"
   :draft: false
   :output: 'html'
   :output_targets: [:html, :pdf]
@@ -44,7 +45,6 @@
       - :prologue
     :bodymatter:
       - :volume
-      - :book
       - :part
       - :chapter
     :backmatter:

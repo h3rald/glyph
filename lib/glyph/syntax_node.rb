@@ -113,6 +113,8 @@ module Glyph
 			children.join
 		end
 
+		alias contents to_s
+
 		def evaluate(context, options={:params => false})
 			self[:value] = ""
 			self.children.each {|c| self[:value] << c.evaluate(context) } if options[:params]
@@ -126,6 +128,10 @@ module Glyph
 		def to_s
 			e = self[:escape] ? "=" : ""
 			"@#{self[:name]}["+e+children.join+e+"]"
+		end
+
+		def contents
+			children.join
 		end
 
 		def evaluate(context, options={:attrs => false})
