@@ -78,9 +78,7 @@ describe "Macro:" do
 		@p.document.output.gsub(/\n|\t/, '').should == result
 	end
 
-	it "toc" 
-=begin
-	do
+	it "toc" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
 		interpret file_load(Glyph::PROJECT/'document.glyph')
 		doc = @p.document
@@ -98,7 +96,6 @@ describe "Macro:" do
 			</div>
 		}.gsub(/\n|\t/, '')
 	end
-=end
 
 	it "link" do
 		text = %{

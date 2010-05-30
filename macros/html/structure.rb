@@ -83,23 +83,25 @@ end
 
 macro :toc do 
 	no_parameters
-=begin
 	link_header = lambda do |header|
-		%{<a href="##{header[:id]}">#{header[:title].gsub(/@(.+?)@/, '\1')}</a>}
+		%{<a href="##{header[:id]}">#{header[:title]}</a>}
 	end
 	toc = placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
 			list = ""
 			added_headers ||= []
 			n1.descend do |n2, level|
-				if Glyph['system.structure.headers'].include?(n2[:macro])
-					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:macro] } 
-					header_id = n2.children.select{|n| n[:header]}[0][:header] rescue nil
+				if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
+					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] } 
+					header_id = n2[:header]
 					next if added_headers.include? header_id
 					added_headers << header_id
 					# Check if part of frontmatter, bodymatter or backmatter
-					container = n2.find_parent{|node| node[:macro].in? [:frontmatter, :bodymatter, :appendix, :backmatter]}[:macro] rescue nil
-					list << "<li class=\"#{container} #{n2[:macro]}\">#{link_header.call(document.header?(header_id))}</li>\n" if header_id
+					container = n2.find_parent do |node| 
+						node.is_a?(Glyph::MacroNode) && 
+							node[:name].in?([:frontmatter, :bodymatter, :appendix, :backmatter])
+					end[:name] rescue nil
+					list << "<li class=\"#{container} #{n2[:name]}\">#{link_header.call(document.header?(header_id))}</li>\n" if header_id
 					child_list = ""
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)
@@ -117,7 +119,6 @@ macro :toc do
 </div>}
 	end
 	toc
-=end
 end
 
 # See:
