@@ -61,7 +61,13 @@ module Glyph
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def max_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{raw_parameters.length} given)", options) { raw_parameters.length <= n }
+				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{raw_parameters.length} given)", options) do
+					if n == 0 then
+						no_parameters options
+					else
+						raw_parameters.length <= n 
+					end
+				end
 			end
 
 			# Ensures that the macro receives at least _n_ parameters.
@@ -77,14 +83,34 @@ module Glyph
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def exact_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{raw_parameters.length} given)", options) { raw_parameters.length == n }
+				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{raw_parameters.length} given)", options) do
+					if n == 0 then
+						no_parameters options
+					else
+						raw_parameters.length == n 
+					end
+				end
 			end
 
 			# Ensures that the macro receives no parameters.
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			def no_parameters(options={:level=>:error})
-				validate("Macro '#{@name}' takes no parameters (#{raw_parameters.length} given)", options) { raw_parameters.length == 0 }
+				validate("Macro '#{@name}' takes no parameters (#{raw_parameters.length} given)", options) do 
+					case raw_parameters.length
+					when 0 then
+						true
+					when 1 then
+						result = true
+						raw_parameters[0].children.each do |p|
+							result = p.is_a?(Glyph::TextNode) && p[:value].blank?
+							break unless result
+						end
+						result
+					else
+						false
+					end
+				end
 			end
 
 			def no_mutual_inclusion_in(arg)

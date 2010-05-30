@@ -28,6 +28,7 @@ macro :section do
 end
 
 macro :article do
+	exact_parameters 1
 	head = @node.attr(:head).contents rescue nil
  	head ||= %{style[default.css]}
 	logo = @node.attr(:logo).contents rescue nil
@@ -51,6 +52,7 @@ document[
 end
 
 macro :book do
+	no_parameters
 	head = @node.attr(:head).contents rescue nil 
 	head ||= %{style[default.css]}
 	logo = @node.attr(:logo).contents rescue nil
