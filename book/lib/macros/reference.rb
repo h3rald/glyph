@@ -15,23 +15,23 @@ macro :ref_error do
 	error, description = params
 	%{
 		<tr>
-			<td>#{error.strip}</td>
-			<td>#{description.strip}</td>
+			<td>#{error}</td>
+			<td>#{description}</td>
 		</tr>
 	}
 end
 
 macro :"%>" do
-	interpret "=>[#m_#{value.strip.gsub(/[^a-z0-1_-]/, '_')}|##{value.strip}] macro"
+	interpret "=>[#m_#{value.gsub(/[^a-z0-1_-]/, '_')}|##{value}] macro"
 end
 
 macro :"#>" do
-	interpret "=>[#c_#{value.strip}|#{value.strip}] command"
+	interpret "=>[#c_#{value}|#{value}] command"
 end
 
 macro :"$>" do
-	val = value.strip.gsub /\./, "_"
-	interpret "=>[#s_#{val}|#{value.strip}] setting"
+	val = value.gsub /\./, "_"
+	interpret "=>[#s_#{val}|#{value}] setting"
 end
 
 macro :default do
@@ -47,15 +47,15 @@ macro :"parameters" do
 				<th style="width:30%">#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-2]}</th>
 				<th>Description</th>
 			</tr>
-#{value.strip}
+#{value}
 		</table>
 		]
 	}
 end
 
 macro :option do
-	ident = param(0).strip
-	desc = param(1).strip
+	ident = param(0)
+	desc = param(1)
 	%{
 		<tr>
 			<td><notextile>-#{ident[0..0]} (--#{ident})</notextile></td>
@@ -67,37 +67,39 @@ macro :option do
 end
 
 macro :values do
-	%{*Possible Values:* @#{value.strip}@}
+	%{*Possible Values:* @#{value}@}
 end
 
 macro :example do
-	%{*Example:* <code>#{value.strip}</code>}
+	%{*Example:* <code>#{value}</code>}
 end
 
 macro :examples do
 	%{
 *Examples:* 
-#{value.strip.split("\n").map{|i| "@#{i}@\n"}.to_s}
+#{value.split("\n").map{|i| "@#{i}@\n"}.to_s}
 	}
 end
 
 macro :aliases do
-	%{*Aliases:* @#{value.strip}@}
+	%{*Aliases:* @#{value}@}
 end
 
 macro :ref_macro do
-	m_name = param(0).strip
- 	m_value = param(1).strip
+	m_name = param(0)
+ 	m_value = param(1)
 	interpret %{
-	section[header[@#{m_name}@|m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
+	section[
+@title[#{m_name}]
+@id[m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
 #{m_value}
 	]
 	}
 end
 
 macro :ref_config do
-	m_name = param(0).strip
-	m_value = param(1).strip
+	m_name = param(0)
+	m_value = param(1)
 	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
 	default = "nil" if default.blank?
 	interpret %{tr[
@@ -118,7 +120,7 @@ macro :config_table do
 				th[Description]
 				th[Default (YAML)]
 			]
-			#{value.strip}
+			#{value}
 		]}
 end
 

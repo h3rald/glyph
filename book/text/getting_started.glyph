@@ -1,4 +1,5 @@
-section[header[Creating your first Glyph Project]
+section[
+@title[Creating your first Glyph Project]
 
 To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
 
@@ -37,7 +38,9 @@ Additionally, the following files are also created at top level:
 
 ]
 
-section[header[Document Structure|struct]
+section[
+@title[Document Structure]
+@id[struct]
 
 Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@ generated automatically when creating a new project is the following:
 
@@ -53,20 +56,20 @@ document[
     ]
     frontmatter[
       toc[]
-      preface[header[Preface]
+      preface[@title[Preface]
         include[preface.textile]
       ]
     ]
     bodymatter[  
-      chapter[header[Chapter #1]
+      chapter[@title[Chapter #1]
         include[chapter_1.textile]
       ]
-      chapter[header[Chapter #2]
+      chapter[@title[Chapter #2]
         include[chapter_2.textile]
       ]
     ]
     backmatter[
-      appendix[header[Appendix A]
+      appendix[@title[Appendix A]
         include[appendix_a.textile]
       ]
     ]
@@ -91,7 +94,9 @@ Let's now analyze this @document.glyph@ more in detail.
 
 ]
 
-section[header[Project Configuration|cfg]
+section[
+@title[Project Configuration]
+@id[cfg]
 
 Glyph stores configuration settings in the following YAML files:
 # Your _Project Configuration_ is stored in the @config.yml@ file, included in each Glyph Project.

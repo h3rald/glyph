@@ -2,7 +2,8 @@ Glyph was created wih extensibility in mind. You can freely extend &[glang] by c
 
 tip[Alternatively, you can also define macros right in your document, using the %>[macro:].]
 
-section[header[Anatomy of a Macro]
+section[
+@title[Anatomy of a Macro]
 
 This is the source code of a fairly simple macro used to format a note :
 
@@ -65,7 +66,8 @@ Note that the first three keys can also be accessed via instance variables.]
 
 ]
 
-section[header[Bookmarks and Headers]
+section[
+@title[Bookmarks and Headers]
 
 The =>[http://yardoc.org/docs/glyph/Glyph/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
 
@@ -84,7 +86,8 @@ The @bookmark?@ method can be used to check the existance of a particular ID wit
 
 ]
 
-section[header[Using Placeholders]
+section[
+@title[Using Placeholders]
 
 Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that's easy) or even _after_ the link. 
 
@@ -118,7 +121,8 @@ If there's already a bookmark stored in the current document, then it is possibl
 Within the @placeholder@ block, the @document@ parameter is, by all means, the fully analyzed document.
 ]
 
-section[header[Using Validators]
+section[
+@title[Using Validators]
 If you need to make sure that a macro is used properly, consider using =>[http://yardoc.org/docs/glyph/Glyph/Macro/Validators|validators]. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.
 
 If you want to create your own validators, you can call the generic @validate@ method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.
@@ -135,7 +139,8 @@ Even if you consider all the possibilities within the scope of the default macro
 
 ]
 
-section[header[Interpreting Glyph Code]
+section[
+@title[Interpreting Glyph Code]
 
 What if you need to evaluate some Glyph code _within_ a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the @interpret@ method, as follows:
 
@@ -156,7 +161,9 @@ When the @interpret@ method is called, the following happens:
 # The bookmarks, headers and placeholders are passed from the main document to the new one. Because they are stored in arrays and hashes, they are passed by reference, so for example any new bookmark stored in the new document will also become available in the main document.
 # Any macro included in the @String@ is evaluated, and the resulting text is returned by the method. Note that this new document does not get finalized: in other words, placeholders will be left as they are, and they'll eventually be replaced when _the main document_ is finalized.
 
-section[header[Encoding and Decoding Glyph Code|encode_decode]
+section[
+@title[Encoding and Decoding Glyph Code]
+@id[encode_decode]
 When you use the @interpret@ method, keep in mind that the code is interpreted _before_ the macro execution ends. This may not always be what you want: if you're nesting macros interpreting @section@ and @header@ macros,for example, your Table of Contents may get messed up, with child sections showing up before their parents. 
 
 To avoid this, you can use the @encode@ and @decode@ methods, as shown in the macros defined for Glyph's =>[http://github.com/h3rald/glyph/blob/master/book/text/changelog.glyph|Changelog]:
@@ -178,7 +185,7 @@ macro :features do
   verb = (@name == :features) ? "Implemented" : "Fixed"
   total = @node.children.length
   encode %{
-    section[header[#{total} #{@name.to_s.capitalize} #{verb}]
+    section[@title[#{total} #{@name.to_s.capitalize} #{verb}]
       table[
         tr[
           th[ID]
@@ -194,7 +201,7 @@ macro :release do
   exact_parameters 3
   number, date, contents = @params
   interpret %{
-    section[header[v#{number} &ndash; #{date}]
+    section[@title[v#{number} &ndash; #{date}]
       #{decode contents}
     ]
   }
@@ -212,7 +219,8 @@ note[These methods are also wrapped in the %>[encode] and in the %>[decode].]
 ]
 ]
 
-section[header[Further Reading]
+section[
+@title[Further Reading]
 
 For more examples on how to create more complex macros, have a look at the =>[http://github.com/h3rald/glyph/tree/master/macros/|source code] of the existing ones.
 

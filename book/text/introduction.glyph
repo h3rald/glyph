@@ -3,7 +3,8 @@ Glyph is a _Rapid Document Authoring Framework_.
 
 Think of it like a sort of =>[http://www.rubyonrails.org|Ruby on Rails] but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in _projects_ that can be used to generate deliverables in different formats such as HTML or PDF (through &[prince]).
 
-section[header[Main Features]
+section[
+@title[Main Features]
 
 Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 * Generate block-level HTML tags not commonly managed by lightweight markups, like @head@, @body@, @div@ and @table@.
@@ -25,13 +26,15 @@ Glyph uses a simple macro system to perform a wide variety of advanced tasks:
 
 ]
 
-section[header[Installation]
+section[
+@title[Installation]
 
 @gem install glyph@ -- simple, as always.
 
 ]
 
-section[header[Essential Glyph commands]
+section[
+@title[Essential Glyph commands]
 
 Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's] for its simplicity and power (thanks to the =>[http://github.com/davetron5000/gli|gli] gem). Here are some example commands: 
 
@@ -44,18 +47,22 @@ Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's
 
 ]
 
-section[header[Glyph macros in a nutshell|macros_nutshell]
+section[
+@title[Glyph macros in a nutshell]
+@id[macros_nutshell]
 
 Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:
 
 **Glyph Source:**
 
 code[=
-section[header[Something about Glyph]
+section[@title[Something about Glyph]
 You can use Glyph macros in conjunction
  with _Textile_ or _Markdown_ to
 produce HTML files effortlessly.
-  section[header[What about PDFs?\|pdf]
+  section[
+		@title[What about PDFs?]
+		@id[pdf]
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
 extremely easy with a 3rd-party 
@@ -83,7 +90,8 @@ code[=
 =]
 ]
 
-section[header[Resources]
+section[
+@title[Resources]
 
 * Home Page: =>[http://www.h3rald.com/glyph/]
 * Repository: =>[http://www.github.com/h3rald/glyph/]

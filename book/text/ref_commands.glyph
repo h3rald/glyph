@@ -6,14 +6,19 @@ Where:
 * _global-options_ and _options_ are in the form: @-n@ _value_ or @--name=@\._value_, e.g. @-f pdf@ or @--format=pdf@
 * _parameters_ are separated by whitespaces, and can be wrapped in quotes.
 
-section[header[Global Options]
+section[
+@title[Global Options]
 
-section[header[@-d@, @--debug@|debug_switch]
+section[
+@title[@-d@, @--debug@]
+@id[debug_switch]
 If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.
 ]
 ]
 
-section[header[@add@|c_add]
+section[
+@title[@add@]
+@id[c_add]
 Creates a new text file in the @text/@ folder.
 
 example[glyph add introduction.textile]
@@ -23,7 +28,9 @@ parameters[
 ]
 ] --[End add]
 
-section[header[@compile@|c_compile]
+section[
+@title[@compile@]
+@id[c_compile]
 Compiles a Glyph document into an output file. If no options are specified, the @document.glyph@ file is used as source to produce a standalone HTML file.
 
 example[glyph compile -f pdf]
@@ -49,7 +56,9 @@ If specified, enable =>[#auto_regeneration|auto regeneration] (requires the =>[h
 ]
 ] --[End compile]
 
-section[header[@config@|c_config]
+section[
+@title[@config@]
+@id[c_config]
 Gets or sets a configuration setting in the project or global configuration file (\.fmi[configuration files|#cfg]).
 
 examples[
@@ -69,7 +78,9 @@ parameters[
 ]
 ] --[End config]
 
-section[header[@help@|c_help]
+section[
+@title[@help@]
+@id[c_help]
 Prints information about all Glyph commands or about one specific command.
 
 examples[
@@ -83,13 +94,17 @@ parameters[
 
 ] --[End help]
 
-section[header[@init@|c_init]
+section[
+@title[@init@]
+@id[c_init]
 Creates a new Glyph project in the current directory (if empty).
 
 example[glyph init]
 ] --[End init]
 
-section[header[@todo@|c_todo]
+section[
+@title[@todo@]
+@id[c_todo]
 Prints all the todo items saved using the %>[todo].
 
 example[glyph todo]

@@ -3,7 +3,7 @@ This chapter lists the most common error messages that can be returned when runn
 
 tip[As a general rule, more diagnostic information is provided if Glyph is run in =>[#debug_switch|debug mode].]
 
-section[header[Generic Errors]
+section[@title[Generic Errors]
 
 error_table[
 ref_error[Incorrect macro syntax|
@@ -38,7 +38,7 @@ Returned if the name of an existing file was specified as a parameter for the #>
 
 
 
-section[header[Command Errors]
+section[@title[Command Errors]
 
 error_table[
 
@@ -84,7 +84,7 @@ The name of an unknown setting was specified for the #>[config].
 
 
 
-section[header[Macro Errors]
+section[@title[Macro Errors]
 
 The following errors are displayed in the form:
 

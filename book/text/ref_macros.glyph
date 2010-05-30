@@ -1,4 +1,5 @@
-﻿section[header[Common Macros]
+﻿section[
+@title[Common Macros]
 
 ref_macro[and|
 Conditional @and@ operator, to be used with the %>[condition].
@@ -147,7 +148,9 @@ example[=todo[Remember to do this.]=]
 
 ] --[End common macros]
 
-section[header[Filter Macros|f_macros]
+section[
+@title[Filter Macros]
+@id[f_macros]
 
 ref_macro[markdown|
 Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the $>[filters.target] is set to @html@.
@@ -167,7 +170,8 @@ example[=textile[This is a *strong emphasis*.]=]
 
 ] --[End filter macros]
 
-section[header[Block Macros]
+section[
+@title[Block Macros]
 
 ref_macro[box|
 Creates a titled box (@<div>@ tag).
@@ -288,7 +292,8 @@ ref_macro[tr|See =>[#m_table].]
 
 ] --[End block macros]
 
-section[header[Inline Macros]
+section[
+@title[Inline Macros]
 
 ref_macro[anchor|
 Creates a named anchor (or bookmark).
@@ -332,7 +337,8 @@ examples[=
 
 ] --[End inline macros]
 
-section[header[Structure Macros]
+section[
+@title[Structure Macros]
 
 ref_macro[body|
 Creates a @<body>@ tag.

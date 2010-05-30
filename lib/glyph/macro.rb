@@ -98,7 +98,11 @@ module Glyph
 			@node.ascend do |n|
 				case 
 				when n.is_a?(Glyph::MacroNode) then
-					name = n[:name].to_s
+					if n[:name] == :"|xml|" then
+						name = "xml[#{n[:element]}]"
+					else
+						name = n[:name].to_s
+					end
 				when n.is_a?(Glyph::ParameterNode) then
 					if n.parent.parameters.length == 1 then
 						name = nil
