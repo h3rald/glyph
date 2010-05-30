@@ -86,33 +86,6 @@ macro :pubdate do
 </div>}
 end
 
-macro :table do
-	exact_parameters 1
-	%{<table>
-#{value}
-</table>}
-end
-
-macro :tr do
-	exact_parameters 1, :level => :warning
-	%{<tr>
-#{value}	
-</tr>}
-end
-
-macro :td do
-	exact_parameters 1, :level => :warning
-	%{<td>
-#{value}
-
-</td>}
-end
-
-macro :th do
-	exact_parameters 1, :level => :warning
-	%{<th>#{value}</th>}
-end
-
 macro_alias :important => :note
 macro_alias :tip => :note
 macro_alias :caution => :note

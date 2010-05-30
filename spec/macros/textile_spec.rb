@@ -52,64 +52,6 @@ Testing:
 	end
 
 	######################################
-	
-	it "should be embeddable in td macros" do
-		text0 =
-%{<table>
-<tr>
-<td>
-#@textile
-</td>
-</tr>
-</table>
-}
-		text1 =
-%{textile[table[
-	tr[td[#@textile]]
-]]}
-		text2 =
-%{textile[table[
-	tr[
-		td[#@textile]
-	]
-]]}
-		text3 =
-%{textile[table[
-	tr[
-		td[
-#@textile
-		]
-	]
-]]}
-		text4 = %{textile[table[
-	tr[
-		td[This is a _test_.]
-	]
-]]}
-		result = 
-%{<table>
-<tr>
-<td>
-#@html
-</td>
-</tr>
-</table>}
-		result2 = 
-%{<table>
-<tr>
-<td>
-<p>This is a <em>test</em>.</p>
-</td>
-</tr>
-</table>}
-		filter(text1).should == result
-		filter(text2).should == result
-		filter(text3).should == result
-		##### Check inline textile
-		filter(text4).should == result2
-	end
-	
-	######################################
 
 	it "should be embeddable in box macros" do
 		result = 

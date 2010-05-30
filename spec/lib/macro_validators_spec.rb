@@ -24,7 +24,7 @@ describe Glyph::Macro::Validators do
 
 	it "should validate the number of parameters" do
 		# exact
-		lambda { interpret("table[]").document.output }.should raise_error Glyph::MacroError
+		lambda { interpret("section[sfsdg|saf]").document.output }.should raise_error Glyph::MacroError
 		# none
 		lambda { interpret("title[test]").document.output }.should raise_error Glyph::MacroError
 		# min
