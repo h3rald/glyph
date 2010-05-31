@@ -36,6 +36,9 @@ module Glyph
 			@document
 		end
 
+		# Parses the string provided during initialization
+		# @return [Glyph::SyntaxNode] the Abstract Syntax Tree generated from the string
+		# @since 0.3.0
 		def parse
 			Glyph.info "  -> Parsing: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
 			@tree = @parser.parse

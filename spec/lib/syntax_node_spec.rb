@@ -85,7 +85,7 @@ describe Glyph::MacroNode do
 
 	it "should resolve to an XML element" do
 		reset_quiet
-		@n.xml_element({})
+		@n.expand({}) rescue nil # |xml| macro not defined
 		@n[:element].should == "test"
 	end
 

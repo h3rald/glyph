@@ -261,6 +261,12 @@ module Glyph
 	def self.error(message)
 		puts "=> error: #{message}" unless Glyph['system.quiet']
 	end
+	
+	# Prints a message if running in debug mode
+	# @param [String] message the message to print
+	def self.debug(message)
+		puts message if Glyph.debug?
+	end
 
 end
 

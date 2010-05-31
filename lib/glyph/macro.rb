@@ -17,25 +17,44 @@ module Glyph
 			@source = @node[:source] || "--"
 		end
 
+		# Returns the macro's raw attribute syntax nodes (See Glyph::MacroNode#attributes). 
+		# @return [Array<Glyph::AttributeNode>, nil] an array of attribute nodes
+		# @since 0.3.0
 		def raw_attributes
 			return @raw_attributes if @raw_attributes
-			@raw_attributes = {}
 			@raw_attributes = @node.attributes
 		end
 
+		# Returns the macro's raw parameter syntax nodes (See Glyph::MacroNode#parameters). 
+		# @return [Array<Glyph::ParameterNode>, nil] an array of parameter nodes
+		# @since 0.3.0
 		def raw_parameters
 			return @raw_parameters if @raw_parameters
 			@raw_parameters = @node.parameters
 		end
 
-		def raw_parameter(n)
-			raw_parameters[n]
-		end
-
+		# Returns the attribute syntax node with the specified name (See Glyph::MacroNode#attribute). 
+		# @param [Symbol] name the name of the attribute
+		# @return [Glyph::AttributeNode, nil] an attribute node
+		# @since 0.3.0
 		def raw_attribute(name)
 			raw_attributes.select{|n| n[:name] == name}[0]
 		end
 
+		# Returns the parameter syntax node at the specified index (See Glyph::MacroNode#parameter). 
+		# @param [Fixnum] n the index of the parameter 
+		# @return [Glyph::ParameterNode, nil] a parameter node
+		# @since 0.3.0
+		def raw_parameter(n)
+			raw_parameters[n]
+		end
+
+		# Returns an evaluated macro attribute by name
+		# @param [String, Symbol] name the name of the attribute
+		# @param [Hash] options a hash of options
+		# @option options [Boolean] :strip whether the value is stripped or not
+		# @return [String, nil] the value of the attribute
+		# @since 0.3.0
 		def attribute(name, options={:strip => true})
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
 			return nil unless raw_attribute(name)
@@ -45,6 +64,12 @@ module Glyph
 			@attributes[name]
 		end
 
+		# Returns an evaluated macro parameter by index
+		# @param [Fixnum] n the index of the parameter
+		# @param [Hash] options a hash of options
+		# @option options [Boolean] :strip whether the value is stripped or not
+		# @return [String, nil] the value of the parameter
+		# @since 0.3.0
 		def parameter(n, options={:strip => true})
 			return @parameters[n] if @parameters && @parameters[n]
 			return nil unless raw_parameter(n)
@@ -54,6 +79,11 @@ module Glyph
 			@parameters[n]
 		end
 
+		# Returns a hash containing all evaluated macro attributes
+		# @param [Hash] options a hash of options
+		# @option options [Boolean] :strip whether the value is stripped or not
+		# @return [Hash] the macro attributes
+		# @since 0.3.0
 		def attributes(options={:strip => true})
 			return @attributes if @attributes
 			@attributes = {}
@@ -64,6 +94,11 @@ module Glyph
 			@attributes
 		end
 
+		# Returns an array containing all evaluated macro parameters
+		# @param [Hash] options a hash of options
+		# @option options [Boolean] :strip whether the value is stripped or not
+		# @return [Array] the macro parameters
+		# @since 0.3.0
 		def parameters(options={:strip => true})
 			return @parameters if @parameters
 			@parameters = []
@@ -83,16 +118,21 @@ module Glyph
 		alias raw_attrs raw_attributes
 		alias raw_attr raw_attribute
 
+		# Equivalent to Glyph::Macro#parameter(0).
+		# @since 0.3.0
 		def value
 			parameter(0)
 		end
 
+		# Equivalent to Glyph::Macro#raw_parameter(0).
+		# @since 0.3.0
 		def raw_value
 			raw_parameter(0)
 		end
 
 		# Returns the "path" to the macro within the syntax tree.
 		# @return [String] the macro path
+		# @since 0.3.0
 		def path
 			macros = []
 			@node.ascend do |n|
@@ -137,7 +177,7 @@ module Glyph
 		# @raise [Glyph::MacroError]
 		def macro_error(msg, klass=Glyph::MacroError)
 			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
-			@node[:document].errors << message
+			@node[:document].errors << message if @node[:document]
 			message += "\n    value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}" if Glyph.debug?
 			raise klass, message
 		end
@@ -162,7 +202,6 @@ module Glyph
 		# Instantiates a Glyph::Interpreter and interprets a string
 		# @param [String] string the string to interpret
 		# @return [String] the interpreted output
-		# @raise [Glyph::MacroError] in case of mutual macro inclusion (snippet, include macros)
 		def interpret(string)
 			if @node[:escape] then
 				result = string 
@@ -213,8 +252,5 @@ module Glyph
 			res
 		end
 
-		protected
-
 	end
-
 end

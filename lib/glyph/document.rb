@@ -6,7 +6,7 @@ module Glyph
 	# currently being interpreted.
 	#
 	# It is responsible of analyzing (evaluating) the syntax tree and return the corresponding output
-	# as well as evaluating placeholders.
+	# as well as replacing placeholders.
 	class Document
 
 		ESCAPES = [

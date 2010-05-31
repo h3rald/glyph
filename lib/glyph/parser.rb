@@ -3,10 +3,15 @@ require 'strscan'
 
 module Glyph
 
+	# The Glyph::Parser class can parse a string of text containing Glyph macros and produce the
+	# corresponding syntax tree.
+	# @since 0.3.0
 	class Parser
 
-		class Glyph::SyntaxNode < Node; end
-
+		# Initializes the parser.
+		# @param [String] text the text to parse
+		# @param [String] source_name the name of the source file (stored in the root node) 
+		# @since 0.3.0
 		def initialize(text, source_name="--")
 			@source_name = source_name || "--"
 			@input = StringScanner.new text
@@ -15,6 +20,9 @@ module Glyph
 			@current_attribute = nil
 		end
 
+		# Parses the string of text provided during initialization
+		# @return [Glyph::SyntaxNode] the Abstract Syntax Tree corresponding to the string
+		# @since 0.3.0
 		def parse
 			count = 0
 			while result = parse_contents(@output) do
