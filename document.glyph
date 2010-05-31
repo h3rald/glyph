@@ -1,29 +1,25 @@
-document[
-  head[style[default.css]]
-  body[
-    titlepage[
-      title[]
-      author[]
-      pubdate[]
-    ]
-    frontmatter[
-      toc[]
-      preface[header[Preface]
-        @[preface.textile]
-      ]
-    ]
-    bodymatter[  
-      chapter[header[Chapter #1]
-        @[chapter_1.textile]
-      ]
-      chapter[header[Chapter #2]
-        @[chapter_2.textile]
-      ]
-    ]
-		backmatter[
-			appendix[header[Appendix A]
-				@[appendix_a.textile]
-			]
+book[
+  @frontmatter[
+		toc[]
+		preface[
+			@title[Preface]
+			include[preface.textile]
 		]
+	]
+  @bodymatter[  
+    chapter[ 
+			@title[Chapter #1]
+      include[chapter_1.textile]
+    ]
+    chapter[
+			@title[Chapter #2]
+      include[chapter_2.textile]
+    ]
   ]
+	@backmatter[
+		appendix[
+			@title[Appendix A]
+			include[appendix_a.textile]
+		]
+	]
 ]
