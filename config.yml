@@ -9,7 +9,7 @@
   :output: 'html'
   :output_targets: [:html, :pdf]
 :language:
-  :set: 'glyph' # xml, bare, filters
+  :set: 'glyph' # xml, core, filters
   :options:
     :xml_fallback: true
 :system:

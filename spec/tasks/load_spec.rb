@@ -36,7 +36,7 @@ describe "load" do
 	end
 
 	it "[macros] should be able to load only common macros" do
-		language 'bare'
+		language 'core'
 		output_for("$:[language.set|glyph]").blank?.should == true
 		Glyph['language.set'].should == 'glyph'
 	end

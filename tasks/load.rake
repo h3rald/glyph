@@ -41,7 +41,7 @@ namespace :load do
 		when 'filters' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 
-		when 'bare' then
+		when 'core' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
 		end
 		# load project macros
