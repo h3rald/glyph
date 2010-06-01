@@ -7,7 +7,7 @@ macro :textile do
 		require 'RedCloth'
 		rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
 	rescue Exception
-		macro_error "RedCloth gem not installed. Please run: gem insall RedCloth"
+		macro_error "RedCloth gem not installed. Please run: gem install RedCloth"
 	end
 	target = Glyph["filters.target"]
 	case target.to_sym
@@ -24,7 +24,10 @@ macro :markdown do
 	exact_parameters 1, :level => :warning
 	md = nil
 	markdown_converter = Glyph["filters.markdown_converter"].to_sym rescue nil
-	if !markdown_converter then
+	begin
+		raise LoadError unless markdown_converter
+		require markdown_converter.to_s
+	rescue LoadError
 		begin
 			require 'bluecloth'
 			markdown_converter = :bluecloth
@@ -41,28 +44,24 @@ macro :markdown do
 						require 'kramdown'
 						markdown_converter = :kramdown
 					rescue LoadError
-						macro_error "No MarkDown converter installed. Please run: gem install bluecloth"
+						macro_error "No supported MarkDown converter installed. Please run: gem install bluecloth"
 					end
 				end
 			end
 		end
-		Glyph["filters.markdown_converter"] = markdown_converter
 	end
+	Glyph["filters.markdown_converter"] = markdown_converter
 	case markdown_converter
 	when :bluecloth
-		require 'bluecloth'
 		md = BlueCloth.new value
 	when :rdiscount
-		require 'rdiscount'
 		md = RDiscount.new value
 	when :maruku
-		require 'maruku'
 		md = Maruku.new value
 	when :kramdown
-		require 'kramdown'
 		md = Kramdown::Document.new value
 	else
-	 macro_error "No MarkDown converter installed. Please run: gem install bluecloth"
+	 macro_error "No supported MarkDown converter installed. Please run: gem install bluecloth"
 	end
 	target = Glyph["filters.target"]
 	if target.to_sym == :html then
@@ -78,7 +77,14 @@ macro :highlight do
 	text = param(1)
 	text.gsub!(/\\(.)/){$1}
 	highlighter = Glyph["highlighters.current"].to_sym rescue nil
-	if !highlighter then
+	begin
+		raise LoadError unless highlighter
+		if highlighter.to_s.match(/^(uv|ultraviolet)$/) then
+			require 'uv'
+		else
+			require highlighter.to_s
+		end
+	rescue LoadError
 		begin
 			require 'coderay'
 			highlighter = :coderay
@@ -87,39 +93,34 @@ macro :highlight do
 				require 'uv'
 				highlighter = :ultraviolet
 			rescue LoadError
-				macro_error "No highlighter installed. Please run: gem install coderay"
+				macro_error "No supported highlighter installed. Please run: gem install coderay"
 			end
 		end
-		Glyph["highlighter.current"] = highlighter
 	end
+	Glyph["highlighter.current"] = highlighter
 	target = Glyph["highlighters.target"]
 	result = ""
 	case highlighter.to_sym
 	when :coderay
 		begin
-			require 'coderay'
 			result = CodeRay.scan(text, lang).div(Glyph["highlighters.coderay"])
-		rescue LoadError
-			macro_error "CodeRay highlighter not installed. Please run: gem install coderay"
 		rescue Exception => e
 			macro_error e.message
 		end
 	when :ultraviolet
 		begin
-			require 'uv'
 			target = 'xhtml' if target == 'html'
 			result = Uv.parse(text.to_s, target.to_s, lang.to_s, 
 							 Glyph["highlighters.ultraviolet.line_numbers"], 
 							 Glyph["highlighters.ultraviolet.theme"].to_s)
-		rescue LoadError
-			macro_error "UltraViolet highlighter not installed. Please run: gem install ultraviolet"
 		rescue Exception => e
 			macro_error e.message
 		end
 	else
-		macro_error "No highlighter installed. Please run: gem install coderay"
+		macro_error "No supported highlighter installed. Please run: gem install coderay"
 	end
 	result
 end
 
 macro_alias :md => :markdown
+macro_alias :txt => :textile
