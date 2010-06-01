@@ -1,0 +1,55 @@
+section[
+	@title[Document Structure]
+	@id[struct]
+
+	p[Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@ generated automatically when creating a new project is the following]
+
+	codeblock[=
+document[
+  head[style[default.css]]
+  body[
+    titlepage[
+      title[]
+      author[]
+      pubdate[]
+    ]
+    frontmatter[
+      toc[]
+      preface[@title[Preface]
+        include[preface.textile]
+      ]
+    ]
+    bodymatter[  
+      chapter[@title[Chapter #1]
+        include[chapter_1.textile]
+      ]
+      chapter[@title[Chapter #2]
+        include[chapter_2.textile]
+      ]
+    ]
+    backmatter[
+      appendix[@title[Appendix A]
+        include[appendix_a.textile]
+      ]
+    ]
+  ]
+]
+	=]
+
+
+	textile[
+Even without knowing anything about &[glang], you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. @frontmatter\[\]@, @preface\[\]@, @chapter\[\]@, etc. are all Glyph _macros_ used to define -- in this case -- some structural elements. In practice, this means that if you plan to generate an HTML document, they'll be converted into @<div>@ tags.
+
+Be aware that other macros, on the other hand, are used to do something completely different, e.g.:
+* @toc\[\]@ generates the document's Table of Contents
+* code[=@\[\]=] or its alias @include\[\]@ is used to copy the contents of another file stored anywhere in the @text/@ directory.
+
+Let's now analyze this @document.glyph@ more in detail.
+* The @document\[\]@ macro wraps every other macro. This is necessary to create the initial @<html>@ tag.
+* Similarly, @head\[\]@ and @body\[\]@ are used to generate the respective HTML tags. Actually, @head\[\]@ already sets some metadata for you, by default (author and copyright).
+* Within @head\[\]@, the @style\[\]@ macro is used to load the @default.css@ stylesheet, which is one of the =>[#default_styles|default Glyph styleseets].
+* Immediately after the @body\[\]@ macro, the @titlepage\[\]@ macro is used to define (guess...) the first page of your document. @title\[\]@, @author\[\]@  and @pubdate\[\]@ insert the title of the document, its author and the publication date (retrieved from the project's =>[#cfg|configuration settings]).
+* Then, the @frontmatter\[\]@, @bodymatter\[\]@ and @backmatter\[\]@ macros are used to further divide the portions of your document according to the rules of =>[http://en.wikipedia.org/wiki/Book_design|book design]. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.
+* @preface\[\]@, @chapter\[\]@, @appendix\[\]@ are just a way to wrap content in @<div>@ tags, from an HTML point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together with the @header\[\]@ macro.
+	]
+]

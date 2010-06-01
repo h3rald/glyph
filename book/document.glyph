@@ -27,7 +27,9 @@ book[
 	@bodymatter[
 		chapter[
 			@title[Getting Started]
-			textile[include[getting_started.glyph]]
+			include[create_project.glyph]
+			include[structure.glyph]
+			include[configuration.glyph]
 		]
 		chapter[
 			@title[Authoring Documents]

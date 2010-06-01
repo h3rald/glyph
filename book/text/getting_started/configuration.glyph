@@ -1,0 +1,68 @@
+section[
+	@title[Project Configuration]
+	@id[cfg]
+
+	textile[
+Glyph stores configuration settings in the following YAML files:
+# Your _Project Configuration_ is stored in the @config.yml@ file, included in each Glyph Project.
+# Your _Global Configuration_ is stored in a @.glyphrc@ file in your $HOME (or ==%HOMEPATH%== on Windows) directory (not created by default).
+# The _System Configuration_ is stored in the source directory of Glyph itself.
+
+When compiling, Glyph loads all these configuration files and merges them according to the following rules:
+* A setting configured in the _Project Configuration_ overrides the same setting in both Global and System configuration.
+* A setting configured in the _Global Configuration_ overrides the same setting in the _System Configuration_
+
+Typically, you should use the _Project Configuration_ for all project-specific settings and the _Global Configuration_ for settings affecting all your projects (for example, you may want to set the $>[document.author] in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The _System Configuration_ is best left untouched.
+
+Instead of editing your configuration settings directly, you can use the #>[config], as follows:
+
+@glyph config@ _setting_ _\[value\]_
+
+If no _value_ is specified, glyph just prints the value of the configuration setting, so typing @glyph config document.author@ right after creating a project (assuming you didn't set this in the Global Configuration) will print nothing, because this setting is blank by default.
+
+To change the value of a configuration setting, specify a value right after the setting, like this:
+
+@glyph config document.author "John Smith"@
+
+	tip[It is also possible to change configuration settings inside your document, using the %>[config:].]
+
+In this way, the document author will be set to _John Smith_ for the current project. To save this setting globally, add a @-g@ option, like this:
+
+@glyph config -g document.author "John Smith"@
+
+	box[Regarding configuration values and data types...|
+Glyph attempts to "guess" the data type of a configuration values by evaluation (@Kernel#instance_eval@) if the value:
+* is wrapped in quotes (@"@ or @'@) &rarr; @String@
+* starts with a colon (@:@) &rarr; @Symbol@
+* is wrapped in square brackets (@\[@ and @\]@) &rarr; @Array@
+* is wrapped in curly brackets (@{@ and @}@) &rarr; @Hash@
+* is _true_ or _false_ &rarr; @Boolean@
+* is _nil_ &rarr; @NilClass@
+
+Note that this guessing is far from being foolproof: If you type something like _{:test, 2}_, for example, you'll get an error. 
+	]
+
+There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file). 
+
+For a complete reference, see =>[#cfg_ref]. Normally, you may just want to change the following ones:
+	] --[End textile]
+
+	table[
+		tr[
+			th[Setting]
+			th[Description]
+		]
+		tr[
+			th[code[document.author]]
+			td[The author of the document]
+		]
+		tr[
+			th[code[document.title]]
+			td[The title of the document]
+		]
+		tr[
+			th[code[document.filename]]
+			td[The document file name]
+		]
+	]
+]
