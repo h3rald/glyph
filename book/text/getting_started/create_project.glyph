@@ -22,6 +22,8 @@ Additionally, some Glyph macros may require additional gems, such as:
 * RedCloth (\.%>[textile])
 * BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (\.%>[markdown])
 * Haml (if you want to load .sass files with the %>[style])
+* CodeRay _or_ UltraViolet (\.%>[highlight])
+* directory_watcher (to use auto-regeneration with the #>[compile])
 	]
 
 Every Glyph project is comprised of the following directories:
@@ -29,11 +31,11 @@ Every Glyph project is comprised of the following directories:
 * @lib/@ -- used to store your custom Glyph macros and Rake tasks.
 * @output/@ -- used to store your generated output files.
 * @styles/@ -- used to store your stylesheets.
-* @text/*@ -- used to store your source text files.
+* @text/@ -- used to store your source text files.
 
 Additionally, the following files are also created at top level:
 * @config.yml@ -- containing your =>[#cfg|Project Configuration].
-* @document.glyph@ -- containing your =>[#struct|Document Structure]
+* @document.glyph@ -- containing the =>[#struct|structure] of your document.
 * @snippets.yml@ -- containing your text =>[#incl|snippets].
 	]
 ]

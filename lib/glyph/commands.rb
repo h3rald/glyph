@@ -113,9 +113,13 @@ end
 GLI.desc 'Display all project TODO items'
 command :todo do |c|
 	c.action do |global_options, options, args|
+		Glyph['system.quiet'] = true
 		Glyph.run "generate:document"
+		Glyph['system.quiet'] = false
 		unless Glyph.document.todos.blank?
-			Glyph.info "*** TODOs: ***"
+			puts "====================================="
+			puts "#{Glyph['document.title']} - TODOs"
+			puts "====================================="
 			Glyph.document.todos.each do |t|
 				Glyph.info t
 			end
@@ -141,7 +145,9 @@ command :outline do |c|
 		files = options[:f]
 		titles = options[:t]
 		titles = true if !ids && !levels && !files || levels && !ids
+		Glyph['system.quiet'] = true
 		Glyph.run "generate:document"
+		Glyph['system.quiet'] = false
 		puts "====================================="
 		puts "#{Glyph['document.title']} - Outline"
 		puts "====================================="
@@ -150,6 +156,7 @@ command :outline do |c|
 				case
 				when n[:name].in?(Glyph['system.structure.headers']) then
 					header = Glyph.document.header?(n[:header])
+					next unless header
 					last_level = header[:level]
 					h_id = ids ? "[##{header[:id]}]" : ""
 					h_level = levels ? "h#{header[:level]}: " : ""

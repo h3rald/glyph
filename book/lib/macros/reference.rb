@@ -22,7 +22,7 @@ macro :ref_error do
 end
 
 macro :"%>" do
-	interpret "=>[#m_#{value.gsub(/[^a-z0-1_-]/, '_')}|##{value}] macro"
+	interpret "=>[#m_#{value.gsub(/[^a-z0-1_-]/, '_')}|#{value}] macro"
 end
 
 macro :"#>" do

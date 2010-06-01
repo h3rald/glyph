@@ -2,54 +2,54 @@ section[
 	@title[Document Structure]
 	@id[struct]
 
-	p[Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@ generated automatically when creating a new project is the following]
+	p[Every Glyph project contains a code[document.glyph] file that is typically used to define the document structure. The default code[document.glyph] generated automatically when creating a new project is the following:]
 
 	codeblock[=
-document[
-  head[style[default.css]]
-  body[
-    titlepage[
-      title[]
-      author[]
-      pubdate[]
+book[
+  @frontmatter[
+    toc[]
+    preface[
+      @title[Preface]
+      todo[Write the preface]
+      include[preface.glyph]
     ]
-    frontmatter[
-      toc[]
-      preface[@title[Preface]
-        include[preface.textile]
-      ]
+  ]
+  @bodymatter[  
+    chapter[ 
+      @title[Chapter 1]
+      todo[Write chapter 1]
+      include[chapter_1.glyph]
     ]
-    bodymatter[  
-      chapter[@title[Chapter #1]
-        include[chapter_1.textile]
-      ]
-      chapter[@title[Chapter #2]
-        include[chapter_2.textile]
-      ]
+    chapter[
+      @title[Chapter 2]
+      todo[Write chapter 2]
+      include[chapter_2.glyph]
     ]
-    backmatter[
-      appendix[@title[Appendix A]
-        include[appendix_a.textile]
-      ]
+  ]
+  @backmatter[
+    appendix[
+      @title[Appendix A]
+      todo[Write appendix A]
+      include[appendix_a.glyph]
     ]
   ]
 ]
 	=]
 
-
 	textile[
-Even without knowing anything about &[glang], you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. @frontmatter\[\]@, @preface\[\]@, @chapter\[\]@, etc. are all Glyph _macros_ used to define -- in this case -- some structural elements. In practice, this means that if you plan to generate an HTML document, they'll be converted into @<div>@ tags.
+Even without knowing anything about &[glang], you can easily figure out that this file defines a document with a Table of Contents, a Preface some Chapters and an Appendix.
 
-Be aware that other macros, on the other hand, are used to do something completely different, e.g.:
-* @toc\[\]@ generates the document's Table of Contents
-* code[=@\[\]=] or its alias @include\[\]@ is used to copy the contents of another file stored anywhere in the @text/@ directory.
+As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for em[\.=>[#macro_intro|macros]] and em[\.=>[#attribute_intro|attributes]]. The only syntactic difference between macros and attributes is that attributes are preceded by a code[@]. 
 
-Let's now analyze this @document.glyph@ more in detail.
-* The @document\[\]@ macro wraps every other macro. This is necessary to create the initial @<html>@ tag.
-* Similarly, @head\[\]@ and @body\[\]@ are used to generate the respective HTML tags. Actually, @head\[\]@ already sets some metadata for you, by default (author and copyright).
-* Within @head\[\]@, the @style\[\]@ macro is used to load the @default.css@ stylesheet, which is one of the =>[#default_styles|default Glyph styleseets].
-* Immediately after the @body\[\]@ macro, the @titlepage\[\]@ macro is used to define (guess...) the first page of your document. @title\[\]@, @author\[\]@  and @pubdate\[\]@ insert the title of the document, its author and the publication date (retrieved from the project's =>[#cfg|configuration settings]).
-* Then, the @frontmatter\[\]@, @bodymatter\[\]@ and @backmatter\[\]@ macros are used to further divide the portions of your document according to the rules of =>[http://en.wikipedia.org/wiki/Book_design|book design]. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.
-* @preface\[\]@, @chapter\[\]@, @appendix\[\]@ are just a way to wrap content in @<div>@ tags, from an HTML point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together with the @header\[\]@ macro.
+For now, think about a macro as something that performs a certain action and -- generally -- produces some text output or manipulation of the text inside it. In this way, it becomes easy to understand that the @chapter@ macro creates a chapter and the %>[include] includes an external file, for example.
+Attributes "belong" to the macro they're in, so in this case the %>[book] macro has the following attributes:
+*  code[@frontmatter]
+*  code[@bodymatter]
+*  code[@backmatter]
+
+More specifically, in this @document.glyph@ file:
+* The %>[book] wraps every other macro and is used to create the document header and default title page.
+* Then, the code[@frontmatter], code[@bodymatter], and code[@backmatter] attributes are used to divide the portions of your document according to the rules of =>[http://en.wikipedia.org/wiki/Book_design|book design]. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.
+* @preface@, @chapter@, @appendix@ are just a way to wrap content in @<div>@ tags, from an HTML point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together through code[@title] attributes.
 	]
 ]

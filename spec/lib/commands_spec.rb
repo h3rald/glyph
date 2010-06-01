@@ -184,10 +184,7 @@ describe "glyph" do
 
 	it "[outline] should display the document outline" do
 		create_project
-		start = %{-- Parsing 'document.glyph'...
--- Processing...
--- Post-processing...
-=====================================
+		start = %{=====================================
 test_project - Outline
 =====================================}
 		c_file = "----- file: container.textile"

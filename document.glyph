@@ -3,23 +3,27 @@ book[
 		toc[]
 		preface[
 			@title[Preface]
-			include[preface.textile]
+			todo[Write the preface]
+			include[preface.glyph]
 		]
 	]
   @bodymatter[  
     chapter[ 
-			@title[Chapter #1]
-      include[chapter_1.textile]
+			@title[Chapter 1]
+			todo[Write chapter 1]
+      include[chapter_1.glyph]
     ]
     chapter[
-			@title[Chapter #2]
-      include[chapter_2.textile]
+			@title[Chapter 2]
+			todo[Write chapter 2]
+      include[chapter_2.glyph]
     ]
   ]
 	@backmatter[
 		appendix[
 			@title[Appendix A]
-			include[appendix_a.textile]
+			todo[Write appendix A]
+			include[appendix_a.glyph]
 		]
 	]
 ]

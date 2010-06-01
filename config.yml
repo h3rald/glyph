@@ -4,7 +4,7 @@
   :title: ""
   :subtitle: ""
   :filename: ""
-  :revision: "1.0"
+  :revision: "rev. 1"
   :draft: false
   :output: 'html'
   :output_targets: [:html, :pdf]

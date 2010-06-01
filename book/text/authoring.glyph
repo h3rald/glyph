@@ -6,6 +6,7 @@ One of the main purposes of Glyph is streamlining text editing. Glyph accomplish
 
 section[
 @title[Introducing &[macros]]
+@id[macro_intro]
 
 By now you probably figured out what a macro looks like: it's an identifier of some kind that wraps a value or parameters within square brackets. More specifically:
 * The macro identifier can contain _any_ character except for: @\[@, @\]@, @\\@, @\|@ or spaces.

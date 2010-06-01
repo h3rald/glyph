@@ -368,7 +368,7 @@ June 2010
 </ol></li>
 <li class="bodymatter chapter"><a href="#h_13">Authoring Documents</a></li>
 <li><ol><li class="bodymatter section"><a href="#h_14">Text Editing</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_15">Introducing Glyph Macros</a></li>
+<li><ol><li class="bodymatter section"><a href="#macro_intro">Introducing Glyph Macros</a></li>
 <li class="bodymatter section"><a href="#esc_quot">Escaping and Quoting</a></li>
 <li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li>
 <li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li>
@@ -639,9 +639,11 @@ all copies or substantial portions of the Software.</p>
 </ul>
 <p>Additionally, some Glyph macros may require additional gems, such as:</p>
 <ul>
-	<li>RedCloth (<a href="#m_textile">#textile</a> macro)</li>
-	<li>BlueCloth <em>or</em> RDiscount <em>or</em> Maruku <em>or</em> Kramdown (<a href="#m_markdown">#markdown</a> macro)</li>
-	<li>Haml (if you want to load .sass files with the <a href="#m_style">#style</a> macro)</li>
+	<li>RedCloth (<a href="#m_textile">textile</a> macro)</li>
+	<li>BlueCloth <em>or</em> RDiscount <em>or</em> Maruku <em>or</em> Kramdown (<a href="#m_markdown">markdown</a> macro)</li>
+	<li>Haml (if you want to load .sass files with the <a href="#m_style">style</a> macro)</li>
+	<li>CodeRay <em>or</em> UltraViolet (<a href="#m_highlight">highlight</a> macro)</li>
+	<li>directory_watcher (to use auto-regeneration with the <a href="#c_compile">compile</a> command)</li>
 </ul>
 </div>
 <p>Every Glyph project is comprised of the following directories:</p>
@@ -650,50 +652,50 @@ all copies or substantial portions of the Software.</p>
 	<li><code>lib/</code> &#8212; used to store your custom Glyph macros and Rake tasks.</li>
 	<li><code>output/</code> &#8212; used to store your generated output files.</li>
 	<li><code>styles/</code> &#8212; used to store your stylesheets.</li>
-	<li><code>text/*</code> &#8212; used to store your source text files.</li>
+	<li><code>text/</code> &#8212; used to store your source text files.</li>
 </ul>
 <p>Additionally, the following files are also created at top level:</p>
 <ul>
 	<li><code>config.yml</code> &#8212; containing your <a href="#cfg">Project Configuration</a>.</li>
-	<li><code>document.glyph</code> &#8212; containing your <a href="#struct">Document Structure</a></li>
+	<li><code>document.glyph</code> &#8212; containing the <a href="#struct">structure</a> of your document.</li>
 	<li><code>snippets.yml</code> &#8212; containing your text <a href="#incl">snippets</a>.</li>
 </ul>
 
 </div>
 			<div class="section">
 <h3 id="struct">Document Structure</h3>
-<p>Every Glyph project contains a @document.glyph@ file that is typically used to define the document structure. The default @document.glyph@ generated automatically when creating a new project is the following</p>
+<p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code> generated automatically when creating a new project is the following:</p>
 
 	
 <div class="code">
 <pre>
 <code>
-document[
-  head[style[default.css]]
-  body[
-    titlepage[
-      title[]
-      author[]
-      pubdate[]
+book[
+  @frontmatter[
+    toc[]
+    preface[
+      @title[Preface]
+      todo[Write the preface]
+      include[preface.glyph]
     ]
-    frontmatter[
-      toc[]
-      preface[@title[Preface]
-        include[preface.textile]
-      ]
+  ]
+  @bodymatter[  
+    chapter[ 
+      @title[Chapter 1]
+      todo[Write chapter 1]
+      include[chapter_1.glyph]
     ]
-    bodymatter[  
-      chapter[@title[Chapter #1]
-        include[chapter_1.textile]
-      ]
-      chapter[@title[Chapter #2]
-        include[chapter_2.textile]
-      ]
+    chapter[
+      @title[Chapter 2]
+      todo[Write chapter 2]
+      include[chapter_2.glyph]
     ]
-    backmatter[
-      appendix[@title[Appendix A]
-        include[appendix_a.textile]
-      ]
+  ]
+  @backmatter[
+    appendix[
+      @title[Appendix A]
+      todo[Write appendix A]
+      include[appendix_a.glyph]
     ]
   ]
 ]
@@ -701,21 +703,20 @@ document[
 </pre>
 </div>
 
-
-	<p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface and some Chapters. <code>frontmatter[]</code>, <code>preface[]</code>, <code>chapter[]</code>, etc. are all Glyph <em>macros</em> used to define &#8212; in this case &#8212; some structural elements. In practice, this means that if you plan to generate an <span class="caps">HTML</span> document, they&#8217;ll be converted into <code>&lt;div&gt;</code> tags.</p>
-<p>Be aware that other macros, on the other hand, are used to do something completely different, e.g.:</p>
+	<p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface some Chapters and an Appendix.</p>
+<p>As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for <em><a href="#macro_intro">macros</a></em> and <em><a href="#attribute_intro">attributes</a></em>. The only syntactic difference between macros and attributes is that attributes are preceded by a <code>@</code>.</p>
+<p>For now, think about a macro as something that performs a certain action and &#8212; generally &#8212; produces some text output or manipulation of the text inside it. In this way, it becomes easy to understand that the <code>chapter</code> macro creates a chapter and the <a href="#m_include">include</a> macro includes an external file, for example.<br />
+Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case the <a href="#m_book">book</a> macro macro has the following attributes:</p>
 <ul>
-	<li><code>toc[]</code> generates the document&#8217;s Table of Contents</li>
-	<li><code>@[]</code> or its alias <code>include[]</code> is used to copy the contents of another file stored anywhere in the <code>text/</code> directory.</li>
+	<li><code>@frontmatter</code></li>
+	<li><code>@bodymatter</code></li>
+	<li><code>@backmatter</code></li>
 </ul>
-<p>Let&#8217;s now analyze this <code>document.glyph</code> more in detail.</p>
+<p>More specifically, in this <code>document.glyph</code> file:</p>
 <ul>
-	<li>The <code>document[]</code> macro wraps every other macro. This is necessary to create the initial <code>&lt;html&gt;</code> tag.</li>
-	<li>Similarly, <code>head[]</code> and <code>body[]</code> are used to generate the respective <span class="caps">HTML</span> tags. Actually, <code>head[]</code> already sets some metadata for you, by default (author and copyright).</li>
-	<li>Within <code>head[]</code>, the <code>style[]</code> macro is used to load the <code>default.css</code> stylesheet, which is one of the <a href="#default_styles">default Glyph styleseets</a>.</li>
-	<li>Immediately after the <code>body[]</code> macro, the <code>titlepage[]</code> macro is used to define (guess&#8230;) the first page of your document. <code>title[]</code>, <code>author[]</code>  and <code>pubdate[]</code> insert the title of the document, its author and the publication date (retrieved from the project&#8217;s <a href="#cfg">configuration settings</a>).</li>
-	<li>Then, the <code>frontmatter[]</code>, <code>bodymatter[]</code> and <code>backmatter[]</code> macros are used to further divide the portions of your document according to the rules of <a href="http://en.wikipedia.org/wiki/Book_design">book design</a>. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.</li>
-	<li><code>preface[]</code>, <code>chapter[]</code>, <code>appendix[]</code> are just a way to wrap content in <code>&lt;div&gt;</code> tags, from an <span class="caps">HTML</span> point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together with the <code>header[]</code> macro.</li>
+	<li>The <a href="#m_book">book</a> macro wraps every other macro and is used to create the document header and default title page.</li>
+	<li>Then, the <code>@frontmatter</code>, <code>@bodymatter</code>, and <code>@backmatter</code> attributes are used to divide the portions of your document according to the rules of <a href="http://en.wikipedia.org/wiki/Book_design">book design</a>. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.</li>
+	<li><code>preface</code>, <code>chapter</code>, <code>appendix</code> are just a way to wrap content in <code>&lt;div&gt;</code> tags, from an <span class="caps">HTML</span> point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together through <code>@title</code> attributes.</li>
 </ul>
 
 </div>
@@ -739,7 +740,7 @@ document[
 <p>To change the value of a configuration setting, specify a value right after the setting, like this:</p>
 <p><code>glyph config document.author "John Smith"</code></p>
 <div class="tip">
-<p><span class="note-title">Tip</span>It is also possible to change configuration settings inside your document, using the <a href="#m_config_">#config:</a> macro.</p>
+<p><span class="note-title">Tip</span>It is also possible to change configuration settings inside your document, using the <a href="#m_config_">config:</a> macro.</p>
 </div>
 <p>In this way, the document author will be set to <em>John Smith</em> for the current project. To save this setting globally, add a <code>-g</code> option, like this:</p>
 <p><code>glyph config -g document.author "John Smith"</code></p>
@@ -784,22 +785,22 @@ document[
 <h3 id="h_14">Text Editing</h3><br />
 One of the main purposes of Glyph is streamlining text editing. Glyph accomplishes this through its own macro language that can be used in conjunction with Textile or Markdown.</p>
 <div class="section">
-<h4 id="h_15">Introducing Glyph Macros</h4>
+<h4 id="macro_intro">Introducing Glyph Macros</h4>
 <p>By now you probably figured out what a macro looks like: it&#8217;s an identifier of some kind that wraps a value or parameters within square brackets. More specifically:</p>
 <ul>
 	<li>The macro identifier can contain <em>any</em> character except for: <code>[</code>, <code>]</code>, <code>\</code>, <code>|</code> or spaces.</li>
 	<li>The delimiters can be either <code>[</code> and <code>]</code> or <code>[=</code> and <code>=]</code> (<span class="fmi">for more information on differences between delimiters, see <a href="#esc_quot">Escaping and Quoting</a></span>).</li>
-	<li>The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with <code>|</code>. For example, the <a href="#m_link">#link</a> macro can take an optional second parameter for the link text: <code>link[#link_id|This is the link text]</code>.</li>
+	<li>The value can be anything, even other macros. If a macro supports more than one parameter, they must be separated with <code>|</code>. For example, the <a href="#m_link">link</a> macro can take an optional second parameter for the link text: <code>link[#link_id|This is the link text]</code>.</li>
 </ul>
-<p>A macro can often have one or more aliases. For example, <code>=&gt;</code> is an alias for the <a href="#m_link">#link</a> macro, so the following macro calls are equivalent:</p>
+<p>A macro can often have one or more aliases. For example, <code>=&gt;</code> is an alias for the <a href="#m_link">link</a> macro, so the following macro calls are equivalent:</p>
 <p><code>=&gt;[#test|Test Section]</code><br />
 <code>link[#test|Test Section]</code></p>
 </div>
 <div class="section">
 <h4 id="esc_quot">Escaping and Quoting</h4>
 <p>Glyph doesn&#8217;t require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That&#8217;s not <em>too</em> bad if you think about it, unless you&#8217;re writing programming code, in which case escaping every single square bracket can be painful.</p>
-<p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <a href="#m_escape">#escape</a> macro (or its alias <code>.</code>) with the <code>[=</code> and <code>=]</code> delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as an escape for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
-<p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <a href="#m_section">#section</a> macros may not be a good idea, but they should be more or less mandatory with the <a href="#m_code">#code</a> macro, like this:</p>
+<p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <a href="#m_escape">escape</a> macro (or its alias <code>.</code>) with the <code>[=</code> and <code>=]</code> delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as an escape for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
+<p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <a href="#m_section">section</a> macros may not be a good idea, but they should be more or less mandatory with the <a href="#m_code">code</a> macro, like this:</p>
 <div class="code">
 <pre>
 <code>
@@ -845,7 +846,7 @@ This is another section.
 </div>
 <div class="section">
 <h4 id="sec_head">Sections and Headers</h4>
-<p>Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the <a href="#m_section">#section</a> macro, like so:</p>
+<p>Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the <a href="#m_section">section</a> macro, like so:</p>
 <div class="code">
 <pre>
 <code>
@@ -886,7 +887,7 @@ This section is nested into the previous one.
     <td><code>volume</code>, <code>book</code>, <code>part</code>, <code>chapter</code></td></tr>
   <tr><td><strong>Backmatter</strong></td>
     <td><code>epilogue</code> <sup>‡</sup>, <code>afterword</code> <sup>‡</sup>, <code>postscript</code> <sup>†</sup>, <code>appendix</code>, <code>addendum</code> <sup>‡</sup>, <code>glossary</code> <sup>**‡</sup>, <code>colophon</code> <sup>†</sup>, <code>bibliography</code> <sup>**‡</sup>, <code>promotion</code> <sup>†</sup>, <code>references</code> <sup>**‡</sup>, <code>index</code> <sup>**‡</sup>, <code>lot</code> <sup>**‡</sup>, <code>lof</code> <sup>**‡</sup></td><p></tr></table></p>
-<p>*: The <a href="#m_toc">#toc</a> macro is used to generate the Table of Contents automatically, and it must be used with no contents (i.e.: <code>toc[]</code>).</p>
+<p>*: The <a href="#m_toc">toc</a> macro is used to generate the Table of Contents automatically, and it must be used with no contents (i.e.: <code>toc[]</code>).</p>
 <p>**: This macro is likely to be extended in future versions to generate/aggregate content automatically.</p>
 <p>†: This section is not listed in the Table of Contents.</p>
 <p>‡: Any subsection of this section is not listed in the Table of Contents.</p>
@@ -896,7 +897,7 @@ This section is nested into the previous one.
 </div>
 <div class="section">
 <h4 id="incl">Including Files and Snippets</h4>
-<p>If you&#8217;re authoring a user manual, a long article or a book, writing everything inside a single file (<code>document.glyph</code>) may not be optimal. For this reason, Glyph provides an <a href="#m_include">#include</a> macro (aliased by <code>@</code>) that can be used to include the contents of any file within the <code>text/</code> directory:</p>
+<p>If you&#8217;re authoring a user manual, a long article or a book, writing everything inside a single file (<code>document.glyph</code>) may not be optimal. For this reason, Glyph provides an <a href="#m_include">include</a> macro (aliased by <code>@</code>) that can be used to include the contents of any file within the <code>text/</code> directory:</p>
 <p><code>include[introduction.textile]</code></p>
 <p>The macro call above loads the contents of the <code>introduction.textile</code> file, that can be stored <em>anywhere</em> within the <code>text/</code> directory.</p>
 <div class="note">
@@ -905,17 +906,17 @@ This section is nested into the previous one.
 </div>
 <p>When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:</p>
 <ul>
-	<li><code>.textile</code> &rarr; <a href="#m_textile">#textile</a> macro</li>
-	<li><code>.markdown</code> or <code>.md</code> &rarr; <a href="#m_markdown">#markdown</a> macro</li>
+	<li><code>.textile</code> &rarr; <a href="#m_textile">textile</a> macro</li>
+	<li><code>.markdown</code> or <code>.md</code> &rarr; <a href="#m_markdown">markdown</a> macro</li>
 </ul>
 <div class="tip">
 <p><span class="note-title">Tip</span>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>, like this:</p>
 <p><code>glyph config filters.by_file_extensions false</code></p>
 </div>
 <p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a <em>snippet</em> instead.</p>
-<p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <a href="#m_snippet">#snippet</a> macro (or its alias <code>&amp;</code>).</p>
+<p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <a href="#m_snippet">snippet</a> macro (or its alias <code>&amp;</code>).</p>
 <div class="tip">
-<p><span class="note-title">Tip</span>Besides storing snippets in the <code>snippets.yml</code> file, you can also define them right in your document, using the <a href="#m_snippet_">#snippet:</a> macro.</p>
+<p><span class="note-title">Tip</span>Besides storing snippets in the <code>snippets.yml</code> file, you can also define them right in your document, using the <a href="#m_snippet_">snippet:</a> macro.</p>
 </div>
 <div class="box">
 <div class="box-title">Example</div>
@@ -987,15 +988,15 @@ warning: Bookmark 'wrong' does not exist
 </pre>
 </div>
 </div>
-<p>Basically, if you use the <a href="#m_link">#link</a> macro and the <a href="#m_anchor">#anchor</a> macro, Glyph makes sure that:</p>
+<p>Basically, if you use the <a href="#m_link">link</a> macro and the <a href="#m_anchor">anchor</a> macro, Glyph makes sure that:</p>
 <ul>
 	<li>All links point to valid anchors within the document (regardless if the anchors are before or after the link, in snippets or included files).</li>
 	<li>There are no duplicate anchors within the documents.</li>
-	<li>If no title is specified as second parameter for the <a href="#m_link">#link</a> macro, the anchor&#8217;s title is used as such.</li>
+	<li>If no title is specified as second parameter for the <a href="#m_link">link</a> macro, the anchor&#8217;s title is used as such.</li>
 </ul>
-<p>Besides using the <a href="#m_anchor">#anchor</a> macro macro, you can also create an anchor for a header by passing an extra parameter to the <a href="#m_header">#header</a> macro, like this: <code>header[Header Title|my_anchor]</code>.</p>
+<p>Besides using the <a href="#m_anchor">anchor</a> macro macro, you can also create an anchor for a header by passing an extra parameter to the <a href="#m_header">header</a> macro, like this: <code>header[Header Title|my_anchor]</code>.</p>
 <div class="note">
-<p><span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link">#link</a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external links as well.</p>
+<p><span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link">link</a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external links as well.</p>
 </div>
 </div>
 <div class="section">
@@ -1004,22 +1005,22 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Jun 01 10:24:46 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Jun 01 13:53:23 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
-<p>Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <a href="#m_config">#config</a> macro (aliased to <code>$</code>) makes things slightly simpler (e.g. <code>$[document.author]</code>).</p>
+<p>Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <a href="#m_config">config</a> macro (aliased to <code>$</code>) makes things slightly simpler (e.g. <code>$[document.author]</code>).</p>
 </div>
 <div class="section">
 <h4 id="cond_macros">Conditional Macros</h4>
 <p>Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see <a href="#s_document_draft">document.draft</a> setting), or use a particular stylesheet only if when you generate a <span class="caps">PDF</span> document.</p>
-<p>To do so, you can use the <a href="#m_condition">#condition</a> macro (aliased by <code>?</code>), and a set of additional macros that can be used as conditional operators i.e.:</p>
+<p>To do so, you can use the <a href="#m_condition">condition</a> macro (aliased by <code>?</code>), and a set of additional macros that can be used as conditional operators i.e.:</p>
 <ul>
-	<li><a href="#m_eq">#eq</a> macro</li>
-	<li><a href="#m_not">#not</a> macro</li>
-	<li><a href="#m_and">#and</a> macro</li>
-	<li><a href="#m_or">#or</a> macro</li>
-	<li><a href="#m_match">#match</a> macro</li>
+	<li><a href="#m_eq">eq</a> macro</li>
+	<li><a href="#m_not">not</a> macro</li>
+	<li><a href="#m_and">and</a> macro</li>
+	<li><a href="#m_or">or</a> macro</li>
+	<li><a href="#m_match">match</a> macro</li>
 </ul>
 <p>Consider the following code:</p>
 <div class="code">
@@ -1033,7 +1034,7 @@ This is the official version of the Glyph Book]
 </pre>
 </div>
 <p>In this case, if <code>document.draft</code> is set to <code>true</code>, &#8220;This is a first draft of the Glyph Book&#8221; will be displayed; if not, &#8220;This is the official version of the Glyph Book&#8221; will be displayed instead.</p>
-<p>The <a href="#m_condition">#condition</a> macro takes two parameters:</p>
+<p>The <a href="#m_condition">condition</a> macro takes two parameters:</p>
 <ul>
 	<li>the first one is the condition to evaluate</li>
 	<li>the second one is the text to include in the document only if the condition is satisfied.</li>
@@ -1055,7 +1056,7 @@ This is the official version of the Glyph Book]
 <p>In this case, the <code>pagination.css</code> stylesheet is included only when you&#8217;re generating a <span class="caps">PDF</span> document using Prince <span class="caps">XML</span>.</p>
 <div class="section">
 <h5 id="h_22">Using macros inside the condition macro</h5>
-<p>Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a <a href="#m_condition">#condition</a> macro are <em>always</em> parsed and <em>executed</em>, even <em>before</em> that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you&#8217;re the <a href="#m_config_">#config:</a> macro or the <a href="#m_ruby">#ruby</a> macro, for example: because in that case a configuration setting or a piece of Ruby code is always executed&#8230;</p>
+<p>Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a <a href="#m_condition">condition</a> macro are <em>always</em> parsed and <em>executed</em>, even <em>before</em> that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you&#8217;re the <a href="#m_config_">config:</a> macro or the <a href="#m_ruby">ruby</a> macro, for example: because in that case a configuration setting or a piece of Ruby code is always executed&#8230;</p>
 <p>To avoid this potentially dangerous side effect, you can <em><a href="#m_encode">encode</a></em> the second parameter of the condition macro, like this:</p>
 <div class="code">
 <pre>
@@ -1069,7 +1070,7 @@ This is the official version of the Glyph Book]
 </div>
 <div class="section">
 <h5 id="h_23">Results of conditional expressions</h5>
-<p>The <a href="#m_condition">#condition</a> macro in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:</p>
+<p>The <a href="#m_condition">condition</a> macro in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:</p>
 <ul>
 	<li>A conditional expression is satisfied if it evaluates to a non-empty string except &#8220;false&#8221;.</li>
 	<li>A conditional expression is not satisfied if it evaluates to an empty string or the string &#8220;false&#8221;.</li>
@@ -1078,7 +1079,7 @@ This is the official version of the Glyph Book]
 </div>
 <div class="section">
 <h4 id="img_fig">Images and Figures</h4>
-<p>Same as for <a href="#links">links</a>, you can also include images and figures using Textile or Markdown. If you want additional features, you can use the <a href="#m_img">#img</a> macro and the <a href="#m_fig">#fig</a> macro, as shown in the following example:</p>
+<p>Same as for <a href="#links">links</a>, you can also include images and figures using Textile or Markdown. If you want additional features, you can use the <a href="#m_img">img</a> macro and the <a href="#m_fig">fig</a> macro, as shown in the following example:</p>
 <div class="box">
 <div class="box-title">Example</div>
 <p>The following Glyph code:</p>
@@ -1111,11 +1112,11 @@ fig[example.png|An example figure.]
 <p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph providers different ways to format source code, as described in the following sections.</p>
 <div class="section">
 <h5 id="h_26">Inline code</h5>
-<p>The <a href="#m_code">#code</a> macro can be used to format inline code. That&#8217;s exactly the same as using <code>&lt;code&gt;</code> tags, just remember to use <a href="#esc_quot">escaping delimiters</a> and to escape pipes.</p>
+<p>The <a href="#m_code">code</a> macro can be used to format inline code. That&#8217;s exactly the same as using <code>&lt;code&gt;</code> tags, just remember to use <a href="#esc_quot">escaping delimiters</a> and to escape pipes.</p>
 </div>
 <div class="section">
 <h5 id="h_27">Code block</h5>
-<p>For code blocks, you have two choices: the <a href="#m_code">#code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">#highlight</a> macro macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it highlights the most common programming language.</p>
+<p>For code blocks, you have two choices: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it highlights the most common programming language.</p>
 <p>Cosider the following piece of ruby code:</p>
 <div class="code">
 <pre>
@@ -1164,7 +1165,7 @@ highlight[=ruby|
 <div class="box-title">Some Remarks</div>
 <ul>
 	<li>Highlighters require some configuration. For more information on relevant configuration settings, see the <code>highlighters.*</code> configuration settings.</li>
-	<li>If you&#8217;re using the <a href="#m_highlight">#highlight</a> macro together with <a href="#m_textile">#textile</a> macro, you must wrap the macro call within <code>&lt;notextile&gt;</code> tags.</li>
+	<li>If you&#8217;re using the <a href="#m_highlight">highlight</a> macro together with <a href="#m_textile">textile</a> macro, you must wrap the macro call within <code>&lt;notextile&gt;</code> tags.</li>
 	<li>You must always escape pipes (<code>|</code>) with the code or the highlight macro.</li>
 </ul>
 </div>
@@ -1177,12 +1178,12 @@ highlight[=ruby|
 <div class="section">
 <h4 id="stylesheets">Adding Stylesheets</h4>
 <p>Currently, Glyph does not provide any native way to format text and pages. The reason is that there&#8217;s absolutely no need for that: <span class="caps">CSS</span> does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That&#8217;s no replacement for LaTeX by any means, but it is enough if you&#8217;re not looking for advanced typographical features.</p>
-<p>You can embed <span class="caps">CSS</span> files using the <a href="#m_style">#style</a> macro, like this:</p>
+<p>You can embed <span class="caps">CSS</span> files using the <a href="#m_style">style</a> macro, like this:</p>
 <p><code>style[default.css]</code></p>
-<p>In this case, the <a href="#m_style">#style</a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
+<p>In this case, the <a href="#m_style">style</a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
 <div class="section">
 <h5 id="default_styles">Default Stylesheets</h5>
-<p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">#style</a> macro macro:</p>
+<p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">style</a> macro macro:</p>
 	<table><tr><th>File name</th>
 			<th>Notes</th></tr>
 		<tr><td><code>default.css</code></td>
@@ -1227,12 +1228,12 @@ highlight[=ruby|
 <h4 id="lite_limitations">Limitations</h4>
 <p>This sort of &#8220;lite&#8221; mode comes with a few minor limitations:</p>
 <ul>
-	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet_">#snippet:</a> macro macro.</li>
-	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">#config:</a> macro macro.</li>
-	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_">#macro:</a> macro macro.</li>
+	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet_">snippet:</a> macro macro.</li>
+	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">config:</a> macro macro.</li>
+	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_">macro:</a> macro macro.</li>
 	<li>Images must be linked with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.</li>
 	<li>Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph system stylesheet .</li>
-	<li>The <a href="#m_include">#include</a> macro cannot be used (if you need to include other text files, you should probably use a Glyph project&#8230;)</li>
+	<li>The <a href="#m_include">include</a> macro cannot be used (if you need to include other text files, you should probably use a Glyph project&#8230;)</li>
 </ul>
 </div>
 </div>
@@ -1260,7 +1261,7 @@ highlight[=ruby|
 <h2 id="extending">Extending Glyph</h2>
 <p>Glyph was created wih extensibility in mind. You can freely extend Glyph Language by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in <code>.rb</code> files within the <code>lib/macros/</code> folder of your project.</p>
 <div class="tip">
-<p><span class="note-title">Tip</span>Alternatively, you can also define macros right in your document, using the <a href="#m_macro_">#macro:</a> macro.</p>
+<p><span class="note-title">Tip</span>Alternatively, you can also define macros right in your document, using the <a href="#m_macro_">macro:</a> macro.</p>
 </div>
 <div class="section">
 <h3 id="h_38">Anatomy of a Macro</h3>
@@ -1315,7 +1316,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
 </div>
 <div class="section">
 <h3 id="h_39">Bookmarks and Headers</h3>
-<p>The <a href="http://yardoc.org/docs/glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">#anchor</a> macro:</p>
+<p>The <a href="http://yardoc.org/docs/glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">anchor</a> macro:</p>
 <div class="CodeRay">
   <div class="code"><pre>macro <span class="sy">:anchor</span> <span class="r">do</span> 
   ident, title = <span class="iv">@params</span>
@@ -1330,7 +1331,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
 <div class="section">
 <h3 id="h_40">Using Placeholders</h3>
 <p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
-<p>Here&#8217;s the source code of the <a href="#m_link">#link</a> macro:</p>
+<p>Here&#8217;s the source code of the <a href="#m_link">link</a> macro:</p>
 <div class="CodeRay">
   <div class="code"><pre>macro <span class="sy">:link</span> <span class="r">do</span>
   href, title = <span class="iv">@params</span>
@@ -1362,7 +1363,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
 <div class="box">
 <div class="box-title">Validating macro placement</div>
 <p>You can, of course, create your own validators to check whether a macro is used within another. While this may seem a good idea to enforce constraints into the way documents are created, it has one major drawback: if you define a macro with such validation, you&#8217;re effectively limiting its usage, so for example you won&#8217;t be able to use within snippets or other custom macros.</p>
-<p>Suppose, for example, that the <a href="#m_header">#header</a> macro is only allowed within a <code>section</code> macro. This means that, for example:</p>
+<p>Suppose, for example, that the <a href="#m_header">header</a> macro is only allowed within a <code>section</code> macro. This means that, for example:</p>
 <ul>
 	<li>the macro cannot be used within <code>chapter</code> or <code>appendix</code> macros.</li>
 	<li>the macro cannot be used in snippets</li>
@@ -1439,7 +1440,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 	<li>When all you want is to copy some Glyph code from child macros into their parents.</li>
 </ul>
 <div class="note">
-<p><span class="note-title">Note</span>These methods are also wrapped in the <a href="#m_encode">#encode</a> macro and in the <a href="#m_decode">#decode</a> macro.</p>
+<p><span class="note-title">Note</span>These methods are also wrapped in the <a href="#m_encode">encode</a> macro and in the <a href="#m_decode">decode</a> macro.</p>
 </div>
 </div>
 </div>
@@ -1458,7 +1459,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 </div>
 		<div class="chapter">
 <h2 id="h_45">Troubleshooting</h2>
-<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">#ruby</a> macro macro.</p>
+<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">ruby</a> macro macro.</p>
 <div class="tip">
 <p><span class="note-title">Tip</span>As a general rule, more diagnostic information is provided if Glyph is run in <a href="#debug_switch">debug mode</a>.</p>
 </div>
@@ -1606,7 +1607,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 
 <tr>
 			<td>Macro not available when compiling a single file.</td>
-			<td>Returned by the <a href="#m_include">#include</a> macro if used in <a href="#lite_mode">lite mode</a>.</td>
+			<td>Returned by the <a href="#m_include">include</a> macro if used in <a href="#lite_mode">lite mode</a>.</td>
 </tr>
 
 <tr>
@@ -1616,7 +1617,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 
 <tr>
 			<td>Invalid regular expression: <em>regexp</em></td>
-			<td>Returned by the <a href="#m_match">#match</a> macro macro if an invalid regular expression was supplied.</td>
+			<td>Returned by the <a href="#m_match">match</a> macro macro if an invalid regular expression was supplied.</td>
 </tr>
 
 <tr>
@@ -1626,17 +1627,17 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 
 <tr>
 			<td>No highlighter installed. Please run: gem install coderay</td>
-			<td>Returned by the <a href="#m_highlight">#highlight</a> macro macro if no highlighters are installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if no highlighters are installed.</td>
 </tr>
 
 <tr>
 			<td>CodeRay highlighter not installed. Please run: gem install coderay</td>
-			<td>Returned by the <a href="#m_highlight">#highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>coderay</code> but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>coderay</code> but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
 </tr>
 
 <tr>
 			<td>UltraViolet highlighter not installed. Please run: gem install ultraviolet</td>
-			<td>Returned by the <a href="#m_highlight">#highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>ultraviolet</code> but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>ultraviolet</code> but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
 </tr>
 
 <tr>
@@ -1646,54 +1647,54 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 
 <tr>
 			<td>Snippet &#8216;<em>snippet-id</em>&#8217; does not exist</td>
-			<td>Returned by the <a href="#m_snippet">#snippet</a> macro if an invalid snippet was supplied.</td>
+			<td>Returned by the <a href="#m_snippet">snippet</a> macro if an invalid snippet was supplied.</td>
 </tr>
 
 <tr>
 			<td>File &#8216;<em>file-name</em>&#8217; not found</td>
-			<td>Returned by the <a href="#m_include">#include</a> macro if an invalid file was supplied.</td>
+			<td>Returned by the <a href="#m_include">include</a> macro if an invalid file was supplied.</td>
 </tr>
 
 <tr>
 			<td>Filter macro &#8216;<em>macro-name</em>&#8217; not found</td>
-			<td>Returned by the <a href="#m_include">#include</a> macro macro if the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is set to <code>true</code> but the file extension of the included file is not recognized as a filter macro.</td>
+			<td>Returned by the <a href="#m_include">include</a> macro macro if the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is set to <code>true</code> but the file extension of the included file is not recognized as a filter macro.</td>
 </tr>
 
 <tr>
 			<td>RedCloth gem not installed. Please run: gem insall RedCloth</td>
-			<td>Returned by the <a href="#m_textile">#textile</a> macro if the RedCloth gem is not installed.</td>
+			<td>Returned by the <a href="#m_textile">textile</a> macro if the RedCloth gem is not installed.</td>
 </tr>
 
 <tr>
 			<td>No MarkDown converter installed. Please run: gem insall bluecloth</td>
-			<td>Returned by the <a href="#m_markdown">#markdown</a> macro if no valid Markdown converter gem is installed. <br />
+			<td>Returned by the <a href="#m_markdown">markdown</a> macro if no valid Markdown converter gem is installed. <br />
 <br />
 Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </tr>
 
 <tr>
 			<td>Image/Figure not found</td>
-			<td>Retured by the <a href="#m_img">#img</a> macro or the <a href="#m_fig">#fig</a> macro respectively, if the specified image file could not be found within the <code>images/</code> folder.</td>
+			<td>Retured by the <a href="#m_img">img</a> macro or the <a href="#m_fig">fig</a> macro respectively, if the specified image file could not be found within the <code>images/</code> folder.</td>
 </tr>
 
 <tr>
 			<td>Bookmark &#8216;<em>bookmark-name</em>&#8217; already exists</td>
-			<td>Returned by the <a href="#m_anchor">#anchor</a> macro or by the <a href="#m_header">#header</a> macro if the anchor ID supplied as parameter has already been used in the document.</td>
+			<td>Returned by the <a href="#m_anchor">anchor</a> macro or by the <a href="#m_header">header</a> macro if the anchor ID supplied as parameter has already been used in the document.</td>
 </tr>
 
 <tr>
 			<td>Bookmark &#8216;<em>bookmark-name</em>&#8217; already exists</td>
-			<td>Returned by the <a href="#m_link">#link</a> macro if the anchor ID supplied as parameter has not been used in the document.</td>
+			<td>Returned by the <a href="#m_link">link</a> macro if the anchor ID supplied as parameter has not been used in the document.</td>
 </tr>
 
 <tr>
 			<td>Stylesheet &#8216;<em>file-name</em>&#8217; not found</td>
-			<td>Returned by the <a href="#m_style">#style</a> macro if the <code>.css</code> or <code>.sass</code> file supplied as parameter was not found in the <code>styles/</code> directory.</td>
+			<td>Returned by the <a href="#m_style">style</a> macro if the <code>.css</code> or <code>.sass</code> file supplied as parameter was not found in the <code>styles/</code> directory.</td>
 </tr>
 
 <tr>
 			<td>Haml is not installed. Please run: gem install haml</td>
-			<td>Returned by the <a href="#m_style">#style</a> macro if a <code>.sass</code> file was passed as parameter but the Haml gem is not installed.</td>
+			<td>Returned by the <a href="#m_style">style</a> macro if a <code>.sass</code> file was passed as parameter but the Haml gem is not installed.</td>
 </tr>
 </table>
 </div>
@@ -1863,7 +1864,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 </div>
 <div class="section">
 <h3 id="c_todo"><code>todo</code></h3>
-<p>Prints all the todo items saved using the <a href="#m_todo">#todo</a> macro.</p>
+<p>Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.</p>
 <p><strong>Example:</strong> <code>glyph todo</code></p>
 </div>
 
@@ -1875,7 +1876,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <h3 id="h_59">Common Macros</h3><br />
 <div class="section"><br />
 <h4 id="m_and">and</h4><br />
-Conditional <code>and</code> operator, to be used with the <a href="#m_condition">#condition</a> macro.</p>
+Conditional <code>and</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[and[true|false]|This is never displayed.]</code></p>
 </div>
 
@@ -1888,16 +1889,16 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_condition">condition</h4>
-<p>Tests a conditional expression (first parameter), and evaluates to the second parameter if the condition is satisfied. If the second parameter is an <a href="#m_escape">#escape</a> macro macro, its contents are unescaped and interpreted only if the condition is satisfied. For more information, see <a href="#cond_macros">Conditional Macros</a>.</p>
+<p>Tests a conditional expression (first parameter), and evaluates to the second parameter if the condition is satisfied. If the second parameter is an <a href="#m_escape">escape</a> macro macro, its contents are unescaped and interpreted only if the condition is satisfied. For more information, see <a href="#cond_macros">Conditional Macros</a>.</p>
 <p><strong>Aliases:</strong> <code>?</code></p>
 <p><strong>Examples</strong></p>
 <p>See any of the following:</p>
 <ul>
-	<li><a href="#m_and">#and</a> macro</li>
-	<li><a href="#m_or">#or</a> macro</li>
-	<li><a href="#m_not">#not</a> macro</li>
-	<li><a href="#m_match">#match</a> macro</li>
-	<li><a href="#m_eq">#eq</a> macro</li>
+	<li><a href="#m_and">and</a> macro</li>
+	<li><a href="#m_or">or</a> macro</li>
+	<li><a href="#m_not">not</a> macro</li>
+	<li><a href="#m_match">match</a> macro</li>
+	<li><a href="#m_eq">eq</a> macro</li>
 </ul>
 </div>
 
@@ -1917,21 +1918,21 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_decode">decode</h4>
-<p>Decodes some text that was previously encoded (see <a href="#m_encode">#encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">Encoding and Decoding Glyph Code</a></span>.</p>
+<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">Encoding and Decoding Glyph Code</a></span>.</p>
 <p><strong>Aliases:</strong> <code>**</code></p>
 <p><strong>Example:</strong> <code>*[=note‡‡¤91¤‡‡This will not be evaluated‡‡¤93¤‡‡=]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_encode">encode</h4>
-<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">#decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">Encoding and Decoding Glyph Code</a></span>.</p>
+<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">Encoding and Decoding Glyph Code</a></span>.</p>
 <p><strong>Aliases:</strong> <code>*</code></p>
 <p><strong>Example:</strong> <code>*[=note[This will not be evaluated]=]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_eq">eq</h4>
-<p>Conditional equality operator, to be used with the <a href="#m_condition">#condition</a> macro.</p>
+<p>Conditional equality operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[eq[$[document.draft]|true]|This is displayed only in draft documents.]</code></p>
 </div>
 
@@ -1951,7 +1952,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_match">match</h4>
-<p>Evaluates to <code>true</code> if the first parameter matches the second, an empty string otherwise. The second parameter must be a valid Ruby-compatible regular expression. This macro must be used with the <a href="#m_condition">#condition</a> macro.</p>
+<p>Evaluates to <code>true</code> if the first parameter matches the second, an empty string otherwise. The second parameter must be a valid Ruby-compatible regular expression. This macro must be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[match[Hello!|/^hell/i]|This is always displayed]</code></p>
 </div>
 
@@ -1967,13 +1968,13 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_not">not</h4>
-<p>Conditional <code>and</code> operator, to be used with the <a href="#m_condition">#condition</a> macro.</p>
+<p>Conditional <code>and</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[not[false]|This is always displayed.]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_or">or</h4>
-<p>Conditional <code>or</code> operator, to be used with the <a href="#m_condition">#condition</a> macro.</p>
+<p>Conditional <code>or</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
 <p><strong>Example:</strong> <code>?[or[true|false]|This is always displayed.]</code></p>
 </div>
 
@@ -2040,8 +2041,8 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 <h4 id="m_code">code</h4>
 <p>Used to render a block of code within <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags.</p>
 <ul>
-	<li>For inline code, see the <a href="#m_codeph">#codeph</a> macro.</li>
-	<li>For code highlighting, see the <a href="#m_highlight">#highlight</a> macro.</li>
+	<li>For inline code, see the <a href="#m_codeph">codeph</a> macro.</li>
+	<li>For code highlighting, see the <a href="#m_highlight">highlight</a> macro.</li>
 </ul>
 <p><strong>Example:</strong></p>
 <p><code>code[
@@ -2163,7 +2164,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_fmi">fmi</h4>
-<p>Creates a <em>For More Information</em> link (for an example usage, see the <a href="#m_link">#link</a> macro).</p>
+<p>Creates a <em>For More Information</em> link (for an example usage, see the <a href="#m_link">link</a> macro).</p>
 <p><strong>Example:</strong> <code>fmi[creating links|#links]</code></p>
 </div>
 
@@ -2269,12 +2270,12 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 		<tr><td><br />
 <codeph>document.subtitle</codeph> <p><a id="s_document_subtitle"></a></p>
 </td>
-		<td>The subtitle of the document, displayed using the <a href="#m_subtitle">#subtitle</a> macro.</td>
+		<td>The subtitle of the document, displayed using the <a href="#m_subtitle">subtitle</a> macro.</td>
 		<td><code>""</code></td></tr>
 		<tr><td><br />
 <codeph>document.title</codeph> <p><a id="s_document_title"></a></p>
 </td>
-		<td>The title of the document, displayed using the <a href="#m_title">#title</a> macro.</td>
+		<td>The title of the document, displayed using the <a href="#m_title">title</a> macro.</td>
 		<td><code>""</code></td><p></tr></table></p>
 </div>
 <div class="section">
@@ -2290,7 +2291,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 		<tr><td><br />
 <codeph>filters.markdown.converter</codeph> <p><a id="s_filters_markdown_converter"></a></p>
 </td>
-		<td>The name of the markdown converter to use with the <a href="#m_markdown">#markdown</a> macro. It can be set to one of the following values:<br />
+		<td>The name of the markdown converter to use with the <a href="#m_markdown">markdown</a> macro. It can be set to one of the following values:<br />
 * BlueCloth<br />
 * RDiscount<br />
 * Maruku<br />
@@ -2301,7 +2302,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<tr><td><br />
 <codeph>filters.redcloth.restrictions</codeph> <p><a id="s_filters_redcloth_restrictions"></a></p>
 </td>
-		<td>An <code>Array</code> containing restrictions applied to RedCloth, used by the <a href="#m_textile">#textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</td>
+		<td>An <code>Array</code> containing restrictions applied to RedCloth, used by the <a href="#m_textile">textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</td>
 		<td><code>[]</code></td></tr>
 		<tr><td><br />
 <codeph>filters.target</codeph> <p><a id="s_filters_target"></a></p>
@@ -2396,7 +2397,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 				
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/62">#62</a></td>
-			<td><p>A new <a href="#m_highlight">#highlight</a> macro is available to highlight source code (CodeRay or UltraViolet requireed).</p></td></tr>
+			<td><p>A new <a href="#m_highlight">highlight</a> macro is available to highlight source code (CodeRay or UltraViolet requireed).</p></td></tr>
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/76">#76</a></td>
@@ -2404,11 +2405,11 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/87">#87</a></td>
-			<td><p>It is now possible to define snippets inside a Glyph source file using the <a href="#m_snippet_">#snippet:</a> macro.</p></td></tr>
+			<td><p>It is now possible to define snippets inside a Glyph source file using the <a href="#m_snippet_">snippet:</a> macro.</p></td></tr>
 		
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/88">#88</a></td>
-			<td><p>It is now possible to change configuration settings inside a Glyph source file using the <a href="#m_config_">#config:</a> macro (Jabbslad).</p></td></tr>
+			<td><p>It is now possible to change configuration settings inside a Glyph source file using the <a href="#m_config_">config:</a> macro (Jabbslad).</p></td></tr>
 		
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/89">#89</a></td>
@@ -2416,7 +2417,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/92">#92</a></td>
-			<td><p>6 new macros have been defined to allow conditional processing (<a href="#m_condition">#condition</a> macro, <a href="#m_eq">#eq</a> macro, <a href="#m_not">#not</a> macro, <a href="#m_and">#and</a> macro, <a href="#m_or">#or</a> macro, <a href="#m_match">#match</a> macro)</p></td></tr>
+			<td><p>6 new macros have been defined to allow conditional processing (<a href="#m_condition">condition</a> macro, <a href="#m_eq">eq</a> macro, <a href="#m_not">not</a> macro, <a href="#m_and">and</a> macro, <a href="#m_or">or</a> macro, <a href="#m_match">match</a> macro)</p></td></tr>
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/94">#94</a></td>
@@ -2436,7 +2437,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/108">#108</a></td>
-			<td><p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro_">#macro:</a> macro.</p></td></tr></table>
+			<td><p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro_">macro:</a> macro.</p></td></tr></table>
 
 </div>
 	
@@ -2452,7 +2453,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	 
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/93">#93</a></td>
-			<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style">#style</a> macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p></td></tr>
+			<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style">style</a> macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p></td></tr>
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/95">#95</a></td>
@@ -2476,7 +2477,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 		
 		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/107">#107</a></td>
-			<td><p>Added the possibility to encode (using the <a href="#m_encode">#encode</a> macro) and decode (using the <a href="#m_decode">#decode</a> macro) macros so that they can be interpreted later.</p></td></tr></table>
+			<td><p>Added the possibility to encode (using the <a href="#m_encode">encode</a> macro) and decode (using the <a href="#m_decode">decode</a> macro) macros so that they can be interpreted later.</p></td></tr></table>
 
 </div>
 
