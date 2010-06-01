@@ -143,8 +143,6 @@ macro :match do
 end
 
 macro_alias '--' => :comment
-macro_alias '*' => :encode
-macro_alias '**' => :decode
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
 macro_alias '%:' => 'macro:'

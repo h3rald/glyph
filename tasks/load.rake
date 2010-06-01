@@ -30,19 +30,19 @@ namespace :load do
 		end
 		case  Glyph['language.set']
 		when 'glyph' then
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb')
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb')
 			load_macros_from_dir.call Glyph::HOME/"macros"/Glyph["filters.target"].to_s
 		when 'xml' then
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb') 
 		when 'filters' then
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 
 		when 'core' then
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/common.rb') 
+			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb') 
 		end
 		# load project macros
 		unless Glyph.lite? then
