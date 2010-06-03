@@ -1,0 +1,53 @@
+section[
+@title[Including Files and Snippets]
+@id[incl]
+
+If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an %>[include] (aliased by code[@]) that can be used to include the contents of any file within the @text/@ directory:
+
+code[=include[introduction.textile]=]
+
+The macro call above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
+
+note[Unlike with =>[img_fig|image and figures] that must be included with their _relative_ path to the @images/@ folder, you must not specify a relative path when including text files. This is due to the fact that images are copied _as they are_ in the @output/<format>/images/@ directory and they have to be linked from the output file.
+
+A possible downside of this behavior is that file names must be unique within the entire @text/@ directory and any of its subdirectories]
+
+When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:
+* @.textile@ &rarr; %>[textile]
+* @.markdown@ or @.md@ &rarr; %>[markdown]
+
+tip[You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@, like this:
+
+@glyph config filters.by_file_extensions false@]
+
+While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a _snippet_ instead.
+
+Snippets are text strings saved in YAML format in the @snippets.yml@ file. They can be included anywhere in your document using the %>[snippet] (or its alias @&@). 
+
+tip[Besides storing snippets in the @snippets.yml@ file, you can also define them right in your document, using the %>[snippet:].]
+
+box[Example|
+Consider the following @snippets.yml@ file:
+
+<notextile>
+highlight[=yaml|
+--- 
+:glang: Glyph Language
+:macros: Glyph Macros
+:sq_esc: \\\|-
+  Square brackets must be escaped 
+  unless used as macro delimiters or within a quoting macro.
+:markups: Textile or Markdown
+:test: \\\|-
+  This is a 
+  Test snippet
+=]
+</notextile>
+
+You can use code[=&[markups]=] anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the @markups@ snippets only in the @snippets.yml@ file to change it everywhere else in the document.
+] --[End Example]
+tip[
+Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
+]
+
+] --[End Section]

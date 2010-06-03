@@ -1,0 +1,25 @@
+section[
+@title[Compiling single Glyph files]
+@id[lite_mode]
+Glyph's primary goal is to author complex documents like books or manuals. In order to do so, a Glyph project is required to keep everything organized and automated via a set of predefined conventions, exactly like Ruby on Rails or other similar frameworks do.
+
+If you want to write a one-page article or a short draft, however, creating and managing Glyph projects can be an unnecessary burden. Luckily, you don't have to: you can use Glyph to compile single files containing Glyph code, by adding one parameter (or two if you want to specify a custom destination file) to the #>[compile], like this:
+
+code[glyph compile source.glyph destination.htm]
+
+This command will process a file called @source.glyph@ and produce an HTML file called @destination.htm@.
+
+section[
+@title[Limitations]
+@id[lite_limitations]
+&:[only_defined_through|can only be defined inside the source file, using the]
+This sort of "lite" mode comes with a few minor limitations: 
+* Snippets &[only_defined_through] %>[snippet:] macro.
+* Project configuration settings &[only_defined_through] %>[config:] macro.
+* Custom macros &[only_defined_through] %>[macro:] macro.
+* Images must be linked with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.
+* Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph system stylesheet ![link to system stylesheet list].
+* The %>[include] cannot be used (if you need to include other text files, you should probably use a Glyph project...)
+]
+]
+

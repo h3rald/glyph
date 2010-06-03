@@ -1,0 +1,36 @@
+section[
+@title[Images and Figures]
+@id[img_fig]
+
+Same as for =>[#links|links], you can also include images and figures using &[markups]. If you want additional features, you can use the %>[img] and the %>[fig], as shown in the following example:
+
+box[Example|
+
+&[gcode]
+
+codeblock[=
+img[glyph.svg\|20%\|20%]
+
+fig[example.png\|An example figure.]
+=]
+
+&[htmlcode]
+
+<notextile>
+highlight[=html|
+<img src="images/glyph.svg" width="20%" height="20%" alt="-" />
+
+<div class="figure">
+  <img src="images/example.png" alt="-"/>
+  <div class="caption">An example figure.</div>
+</div>
+=]
+</notextile>
+]
+
+note[
+In future releases, figures will be numbered automatically and included in a _List of Figures_ section.
+]
+
+] --[End of section]
+

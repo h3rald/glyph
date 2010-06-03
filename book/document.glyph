@@ -33,7 +33,24 @@ book[
 		]
 		chapter[
 			@title[Authoring Documents]
-			textile[include[authoring.glyph]]
+			section[
+				@title[Text Editing]
+				include[macro_intro.glyph]
+				include[sections.glyph]
+				include[links.glyph]
+				include[images.glyph]
+				include[code.glyph]
+				include[stylesheets.glyph]
+				include[inclusions.glyph]
+				include[evaluation.glyph]
+				include[conditionals.glyph]
+			]
+		]
+		chapter[
+			@title[Generating Output Files]
+			include[compiling.glyph]
+			include[lite_mode.glyph]
+			include[programmatic_usage.glyph]
 		]
 		chapter[
 			@title[Extending Glyph]

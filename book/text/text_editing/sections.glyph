@@ -1,0 +1,70 @@
+section[
+@title[Sections and Headers]
+@id[sec_head]
+
+Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section], like so:
+
+codeblock[=
+section[
+  @title[Section #1]
+
+Write the section contents here...
+
+  section[
+    @title[Section #2]
+
+This section is nested into the previous one.
+
+  ] --[End of Section #2]
+] --[End of Section #1]
+=]
+
+This example defines two nested sections, each with its own header. The header is _mandatory_: it will be displayed at the start of the section and in the Table of Contents. 
+
+Note an important difference from HTML: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following HTML code:
+
+<notextile>
+highlight[=html|
+<div class="section">
+  <h2>Section #1</h2>
+  <p>Write the section contents here...</p>
+  <div class="section">
+    <h3>Section #2</h3>
+    <p>This section is nested in the previous one</p>
+  </div>
+</div>
+=]
+</notextile>
+
+By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--\[...\]@ macros are _comments_, therefore they are not included in the final output).
+
+There are _a lot_ of macros that can be used in the same way as @section@, one for each element commonly used in =>[http://en.wikipedia.org/wiki/Book_design|Book Design]. Each one of them is a simple wrapper for a @<div>@ tag with a @class@ attribute set to its name.
+
+The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:
+
+table[
+  tr[
+    td[*Frontmatter*]
+    td[@imprint@ ^†^, @dedication@ ^†^, @inspiration@ ^†^, @foreword@ ^‡^, @introduction@ ^‡^, @acknowledgement@ ^‡^, @prologue@ ^‡^, @toc@ ^*^]
+  ]
+  tr[
+    td[*Bodymatter*]
+    td[@volume@, @book@, @part@, @chapter@]
+  ]
+  tr[
+    td[*Backmatter*]
+    td[@epilogue@ ^‡^, @afterword@ ^‡^, @postscript@ ^†^, @appendix@, @addendum@ ^‡^, @glossary@ ^**‡^, @colophon@ ^†^, @bibliography@ ^**‡^, @promotion@ ^†^, @references@ ^**‡^, @index@ ^**‡^, @lot@ ^**‡^, @lof@ ^**‡^]
+  ]
+]
+
+<notextile>*</notextile>: The %>[toc] is used to generate the Table of Contents automatically, and it must be used with no contents (i.e.: @toc\[\]@).
+
+<notextile>**</notextile>: This macro is likely to be extended in future versions to generate/aggregate content automatically.
+ 
+†: This section is not listed in the Table of Contents.
+
+‡: Any subsection of this section is not listed in the Table of Contents.
+
+note[@frontmatter@, @bodymatter@ and @backmatter@ are also valid (and mandatory!) macro identifiers, typically already included in the default @document.glyph@ file of every project.]
+
+] --[End section]

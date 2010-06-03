@@ -1,0 +1,60 @@
+section[
+@title[Links and Bookmarks]
+@id[links]
+
+Lightweight markups let you create internal and external links in a very easy way, and you can still do so in Glyph. However, if you do so:
+* There is no built-in way to check if they are valid
+* There is no built-in way to determine the title of a link automatically
+
+If you care about link validation and you want to save some keystrokes, then you should use the following markup-agnostic macros:
+* @link@ (aliased to @=>@) -- to create internal and external links.
+* @anchor@ (aliased to @#@) -- to create named anchors (bookmarks) within your document.
+
+box[Example|
+
+&[gcode]
+
+codeblock[=
+This is a link to link[#test].
+
+...
+
+This is link[#wrong].
+
+This is a #[test\\\|test anchor].=]
+
+&[htmlcode]
+
+<notextile>
+highlight[=html|
+<p>This is a link to <a href="#test">test anchor</a>.</p>
+<p>...</p>
+<p>This is <a href="#wrong">#wrong</a>.</p>
+<p>This is a <a id="test">test anchor</a>.</p>
+=]
+</notextile>
+
+Additionally, the following warning message is displayed when =>[#compile|compiling]:
+
+<notextile>
+codeblock[=
+warning: Bookmark 'wrong' does not exist
+ -> source: @: aurhoting.textile
+ -> path: document/body/bodymatter/chapter/@/textile/section/section/box/link
+=]
+</notextile>
+
+]
+
+Basically, if you use the %>[link] and the %>[anchor], Glyph makes sure that:
+* All links point to valid anchors within the document (regardless if the anchors are before or after the link, in snippets or included files).
+* There are no duplicate anchors within the documents.
+* If no title is specified as second parameter for the %>[link], the anchor's title is used as such.
+
+Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an extra parameter to the %>[header], like this: code[=header[Header Title\|my_anchor]=].
+
+note[
+At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the %>[link] starts with a @#@). In the future, the macro could be extended to support external links as well. 
+]
+
+] --[End section]
