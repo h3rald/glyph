@@ -35,6 +35,7 @@ book[
 			@title[Authoring Documents]
 			section[
 				@title[Text Editing]
+				include[glyph_files.glyph]
 				include[macro_intro.glyph]
 				include[sections.glyph]
 				include[links.glyph]

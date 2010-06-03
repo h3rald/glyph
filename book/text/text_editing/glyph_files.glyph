@@ -1,0 +1,7 @@
+section[
+	@title[.glyph files]
+	txt[
+The @text@ folder of any Glyph folder contains all the text source files used to produce a document. Although there are no restrictions on the extension of the files in this folder, you may want to use @.glyph@, especially if =>[http://www.vim.org|Vim] is your favorite text editor.
+The reason is simple: a Glyph syntax file is =>[http://www.vim.org/scripts/script.php?script_id=3086|available on vim.org]. Although not essential, syntax highlighting does help when editing Glyph files. 
+	]
+]
