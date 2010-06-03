@@ -76,7 +76,7 @@ macro :highlight do
 	lang = param(0)
 	text = param(1)
 	text.gsub!(/\\(.)/){$1}
-	highlighter = Glyph["highlighters.current"].to_sym rescue nil
+	highlighter = Glyph["filters.highlighter"].to_sym rescue nil
 	begin
 		raise LoadError unless highlighter
 		if highlighter.to_s.match(/^(uv|ultraviolet)$/) then
@@ -98,12 +98,12 @@ macro :highlight do
 		end
 	end
 	Glyph["highlighter.current"] = highlighter
-	target = Glyph["highlighters.target"]
+	target = Glyph["filters.target"]
 	result = ""
 	case highlighter.to_sym
 	when :coderay
 		begin
-			result = CodeRay.scan(text, lang).div(Glyph["highlighters.coderay"])
+			result = CodeRay.scan(text, lang).div(Glyph["filters.coderay"])
 		rescue Exception => e
 			macro_error e.message
 		end
@@ -111,8 +111,8 @@ macro :highlight do
 		begin
 			target = 'xhtml' if target == 'html'
 			result = Uv.parse(text.to_s, target.to_s, lang.to_s, 
-							 Glyph["highlighters.ultraviolet.line_numbers"], 
-							 Glyph["highlighters.ultraviolet.theme"].to_s)
+							 Glyph["filters.ultraviolet.line_numbers"], 
+							 Glyph["filters.ultraviolet.theme"].to_s)
 		rescue Exception => e
 			macro_error e.message
 		end

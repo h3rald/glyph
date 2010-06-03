@@ -1,8 +1,4 @@
 --- 
-:highlighters: 
-  :current: ultraviolet
-  :ultraviolet: 
-    :theme: blackboard
 :document: 
   :output: html
   :title: Glyph
