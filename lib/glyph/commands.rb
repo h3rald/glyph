@@ -35,7 +35,7 @@ command :compile do |c|
 		Glyph.lite_mode = true unless args.blank? 
 		Glyph.run! 'load:config'
 		original_config = Glyph::CONFIG.dup
-		output_targets = Glyph::CONFIG.get('document.output_targets')
+		output_targets = Glyph['system.output_targets']
 		target = nil
 		Glyph['document.output'] = options[:f] if options[:f]
 		target = Glyph['document.output']

@@ -7,13 +7,13 @@
   :revision: "rev. 1"
   :draft: false
   :output: 'html'
-  :output_targets: [:html, :pdf]
 :language:
   :set: 'glyph' # xml, core, filters
   :options:
     :xml_fallback: true
 :system:
   :quiet: false
+  :output_targets: [:html, :pdf]
   :structure:
     :hidden:
       - :imprint
