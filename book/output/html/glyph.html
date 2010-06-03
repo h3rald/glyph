@@ -41,7 +41,7 @@ body {
 }
 
 /* Structure */
-.titlepage {
+.halftitlepage, .titlepage {
 	margin: auto;
 	text-align: center;
 }
@@ -51,7 +51,7 @@ body {
 	line-height: 1.5em;
 	margin-bottom: 0.2em;
 }
-.titlepage h2 {
+.halftitlepage, .titlepage h2 {
 	font-size: 1.1em;
 	font-style: italic;
 	font-weight: bold;
@@ -482,7 +482,7 @@ June 2010
 </ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_111">document.*</a></li>
+<li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#h_112">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
 <li class="appendix section"><a href="#h_114">structure.*</a></li>
@@ -725,18 +725,18 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 <p>Glyph stores configuration settings in the following <span class="caps">YAML</span> files:</p>
 <ol>
 	<li>Your <em>Project Configuration</em> is stored in the <code>config.yml</code> file, included in each Glyph Project.</li>
-	<li>Your <em>Global Configuration</em> is stored in a <code>.glyphrc</code> file in your $<span class="caps">HOME</span> (or %HOMEPATH% on Windows) directory (not created by default).</li>
+	<li>Your <em>Global Configuration</em> is stored in a <code>.glyphrc</code> file in your <code>$HOME</code> (or <code>%HOMEPATH%</code> on Windows) directory (not created by default).</li>
 	<li>The <em>System Configuration</em> is stored in the source directory of Glyph itself.</li>
 </ol>
 <p>When compiling, Glyph loads all these configuration files and merges them according to the following rules:</p>
 <ul>
 	<li>A setting configured in the <em>Project Configuration</em> overrides the same setting in both Global and System configuration.</li>
-	<li>A setting configured in the <em>Global Configuration</em> overrides the same setting in the <em>System Configuration</em></li>
+	<li>A setting configured in the <em>Global Configuration</em> overrides the same setting in the <em>System Configuration</em>.</li>
 </ul>
 <p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set the <a href="#s_document_author">document.author</a> setting in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
 <p>Instead of editing your configuration settings directly, you can use the <a href="#c_config">config</a> command, as follows:</p>
 <p><code>glyph config</code> <em>setting</em> <em>[value]</em></p>
-<p>If no <em>value</em> is specified, glyph just prints the value of the configuration setting, so typing <code>glyph config document.author</code> right after creating a project (assuming you didn&#8217;t set this in the Global Configuration) will print nothing, because this setting is blank by default.</p>
+<p>If no <em>value</em> is specified, glyph prints the value of the configuration setting, so typing <code>glyph config document.author</code> right after creating a project (assuming you didn&#8217;t set this in the Global Configuration) will print nothing, because this setting is blank by default.</p>
 <p>To change the value of a configuration setting, specify a value right after the setting, like this:</p>
 <p><code>glyph config document.author "John Smith"</code></p>
 <div class="tip">
@@ -746,7 +746,7 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 <p><code>glyph config -g document.author "John Smith"</code></p>
 <div class="box">
 <div class="box-title">Regarding configuration values and data types&#8230;</div>
-<p>Glyph attempts to &#8220;guess&#8221; the data type of a configuration values by evaluation (<code>Kernel#instance_eval</code>) if the value:</p>
+<p>Glyph attempts to &#8220;guess&#8221; the data type of a configuration value by evaluation (<code>Kernel#instance_eval</code>) if the value:</p>
 <ul>
 	<li>is wrapped in quotes (<code>"</code> or <code>'</code>) &rarr; <code>String</code></li>
 	<li>starts with a colon (<code>:</code>) &rarr; <code>Symbol</code></li>
@@ -758,22 +758,7 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 <p>Note that this guessing is far from being foolproof: If you type something like <em>{:test, 2}</em>, for example, you&#8217;ll get an error.</p>
 </div>
 <p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file).</p>
-<p>For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. Normally, you may just want to change the following ones:</p> 
-
-	<table><tr><th>Setting</th>
-			<th>Description</th></tr>
-		<tr><th>
-<code>document.author</code>
-</th>
-			<td>The author of the document</td></tr>
-		<tr><th>
-<code>document.title</code>
-</th>
-			<td>The title of the document</td></tr>
-		<tr><th>
-<code>document.filename</code>
-</th>
-			<td>The document file name</td></tr></table>
+<p>For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. For everyday use, you may just want to change the settings defined in the <a href="#cfg_document">document.*</a> namespace.</p>
 
 </div>
 
@@ -1005,7 +990,7 @@ warning: Bookmark 'wrong' does not exist
 However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Jun 01 13:53:23 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Thu Jun 03 12:25:42 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -2231,7 +2216,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 		<div class="appendix">
 <h2 id="cfg_ref">Configuration Reference</h2>
 <div class="section">
-<h3 id="h_111">document.*</h3>
+<h3 id="cfg_document">document.*</h3>
 <p>The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.</p>
 	<table><tr><th>Name</th>
 				<th>Description</th>
