@@ -142,6 +142,27 @@ macro :match do
 	val.match(instance_eval(regexp)) ? true : nil
 end
 
+macro "alias:" do
+	exact_parameters 2
+	Glyph.macro_alias param(0) => param(1)
+end
+
+macro "rewrite:" do
+	string = raw_param(1).to_s
+	# Parameters
+	string.gsub!(/@(\d+)/) do
+		'#{raw_param('+$1+')}'
+	end
+	# Attributes
+	string.gsub!(/@([^\[\]\|\\\s]+)/) do
+		'#{raw_attr(:'+$1+')}'
+	end
+	puts string
+	Glyph.macro param(0) do
+		instance_eval %{interpret "#{string}"}
+	end
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
@@ -151,3 +172,4 @@ macro_alias '$' => :config
 macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias '?' => :condition
+macro_alias :"rw:" => :"rewrite"

@@ -142,4 +142,18 @@ describe "Macro:" do
 		@p.document.output.should == "Test: OK!"
 	end
 
+	it "alias:" do
+		define_em_macro
+		interpret("alias:[test|em]").process
+		Glyph::MACROS[:test].should == Glyph::MACROS[:em]
+	end
+
+	it "rewrite:" do
+		define_em_macro
+		interpret("rewrite:[rw_test|em[@0\\.em[@a]]]").process
+		output_for("rw_test[test @a[em[A!]]]").should == "<em>test<em><em>A!</em></em></em>"
+	end
+
+	it "rewrite should detect mutual inclusions"
+
 end	
