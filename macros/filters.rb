@@ -109,7 +109,7 @@ macro :highlight do
 		end
 	when :ultraviolet
 		begin
-			target = 'xhtml' if target == 'html'
+			target = 'xhtml' if target.to_s == 'html'
 			result = Uv.parse(text.to_s, target.to_s, lang.to_s, 
 							 Glyph["filters.ultraviolet.line_numbers"], 
 							 Glyph["filters.ultraviolet.theme"].to_s)

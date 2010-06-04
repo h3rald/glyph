@@ -62,7 +62,7 @@ interpret text
 			puts a<span class=\"Keyword\">+</span>b <span class=\"Keyword\">end</span> </pre>}
 			Glyph['filters.ultraviolet.theme'] = 'iplastic'
 			check = lambda do |hl, result|
-				Glyph["highlighters.current"] = hl
+				Glyph["filters.highlighter"] = hl.to_sym
 				Glyph.debug_mode = true
 				interpret("highlight[=ruby|\n#{code}=]")
 				@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip

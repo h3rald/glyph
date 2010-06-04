@@ -148,18 +148,24 @@ macro "alias:" do
 end
 
 macro "rewrite:" do
+	exact_parameters 2
+	macro_name = param(0).to_sym
+	raw_param(1).descend do |n, level|
+		if n[:name] == macro_name then
+			macro_error "Macro '#{macro_name}' cannot be defined by itself"
+		end
+	end
 	string = raw_param(1).to_s
-	# Parameters
-	string.gsub!(/@(\d+)/) do
-		'#{raw_param('+$1+')}'
-	end
-	# Attributes
-	string.gsub!(/@([^\[\]\|\\\s]+)/) do
-		'#{raw_attr(:'+$1+')}'
-	end
-	puts string
-	Glyph.macro param(0) do
-		instance_eval %{interpret "#{string}"}
+	Glyph.macro macro_name do
+		# Parameters
+		string.gsub!(/@(\d+)/) do
+			raw_param($1.to_i).to_s.strip
+		end
+		# Attributes
+		string.gsub!(/@([^\[\]\|\\\s]+)/) do
+			raw_attr($1.to_sym).contents.to_s.strip
+		end
+		interpret string
 	end
 end
 
@@ -172,4 +178,4 @@ macro_alias '$' => :config
 macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias '?' => :condition
-macro_alias :"rw:" => :"rewrite"
+macro_alias "rw:" => :"rewrite:"

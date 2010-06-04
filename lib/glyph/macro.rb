@@ -178,7 +178,7 @@ module Glyph
 		def macro_error(msg, klass=Glyph::MacroError)
 			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
 			@node[:document].errors << message if @node[:document]
-			message += "\n    value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}" if Glyph.debug?
+			message += "\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
 			raise klass, message
 		end
 
@@ -189,7 +189,7 @@ module Glyph
 		def macro_warning(msg, e=nil)
 			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
 			if Glyph.debug? then
-				message << %{\n    value:\n#{"-"*54}\n#{value.strip}\n#{"-"*54}} 
+				message << %{\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}} 
 				if e then
 					message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
 					message << "\n"+e.backtrace.join("\n")

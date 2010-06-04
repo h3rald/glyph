@@ -154,6 +154,12 @@ describe "Macro:" do
 		output_for("rw_test[test @a[em[A!]]]").should == "<em>test<em><em>A!</em></em></em>"
 	end
 
-	it "rewrite should detect mutual inclusions"
+	it "rewrite should detect mutual definitions" do
+		define_em_macro
+		lambda do
+			interpret("rw:[rw_test2|em[rw_test2[@0]]]").process
+		end.should raise_error(Glyph::MacroError)
+	end
+
 
 end	
