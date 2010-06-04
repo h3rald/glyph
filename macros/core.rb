@@ -8,8 +8,14 @@ macro :snippet do
 			@node[:source] = "#{@name}[#{ident}]"
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
-			raise if e.is_a? Glyph::MutualInclusionError
-			macro_warning e.message, e
+			case 
+			when e.is_a?(Glyph::MutualInclusionError) then
+				raise
+			when e.is_a?(Glyph::MacroError) then
+				Glyph.warning e.message
+			else
+				macro_warning e.message, e
+			end
 			macro_todo "Correct errors in snippet '#{ident}'"
 		end
 	else
@@ -59,8 +65,14 @@ macro :include do
 			@node[:source] = "#{@name}[#{v}]"
 			interpret contents
 		rescue Exception => e
-			raise if e.is_a? Glyph::MutualInclusionError
-			macro_warning e.message, e
+			case 
+			when e.is_a?(Glyph::MutualInclusionError) then
+				raise
+			when e.is_a?(Glyph::MacroError) then
+				Glyph.warning e.message
+			else
+				macro_warning e.message, e
+			end
 			macro_todo "Correct errors in file '#{value}'"
 		end
 	else
@@ -157,16 +169,22 @@ macro "rewrite:" do
 	end
 	string = raw_param(1).to_s
 	Glyph.macro macro_name do
+		s = string.dup
 		# Parameters
-		string.gsub!(/@(\d+)/) do
-			raw_param($1.to_i).to_s.strip
+		s.gsub!(/\{\{(\d+)\}\}/) do
+			p = raw_param($1.to_i)
+			macro_error "Parameter ##{$1} not specified" unless p
+			p.to_s.strip
 		end
 		# Attributes
-		string.gsub!(/@([^\[\]\|\\\s]+)/) do
-			raw_attr($1.to_sym).contents.to_s.strip
+		s.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
+			a = raw_attr($1.to_sym)
+			macro_error "Attribute @#{$1} not specified" unless a
+			a.contents.to_s.strip
 		end
-		interpret string
+		interpret s
 	end
+	nil
 end
 
 macro_alias '--' => :comment
@@ -178,4 +196,4 @@ macro_alias '$' => :config
 macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias '?' => :condition
-macro_alias "rw:" => :"rewrite:"
+macro_alias 'rw:' => 'rewrite:'

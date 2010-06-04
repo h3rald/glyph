@@ -1,18 +1,18 @@
 section[
 @title[Source code]
 @id[source_code]
-If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph providers different ways to format source code, as described in the following sections.
+p[If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph providers different ways to format source code, as described in the following sections.]
 
 section[
 @title[Inline code]
-The %>[code] can be used to format inline code. That's exactly the same as using @<code>@ tags, just remember to use =>[#esc_quot|escaping delimiters] and to escape pipes. 
+txt[The %>[code] can be used to format inline code. That's exactly the same as using @<code>@ tags, just remember to use =>[#esc_quot|escaping delimiters] and to escape pipes.] 
 ]
 
 section[
 @title[Code block]
-For code blocks, you have two choices: the %>[code], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight] macro. The last one requires either &[coderay] or &[uv], but it highlights the most common programming language.
+txt[For code blocks, you have two choices: the %>[code], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight] macro. The last one requires either &[coderay] or &[uv], but it highlights the most common programming language.]
 
-Cosider the following piece of ruby code:
+p[Cosider the following piece of ruby code:]
 
 codeblock[=
   def find_child(&block)
@@ -25,7 +25,7 @@ codeblock[=
   end
 =]
 
-It can be wrapped in a highlight macro, like so:
+p[It can be wrapped in a highlight macro, like so:]
 
 codeblock[=
 highlight[\=ruby\|
@@ -40,7 +40,7 @@ highlight[\=ruby\|
 \=]
 =]
 
-...to produce the following, using the $[highlighters.current] highlighter:
+p[...to produce the following, using the $[highlighters.current] highlighter:]
  
 <notextile>
 highlight[=ruby|
@@ -56,9 +56,9 @@ highlight[=ruby|
 </notextile>
 
 box[Some Remarks|
-* Highlighters require some configuration. For more information on relevant configuration settings, see the @highlighters.*@ configuration settings.
+txt[* Highlighters require some configuration. For more information on relevant configuration settings, see the @highlighters.*@ configuration settings.
 * If you're using the %>[highlight] together with %>[textile], you must wrap the macro call within @<notextile>@ tags.
-* You must always escape pipes (@\|@) with the code or the highlight macro.
+* You must always escape pipes (@\|@) with the code or the highlight macro.]
 ]
 ]
 

@@ -1,16 +1,4 @@
 %[=
-macro :issue do
-	exact_parameters 2
-	ident = @node.param 0
-	desc = @node.param 1
-	interpret %{
-		tr[
-			td[\\.=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
-			td[textile[#{desc}]]
-		]
-	}
-end
-
 macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
 	total = @node.children[0].children.length
@@ -28,31 +16,27 @@ macro :features do
 	}
 end
 
-macro :release do
-	exact_parameters 3
-	number = @node.param 0
-	date = @node.param 1
-  contents = @node.param 2
-	interpret %{
-		section[
-			@title[v#{number} &ndash; #{date}]
-			#{contents}
-		]
-	}
-end
-
-
 macro_alias :bugs => :features
-
 =]
-?[%[lite?]|*[=
-		%:[%>|"#@value macro"]
-		%:[#>|"#@value command"]
-	=]
+rw:[release|
+	section[
+		@title[v{{0}} &ndash; {{1}}]
+		{{2}}
+	]
+]
+rw:[issue|
+	tr[
+		td[\.=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}|#{{0}}]]
+		td[txt[{{1}}]]
+	]
+]
+?[%[lite?]|
+	%:[%>|"#@value macro"]
+	%:[#>|"#@value command"]
 ]
 release[0.2.0|May 9th 2010|
 	features[
-		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet requireed).]
+		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet required).]
 		issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
 		issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]	
 		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] (Jabbslad).]	

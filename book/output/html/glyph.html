@@ -234,131 +234,6 @@ code, pre {
 
 
 </style>
-		
-		<style type="text/css">
-.CodeRay {
-  background-color: #f8f8f8;
-  border: 1px solid silver;
-  font-family: 'Courier New', 'Terminal', monospace;
-  color: #000;
-}
-.CodeRay pre { margin: 0px; }
-
-span.CodeRay { white-space: pre; border: 0px; padding: 2px; }
-
-table.CodeRay { border-collapse: collapse; width: 100%; padding: 2px; }
-table.CodeRay td { padding: 2px 4px; vertical-align: top; }
-
-.CodeRay .line_numbers, .CodeRay .no {
-  background-color: #def;
-  color: gray;
-  text-align: right;
-}
-.CodeRay .line_numbers a:target, .CodeRay .no a:target { color: blue; }
-.CodeRay .line_numbers .highlighted, .CodeRay .no .highlighted { color: red; }
-.CodeRay .no { padding: 0px 4px; }
-.CodeRay .code { width: 100%; }
-.CodeRay .code pre { overflow: auto; }
-
-.CodeRay .debug { color:white ! important; background:blue ! important; }
-
-.CodeRay .an { color:#007 }
-.CodeRay .at { color:#f08 }
-.CodeRay .av { color:#700 }
-.CodeRay .bi { color:#509; font-weight:bold }
-.CodeRay .c  { color:#888; }
-.CodeRay .c .dl { color:#444; }
-.CodeRay .c .ch { color:#444; }
-
-.CodeRay .ch { color:#04D }
-.CodeRay .ch .k { color:#04D }
-.CodeRay .ch .dl { color:#039 }
-
-.CodeRay .cl { color:#B06; font-weight:bold }
-.CodeRay .cm { color:#A08; font-weight:bold }
-.CodeRay .co { color:#036; font-weight:bold }
-.CodeRay .cr { color:#0A0 }
-.CodeRay .cv { color:#369 }
-.CodeRay .de { color:#B0B; }
-.CodeRay .df { color:#099; font-weight:bold }
-.CodeRay .di { color:#088; font-weight:bold }
-.CodeRay .dl { color:black }
-.CodeRay .do { color:#970 }
-.CodeRay .dt { color:#34b }
-.CodeRay .ds { color:#D42; font-weight:bold }
-.CodeRay .e  { color:#666; font-weight:bold }
-.CodeRay .en { color:#800; font-weight:bold }
-.CodeRay .er { color:#F00; background-color:#FAA }
-.CodeRay .ex { color:#C00; font-weight:bold }
-.CodeRay .fl { color:#60E; font-weight:bold }
-.CodeRay .fu { color:#06B; font-weight:bold }
-.CodeRay .gv { color:#d70; font-weight:bold }
-.CodeRay .hx { color:#058; font-weight:bold }
-.CodeRay .i  { color:#00D; font-weight:bold }
-.CodeRay .ic { color:#B44; font-weight:bold }
-
-.CodeRay .il { background-color: hsla(0,0%,0%,0.1); color: black }
-.CodeRay .il .idl { font-weight: bold; color: #666 }
-.CodeRay .idl { font-weight: bold; color: #666; }
-
-.CodeRay .im { color:#f00; }
-.CodeRay .in { color:#B2B; font-weight:bold }
-.CodeRay .iv { color:#33B }
-.CodeRay .la { color:#970; font-weight:bold }
-.CodeRay .lv { color:#963 }
-.CodeRay .ns { color:#707; font-weight:bold }
-.CodeRay .oc { color:#40E; font-weight:bold }
-.CodeRay .op { }
-.CodeRay .pc { color:#058; font-weight:bold }
-.CodeRay .pd { color:#369; font-weight:bold }
-.CodeRay .pp { color:#579; }
-.CodeRay .ps { color:#00C; font-weight:bold }
-.CodeRay .pt { color:#074; font-weight:bold }
-.CodeRay .r, .kw  { color:#080; font-weight:bold }
-
-.CodeRay .ke { color: #808; }
-.CodeRay .ke .dl { color: #606; }
-.CodeRay .ke .ch { color: #80f; }
-.CodeRay .vl { color: #088; }
-
-.CodeRay .rx { background-color:hsla(300,100%,50%,0.1); color:#808 }
-.CodeRay .rx .k { }
-.CodeRay .rx .dl { color:#404 }
-.CodeRay .rx .mod { color:#C2C }
-.CodeRay .rx .fu  { color:#404; font-weight: bold }
-
-.CodeRay .s { background-color:hsla(0,100%,50%,0.1); color: #D20; }
-.CodeRay .s .k { }
-.CodeRay .s .ch { color: #b0b; }
-.CodeRay .s .dl { color: #710; }
-
-.CodeRay .sh { background-color:hsla(120,100%,50%,0.1); color:#2B2 }
-.CodeRay .sh .k { }
-.CodeRay .sh .dl { color:#161 }
-
-.CodeRay .sy { color:#A60 }
-.CodeRay .sy .k { color:#A60 }
-.CodeRay .sy .dl { color:#630 }
-
-.CodeRay .ta { color:#070 }
-.CodeRay .ts { color:#D70; font-weight:bold }
-.CodeRay .ty { color:#339; font-weight:bold }
-.CodeRay .v  { color:#036 }
-.CodeRay .xt { color:#444 }
-
-.CodeRay .ins { background: #afa; }
-.CodeRay .del { background: #faa; }
-.CodeRay .chg { color: #aaf; background: #007; }
-.CodeRay .head { color: #f8f; background: #505 }
-.CodeRay .head .filename { color: white; }
-
-.CodeRay .ins .ins { color: #080; font-weight:bold }
-.CodeRay .del .del { color: #800; font-weight:bold }
-.CodeRay .chg .chg { color: #66f; }
-.CodeRay .head .head { color: #f4f; }
-
-
-</style>
 </head>
 
 	<body>
@@ -404,52 +279,26 @@ June 2010
 <li class="bodymatter section"><a href="#macro_intro">Introducing Glyph Macros</a></li>
 <li class="bodymatter section"><a href="#attribute_intro">Macro attributes</a></li>
 <li class="bodymatter section"><a href="#esc_quot">Escaping and Quoting</a></li>
-<li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li>
-<li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li>
-<li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li>
-<li class="bodymatter section"><a href="#source_code">Source code</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_23">Inline code</a></li>
-<li class="bodymatter section"><a href="#h_24">Code block</a></li>
-</ol></li>
-<li class="bodymatter section"><a href="#stylesheets">Adding Stylesheets</a></li>
-<li><ol><li class="bodymatter section"><a href="#default_styles">Default Stylesheets</a></li>
-</ol></li>
-<li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li>
-<li class="bodymatter section"><a href="#h_28">Evaluating Ruby code and Configuration Settings</a></li>
-<li class="bodymatter section"><a href="#cond_macros">Conditional Macros</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_30">Using macros inside the condition macro</a></li>
-<li class="bodymatter section"><a href="#h_31">Results of conditional expressions</a></li>
 </ol></li>
 </ol></li>
-</ol></li>
-<li class="bodymatter chapter"><a href="#h_32">Generating Output Files</a></li>
-<li><ol><li class="bodymatter section"><a href="#compile">Compiling a project</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_34">HTML output</a></li>
-<li class="bodymatter section"><a href="#h_35">PDF Output</a></li>
-<li class="bodymatter section"><a href="#auto_regeneration">Auto Regeneration</a></li>
-</ol></li>
-<li class="bodymatter section"><a href="#lite_mode">Compiling single Glyph files</a></li>
-<li><ol><li class="bodymatter section"><a href="#lite_limitations">Limitations</a></li>
-</ol></li>
-<li class="bodymatter section"><a href="#h_39">Using Glyph programmatically</a></li>
-</ol></li>
+<li class="bodymatter chapter"><a href="#h_19">Generating Output Files</a></li>
 <li class="bodymatter chapter"><a href="#extending">Extending Glyph</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_41">Anatomy of a Macro</a></li>
-<li class="bodymatter section"><a href="#h_42">Bookmarks and Headers</a></li>
-<li class="bodymatter section"><a href="#h_43">Using Placeholders</a></li>
-<li class="bodymatter section"><a href="#h_44">Using Validators</a></li>
-<li class="bodymatter section"><a href="#h_45">Interpreting Glyph Code</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_21">Anatomy of a Macro</a></li>
+<li class="bodymatter section"><a href="#h_22">Bookmarks and Headers</a></li>
+<li class="bodymatter section"><a href="#h_23">Using Placeholders</a></li>
+<li class="bodymatter section"><a href="#h_24">Using Validators</a></li>
+<li class="bodymatter section"><a href="#h_25">Interpreting Glyph Code</a></li>
 <li><ol><li class="bodymatter section"><a href="#encode_decode">Encoding and Decoding Glyph Code</a></li>
 </ol></li>
-<li class="bodymatter section"><a href="#h_47">Further Reading</a></li>
+<li class="bodymatter section"><a href="#h_27">Further Reading</a></li>
 </ol></li>
-<li class="bodymatter chapter"><a href="#h_48">Troubleshooting</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_49">Generic Errors</a></li>
-<li class="bodymatter section"><a href="#h_50">Command Errors</a></li>
-<li class="bodymatter section"><a href="#h_51">Macro Errors</a></li>
+<li class="bodymatter chapter"><a href="#h_28">Troubleshooting</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_29">Generic Errors</a></li>
+<li class="bodymatter section"><a href="#h_30">Command Errors</a></li>
+<li class="bodymatter section"><a href="#h_31">Macro Errors</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_53">Global Options</a></li>
+<li><ol><li class="appendix section"><a href="#h_33">Global Options</a></li>
 <li><ol><li class="appendix section"><a href="#debug_switch">@-d@, @--debug@</a></li>
 </ol></li>
 <li class="appendix section"><a href="#c_add">@add@</a></li>
@@ -460,7 +309,7 @@ June 2010
 <li class="appendix section"><a href="#c_todo">@todo@</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_62">Common Macros</a></li>
+<li><ol><li class="appendix section"><a href="#h_42">Common Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_and">and</a></li>
 <li class="appendix section"><a href="#m_comment">comment</a></li>
 <li class="appendix section"><a href="#m_condition">condition</a></li>
@@ -484,7 +333,7 @@ June 2010
 <li><ol><li class="appendix section"><a href="#m_markdown">markdown</a></li>
 <li class="appendix section"><a href="#m_textile">textile</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_84">Block Macros</a></li>
+<li class="appendix section"><a href="#h_64">Block Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_box">box</a></li>
 <li class="appendix section"><a href="#m_code">code</a></li>
 <li class="appendix section"><a href="#m_fig">fig</a></li>
@@ -499,14 +348,14 @@ June 2010
 <li class="appendix section"><a href="#m_th">th</a></li>
 <li class="appendix section"><a href="#m_tr">tr</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_98">Inline Macros</a></li>
+<li class="appendix section"><a href="#h_78">Inline Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_anchor">anchor</a></li>
 <li class="appendix section"><a href="#m_codeph">codeph</a></li>
 <li class="appendix section"><a href="#m_draftcomment">draftcomment</a></li>
 <li class="appendix section"><a href="#m_fmi">fmi</a></li>
 <li class="appendix section"><a href="#m_link">link</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_104">Structure Macros</a></li>
+<li class="appendix section"><a href="#h_84">Structure Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_body">body</a></li>
 <li class="appendix section"><a href="#m_div">div</a></li>
 <li class="appendix section"><a href="#m_document">document</a></li>
@@ -519,17 +368,17 @@ June 2010
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
-<li class="appendix section"><a href="#h_115">filters.*</a></li>
+<li class="appendix section"><a href="#h_95">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_117">structure.*</a></li>
-<li class="appendix section"><a href="#h_118">tools.*</a></li>
+<li class="appendix section"><a href="#h_97">structure.*</a></li>
+<li class="appendix section"><a href="#h_98">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_119">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_120">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_121">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_122">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_99">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_100">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_101">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_102">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_123">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_103">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -909,543 +758,14 @@ This is another section.
     		<td>An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:<br />
 <code>_\.=&gt;[#link|This link is emphasized using Textile]_</code></td><p></tr></table></p>
 
-</div> 
-				<div class="section">
-<h4 id="sec_head">Sections and Headers</h4>
-Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the <a href="#m_section">section</a> macro, like so:
-
-
-<div class="code">
-<pre>
-<code>
-section[
-  @title[Section #1]
-
-Write the section contents here...
-
-  section[
-    @title[Section #2]
-
-This section is nested into the previous one.
-
-  ] --[End of Section #2]
-] --[End of Section #1]
-</code>
-</pre>
-</div>
-
-This example defines two nested sections, each with its own header. The header is _mandatory_: it will be displayed at the start of the section and in the Table of Contents. 
-
-Note an important difference from HTML: there is no explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following HTML code:
-
-<notextile>
-<div class="CodeRay">
-  <div class="code"><pre><span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">section</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
-  <span class="ta">&lt;h2&gt;</span>Section #1<span class="ta">&lt;/h2&gt;</span>
-  <span class="ta">&lt;p&gt;</span>Write the section contents here...<span class="ta">&lt;/p&gt;</span>
-  <span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">section</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
-    <span class="ta">&lt;h3&gt;</span>Section #2<span class="ta">&lt;/h3&gt;</span>
-    <span class="ta">&lt;p&gt;</span>This section is nested in the previous one<span class="ta">&lt;/p&gt;</span>
-  <span class="ta">&lt;/div&gt;</span>
-<span class="ta">&lt;/div&gt;</span></pre></div>
-</div>
-
-</notextile>
-
-By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--[...]@ macros are _comments_, therefore they are not included in the final output).
-
-There are _a lot_ of macros that can be used in the same way as @section@, one for each element commonly used in <a href="http://en.wikipedia.org/wiki/Book_design">Book Design</a>. Each one of them is a simple wrapper for a @<div>@ tag with a @class@ attribute set to its name.
-
-The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:
-
-<table><tr><td>*Frontmatter*</td>
-    <td>@imprint@ ^†^, @dedication@ ^†^, @inspiration@ ^†^, @foreword@ ^‡^, @introduction@ ^‡^, @acknowledgement@ ^‡^, @prologue@ ^‡^, @toc@ ^*^</td></tr>
-  <tr><td>*Bodymatter*</td>
-    <td>@volume@, @book@, @part@, @chapter@</td></tr>
-  <tr><td>*Backmatter*</td>
-    <td>@epilogue@ ^‡^, @afterword@ ^‡^, @postscript@ ^†^, @appendix@, @addendum@ ^‡^, @glossary@ ^**‡^, @colophon@ ^†^, @bibliography@ ^**‡^, @promotion@ ^†^, @references@ ^**‡^, @index@ ^**‡^, @lot@ ^**‡^, @lof@ ^**‡^</td></tr></table>
-
-<notextile>*</notextile>: The <a href="#m_toc">toc</a> macro is used to generate the Table of Contents automatically, and it must be used with no contents (i.e.: @toc[]@).
-
-<notextile>**</notextile>: This macro is likely to be extended in future versions to generate/aggregate content automatically.
- 
-†: This section is not listed in the Table of Contents.
-
-‡: Any subsection of this section is not listed in the Table of Contents.
-
-<div class="note">
-<span class="note-title">Note</span>@frontmatter@, @bodymatter@ and @backmatter@ are also valid (and mandatory!) macro identifiers, typically already included in the default @document.glyph@ file of every project.
-
-</div>
-
-</div> 
-				<div class="section">
-<h4 id="links">Links and Bookmarks</h4>
-Lightweight markups let you create internal and external links in a very easy way, and you can still do so in Glyph. However, if you do so:
-* There is no built-in way to check if they are valid
-* There is no built-in way to determine the title of a link automatically
-
-If you care about link validation and you want to save some keystrokes, then you should use the following markup-agnostic macros:
-* @link@ (aliased to @=>@) -- to create internal and external links.
-* @anchor@ (aliased to @#@) -- to create named anchors (bookmarks) within your document.
-
-<div class="box">
-<div class="box-title">Example</div>
-The following Glyph code:
-
-
-<div class="code">
-<pre>
-<code>
-This is a link to link[#test].
-
-...
-
-This is link[#wrong].
-
-This is a #[test|test anchor].
-</code>
-</pre>
-</div>
-
-Is translated into the following HTML code:
-
-<notextile>
-<div class="CodeRay">
-  <div class="code"><pre><span class="ta">&lt;p&gt;</span>This is a link to <span class="ta">&lt;a</span> <span class="an">href</span>=<span class="s"><span class="dl">&quot;</span><span class="k">#test</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>test anchor<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span>
-<span class="ta">&lt;p&gt;</span>...<span class="ta">&lt;/p&gt;</span>
-<span class="ta">&lt;p&gt;</span>This is <span class="ta">&lt;a</span> <span class="an">href</span>=<span class="s"><span class="dl">&quot;</span><span class="k">#wrong</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>#wrong<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span>
-<span class="ta">&lt;p&gt;</span>This is a <span class="ta">&lt;a</span> <span class="an">id</span>=<span class="s"><span class="dl">&quot;</span><span class="k">test</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>test anchor<span class="ta">&lt;/a&gt;</span>.<span class="ta">&lt;/p&gt;</span></pre></div>
-</div>
-
-</notextile>
-
-Additionally, the following warning message is displayed when <a href="#compile">compiling</a>:
-
-<notextile>
-
-<div class="code">
-<pre>
-<code>
-warning: Bookmark 'wrong' does not exist
- -> source: @: aurhoting.textile
- -> path: document/body/bodymatter/chapter/@/textile/section/section/box/link
-</code>
-</pre>
-</div>
-</notextile>
-
-</div>
-
-Basically, if you use the <a href="#m_link">link</a> macro and the <a href="#m_anchor">anchor</a> macro, Glyph makes sure that:
-* All links point to valid anchors within the document (regardless if the anchors are before or after the link, in snippets or included files).
-* There are no duplicate anchors within the documents.
-* If no title is specified as second parameter for the <a href="#m_link">link</a> macro, the anchor's title is used as such.
-
-Besides using the <a href="#m_anchor">anchor</a> macro macro, you can also create an anchor for a header by passing an extra parameter to the <a href="#m_header">header</a> macro, like this: <code>header[Header Title|my_anchor]</code>.
-
-<div class="note">
-<span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link">link</a> macro starts with a @#@). In the future, the macro could be extended to support external links as well.
-
-</div>
-
-</div> 
-				<div class="section">
-<h4 id="img_fig">Images and Figures</h4>
-Same as for <a href="#links">links</a>, you can also include images and figures using Textile or Markdown. If you want additional features, you can use the <a href="#m_img">img</a> macro and the <a href="#m_fig">fig</a> macro, as shown in the following example:
-
-<div class="box">
-<div class="box-title">Example</div>
-The following Glyph code:
-
-
-<div class="code">
-<pre>
-<code>
-img[glyph.svg|20%|20%]
-
-fig[example.png|An example figure.]
-</code>
-</pre>
-</div>
-
-Is translated into the following HTML code:
-
-<notextile>
-<div class="CodeRay">
-  <div class="code"><pre><span class="ta">&lt;img</span> <span class="an">src</span>=<span class="s"><span class="dl">&quot;</span><span class="k">images/glyph.svg</span><span class="dl">&quot;</span></span> <span class="an">width</span>=<span class="s"><span class="dl">&quot;</span><span class="k">20%</span><span class="dl">&quot;</span></span> <span class="an">height</span>=<span class="s"><span class="dl">&quot;</span><span class="k">20%</span><span class="dl">&quot;</span></span> <span class="an">alt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">-</span><span class="dl">&quot;</span></span> <span class="ta">/&gt;</span>
-
-<span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">figure</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>
-  <span class="ta">&lt;img</span> <span class="an">src</span>=<span class="s"><span class="dl">&quot;</span><span class="k">images/example.png</span><span class="dl">&quot;</span></span> <span class="an">alt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">-</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>
-  <span class="ta">&lt;div</span> <span class="an">class</span>=<span class="s"><span class="dl">&quot;</span><span class="k">caption</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>An example figure.<span class="ta">&lt;/div&gt;</span>
-<span class="ta">&lt;/div&gt;</span></pre></div>
-</div>
-
-</notextile>
-
-</div>
-
-<div class="note">
-<span class="note-title">Note</span>In future releases, figures will be numbered automatically and included in a _List of Figures_ section.
-
-</div>
-
-</div> 
-
-				<div class="section">
-<h4 id="source_code">Source code</h4>
-If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph providers different ways to format source code, as described in the following sections.
-
-<div class="section">
-<h5 id="h_23">Inline code</h5>
-The <a href="#m_code">code</a> macro can be used to format inline code. That's exactly the same as using @<code>@ tags, just remember to use <a href="#esc_quot">escaping delimiters</a> and to escape pipes.
-
-</div>
-
-<div class="section">
-<h5 id="h_24">Code block</h5>
-For code blocks, you have two choices: the <a href="#m_code">code</a> macro, which simply wraps text into @<pre>@ and @<code>@ tags, or the <a href="#m_highlight">highlight</a> macro macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it highlights the most common programming language.
-
-Cosider the following piece of ruby code:
-
-
-<div class="code">
-<pre>
-<code>
-def find_child(&block)
-    children.each do |c|
-      c.descend do |node, level|
-        return node if block.call(node)
-      end
-    end
-    nil
-  end
-</code>
-</pre>
-</div>
-
-It can be wrapped in a highlight macro, like so:
-
-
-<div class="code">
-<pre>
-<code>
-highlight[=ruby|
-  def find_child(&block)
-    children.each do \|c\|
-      c.descend do \|node, level\|
-        return node if block.call(node)
-      end
-    end
-    nil
-  end
-=]
-</code>
-</pre>
-</div>
-
-...to produce the following, using the coderay highlighter:
- 
-<notextile>
-<div class="CodeRay">
-  <div class="code"><pre><span class="r">def</span> <span class="fu">find_child</span>(&amp;block)
-    children.each <span class="r">do</span> |c|
-      c.descend <span class="r">do</span> |node, level|
-        <span class="r">return</span> node <span class="r">if</span> block.call(node)
-      <span class="r">end</span>
-    <span class="r">end</span>
-    <span class="pc">nil</span>
-  <span class="r">end</span></pre></div>
-</div>
-
-</notextile>
-
-<div class="box">
-<div class="box-title">Some Remarks</div>
-* Highlighters require some configuration. For more information on relevant configuration settings, see the @highlighters.*@ configuration settings.
-* If you're using the <a href="#m_highlight">highlight</a> macro together with <a href="#m_textile">textile</a> macro, you must wrap the macro call within @<notextile>@ tags.
-* You must always escape pipes (@|@) with the code or the highlight macro.
-
-</div>
-
-</div>
-
-</div> 
-
-				<div class="section">
-<h4 id="stylesheets">Adding Stylesheets</h4>
-Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.
-
-You can embed CSS files using the <a href="#m_style">style</a> macro, like this:
-
-<code>style[default.css]</code>
-
-In this case, the <a href="#m_style">style</a> macro looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
-
-<div class="section">
-<h5 id="default_styles">Default Stylesheets</h5>
-Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">style</a> macro macro:
-
-	<table><tr><th>File name</th>
-			<th>Notes</th></tr>
-		<tr><td>@default.css@</td>
-			<td>The default stylesheet used for this book.</td></tr>
-		<tr><td>@pagination.css@</td>
-			<td>A CSS3-compliant stylesheet used for pagination, suitable for PDF generation using Prince.</td></tr>
-		<tr><td>@coderay.css@</td>
-			<td>The default <a href="http://coderay.rubychan.de/">Coderay</a> stylesheet, used for syntax highlighting.</td></tr>
-		<tr><td>@ultraviolet/*@</td>
-			<td>This folder contains the following <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> stylesheets, used for syntax highlighting: <code>active4d.css, all_hallows_eve.css, amy.css, blackboard.css, brilliance_black.css, brilliance_dull.css, cobalt.css, dawn.css, eiffel.css, espresso_libre.css, idle.css, iplastic.css, lazy.css, mac_classic.css, magicwb_amiga.css, pastels_on_dark.css, slush_poppies.css, spacecadet.css, sunburst.css, twilight.css, zenburnesque.css</code></td></tr></table>
-
-</div>
-
-</div>
-
-				<div class="section">
-<h4 id="incl">Including Files and Snippets</h4>
-If you're authoring a user manual, a long article or a book, writing everything inside a single file (@document.glyph@) may not be optimal. For this reason, Glyph provides an <a href="#m_include">include</a> macro (aliased by <code>@</code>) that can be used to include the contents of any file within the @text/@ directory:
-
-<code>include[introduction.textile]</code>
-
-The macro call above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
-
-<div class="note">
-<span class="note-title">Note</span>Unlike with <a href="img_fig">image and figures</a> that must be included with their _relative_ path to the @images/@ folder, you must not specify a relative path when including text files. This is due to the fact that images are copied _as they are_ in the @output/<format>/images/@ directory and they have to be linked from the output file.
-
-A possible downside of this behavior is that file names must be unique within the entire @text/@ directory and any of its subdirectories
-
-</div>
-
-When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:
-* @.textile@ &rarr; <a href="#m_textile">textile</a> macro
-* @.markdown@ or @.md@ &rarr; <a href="#m_markdown">markdown</a> macro
-
-<div class="tip">
-<span class="note-title">Tip</span>You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@, like this:
-
-@glyph config filters.by_file_extensions false@
-
-</div>
-
-While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence? In this case, you may want to consider using a _snippet_ instead.
-
-Snippets are text strings saved in YAML format in the @snippets.yml@ file. They can be included anywhere in your document using the <a href="#m_snippet">snippet</a> macro (or its alias @&@). 
-
-<div class="tip">
-<span class="note-title">Tip</span>Besides storing snippets in the @snippets.yml@ file, you can also define them right in your document, using the <a href="#m_snippet_">snippet:</a> macro.
-
-</div>
-
-<div class="box">
-<div class="box-title">Example</div>
-Consider the following @snippets.yml@ file:
-
-<notextile>
-<div class="CodeRay">
-  <div class="code"><pre><span class="head"><span class="head">---</span></span> 
-<span class="sy">:glang</span>: <span class="er">Glyph Language</span>
-<span class="sy">:macros</span>: <span class="er">Glyph Macros</span>
-<span class="sy">:sq_esc</span>: <span class="er">|-</span>
-  <span class="er">Square brackets must be escaped </span>
-  <span class="er">unless used as macro delimiters or within a quoting macro.</span>
-<span class="sy">:markups</span>: <span class="er">Textile or Markdown</span>
-<span class="sy">:test</span>: <span class="er">|-</span>
-  <span class="er">This is a </span>
-  <span class="er">Test snippet</span></pre></div>
-</div>
-
-</notextile>
-
-You can use <code>&[markups]</code> anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the @markups@ snippets only in the @snippets.yml@ file to change it everywhere else in the document.
-
-</div> 
-<div class="tip">
-<span class="note-title">Tip</span>Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
-
-</div>
-
-</div> 
-				<div class="section">
-<h4 id="h_28">Evaluating Ruby code and Configuration Settings</h4>
-Glyph Language is not a full-blown programming language, as it does not provide control flow or variables, for example. 
-However, it is possible to evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
-* <code>%[2 + 2]</code> &rarr; 4
-* <code>%[Time.now]</code> &rarr; Thu Jun 03 14:27:19 +0200 2010
-* <code>%[Glyph::VERSION]</code> &rarr; 0.2.0
-
-The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself). 
-
-Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <a href="#m_config">config</a> macro (aliased to @$@) makes things slightly simpler (e.g. <code>$[document.author]</code>).
-
-</div>
-				<div class="section">
-<h4 id="cond_macros">Conditional Macros</h4>
-Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see <a href="#s_document_draft">document.draft</a> setting), or use a particular stylesheet only if when you generate a PDF document.
-
-To do so, you can use the <a href="#m_condition">condition</a> macro (aliased by @?@), and a set of additional macros that can be used as conditional operators i.e.:
-* <a href="#m_eq">eq</a> macro
-* <a href="#m_not">not</a> macro
-* <a href="#m_and">and</a> macro
-* <a href="#m_or">or</a> macro
-* <a href="#m_match">match</a> macro
-
-Consider the following code:
-
-
-<div class="code">
-<pre>
-<code>
-?[$[document.draft]|
-This is a first draft of the Glyph Book]
-?[not[$[document.draft]]|
-This is the official version of the Glyph Book]
-</code>
-</pre>
-</div>
-
-In this case, if @document.draft@ is set to @true@, "This is a first draft of the Glyph Book" will be displayed; if not, "This is the official version of the Glyph Book" will be displayed instead.
-
-The <a href="#m_condition">condition</a> macro takes two parameters:
-* the first one is the condition to evaluate
-* the second one is the text to include in the document only if the condition is satisfied.
-
-Note that _both_ parameters can contain macros, of course, so you can write things like:
-
-
-<div class="code">
-<pre>
-<code>
-?[and[
-    eq[$[document.output]|pdf]
-    |
-    eq[$[tools.pdf_generator]|prince]
-    ]
-  |
-  style[pagination.css]]
-</code>
-</pre>
-</div>
-
-In this case, the @pagination.css@ stylesheet is included only when you're generating a PDF document using Prince XML.
-
-  <div class="section">
-<h5 id="h_30">Using macros inside the condition macro</h5>
-Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a <a href="#m_condition">condition</a> macro are _always_ parsed and _executed_, even _before_ that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you're the <a href="#m_config_">config:</a> macro or the <a href="#m_ruby">ruby</a> macro, for example: because in that case a configuration setting or a piece of Ruby code is always executed...
-
-To avoid this potentially dangerous side effect, you can _<a href="#m_encode">encode</a>_ the second parameter of the condition macro, like this:
-
-
-<div class="code">
-<pre>
-<code>
-?[$[document.draft]|
-*[= $:[document.output|html] =]]
-</code>
-</pre>
-</div>
-
-If you do so, if the condition is satisfied, the condition macro decodes the second parameter and interprets its contents. In this way, if @document.draft@ is true, @document.output@ will be set to @html@, otherwise it will be left unchanged.
-
-</div>
-
-  <div class="section">
-<h5 id="h_31">Results of conditional expressions</h5>
-The <a href="#m_condition">condition</a> macro in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:
-* A conditional expression is satisfied if it evaluates to a non-empty string except "false".
-* A conditional expression is not satisfied if it evaluates to an empty string or the string "false".
-
-</div>
-
 </div>
 
 </div>
 
 </div>
 		<div class="chapter">
-<h2 id="h_32">Generating Output Files</h2>
-<div class="section">
-<h3 id="compile">Compiling a project</h3>
-By default, a Glyph project can be _compiled_ into an HTML document. Additionally, Glyph can also be used to produce PDF documents through <a href="http://www.princexml.com/">Prince</a>, and in future releases more formats could be supported.
+<h2 id="h_19">Generating Output Files</h2>
 
-
-<div class="section">
-<h4 id="h_34">HTML output</h4>
-To compile a Glyph project to an HTML document, use the <a href="#c_compile">compile</a> command within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
-
-The name of the HTML file can be set in the configuration (@document.filename@ setting).
-
-</div>
-
-<div class="section">
-<h4 id="h_35">PDF Output</h4>
-To generate a PDF document, you must specify @pdf@ as format, like this:
-
-<code>glyph compile -f pdf</code>
-
-The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.
-
-<div class="note">
-<span class="note-title">Note</span>Glyph v0.2.0 has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.
-
-</div>
-
-</div>
-
-<div class="section">
-<h4 id="auto_regeneration">Auto Regeneration</h4>
-You can also call the <a href="#c_compile">compile</a> command with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed. 
-
-<div class="note">
-<span class="note-title">Note</span>Auto regeneration requires the <a href="http://rubygems.org/gems/directory_watcher">directory_watcher</a> gem to be installed.
-
-</div>
-
-</div>
-
-</div>
-
-			<div class="section">
-<h3 id="lite_mode">Compiling single Glyph files</h3>
-Glyph's primary goal is to author complex documents like books or manuals. In order to do so, a Glyph project is required to keep everything organized and automated via a set of predefined conventions, exactly like Ruby on Rails or other similar frameworks do.
-
-If you want to write a one-page article or a short draft, however, creating and managing Glyph projects can be an unnecessary burden. Luckily, you don't have to: you can use Glyph to compile single files containing Glyph code, by adding one parameter (or two if you want to specify a custom destination file) to the <a href="#c_compile">compile</a> command, like this:
-
-<code>glyph compile source.glyph destination.htm</code>
-
-This command will process a file called @source.glyph@ and produce an HTML file called @destination.htm@.
-
-<div class="section">
-<h4 id="lite_limitations">Limitations</h4>
-This sort of "lite" mode comes with a few minor limitations: 
-* Snippets can only be defined inside the source file, using the <a href="#m_snippet_">snippet:</a> macro macro.
-* Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">config:</a> macro macro.
-* Custom macros can only be defined inside the source file, using the <a href="#m_macro_">macro:</a> macro macro.
-* Images must be linked with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.
-* Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph system stylesheet .
-* The <a href="#m_include">include</a> macro cannot be used (if you need to include other text files, you should probably use a Glyph project...)
-
-</div>
-
-</div>
-
-			<div class="section">
-<h3 id="h_39">Using Glyph programmatically</h3>
-Besides using Glyph from the command line, you can also use it straight from your code. Glyph's public <a href="http://yardoc.org/docs/glyph/Glyph">API</a> is simple and can be used to:
-* Retrieve and update configuration settings (using @Glyph[]@ and @Glyph[]=@)
-* Filter text to HTML (using @Glyph#filter@)
-* Compile Glyph source files into HTML or PDF files (using @Glyph#compile@)
-
-That's pretty much it. Of course, both the @filter@ and @compile@ method cause Glyph to run in <a href="#lite_mode">_lite_ mode</a>, so the same <a href="#lite_limitations">limitations</a> apply. 
-
-<div class="tip">
-<span class="note-title">Tip</span>For an example on how to use Glyph programmatically (specifically in conjunction with the <a href="http://nanoc.stoneship.org/">nanoc</a> static site generator), see <a href="http://github.com/h3rald/h3rald">h3rald.com source code</a>, in particular:
-* <a href="http://github.com/h3rald/h3rald/blob/master/lib/glyph-data.rb">lib/glyph-data.rb</a> -- updating configuration settings.
-* <a href="http://github.com/h3rald/h3rald/blob/master/lib/glyph-filter.rb">lib/glyph-data.rb</a> -- using the @Glyph#filter@ method.
-* <a href="http://github.com/h3rald/h3rald/blob/master/Rules">Rules</a> -- using the @Glyph#compile@ method to generate PDF files.
-
-</div>
-
-</div>
 
 </div>
 		<div class="chapter">
@@ -1455,7 +775,7 @@ That's pretty much it. Of course, both the @filter@ and @compile@ method cause G
 <p><span class="note-title">Tip</span>Alternatively, you can also define macros right in your document, using the <a href="#m_macro_">macro:</a> macro.</p>
 </div>
 <div class="section">
-<h3 id="h_41">Anatomy of a Macro</h3>
+<h3 id="h_21">Anatomy of a Macro</h3>
 <p>This is the source code of a fairly simple macro used to format a note :</p>
 <div class="CodeRay">
   <div class="code"><pre>macro <span class="sy">:note</span> <span class="r">do</span>
@@ -1506,7 +826,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
     <td>The parameters passed to the macro. In other words, the value of the macro split by pipes (<code>|</code>).</td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_42">Bookmarks and Headers</h3>
+<h3 id="h_22">Bookmarks and Headers</h3>
 <p>The <a href="http://yardoc.org/docs/glyph/Glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">anchor</a> macro:</p>
 <div class="CodeRay">
   <div class="code"><pre>macro <span class="sy">:anchor</span> <span class="r">do</span> 
@@ -1520,7 +840,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
 <p>The <code>bookmark?</code> method can be used to check the existance of a particular ID within the whole document, while the <code>bookmark</code> method is used to store bookmark IDs and titles. In a similar way, you can use <code>header?</code> and <code>header</code> methods to check the existance of headers within the documents or store new ones.</p>
 </div>
 <div class="section">
-<h3 id="h_43">Using Placeholders</h3>
+<h3 id="h_23">Using Placeholders</h3>
 <p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
 <p>Here&#8217;s the source code of the <a href="#m_link">link</a> macro:</p>
 <div class="CodeRay">
@@ -1548,7 +868,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
 <p>Within the <code>placeholder</code> block, the <code>document</code> parameter is, by all means, the fully analyzed document.</p>
 </div>
 <div class="section">
-<h3 id="h_44">Using Validators</h3>
+<h3 id="h_24">Using Validators</h3>
 <p>If you need to make sure that a macro is used properly, consider using <a href="http://yardoc.org/docs/glyph/Glyph/Macro/Validators">validators</a>. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.</p>
 <p>If you want to create your own validators, you can call the generic <code>validate</code> method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.</p>
 <div class="box">
@@ -1563,7 +883,7 @@ Note that the first three keys can also be accessed via instance variables.</td>
 </div>
 </div>
 <div class="section">
-<h3 id="h_45">Interpreting Glyph Code</h3>
+<h3 id="h_25">Interpreting Glyph Code</h3>
 <p>What if you need to evaluate some Glyph code <em>within</em> a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the <code>interpret</code> method, as follows:</p>
 <div class="CodeRay">
   <div class="code"><pre>macro <span class="sy">:fmi</span> <span class="r">do</span>
@@ -1636,7 +956,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 </div>
 </div>
 <div class="section">
-<h3 id="h_47">Further Reading</h3>
+<h3 id="h_27">Further Reading</h3>
 <p>For more examples on how to create more complex macros, have a look at the <a href="http://github.com/h3rald/glyph/tree/master/macros/">source code</a> of the existing ones.</p>
 <p>To gain a deeper understanding on how macros are executed, have a look at the following Glyph classes:</p>
 <ul>
@@ -1649,13 +969,13 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 
 </div>
 		<div class="chapter">
-<h2 id="h_48">Troubleshooting</h2>
+<h2 id="h_28">Troubleshooting</h2>
 <p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">ruby</a> macro macro.</p>
 <div class="tip">
 <p><span class="note-title">Tip</span>As a general rule, more diagnostic information is provided if Glyph is run in <a href="#debug_switch">debug mode</a>.</p>
 </div>
 <div class="section">
-<h3 id="h_49">Generic Errors</h3>
+<h3 id="h_29">Generic Errors</h3>
 <table style="width:100%;">
 <tr>
 				<th style="width:30%">Error Message</th>
@@ -1708,7 +1028,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 </table>
 </div>
 <div class="section">
-<h3 id="h_50">Command Errors</h3>
+<h3 id="h_30">Command Errors</h3>
 <table style="width:100%;">
 <tr>
 				<th style="width:30%">Error Message</th>
@@ -1763,7 +1083,7 @@ macro <span class="sy">:release</span> <span class="r">do</span>
 </table>
 </div>
 <div class="section">
-<h3 id="h_51">Macro Errors</h3>
+<h3 id="h_31">Macro Errors</h3>
 <p>The following errors are displayed in the form:</p>
 <p><em>message</em><br />
 &#8594; source: <em>macro-source</em><br />
@@ -1904,7 +1224,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 	<li><em>parameters</em> are separated by whitespaces, and can be wrapped in quotes.</li>
 </ul>
 <div class="section">
-<h3 id="h_53">Global Options</h3>
+<h3 id="h_33">Global Options</h3>
 <div class="section">
 <h4 id="debug_switch"><code>-d</code>, <code>--debug</code></h4>
 <p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
@@ -2064,7 +1384,7 @@ Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.</td>
 <h2 id="macro_ref">Macro Reference</h2>
 <p>﻿<br />
 <div class="section"><br />
-<h3 id="h_62">Common Macros</h3><br />
+<h3 id="h_42">Common Macros</h3><br />
 <div class="section"><br />
 <h4 id="m_and">and</h4><br />
 Conditional <code>and</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
@@ -2080,7 +1400,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_condition">condition</h4>
-<p>Tests a conditional expression (first parameter), and evaluates to the second parameter if the condition is satisfied. If the second parameter is an <a href="#m_escape">escape</a> macro macro, its contents are unescaped and interpreted only if the condition is satisfied. For more information, see <a href="#cond_macros">Conditional Macros</a>.</p>
+<p>Tests a conditional expression (first parameter), and evaluates to the second parameter if the condition is satisfied. If the second parameter is an <a href="#m_escape">escape</a> macro macro, its contents are unescaped and interpreted only if the condition is satisfied. For more information, see <a href="#cond_macros">‡‡‡‡‡PLACEHOLDER¤76‡‡‡‡‡</a>.</p>
 <p><strong>Aliases:</strong> <code>?</code></p>
 <p><strong>Examples</strong></p>
 <p>See any of the following:</p>
@@ -2218,7 +1538,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 </div>
 </div>
 <div class="section">
-<h3 id="h_84">Block Macros</h3>
+<h3 id="h_64">Block Macros</h3>
 <div class="section">
 <h4 id="m_box">box</h4>
 <p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
@@ -2253,7 +1573,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_highlight">highlight</h4>
-<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">Source code</a></span>.</p>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤110‡‡‡‡‡</a></span>.</p>
 <p><strong>Example:</strong></p>
 <p><code>highlight[ruby|
   def hello
@@ -2332,7 +1652,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_98">Inline Macros</h3>
+<h3 id="h_78">Inline Macros</h3>
 <div class="section">
 <h4 id="m_anchor">anchor</h4>
 <p>Creates a named anchor (or bookmark).</p>
@@ -2361,7 +1681,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_link">link</h4>
-<p>Creates an hyperlink (<span class="fmi">for more information on creating links, see <a href="#links">Links and Bookmarks</a></span>).</p>
+<p>Creates an hyperlink (<span class="fmi">for more information on creating links, see <a href="#links">‡‡‡‡‡PLACEHOLDER¤109‡‡‡‡‡</a></span>).</p>
 <p><strong>Aliases:</strong> <code>=&gt;</code></p>
 <p><strong>Examples:</strong> <br />
 <code>=&gt;[#introduction]</code><br />
@@ -2370,7 +1690,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_104">Structure Macros</h3>
+<h3 id="h_84">Structure Macros</h3>
 <div class="section">
 <h4 id="m_body">body</h4>
 <p>Creates a <code>&lt;body&gt;</code> tag.</p>
@@ -2394,7 +1714,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_header">header</h4>
-<p>Creates an <code>h2</code>, <code>h3</code>, <code>h4</code>, etc. header (<span class="fmi">for more information on using headers, see <a href="#sec_head">Sections and Headers</a></span>).</p>
+<p>Creates an <code>h2</code>, <code>h3</code>, <code>h4</code>, etc. header (<span class="fmi">for more information on using headers, see <a href="#sec_head">‡‡‡‡‡PLACEHOLDER¤107‡‡‡‡‡</a></span>).</p>
 <p><strong>Examples:</strong> <br />
 <code>header[Introduction]</code><br />
 <code>header[Getting Started|gs]</code></p>
@@ -2407,7 +1727,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_style">style</h4>
-<p>Embeds the content of a <span class="caps">CSS</span> or Sass file within a <code>&lt;style&gt;</code> tag (<span class="fmi">for more information on stylesheets, see <a href="#stylesheets">Adding Stylesheets</a></span>).</p>
+<p>Embeds the content of a <span class="caps">CSS</span> or Sass file within a <code>&lt;style&gt;</code> tag (<span class="fmi">for more information on stylesheets, see <a href="#stylesheets">‡‡‡‡‡PLACEHOLDER¤111‡‡‡‡‡</a></span>).</p>
 <p><strong>Example:</strong> <code>style[default.css]</code></p>
 </div>
 
@@ -2451,8 +1771,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 <codeph>document.output_targets</codeph> <p><a id="s_document_output_targets"></a></p>
 </td>
 		<td>An <code>Array</code> containing all the possible output formats. This setting should not be changed by the user.</td>
-		<td><code>- :html
-- :pdf</code></td></tr>
+		<td><code>nil</code></td></tr>
 		<tr><td><br />
 <codeph>document.source</codeph> <p><a id="s_document_source"></a></p>
 </td>
@@ -2470,14 +1789,14 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 		<td><code>""</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_115">filters.*</h3>
+<h3 id="h_95">filters.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (<span class="caps">YAML</span>)</th></tr>
 			<tr><td><br />
 <codeph>filters.by_file_extension</codeph> <p><a id="s_filters_by_file_extension"></a></p>
 </td>
-		<td>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</td>
+		<td>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">‡‡‡‡‡PLACEHOLDER¤108‡‡‡‡‡</a></span>).</td>
 		<td><code>true</code></td></tr>
 		<tr><td><br />
 <codeph>filters.markdown.converter</codeph> <p><a id="s_filters_markdown_converter"></a></p>
@@ -2515,25 +1834,25 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 <codeph>highlighters.current</codeph> <p><a id="s_highlighters_current"></a></p>
 </td>
 		<td>The current highlighter to use. It can be set to <code>coderay</code> or <code>ultraviolet</code></td>
-		<td><code>coderay</code></td></tr>
+		<td><code>nil</code></td></tr>
 		<tr><td><br />
 <codeph>highlighters.target</codeph> <p><a id="s_highlighters_target"></a></p>
 </td>
 		<td>The target output of the <a href="#s_highlighters_current">current highlighter</a>. It can be set to anything the highlighter supports.</td>
-		<td><code>html</code></td></tr>
+		<td><code>nil</code></td></tr>
 		<tr><td><br />
 <codeph>highlighters.ultraviolet.line_numbers</codeph> <p><a id="s_highlighters_ultraviolet_line_numbers"></a></p>
 </td>
 		<td>Whether the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter should display line numbers or not.</td>
-		<td><code>false</code></td></tr>
+		<td><code>nil</code></td></tr>
 		<tr><td><br />
 <codeph>highlighters.ultraviolet.theme</codeph> <p><a id="s_highlighters_ultraviolet_theme"></a></p>
 </td>
 		<td>The theme used by the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter.</td>
-		<td><code>blackboard</code></td><p></tr></table></p>
+		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_117">structure.*</h3>
+<h3 id="h_97">structure.*</h3>
 <p>The following configuration settings are used internally by Glyph and should not be changed by the user.</p>
 	<table><tr><th>Name</th>
 				<th>Description</th>
@@ -2565,7 +1884,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_118">tools.*</h3>
+<h3 id="h_98">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (<span class="caps">YAML</span>)</th></tr>
@@ -2578,105 +1897,87 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 
 </div>
 		<div class="appendix">
-<h2 id="h_119">Changelog</h2>
+<h2 id="h_99">Changelog</h2>
 <div class="section">
-<h3 id="h_120">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_100">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_121">23 Features Implemented</h4>
+<h4 id="h_101">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/62">#62</a></td>
-			<td><p>A new <a href="#m_highlight">highlight</a> macro is available to highlight source code (CodeRay or UltraViolet requireed).</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/62">#62</a></td>
+		<td><p>A new <a href="#m_highlight">highlight</a> macro is available to highlight source code (CodeRay or UltraViolet required).</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/76">#76</a></td>
-			<td><p>It is now possible to use Glyph programmatically via the new <code>Glyph#filter</code> and <code>Glyph#compile</code> methods.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/76">#76</a></td>
+		<td><p>It is now possible to use Glyph programmatically via the new <code>Glyph#filter</code> and <code>Glyph#compile</code> methods.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/87">#87</a></td>
-			<td><p>It is now possible to define snippets inside a Glyph source file using the <a href="#m_snippet_">snippet:</a> macro.</p></td></tr>
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/87">#87</a></td>
+		<td><p>It is now possible to define snippets inside a Glyph source file using the <a href="#m_snippet_">snippet:</a> macro.</p></td></tr>	
 		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/88">#88</a></td>
+		<td><p>It is now possible to change configuration settings inside a Glyph source file using the <a href="#m_config_">config:</a> macro (Jabbslad).</p></td></tr>	
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/88">#88</a></td>
-			<td><p>It is now possible to change configuration settings inside a Glyph source file using the <a href="#m_config_">config:</a> macro (Jabbslad).</p></td></tr>
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/89">#89</a></td>
+		<td><p>It is now possible to compile a single Glyph source file without creating a Glyph project.</p></td></tr>
 		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/92">#92</a></td>
+		<td><p>6 new macros have been defined to allow conditional processing (<a href="#m_condition">condition</a> macro, <a href="#m_eq">eq</a> macro, <a href="#m_not">not</a> macro, <a href="#m_and">and</a> macro, <a href="#m_or">or</a> macro, <a href="#m_match">match</a> macro)</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/89">#89</a></td>
-			<td><p>It is now possible to compile a single Glyph source file without creating a Glyph project.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/94">#94</a></td>
+		<td><p>It is now possible to add <em>validators</em> to macros, for example to check the number of parameters they take.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/92">#92</a></td>
-			<td><p>6 new macros have been defined to allow conditional processing (<a href="#m_condition">condition</a> macro, <a href="#m_eq">eq</a> macro, <a href="#m_not">not</a> macro, <a href="#m_and">and</a> macro, <a href="#m_or">or</a> macro, <a href="#m_match">match</a> macro)</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/97">#97</a></td>
+		<td><p>The <a href="#c_compile">compile</a> command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed (koraktor).</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/94">#94</a></td>
-			<td><p>It is now possible to add <em>validators</em> to macros, for example to check the number of parameters they take.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/99">#99</a></td>
+		<td><p>Added a <code>document.draft</code> setting. If set to <code>true</code>, comments and TODOs are rendered in output files.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/97">#97</a></td>
-			<td><p>The <a href="#c_compile">compile</a> command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed (koraktor).</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/100">#100</a></td>
+		<td><p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied">#93</a>).</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/99">#99</a></td>
-			<td><p>Added a <code>document.draft</code> setting. If set to <code>true</code>, comments and TODOs are rendered in output files.</p></td></tr>
-	
-		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/100">#100</a></td>
-			<td><p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied">#93</a>).</p></td></tr>
-	
-		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/108">#108</a></td>
-			<td><p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro_">macro:</a> macro.</p></td></tr></table>
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/108">#108</a></td>
+		<td><p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro_">macro:</a> macro.</p></td></tr></table>
 
 </div>
 	
 	
 		<div class="section">
-<h4 id="h_122">17 Bugs Fixed</h4>
+<h4 id="h_102">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/86">#86</a></td>
-			<td><p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p></td></tr>
-	 
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/86">#86</a></td>
+		<td><p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p></td></tr> 
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/93">#93</a></td>
-			<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style">style</a> macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/93">#93</a></td>
+		<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style">style</a> macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/95">#95</a></td>
-			<td><p>The <a href="#c_config">config</a> command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/95">#95</a></td>
+		<td><p>The <a href="#c_config">config</a> command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/98">#98</a></td>
-			<td><p>Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/98">#98</a></td>
+		<td><p>Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/101">#101</a></td>
-			<td><p>Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/101">#101</a></td>
+		<td><p>Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/103">#103</a></td>
-			<td><p>Fixed a bug that caused test failures when deleting the test project directory.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/103">#103</a></td>
+		<td><p>Fixed a bug that caused test failures when deleting the test project directory.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/104">#104</a></td>
-			<td><p>Nested Glyph macros calling <code>Macro#interpret</code> no longer ignore escape delimiters.</p></td></tr>
-	
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/104">#104</a></td>
+		<td><p>Nested Glyph macros calling <code>Macro#interpret</code> no longer ignore escape delimiters.</p></td></tr>
 		
-		<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/107">#107</a></td>
-			<td><p>Added the possibility to encode (using the <a href="#m_encode">encode</a> macro) and decode (using the <a href="#m_decode">decode</a> macro) macros so that they can be interpreted later.</p></td></tr></table>
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/107">#107</a></td>
+		<td><p>Added the possibility to encode (using the <a href="#m_encode">encode</a> macro) and decode (using the <a href="#m_decode">decode</a> macro) macros so that they can be interpreted later.</p></td></tr></table>
 
 </div>
 
 </div>
-	
 
-		<div class="section">
-<h3 id="h_123">v0.1.0 &ndash; April 8th 2010</h3>
+	<div class="section">
+<h3 id="h_103">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>
