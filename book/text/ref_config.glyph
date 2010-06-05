@@ -35,6 +35,7 @@ The title of the document, displayed using the %>[title].
 
 section[
 @title[filters.*]
+@id[cfg_filters]
 	config_table[
 		ref_config[filters.by_file_extension|
 If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).  

@@ -34,9 +34,9 @@ To avoid these situations, some macros which would normally take three or four p
 	]
 	highlight[=html|
 image[test.png
-	@width[50%]
-	@alt[Test Image]
-	@height[50%]
+  @width[50%]
+  @alt[Test Image]
+  @height[50%]
 ]=]
 	p[More verbose, of course, but definitely more readable. In this way, if you won't want to scale an image, you can safely omit the code[@width] and code[@height] attributes.]
 	note[Like parameters, attributes can contain other macros, too.]

@@ -1,33 +1,22 @@
 section[
-@title[Source code]
-@id[source_code]
-p[If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph providers different ways to format source code, as described in the following sections.]
 
-section[
-@title[Inline code]
-txt[The %>[code] can be used to format inline code. That's exactly the same as using @<code>@ tags, just remember to use =>[#esc_quot|escaping delimiters] and to escape pipes.] 
-]
+	txt[
+If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the %>[code], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight] macro. The last one requires either &[coderay] or &[uv], but it provides syntax highlighting for the most common programming languages.
 
-section[
-@title[Code block]
-txt[For code blocks, you have two choices: the %>[code], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight] macro. The last one requires either &[coderay] or &[uv], but it highlights the most common programming language.]
-
-p[Cosider the following piece of ruby code:]
-
-codeblock[=
-  def find_child(&block)
-    children.each do \|c\|
-      c.descend do \|node, level\|
-        return node if block.call(node)
-      end
+Cosider the following piece of ruby code:
+	]
+	highlight[=mediawiki|
+def find_child(&block)
+  children.each do \|c\|
+    c.descend do \|node, level\|
+      return node if block.call(node)
     end
-    nil
   end
-=]
-
-p[It can be wrapped in a highlight macro, like so:]
-
-codeblock[=
+  nil
+end
+	=]
+	p[It can be wrapped in a highlight macro, like so:]
+	highlight[=mediawiki|
 highlight[\=ruby\|
   def find_child(&block)
     children.each do \\\.\|c\\\.\|
@@ -38,29 +27,24 @@ highlight[\=ruby\|
     nil
   end
 \=]
-=]
-
-p[...to produce the following, using the $[highlighters.current] highlighter:]
- 
-<notextile>
-highlight[=ruby|
-  def find_child(&block)
-    children.each do \|c\|
-      c.descend do \|node, level\|
-        return node if block.call(node)
-      end
+	=]
+	p[...to produce the following, using the $[filters.highlighter] highlighter:]
+	highlight[=ruby|
+def find_child(&block)
+  children.each do \|c\|
+    c.descend do \|node, level\|
+      return node if block.call(node)
     end
-    nil
   end
-=]
-</notextile>
-
-box[Some Remarks|
-txt[* Highlighters require some configuration. For more information on relevant configuration settings, see the @highlighters.*@ configuration settings.
-* If you're using the %>[highlight] together with %>[textile], you must wrap the macro call within @<notextile>@ tags.
-* You must always escape pipes (@\|@) with the code or the highlight macro.]
-]
-]
-
-] --[End of section]
+  nil
+end
+	=]
+	box[Some Remarks|
+		txt[
+* Highlighters require some configuration. For more information on relevant configuration settings, see the =>[#cfg_filters|filters.*] configuration settings.
+* If you're using the %>[highlight] together within the %>[textile], you must wrap the macro call within @<notextile>@ tags.
+* You must always escape pipes (@\|@) with the code or the highlight macro.
+		]
+	]
+] 
 

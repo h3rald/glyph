@@ -42,8 +42,8 @@ Besides using the %>[anchor] macro, you can also create an anchor for a header b
 	]
 	highlight[=html|
 section[
-	@title[My Section]
-	@id[my_section]
+  @title[My Section]
+  @id[my_section]
 ...
 ]
 	=]

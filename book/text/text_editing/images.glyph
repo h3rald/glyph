@@ -1,36 +1,29 @@
 section[
-@title[Images and Figures]
-@id[img_fig]
+	@title[Images and Figures]
+	@id[img_fig]
+	p[Same as for =>[#links|links], you can also include images and figures using &[markups]. If you want additional features, you can use the %>[image] and the %>[figure], as shown in the following example:]
 
-Same as for =>[#links|links], you can also include images and figures using &[markups]. If you want additional features, you can use the %>[img] and the %>[fig], as shown in the following example:
-
-box[Example|
-
-&[gcode]
-
-codeblock[=
-img[glyph.svg\|20%\|20%]
-
-fig[example.png\|An example figure.]
-=]
-
-&[htmlcode]
-
-<notextile>
-highlight[=html|
-<img src="images/glyph.svg" width="20%" height="20%" alt="-" />
-
+	box[Example|
+		p[&[gcode]]
+		highlight[=html|
+image[glyph.svg
+  @with[20%]
+  @height[20%]
+]
+figure[example.png\|An example figure.
+  @alt[Example Figure]
+]
+	=]
+		p[&[htmlcode]]
+		highlight[=html|
+<img src="images/glyph.svg" width="20%" height="20%" />
 <div class="figure">
-  <img src="images/example.png" alt="-"/>
+  <img src="images/example.png" alt="Example Figure"/>
   <div class="caption">An example figure.</div>
 </div>
-=]
-</notextile>
-]
-
-note[
-In future releases, figures will be numbered automatically and included in a _List of Figures_ section.
-]
-
-] --[End of section]
+	=]
+		txt[Any attribute passed to the %>[image] or the %>[figure] is automatically passed to the underlying @<img>@ tag.]
+	]
+	note[In future releases, figures will be numbered automatically and included in a em[List of Figures] section.]
+] 
 
