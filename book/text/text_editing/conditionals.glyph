@@ -1,8 +1,8 @@
 section[
-@title[Conditional Macros]
-@id[cond_macros]
-
-Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see $>[document.draft]), or use a particular stylesheet only if when you generate a PDF document.
+	@title[Conditional Macros]
+	@id[cond_macros]
+	txt[
+Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see the $>[document.draft]), or use a particular stylesheet only if when you generate a PDF document.
 
 To do so, you can use the %>[condition] (aliased by @?@), and a set of additional macros that can be used as conditional operators i.e.:
 * %>[eq]
@@ -12,14 +12,14 @@ To do so, you can use the %>[condition] (aliased by @?@), and a set of additiona
 * %>[match]
 
 Consider the following code:
-
-codeblock[=
+	]
+	highlight[=html|
 ?[$[document.draft]\|
 This is a first draft of the Glyph Book]
 ?[not[$[document.draft]]\|
 This is the official version of the Glyph Book]
-=]
-
+	=]
+	txt[
 In this case, if @document.draft@ is set to @true@, "This is a first draft of the Glyph Book" will be displayed; if not, "This is the official version of the Glyph Book" will be displayed instead.
 
 The %>[condition] takes two parameters:
@@ -27,8 +27,8 @@ The %>[condition] takes two parameters:
 * the second one is the text to include in the document only if the condition is satisfied.
 
 Note that _both_ parameters can contain macros, of course, so you can write things like:
-
-codeblock[=
+	]
+	highlight[=html|
 ?[and[
     eq[$[document.output]\|pdf]
     \|
@@ -36,30 +36,14 @@ codeblock[=
     ]
   \|
   style[pagination.css]]
-=]
-
-In this case, the @pagination.css@ stylesheet is included only when you're generating a PDF document using Prince XML.
-
+	=]
+	p[In this case, the code[pagination.css] stylesheet is included only when you're generating a PDF document using Prince XML.]
   section[
-@title[Using macros inside the condition macro]
-Conditionals are not implemented at parser level. This means that macros specified as the second parameter of a %>[condition] are _always_ parsed and _executed_, even _before_ that the condition is evaluated! Besides being inefficient, this can also lead to dangerous results if you're the %>[config:] or the %>[ruby], for example: because in that case a configuration setting or a piece of Ruby code is always executed...
-
-To avoid this potentially dangerous side effect, you can _\.=>[#m_encode|encode]_ the second parameter of the condition macro, like this:
-
-codeblock[=
-?[$[document.draft]\|
-*\[\= $:[document.output\|html] \=\]]
-=]
-
-If you do so, if the condition is satisfied, the condition macro decodes the second parameter and interprets its contents. In this way, if @document.draft@ is true, @document.output@ will be set to @html@, otherwise it will be left unchanged.
-  ]
-
-  section[
-@title[Results of conditional expressions]
+		@title[Results of conditional expressions]
+		txt[
 The %>[condition] in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:
 * A conditional expression is satisfied if it evaluates to a non-empty string except "false".
 * A conditional expression is not satisfied if it evaluates to an empty string or the string "false".
+		]
   ]
-
-] --[End section]
-
+]

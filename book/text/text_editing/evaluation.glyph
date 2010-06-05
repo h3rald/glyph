@@ -1,8 +1,7 @@
 section[
-@title[Evaluating Ruby code and Configuration Settings]
-
-&[glang] is not a full-blown programming language, as it does not provide control flow or variables, for example. 
-However, it is possible to evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
+	@title[Evaluating Ruby code and Configuration Settings]
+	txt[
+&[glang] is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
 * code[=%[2 + 2]=] &rarr; 4
 * code[=%[Time.now]=] &rarr; %[Time.now]
 * code[=%[Glyph::VERSION]=] &rarr; %[Glyph::VERSION]
@@ -10,5 +9,5 @@ However, it is possible to evaluate simple ruby code snippets using the @ruby@ m
 The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself). 
 
 Although it is possible to retrieve Glyph configuration settings in this way (e.g. code[=%[cfg('document.author')]=]), the %>[config] (aliased to @$@) makes things slightly simpler (e.g. code[=$[document.author]=]).
-
+	]
 ]

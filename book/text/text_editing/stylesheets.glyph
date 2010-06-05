@@ -1,44 +1,36 @@
 section[
-@title[Adding Stylesheets]
-@id[stylesheets]
-
-Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.
-
-You can embed CSS files using the %>[style], like this:
-
-code[= style[default.css] =]
-
-In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).
-
-section[
-@title[Default Stylesheets]
-@id[default_styles]
-Glyph provides the following default stylesheets, that can be referenced directly using the %>[style] macro:
-
-	table[
-		tr[
-			th[File name]
-			th[Notes]
-		]
-		tr[
-			td[@default.css@]
-			td[The default stylesheet used for this book.]
-		]
-		tr[
-			td[@pagination.css@]
-			td[A CSS3-compliant stylesheet used for pagination, suitable for PDF generation using Prince.]
-		]
-		tr[
-			td[@coderay.css@]
-			td[The default &[coderay] stylesheet, used for syntax highlighting.]
-		]
-		tr[
-			td[@ultraviolet/*@]
-			td[This folder contains the following &[uv] stylesheets, used for syntax highlighting: code[%[(Glyph::HOME/"styles/ultraviolet").children.sort.map{\|c\| c.basename}.join(", ")]]]
+	@title[Adding Stylesheets]
+	@id[stylesheets]
+	p[Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.]
+	p[You can embed CSS files using the %>[style], like this:]
+	p[code[= style[default.css] =]]
+	txt[In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).]
+	section[
+		@title[Default Stylesheets]
+		@id[default_styles]
+		p[Glyph provides the following default stylesheets, that can be referenced directly using the %>[style] macro:]
+		table[
+			tr[
+				th[File name]
+				th[Notes]
+			]
+			tr[
+				td[code[default.css]]
+				td[The stylesheet used for this book.]
+			]
+			tr[
+				td[code[pagination.css]]
+				td[A CSS3-compliant stylesheet used for pagination, suitable for PDF generation using &[prince].]
+			]
+			tr[
+				td[code[coderay.css]]
+				td[The default &[coderay] stylesheet, used for syntax highlighting.]
+			]
+			tr[
+				td[code[ultraviolet/*]]
+				td[This folder contains the following &[uv] stylesheets, used for syntax highlighting: code[%[(Glyph::HOME/"styles/ultraviolet").children.sort.map{\|c\| c.basename}.join(", ")]]]
+			]
 		]
 	]
-
-]
-
 ]
 

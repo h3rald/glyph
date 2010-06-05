@@ -128,6 +128,13 @@ sup {
 	background: #EEE;
 	color: #1F1F1F;
 }
+.note>p, 
+.important>p, 
+.tip>p, 
+.caution>p {
+	margin: 0;
+	padding: 0;
+}	
 .note-title {
 	font-weight: bold;
 	margin-right: 1em;

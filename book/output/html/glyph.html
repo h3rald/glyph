@@ -138,6 +138,13 @@ sup {
 	background: #EEE;
 	color: #1F1F1F;
 }
+.note>p, 
+.important>p, 
+.tip>p, 
+.caution>p {
+	margin: 0;
+	padding: 0;
+}	
 .note-title {
 	font-weight: bold;
 	margin-right: 1em;
@@ -364,10 +371,22 @@ June 2010
 <li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li>
 <li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li>
 <li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li>
+<li class="bodymatter section"><a href="#h_22">Other HTML Elements</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_23">Textile or Markdown</a></li>
+<li class="bodymatter section"><a href="#h_24">XML Fallback</a></li>
+</ol></li>
+<li class="bodymatter section"><a href="#stylesheets">Adding Stylesheets</a></li>
+<li><ol><li class="bodymatter section"><a href="#default_styles">Default Stylesheets</a></li>
+</ol></li>
+<li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li>
+<li class="bodymatter section"><a href="#h_28">Evaluating Ruby code and Configuration Settings</a></li>
+<li class="bodymatter section"><a href="#cond_macros">Conditional Macros</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_30">Results of conditional expressions</a></li>
+</ol></li>
 </ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_23">Global Options</a></li>
+<li><ol><li class="appendix section"><a href="#h_32">Global Options</a></li>
 <li><ol><li class="appendix section"><a href="#debug_switch">@-d@, @--debug@</a></li>
 </ol></li>
 <li class="appendix section"><a href="#c_add">@add@</a></li>
@@ -378,7 +397,7 @@ June 2010
 <li class="appendix section"><a href="#c_todo">@todo@</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_32">Common Macros</a></li>
+<li><ol><li class="appendix section"><a href="#h_41">Common Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_and">and</a></li>
 <li class="appendix section"><a href="#m_comment">comment</a></li>
 <li class="appendix section"><a href="#m_condition">condition</a></li>
@@ -402,7 +421,7 @@ June 2010
 <li><ol><li class="appendix section"><a href="#m_markdown">markdown</a></li>
 <li class="appendix section"><a href="#m_textile">textile</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_54">Block Macros</a></li>
+<li class="appendix section"><a href="#h_63">Block Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_box">box</a></li>
 <li class="appendix section"><a href="#m_code">code</a></li>
 <li class="appendix section"><a href="#m_fig">fig</a></li>
@@ -417,14 +436,14 @@ June 2010
 <li class="appendix section"><a href="#m_th">th</a></li>
 <li class="appendix section"><a href="#m_tr">tr</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_68">Inline Macros</a></li>
+<li class="appendix section"><a href="#h_77">Inline Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_anchor">anchor</a></li>
 <li class="appendix section"><a href="#m_codeph">codeph</a></li>
 <li class="appendix section"><a href="#m_draftcomment">draftcomment</a></li>
 <li class="appendix section"><a href="#m_fmi">fmi</a></li>
 <li class="appendix section"><a href="#m_link">link</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_74">Structure Macros</a></li>
+<li class="appendix section"><a href="#h_83">Structure Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_body">body</a></li>
 <li class="appendix section"><a href="#m_div">div</a></li>
 <li class="appendix section"><a href="#m_document">document</a></li>
@@ -439,15 +458,15 @@ June 2010
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_87">structure.*</a></li>
-<li class="appendix section"><a href="#h_88">tools.*</a></li>
+<li class="appendix section"><a href="#h_96">structure.*</a></li>
+<li class="appendix section"><a href="#h_97">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_89">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_90">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_91">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_92">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_98">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_99">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_100">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_101">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_93">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_102">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -1019,6 +1038,253 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 </div>
 
+</div> 
+
+				<div class="section">
+<h4 id="h_22">Other HTML Elements</h4>
+<p>So far we examined how to create <code>&lt;div&gt;</code> tags for sections, links, images&#8230; but what about lists, tables or paragraphs? How is it possible to create them using Glyphs? You have two possibilities (besides using raw <span class="caps">HTML</span> code, that is):</p>
+<ul>
+	<li>use a lightweight markup supported by Glyph (currently Textile or Markdown)</li>
+	<li>rely Glyph&#8217;s <em><span class="caps">XML</span> fallback</em> feature</li>
+</ul>
+	
+	<div class="section">
+<h5 id="h_23">Textile or Markdown</h5>
+<p>Textile or Markdown are very easy and intuitive to use, and they can produce HTML markup with almost no effort. Using them with Glyph is as simple as using the <a href="#m_textile">textile</a> macro (aliased to <code>txt</code>) and the <a href="#m_markdown">markdown</a> macro (aliased to <code>md</code>).</p>
+		<div class="box">
+<div class="box-title">Example</div>
+<p>The following Glyph code:</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> textile[
+<span class="line-numbers">   2 </span> This is a paragraph with some _emphasized_ text.
+<span class="line-numbers">   3 </span> 
+<span class="line-numbers">   4 </span> This is another paragraph with some -deleted- text.
+<span class="line-numbers">   5 </span> * This is
+<span class="line-numbers">   6 </span> * a bulletted
+<span class="line-numbers">   7 </span> * list
+<span class="line-numbers">   8 </span> ]
+</pre>
+			<p>produces the following HTML code:</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a paragraph with some <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">em</span><span class="MetaTag">&gt;</span></span>emphasized<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">em</span><span class="MetaTag">&gt;</span></span> text.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   2 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a paragraph with some <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">del</span><span class="MetaTag">&gt;</span></span>deleted<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">del</span><span class="MetaTag">&gt;</span></span> text.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">ul</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   4 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>This is<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   5 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>a bulletted<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   6 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>list<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   7 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">ul</span><span class="MetaTag">&gt;</span></span>
+</pre>
+
+</div>
+		<div class="important">
+<span class="note-title">Important</span>Be careful when using block-level HTML with Textile and Markdown: sometimes it may be necessary to add extra empty lines or escape tags.
+
+</div>
+
+</div>
+	<div class="section">
+<h5 id="h_24">XML Fallback</h5>
+<p>Sure Textile and Markdown are great, but sometimes you may want to just use HTML, without the extra verbosity, of course. Take tables for example: Textile offers an easy way to create them, but things may get dirty when you need to have multiple paragraphs or lists within cells.</p>
+		<p>Very early versions of Glyph used to offered some simple <code>table</code>, <code>tr</code>, <code>tr</code>, <code>td</code> macros just for that. Of course the problem was that thy didn't offer any way to customize the markup by adding, for example, CSS classes.</p>
+		<p>Instead, by default, Glyph can convert any unrecognized macro to the corresponding XML element and macro attributes to XML attributes.</p>
+		<div class="box">
+<div class="box-title">Example</div>
+<p>The following Glyph code:</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> table[@class[features]
+<span class="line-numbers">   2 </span>   tr[
+<span class="line-numbers">   3 </span> 		th[ID]
+<span class="line-numbers">   4 </span> 		th[Priority]
+<span class="line-numbers">   5 </span> 		th[Description]
+<span class="line-numbers">   6 </span>   ]
+<span class="line-numbers">   7 </span>   tr[
+<span class="line-numbers">   8 </span>     td[27]
+<span class="line-numbers">   9 </span>     td[span[@style[color:red;font-weight:bold;] HIGH]]
+<span class="line-numbers">  10 </span>     td[HTML output]
+<span class="line-numbers">  11 </span>   ]
+<span class="line-numbers">  12 </span>   tr[
+<span class="line-numbers">  13 </span>     td[42]
+<span class="line-numbers">  14 </span>     td[span[@style[color:green;font-weight:bols;] LOW]]
+<span class="line-numbers">  15 </span>     td[
+<span class="line-numbers">  16 </span>       p[Support for less-used tags:]
+<span class="line-numbers">  17 </span>       ul[
+<span class="line-numbers">  18 </span>         li[cite]
+<span class="line-numbers">  19 </span>         li[sup]
+<span class="line-numbers">  20 </span>         li[...]
+<span class="line-numbers">  21 </span>       ]
+<span class="line-numbers">  22 </span>     ]
+<span class="line-numbers">  23 </span>   ]
+<span class="line-numbers">  24 </span> ]
+</pre>
+			<p>Is translated into the following HTML code:</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">table</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>features<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   2 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">tr</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">th</span><span class="MetaTag">&gt;</span></span>ID<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">th</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   4 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">th</span><span class="MetaTag">&gt;</span></span>Priority<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">th</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   5 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">th</span><span class="MetaTag">&gt;</span></span>Description<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">th</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   6 </span>   <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">tr</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   7 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">tr</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   8 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>27<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   9 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span><span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">style</span>=<span class="String"><span class="String">&quot;</span>color:red;font-weight:bold;<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>HIGH<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span><span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  10 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>HTML output<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  11 </span>   <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">tr</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  12 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">tr</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  13 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>42<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  14 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span><span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">style</span>=<span class="String"><span class="String">&quot;</span>color:green;font-weight:bold;<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>LOW<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span><span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  15 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  16 </span>       <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>Support for less-used tags:<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  17 </span>       <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">ul</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  18 </span>         <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>cite<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  19 </span>         <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>sup<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  20 </span>         <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>...<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">li</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  21 </span>       <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">ul</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  22 </span>     <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">td</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  23 </span>   <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">tr</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">  24 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">table</span><span class="MetaTag">&gt;</span></span>
+</pre>
+
+</div>
+		<p>Basically, if the <a href="#s_language_options_xml_fallback">language.options.xml_fallback</a> setting is set to <code>true</code>, any macro unknown to Glyph with at most one parameter will be converted to an XML tag with the same name and any attribute will be converted to the corresponding XML attribute.</p>
+		<div class="important">
+<span class="note-title">Important</span>While macro names and attributes are validated so that an error is returned if they contain illegal character, no check is performed against any particular XML schema.
+
+</div>
+		<p>Additionally, it is possible to force macro-to-<span class="caps">XML</span> conversion by prepending an equal sign to any macro, so for example <code>=snippet[test]</code> will be converted into <code>&lt;snippet&gt;test&lt;/snippet&gt;</code>.</p>
+
+</div>
+
+</div>
+				<div class="section">
+<h4 id="stylesheets">Adding Stylesheets</h4>
+<p>Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.</p>
+	<p>You can embed CSS files using the <a href="#m_style">style</a> macro, like this:</p>
+	<p>
+<code>style[default.css]</code>
+</p>
+	<p>In this case, the <a href="#m_style">style</a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
+	<div class="section">
+<h5 id="default_styles">Default Stylesheets</h5>
+<p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">style</a> macro macro:</p>
+		<table><tr><th>File name</th>
+				<th>Notes</th></tr>
+			<tr><td>
+<code>default.css</code>
+</td>
+				<td>The stylesheet used for this book.</td></tr>
+			<tr><td>
+<code>pagination.css</code>
+</td>
+				<td>A CSS3-compliant stylesheet used for pagination, suitable for PDF generation using <a href="http://www.princexml.com/">Prince</a>.</td></tr>
+			<tr><td>
+<code>coderay.css</code>
+</td>
+				<td>The default <a href="http://coderay.rubychan.de/">Coderay</a> stylesheet, used for syntax highlighting.</td></tr>
+			<tr><td>
+<code>ultraviolet/*</code>
+</td>
+				<td>This folder contains the following <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> stylesheets, used for syntax highlighting: <code>active4d.css, all_hallows_eve.css, amy.css, blackboard.css, brilliance_black.css, brilliance_dull.css, cobalt.css, dawn.css, eiffel.css, espresso_libre.css, idle.css, iplastic.css, lazy.css, mac_classic.css, magicwb_amiga.css, pastels_on_dark.css, slush_poppies.css, spacecadet.css, sunburst.css, twilight.css, zenburnesque.css</code></td></tr></table>
+
+</div>
+
+</div>
+
+				<div class="section">
+<h4 id="incl">Including Files and Snippets</h4>
+<p>If you&#8217;re authoring a user manual, a long article, or a book, writing everything inside a single <code>document.glyph</code> file may not be optimal. For this reason, Glyph provides an <a href="#m_include">include</a> macro that can be used to include the contents of any file within the <code>text/</code> directory:</p>
+<p><code>include[introduction.textile]</code></p>
+<p>The macro call above loads the contents of the <code>introduction.textile</code> file, that can be stored <em>anywhere</em> within the <code>text/</code> directory.</p>
+<div class="note">
+<p><span class="note-title">Note</span>Unlike with <a href="img_fig">image and figures</a> that must be included with their <em>relative</em> path to the <code>images/</code> folder, you must not specify a relative path when including text files. This is due to the fact that images are copied <em>as they are</em> in the <code>output/&lt;format&gt;/images/</code> directory and they have to be linked from the output file.</p>
+<p>A possible downside of this behavior is that file names must be unique within the entire <code>text/</code> directory and any of its subdirectories</p>
+</div>
+<p>When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:</p>
+<ul>
+	<li><code>.textile</code> or <code>.txt</code> &rarr; <a href="#m_textile">textile</a> macro</li>
+	<li><code>.markdown</code> or <code>.md</code> &rarr; <a href="#m_markdown">markdown</a> macro</li>
+</ul>
+<div class="tip">
+<p><span class="note-title">Tip</span>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>.</p>
+</div>
+<p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence or a single word? In this case, you may want to consider using a <em>snippet</em> instead.</p>
+<p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <a href="#m_snippet">snippet</a> macro (or its alias <code>&amp;</code>).</p>
+<div class="tip">
+<p><span class="note-title">Tip</span>Besides storing snippets in the <code>snippets.yml</code> file, you can also define them right in your document, using the <a href="#m_snippet_">snippet:</a> macro.</p>
+</div>
+	<div class="box">
+<div class="box-title">Example</div>
+<p>Consider the following <code>snippets.yml</code> file:</p>
+	<pre class="lazy"><span class="line-numbers">   1 </span> <span class="Keyword">-</span><span class="Keyword">-</span><span class="Keyword">-</span><span class="InvalidDeprecated"> </span>
+<span class="line-numbers">   2 </span> :<span class="String"><span class="Entity">glang<span class="Entity">:</span></span> <span class="String">Glyph Language</span></span>
+<span class="line-numbers">   3 </span> :<span class="String"><span class="Entity">macros<span class="Entity">:</span></span> <span class="String">Glyph Macros</span></span>
+<span class="line-numbers">   4 </span> :<span class="MetaTag"><span class="MetaTag">sq_esc</span><span class="MetaTag">:</span> </span>|<span class="Keyword">-</span>
+<span class="line-numbers">   5 </span>   Square brackets must be escaped<span class="InvalidDeprecated"> </span>
+<span class="line-numbers">   6 </span>   unless used as macro delimiters or within a quoting macro.
+<span class="line-numbers">   7 </span> :<span class="String"><span class="Entity">markups<span class="Entity">:</span></span> <span class="String">Textile or Markdown</span></span>
+<span class="line-numbers">   8 </span> :<span class="MetaTag"><span class="MetaTag">test</span><span class="MetaTag">:</span> </span>|<span class="Keyword">-</span>
+<span class="line-numbers">   9 </span>   This is a<span class="InvalidDeprecated"> </span>
+<span class="line-numbers">  10 </span>   Test snippet
+</pre>
+	<p>You can use <code>&[markups]</code> anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the <code>markups</code> snippet only in the <code>snippets.yml</code> file to change it everywhere else in the document.</p>
+
+</div> 
+	<div class="tip">
+<span class="note-title">Tip</span>Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
+
+</div>
+
+</div>
+				<div class="section">
+<h4 id="h_28">Evaluating Ruby code and Configuration Settings</h4>
+<p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
+<ul>
+	<li><code>%[2 + 2]</code> &rarr; 4</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Jun 05 21:57:53 +0200 2010</li>
+	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
+</ul>
+<p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
+<p>Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <a href="#m_config">config</a> macro (aliased to <code>$</code>) makes things slightly simpler (e.g. <code>$[document.author]</code>).</p>
+
+</div>
+				<div class="section">
+<h4 id="cond_macros">Conditional Macros</h4>
+<p>Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see the <a href="#s_document_draft">document.draft</a> setting), or use a particular stylesheet only if when you generate a <span class="caps">PDF</span> document.</p>
+<p>To do so, you can use the <a href="#m_condition">condition</a> macro (aliased by <code>?</code>), and a set of additional macros that can be used as conditional operators i.e.:</p>
+<ul>
+	<li><a href="#m_eq">eq</a> macro</li>
+	<li><a href="#m_not">not</a> macro</li>
+	<li><a href="#m_and">and</a> macro</li>
+	<li><a href="#m_or">or</a> macro</li>
+	<li><a href="#m_match">match</a> macro</li>
+</ul>
+<p>Consider the following code:</p>
+	<pre class="lazy"><span class="line-numbers">   1 </span> ?[$[document.draft]|
+<span class="line-numbers">   2 </span> This is a first draft of the Glyph Book]
+<span class="line-numbers">   3 </span> ?[not[$[document.draft]]|
+<span class="line-numbers">   4 </span> This is the official version of the Glyph Book]
+</pre>
+	<p>In this case, if <code>document.draft</code> is set to <code>true</code>, &#8220;This is a first draft of the Glyph Book&#8221; will be displayed; if not, &#8220;This is the official version of the Glyph Book&#8221; will be displayed instead.</p>
+<p>The <a href="#m_condition">condition</a> macro takes two parameters:</p>
+<ul>
+	<li>the first one is the condition to evaluate</li>
+	<li>the second one is the text to include in the document only if the condition is satisfied.</li>
+</ul>
+<p>Note that <em>both</em> parameters can contain macros, of course, so you can write things like:</p>
+	<pre class="lazy"><span class="line-numbers">   1 </span> ?[and[
+<span class="line-numbers">   2 </span>     eq[$[document.output]|pdf]
+<span class="line-numbers">   3 </span>     |
+<span class="line-numbers">   4 </span>     eq[$[tools.pdf_generator]|prince]
+<span class="line-numbers">   5 </span>     ]
+<span class="line-numbers">   6 </span>   |
+<span class="line-numbers">   7 </span>   style[pagination.css]]
+</pre>
+	<p>In this case, the <code>pagination.css</code> stylesheet is included only when you're generating a PDF document using Prince XML.</p>
+  <div class="section">
+<h5 id="h_30">Results of conditional expressions</h5>
+<p>The <a href="#m_condition">condition</a> macro in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:</p>
+<ul>
+	<li>A conditional expression is satisfied if it evaluates to a non-empty string except &#8220;false&#8221;.</li>
+	<li>A conditional expression is not satisfied if it evaluates to an empty string or the string &#8220;false&#8221;.</li>
+</ul>
+
+</div>
+
 </div>
 
 </div>
@@ -1037,7 +1303,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><em>parameters</em> are separated by whitespaces, and can be wrapped in quotes.</li>
 </ul>
 <div class="section">
-<h3 id="h_23">Global Options</h3>
+<h3 id="h_32">Global Options</h3>
 <div class="section">
 <h4 id="debug_switch"><code>-d</code>, <code>--debug</code></h4>
 <p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
@@ -1197,7 +1463,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h2 id="macro_ref">Macro Reference</h2>
 <p>﻿<br />
 <div class="section"><br />
-<h3 id="h_32">Common Macros</h3><br />
+<h3 id="h_41">Common Macros</h3><br />
 <div class="section"><br />
 <h4 id="m_and">and</h4><br />
 Conditional <code>and</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
@@ -1213,7 +1479,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_condition">condition</h4>
-<p>Tests a conditional expression (first parameter), and evaluates to the second parameter if the condition is satisfied. If the second parameter is an <a href="#m_escape">escape</a> macro macro, its contents are unescaped and interpreted only if the condition is satisfied. For more information, see <a href="#cond_macros">‡‡‡‡‡PLACEHOLDER¤55‡‡‡‡‡</a>.</p>
+<p>Tests a conditional expression (first parameter), and evaluates to the second parameter if the condition is satisfied. If the second parameter is an <a href="#m_escape">escape</a> macro macro, its contents are unescaped and interpreted only if the condition is satisfied. For more information, see <a href="#cond_macros">Conditional Macros</a>.</p>
 <p><strong>Aliases:</strong> <code>?</code></p>
 <p><strong>Examples</strong></p>
 <p>See any of the following:</p>
@@ -1242,14 +1508,14 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_decode">decode</h4>
-<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤89‡‡‡‡‡</a></span>.</p>
+<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤108‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>**</code></p>
 <p><strong>Example:</strong> <code>*[=note‡‡¤91¤‡‡This will not be evaluated‡‡¤93¤‡‡=]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_encode">encode</h4>
-<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤87‡‡‡‡‡</a></span>.</p>
+<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤106‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>*</code></p>
 <p><strong>Example:</strong> <code>*[=note[This will not be evaluated]=]</code></p>
 </div>
@@ -1351,7 +1617,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 </div>
 </div>
 <div class="section">
-<h3 id="h_54">Block Macros</h3>
+<h3 id="h_63">Block Macros</h3>
 <div class="section">
 <h4 id="m_box">box</h4>
 <p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
@@ -1386,7 +1652,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_highlight">highlight</h4>
-<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤90‡‡‡‡‡</a></span>.</p>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤107‡‡‡‡‡</a></span>.</p>
 <p><strong>Example:</strong></p>
 <p><code>highlight[ruby|
   def hello
@@ -1465,7 +1731,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_68">Inline Macros</h3>
+<h3 id="h_77">Inline Macros</h3>
 <div class="section">
 <h4 id="m_anchor">anchor</h4>
 <p>Creates a named anchor (or bookmark).</p>
@@ -1503,7 +1769,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_74">Structure Macros</h3>
+<h3 id="h_83">Structure Macros</h3>
 <div class="section">
 <h4 id="m_body">body</h4>
 <p>Creates a <code>&lt;body&gt;</code> tag.</p>
@@ -1540,7 +1806,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_style">style</h4>
-<p>Embeds the content of a <span class="caps">CSS</span> or Sass file within a <code>&lt;style&gt;</code> tag (<span class="fmi">for more information on stylesheets, see <a href="#stylesheets">‡‡‡‡‡PLACEHOLDER¤88‡‡‡‡‡</a></span>).</p>
+<p>Embeds the content of a <span class="caps">CSS</span> or Sass file within a <code>&lt;style&gt;</code> tag (<span class="fmi">for more information on stylesheets, see <a href="#stylesheets">Adding Stylesheets</a></span>).</p>
 <p><strong>Example:</strong> <code>style[default.css]</code></p>
 </div>
 
@@ -1609,7 +1875,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 			<tr><td><br />
 <codeph>filters.by_file_extension</codeph> <p><a id="s_filters_by_file_extension"></a></p>
 </td>
-		<td>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">‡‡‡‡‡PLACEHOLDER¤86‡‡‡‡‡</a></span>).</td>
+		<td>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</td>
 		<td><code>true</code></td></tr>
 		<tr><td><br />
 <codeph>filters.markdown.converter</codeph> <p><a id="s_filters_markdown_converter"></a></p>
@@ -1665,7 +1931,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_87">structure.*</h3>
+<h3 id="h_96">structure.*</h3>
 <p>The following configuration settings are used internally by Glyph and should not be changed by the user.</p>
 	<table><tr><th>Name</th>
 				<th>Description</th>
@@ -1697,7 +1963,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_88">tools.*</h3>
+<h3 id="h_97">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (<span class="caps">YAML</span>)</th></tr>
@@ -1710,11 +1976,11 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 
 </div>
 		<div class="appendix">
-<h2 id="h_89">Changelog</h2>
+<h2 id="h_98">Changelog</h2>
 <div class="section">
-<h3 id="h_90">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_99">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_91">23 Features Implemented</h4>
+<h4 id="h_100">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -1756,7 +2022,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 	
 		<div class="section">
-<h4 id="h_92">17 Bugs Fixed</h4>
+<h4 id="h_101">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -1790,7 +2056,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 </div>
 
 	<div class="section">
-<h3 id="h_93">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_102">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

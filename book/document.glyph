@@ -41,14 +41,11 @@ book[
 				include[links.glyph]
 				include[images.glyph]
 				include[code.glyph]
---[
-test[=dsaagas=]
 				include[raw_html.glyph]
 				include[stylesheets.glyph]
 				include[inclusions.glyph]
 				include[evaluation.glyph]
 				include[conditionals.glyph]
-]
 			]
 		]
 --[
