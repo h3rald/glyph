@@ -207,8 +207,12 @@ code, pre {
 	font-size: 0.75em;
 }
 pre{
-	margin: 1em;
-	padding: 1em;
+	border: 1px solid #cecece;
+	padding-top: 1px;
+}
+span.line-numbers{
+	margin: 0;
+	padding: 3px;
 }
 
 pre>code {
@@ -237,93 +241,78 @@ code, pre {
 		
 		
 		<style type="text/css">
-pre.blackboard .LatexSupport {
-   color: #FBDE2D;
+pre.lazy .OcamlInfixFPOperator {
+   text-decoration: underline;
 }
-pre.blackboard .OcamlInfixOperator {
-   color: #8DA6CE;
+pre.lazy .OcamlInfixOperator {
+   color: #3B5BB5;
 }
-pre.blackboard .MetaFunctionCallPy {
-   color: #BECDE6;
+pre.lazy .MetaFunctionCallPy {
+   color: #3E4558;
 }
-pre.blackboard .Superclass {
-   color: #FF6400;
+pre.lazy .Superclass {
+   color: #3B5BB5;
    font-style: italic;
 }
-pre.blackboard .Constant {
-   color: #D8FA3C;
+pre.lazy .LatexEntity {
+   color: #D62A28;
 }
-pre.blackboard {
-   background-color: #0C1021;
-   color: #F8F8F8;
+pre.lazy .Constant {
+   color: #3B5BB5;
 }
-pre.blackboard .OcamlFPConstant {
+pre.lazy .OcamlFPConstant {
    text-decoration: underline;
 }
-pre.blackboard .OcamlFPInfixOperator {
-   text-decoration: underline;
+pre.lazy .Support {
+   color: #3B5BB5;
 }
-pre.blackboard .Support {
-   color: #8DA6CE;
+pre.lazy .OcamlOperator {
+   color: #000000;
 }
-pre.blackboard .OcamlOperator {
-   color: #F8F8F8;
+pre.lazy .line-numbers {
+   background-color: #E3FC8D;
+   color: #000000;
 }
-pre.blackboard .Storage {
-   color: #FBDE2D;
+pre.lazy .StringInterpolation {
+   color: #671EBB;
 }
-pre.blackboard .line-numbers {
-   background-color: #253B76;
-   color: #FFFFFF;
-}
-pre.blackboard .StringInterpolation {
-   color: #FF6400;
-}
-pre.blackboard .InvalidIllegal {
+pre.lazy .InvalidIllegal {
    background-color: #9D1E15;
    color: #F8F8F8;
 }
-pre.blackboard .PlistUnquotedString {
-   color: #FFFFFF;
-}
-pre.blackboard .OcamlVariant {
-   color: #D5E0F3;
-}
-pre.blackboard .MetaTag {
+pre.lazy .OcamlVariant {
    color: #7F90AA;
 }
-pre.blackboard .LatexEnvironment {
-   background-color: #F7F7F8;
+pre.lazy .MetaTag {
+   color: #3A4A64;
 }
-pre.blackboard .OcamlFPPrefixOperator {
+pre.lazy .OcamlPrefixFPOperator {
    text-decoration: underline;
 }
-pre.blackboard .OcamlPrefixOperator {
-   color: #8DA6CE;
+pre.lazy .OcamlPrefixOperator {
+   color: #3B5BB5;
 }
-pre.blackboard .EntityNameSection {
-   color: #FFFFFF;
+pre.lazy .String {
+   color: #409B1C;
 }
-pre.blackboard .String {
-   color: #61CE3C;
+pre.lazy .Keyword {
+   color: #FF7800;
 }
-pre.blackboard .Keyword {
-   color: #FBDE2D;
+pre.lazy {
+   background-color: #FFFFFF;
+   color: #000000;
 }
-pre.blackboard .LatexEnvironmentNested {
-   background-color: #7691F3;
-}
-pre.blackboard .InvalidDeprecated {
-   color: #AB2A1D;
+pre.lazy .InvalidDeprecated {
+   color: #990000;
    font-style: italic;
 }
-pre.blackboard .Variable {
+pre.lazy .Variable {
 }
-pre.blackboard .Entity {
-   color: #FF6400;
+pre.lazy .Entity {
+   color: #3B5BB5;
 }
-pre.blackboard .Comment {
-   color: #AEAEAE;
+pre.lazy .Comment {
+   color: #8C868F;
 }
 
 </style>
@@ -631,35 +620,35 @@ all copies or substantial portions of the Software.</p>
 <h3 id="struct">Document Structure</h3>
 <p>Every Glyph project contains a <code>document.glyph</code> file that is typically used to define the document structure. The default <code>document.glyph</code> generated automatically when creating a new project is the following:</p>
 
-	<pre class="blackboard">book[
-  @frontmatter[
-    toc[]
-    preface[
-      @title[Preface]
-      todo[Write the preface]
-      include[preface.glyph]
-    ]
-  ]
-  @bodymatter[  
-    chapter[ 
-      @title[Chapter 1]
-      todo[Write chapter 1]
-      include[chapter_1.glyph]
-    ]
-    chapter[
-      @title[Chapter 2]
-      todo[Write chapter 2]
-      include[chapter_2.glyph]
-    ]
-  ]
-  @backmatter[
-    appendix[
-      @title[Appendix A]
-      todo[Write appendix A]
-      include[appendix_a.glyph]
-    ]
-  ]
-]
+	<pre class="lazy"><span class="line-numbers">   1 </span> book[
+<span class="line-numbers">   2 </span>   @frontmatter[
+<span class="line-numbers">   3 </span>     toc[]
+<span class="line-numbers">   4 </span>     preface[
+<span class="line-numbers">   5 </span>       @title[Preface]
+<span class="line-numbers">   6 </span>       todo[Write the preface]
+<span class="line-numbers">   7 </span>       include[preface.glyph]
+<span class="line-numbers">   8 </span>     ]
+<span class="line-numbers">   9 </span>   ]
+<span class="line-numbers">  10 </span>   @bodymatter[  
+<span class="line-numbers">  11 </span>     chapter[ 
+<span class="line-numbers">  12 </span>       @title[Chapter 1]
+<span class="line-numbers">  13 </span>       todo[Write chapter 1]
+<span class="line-numbers">  14 </span>       include[chapter_1.glyph]
+<span class="line-numbers">  15 </span>     ]
+<span class="line-numbers">  16 </span>     chapter[
+<span class="line-numbers">  17 </span>       @title[Chapter 2]
+<span class="line-numbers">  18 </span>       todo[Write chapter 2]
+<span class="line-numbers">  19 </span>       include[chapter_2.glyph]
+<span class="line-numbers">  20 </span>     ]
+<span class="line-numbers">  21 </span>   ]
+<span class="line-numbers">  22 </span>   @backmatter[
+<span class="line-numbers">  23 </span>     appendix[
+<span class="line-numbers">  24 </span>       @title[Appendix A]
+<span class="line-numbers">  25 </span>       todo[Write appendix A]
+<span class="line-numbers">  26 </span>       include[appendix_a.glyph]
+<span class="line-numbers">  27 </span>     ]
+<span class="line-numbers">  28 </span>   ]
+<span class="line-numbers">  29 </span> ]
 </pre>
 
 	<p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface some Chapters and an Appendix.</p>
@@ -754,7 +743,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Although a macro can take any number of parameters, they are often no more than two or three, for readibility reasons: parameters have no name, but their position within a macro is significant.</p>
 <p>If you have something like this:</p>
 
-	<pre class="blackboard">custom_image[test.png|50%|50%|Test Image]
+	<pre class="lazy"><span class="line-numbers">   1 </span> custom_image[test.png|50%|50%|Test Image]
 </pre>
 	<p>it may still be easy enough to understand what each parameter is used for, but:</p>
 <ul>
@@ -762,11 +751,11 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>If you don&#8217;t want to resize the image, you still have to pass <em>empty parameters</em> to the macro, like this: <code>custom_image[test2.png|||Test Image]</code></li>
 </ul>
 <p>To avoid these situations, some macros which would normally take three or four parameters take optional attributes instead, so you can write:</p>
-	<pre class="blackboard">image[test.png
-  @width[50%]
-  @alt[Test Image]
-  @height[50%]
-]
+	<pre class="lazy"><span class="line-numbers">   1 </span> image[test.png
+<span class="line-numbers">   2 </span>   @width[50%]
+<span class="line-numbers">   3 </span>   @alt[Test Image]
+<span class="line-numbers">   4 </span>   @height[50%]
+<span class="line-numbers">   5 </span> ]
 </pre>
 	<p>More verbose, of course, but definitely more readable. In this way, if you won't want to scale an image, you can safely omit the <code>@width</code> and <code>@height</code> attributes.</p>
 	<div class="note">
@@ -781,17 +770,17 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <a href="#m_escape">escape</a> macro (or its alias <code>.</code>) with the <code>[=</code> and <code>=]</code> delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as an escape for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
 <p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <a href="#m_section">section</a> macros may not be a good idea, but they should be more or less mandatory with the <a href="#m_code">code</a> macro, especially when it contains square brackets or even Glyph code, like this:</p>
 
-	<pre class="blackboard">codeblock[=
-  section[
-    @title[A section]
-    @id[test]
-This is a section.
-    section[
-    @title[A nested section]
-This is another section.
-    ]
-  ]
-=]
+	<pre class="lazy"><span class="line-numbers">   1 </span> codeblock[=
+<span class="line-numbers">   2 </span>   section[
+<span class="line-numbers">   3 </span>     @title[A section]
+<span class="line-numbers">   4 </span>     @id[test]
+<span class="line-numbers">   5 </span> This is a section.
+<span class="line-numbers">   6 </span>     section[
+<span class="line-numbers">   7 </span>     @title[A nested section]
+<span class="line-numbers">   8 </span> This is another section.
+<span class="line-numbers">   9 </span>     ]
+<span class="line-numbers">  10 </span>   ]
+<span class="line-numbers">  11 </span> =]
 </pre>
 
 	<div class="note">
@@ -844,7 +833,7 @@ This is another section.
 </td>
    		<td />
    		<td>An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:
-				<pre class="blackboard">_\.=&gt;[#link|This link is emphasized using Textile]_
+				<pre class="lazy"><span class="line-numbers">   1 </span> _\.=&gt;[#link|This link is emphasized using Textile]_
 </pre></td></tr></table>
 
 </div> 
@@ -852,27 +841,27 @@ This is another section.
 <h4 id="sec_head">Sections and Headers</h4>
 <p>Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the <a href="#m_section">section</a> macro, like so:</p>
 
-	<pre class="blackboard">section[
-  @title[Section #1]
-Write the section contents here...
-  section[
-    @title[Section #2]
-This section is nested into the previous one.
-  ] --[End of Section #2]
-] --[End of Section #1]
+	<pre class="lazy"><span class="line-numbers">   1 </span> section[
+<span class="line-numbers">   2 </span>   @title[Section #1]
+<span class="line-numbers">   3 </span> Write the section contents here...
+<span class="line-numbers">   4 </span>   section[
+<span class="line-numbers">   5 </span>     @title[Section #2]
+<span class="line-numbers">   6 </span> This section is nested into the previous one.
+<span class="line-numbers">   7 </span>   ] --[End of Section #2]
+<span class="line-numbers">   8 </span> ] --[End of Section #1]
 </pre>
 
 	<p>This example defines two nested sections. If the <code>@title</code> attribute is specified like in this case, it will be converted to a proper <span class="caps">HTML</span> header and it will appear in the table of contents (see the <a href="#m_toc">toc</a> macro).</p>
 <p>Note an important difference from <span class="caps">HTML</span>: there is no need for an explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
 
-	<pre class="blackboard"><span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
-  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>Section #1<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>
-  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>Write the section contents here...<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
-  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
-    <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h3</span><span class="MetaTag">&gt;</span></span>Section #2<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h3</span><span class="MetaTag">&gt;</span></span>
-    <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This section is nested in the previous one<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
-  <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
-<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
+	<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   2 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>Section #1<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>Write the section contents here...<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   4 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   5 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h3</span><span class="MetaTag">&gt;</span></span>Section #2<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h3</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   6 </span>     <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This section is nested in the previous one<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   7 </span>   <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   8 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
 </pre>
 
 	<p>By default, in Glyph the first header level is <em>2</em>, so the two headers are rendered as <code>h2</code> and <code>h3</code>, respectively (<code>--[...]</code> macros are <em>comments</em>, therefore they are not included in the final output).</p>
@@ -919,21 +908,21 @@ This section is nested into the previous one.
 	<div class="box">
 <div class="box-title">Example</div>
 <p>The following Glyph code:</p>
-		<pre class="blackboard">This is a link to link[#test].
-...
-This is link[#wrong].
-This is a #[test|test anchor].
+		<pre class="lazy"><span class="line-numbers">   1 </span> This is a link to link[#test].
+<span class="line-numbers">   2 </span> ...
+<span class="line-numbers">   3 </span> This is link[#wrong].
+<span class="line-numbers">   4 </span> This is a #[test|test anchor].
 </pre>
 		<p>Is translated into the following HTML code:</p>
-		<pre class="blackboard"><span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a link to <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#test<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>test anchor<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
-<span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>...<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
-<span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#wrong<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>#wrong<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
-<span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag"><span class="MetaTag">id</span><span class="MetaTag">=</span><span class="String"><span class="String">&quot;</span><span class="String">test</span><span class="String">&quot;</span></span></span><span class="MetaTag">&gt;</span></span>test anchor<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a link to <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#test<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>test anchor<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   2 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>...<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#wrong<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>#wrong<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   4 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag"><span class="MetaTag">id</span><span class="MetaTag">=</span><span class="String"><span class="String">&quot;</span><span class="String">test</span><span class="String">&quot;</span></span></span><span class="MetaTag">&gt;</span></span>test anchor<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
 </pre>
 		<p>Additionally, the following warning message is displayed when <a href="#compile">compiling</a>:</p>
-		<pre class="blackboard">warning: Bookmark 'wrong' does not exist
- -&gt; source: @: authoring.textile
- -&gt; path: document/body/bodymatter/chapter/@/textile/section/section/box/link
+		<pre class="lazy"><span class="line-numbers">   1 </span> warning: Bookmark 'wrong' does not exist
+<span class="line-numbers">   2 </span>  -&gt; source: @: authoring.textile
+<span class="line-numbers">   3 </span>  -&gt; path: document/body/bodymatter/chapter/@/textile/section/section/box/link
 </pre>
 
 </div>
@@ -944,11 +933,11 @@ This is a #[test|test anchor].
 	<li>if no title is specified as second parameter for the <a href="#m_link">link</a> macro, the anchor&#8217;s name is used as such.</li>
 </ul>
 <p>Besides using the <a href="#m_anchor">anchor</a> macro macro, you can also create an anchor for a header by passing an <code>@id</code> attribute the the <a href="#m_section">section</a> macro, like this:</p>
-	<pre class="blackboard">section[
-  @title[My Section]
-  @id[my_section]
-...
-]
+	<pre class="lazy"><span class="line-numbers">   1 </span> section[
+<span class="line-numbers">   2 </span>   @title[My Section]
+<span class="line-numbers">   3 </span>   @id[my_section]
+<span class="line-numbers">   4 </span> ...
+<span class="line-numbers">   5 </span> ]
 </pre>
 	<div class="note">
 <span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link">link</a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external (http) links as well.
@@ -963,20 +952,20 @@ This is a #[test|test anchor].
 	<div class="box">
 <div class="box-title">Example</div>
 <p>The following Glyph code:</p>
-		<pre class="blackboard">image[glyph.svg
-  @with[20%]
-  @height[20%]
-]
-figure[example.png|An example figure.
-  @alt[Example Figure]
-]
+		<pre class="lazy"><span class="line-numbers">   1 </span> image[glyph.svg
+<span class="line-numbers">   2 </span>   @with[20%]
+<span class="line-numbers">   3 </span>   @height[20%]
+<span class="line-numbers">   4 </span> ]
+<span class="line-numbers">   5 </span> figure[example.png|An example figure.
+<span class="line-numbers">   6 </span>   @alt[Example Figure]
+<span class="line-numbers">   7 </span> ]
 </pre>
 		<p>Is translated into the following HTML code:</p>
-		<pre class="blackboard"><span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">img</span> <span class="MetaTag">src</span>=<span class="String"><span class="String">&quot;</span>images/glyph.svg<span class="String">&quot;</span></span> <span class="MetaTag">width</span>=<span class="String"><span class="String">&quot;</span>20%<span class="String">&quot;</span></span> <span class="MetaTag">height</span>=<span class="String"><span class="String">&quot;</span>20%<span class="String">&quot;</span></span> /<span class="MetaTag">&gt;</span></span>
-<span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>figure<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
-  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">img</span> <span class="MetaTag">src</span>=<span class="String"><span class="String">&quot;</span>images/example.png<span class="String">&quot;</span></span> <span class="MetaTag">alt</span>=<span class="String"><span class="String">&quot;</span>Example Figure<span class="String">&quot;</span></span>/<span class="MetaTag">&gt;</span></span>
-  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>caption<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>An example figure.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
-<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
+		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">img</span> <span class="MetaTag">src</span>=<span class="String"><span class="String">&quot;</span>images/glyph.svg<span class="String">&quot;</span></span> <span class="MetaTag">width</span>=<span class="String"><span class="String">&quot;</span>20%<span class="String">&quot;</span></span> <span class="MetaTag">height</span>=<span class="String"><span class="String">&quot;</span>20%<span class="String">&quot;</span></span> /<span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   2 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>figure<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">img</span> <span class="MetaTag">src</span>=<span class="String"><span class="String">&quot;</span>images/example.png<span class="String">&quot;</span></span> <span class="MetaTag">alt</span>=<span class="String"><span class="String">&quot;</span>Example Figure<span class="String">&quot;</span></span>/<span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   4 </span>   <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>caption<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>An example figure.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   5 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
 </pre>
 		<p>Any attribute passed to the <a href="#m_image">image</a> macro or the <a href="#m_figure">figure</a> macro is automatically passed to the underlying <code>&lt;img&gt;</code> tag.</p>
 
@@ -991,36 +980,36 @@ figure[example.png|An example figure.
 				<div class="section">
 <p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
 <p>Cosider the following piece of ruby code:</p>
-	<pre class="blackboard">def find_child(&amp;block)
-  children.each do |c|
-    c.descend do |node, level|
-      return node if block.call(node)
-    end
-  end
-  nil
-end
+	<pre class="lazy"><span class="line-numbers">   1 </span> def find_child(&amp;block)
+<span class="line-numbers">   2 </span>   children.each do |c|
+<span class="line-numbers">   3 </span>     c.descend do |node, level|
+<span class="line-numbers">   4 </span>       return node if block.call(node)
+<span class="line-numbers">   5 </span>     end
+<span class="line-numbers">   6 </span>   end
+<span class="line-numbers">   7 </span>   nil
+<span class="line-numbers">   8 </span> end
 </pre>
 	<p>It can be wrapped in a highlight macro, like so:</p>
-	<pre class="blackboard">highlight[=ruby|
-  def find_child(&amp;block)
-    children.each do |c|
-      c.descend do |node, level|
-        return node if block.call(node)
-      end
-    end
-    nil
-  end
-=]
+	<pre class="lazy"><span class="line-numbers">   1 </span> highlight[=ruby|
+<span class="line-numbers">   2 </span>   def find_child(&amp;block)
+<span class="line-numbers">   3 </span>     children.each do |c|
+<span class="line-numbers">   4 </span>       c.descend do |node, level|
+<span class="line-numbers">   5 </span>         return node if block.call(node)
+<span class="line-numbers">   6 </span>       end
+<span class="line-numbers">   7 </span>     end
+<span class="line-numbers">   8 </span>     nil
+<span class="line-numbers">   9 </span>   end
+<span class="line-numbers">  10 </span> =]
 </pre>
 	<p>...to produce the following, using the ultraviolet highlighter:</p>
-	<pre class="blackboard"><span class="Keyword">def</span> <span class="Entity">find_child</span>(<span class="Variable"><span class="Keyword">&amp;</span>block</span>)
-  children.<span class="Entity">each</span> <span class="Keyword">do </span>|<span class="Variable">c</span>|
-    c.<span class="Entity">descend</span> <span class="Keyword">do </span>|<span class="Variable">node</span>, <span class="Variable">level</span>|
-      <span class="Keyword">return</span> node <span class="Keyword">if</span> block.<span class="Entity">call</span>(node)
-    <span class="Keyword">end</span>
-  <span class="Keyword">end</span>
-  <span class="Constant">nil</span>
-<span class="Keyword">end</span>
+	<pre class="lazy"><span class="line-numbers">   1 </span> <span class="Keyword">def</span> <span class="Entity">find_child</span>(<span class="Variable"><span class="Keyword">&amp;</span>block</span>)
+<span class="line-numbers">   2 </span>   children.<span class="Entity">each</span> <span class="Keyword">do </span>|<span class="Variable">c</span>|
+<span class="line-numbers">   3 </span>     c.<span class="Entity">descend</span> <span class="Keyword">do </span>|<span class="Variable">node</span>, <span class="Variable">level</span>|
+<span class="line-numbers">   4 </span>       <span class="Keyword">return</span> node <span class="Keyword">if</span> block.<span class="Entity">call</span>(node)
+<span class="line-numbers">   5 </span>     <span class="Keyword">end</span>
+<span class="line-numbers">   6 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">   7 </span>   <span class="Constant">nil</span>
+<span class="line-numbers">   8 </span> <span class="Keyword">end</span>
 </pre>
 	<div class="box">
 <div class="box-title">Some Remarks</div>

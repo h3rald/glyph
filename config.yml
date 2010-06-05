@@ -25,8 +25,8 @@
     # See options at http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html
     :css: :class 
   :ultraviolet:
-    :line_numbers: false
-    :theme: 'blackboard'
+    :line_numbers: true
+    :theme: 'lazy'
 :system:
   :quiet: false
   :output_targets: [:html, :pdf]

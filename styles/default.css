@@ -197,8 +197,12 @@ code, pre {
 	font-size: 0.75em;
 }
 pre{
-	margin: 1em;
-	padding: 1em;
+	border: 1px solid #cecece;
+	padding-top: 1px;
+}
+span.line-numbers{
+	margin: 0;
+	padding: 3px;
 }
 
 pre>code {

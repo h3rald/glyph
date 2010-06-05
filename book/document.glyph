@@ -3,7 +3,7 @@ book[
 		style[default.css]
 		?[eq[$[document.output]|pdf]|style[pagination.css]]
 		?[eq[$[filters.highlighter]|coderay]|style[coderay.css]]
-		?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/blackboard.css]]
+		?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/lazy.css]]
 	]
 	@logo[
 		?[eq[$[document.output]|pdf]|image[@width[20%]@height[20%]glyph.svg]]
