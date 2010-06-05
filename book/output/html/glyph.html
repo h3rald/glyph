@@ -748,7 +748,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>it may still be easy enough to understand what each parameter is used for, but:</p>
 <ul>
 	<li>you can easily forget that the third parameter is the image width</li>
-	<li>If you don&#8217;t want to resize the image, you still have to pass <em>empty parameters</em> to the macro, like this: <code>custom_image[test2.png|||Test Image]</code></li>
+	<li>if you don&#8217;t want to resize the image, you still have to pass <em>empty parameters</em> to the macro, like this: <code>custom_image[test2.png|||Test Image]</code></li>
 </ul>
 <p>To avoid these situations, some macros which would normally take three or four parameters take optional attributes instead, so you can write:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> image[test.png
@@ -794,7 +794,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
    		<th>Evaluates to...</th>
    		<th>Notes</th></tr>
  		<tr><td>
-<code>\[@</code>
+<code>\[</code>
 </td>
    		<td>
 <code>[</code>
@@ -832,9 +832,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <code>\.</code>
 </td>
    		<td />
-   		<td>An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:
-				<pre class="lazy"><span class="line-numbers">   1 </span> _\.=&gt;[#link|This link is emphasized using Textile]_
-</pre></td></tr></table>
+   		<td>An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters: <br /><code>_\\.=>[#link|This link is emphasized using Textile]_</code></td></tr></table>
 
 </div> 
 				<div class="section">

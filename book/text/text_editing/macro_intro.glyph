@@ -28,7 +28,7 @@ If you have something like this:
 	txt[
 it may still be easy enough to understand what each parameter is used for, but:
 * you can easily forget that the third parameter is the image width
-* If you don't want to resize the image, you still have to pass _empty parameters_ to the macro, like this: code[=custom_image[test2.png\|\|\|Test Image]=]
+* if you don't want to resize the image, you still have to pass _empty parameters_ to the macro, like this: code[=custom_image[test2.png\|\|\|Test Image]=]
 
 To avoid these situations, some macros which would normally take three or four parameters take optional attributes instead, so you can write:
 	]
@@ -77,7 +77,7 @@ This is another section.
    		th[Notes]
  		]
  		tr[
- 			td[code[\\\.\[@]]
+ 			td[code[\\\.\[]]
    		td[code[\[]]
    		td[&[sq_esc]]
   		]
@@ -104,8 +104,7 @@ This is another section.
  		tr[
    		td[code[\\\..]]
    		td[]
-   		td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters:
-				highlight[=html|_\\\\..=>[#link\|This link is emphasized using Textile]_ =]
+   		td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters: br[]code[=_\\\\..=>[#link\|This link is emphasized using Textile]_ =]
     	]
   	]
 	]

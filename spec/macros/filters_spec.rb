@@ -67,6 +67,7 @@ interpret text
 				interpret("highlight[=ruby|\n#{code}=]")
 				@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
 			end
+			Glyph['filters.ultraviolet.line_numbers'] = false
 			check.call 'ultraviolet', uv_result if uv
 			check.call 'coderay', cr_result if cr
 	end

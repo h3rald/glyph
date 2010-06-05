@@ -175,8 +175,9 @@ macro :toc do
 			end
 			list
 		end
+		toc_title = attr(:title) || "Table of Contents"
 		%{<div class="contents">
-<h2 class="toc-header" id="h_toc">Table of Contents</h2>
+<h2 class="toc-header" id="h_toc">#{toc_title}</h2>
 <ol class="toc">
 #{descend_section.call(document.structure, nil)}
 </ol>
