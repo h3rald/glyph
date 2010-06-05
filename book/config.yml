@@ -6,3 +6,5 @@
   :author: Fabio Cevasco
   :revision: "v0.3.0"
   :filename: glyph
+:filters:
+  :highlighter: ultraviolet

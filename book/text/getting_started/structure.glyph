@@ -4,7 +4,7 @@ section[
 
 	p[Every Glyph project contains a code[document.glyph] file that is typically used to define the document structure. The default code[document.glyph] generated automatically when creating a new project is the following:]
 
-	codeblock[=
+	highlight[=html|
 book[
   @frontmatter[
     toc[]

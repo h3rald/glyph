@@ -2,8 +2,8 @@ book[
 	@head[
 		style[default.css]
 		?[eq[$[document.output]|pdf]|style[pagination.css]]
-		?[eq[$[highlighters.current]|coderay]|style[coderay.css]]
-		?[eq[$[highlighters.current]|ultraviolet]|style[ultraviolet/blackboard.css]]
+		?[eq[$[filters.highlighter]|coderay]|style[coderay.css]]
+		?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/blackboard.css]]
 	]
 	@logo[
 		?[eq[$[document.output]|pdf]|image[@width[20%]@height[20%]glyph.svg]]
@@ -37,9 +37,10 @@ book[
 				@title[Text Editing]
 				include[glyph_files.glyph]
 				include[macro_intro.glyph]
---[
 				include[sections.glyph]
 				include[links.glyph]
+--[
+test[=dsaagas=]
 				include[images.glyph]
 				include[code.glyph]
 				include[stylesheets.glyph]
@@ -49,13 +50,12 @@ book[
 ]
 			]
 		]
+--[
 		chapter[
 			@title[Generating Output Files]
---[
 			include[compiling.glyph]
 			include[lite_mode.glyph]
 			include[programmatic_usage.glyph]
-]
 		]
 		chapter[
 			@title[Extending Glyph]
@@ -66,6 +66,7 @@ book[
 			@title[Troubleshooting]
 			textile[include[troubleshooting.glyph]]
 		]
+]
 	]
 	@backmatter[
 		appendix[
