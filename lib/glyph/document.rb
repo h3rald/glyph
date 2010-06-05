@@ -120,12 +120,15 @@ module Glyph
 			raise RuntimeError, "Document cannot be finalized due to previous errors" unless @context[:document].errors.blank?
 			# Substitute placeholders
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
-			@placeholders.each_pair do |key, value| 
-				begin
-					@output.gsub! key.to_s, value.call(self).to_s
-				rescue Exception => e
-					Glyph.warning e.message
+			begin
+				@placeholders.each_pair do |key, value| 
+					begin
+						@output.gsub! key.to_s, value.call(self).to_s
+					rescue Exception => e
+						Glyph.warning e.message
+					end
 				end
+			rescue Exception => e
 			end
 			@state = :finalized
 		end

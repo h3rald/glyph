@@ -48,13 +48,13 @@ book[
 				include[conditionals.glyph]
 			]
 		]
---[
 		chapter[
 			@title[Generating Output Files]
 			include[compiling.glyph]
 			include[lite_mode.glyph]
 			include[programmatic_usage.glyph]
 		]
+--[
 		chapter[
 			@title[Extending Glyph]
 			@id[extending]

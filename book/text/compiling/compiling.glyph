@@ -1,38 +1,23 @@
 section[
-@title[Compiling a project]
-@id[compile]
-
-By default, a Glyph project can be _compiled_ into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more formats could be supported.
-
-
-section[
-@title[HTML output]
-
-To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the @document.glyph@ file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the @/output/html@ folder. 
-
-The name of the HTML file can be set in the configuration (@document.filename@ setting).
+	@title[Compiling a project]
+	@id[compile]
+	p[By default, a Glyph project can be "compiled" into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more output targets will be supported.]
+	section[
+		@title[HTML output]
+		p[To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the code[document.glyph] file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the code[/output/html] folder.] 
+		p[The name of the HTML file can be set in the configuration (\.$>[document.filename]).]
+	]
+	section[
+		@title[PDF Output]
+		p[To generate a PDF document, you must specify code[pdf] as format, like this:]
+		p[code[= glyph compile -f pdf =]]
+		p[The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.]
+		note[Glyph v\.%[Glyph::VERSION] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
+	]
+	section[
+		@title[Auto Regeneration]
+		@id[auto_regeneration]
+		txt[You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed.]
+		note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
+	]
 ]
-
-section[
-@title[PDF Output]
-
-To generate a PDF document, you must specify @pdf@ as format, like this:
-
-code[= glyph compile -f pdf =]
-
-The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.
-
-note[Glyph v\.%[Glyph::VERSION.strip] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
-
-]
-
-section[
-@title[Auto Regeneration]
-@id[auto_regeneration]
-You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed. 
-
-note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
-
-]
-]
-
