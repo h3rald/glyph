@@ -1,0 +1,17 @@
+section[
+	@title[Parameters and Attributes]
+	txt[
+Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the _raw value_ of and attribute or parameter or its _expanded value_. The difference between the two will become clearer in the following sections and also in the =>[#interpreting] section.
+	]
+	section[
+		@title[Accessing Expanded Values]
+		txt[
+Normally, you just want to get the value of an attribute or parameter and use it in the macro. This means, in other words, its _expanded_ value, i.e. the value resulting from the expansion of the macros (if any) within the attribute or parameter.
+		]
+		![Write about methods related to expanded values, pros and cons, etc.]
+	]
+	section[
+		@title[Accessing Raw Values]
+		![Write intro about raw values, methods, pros and cons, etc.]
+	]
+]

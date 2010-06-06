@@ -10,3 +10,4 @@
 :only_after_declaration: "can only be used _after_ its declaration"
 :coderay: "=>[http://coderay.rubychan.de/|Coderay]"
 :uv: "=>[http://ultraviolet.rubyforge.org/|Ultraviolet]"
+:yardoc: "http://yardoc.org/docs/h3rald-glyph"

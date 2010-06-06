@@ -1,5 +1,6 @@
 section[
 @title[Interpreting Glyph Code]
+@id[interpreting]
 
 What if you need to evaluate some Glyph code _within_ a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the @interpret@ method, as follows:
 

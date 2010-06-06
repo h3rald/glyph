@@ -18,7 +18,7 @@ end
 	txt[
 The @macro@ method takes a single @Symbol@ or @String@ parameter, corresponding to the name of the macro. In this case, the entire block (or _body_ of the macro) is a @String@ corresponding to what we want the macro to evaluate to: a @<div>@ tag containing a note. 
 
-The body of the macro is evaluated in the context of the =>[http://yardoc.org/docs/glyph/Glyph/Macro|@Glyph::Macro@] class, therefore its instance variables (like code[@name] or code[@value]) can be used directly.
+The body of the macro is evaluated in the context of the =>[&[yardoc]/Macro|@Glyph::Macro@] class, therefore its instance variables (like code[@name] or code[@value]) can be used directly.
 
 		box[Why using code[@name] instead of just "note"?|
 For the @note@ macro, it absolutely makes no difference. However, by using code[@name] it is possible to re-use the same code for the @tip@, @important@ and @caution@ macros as well, which are in fact only aliases of the @note@ macro.
@@ -36,13 +36,14 @@ The following table lists all the instance variables that can be used inside mac
     	td[code[@node]]
     	td[
 				txt[
-A =>[http://yardoc.org/docs/glyph/Node|code[Node]] containing information about the macro, within the document syntax tree. Useful for accessing parent and child macros, and the current =>[http://yardoc.org/docs/glyph/Glyph/Document|code[Document]]. Normally, macro nodes contain the following keys:
+A =>[&[yardoc]/MacroNode|code[MacroNode]] containing information about the macro. Useful for accessing parent and child macros, and the current =>[&[yardoc]/Document|code[Document]]. Normally, instances of the code[MacroNode] class contain the following keys:
 * @:name@, the name of the macro.
-* @:value@, the value (i.e. the contents, within the delimiters) of the macro
 * @:source@, a @String@ identifying the source of the macro (a file, a snippet, etc.) 
-* @:document@, the parsed document tree.
+* @:value@, the value of the macro (populated after code[MacroNode#evaluate] is called).
+* @:escape@, whether the macro is a =>[#esc_quot|quoting macro] or not.
+* @:document@, the instance of =>[&[yardoc]/Document|code[Document]] the macro is contained in (populated after the document has been parsed and analyzed).
 
-Note that the first three keys can also be accessed via instance variables.
+Note that the first two keys can also be accessed via instance variables.
 				]
 			]
   	]
@@ -51,16 +52,8 @@ Note that the first three keys can also be accessed via instance variables.
     	td[The name of the macro]
   	]
   	tr[
-    	td[code[@value]]
-    	td[The full contents (including parameters and nested macros) inside the macro delimiters.]
-  	]
-  	tr[
     td[code[@source]]
     td[A code[String] identifying the source of the macro (a file, a snippet, etc.) ]
-  	]
-  	tr[
-    	td[code[@params]]
-    	td[The parameters passed to the macro. In other words, the value of the macro split by pipes (\.code[\|]).]
   	]
 	]
 ]

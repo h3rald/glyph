@@ -55,6 +55,7 @@ book[
 			@title[Extending Glyph]
 			@id[extending]
 			include[macro_anatomy.glyph]
+			include[params_attrs.glyph]
 --[
 			include[bookmarks_headers.glyph]
 			include[placeholders.glyph]
