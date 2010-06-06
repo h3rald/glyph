@@ -1,0 +1,67 @@
+section[
+	@title[Anatomy of a Macro]
+	txt[
+Glyph was created wih extensibility in mind. You can freely extend &[glang] by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in @.rb@ files within the @lib/macros/@ folder of your project.
+
+tip[Alternatively, you can also define macros right inside your document, using the %>[macro:].]
+
+This is the source code of a fairly simple macro used to format a note:
+	]
+	highlight[=ruby|
+macro :note do
+  %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>
+		#{@value}
+
+    </div>}
+end
+	=]
+	txt[
+The @macro@ method takes a single @Symbol@ or @String@ parameter, corresponding to the name of the macro. In this case, the entire block (or _body_ of the macro) is a @String@ corresponding to what we want the macro to evaluate to: a @<div>@ tag containing a note. 
+
+The body of the macro is evaluated in the context of the =>[http://yardoc.org/docs/glyph/Glyph/Macro|@Glyph::Macro@] class, therefore its instance variables (like code[@name] or code[@value]) can be used directly.
+
+		box[Why using code[@name] instead of just "note"?|
+For the @note@ macro, it absolutely makes no difference. However, by using code[@name] it is possible to re-use the same code for the @tip@, @important@ and @caution@ macros as well, which are in fact only aliases of the @note@ macro.
+		]
+		![Update according to API changes.]
+
+The following table lists all the instance variables that can be used inside macros:
+	]
+	table[
+  	tr[
+    	th[Variable]
+    	th[Description]
+ 		]
+  	tr[
+    	td[code[@node]]
+    	td[
+				txt[
+A =>[http://yardoc.org/docs/glyph/Node|code[Node]] containing information about the macro, within the document syntax tree. Useful for accessing parent and child macros, and the current =>[http://yardoc.org/docs/glyph/Glyph/Document|code[Document]]. Normally, macro nodes contain the following keys:
+* @:name@, the name of the macro.
+* @:value@, the value (i.e. the contents, within the delimiters) of the macro
+* @:source@, a @String@ identifying the source of the macro (a file, a snippet, etc.) 
+* @:document@, the parsed document tree.
+
+Note that the first three keys can also be accessed via instance variables.
+				]
+			]
+  	]
+  	tr[
+    	td[code[@name]]
+    	td[The name of the macro]
+  	]
+  	tr[
+    	td[code[@value]]
+    	td[The full contents (including parameters and nested macros) inside the macro delimiters.]
+  	]
+  	tr[
+    td[code[@source]]
+    td[A code[String] identifying the source of the macro (a file, a snippet, etc.) ]
+  	]
+  	tr[
+    	td[code[@params]]
+    	td[The parameters passed to the macro. In other words, the value of the macro split by pipes (\.code[\|]).]
+  	]
+	]
+]
+

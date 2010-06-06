@@ -33,20 +33,17 @@ book[
 		]
 		chapter[
 			@title[Authoring Documents]
-			section[
-				@title[Text Editing]
-				include[glyph_files.glyph]
-				include[macro_intro.glyph]
-				include[sections.glyph]
-				include[links.glyph]
-				include[images.glyph]
-				include[code.glyph]
-				include[raw_html.glyph]
-				include[stylesheets.glyph]
-				include[inclusions.glyph]
-				include[evaluation.glyph]
-				include[conditionals.glyph]
-			]
+			include[glyph_files.glyph]
+			include[macro_intro.glyph]
+			include[sections.glyph]
+			include[links.glyph]
+			include[images.glyph]
+			include[code.glyph]
+			include[raw_html.glyph]
+			include[stylesheets.glyph]
+			include[inclusions.glyph]
+			include[evaluation.glyph]
+			include[conditionals.glyph]
 		]
 		chapter[
 			@title[Generating Output Files]
@@ -54,12 +51,19 @@ book[
 			include[lite_mode.glyph]
 			include[programmatic_usage.glyph]
 		]
---[
 		chapter[
 			@title[Extending Glyph]
 			@id[extending]
-			textile[include[extending.glyph]]
+			include[macro_anatomy.glyph]
+--[
+			include[bookmarks_headers.glyph]
+			include[placeholders.glyph]
+			include[validators.glyph]
+			include[interpreting.glyph]
+			include[further_reading.glyph]
+]
 		]
+--[
 		chapter[
 			@title[Troubleshooting]
 			textile[include[troubleshooting.glyph]]

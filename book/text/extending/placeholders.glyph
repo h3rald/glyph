@@ -1,0 +1,35 @@
+section[
+@title[Using Placeholders]
+
+Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that's easy) or even _after_ the link. 
+
+Here's the source code of the %>[link]:
+
+<notextile>
+highlight[=ruby|
+macro :link do
+  href, title = @params
+  if href.match /^#/ then
+    anc = href.gsub(/^#/, '').to_sym
+    bmk = bookmark? anc
+    if bmk then
+      title \|\|= bmk[:title]
+    else
+      plac = placeholder do \|document\|
+        macro_error "Bookmark '#{anc}' does not exist" unless document.bookmarks[anc] 
+        document.bookmarks[anc][:title]
+      end
+      title \|\|= plac
+    end
+  end
+  title \|\|= href
+  %{<a href="#{href}">#{title}</a>}
+end
+=]
+</notextile>
+
+If there's already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the @placeholder@ method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.
+
+Within the @placeholder@ block, the @document@ parameter is, by all means, the fully analyzed document.
+]
+

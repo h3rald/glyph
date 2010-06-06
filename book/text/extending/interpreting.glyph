@@ -1,0 +1,79 @@
+section[
+@title[Interpreting Glyph Code]
+
+What if you need to evaluate some Glyph code _within_ a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the @interpret@ method, as follows:
+
+<notextile>
+highlight[=ruby|
+macro :fmi do
+  topic, href = @params
+  link = placeholder do \|document\| 
+    interpret "link[#{href}]"
+  end
+  %{<span class="fmi">for more information on #{topic}, see #{link}</span>}
+end
+=] 
+</notextile>
+
+When the @interpret@ method is called, the following happens:
+# A new Glyph document is created from the @String@ passed to the method.
+# The bookmarks, headers and placeholders are passed from the main document to the new one. Because they are stored in arrays and hashes, they are passed by reference, so for example any new bookmark stored in the new document will also become available in the main document.
+# Any macro included in the @String@ is evaluated, and the resulting text is returned by the method. Note that this new document does not get finalized: in other words, placeholders will be left as they are, and they'll eventually be replaced when _the main document_ is finalized.
+
+section[
+@title[Encoding and Decoding Glyph Code]
+@id[encode_decode]
+When you use the @interpret@ method, keep in mind that the code is interpreted _before_ the macro execution ends. This may not always be what you want: if you're nesting macros interpreting @section@ and @header@ macros,for example, your Table of Contents may get messed up, with child sections showing up before their parents. 
+
+To avoid this, you can use the @encode@ and @decode@ methods, as shown in the macros defined for Glyph's =>[http://github.com/h3rald/glyph/blob/master/book/text/changelog.glyph|Changelog]:
+
+<notextile>
+highlight[=ruby|
+macro :issue do
+  exact_parameters 2
+  ident, desc = @params
+  encode %{
+    tr[
+      td[\=>[http://github.com/h3rald/glyph/issues/closed#issue/#{ident}\|##{ident}]]
+      td[textile[#{desc}]]
+    ]
+  }
+end
+
+macro :features do
+  verb = (@name == :features) ? "Implemented" : "Fixed"
+  total = @node.children.length
+  encode %{
+    section[@title[#{total} #{@name.to_s.capitalize} #{verb}]
+      table[
+        tr[
+          th[ID]
+          th[Description]
+        ]
+        #@value
+      ]
+    ]
+  }
+end
+
+macro :release do
+  exact_parameters 3
+  number, date, contents = @params
+  interpret %{
+    section[@title[v#{number} &ndash; #{date}]
+      #{decode contents}
+    ]
+  }
+end
+=]
+</notextile>
+
+In this case, @issue@ macros are nested within a @features@ macro, which in turn is nested within a @release@ macro. Note that none of these macros have any side effect: they are just used for text expansion. Because we're always going to nest these macros in this way, there's no to have each one interpret Glyph code: it will be the @release@ macro's job to do so. Instead, the @features@ and @issue@ macros just encode text which will then be decoded by the @release@ macro, before being interpreted. 
+
+When you _encode_ a macro, its delimiters (@\[@, @\]@, and @\|@) will be escaped (into ‡\.‡¤\.91\.¤‡\.‡, ‡\.‡¤\.93\.¤‡\.‡, and ‡\.‡¤\.124\.¤‡\.‡ respectively), and when you _decode_ it, they will be unescaped. In a nutshell, you may want to use the encode/decode mechanism when:
+* When you're nesting macros interpreting Glyph code, without side effects.
+* When all you want is to copy some Glyph code from child macros into their parents.
+
+note[These methods are also wrapped in the %>[encode] and in the %>[decode].]
+]
+]

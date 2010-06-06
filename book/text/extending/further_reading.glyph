@@ -1,0 +1,14 @@
+
+
+
+section[
+@title[Further Reading]
+
+For more examples on how to create more complex macros, have a look at the =>[http://github.com/h3rald/glyph/tree/master/macros/|source code] of the existing ones.
+
+To gain a deeper understanding on how macros are executed, have a look at the following Glyph classes:
+* =>[http://yardoc.org/docs/glyph/Glyph/Macro|@Glyph::Macro@]
+* =>[http://yardoc.org/docs/glyph/Glyph/Interpreter|@Glyph::Interpreter@]
+* =>[http://yardoc.org/docs/glyph/Glyph/Document|@Glyph::Document@]
+* =>[http://yardoc.org/docs/glyph/Glyph/Node|@Node@]
+]
