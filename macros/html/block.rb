@@ -28,13 +28,6 @@ macro :codeblock do
 </div>}
 end
 
-macro :title do
-	no_parameters
-	%{<h1>
-			#{Glyph["document.title"]}
-</h1>}
-end
-
 macro :image do
 	min_parameters 1
 	max_parameters 3
@@ -60,19 +53,37 @@ img[@src[#{dest_file}]#{@node.attrs.join}]
 ]}
 end
 
+macro :title do
+	no_parameters
+	unless Glyph["document.title"].blank? then
+	%{<h1>
+			#{Glyph["document.title"]}
+</h1>}
+	else
+		""
+	end
+end
 
 macro :subtitle do
 	no_parameters
+	unless Glyph["document.subtitle"].blank? then
 	%{<h2>
 #{Glyph["document.subtitle"]}
 </h2>}
+	else
+		""
+	end
 end
 
 macro :author do
 	no_parameters
+	unless Glyph['document.author'].blank? then
 	%{<div class="author">
 by <em>#{Glyph["document.author"]}</em>
 </div>}
+	else
+		""
+	end
 end
 
 macro :pubdate do
@@ -80,6 +91,14 @@ macro :pubdate do
 	%{<div class="pubdate">
 #{Time.now.strftime("%B %Y")}
 </div>}
+end
+
+macro :revision do
+	unless Glyph["document.revision"].blank? then
+	%{<div class="revision">#{Glyph['document.revision']}</div>}
+	else
+		""
+	end
 end
 
 macro_alias :important => :note

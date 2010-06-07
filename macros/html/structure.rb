@@ -32,12 +32,14 @@ macro :article do
 	head = @node.attr(:head).contents rescue nil
  	head ||= %{style[default.css]}
 	logo = @node.attr(:logo).contents rescue nil
+	pubdate = @node.attr(:pubdate) ? "div[@class[pubdate]#{@node.attr(:pubdate).contents}]" : "pubdate[]"
 	halftitlepage = @node.attr(:halftitlepage).contents rescue nil
 	halftitlepage ||= %{
 			#{logo}
 			title[]
+			subtitle[]
 			author[]
-			pubdate[]
+			#{pubdate}
 	}
 	interpret %{
 document[
@@ -57,13 +59,14 @@ macro :book do
 	head ||= %{style[default.css]}
 	logo = @node.attr(:logo).contents rescue nil
 	titlepage = @node.attr(:titlepage).contents rescue nil
+	pubdate = @node.attr(:pubdate) ? "div[@class[pubdate]#{@node.attr(:pubdate).contents}]" : "pubdate[]"
 	titlepage ||= %{
 			#{logo}
 			title[]
 			subtitle[]
 			revision[]
 			author[]
-			pubdate[]
+			#{pubdate}
 	}
 	frontmatter = @node.attr(:frontmatter).contents rescue nil
 	bodymatter = @node.attr(:bodymatter).contents rescue nil
@@ -85,9 +88,6 @@ document[
 ]}	
 end
 
-macro :revision do
-	%{<div class="revision">#{Glyph['document.revision']}</div>}
-end
 
 macro :document do
 	exact_parameters 1
@@ -109,10 +109,13 @@ end
 
 macro :head do
 	exact_parameters 1
+	author = Glyph['document.author'].blank? ? "" : %{<meta name="author" content="#{Glyph["document.author"]}" />
+}
+	copy = Glyph['document.author'].blank? ? "" : %{<meta name="copyright" content="#{Glyph["document.author"]}" />}
 	%{<head>
 <title>#{Glyph["document.title"]}</title>
-<meta name="author" content="#{Glyph["document.author"]}" />
-<meta name="copyright" content="#{Glyph["document.author"]}" />
+#{author}
+#{copy}
 <meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 #{value}
 </head>

@@ -173,14 +173,12 @@ macro "rewrite:" do
 		# Parameters
 		s.gsub!(/\{\{(\d+)\}\}/) do
 			p = raw_param($1.to_i)
-			macro_error "Parameter ##{$1} not specified" unless p
 			p.to_s.strip
 		end
 		# Attributes
 		s.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
 			a = raw_attr($1.to_sym)
-			macro_error "Attribute @#{$1} not specified" unless a
-			a.contents.to_s.strip
+			a.contents.to_s.strip rescue ""
 		end
 		interpret s
 	end
