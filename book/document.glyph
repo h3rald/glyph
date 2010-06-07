@@ -56,10 +56,10 @@ book[
 			@id[extending]
 			include[macro_anatomy.glyph]
 			include[params_attrs.glyph]
---[
 			include[bookmarks_headers.glyph]
 			include[placeholders.glyph]
 			include[validators.glyph]
+--[
 			include[interpreting.glyph]
 			include[further_reading.glyph]
 ]

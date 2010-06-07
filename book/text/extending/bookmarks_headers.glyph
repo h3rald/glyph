@@ -1,21 +1,21 @@
 section[
-@title[Bookmarks and Headers]
+	@title[Bookmarks and Headers]
+	txt[
+The =>[&[yardoc]/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
+	]
 
-The =>[http://yardoc.org/docs/glyph/Glyph/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
-
-<notextile>
-highlight[=ruby|
+	highlight[=ruby|
 macro :anchor do 
   ident, title = @params
   macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
   bookmark :id => ident, :title => title
   %{<a id="#{ident}">#{title}</a>}
 end
-=] 
-</notextile>
+	=] 
 
+	txt[
 The @bookmark?@ method can be used to check the existance of a particular ID within the whole document, while the @bookmark@ method is used to store bookmark IDs and titles. In a similar way, you can use @header?@ and @header@ methods to check the existance of headers within the documents or store new ones.
-
+	]
 ]
 
 

@@ -1,0 +1,34 @@
+participant generate_document
+participant Interpreter
+participant Parser
+participant Document
+participant SyntaxNode
+participant Macro
+
+
+generate_document->Interpreter: new
+Interpreter->Parser: new
+generate_document->Interpreter: parse
+Interpreter->Parser: parse
+Parser-->Interpreter: tree (SyntaxNode)
+Interpreter->Document: new
+generate_document->Interpreter: process
+Interpreter->Document: analyze
+loop Processing
+ Document->SyntaxNode: evaluate
+ alt if macro node
+  SyntaxNode->Macro: expand
+ end
+end
+Document-->Interpreter: :analized
+generate_document->Interpreter: postprocess
+Interpreter->Document: finalize
+loop Post-processing
+ note over Document
+  Replace all escape sequences
+  and placeholders in the
+  final text output
+ end note
+end
+Document-->Interpreter: :finalized
+Interpreter-->generate_document: document

@@ -400,9 +400,12 @@ June 2010
 <li><ol><li class="bodymatter section"><a href="#h_41">Accessing Expanded Values</a></li>
 <li class="bodymatter section"><a href="#h_42">Accessing Raw Values</a></li>
 </ol></li>
+<li class="bodymatter section"><a href="#h_43">Bookmarks and Headers</a></li>
+<li class="bodymatter section"><a href="#h_44">Using Placeholders</a></li>
+<li class="bodymatter section"><a href="#h_45">Using Validators</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_44">Global Options</a></li>
+<li><ol><li class="appendix section"><a href="#h_47">Global Options</a></li>
 <li><ol><li class="appendix section"><a href="#debug_switch">@-d@, @--debug@</a></li>
 </ol></li>
 <li class="appendix section"><a href="#c_add">@add@</a></li>
@@ -413,7 +416,7 @@ June 2010
 <li class="appendix section"><a href="#c_todo">@todo@</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_53">Common Macros</a></li>
+<li><ol><li class="appendix section"><a href="#h_56">Common Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_and">and</a></li>
 <li class="appendix section"><a href="#m_comment">comment</a></li>
 <li class="appendix section"><a href="#m_condition">condition</a></li>
@@ -437,7 +440,7 @@ June 2010
 <li><ol><li class="appendix section"><a href="#m_markdown">markdown</a></li>
 <li class="appendix section"><a href="#m_textile">textile</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_75">Block Macros</a></li>
+<li class="appendix section"><a href="#h_78">Block Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_box">box</a></li>
 <li class="appendix section"><a href="#m_code">code</a></li>
 <li class="appendix section"><a href="#m_fig">fig</a></li>
@@ -452,14 +455,14 @@ June 2010
 <li class="appendix section"><a href="#m_th">th</a></li>
 <li class="appendix section"><a href="#m_tr">tr</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_89">Inline Macros</a></li>
+<li class="appendix section"><a href="#h_92">Inline Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_anchor">anchor</a></li>
 <li class="appendix section"><a href="#m_codeph">codeph</a></li>
 <li class="appendix section"><a href="#m_draftcomment">draftcomment</a></li>
 <li class="appendix section"><a href="#m_fmi">fmi</a></li>
 <li class="appendix section"><a href="#m_link">link</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_95">Structure Macros</a></li>
+<li class="appendix section"><a href="#h_98">Structure Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_body">body</a></li>
 <li class="appendix section"><a href="#m_div">div</a></li>
 <li class="appendix section"><a href="#m_document">document</a></li>
@@ -474,15 +477,15 @@ June 2010
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_108">structure.*</a></li>
-<li class="appendix section"><a href="#h_109">tools.*</a></li>
+<li class="appendix section"><a href="#h_111">structure.*</a></li>
+<li class="appendix section"><a href="#h_112">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_110">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_111">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_112">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_113">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_113">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_114">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_115">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_116">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_114">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_117">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -1249,7 +1252,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Jun 06 20:01:41 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Mon Jun 07 14:04:45 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1403,7 +1406,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <div class="box-title">Why using <code>@name</code> instead of just &#8220;note&#8221;?</div>
 <p>For the <code>note</code> macro, it absolutely makes no difference. However, by using <code>@name</code> it is possible to re-use the same code for the <code>tip</code>, <code>important</code> and <code>caution</code> macros as well, which are in fact only aliases of the <code>note</code> macro.</p>
 </div>
-
+<p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>Update according to <span class="caps">API</span> changes.</span></p>
 <p>The following table lists all the instance variables that can be used inside macros:</p>
 	<table><tr><th>Variable</th>
     	<th>Description</th></tr>
@@ -1436,11 +1439,74 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<div class="section">
 <h4 id="h_41">Accessing Expanded Values</h4>
 <p>Normally, you just want to get the value of an attribute or parameter and use it in the macro. This means, in other words, its <em>expanded</em> value, i.e. the value resulting from the expansion of the macros (if any) within the attribute or parameter.</p>
+		<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Write about methods related to expanded values, pros and cons, etc.</span>
 
 </div>
 	<div class="section">
 <h4 id="h_42">Accessing Raw Values</h4>
+<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Write intro about raw values, methods, pros and cons, etc.</span>
 
+</div>
+
+</div>
+			<div class="section">
+<h3 id="h_43">Bookmarks and Headers</h3>
+<p>The <a href="http://yardoc.org/docs/h3rald-glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">anchor</a> macro:</p>
+
+	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>anchor</span> <span class="Keyword">do </span>
+<span class="line-numbers">   2 </span>   ident, title <span class="Keyword">=</span> <span class="Variable"><span class="Variable">@</span>params</span>
+<span class="line-numbers">   3 </span>   macro_error <span class="String"><span class="String">&quot;</span>Bookmark '<span class="String"><span class="String">#{</span>ident<span class="String">}</span></span>' already exists<span class="String">&quot;</span></span> <span class="Keyword">if</span> bookmark? ident
+<span class="line-numbers">   4 </span>   bookmark <span class="Constant"><span class="Constant">:</span>id</span> =&gt; ident, <span class="Constant"><span class="Constant">:</span>title</span> =&gt; title
+<span class="line-numbers">   5 </span>   <span class="String"><span class="String">%{</span>&lt;a id=&quot;<span class="String"><span class="String">#{</span>ident<span class="String">}</span></span>&quot;&gt;<span class="String"><span class="String">#{</span>title<span class="String">}</span></span>&lt;/a&gt;<span class="String">}</span></span>
+<span class="line-numbers">   6 </span> <span class="Keyword">end</span>
+</pre> 
+
+	<p>The <code>bookmark?</code> method can be used to check the existance of a particular ID within the whole document, while the <code>bookmark</code> method is used to store bookmark IDs and titles. In a similar way, you can use <code>header?</code> and <code>header</code> methods to check the existance of headers within the documents or store new ones.</p>
+
+</div>
+
+
+			<div class="section">
+<h3 id="h_44">Using Placeholders</h3>
+<p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
+<p>Here&#8217;s the source code of the <a href="#m_link">link</a> macro:</p>
+	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>link</span> <span class="Keyword">do</span>
+<span class="line-numbers">   2 </span>   href, title <span class="Keyword">=</span> <span class="Variable"><span class="Variable">@</span>params</span>
+<span class="line-numbers">   3 </span>   <span class="Keyword">if</span> href.<span class="Entity">match</span> <span class="String"><span class="String">/</span></span><span class="String">^#</span><span class="String"><span class="String">/</span></span> <span class="Keyword">then</span>
+<span class="line-numbers">   4 </span>     anc <span class="Keyword">=</span> href.<span class="Entity">gsub</span>(<span class="String"><span class="String">/</span></span><span class="String">^#</span><span class="String"><span class="String">/</span></span>, <span class="String"><span class="String">'</span><span class="String">'</span></span>).<span class="Entity">to_sym</span>
+<span class="line-numbers">   5 </span>     bmk <span class="Keyword">=</span> bookmark? anc
+<span class="line-numbers">   6 </span>     <span class="Keyword">if</span> bmk <span class="Keyword">then</span>
+<span class="line-numbers">   7 </span>       title <span class="Keyword">||=</span> bmk[<span class="Constant"><span class="Constant">:</span>title</span>]
+<span class="line-numbers">   8 </span>     <span class="Keyword">else</span>
+<span class="line-numbers">   9 </span>       plac <span class="Keyword">=</span> placeholder <span class="Keyword">do </span>|<span class="Variable">document</span>|
+<span class="line-numbers">  10 </span>         macro_error <span class="String"><span class="String">&quot;</span>Bookmark '<span class="String"><span class="String">#{</span>anc<span class="String">}</span></span>' does not exist<span class="String">&quot;</span></span> <span class="Keyword">unless</span> document.<span class="Entity">bookmarks</span>[anc] 
+<span class="line-numbers">  11 </span>         document.<span class="Entity">bookmarks</span>[anc][<span class="Constant"><span class="Constant">:</span>title</span>]
+<span class="line-numbers">  12 </span>       <span class="Keyword">end</span>
+<span class="line-numbers">  13 </span>       title <span class="Keyword">||=</span> plac
+<span class="line-numbers">  14 </span>     <span class="Keyword">end</span>
+<span class="line-numbers">  15 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">  16 </span>   title <span class="Keyword">||=</span> href
+<span class="line-numbers">  17 </span>   <span class="String"><span class="String">%{</span>&lt;a href=&quot;<span class="String"><span class="String">#{</span>href<span class="String">}</span></span>&quot;&gt;<span class="String"><span class="String">#{</span>title<span class="String">}</span></span>&lt;/a&gt;<span class="String">}</span></span>
+<span class="line-numbers">  18 </span> <span class="Keyword">end</span>
+</pre>
+	<p>If there&#8217;s already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the <code>placeholder</code> method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.</p>
+<p>Within the <code>placeholder</code> block, the <code>document</code> parameter is, by all means, the fully analyzed document.</p>
+
+</div>
+
+			<div class="section">
+<h3 id="h_45">Using Validators</h3>
+<p>If you need to make sure that a macro is used properly, consider using <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro/Validators">validators</a>. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.</p>
+	<p>If you want to create your own validators, you can call the generic <code>validate</code> method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.</p>
+	<div class="box">
+<div class="box-title">Validating macro placement</div>
+<p>You can, of course, create your own validators to check whether a macro is used within another. While this may seem a good idea to enforce constraints into the way documents are created, it has one major drawback: if you define a macro with such validation, you&#8217;re effectively limiting its usage, so for example you won&#8217;t be able to use within snippets or other custom macros.</p>
+<p>Suppose, for example, that the <a href="#m_box">box</a> macro is only allowed within a <code>section</code> macro. This means that, for example:</p>
+<ul>
+	<li>the macro cannot be used within <code>chapter</code> or <code>appendix</code> macros.</li>
+	<li>the macro cannot be used in snippets</li>
+</ul>
+<p>Even if you consider all the possibilities within the scope of the default macros provided with Glyph, this would also make the <code>box</code> macro unusable within custom macros.</p>
 
 </div>
 
@@ -1460,7 +1526,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><em>parameters</em> are separated by whitespaces, and can be wrapped in quotes.</li>
 </ul>
 <div class="section">
-<h3 id="h_44">Global Options</h3>
+<h3 id="h_47">Global Options</h3>
 <div class="section">
 <h4 id="debug_switch"><code>-d</code>, <code>--debug</code></h4>
 <p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
@@ -1620,7 +1686,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h2 id="macro_ref">Macro Reference</h2>
 <p>﻿<br />
 <div class="section"><br />
-<h3 id="h_53">Common Macros</h3><br />
+<h3 id="h_56">Common Macros</h3><br />
 <div class="section"><br />
 <h4 id="m_and">and</h4><br />
 Conditional <code>and</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
@@ -1665,14 +1731,14 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_decode">decode</h4>
-<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤116‡‡‡‡‡</a></span>.</p>
+<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤121‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>**</code></p>
 <p><strong>Example:</strong> <code>*[=note‡‡¤91¤‡‡This will not be evaluated‡‡¤93¤‡‡=]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_encode">encode</h4>
-<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤118‡‡‡‡‡</a></span>.</p>
+<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤119‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>*</code></p>
 <p><strong>Example:</strong> <code>*[=note[This will not be evaluated]=]</code></p>
 </div>
@@ -1774,7 +1840,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 </div>
 </div>
 <div class="section">
-<h3 id="h_75">Block Macros</h3>
+<h3 id="h_78">Block Macros</h3>
 <div class="section">
 <h4 id="m_box">box</h4>
 <p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
@@ -1809,7 +1875,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_highlight">highlight</h4>
-<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤117‡‡‡‡‡</a></span>.</p>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤120‡‡‡‡‡</a></span>.</p>
 <p><strong>Example:</strong></p>
 <p><code>highlight[ruby|
   def hello
@@ -1888,7 +1954,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_89">Inline Macros</h3>
+<h3 id="h_92">Inline Macros</h3>
 <div class="section">
 <h4 id="m_anchor">anchor</h4>
 <p>Creates a named anchor (or bookmark).</p>
@@ -1926,7 +1992,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_95">Structure Macros</h3>
+<h3 id="h_98">Structure Macros</h3>
 <div class="section">
 <h4 id="m_body">body</h4>
 <p>Creates a <code>&lt;body&gt;</code> tag.</p>
@@ -1977,9 +2043,10 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 		<div class="appendix">
 <h2 id="cfg_ref">Configuration Reference</h2>
-<div class="section">
-<h3 id="cfg_document">document.*</h3>
-<p>The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.</p>
+<p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>Remove system settings from documentation</span><br />
+<div class="section"><br />
+<h3 id="cfg_document">document.*</h3><br />
+The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.</p>
 	<table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (<span class="caps">YAML</span>)</th></tr>
@@ -2088,7 +2155,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_108">structure.*</h3>
+<h3 id="h_111">structure.*</h3>
 <p>The following configuration settings are used internally by Glyph and should not be changed by the user.</p>
 	<table><tr><th>Name</th>
 				<th>Description</th>
@@ -2120,7 +2187,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_109">tools.*</h3>
+<h3 id="h_112">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (<span class="caps">YAML</span>)</th></tr>
@@ -2133,11 +2200,11 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 
 </div>
 		<div class="appendix">
-<h2 id="h_110">Changelog</h2>
+<h2 id="h_113">Changelog</h2>
 <div class="section">
-<h3 id="h_111">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_114">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_112">23 Features Implemented</h4>
+<h4 id="h_115">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -2179,7 +2246,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 	
 		<div class="section">
-<h4 id="h_113">17 Bugs Fixed</h4>
+<h4 id="h_116">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -2213,7 +2280,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 </div>
 
 	<div class="section">
-<h3 id="h_114">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_117">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>
