@@ -45,4 +45,27 @@ describe "Glyph Language" do
 		output_for("span[@class[test]@.[test]test]").should == %{<span class="test">test</span>}
 	end
 
+	it "should not render blacklisted tags" do
+		language('xml')
+		text = %{
+			object[test]
+			applet[test]
+      base[test]
+      basefont[test]
+      embed[test]
+      frame[test]
+      frameset[test]
+      iframe[test]
+      isindex[test]
+			test[test]
+      meta[test]
+      noframes[test]
+      noscript[test]
+      object[test]
+      param[test]
+      title[tesy]
+		}
+		output_for(text).gsub(/\s/, '').should == "<test>test</test>"
+	end
+
 end	

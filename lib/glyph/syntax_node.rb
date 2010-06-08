@@ -130,6 +130,7 @@ module Glyph
 			when Glyph['language.options.xml_fallback'] then
 				unless known_macro then
 					self[:element] = name
+					self[:fallback] = true
 					self[:name] = :"|xml|" 
 				end
 			else
