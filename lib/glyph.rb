@@ -50,8 +50,13 @@ module Glyph
 
 	begin
 		unless const_defined? :MODE then
-			# Glyph's modes: debug/lite/test
-			MODE = {:debug => false, :lite => false, :test => false, :library => false} 
+			MODE = {
+				:debug => false, 
+				:lite => false, 
+				:test => false, 
+				:library => false,
+				:safe => false
+			} 
 		end
 	rescue
 	end
@@ -60,7 +65,7 @@ module Glyph
 	@@document = nil
 
 	(class << self; self; end).instance_eval do
-		["test", "lite", "debug", "library"].each do |mode|
+		["test", "lite", "debug", "library", "safe"].each do |mode|
 			define_method((mode+"?").to_sym) do
 				MODE[mode.to_sym]
 			end

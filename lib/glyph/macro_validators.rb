@@ -99,6 +99,10 @@ module Glyph
 				end
 			end
 
+			def safety_check
+				macro_error "Macro '#@name' cannot be used in safe mode" if Glyph.safe?
+			end
+
 			# Ensure that no mutual inclusion occurs within the specified parameter or attribute
 			# @param [Fixnum, Symbol] the parameter index or attribute name to check
 			# @raise [Glyph::MacroError] mutual inclusion was detected

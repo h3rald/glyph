@@ -33,6 +33,7 @@ macro "snippet:" do
 end
 
 macro "macro:" do
+	safety_check
 	exact_parameters 2
 	ident = param(0)
 	code = param(1)
@@ -43,6 +44,7 @@ macro "macro:" do
 end
 
 macro :include do
+	safety_check
 	exact_parameters 1
 	no_mutual_inclusion_in 0
 	v = value
@@ -82,6 +84,7 @@ macro :include do
 end
 
 macro :ruby do
+	safety_check
 	max_parameters 1
 	res = Glyph.instance_eval(value.gsub(/\\*([\[\]\|])/){$1})
 	res.is_a?(Proc) ? "" : res
@@ -92,6 +95,7 @@ macro :config do
 end
 
 macro "config:" do
+	safety_check
 	max_parameters 2
 	setting = param(0)
 	v = param(1) rescue nil
@@ -160,6 +164,7 @@ macro "alias:" do
 end
 
 macro "rewrite:" do
+	safety_check
 	exact_parameters 2
 	macro_name = param(0).to_sym
 	raw_param(1).descend do |n, level|

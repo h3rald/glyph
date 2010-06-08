@@ -62,4 +62,15 @@ describe Glyph do
 		Glyph['test_setting'].should == nil
 	end
 
+	it "should not allow certain macros to be expanded in safe mode" do
+		create_project
+		Glyph.run! "load:all"
+		Glyph.safe_mode = true
+		lambda { output_for("include[test.glyph]")}.should raise_error Glyph::MacroError
+		lambda {output_for("config:[test|true]")}.should raise_error Glyph::MacroError
+		lambda { output_for("ruby[Time.now]")}.should raise_error Glyph::MacroError
+		lambda { output_for("rw:[a|section[{{0}}]]")}.should raise_error Glyph::MacroError
+		Glyph.safe_mode = false
+	end
+
 end
