@@ -1,9 +1,14 @@
 section[
-	@title[Anatomy of a Macro]
+	@title[Defining Macros]
+	@id[macro_def]
 	txt[
 Glyph was created wih extensibility in mind. You can freely extend &[glang] by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in @.rb@ files within the @lib/macros/@ folder of your project.
 
-tip[Alternatively, you can also define macros right inside your document, using the %>[macro:].]
+		box[Alternative Ways to Define Macros|
+You can also define macros:
+* inside your document, using the %>[macro:].
+* Using the %>[include] specifying the path to an @.rb@ file containing macro definitions stored in the @lib/@ directory (useful especially when =>[#lite_mode|compiling single Glyph files]).
+		]
 
 This is the source code of a fairly simple macro used to format a note:
 	]

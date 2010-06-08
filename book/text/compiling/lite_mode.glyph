@@ -10,13 +10,14 @@ section[
 		@id[lite_limitations]
 		&:[only_defined_through|can only be defined inside the source file, using the]
 		txt[
+&:[referenced_with_path|must be referenced with their absolute path, or a path relative to the current directory]
 This sort of "lite" mode comes with a few minor limitations: 
 * Snippets &[only_defined_through] %>[snippet:] macro.
 * Project configuration settings &[only_defined_through] %>[config:] macro.
 * Custom macros &[only_defined_through] %>[macro:] macro.
-* Images must be linked with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.
-* Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph =>[#default_stylesheets|system stylesheet].
-* The %>[include] cannot be used (if you need to include other text files, you should probably use a Glyph project...).
+* Images &[referenced_with_path], and will not be copied anywhere when the output file is generated.
+* Stylesheets &[referenced_with_path], or the name of an existing Glyph =>[#default_stylesheets|system stylesheet].
+* The files included through the %>[include] &[referenced_with_path].
 		]
 	]
 ]

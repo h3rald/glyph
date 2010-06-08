@@ -396,7 +396,7 @@ June 2010
 <li class="bodymatter section"><a href="#h_37">Using Glyph programmatically</a></li>
 </ol></li>
 <li class="bodymatter chapter"><a href="#extending">Extending Glyph</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_39">Anatomy of a Macro</a></li>
+<li><ol><li class="bodymatter section"><a href="#macro_def">Defining Macros</a></li>
 <li class="bodymatter section"><a href="#h_40">Parameters and Attributes</a></li>
 <li><ol><li class="bodymatter section"><a href="#h_41">Accessing Expanded Values</a></li>
 <li class="bodymatter section"><a href="#h_42">Accessing Raw Values</a></li>
@@ -1169,6 +1169,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 
 </div>
+			<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Add information about XML blacklist</span>
 			<div class="section">
 <h3 id="stylesheets">Adding Stylesheets</h3>
 <p>Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.</p>
@@ -1206,19 +1207,16 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 			<div class="section">
 <h3 id="incl">Including Files and Snippets</h3>
 <p>If you&#8217;re authoring a user manual, a long article, or a book, writing everything inside a single <code>document.glyph</code> file may not be optimal. For this reason, Glyph provides an <a href="#m_include">include</a> macro that can be used to include the contents of any file within the <code>text/</code> directory:</p>
-<p><code>include[introduction.textile]</code></p>
-<p>The macro call above loads the contents of the <code>introduction.textile</code> file, that can be stored <em>anywhere</em> within the <code>text/</code> directory.</p>
-<div class="note">
-<p><span class="note-title">Note</span>Unlike with <a href="img_fig">image and figures</a> that must be included with their <em>relative</em> path to the <code>images/</code> folder, you must not specify a relative path when including text files. This is due to the fact that images are copied <em>as they are</em> in the <code>output/&lt;format&gt;/images/</code> directory and they have to be linked from the output file.</p>
-<p>A possible downside of this behavior is that file names must be unique within the entire <code>text/</code> directory and any of its subdirectories</p>
-</div>
+<p><code>include[general/introduction.textile]</code></p>
+<p>The macro call above loads the contents of the <code>introduction.textile</code> file, within the <code>text/general</code> directory.</p>
 <p>When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:</p>
 <ul>
 	<li><code>.textile</code> or <code>.txt</code> &rarr; <a href="#m_textile">textile</a> macro</li>
 	<li><code>.markdown</code> or <code>.md</code> &rarr; <a href="#m_markdown">markdown</a> macro</li>
 </ul>
+<p>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>.</p>
 <div class="tip">
-<p><span class="note-title">Tip</span>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>.</p>
+<p><span class="note-title">Tip</span>The <a href="#m_include">include</a> macro can also be used to include (and evaluate) ruby files (with a <code>.rb</code> extension). In this case, the ruby file must be placed within the <code>lib/</code> directory of the current project.</p>
 </div>
 <p>While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence or a single word? In this case, you may want to consider using a <em>snippet</em> instead.</p>
 <p>Snippets are text strings saved in <span class="caps">YAML</span> format in the <code>snippets.yml</code> file. They can be included anywhere in your document using the <a href="#m_snippet">snippet</a> macro (or its alias <code>&amp;</code>).</p>
@@ -1253,7 +1251,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Jun 08 17:06:23 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Jun 08 17:30:21 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1356,9 +1354,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet_">snippet:</a> macro macro.</li>
 	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">config:</a> macro macro.</li>
 	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_">macro:</a> macro macro.</li>
-	<li>Images must be linked with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.</li>
-	<li>Stylesheets must be referenced with their absolute path, a path relative to the current directory, or the name of an existing Glyph <a href="#default_stylesheets">system stylesheet</a>.</li>
-	<li>The <a href="#m_include">include</a> macro cannot be used (if you need to include other text files, you should probably use a Glyph project&#8230;).</li>
+	<li>Images must be referenced with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.</li>
+	<li>Stylesheets must be referenced with their absolute path, or a path relative to the current directory, or the name of an existing Glyph <a href="#default_stylesheets">system stylesheet</a>.</li>
+	<li>The files included through the <a href="#m_include">include</a> macro must be referenced with their absolute path, or a path relative to the current directory.</li>
 </ul>
 
 </div>
@@ -1383,15 +1381,21 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 
 </div>
+			<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Add section about Glyph modes</span>
 
 </div>
 		<div class="chapter">
 <h2 id="extending">Extending Glyph</h2>
 <div class="section">
-<h3 id="h_39">Anatomy of a Macro</h3>
+<h3 id="macro_def">Defining Macros</h3>
 <p>Glyph was created wih extensibility in mind. You can freely extend Glyph Language by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in <code>.rb</code> files within the <code>lib/macros/</code> folder of your project.</p>
-<div class="tip">
-<p><span class="note-title">Tip</span>Alternatively, you can also define macros right inside your document, using the <a href="#m_macro_">macro:</a> macro.</p>
+<div class="box">
+<div class="box-title">Alternative Ways to Define Macros</div>
+<p>You can also define macros:</p>
+<ul>
+	<li>inside your document, using the <a href="#m_macro_">macro:</a> macro.</li>
+	<li>Using the <a href="#m_include">include</a> macro specifying the path to an <code>.rb</code> file containing macro definitions stored in the <code>lib/</code> directory (useful especially when <a href="#lite_mode">compiling single Glyph files</a>).</li>
+</ul>
 </div>
 <p>This is the source code of a fairly simple macro used to format a note:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>note</span> <span class="Keyword">do</span>
@@ -1436,7 +1440,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 			<div class="section">
 <h3 id="h_40">Parameters and Attributes</h3>
-<p>Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the <em>raw value</em> of and attribute or parameter or its <em>expanded value</em>. The difference between the two will become clearer in the following sections and also in the <a href="#interpreting">‡‡‡‡‡PLACEHOLDER¤80‡‡‡‡‡</a> section.</p>
+<p>Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the <em>raw value</em> of and attribute or parameter or its <em>expanded value</em>. The difference between the two will become clearer in the following sections and also in the <a href="#interpreting">‡‡‡‡‡PLACEHOLDER¤82‡‡‡‡‡</a> section.</p>
 	<div class="section">
 <h4 id="h_41">Accessing Expanded Values</h4>
 <p>Normally, you just want to get the value of an attribute or parameter and use it in the macro. This means, in other words, its <em>expanded</em> value, i.e. the value resulting from the expansion of the macros (if any) within the attribute or parameter.</p>
@@ -1739,7 +1743,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_encode">encode</h4>
-<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤119‡‡‡‡‡</a></span>.</p>
+<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤122‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>*</code></p>
 <p><strong>Example:</strong> <code>*[=note[This will not be evaluated]=]</code></p>
 </div>
@@ -1876,7 +1880,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_highlight">highlight</h4>
-<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤120‡‡‡‡‡</a></span>.</p>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤123‡‡‡‡‡</a></span>.</p>
 <p><strong>Example:</strong></p>
 <p><code>highlight[ruby|
   def hello

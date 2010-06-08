@@ -4,19 +4,17 @@ section[
 	txt[
 If you're authoring a user manual, a long article, or a book, writing everything inside a single @document.glyph@ file may not be optimal. For this reason, Glyph provides an %>[include] that can be used to include the contents of any file within the @text/@ directory:
 
-code[=include[introduction.textile]=]
+code[=include[general/introduction.textile]=]
 
-The macro call above loads the contents of the @introduction.textile@ file, that can be stored _anywhere_ within the @text/@ directory.
-
-note[Unlike with =>[img_fig|image and figures] that must be included with their _relative_ path to the @images/@ folder, you must not specify a relative path when including text files. This is due to the fact that images are copied _as they are_ in the @output/<format>/images/@ directory and they have to be linked from the output file.
-
-A possible downside of this behavior is that file names must be unique within the entire @text/@ directory and any of its subdirectories]
+The macro call above loads the contents of the @introduction.textile@ file, within the @text/general@ directory.
 
 When including a text file, an input filter macro is applied to its contents by default, based on the file extension used:
 * @.textile@ or @.txt@ &rarr; %>[textile]
 * @.markdown@ or @.md@ &rarr; %>[markdown]
 
-tip[You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@.]
+You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@.
+
+tip[The %>[include] can also be used to include (and evaluate) ruby files (with a @.rb@ extension). In this case, the ruby file must be placed within the @lib/@ directory of the current project.]
 
 While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence or a single word? In this case, you may want to consider using a _snippet_ instead.
 
