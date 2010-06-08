@@ -95,12 +95,42 @@ describe "Macro:" do
 		}.gsub(/\n|\t|_\d{1,3}/, '')
 	end
 
-	it "include should not work in Lite mode" do
-		text = file_load(Glyph::PROJECT/'text/container.textile')
+	it "include should work in Lite mode" do
 		Glyph.lite_mode = true
-		lambda { interpret(text).document.output }.should raise_error Glyph::MacroError
+		result = %{<div class="section">
+<h2 id="h_1">Container section</h2>
+This is a test.
+	<div class="section">
+	<h3 id="h_2">Test Section</h3>
+		<p>&#8230;</p>
+	</div>
+
+</div>}.gsub(/\n|\t/, '')		
+		Dir.chdir Glyph::SPEC_DIR/"files"
+		text = file_load(Glyph::SPEC_DIR/"files/container.textile").gsub("a/b/c/", '')
+		Glyph.filter(text).gsub(/\n|\t/, '').should == result
+		Dir.chdir Glyph::PROJECT
 		Glyph.lite_mode = false
 	end
+
+	it "include should assume .glyph as the default extension" do
+		file_copy Glyph::SPEC_DIR/'files/article.glyph', Glyph::PROJECT/'text/article.glyph'
+		output_for("include[article]").gsub(/\n|\t/, '').should == %{<div class="section">
+Test -- Test Snippet
+
+</div>}.gsub(/\n|\t/, '')
+	end
+
+	it "include should evaluate .rb file in the context of Glyph" do
+		text = %{
+			macro :day do
+				Time.now.day
+			end
+		}
+		file_write Glyph::PROJECT/"lib/test.rb", text
+		output_for("include[test.rb]day[]").should == Time.now.day.to_s	
+	end
+
 
 	it "escape" do
 		define_em_macro

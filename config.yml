@@ -11,6 +11,21 @@
   :set: 'glyph' # xml, core, filters
   :options:
     :xml_fallback: true
+    :xml_blacklist:
+      - applet
+      - base
+      - basefont
+      - embed
+      - frame
+      - frameset
+      - iframe
+      - isindex
+      - meta
+      - noframes
+      - noscript
+      - object
+      - param
+      - title
 :tools:
   :pdf_generator: 'prince'
 :filters:

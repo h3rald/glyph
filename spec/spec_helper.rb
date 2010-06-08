@@ -32,8 +32,8 @@ def create_project
 	Glyph.run! 'project:create', Glyph::PROJECT.to_s
 	file_copy Glyph::SPEC_DIR/'files/container.textile', Glyph::PROJECT/'text/container.textile'
 	(Glyph::PROJECT/'text/a/b/c').mkpath
-	file_copy Glyph::SPEC_DIR/'files/included.textile', Glyph::PROJECT/'text/a//b/c/included.textile'
-	file_copy Glyph::SPEC_DIR/'files/markdown.markdown', Glyph::PROJECT/'text/a//b/c/markdown.markdown'
+	file_copy Glyph::SPEC_DIR/'files/included.textile', Glyph::PROJECT/'text/a/b/c/included.textile'
+	file_copy Glyph::SPEC_DIR/'files/markdown.markdown', Glyph::PROJECT/'text/a/b/c/markdown.markdown'
 	file_copy Glyph::SPEC_DIR/'files/document.glyph', Glyph::PROJECT/'document.glyph'
 	file_copy Glyph::SPEC_DIR/'files/test.sass', Glyph::PROJECT/'styles/test.sass'
 	file_copy Glyph::SPEC_DIR/'files/ligature.jpg', Glyph::PROJECT/'images/ligature.jpg'

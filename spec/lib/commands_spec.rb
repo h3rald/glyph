@@ -188,8 +188,8 @@ describe "glyph" do
 test_project - Outline
 =====================================}
 		c_file = "----- file: container.textile"
-		i_file = "----- file: included.textile"
-		m_file = "----- file: markdown.markdown"
+		i_file = "----- file: a/b/c/included.textile"
+		m_file = "----- file: a/b/c/markdown.markdown"
 		c_title = "Container section "
 		i_title = "Test Section "
 		m_title = "Markdown "

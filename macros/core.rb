@@ -48,34 +48,48 @@ macro :include do
 	exact_parameters 1
 	no_mutual_inclusion_in 0
 	v = value
-	macro_error "Macro not available when compiling a single file." if Glyph.lite?
-	file = nil
-	(Glyph::PROJECT/"text").find do |f|
-		file = f if f.to_s.match /\/#{v}$/
-	end	
-	if file then
-		contents = file_load file
-		ext = v.match(/\.(.*)$/)[1]
-		if Glyph["filters.by_file_extension"] && ext != 'glyph' then
-			if Glyph::MACROS.include?(ext.to_sym) then
-				contents = "#{ext}[#{contents}]"
-			else
-				macro_warning "Filter macro '#{ext}' not available"
-			end
+	v += ".glyph" unless v.match(/\..+$/)
+	ext = v.match(/\.(.*)$/)[1] 
+	if Glyph.lite? then
+		file = Pathname.new(v)
+	else
+		if ext == 'rb' then
+			file = Glyph::PROJECT/"lib/#{v}"
+		else
+			file = Glyph::PROJECT/"text/#{v}"
 		end	
-		begin 
-			@node[:source] = "#{@name}[#{v}]"
-			interpret contents
-		rescue Exception => e
-			case 
-			when e.is_a?(Glyph::MutualInclusionError) then
-				raise
-			when e.is_a?(Glyph::MacroError) then
-				Glyph.warning e.message
-			else
+	end
+	if file.exist? then
+		contents = file_load file
+		if ext == "rb" then
+			begin
+				Glyph.instance_eval contents
+				""
+			rescue Exception => e
 				macro_warning e.message, e
 			end
-			macro_todo "Correct errors in file '#{value}'"
+		else
+			if Glyph["filters.by_file_extension"] && !ext.in?(['rb','glyph']) then
+				if Glyph::MACROS.include?(ext.to_sym) then
+					contents = "#{ext}[#{contents}]"
+				else
+					macro_warning "Filter macro '#{ext}' not available"
+				end
+			end
+			begin 
+				@node[:source] = "#{@name}[#{v}]"
+				interpret contents
+			rescue Exception => e
+				case 
+				when e.is_a?(Glyph::MutualInclusionError) then
+					raise
+				when e.is_a?(Glyph::MacroError) then
+					Glyph.warning e.message
+				else
+					macro_warning e.message, e
+				end
+				macro_todo "Correct errors in file '#{value}'"
+			end
 		end
 	else
 		macro_warning "File '#{value}' no found."

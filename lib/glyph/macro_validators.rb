@@ -99,6 +99,9 @@ module Glyph
 				end
 			end
 
+			# Raises a macro error if Glyph is running in safe mode.
+			# @raise [Glyph::MacroError] the macro cannot be used allowed in safe mode
+			# @since 0.3.0
 			def safety_check
 				macro_error "Macro '#@name' cannot be used in safe mode" if Glyph.safe?
 			end

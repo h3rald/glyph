@@ -1,5 +1,5 @@
 section[
 	@title[Container section]
 This is a test.
-	include[included.textile]
+	include[a/b/c/included.textile]
 ]
