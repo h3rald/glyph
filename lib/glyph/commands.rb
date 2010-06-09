@@ -120,8 +120,19 @@ command :todo do |c|
 			puts "====================================="
 			puts "#{Glyph['document.title']} - TODOs"
 			puts "====================================="
-			Glyph.document.todos.each do |t|
-				Glyph.info t
+			# Group items
+			if Glyph.document.todos.respond_to? :group_by then
+				Glyph.document.todos.group_by{|e| e[:source]}.each_pair do |k, v|
+					puts
+					puts "=== #{k} "
+					v.each do |i|
+						puts " * #{i[:text]}"
+					end
+				end
+			else
+				Glyph.document.todos.each do |t|
+					Glyph.info t
+				end
 			end
 		else
 			Glyph.info "Nothing left to do."
@@ -131,10 +142,10 @@ end
 
 GLI.desc 'Display the document outline'
 command :outline do |c|
+	c.desc "Limit to level N"
+	c.flag :l, :level
 	c.desc "Show file names"
 	c.switch :f, :files
-	c.desc "Show levels"
-	c.switch :l, :levels
 	c.desc "Show titles"
 	c.switch :t, :titles
 	c.desc "Show IDs"
@@ -156,14 +167,19 @@ command :outline do |c|
 				case
 				when n[:name].in?(Glyph['system.structure.headers']) then
 					header = Glyph.document.header?(n[:header])
-					next unless header
+					next if !header || levels && header[:level]-1 > levels.to_i
 					last_level = header[:level]
 					h_id = ids ? "[##{header[:id]}]" : ""
-					h_level = levels ? "h#{header[:level]}: " : ""
 					h_title = titles ? "#{header[:title]} " : ""
-					puts ("  "*(header[:level]-1))+h_level+h_title+h_id
+					text = ("  "*(header[:level]-1))+"- "+h_title+h_id
+					puts text unless text.blank?
 				when n[:name] == :include then
-					puts "----- file: #{n.param(0)}" if files
+					if files && n.find_parent{|p| p[:name] == :document && p.is_a?(Glyph::MacroNode)} then
+						# When using the book or article macros, includes appear twice: 
+						# * in the macro parameters
+						# * as children of the document macro
+						puts "\n=== #{n.param(0)}" 
+					end
 				end	
 			end
 		end

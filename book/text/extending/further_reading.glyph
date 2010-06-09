@@ -1,8 +1,5 @@
-
-
-
 section[
-@title[Further Reading]
+	@title[Further Reading]
 
 For more examples on how to create more complex macros, have a look at the =>[http://github.com/h3rald/glyph/tree/master/macros/|source code] of the existing ones.
 

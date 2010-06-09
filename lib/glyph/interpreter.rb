@@ -11,7 +11,8 @@ module Glyph
 		# @param [Hash] context the context to pass along when expanding macros
 		def initialize(text, context={})
 			@context = context
-		@parser = Glyph::Parser.new text, @context[:source]
+			@context[:source] ||= {:name => "--"}
+			@parser = Glyph::Parser.new text, @context[:source][:name]
 			@text = text
 		end
 
@@ -40,7 +41,7 @@ module Glyph
 		# @return [Glyph::SyntaxNode] the Abstract Syntax Tree generated from the string
 		# @since 0.3.0
 		def parse
-			Glyph.info "  -> Parsing: #{@context[:source_name]}" if Glyph.debug? && @context[:info] && @context[:source_name]
+			Glyph.info "  -> Parsing: #{@context[:source][:name]}" if Glyph.debug? && @context[:info] && @context[:source][:name]
 			@tree = @parser.parse
 			@document = Glyph::Document.new @tree, @context
 			@document.inherit_from @context[:document] if @context[:document]

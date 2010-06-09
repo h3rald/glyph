@@ -5,7 +5,7 @@ macro :snippet do
 	ident = value.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
-			@node[:source] = "#{@name}[#{ident}]"
+			@node[:source] = {:node => @node, :name => "snippet[#{ident}]"}
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			case 
@@ -72,12 +72,12 @@ macro :include do
 			if Glyph["filters.by_file_extension"] && !ext.in?(['rb','glyph']) then
 				if Glyph::MACROS.include?(ext.to_sym) then
 					contents = "#{ext}[#{contents}]"
-				else
+				else 
 					macro_warning "Filter macro '#{ext}' not available"
 				end
 			end
 			begin 
-				@node[:source] = "#{@name}[#{v}]"
+				@node[:source] = {:node => @node, :name => v}
 				interpret contents
 			rescue Exception => e
 				case 

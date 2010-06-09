@@ -187,34 +187,34 @@ describe "glyph" do
 		start = %{=====================================
 test_project - Outline
 =====================================}
-		c_file = "----- file: container.textile"
-		i_file = "----- file: a/b/c/included.textile"
-		m_file = "----- file: a/b/c/markdown.markdown"
-		c_title = "Container section "
-		i_title = "Test Section "
-		m_title = "Markdown "
+		c_file = "\n=== container.textile"
+		i_file = "\n=== a/b/c/included.textile"
+		m_file = "\n=== a/b/c/markdown.markdown"
+		c_title = "- Container section "
+		i_title = "- Test Section "
+		m_title = "- Markdown "
 		c_id = "[#h_1]"
 		i_id = "[#h_2]"
 		m_id = "[#md]"
+		file_write Glyph::PROJECT/'document.glyph', "document[#{file_load(Glyph::PROJECT/'document.glyph')}]"
 		run_command(["outline"]).should == %{#{start}
   #{c_title}
     #{i_title}
   #{m_title}
 }
 		reset_quiet
-		run_command(["outline", "-li"]).should == %{#{start}
-  h2: #{c_id}
-    h3: #{i_id}
-  h2: #{m_id}
+		run_command(["outline", "-l", "1"]).should == %{#{start}
+  #{c_title}
+  #{m_title}
 }
 		reset_quiet
-		run_command(["outline", "-lift"]).should == %{#{start}
+		run_command(["outline", "-ift"]).should == %{#{start}
 #{c_file}
-  h2: #{c_title}#{c_id}
+  #{c_title}#{c_id}
 #{i_file}
-    h3: #{i_title}#{i_id}
+    #{i_title}#{i_id}
 #{m_file}
-  h2: #{m_title}#{m_id}
+  #{m_title}#{m_id}
 }
 	end
 

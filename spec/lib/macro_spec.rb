@@ -12,7 +12,7 @@ describe Glyph::Macro do
 		@text = "test[section[header[Test!|test]]]"
 		@tree = create_tree @text 
 		@doc = create_doc @tree
-		@node = Glyph::MacroNode.new.from({:name => :test, :source => "--", :document => @doc})
+		@node = Glyph::MacroNode.new.from({:name => :test, :source => {:name => "--"}, :document => @doc})
 		@node << Glyph::ParameterNode.new.from({:name => :"0"})
 		(@node&0) << Glyph::TextNode.new.from({:value => "Testing..."})
 		@macro = Glyph::Macro.new @node

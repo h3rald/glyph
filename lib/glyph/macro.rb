@@ -14,7 +14,7 @@ module Glyph
 		def initialize(node)
 			@node = node
 			@name = @node[:name]
-			@source = @node[:source] || "--"
+			@source = @node[:source][:name] rescue "--"
 		end
 
 		# Returns the macro's raw attribute syntax nodes (See Glyph::MacroNode#attributes). 
@@ -207,7 +207,7 @@ module Glyph
 				result = string 
 			else
 				context = {}
-				context[:source] = @node[:source] || "#@name[...]"
+				context[:source] = @node[:source] || {:node => @node, :name => "#@name[...]"}
 				context[:embedded] = true
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context

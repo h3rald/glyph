@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-06-08}
+  s.date = %q{2010-06-09}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -53,7 +53,7 @@ Gem::Specification.new do |s|
      "book/text/extending/bookmarks_headers.glyph",
      "book/text/extending/further_reading.glyph",
      "book/text/extending/interpreting.glyph",
-     "book/text/extending/macro_anatomy.glyph",
+     "book/text/extending/macro_def.glyph",
      "book/text/extending/params_attrs.glyph",
      "book/text/extending/placeholders.glyph",
      "book/text/extending/validators.glyph",
