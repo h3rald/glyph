@@ -187,9 +187,9 @@ describe "glyph" do
 		start = %{=====================================
 test_project - Outline
 =====================================}
-		c_file = "\n=== container.textile"
-		i_file = "\n=== a/b/c/included.textile"
-		m_file = "\n=== a/b/c/markdown.markdown"
+		c_file = "=== container.textile"
+		i_file = "=== a/b/c/included.textile"
+		m_file = "=== a/b/c/markdown.markdown"
 		c_title = "- Container section "
 		i_title = "- Test Section "
 		m_title = "- Markdown "

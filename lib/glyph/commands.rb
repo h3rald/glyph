@@ -178,7 +178,7 @@ command :outline do |c|
 						# When using the book or article macros, includes appear twice: 
 						# * in the macro parameters
 						# * as children of the document macro
-						puts "\n=== #{n.param(0)}" 
+						puts "=== #{n.param(0)}" 
 					end
 				end	
 			end
