@@ -31,15 +31,17 @@ macro :article do
 	exact_parameters 1
 	head = @node.attr(:head).contents rescue nil
  	head ||= %{style[default.css]}
-	logo = @node.attr(:logo).contents rescue nil
+	pre_title = @node.attr(:"pre-title").contents rescue nil
+	post_title = @node.attr(:"post-title").contents rescue nil
 	pubdate = @node.attr(:pubdate) ? "div[@class[pubdate]#{@node.attr(:pubdate).contents}]" : "pubdate[]"
 	halftitlepage = @node.attr(:halftitlepage).contents rescue nil
 	halftitlepage ||= %{
-			#{logo}
+			#{pre_title}
 			title[]
 			subtitle[]
 			author[]
 			#{pubdate}
+			#{post_title}
 	}
 	interpret %{
 document[
@@ -57,16 +59,18 @@ macro :book do
 	no_parameters
 	head = @node.attr(:head).contents rescue nil 
 	head ||= %{style[default.css]}
-	logo = @node.attr(:logo).contents rescue nil
+	pre_title = @node.attr(:"pre-title").contents rescue nil
+	post_title = @node.attr(:"post-title").contents rescue nil
 	titlepage = @node.attr(:titlepage).contents rescue nil
 	pubdate = @node.attr(:pubdate) ? "div[@class[pubdate]#{@node.attr(:pubdate).contents}]" : "pubdate[]"
 	titlepage ||= %{
-			#{logo}
+			#{pre_title}
 			title[]
 			subtitle[]
 			revision[]
 			author[]
 			#{pubdate}
+			#{post_title}
 	}
 	frontmatter = @node.attr(:frontmatter).contents rescue nil
 	bodymatter = @node.attr(:bodymatter).contents rescue nil

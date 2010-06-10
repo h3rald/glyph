@@ -41,7 +41,7 @@ body {
 	line-height: 1.5em;
 	margin-bottom: 0.2em;
 }
-.halftitlepage, .titlepage h2 {
+.halftitlepage h2, .titlepage h2 {
 	font-size: 1.1em;
 	font-style: italic;
 	font-weight: bold;
