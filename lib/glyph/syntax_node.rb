@@ -135,7 +135,7 @@ module Glyph
 				end
 			else
 				# Unknown macro
-				raise Glyph::RuntimeError, "Undefined macro '#{name}'\n -> source: #{context[:source][:name]}" unless known_macro
+				raise RuntimeError, "Undefined macro '#{name}'\n -> source: #{context[:source][:name]}" unless known_macro
 			end
 		end
 

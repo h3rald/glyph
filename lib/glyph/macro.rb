@@ -9,6 +9,8 @@ module Glyph
 
 		include Validators
 
+		attr_reader :node, :source
+
 		# Creates a new macro instance from a Node
 		# @param [Node] node a node populated with macro data
 		def initialize(node)
@@ -176,10 +178,8 @@ module Glyph
 		# @param [String] msg the message to print
 		# @raise [Glyph::MacroError]
 		def macro_error(msg, klass=Glyph::MacroError)
-			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
-			@node[:document].errors << message if @node[:document]
-			message += "\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
-			raise klass, message
+			@node[:document].errors << msg if @node[:document]
+			raise klass.new(msg, self)
 		end
 
 		# Prints a macro earning
@@ -187,16 +187,20 @@ module Glyph
 		# @param [Exception] e the exception raised
 		# @since 0.2.0
 		def macro_warning(msg, e=nil)
-			message = "#{msg}\n    source: #{@source}\n    path: #{path}"
-			if Glyph.debug? then
-				message << %{\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}} 
-				if e then
-					message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
-					message << "\n"+e.backtrace.join("\n")
-					message << "\n"+"-"*54
+			if e.is_a?(Glyph::MacroError) then
+				e.display 
+			else
+				message = "#{msg}\n    source: #{@source}\n    path: #{path}"
+				if Glyph.debug? then
+					message << %{\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}} 
+					if e then
+						message << "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
+						message << "\n"+e.backtrace.join("\n")
+						message << "\n"+"-"*54
+					end
 				end
+				Glyph.warning message
 			end
-			Glyph.warning message
 		end
 
 		# Instantiates a Glyph::Interpreter and interprets a string

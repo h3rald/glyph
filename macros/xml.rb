@@ -6,7 +6,7 @@ macro "|xml|" do
 		max_parameters 1
 	rescue Exception => e
 		if @node[:fallback] then
-			macro_error "Unknown macro '#{@node[element]}'"
+			macro_error "Unknown macro '#{@node[:element]}'"
 		else
 			raise
 		end

@@ -124,6 +124,10 @@ macro :config_table do
 		]}
 end
 
+macro :class do
+	%{=>[link[&[yardoc]/#{value.gsub(/Glyph::/, '')}|code[#{value}]]]}
+end
+
 
 macro_alias :options => :parameters
 macro_alias '-p' => :ref_error

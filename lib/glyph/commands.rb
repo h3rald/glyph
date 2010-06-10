@@ -247,11 +247,12 @@ end
 on_error do |exception|
 	raise if Glyph.library?
 	if exception.is_a? Glyph::MacroError then
-		Glyph.warning exception.message
+		exception.display
 		false
 	else
 		if Glyph.debug? then
-			puts "Exception: #{exception.message}"
+			Glyph.warning exception.message
+			puts "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
 			puts "Backtrace:"
 			exception.backtrace.each do |b|
 				puts b

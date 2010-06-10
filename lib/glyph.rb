@@ -36,7 +36,20 @@ module Glyph
 
 	class Error < RuntimeError; end
 	class SyntaxError < Error; end
-	class MacroError < Error; end
+	class MacroError < Error
+		attr_reader :macro
+
+		def initialize(message, macro)
+			@macro = macro
+			super(message)
+		end
+
+		def display
+			Glyph.warning exception.message
+			puts "    source: #{@macro.source}\n    path: #{@macro.path}"
+			puts "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
+		end
+	end
 	class MutualInclusionError < MacroError; end
 
 	# The current version of Glyph

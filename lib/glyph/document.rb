@@ -124,7 +124,10 @@ module Glyph
 				@placeholders.each_pair do |key, value| 
 					begin
 						@output.gsub! key.to_s, value.call(self).to_s
+					rescue Glyph::MacroError => e
+						e.macro.macro_warning e.message, e
 					rescue Exception => e
+						puts e.class
 						Glyph.warning e.message
 					end
 				end

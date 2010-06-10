@@ -41,9 +41,15 @@ describe "Glyph Language" do
 
 	it "should detect invalid characters for XML elements and attributes" do
 		language('xml')
-		interpret("!&test[test]").should raise_error
+		lambda  { interpret("!&test[test]").document }.should raise_error
 		output_for("span[@class[test]@.[test]test]").should == %{<span class="test">test</span>}
 	end
+
+	it "should notify the user that a macro is not found for invalid elements if xml_fallback is enabled" do
+		# Assuming language.options.xml_fallback = true
+		language('glyph')
+		lambda { interpret("*a[test]").document }.should raise_error(Glyph::MacroError, "Unknown macro '*a'")
+	end	
 
 	it "should not render blacklisted tags" do
 		language('xml')

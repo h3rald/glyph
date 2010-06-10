@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
      "book/text/compiling/programmatic_usage.glyph",
      "book/text/extending/bookmarks_headers.glyph",
      "book/text/extending/further_reading.glyph",
+     "book/text/extending/internals.glyph",
      "book/text/extending/interpreting.glyph",
      "book/text/extending/macro_def.glyph",
      "book/text/extending/params_attrs.glyph",

@@ -12,7 +12,7 @@ When including a text file, an input filter macro is applied to its contents by 
 * @.textile@ or @.txt@ &rarr; %>[textile]
 * @.markdown@ or @.md@ &rarr; %>[markdown]
 
-You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@.
+You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@. If no extension is specified, @.glyph@ is assumed.
 
 tip[The %>[include] can also be used to include (and evaluate) ruby files (with a @.rb@ extension). In this case, the ruby file must be placed within the @lib/@ directory of the current project.]
 

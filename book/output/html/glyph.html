@@ -52,7 +52,7 @@ body {
 	line-height: 1.5em;
 	margin-bottom: 0.2em;
 }
-.halftitlepage, .titlepage h2 {
+.halftitlepage h2, .titlepage h2 {
 	font-size: 1.1em;
 	font-style: italic;
 	font-weight: bold;
@@ -328,9 +328,7 @@ pre.lazy .Comment {
 
 	<body>
 <div class="titlepage">
-<img src="images/glyph.png" width="20%" height="20%" />
-	
-			<h1>
+<h1>
 			Glyph
 </h1>
 			<h2>
@@ -371,42 +369,46 @@ June 2010
 <li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li>
 <li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li>
 <li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li>
-<li class="bodymatter section"><a href="#h_21">Other HTML Elements</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_22">Textile or Markdown</a></li>
-<li class="bodymatter section"><a href="#h_23">XML Fallback</a></li>
+<li class="bodymatter section"><a href="#h_21">Source Code</a></li>
+<li class="bodymatter section"><a href="#h_22">Other HTML Elements</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_23">Textile or Markdown</a></li>
+<li class="bodymatter section"><a href="#h_24">XML Fallback</a></li>
 </ol></li>
 <li class="bodymatter section"><a href="#stylesheets">Adding Stylesheets</a></li>
 <li><ol><li class="bodymatter section"><a href="#default_styles">Default Stylesheets</a></li>
 </ol></li>
 <li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li>
-<li class="bodymatter section"><a href="#h_27">Evaluating Ruby code and Configuration Settings</a></li>
+<li class="bodymatter section"><a href="#h_28">Evaluating Ruby code and Configuration Settings</a></li>
 <li class="bodymatter section"><a href="#cond_macros">Conditional Macros</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_29">Results of conditional expressions</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_30">Results of conditional expressions</a></li>
 </ol></li>
 </ol></li>
-<li class="bodymatter chapter"><a href="#h_30">Generating Output Files</a></li>
+<li class="bodymatter chapter"><a href="#h_31">Generating Output Files</a></li>
 <li><ol><li class="bodymatter section"><a href="#compile">Compiling a project</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_32">HTML output</a></li>
-<li class="bodymatter section"><a href="#h_33">PDF Output</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_33">HTML output</a></li>
+<li class="bodymatter section"><a href="#h_34">PDF Output</a></li>
 <li class="bodymatter section"><a href="#auto_regeneration">Auto Regeneration</a></li>
 </ol></li>
 <li class="bodymatter section"><a href="#lite_mode">Compiling single Glyph files</a></li>
 <li><ol><li class="bodymatter section"><a href="#lite_limitations">Limitations</a></li>
 </ol></li>
-<li class="bodymatter section"><a href="#h_37">Using Glyph programmatically</a></li>
+<li class="bodymatter section"><a href="#h_38">Using Glyph programmatically</a></li>
 </ol></li>
 <li class="bodymatter chapter"><a href="#extending">Extending Glyph</a></li>
-<li><ol><li class="bodymatter section"><a href="#macro_def">Defining Macros</a></li>
-<li class="bodymatter section"><a href="#h_40">Parameters and Attributes</a></li>
-<li><ol><li class="bodymatter section"><a href="#h_41">Accessing Expanded Values</a></li>
-<li class="bodymatter section"><a href="#h_42">Accessing Raw Values</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_40">A quick look at Glyph's internals</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_41">Example: A short note</a></li>
 </ol></li>
-<li class="bodymatter section"><a href="#h_43">Bookmarks and Headers</a></li>
-<li class="bodymatter section"><a href="#h_44">Using Placeholders</a></li>
-<li class="bodymatter section"><a href="#h_45">Using Validators</a></li>
+<li class="bodymatter section"><a href="#macro_def">Defining Macros</a></li>
+<li class="bodymatter section"><a href="#h_43">Parameters and Attributes</a></li>
+<li><ol><li class="bodymatter section"><a href="#h_44">Accessing Expanded Values</a></li>
+<li class="bodymatter section"><a href="#h_45">Accessing Raw Values</a></li>
+</ol></li>
+<li class="bodymatter section"><a href="#h_46">Bookmarks and Headers</a></li>
+<li class="bodymatter section"><a href="#h_47">Using Placeholders</a></li>
+<li class="bodymatter section"><a href="#h_48">Using Validators</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_47">Global Options</a></li>
+<li><ol><li class="appendix section"><a href="#h_50">Global Options</a></li>
 <li><ol><li class="appendix section"><a href="#debug_switch">@-d@, @--debug@</a></li>
 </ol></li>
 <li class="appendix section"><a href="#c_add">@add@</a></li>
@@ -417,7 +419,7 @@ June 2010
 <li class="appendix section"><a href="#c_todo">@todo@</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
-<li><ol><li class="appendix section"><a href="#h_56">Common Macros</a></li>
+<li><ol><li class="appendix section"><a href="#h_59">Common Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_and">and</a></li>
 <li class="appendix section"><a href="#m_comment">comment</a></li>
 <li class="appendix section"><a href="#m_condition">condition</a></li>
@@ -441,7 +443,7 @@ June 2010
 <li><ol><li class="appendix section"><a href="#m_markdown">markdown</a></li>
 <li class="appendix section"><a href="#m_textile">textile</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_78">Block Macros</a></li>
+<li class="appendix section"><a href="#h_81">Block Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_box">box</a></li>
 <li class="appendix section"><a href="#m_code">code</a></li>
 <li class="appendix section"><a href="#m_fig">fig</a></li>
@@ -456,14 +458,14 @@ June 2010
 <li class="appendix section"><a href="#m_th">th</a></li>
 <li class="appendix section"><a href="#m_tr">tr</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_92">Inline Macros</a></li>
+<li class="appendix section"><a href="#h_95">Inline Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_anchor">anchor</a></li>
 <li class="appendix section"><a href="#m_codeph">codeph</a></li>
 <li class="appendix section"><a href="#m_draftcomment">draftcomment</a></li>
 <li class="appendix section"><a href="#m_fmi">fmi</a></li>
 <li class="appendix section"><a href="#m_link">link</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_98">Structure Macros</a></li>
+<li class="appendix section"><a href="#h_101">Structure Macros</a></li>
 <li><ol><li class="appendix section"><a href="#m_body">body</a></li>
 <li class="appendix section"><a href="#m_div">div</a></li>
 <li class="appendix section"><a href="#m_document">document</a></li>
@@ -478,15 +480,15 @@ June 2010
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_111">structure.*</a></li>
-<li class="appendix section"><a href="#h_112">tools.*</a></li>
+<li class="appendix section"><a href="#h_114">structure.*</a></li>
+<li class="appendix section"><a href="#h_115">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_113">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_114">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_115">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_116">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_116">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_117">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_118">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_119">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_117">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_120">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -665,26 +667,26 @@ all copies or substantial portions of the Software.</p>
 <span class="line-numbers">   4 </span>     preface[
 <span class="line-numbers">   5 </span>       @title[Preface]
 <span class="line-numbers">   6 </span>       todo[Write the preface]
-<span class="line-numbers">   7 </span>       include[preface.glyph]
+<span class="line-numbers">   7 </span>       include[preface]
 <span class="line-numbers">   8 </span>     ]
 <span class="line-numbers">   9 </span>   ]
 <span class="line-numbers">  10 </span>   @bodymatter[  
 <span class="line-numbers">  11 </span>     chapter[ 
 <span class="line-numbers">  12 </span>       @title[Chapter 1]
 <span class="line-numbers">  13 </span>       todo[Write chapter 1]
-<span class="line-numbers">  14 </span>       include[chapter_1.glyph]
+<span class="line-numbers">  14 </span>       include[chapter_1]
 <span class="line-numbers">  15 </span>     ]
 <span class="line-numbers">  16 </span>     chapter[
 <span class="line-numbers">  17 </span>       @title[Chapter 2]
 <span class="line-numbers">  18 </span>       todo[Write chapter 2]
-<span class="line-numbers">  19 </span>       include[chapter_2.glyph]
+<span class="line-numbers">  19 </span>       include[chapter_2]
 <span class="line-numbers">  20 </span>     ]
 <span class="line-numbers">  21 </span>   ]
 <span class="line-numbers">  22 </span>   @backmatter[
 <span class="line-numbers">  23 </span>     appendix[
 <span class="line-numbers">  24 </span>       @title[Appendix A]
 <span class="line-numbers">  25 </span>       todo[Write appendix A]
-<span class="line-numbers">  26 </span>       include[appendix_a.glyph]
+<span class="line-numbers">  26 </span>       include[appendix_a]
 <span class="line-numbers">  27 </span>     ]
 <span class="line-numbers">  28 </span>   ]
 <span class="line-numbers">  29 </span> ]
@@ -1013,6 +1015,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div> 
 
 			<div class="section">
+<h3 id="h_21">Source Code</h3>
 <p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
 <p>Cosider the following piece of ruby code:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> def find_child(&amp;block)
@@ -1059,7 +1062,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div> 
 
 			<div class="section">
-<h3 id="h_21">Other HTML Elements</h3>
+<h3 id="h_22">Other HTML Elements</h3>
 <p>So far we examined how to create <code>&lt;div&gt;</code> tags for sections, links, images&#8230; but what about lists, tables or paragraphs? How is it possible to create them using Glyphs? You have two possibilities (besides using raw <span class="caps">HTML</span> code, that is):</p>
 <ul>
 	<li>use a lightweight markup supported by Glyph (currently Textile or Markdown)</li>
@@ -1067,7 +1070,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </ul>
 	
 	<div class="section">
-<h4 id="h_22">Textile or Markdown</h4>
+<h4 id="h_23">Textile or Markdown</h4>
 <p>Textile or Markdown are very easy and intuitive to use, and they can produce HTML markup with almost no effort. Using them with Glyph is as simple as using the <a href="#m_textile">textile</a> macro (aliased to <code>txt</code>) and the <a href="#m_markdown">markdown</a> macro (aliased to <code>md</code>).</p>
 		<div class="box">
 <div class="box-title">Example</div>
@@ -1099,7 +1102,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 </div>
 	<div class="section">
-<h4 id="h_23">XML Fallback</h4>
+<h4 id="h_24">XML Fallback</h4>
 <p>Sure Textile and Markdown are great, but sometimes you may want to just use HTML, without the extra verbosity, of course. Take tables for example: Textile offers an easy way to create them, but things may get dirty when you need to have multiple paragraphs or lists within cells.</p>
 		<p>Very early versions of Glyph used to offered some simple <code>table</code>, <code>tr</code>, <code>tr</code>, <code>td</code> macros just for that. Of course the problem was that thy didn't offer any way to customize the markup by adding, for example, CSS classes.</p>
 		<p>Instead, by default, Glyph can convert any unrecognized macro to the corresponding XML element and macro attributes to XML attributes.</p>
@@ -1214,7 +1217,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><code>.textile</code> or <code>.txt</code> &rarr; <a href="#m_textile">textile</a> macro</li>
 	<li><code>.markdown</code> or <code>.md</code> &rarr; <a href="#m_markdown">markdown</a> macro</li>
 </ul>
-<p>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>.</p>
+<p>You can override this behavior by setting the <code>filters.by_file_extensions</code> configuration setting to <code>false</code>. If no extension is specified, <code>.glyph</code> is assumed.</p>
 <div class="tip">
 <p><span class="note-title">Tip</span>The <a href="#m_include">include</a> macro can also be used to include (and evaluate) ruby files (with a <code>.rb</code> extension). In this case, the ruby file must be placed within the <code>lib/</code> directory of the current project.</p>
 </div>
@@ -1247,11 +1250,11 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 </div>
 			<div class="section">
-<h3 id="h_27">Evaluating Ruby code and Configuration Settings</h3>
+<h3 id="h_28">Evaluating Ruby code and Configuration Settings</h3>
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Tue Jun 08 17:30:21 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Thu Jun 10 17:34:44 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1292,7 +1295,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre>
 	<p>In this case, the <code>pagination.css</code> stylesheet is included only when you're generating a PDF document using Prince XML.</p>
   <div class="section">
-<h4 id="h_29">Results of conditional expressions</h4>
+<h4 id="h_30">Results of conditional expressions</h4>
 <p>The <a href="#m_condition">condition</a> macro in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:</p>
 <ul>
 	<li>A conditional expression is satisfied if it evaluates to a non-empty string except &#8220;false&#8221;.</li>
@@ -1305,18 +1308,18 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 </div>
 		<div class="chapter">
-<h2 id="h_30">Generating Output Files</h2>
+<h2 id="h_31">Generating Output Files</h2>
 <div class="section">
 <h3 id="compile">Compiling a project</h3>
 <p>By default, a Glyph project can be "compiled" into an HTML document. Additionally, Glyph can also be used to produce PDF documents through <a href="http://www.princexml.com/">Prince</a>, and in future releases more output targets will be supported.</p>
 	<div class="section">
-<h4 id="h_32">HTML output</h4>
+<h4 id="h_33">HTML output</h4>
 <p>To compile a Glyph project to an HTML document, use the <a href="#c_compile">compile</a> command within your Glyph project folder. Glyph parses the <code>document.glyph</code> file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the <code>/output/html</code> folder.</p> 
 		<p>The name of the HTML file can be set in the configuration (<a href="#s_document_filename">document.filename</a> setting).</p>
 
 </div>
 	<div class="section">
-<h4 id="h_33">PDF Output</h4>
+<h4 id="h_34">PDF Output</h4>
 <p>To generate a PDF document, you must specify <code>pdf</code> as format, like this:</p>
 		<p>
 <code>glyph compile -f pdf</code>
@@ -1363,7 +1366,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 </div>
 			<div class="section">
-<h3 id="h_37">Using Glyph programmatically</h3>
+<h3 id="h_38">Using Glyph programmatically</h3>
 <p>Besides using Glyph from the command line, you can also use it straight from your code. Glyph&#8217;s public <a href="http://yardoc.org/docs/glyph/Glyph"><span class="caps">API</span></a> is simple and can be used to:</p>
 <ul>
 	<li>Retrieve and update configuration settings (using <code>Glyph[]</code> and <code>Glyph[]=</code>)</li>
@@ -1387,6 +1390,78 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		<div class="chapter">
 <h2 id="extending">Extending Glyph</h2>
 <div class="section">
+<h3 id="h_40">A quick look at Glyph's internals</h3>
+<p>If you plan on extending Glyph, knowing how it works inside helps. It is not mandatory by any means, but it definitely helps, especially when creating complex macros.</p>
+	<p>What happens behind the scenes when you call <code>glyph compile</code>? Glyph's code is parsed, analyzed and then translated into text, and here's how:</p>
+	<div class="figure"><img src="images/document_generation.png" />
+<div class="caption">A sequence diagram for document generation</div></div>
+	<p>From the diagram, it is possible to divide the document generation process into three phases:</p>
+<ul>
+	<li>The <em>Parsing Phase</em> starts when a chunk of Glyph code is passed (by the <code>generate:document</code> Rake task, for example) to a =&gt;[link[&amp;[yardoc]/Interpreter|code[Glyph::Interpreter]]]. The interpreter initializes a =&gt;[link[&amp;[yardoc]/Parser|code[Glyph::Parser]]] that parses the code and returns an <em>Abstract Syntax Tree</em> (<span class="caps">AST</span>) of =&gt;[link[&amp;[yardoc]/SyntaxNode|code[Glyph::SyntaxNode]]] objects.</li>
+	<li>The <em>Analysis Phase</em> (Processing) starts when the interpreter method calls the <code>analyze</code> method, instantiating a new =&gt;[link[&amp;[yardoc]/Document|code[Glyph::Document]]]. The <code>Glyph::Document</code> object evaluates the <span class="caps">AST</span> expanding all macro nodesth (that&#8217;s when macros are executed) and generates string.</li>
+	<li>The <em>Finalization Phase</em> (Post-Processing) starts when the interpreter calls the <code>finalyze</code> method, causing the <code>Glyph::Document</code> object to perform a series of finalizations on the string obtained after analysis, i.e. it replaces escape sequences and placeholders.</li>
+</ul>
+	<div class="section">
+<h4 id="h_41">Example: A short note</h4>
+<p>As an example, consider the following Glyph code:</p>
+		<pre class="lazy"><span class="line-numbers">   1 </span> fmi[something|#test]
+<span class="line-numbers">   2 </span> ...
+<span class="line-numbers">   3 </span> section[
+<span class="line-numbers">   4 </span>   @title[Test Section]
+<span class="line-numbers">   5 </span>   @id[test]
+<span class="line-numbers">   6 </span> ...
+<span class="line-numbers">   7 </span> ]
+</pre>
+		<p>...</p>
+		<pre class="lazy"><span class="line-numbers">   1 </span> {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>--<span class="Constant">&quot;</span></span>}
+<span class="line-numbers">   2 </span>   {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>fmi</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
+<span class="line-numbers">   3 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>0<span class="Constant">&quot;</span></span>}
+<span class="line-numbers">   4 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>something<span class="String">&quot;</span></span>}
+<span class="line-numbers">   5 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>1<span class="Constant">&quot;</span></span>}
+<span class="line-numbers">   6 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>#test<span class="String">&quot;</span></span>}
+<span class="line-numbers">   7 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
+<span class="line-numbers">   8 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>[<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">   9 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>...<span class="String">&quot;</span></span>}
+<span class="line-numbers">  10 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>]<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">  11 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
+<span class="line-numbers">  12 </span>   {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>section</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
+<span class="line-numbers">  13 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>0<span class="Constant">&quot;</span></span>}
+<span class="line-numbers">  14 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>nt<span class="String">&quot;</span></span>}
+<span class="line-numbers">  15 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>nt<span class="String">&quot;</span></span>}
+<span class="line-numbers">  16 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
+<span class="line-numbers">  17 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>[<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">  18 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>...<span class="String">&quot;</span></span>}
+<span class="line-numbers">  19 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>]<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">  20 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
+<span class="line-numbers">  21 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>title</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
+<span class="line-numbers">  22 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>Test Section<span class="String">&quot;</span></span>}
+<span class="line-numbers">  23 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>id</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
+<span class="line-numbers">  24 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>test<span class="String">&quot;</span></span>}
+</pre>
+		<p>...</p>
+		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see PLACEHOLDER-1
+<span class="line-numbers">   2 </span> �<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span> [...]
+<span class="line-numbers">   4 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   5 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h2</span> <span class="MetaTag"><span class="MetaTag">id</span><span class="MetaTag">=</span><span class="String"><span class="String">&quot;</span><span class="String">test</span><span class="String">&quot;</span></span></span><span class="MetaTag">&gt;</span></span>Test Section<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   6 </span> [...]
+<span class="line-numbers">   7 </span> 
+<span class="line-numbers">   8 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
+</pre>
+		<p>...</p>
+		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#test<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>Test Section<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span><span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   2 </span> [...]
+<span class="line-numbers">   3 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   4 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h2</span> <span class="MetaTag"><span class="MetaTag">id</span><span class="MetaTag">=</span><span class="String"><span class="String">&quot;</span><span class="String">test</span><span class="String">&quot;</span></span></span><span class="MetaTag">&gt;</span></span>Test Section<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   5 </span> [...]
+<span class="line-numbers">   6 </span> 
+<span class="line-numbers">   7 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
+</pre>
+
+</div>
+
+</div>
+			<div class="section">
 <h3 id="macro_def">Defining Macros</h3>
 <p>Glyph was created wih extensibility in mind. You can freely extend Glyph Language by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in <code>.rb</code> files within the <code>lib/macros/</code> folder of your project.</p>
 <div class="box">
@@ -1439,23 +1514,23 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 
 			<div class="section">
-<h3 id="h_40">Parameters and Attributes</h3>
+<h3 id="h_43">Parameters and Attributes</h3>
 <p>Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the <em>raw value</em> of and attribute or parameter or its <em>expanded value</em>. The difference between the two will become clearer in the following sections and also in the <a href="#interpreting">‡‡‡‡‡PLACEHOLDER¤82‡‡‡‡‡</a> section.</p>
 	<div class="section">
-<h4 id="h_41">Accessing Expanded Values</h4>
+<h4 id="h_44">Accessing Expanded Values</h4>
 <p>Normally, you just want to get the value of an attribute or parameter and use it in the macro. This means, in other words, its <em>expanded</em> value, i.e. the value resulting from the expansion of the macros (if any) within the attribute or parameter.</p>
 		<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Write about methods related to expanded values, pros and cons, etc.</span>
 
 </div>
 	<div class="section">
-<h4 id="h_42">Accessing Raw Values</h4>
+<h4 id="h_45">Accessing Raw Values</h4>
 <span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Write intro about raw values, methods, pros and cons, etc.</span>
 
 </div>
 
 </div>
 			<div class="section">
-<h3 id="h_43">Bookmarks and Headers</h3>
+<h3 id="h_46">Bookmarks and Headers</h3>
 <p>The <a href="http://yardoc.org/docs/h3rald-glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor">anchor</a> macro:</p>
 
 	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>anchor</span> <span class="Keyword">do </span>
@@ -1472,7 +1547,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 
 			<div class="section">
-<h3 id="h_44">Using Placeholders</h3>
+<h3 id="h_47">Using Placeholders</h3>
 <p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
 <p>Here&#8217;s the source code of the <a href="#m_link">link</a> macro:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>link</span> <span class="Keyword">do</span>
@@ -1500,7 +1575,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 
 			<div class="section">
-<h3 id="h_45">Using Validators</h3>
+<h3 id="h_48">Using Validators</h3>
 <p>If you need to make sure that a macro is used properly, consider using <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro/Validators">validators</a>. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.</p>
 	<p>If you want to create your own validators, you can call the generic <code>validate</code> method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.</p>
 	<div class="box">
@@ -1531,7 +1606,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><em>parameters</em> are separated by whitespaces, and can be wrapped in quotes.</li>
 </ul>
 <div class="section">
-<h3 id="h_47">Global Options</h3>
+<h3 id="h_50">Global Options</h3>
 <div class="section">
 <h4 id="debug_switch"><code>-d</code>, <code>--debug</code></h4>
 <p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
@@ -1691,7 +1766,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h2 id="macro_ref">Macro Reference</h2>
 <p>﻿<br />
 <div class="section"><br />
-<h3 id="h_56">Common Macros</h3><br />
+<h3 id="h_59">Common Macros</h3><br />
 <div class="section"><br />
 <h4 id="m_and">and</h4><br />
 Conditional <code>and</code> operator, to be used with the <a href="#m_condition">condition</a> macro.</p>
@@ -1736,14 +1811,14 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_decode">decode</h4>
-<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤121‡‡‡‡‡</a></span>.</p>
+<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤123‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>**</code></p>
 <p><strong>Example:</strong> <code>*[=note‡‡¤91¤‡‡This will not be evaluated‡‡¤93¤‡‡=]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_encode">encode</h4>
-<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤122‡‡‡‡‡</a></span>.</p>
+<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤121‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>*</code></p>
 <p><strong>Example:</strong> <code>*[=note[This will not be evaluated]=]</code></p>
 </div>
@@ -1845,7 +1920,7 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 </div>
 </div>
 <div class="section">
-<h3 id="h_78">Block Macros</h3>
+<h3 id="h_81">Block Macros</h3>
 <div class="section">
 <h4 id="m_box">box</h4>
 <p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
@@ -1880,7 +1955,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_highlight">highlight</h4>
-<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤123‡‡‡‡‡</a></span>.</p>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤122‡‡‡‡‡</a></span>.</p>
 <p><strong>Example:</strong></p>
 <p><code>highlight[ruby|
   def hello
@@ -1959,7 +2034,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_92">Inline Macros</h3>
+<h3 id="h_95">Inline Macros</h3>
 <div class="section">
 <h4 id="m_anchor">anchor</h4>
 <p>Creates a named anchor (or bookmark).</p>
@@ -1997,7 +2072,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 </div>
 </div>
 <div class="section">
-<h3 id="h_98">Structure Macros</h3>
+<h3 id="h_101">Structure Macros</h3>
 <div class="section">
 <h4 id="m_body">body</h4>
 <p>Creates a <code>&lt;body&gt;</code> tag.</p>
@@ -2160,7 +2235,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_111">structure.*</h3>
+<h3 id="h_114">structure.*</h3>
 <p>The following configuration settings are used internally by Glyph and should not be changed by the user.</p>
 	<table><tr><th>Name</th>
 				<th>Description</th>
@@ -2192,7 +2267,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 		<td><code>nil</code></td><p></tr></table></p>
 </div>
 <div class="section">
-<h3 id="h_112">tools.*</h3>
+<h3 id="h_115">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (<span class="caps">YAML</span>)</th></tr>
@@ -2205,11 +2280,11 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 
 </div>
 		<div class="appendix">
-<h2 id="h_113">Changelog</h2>
+<h2 id="h_116">Changelog</h2>
 <div class="section">
-<h3 id="h_114">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_117">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_115">23 Features Implemented</h4>
+<h4 id="h_118">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -2251,7 +2326,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 	
 	
 		<div class="section">
-<h4 id="h_116">17 Bugs Fixed</h4>
+<h4 id="h_119">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -2285,7 +2360,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 </div>
 
 	<div class="section">
-<h3 id="h_117">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_120">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

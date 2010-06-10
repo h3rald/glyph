@@ -12,7 +12,7 @@ macro :snippet do
 			when e.is_a?(Glyph::MutualInclusionError) then
 				raise
 			when e.is_a?(Glyph::MacroError) then
-				Glyph.warning e.message
+				macro_warning e.message, e
 			else
 				macro_warning e.message, e
 			end
@@ -79,15 +79,13 @@ macro :include do
 			begin 
 				@node[:source] = {:node => @node, :name => v}
 				interpret contents
+			rescue Glyph::MutualInclusionError => e
+				raise
+			rescue Glyph::MacroError => e
+				macro_warning e.message, e
+				macro_todo "Correct errors in file '#{value}'"
 			rescue Exception => e
-				case 
-				when e.is_a?(Glyph::MutualInclusionError) then
-					raise
-				when e.is_a?(Glyph::MacroError) then
-					Glyph.warning e.message
-				else
-					macro_warning e.message, e
-				end
+				macro_warning e.message, e
 				macro_todo "Correct errors in file '#{value}'"
 			end
 		end

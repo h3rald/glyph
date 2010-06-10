@@ -4,26 +4,26 @@ book[
 		preface[
 			@title[Preface]
 			todo[Write the preface]
-			include[preface.glyph]
+			include[preface]
 		]
 	]
   @bodymatter[  
     chapter[ 
 			@title[Chapter 1]
 			todo[Write chapter 1]
-      include[chapter_1.glyph]
+      include[chapter_1]
     ]
     chapter[
 			@title[Chapter 2]
 			todo[Write chapter 2]
-      include[chapter_2.glyph]
+      include[chapter_2]
     ]
   ]
 	@backmatter[
 		appendix[
 			@title[Appendix A]
 			todo[Write appendix A]
-			include[appendix_a.glyph]
+			include[appendix_a]
 		]
 	]
 ]

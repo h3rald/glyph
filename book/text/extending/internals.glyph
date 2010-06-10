@@ -1,0 +1,72 @@
+section[
+	@title[A quick look at Glyph's internals]
+	p[If you plan on extending Glyph, knowing how it works inside helps. It is not mandatory by any means, but it definitely helps, especially when creating complex macros.]
+	p[What happens behind the scenes when you call code[glyph compile]? Glyph's code is parsed, analyzed and then translated into text, and here's how:]
+	figure[document_generation.png|A sequence diagram for document generation]
+	txt[From the diagram, it is possible to divide the document generation process into three phases:
+* The _Parsing Phase_ starts when a chunk of Glyph code is passed (by the @generate:document@ Rake task, for example) to a class[Glyph::Interpreter]. The interpreter initializes a class[Glyph::Parser] that parses the code and returns an _Abstract Syntax Tree_ (AST) of class[Glyph::SyntaxNode] objects.
+* The _Analysis Phase_ (Processing) starts when the interpreter method calls the @analyze@ method, instantiating a new class[Glyph::Document]. The @Glyph::Document@ object evaluates the AST expanding all macro nodesth (that's when macros are executed) and generates string.
+* The _Finalization Phase_ (Post-Processing) starts when the interpreter calls the @finalyze@ method, causing the @Glyph::Document@ object to perform a series of finalizations on the string obtained after analysis, i.e. it replaces escape sequences and placeholders.
+	]
+	section[
+		@title[Example: A short note]
+		p[As an example, consider the following Glyph code:]
+		highlight[=html|
+fmi[something\|#test]
+...
+section[
+  @title[Test Section]
+  @id[test]
+...
+]
+		=]
+		p[...]
+		highlight[=ruby|
+{:name=>:"--"}
+  {:name=>:fmi, :escape=>false}
+    {:name=>:"0"}
+      {:value=>"something"}
+    {:name=>:"1"}
+      {:value=>"#test"}
+  {:value=>"\n"}
+  {:value=>"\[", :escaped=>true}
+  {:value=>"..."}
+  {:value=>"\]", :escaped=>true}
+  {:value=>"\n"}
+  {:name=>:section, :escape=>false}
+    {:name=>:"0"}
+      {:value=>"\n\t"}
+      {:value=>"\n\t"}
+      {:value=>"\n"}
+      {:value=>"\[", :escaped=>true}
+      {:value=>"..."}
+      {:value=>"\]", :escaped=>true}
+      {:value=>"\n"}
+    {:name=>:title, :escape=>false}
+      {:value=>"Test Section"}
+    {:name=>:id, :escape=>false}
+      {:value=>"test"}
+		=]
+		p[...]
+		highlight[=html|
+<span class="fmi">for more information on something, see PLACEHOLDER-1
+í</span>
+\[...\]
+<div class="section">
+<h2 id="test">Test Section</h2>
+\[...\]
+
+</div>
+		=]
+		p[...]
+		highlight[=html|
+<span class="fmi">for more information on something, see <a href="#test">Test Section</a></span>
+[...]
+<div class="section">
+<h2 id="test">Test Section</h2>
+[...]
+
+</div>
+	=]
+	]
+]
