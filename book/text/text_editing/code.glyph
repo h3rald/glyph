@@ -1,7 +1,7 @@
 section[
 	@title[Source Code]
 	txt[
-If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the %>[code], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight] macro. The last one requires either &[coderay] or &[uv], but it provides syntax highlighting for the most common programming languages.
+If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the %>[code], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight]. The last one requires either &[coderay] or &[uv], but it provides syntax highlighting for the most common programming languages.
 
 Cosider the following piece of ruby code:
 	]

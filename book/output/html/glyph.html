@@ -708,7 +708,7 @@ all copies or substantial portions of the Software.</p>
 	<p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface some Chapters and an Appendix.</p>
 <p>As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for <em><a href="#macro_intro">macros</a></em> and <em><a href="#attribute_intro">attributes</a></em>. The only syntactic difference between macros and attributes is that attributes are preceded by a <code>@</code>.</p>
 <p>For now, think about a macro as something that performs a certain action and &#8212; generally &#8212; produces some text output or manipulation of the text inside it. In this way, it becomes easy to understand that the <code>chapter</code> macro creates a chapter and the <a href="#m_include">include</a> macro includes an external file, for example.<br />
-Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case the <a href="#m_book">book</a> macro macro has the following attributes:</p>
+Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case the <a href="#m_book">book</a> macro has the following attributes:</p>
 <ul>
 	<li><code>@frontmatter</code></li>
 	<li><code>@bodymatter</code></li>
@@ -982,7 +982,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>there are no duplicate anchors within the documents.</li>
 	<li>if no title is specified as second parameter for the <a href="#m_link">link</a> macro, the anchor&#8217;s name is used as such.</li>
 </ul>
-<p>Besides using the <a href="#m_anchor">anchor</a> macro macro, you can also create an anchor for a header by passing an <code>@id</code> attribute the the <a href="#m_section">section</a> macro, like this:</p>
+<p>Besides using the <a href="#m_anchor">anchor</a> macro, you can also create an anchor for a header by passing an <code>@id</code> attribute the the <a href="#m_section">section</a> macro, like this:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> section[
 <span class="line-numbers">   2 </span>   @title[My Section]
 <span class="line-numbers">   3 </span>   @id[my_section]
@@ -1029,7 +1029,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 			<div class="section">
 <h3 id="h_21">Source Code</h3>
-<p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
+<p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
 <p>Cosider the following piece of ruby code:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> def find_child(&amp;block)
 <span class="line-numbers">   2 </span>   children.each do |c|
@@ -1220,7 +1220,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>In this case, the <a href="#m_style">style</a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
 	<div class="section">
 <h4 id="default_styles">Default Stylesheets</h4>
-<p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">style</a> macro macro:</p>
+<p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">style</a> macro:</p>
 		<table><tr><th>File name</th>
 				<th>Notes</th></tr>
 			<tr><td>
@@ -1291,7 +1291,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Fri Jun 11 20:01:09 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Fri Jun 11 20:09:49 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1391,9 +1391,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h4 id="lite_limitations">Limitations</h4>
 <p>This sort of &#8220;lite&#8221; mode comes with a few minor limitations:</p>
 <ul>
-	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet_">snippet:</a> macro macro.</li>
-	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">config:</a> macro macro.</li>
-	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_">macro:</a> macro macro.</li>
+	<li>Snippets can only be defined inside the source file, using the <a href="#m_snippet_">snippet:</a> macro.</li>
+	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_">config:</a> macro.</li>
+	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_">macro:</a> macro.</li>
 	<li>Images must be referenced with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.</li>
 	<li>Stylesheets must be referenced with their absolute path, or a path relative to the current directory, or the name of an existing Glyph <a href="#default_stylesheets">system stylesheet</a>.</li>
 	<li>The files included through the <a href="#m_include">include</a> macro must be referenced with their absolute path, or a path relative to the current directory.</li>
@@ -1788,7 +1788,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   5 </span>   ]
 <span class="line-numbers">   6 </span> ]
 </pre>
-		<p>Within the <a href="#m_rewrite">rewrite</a> macro macro, it is possible to use a special syntax to call the <code>raw_attr</code> or <code>raw_param</code> methods: <br />
+		<p>Within the <a href="#m_rewrite_">rewrite:</a> macro, it is possible to use a special syntax to call the <code>raw_attr</code> or <code>raw_param</code> methods: <br />
 			<code>{{</code><em>parameter_number</em> or <em>attribute_name</em><code>}}</code></p>
 
 </div>
@@ -1811,8 +1811,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 		<div class="chapter">
 <h2 id="h_54">Troubleshooting</h2>
-<p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>New error: Cannot reset &#8216;#@value&#8217; setting (system use only).</span><br />
-This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">ruby</a> macro macro.</p>
+<p>This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you <a href="#extending">extended</a> Glyph by creating your own macros or you&#8217;re embedding Ruby code using the <a href="#m_ruby">ruby</a> macro.</p>
 <div class="tip">
 <p><span class="note-title">Tip</span>As a general rule, more diagnostic information is provided if Glyph is run in <a href="#debug_switch">debug mode</a>.</p>
 </div>
@@ -2018,7 +2017,7 @@ This chapter lists the most common error messages that can be returned when runn
 
 <tr>
 			<td>Invalid regular expression: <em>regexp</em></td>
-			<td>Returned by the <a href="#m_match">match</a> macro macro if an invalid regular expression was supplied.</td>
+			<td>Returned by the <a href="#m_match">match</a> macro if an invalid regular expression was supplied.</td>
 </tr>
 
 <tr>
@@ -2028,17 +2027,17 @@ This chapter lists the most common error messages that can be returned when runn
 
 <tr>
 			<td>No highlighter installed. Please run: gem install coderay</td>
-			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if no highlighters are installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro if no highlighters are installed.</td>
 </tr>
 
 <tr>
 			<td>CodeRay highlighter not installed. Please run: gem install coderay</td>
-			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>coderay</code> but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>coderay</code> but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
 </tr>
 
 <tr>
 			<td>UltraViolet highlighter not installed. Please run: gem install ultraviolet</td>
-			<td>Returned by the <a href="#m_highlight">highlight</a> macro macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>ultraviolet</code> but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to <code>ultraviolet</code> but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
 </tr>
 
 <tr>
@@ -2058,7 +2057,7 @@ This chapter lists the most common error messages that can be returned when runn
 
 <tr>
 			<td>Filter macro &#8216;<em>macro_name</em>&#8217; not found</td>
-			<td>Returned by the <a href="#m_include">include</a> macro macro if the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is set to <code>true</code> but the file extension of the included file is not recognized as a filter macro.</td>
+			<td>Returned by the <a href="#m_include">include</a> macro if the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is set to <code>true</code> but the file extension of the included file is not recognized as a filter macro.</td>
 </tr>
 
 <tr>

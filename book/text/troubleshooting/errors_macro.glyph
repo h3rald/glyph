@@ -32,19 +32,19 @@ Returned by the %>[include] if used in =>[#lite_mode|lite mode].
 Returned by a filter macro if $>[filters.byem[file]extension] is set to @true@, but the extension was not recognized.
 		]
 		ref_error[Invalid regular expression: em[regexp]|
-Returned by the %>[match] macro if an invalid regular expression was supplied.
+Returned by the %>[match] if an invalid regular expression was supplied.
 		]
 		ref_error[Macro '\.em[name]' takes no parameters (\.em[x] given)|
 Returned if the macro was called with parameters but none are requested.
 		]
 		ref_error[No highlighter installed. Please run: gem install coderay|
-Returned by the %>[highlight] macro if no highlighters are installed.
+Returned by the %>[highlight] if no highlighters are installed.
 		]
 		ref_error[CodeRay highlighter not installed. Please run: gem install coderay|
-Returned by the %>[highlight] macro if $>[highlighters.current] is set to @coderay@ but &[coderay] is not installed.
+Returned by the %>[highlight] if $>[highlighters.current] is set to @coderay@ but &[coderay] is not installed.
 		]
 		ref_error[UltraViolet highlighter not installed. Please run: gem install ultraviolet|
-Returned by the %>[highlight] macro if $>[highlighters.current] is set to @ultraviolet@ but &[uv] is not installed.
+Returned by the %>[highlight] if $>[highlighters.current] is set to @ultraviolet@ but &[uv] is not installed.
 		]
 		ref_error[Mutual Inclusion in parameter/attribute(\.em[name]): '\.em[value]'|
 Returned if a catch-22 situation occurs with macro inclusion, for example if the value of a snippet includes a reference to the same snippet.
@@ -56,7 +56,7 @@ Returned by the %>[snippet] if an invalid snippet ID was supplied.
 Returned by the %>[include] if an invalid file was supplied.
 		]
 		ref_error[Filter macro '\.em[macro_name]' not found|
-Returned by the %>[include] macro if the $>[filters.by_file_extension] is set to @true@ but the file extension of the included file is not recognized as a filter macro.
+Returned by the %>[include] if the $>[filters.by_file_extension] is set to @true@ but the file extension of the included file is not recognized as a filter macro.
 		]
 		ref_error[RedCloth gem not installed. Please run: gem install RedCloth|
 Returned by the %>[textile] if the RedCloth gem is not installed.

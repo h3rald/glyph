@@ -45,7 +45,7 @@ rewrite:[issue\|
   ]
 ]
 		=]
-		p[Within the %>[rewrite] macro, it is possible to use a special syntax to call the code[raw_attr] or code[raw_param] methods: br[]
+		p[Within the %>[rewrite:], it is possible to use a special syntax to call the code[raw_attr] or code[raw_param] methods: br[]
 			code[{{]em[parameter_number] or em[attribute_name]code[}}]]
 	]
 ]

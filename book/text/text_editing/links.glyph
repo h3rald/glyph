@@ -38,7 +38,7 @@ Basically, if you use the %>[link] and the %>[anchor], Glyph makes sure that:
 * there are no duplicate anchors within the documents.
 * if no title is specified as second parameter for the %>[link], the anchor's name is used as such.
 
-Besides using the %>[anchor] macro, you can also create an anchor for a header by passing an code[@id] attribute the the %>[section], like this: 
+Besides using the %>[anchor], you can also create an anchor for a header by passing an code[@id] attribute the the %>[section], like this: 
 	]
 	highlight[=html|
 section[

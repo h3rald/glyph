@@ -8,7 +8,7 @@ section[
 	section[
 		@title[Default Stylesheets]
 		@id[default_styles]
-		p[Glyph provides the following default stylesheets, that can be referenced directly using the %>[style] macro:]
+		p[Glyph provides the following default stylesheets, that can be referenced directly using the %>[style]:]
 		table[
 			tr[
 				th[File name]
