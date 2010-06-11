@@ -4,7 +4,7 @@ section[
 	p[What happens behind the scenes when you call code[glyph compile]? Glyph's code is parsed, analyzed and then translated into text, and here's how:]
 	figure[document_generation.png|A sequence diagram for document generation]
 	txt[From the diagram, it is possible to divide the document generation process into three phases:
-* The _Parsing Phase_ starts when a chunk of Glyph code is passed (by the @generate:document@ Rake task, for example) to a class[Glyph::Interpreter]. The interpreter initializes a class[Glyph::Parser] that parses the code and returns an _Abstract Syntax Tree_ (AST) of class[Glyph::SyntaxNode] objects.
+* The _Parsing Phase_ starts when a chunk of Glyph code is passed (by the code[generate:document] Rake task, for example) to a class[Glyph::Interpreter]. The interpreter initializes a class[Glyph::Parser] that parses the code and returns an _Abstract Syntax Tree_ (AST) of class[Glyph::SyntaxNode] objects.
 * The _Analysis Phase_ (Processing) starts when the interpreter method calls the @analyze@ method, instantiating a new class[Glyph::Document]. The @Glyph::Document@ object evaluates the AST expanding all macro nodesth (that's when macros are executed) and generates string.
 * The _Finalization Phase_ (Post-Processing) starts when the interpreter calls the @finalyze@ method, causing the @Glyph::Document@ object to perform a series of finalizations on the string obtained after analysis, i.e. it replaces escape sequences and placeholders.
 	]
@@ -20,7 +20,7 @@ section[
 ...
 ]
 		=]
-		p[...]
+		p[This simple snippet uses the %>[fmi] to link to a section later on in the document. When parsed, the produced AST is the following:]
 		highlight[=ruby|
 {:name=>:"--"}
   {:name=>:fmi, :escape=>false}
@@ -28,37 +28,44 @@ section[
       {:value=>"something"}
     {:name=>:"1"}
       {:value=>"#test"}
-  {:value=>"\n"}
-  {:value=>"\[", :escaped=>true}
+  {:value=>"\\n"}
+  {:value=>"\\\\[", :escaped=>true}
   {:value=>"..."}
-  {:value=>"\]", :escaped=>true}
-  {:value=>"\n"}
+  {:value=>"\\\\]", :escaped=>true}
+  {:value=>"\\n"}
   {:name=>:section, :escape=>false}
     {:name=>:"0"}
-      {:value=>"\n\t"}
-      {:value=>"\n\t"}
-      {:value=>"\n"}
-      {:value=>"\[", :escaped=>true}
+      {:value=>"\\n\\t"}
+      {:value=>"\\n\\t"}
+      {:value=>"\\n"}
+      {:value=>"\\\\[", :escaped=>true}
       {:value=>"..."}
-      {:value=>"\]", :escaped=>true}
-      {:value=>"\n"}
+      {:value=>"\\\\]", :escaped=>true}
+      {:value=>"\\\n"}
     {:name=>:title, :escape=>false}
       {:value=>"Test Section"}
     {:name=>:id, :escape=>false}
       {:value=>"test"}
 		=]
-		p[...]
+		p[This output is produced by calling the code[inspect] method on the AST. Each class[Glyph::SyntaxNode] object in the tree is basically an ordinary Glyph Hash with a parent and 0 or more chidren, so the code snippets above shows how the syntax nodes are nested.]
+		p[The AST contains information about macro, parameter and attribute names, and escaping, and raw text values (the nodes without a code[:name] key), but nothing more.]
+		p[When the AST is analyzed, the resulting textual output is the following:]
 		highlight[=html|
-<span class="fmi">for more information on something, see PLACEHOLDER-1
-í</span>
-\[...\]
+<span class="fmi">for more information on something, see ‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡
+</span>
+\\\\\.[...\\\\\.]
 <div class="section">
 <h2 id="test">Test Section</h2>
-\[...\]
+\\\\\.[...\\\\\.]
 
 </div>
 		=]
-		p[...]
+		p[This looks almost perfect, except that:]
+		ul[
+			li[There's a nasty placeholder instead of a link: this is due to the fact that when the link is processed, there is no code[#text] anchor in the document, but there may be one afterwards (and there will be).]
+			li[There are some escaped brackets.]
+		]
+		p[Finally, when the document is finalized, placeholders and escape sequences are removed and the final result is the following:]
 		highlight[=html|
 <span class="fmi">for more information on something, see <a href="#test">Test Section</a></span>
 [...]

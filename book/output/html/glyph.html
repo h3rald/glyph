@@ -1254,7 +1254,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Thu Jun 10 17:34:44 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Fri Jun 11 11:48:54 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1397,8 +1397,8 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <div class="caption">A sequence diagram for document generation</div></div>
 	<p>From the diagram, it is possible to divide the document generation process into three phases:</p>
 <ul>
-	<li>The <em>Parsing Phase</em> starts when a chunk of Glyph code is passed (by the <code>generate:document</code> Rake task, for example) to a =&gt;[link[&amp;[yardoc]/Interpreter|code[Glyph::Interpreter]]]. The interpreter initializes a =&gt;[link[&amp;[yardoc]/Parser|code[Glyph::Parser]]] that parses the code and returns an <em>Abstract Syntax Tree</em> (<span class="caps">AST</span>) of =&gt;[link[&amp;[yardoc]/SyntaxNode|code[Glyph::SyntaxNode]]] objects.</li>
-	<li>The <em>Analysis Phase</em> (Processing) starts when the interpreter method calls the <code>analyze</code> method, instantiating a new =&gt;[link[&amp;[yardoc]/Document|code[Glyph::Document]]]. The <code>Glyph::Document</code> object evaluates the <span class="caps">AST</span> expanding all macro nodesth (that&#8217;s when macros are executed) and generates string.</li>
+	<li>The <em>Parsing Phase</em> starts when a chunk of Glyph code is passed (by the <code>generate:document</code> Rake task, for example) to a <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Interpreter"><code>Glyph::Interpreter</code></a>. The interpreter initializes a <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Parser"><code>Glyph::Parser</code></a> that parses the code and returns an <em>Abstract Syntax Tree</em> (<span class="caps">AST</span>) of <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/SyntaxNode"><code>Glyph::SyntaxNode</code></a> objects.</li>
+	<li>The <em>Analysis Phase</em> (Processing) starts when the interpreter method calls the <code>analyze</code> method, instantiating a new <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Document"><code>Glyph::Document</code></a>. The <code>Glyph::Document</code> object evaluates the <span class="caps">AST</span> expanding all macro nodesth (that&#8217;s when macros are executed) and generates string.</li>
 	<li>The <em>Finalization Phase</em> (Post-Processing) starts when the interpreter calls the <code>finalyze</code> method, causing the <code>Glyph::Document</code> object to perform a series of finalizations on the string obtained after analysis, i.e. it replaces escape sequences and placeholders.</li>
 </ul>
 	<div class="section">
@@ -1412,43 +1412,48 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   6 </span> ...
 <span class="line-numbers">   7 </span> ]
 </pre>
-		<p>...</p>
+		<p>This simple snippet uses the <a href="#m_fmi">fmi</a> macro to link to a section later on in the document. When parsed, the produced AST is the following:</p>
 		<pre class="lazy"><span class="line-numbers">   1 </span> {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>--<span class="Constant">&quot;</span></span>}
 <span class="line-numbers">   2 </span>   {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>fmi</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
 <span class="line-numbers">   3 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>0<span class="Constant">&quot;</span></span>}
 <span class="line-numbers">   4 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>something<span class="String">&quot;</span></span>}
 <span class="line-numbers">   5 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>1<span class="Constant">&quot;</span></span>}
 <span class="line-numbers">   6 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>#test<span class="String">&quot;</span></span>}
-<span class="line-numbers">   7 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
-<span class="line-numbers">   8 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>[<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">   7 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\n</span><span class="String">&quot;</span></span>}
+<span class="line-numbers">   8 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\</span>[<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
 <span class="line-numbers">   9 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>...<span class="String">&quot;</span></span>}
-<span class="line-numbers">  10 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>]<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
-<span class="line-numbers">  11 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
+<span class="line-numbers">  10 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\</span>]<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">  11 </span>   {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\n</span><span class="String">&quot;</span></span>}
 <span class="line-numbers">  12 </span>   {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>section</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
 <span class="line-numbers">  13 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:&quot;</span>0<span class="Constant">&quot;</span></span>}
-<span class="line-numbers">  14 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>nt<span class="String">&quot;</span></span>}
-<span class="line-numbers">  15 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>nt<span class="String">&quot;</span></span>}
-<span class="line-numbers">  16 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
-<span class="line-numbers">  17 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>[<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">  14 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\n</span><span class="Constant">\t</span><span class="String">&quot;</span></span>}
+<span class="line-numbers">  15 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\n</span><span class="Constant">\t</span><span class="String">&quot;</span></span>}
+<span class="line-numbers">  16 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\n</span><span class="String">&quot;</span></span>}
+<span class="line-numbers">  17 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\</span>[<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
 <span class="line-numbers">  18 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>...<span class="String">&quot;</span></span>}
-<span class="line-numbers">  19 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>]<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
-<span class="line-numbers">  20 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>n<span class="String">&quot;</span></span>}
+<span class="line-numbers">  19 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\</span>]<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>escaped</span>=&gt;<span class="Constant">true</span>}
+<span class="line-numbers">  20 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span><span class="Constant">\n</span><span class="String">&quot;</span></span>}
 <span class="line-numbers">  21 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>title</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
 <span class="line-numbers">  22 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>Test Section<span class="String">&quot;</span></span>}
 <span class="line-numbers">  23 </span>     {<span class="Constant"><span class="Constant">:</span>name</span>=&gt;<span class="Constant"><span class="Constant">:</span>id</span>, <span class="Constant"><span class="Constant">:</span>escape</span>=&gt;<span class="Constant">false</span>}
 <span class="line-numbers">  24 </span>       {<span class="Constant"><span class="Constant">:</span>value</span>=&gt;<span class="String"><span class="String">&quot;</span>test<span class="String">&quot;</span></span>}
 </pre>
-		<p>...</p>
-		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see PLACEHOLDER-1
-<span class="line-numbers">   2 </span> �<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span>
-<span class="line-numbers">   3 </span> [...]
+		<p>This output is produced by calling the <code>inspect</code> method on the AST. Each <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/SyntaxNode"><code>Glyph::SyntaxNode</code></a> object in the tree is basically an ordinary Glyph Hash with a parent and 0 or more chidren, so the code snippets above shows how the syntax nodes are nested.</p>
+		<p>The AST contains information about macro, parameter and attribute names, and escaping, and raw text values (the nodes without a <code>:name</code> key), but nothing more.</p>
+		<p>When the AST is analyzed, the resulting textual output is the following:</p>
+		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see �����PLACEHOLDER�1�����
+<span class="line-numbers">   2 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span>
+<span class="line-numbers">   3 </span> \[...\]
 <span class="line-numbers">   4 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
 <span class="line-numbers">   5 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">h2</span> <span class="MetaTag"><span class="MetaTag">id</span><span class="MetaTag">=</span><span class="String"><span class="String">&quot;</span><span class="String">test</span><span class="String">&quot;</span></span></span><span class="MetaTag">&gt;</span></span>Test Section<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">h2</span><span class="MetaTag">&gt;</span></span>
-<span class="line-numbers">   6 </span> [...]
+<span class="line-numbers">   6 </span> \[...\]
 <span class="line-numbers">   7 </span> 
 <span class="line-numbers">   8 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">div</span><span class="MetaTag">&gt;</span></span>
 </pre>
-		<p>...</p>
+		<p>This looks almost perfect, except that:</p>
+		<ul><li>There's a nasty placeholder instead of a link: this is due to the fact that when the link is processed, there is no <code>#text</code> anchor in the document, but there may be one afterwards (and there will be).</li>
+			<li>There are some escaped brackets.</li></ul>
+		<p>Finally, when the document is finalized, placeholders and escape sequences are removed and the final result is the following:</p>
 		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#test<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>Test Section<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span><span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span>
 <span class="line-numbers">   2 </span> [...]
 <span class="line-numbers">   3 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
@@ -1515,7 +1520,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 			<div class="section">
 <h3 id="h_43">Parameters and Attributes</h3>
-<p>Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the <em>raw value</em> of and attribute or parameter or its <em>expanded value</em>. The difference between the two will become clearer in the following sections and also in the <a href="#interpreting">‡‡‡‡‡PLACEHOLDER¤82‡‡‡‡‡</a> section.</p>
+<p>Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the <em>raw value</em> of and attribute or parameter or its <em>expanded value</em>. The difference between the two will become clearer in the following sections and also in the <a href="#interpreting">‡‡‡‡‡PLACEHOLDER¤83‡‡‡‡‡</a> section.</p>
 	<div class="section">
 <h4 id="h_44">Accessing Expanded Values</h4>
 <p>Normally, you just want to get the value of an attribute or parameter and use it in the macro. This means, in other words, its <em>expanded</em> value, i.e. the value resulting from the expansion of the macros (if any) within the attribute or parameter.</p>
@@ -1811,14 +1816,14 @@ Conditional <code>and</code> operator, to be used with the <a href="#m_condition
 
 <div class="section">
 <h4 id="m_decode">decode</h4>
-<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤123‡‡‡‡‡</a></span>.</p>
+<p>Decodes some text that was previously encoded (see <a href="#m_encode">encode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤124‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>**</code></p>
 <p><strong>Example:</strong> <code>*[=note‡‡¤91¤‡‡This will not be evaluated‡‡¤93¤‡‡=]</code></p>
 </div>
 
 <div class="section">
 <h4 id="m_encode">encode</h4>
-<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤121‡‡‡‡‡</a></span>.</p>
+<p>Encodes some Glyph code to prevent its evaluation, so that it can be decoded (and interpreted) later on (see the <a href="#m_decode">decode</a> macro). <span class="fmi">for more information on this topic, see <a href="#encode_decode">‡‡‡‡‡PLACEHOLDER¤122‡‡‡‡‡</a></span>.</p>
 <p><strong>Aliases:</strong> <code>*</code></p>
 <p><strong>Example:</strong> <code>*[=note[This will not be evaluated]=]</code></p>
 </div>
@@ -1955,7 +1960,7 @@ Boxes can be used to make a section of text stand out from the rest of the docum
 
 <div class="section">
 <h4 id="m_highlight">highlight</h4>
-<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤122‡‡‡‡‡</a></span>.</p>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">‡‡‡‡‡PLACEHOLDER¤123‡‡‡‡‡</a></span>.</p>
 <p><strong>Example:</strong></p>
 <p><code>highlight[ruby|
   def hello

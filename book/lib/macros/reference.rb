@@ -125,7 +125,12 @@ macro :config_table do
 end
 
 macro :class do
-	%{=>[link[&[yardoc]/#{value.gsub(/Glyph::/, '')}|code[#{value}]]]}
+	if value.match /Glyph::/ then
+		path = "Glyph/#{value.gsub /Glyph::/, ''}"
+	else
+		path = value
+	end
+	interpret %{=>[&[yardoc]/#{path}|code[#{value}]]}
 end
 
 
