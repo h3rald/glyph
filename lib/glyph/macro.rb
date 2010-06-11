@@ -220,6 +220,7 @@ module Glyph
 				result = interpreter.document.output
 			end
 			result.gsub(/\\*([\[\]])/){"\\#$1"}
+			result
 		end
 
 		# @see Glyph::Document#placeholder

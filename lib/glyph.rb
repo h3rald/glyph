@@ -39,15 +39,19 @@ module Glyph
 	class MacroError < Error
 		attr_reader :macro
 
+		# Initializes a new Glyph::MacroError
+		# @param [String] message the error message
+		# @param [Glyph::Macro] macro the macro that caused the error
 		def initialize(message, macro)
 			@macro = macro
 			super(message)
 		end
 
+		# Displays the error message, source, path and node value (if debugging)
 		def display
 			Glyph.warning exception.message
-			puts "    source: #{@macro.source}\n    path: #{@macro.path}"
-			puts "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
+			Glyph.msg "    source: #{@macro.source}\n    path: #{@macro.path}"
+			Glyph.msg "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
 		end
 	end
 	class MutualInclusionError < MacroError; end
@@ -262,7 +266,14 @@ module Glyph
 		result
 	end
 
+
 	# Prints a message
+	# @param [String] message the message to print
+	def self.msg(message)
+		puts message unless Glyph['system.quiet']
+	end
+
+	# Prints an informational message
 	# @param [String] message the message to print
 	def self.info(message)
 		puts "-- #{message}" unless Glyph['system.quiet']
