@@ -97,4 +97,15 @@ table[@class[features]
 		important[While macro names and attributes are validated so that an error is returned if they contain illegal character, no check is performed against any particular XML schema.]
 		txt[Additionally, it is possible to force macro-to-XML conversion by prepending an equal sign to any macro, so for example code[=\.=snippet[test]=] will be converted into @<snippet>test</snippet>@.]
 	]
+	section[
+		@title[Blacklisted XML tags]
+		@id[xml_blacklist]
+		txt[
+By default, the following tags are blacklisted and will be ignored:
+%[="* "+Glyph['language.options.xml_blacklist'].join("\n* ")=]
+
+tip[You can change this list by modifying the $>[language.options.xml_blacklist].]
+		]
+ 
+	]
 ]

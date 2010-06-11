@@ -13,4 +13,62 @@ That's pretty much it. Of course, both the @filter@ and @compile@ method cause G
 * =>[http://github.com/h3rald/h3rald/blob/master/Rules|Rules] -- using the @Glyph#compile@ method to generate PDF files.
 		]
 	]
+	section[
+		@title[Modes]
+		@id[modes]
+		p[It is possible to specify some flags (or "modes") to make Glyph behave slightly different than normal, as shown in the following table (by default, none of these is used).]
+		table[
+			tr[
+				th[Name]
+				th[Writer Method]
+				th[Reader Method]
+				th[Description]
+			]
+			tr[
+				td[Test Mode]
+				td[code[Glyph.test_mode=]]
+				td[code[Glyph.test?]]
+				td[Used internally by the code[rake spec] task to run Glyph's specs.]
+			]
+			tr[
+				td[Library Mode]
+				td[code[Glyph.library_mode=]]
+				td[code[Glyph.library?]]
+				td[If enabled, the #>[compile] command will raise exceptions instead of printing errors on the screen. Enabled by the code[Glyph.compile] command.]
+			]
+			tr[
+				td[Debug Mode]
+				td[code[Glyph.debug_mode=]]
+				td[code[Glyph.debug?]]
+				td[If enabled, additional diagnostic information (such as backtraces or macro values) will be displayed. Enabled by specifying the =>[#debug_switch|debug switch] when running a Glyph command.]
+			]
+			tr[
+				td[Lite Mode]
+				td[code[Glyph.lite_mode=]]
+				td[code[Glyph.lite?]]
+				td[
+					txt[
+Used to compile =>[#lite_mode|single files]. Enabled by:
+* The @Glyph.compile@ and @Glyph.filter@ methods.
+* The #>[compile], if at least one parameter is supplied.
+					]
+				]
+			]
+			tr[
+				td[Safe Mode]
+				td[code[Glyph.safe_mode=]]
+				td[code[Glyph.safe?]]
+				td[
+					txt[
+If enabled, the following macros cannot be used and will return an error:
+* %>[ruby]
+* %>[macro:]
+* %>[include]
+* %>[rewrite:]
+* %>[config:]
+					]
+				]
+			]
+		]
+	]
 ]

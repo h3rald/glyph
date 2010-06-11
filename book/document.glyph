@@ -40,7 +40,6 @@ book[
 			include[text_editing/images]
 			include[text_editing/code]
 			include[text_editing/raw_html]
-			![Add information about XML blacklist]
 			include[text_editing/stylesheets]
 			include[text_editing/inclusions]
 			include[text_editing/evaluation]
@@ -51,7 +50,6 @@ book[
 			include[compiling/compiling]
 			include[compiling/lite_mode]
 			include[compiling/programmatic_usage]
-			![Add section about Glyph modes]
 		]
 		chapter[
 			@title[Extending Glyph]
