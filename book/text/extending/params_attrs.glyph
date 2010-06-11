@@ -5,13 +5,68 @@ Perhaps the most common things to do in a macro definition is accessing paramete
 	]
 	section[
 		@title[Accessing Expanded Values]
+		@id[expanded_values]
 		txt[
 Normally, you just want to get the value of an attribute or parameter and use it in the macro. This means, in other words, its _expanded_ value, i.e. the value resulting from the expansion of the macros (if any) within the attribute or parameter.
 		]
-		![Write about methods related to expanded values, pros and cons, etc.]
+		txt[
+To access expanded values, use the following methods:
+* @parameter@ (or @param@): Returns the expanded value of the parameter specified by number. Other parameters are not expanded.
+* @value@: Returns the expanded value of the first parameter (i.e. like @parameter(0)@).
+* @attribute@ (or @attr@): Returns the expanded value of the attribute specified by name. Other attributes are not expanded.
+* @parameters@ (or @params@):  Returns an array of expanded parameters.
+* @attributes@ (or @attrs@):  Returns a hash of expanded attributes.
+ 
+		]
+		
 	]
 	section[
 		@title[Accessing Raw Values]
-		![Write intro about raw values, methods, pros and cons, etc.]
+		p[While accessing expanded values is simple and immediate, in some cases it may not produce the desired results. Consider the following macro definition:]
+		highlight[=ruby|
+macro :nest_section do
+  interpret %{section[
+    @title[A]
+    section[
+      @title[B]
+      #{value}
+    ]
+  ]}
+end
+		=]
+		p[And suppose to use it as follows:]
+		highlight[=ruby|
+nest_section[
+  section[
+    @title[Inner Section]
+    ...
+  ]
+]
+		=]
+		p[It produces the following HTML code:]
+		highlight[=html|
+<div class="section">
+  <h2 id="h_2">A</h2>
+  <div class="section">
+    <h3 id="h_3">B</h3>
+    <div class="section">
+      <h2 id="h_1">Inner Section</h2>
+...
+    </div>
+  </div>
+</div>
+		=]
+		p[Everything is fine em[except] for the header level: the heading "Inner Section" is of level 2, but it should be level 4!]
+		p[This happens because the inner section is evaluated em[before] the code[nest_section] macro: after all, we ask for it ourselves when we call the code[value] method inside the macro definition. When the value is expanded, there are no outer sections em[yet].]
+		p[To avoid this unwanted behavior, we can use the code[raw_value] method instead, which _converts the value back to Glyph code_, so that it is interpreted in the correct order.]
+		txt[
+To access raw values, use the following methods:
+* @raw_parameter@ (or @raw_param@): Returns the raw value of the parameter specified by number.
+* @raw_value@: Returns the raw value of the first parameter (i.e. like @raw_parameter(0)@).
+* @raw_attribute@ (or @raw_attr@): Returns the raw value of the attribute specified by name.
+* @raw_parameters@ (or @raw_params@):  Returns an array of expanded parameters.
+* @raw_attributes@ (or @raw_attrs@):  Returns a hash of expanded attributes.
+		]
+		tip[To be on the safe side, always use code[raw_*] methods when interpreting.]
 	]
 ]

@@ -62,10 +62,8 @@ book[
 			include[extending/bookmarks_headers]
 			include[extending/placeholders]
 			include[extending/validators]
---[
 			include[extending/interpreting]
 			include[extending/further_reading]
-]
 		]
 --[
 		chapter[
