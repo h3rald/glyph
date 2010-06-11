@@ -63,12 +63,14 @@ book[
 			include[extending/interpreting]
 			include[extending/further_reading]
 		]
---[
 		chapter[
 			@title[Troubleshooting]
-			textile[include[troubleshooting]]
+			textile[include[troubleshooting/errors_intro]]
+			textile[include[troubleshooting/errors_generic]]
+			textile[include[troubleshooting/errors_parser]]
+			textile[include[troubleshooting/errors_command]]
+			textile[include[troubleshooting/errors_macro]]
 		]
-]
 	]
 	@backmatter[
 		appendix[

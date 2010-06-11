@@ -1,0 +1,98 @@
+section[
+	@title[Macro Errors]
+	txt[
+The following errors are displayed in the form:
+
+em[message]
+ source: em[macro_source]
+ path: em[macro_path]
+
+em[macro_value]
+
+Where:
+* em[message] is the error message.
+* em[macro_source] is the file or snippet where the error occurred.
+* em[macro_path] is the full path to the macro that returned the error, within the document syntax tree, e.g. @document/body/bodymatter/chapter/section/header/&@ if the error occurrent in a snippet within the header of a section in the @bodymatter@ part of the document.
+* em[macro_value] is the value of the macro (shown only if Glyph is running in =>[#debug_switch|debug mode]).
+	]
+	error_table[
+		ref_error[Macro '\.em[name]' takes up to em[x] parameter(s) (\.em[y] given)|
+Returned if the macro was called with extra parameters.
+		]
+		ref_error[Macro '\.em[name]' takes at least em[x] parameter(s) (\.em[y] given)|
+Returned if the macro was called with fewer parameters than expected.
+		]
+		ref_error[Macro '\.em[name]' takes exactly em[x] parameter(s) (\.em[y] given)|
+Returned if the macro was called with a different number of parameters than.
+		]
+		ref_error[Macro not available when compiling a single file.|
+Returned by the %>[include] if used in =>[#lite_mode|lite mode].
+		]
+		ref_error[Filter macro '\.em[extension]' not available|
+Returned by a filter macro if $>[filters.byem[file]extension] is set to @true@, but the extension was not recognized.
+		]
+		ref_error[Invalid regular expression: em[regexp]|
+Returned by the %>[match] macro if an invalid regular expression was supplied.
+		]
+		ref_error[Macro '\.em[name]' takes no parameters (\.em[x] given)|
+Returned if the macro was called with parameters but none are requested.
+		]
+		ref_error[No highlighter installed. Please run: gem install coderay|
+Returned by the %>[highlight] macro if no highlighters are installed.
+		]
+		ref_error[CodeRay highlighter not installed. Please run: gem install coderay|
+Returned by the %>[highlight] macro if $>[highlighters.current] is set to @coderay@ but &[coderay] is not installed.
+		]
+		ref_error[UltraViolet highlighter not installed. Please run: gem install ultraviolet|
+Returned by the %>[highlight] macro if $>[highlighters.current] is set to @ultraviolet@ but &[uv] is not installed.
+		]
+		ref_error[Mutual Inclusion in parameter/attribute(\.em[name]): '\.em[value]'|
+Returned if a catch-22 situation occurs with macro inclusion, for example if the value of a snippet includes a reference to the same snippet.
+		]
+		ref_error[Snippet '\.em[snippet_id]' does not exist|
+Returned by the %>[snippet] if an invalid snippet ID was supplied.
+		]
+		ref_error[File '\.em[file_name]' not found|
+Returned by the %>[include] if an invalid file was supplied.
+		]
+		ref_error[Filter macro '\.em[macro_name]' not found|
+Returned by the %>[include] macro if the $>[filters.by_file_extension] is set to @true@ but the file extension of the included file is not recognized as a filter macro.
+		]
+		ref_error[RedCloth gem not installed. Please run: gem install RedCloth|
+Returned by the %>[textile] if the RedCloth gem is not installed.
+		]
+		ref_error[No MarkDown converter installed. Please run: gem install bluecloth|
+Returned by the %>[markdown] if no valid Markdown converter gem is installed. Glyph checks for: BlueCloth, Maruku, Kramdown and RDiscount.
+		]
+		ref_error[Image/Figure not found|
+Retured by the %>[image] or the %>[figure] respectively, if the specified image file could not be found within the code[images/] folder.
+		]
+		ref_error[Bookmark '\.em[bookmark_name]' already exists|
+Returned by the %>[anchor] or by the %>[header] if the anchor ID supplied as parameter has already been used in the document.
+		]
+		ref_error[Bookmark '\.em[bookmark_name]' already exists|
+Returned by the %>[link] if the anchor ID supplied as parameter has not been used in the document.
+		]
+		ref_error[Stylesheet '\.em[file_name]' not found|
+Returned by the %>[style] if the code[.css] or code[.sass] file supplied as parameter was not found in the code[styles/] directory.
+		]
+		ref_error[Haml is not installed. Please run: gem install haml|
+Returned by the %>[style] if a code[.sass] file was passed as parameter but the Haml gem is not installed.
+		]
+		ref_error[Invalid XML element: '\.em[element_name]'|
+An invalid XML element name was supplied to the code[\|xml\|] system macro (see =>[#other_elements]).
+		]
+		ref_error[Invalid XML element: '\.em[element_name]'|
+An invalid XML attribute name was supplied to the code[\|xml\|] system macro (see =>[#other_elements]).
+		]
+		ref_error[Macro '\.em[macro_name]' cannot be used in safe mode|
+Returned if a forbidden macro was used in safe mode (see =>[#modes]).
+		]
+		ref_error[Cannot reset 'system.\.em[setting_name]' setting (system use only).|
+Returned by the =>[config:] when attempting to override a setting in the code[system.*] namespace.
+		]
+		ref_error[Macro '\.em[macro_name]' cannot be defined by itself|
+Returned by the =>[rewrite:] if it contains a macro with the same name.
+		]
+	]
+]

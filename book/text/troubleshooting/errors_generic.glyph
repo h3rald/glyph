@@ -1,0 +1,29 @@
+section[
+	@title[Generic Errors]
+	error_table[
+		ref_error[Invalid alias: macro '\.em[macro_name]' already exists|
+The alias name supplied to the @macro_alias@ method has already been used for another macro or alias.
+		]
+		ref_error[Undefined macro '\.em[macro_name]'|
+The document contains a macro that does not exist, i.e. it is not a standard or used-defined =>[#macro_ref|Glyph macro or alias].
+		]
+		ref_error[An error occurred when generating _file-name_.pdf|
+Returned if Prince could not generate the PDF file or if Prince is not installed. Normally, Prince provides additional details on the specific error(s).
+		]
+		ref_error[Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting|
+Returned if the $>[tools.pdf_generator] has not be set to a valid PDF renderer. Currently, the only supported value for this setting is code[prince].
+		]
+		ref_error[The current directory is not a valid Glyph project|
+Returned if a glyph command was executed outside a valid glyph project directory.
+		]
+		ref_error[Invalid snippet file|
+The code[snippet.yml] file contains invalid data. Most likely, it does not evaluate to a Ruby code[Hash].
+		]
+		ref_error[Directory '\.em[directory_name]' is not empty|
+	Returned when executing the #>[init] in a directory that is not empty.
+		]
+		ref_error[File '\.em[file_name]' already exists|
+Returned if the name of an existing file was specified as a parameter for the #>[add].
+		]
+	]
+] 

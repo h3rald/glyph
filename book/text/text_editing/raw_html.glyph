@@ -4,6 +4,7 @@ txt[So far we examined how to create @<div>@ tags for sections, links, images...
 * rely Glyph's _XML fallback_ feature
 ]
 	@title[Other HTML Elements]
+	@id[other_elements]
 	section[
 		@title[&[markups]]
 		p[&[markups] are very easy and intuitive to use, and they can produce HTML markup with almost no effort. Using them with Glyph is as simple as using the %>[textile] (aliased to code[txt]) and the %>[markdown] (aliased to code[md]).]

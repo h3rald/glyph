@@ -1,0 +1,39 @@
+section[
+	@title[Command Errors]
+	error_table[
+		ref_error[Source file '\.em[source_file]' does not exist|
+Returned if Glyph is running in =>[#lite_mode|lite mode] and the specified source file was not found.
+		]
+		ref_error[Source and destination file are the same|
+Returned if Glyph is running in =>[#lite_mode|lite mode] and you specified the same source and destination files.
+		]
+		ref_error[DirectoryWatcher is not available. Install it with: gem install directory_watcher|
+Returned if =>[#auto_regeneration|auto regeneration] is enabled but the code[directory_watcher] gem in not installed.
+		]
+		ref_error[Document cannot be finalized due to previous errors|
+Returned if one or more errors occurred in the document prevented finalization.
+		]
+		ref_error[Please specify a file name|
+No file name was specified for the #>[add].
+		]
+		ref_error[Output target not specified|
+Returned if no target was specified for the #>[compile] _and_ if the $>[document.output] is not set.
+		]
+		ref_error[Unknown output target '\.em[target_name]'|
+An unsupported output target was specified for the #>[compile]. Only the following output targets are supported:
+			ul[
+				li[html]
+				li[pdf]
+			]
+		]
+		ref_error[Too few/too many arguments|
+Returned if the #>[config] was used with no arguments or more than two arguments respectively.
+		]
+		ref_error[Unknown setting '\.em[setting_name]'|
+The name of an unknown setting was specified for the #>[config].
+		]
+		ref_error[Cannot reset '\.em[setting_name]' setting (system use only).|
+Returned by the #>[config] when attempting to override a setting in the code[system.*] namespace.
+		]
+	]
+] 
