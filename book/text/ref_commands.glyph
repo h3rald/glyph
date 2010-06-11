@@ -1,111 +1,117 @@
+txt[
 Glyph's command-line interface has been built using the =>[http://github.com/davetron5000/gli|gli] (Git-like interface) gem. Therefore, Glyph commands are all written like this:
 
-@glyph@ _global-options_ command _options_ _parameters_
+strong[glyph] em[global_options] strong[command] em[options] em[parameters]
 
 Where:
-* _global-options_ and _options_ are in the form: @-n@ _value_ or @--name=@\._value_, e.g. @-f pdf@ or @--format=pdf@
+* em[global_options] and _options_ are in the form: @-n@ _value_ or @--name=@\._value_, e.g. @-f pdf@ or @--format=pdf@
 * _parameters_ are separated by whitespaces, and can be wrapped in quotes.
-
-section[
-@title[Global Options]
-
-section[
-@title[@-d@, @--debug@]
-@id[debug_switch]
-If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.
 ]
-]
-
 section[
-@title[@add@]
-@id[c_add]
-Creates a new text file in the @text/@ folder.
-
-example[glyph add introduction.textile]
-
-parameters[
--p[_file-name_|The name (or relative path) of the new file to be created.]
+	@title[Global Options]
+	section[
+		@title[code[-d], code[--debug]]
+		@id[debug_switch]
+		p[If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.]
+	]
 ]
-] --[End add]
-
 section[
-@title[@compile@]
-@id[c_compile]
-Compiles a Glyph document into an output file. If no options are specified, the @document.glyph@ file is used as source to produce a standalone HTML file.
-
-example[glyph compile -f pdf]
-
-parameters[
--p[_source_|The source glyph file to compile _(Optional)_.]
--p[_destination_|The destination file _(Optional)_.]
+	@title[code[add]]
+	@id[c_add]
+	p[Creates a new text file in the code[text/] folder.]
+	example[glyph add introduction.textile]
+	parameters[
+	-p[em[file_name]|The name (or relative path) of the new file to be created.]
+	]
 ]
-
-options[
--o[source|
+section[
+	@title[code[compile]]
+	@id[c_compile]
+	p[Compiles a Glyph document into an output file. If no options are specified, the code[document.glyph] file is used as source to produce a standalone HTML file.]
+	example[glyph compile -f pdf]
+	parameters[
+	-p[em[source]|The source glyph file to compile em[(Optional)].]
+	-p[em[destination]|The destination file em[(Optional)].]
+	]
+	options[
+		-o[source|
 The source file to compile. 
-default[document.glyph]
-]
--o[format|
+			default[document.glyph]
+	]
+		-o[format|
 The format of the output file.
-default[html]
-values[html, pdf]
-]
--o[auto|
+			default[html]
+			values[html, pdf]
+		]
+		-o[auto|
 If specified, enable =>[#auto_regeneration|auto regeneration] (requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed).
+		]
+	]
 ]
-]
-] --[End compile]
-
 section[
-@title[@config@]
-@id[c_config]
+	@title[code[config]]
+	@id[c_config]
 Gets or sets a configuration setting in the project or global configuration file (\.fmi[configuration files|#cfg]).
-
-examples[
+	examples[
 glyph config document.filename
 glyph config -g document.author "Fabio Cevasco"
-]
-
-options[
--o[global|
+	]
+	options[
+		-o[global|
 If specified, the global configuration file is processed instead of the project file.
-default[false]
+		default[false]
+		]
+	]
+	parameters[
+		-p[em[setting]|The name of a valid =>[#cfg_ref|configuration setting].]
+		-p[em[value]|The new value of the configuration setting.]
+	]
 ]
-]
-parameters[
--p[_setting_|The name of a valid =>[#cfg_ref|configuration setting].]
--p[_value_|The new value of the configuration setting.]
-]
-] --[End config]
-
 section[
-@title[@help@]
-@id[c_help]
+	@title[code[help]]
+	@id[c_help]
 Prints information about all Glyph commands or about one specific command.
-
-examples[
+	examples[
 glyph help
 glyph help compile
+	]
+	parameters[
+		-p[em[command]|A valid Glyph command.]
+	]
 ]
-
-parameters[
--p[_command_|A valid Glyph command.]
-]
-
-] --[End help]
-
 section[
-@title[@init@]
-@id[c_init]
+	@title[code[init]]
+	@id[c_init]
 Creates a new Glyph project in the current directory (if empty).
-
-example[glyph init]
-] --[End init]
-
+	example[glyph init]
+]
 section[
-@title[@todo@]
-@id[c_todo]
+	@title[code[outline]]
+	@id[c_outline]
+Display an outline of the current document.
+	options[
+		-o[limit|
+Only display headers until the specified level.
+		]
+		-o[ids|
+Display section IDs.
+		]
+		-o[files|
+Display file names.
+		]
+		-o[titles|
+Display section titles.
+		]
+	]
+	examples[
+glyph outline -it -l 1
+glyph outline -l 2
+glyph outline -f
+	]
+]
+section[
+	@title[code[todo]]
+	@id[c_todo]
 Prints all the todo items saved using the %>[todo].
-
-example[glyph todo]
-] --[End todo]
+	example[glyph todo]
+]

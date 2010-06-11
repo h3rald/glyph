@@ -4,8 +4,8 @@ section[
 The following errors are displayed in the form:
 
 em[message]
- source: em[macro_source]
- path: em[macro_path]
+&nbsp; source: em[macro_source]
+&nbsp;  path: em[macro_path]
 
 em[macro_value]
 

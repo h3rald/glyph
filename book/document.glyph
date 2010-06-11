@@ -76,17 +76,17 @@ book[
 		appendix[
 			@title[Command Reference]
 			@id[cmd_ref]
-			textile[include[ref_commands]]
+			include[ref_commands]
 		]
 		appendix[
 			@title[Macro Reference]
 			@id[macro_ref]
-			textile[include[ref_macros]]
+			include[ref_macros]
 		]
 		appendix[
 			@title[Configuration Reference]
 			@id[cfg_ref]
-			textile[include[ref_config]]
+			include[ref_config]
 		]
 		appendix[@title[Changelog]
 		include[changelog]

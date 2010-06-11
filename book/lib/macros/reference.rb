@@ -40,7 +40,8 @@ end
 
 macro :"parameters" do
 	interpret %{
-		section[header[#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-1]}]
+		section[
+			@title[#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-1]}]
 
 		<table style="width:100%;">
 			<tr>
@@ -58,7 +59,7 @@ macro :option do
 	desc = param(1)
 	%{
 		<tr>
-			<td><notextile>-#{ident[0..0]} (--#{ident})</notextile></td>
+			<td><code>-#{ident[0..0]}</code> (<code>--#{ident}</code>)</td>
 			<td>
 #{desc}
 			</td>
@@ -71,13 +72,15 @@ macro :values do
 end
 
 macro :example do
-	%{*Example:* <code>#{value}</code>}
+	%{<p><strong>Example:</strong> <code>#{value}</code></p>}
 end
 
 macro :examples do
 	%{
-*Examples:* 
-#{value.split("\n").map{|i| "@#{i}@\n"}.to_s}
+<div class="examples">
+<p><strong>Examples:</strong></p> 
+#{value.split("\n").map{|i| "<code>#{i}</code><br />"}.to_s}
+</div>
 	}
 end
 

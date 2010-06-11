@@ -29,7 +29,7 @@ command :compile do |c|
 	c.desc "Specify the format of the output file (default: html)"
 	c.flag [:f, :format]
 	c.desc "Auto-regenerate output on file changes"
-	c.switch :auto
+	c.switch [:a, :auto]
 	c.action do |global_options, options, args|
 		raise ArgumentError, "Too many arguments" if args.length > 2
 		Glyph.lite_mode = true unless args.blank? 
@@ -74,7 +74,7 @@ command :compile do |c|
 		end
 
 		# Auto-regeneration
-		if options[:auto] && !Glyph.lite? then
+		if options[:a] && !Glyph.lite? then
 			Glyph.lite_mode = false
 			begin
 				require 'directory_watcher'
