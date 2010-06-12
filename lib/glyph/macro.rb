@@ -18,7 +18,7 @@ module Glyph
 			@name = @node[:name]
 			@source = @node[:source][:name] rescue "--"
 		end
-
+=begin
 		# Returns the macro's raw attribute syntax nodes (See Glyph::MacroNode#attributes). 
 		# @return [Array<Glyph::AttributeNode>, nil] an array of attribute nodes
 		# @since 0.3.0
@@ -50,6 +50,15 @@ module Glyph
 		def raw_parameter(n)
 			raw_parameters[n]
 		end
+=end
+		
+		def raw_parameter(n)
+			@node.parameter(n).contents.to_s
+		end
+
+		def raw_attribute(name)
+			@node.attribute(name).contents.to_s
+		end
 
 		# Returns an evaluated macro attribute by name
 		# @param [String, Symbol] name the name of the attribute
@@ -59,9 +68,9 @@ module Glyph
 		# @since 0.3.0
 		def attribute(name, options={:strip => true})
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
-			return nil unless raw_attribute(name)
+			return nil unless @node.attribute(name)
 			@attributes = {} unless @attributes
-			@attributes[name] = raw_attribute(name).evaluate(@node, :attrs => true).to_s
+			@attributes[name] = @node.attribute(name).evaluate(@node, :attrs => true).to_s
 			@attributes[name].strip! if options[:strip]
 			@attributes[name]
 		end
@@ -74,9 +83,9 @@ module Glyph
 		# @since 0.3.0
 		def parameter(n, options={:strip => true})
 			return @parameters[n] if @parameters && @parameters[n]
-			return nil unless raw_parameter(n)
-			@parameters = Array.new(raw_parameters.length) unless @parameters
-			@parameters[n] = raw_parameter(n).evaluate(@node, :params => true).to_s
+			return nil unless @node.parameter(n)
+			@parameters = Array.new(@node.parameters.length) unless @parameters
+			@parameters[n] = @node.parameter(n).evaluate(@node, :params => true).to_s
 			@parameters[n].strip! if options[:strip]
 			@parameters[n]
 		end
@@ -89,7 +98,7 @@ module Glyph
 		def attributes(options={:strip => true})
 			return @attributes if @attributes
 			@attributes = {}
-			raw_attributes.each do |value|
+			@node.attributes.each do |value|
 				@attributes[value[:name]] = value.evaluate(@node, :attrs => true)
 				@attributes[value[:name]].strip! if options[:strip]
 			end
@@ -104,7 +113,7 @@ module Glyph
 		def parameters(options={:strip => true})
 			return @parameters if @parameters
 			@parameters = []
-			raw_parameters.each do |value|
+			@node.parameters.each do |value|
 				@parameters << value.evaluate(@node, :params => true)
 				@parameters.last.strip! if options[:strip]
 			end
@@ -115,9 +124,7 @@ module Glyph
 		alias param parameter
 		alias attrs attributes
 		alias attr attribute
-		alias raw_params raw_parameters
 		alias raw_param raw_parameter
-		alias raw_attrs raw_attributes
 		alias raw_attr raw_attribute
 
 		# Equivalent to Glyph::Macro#parameter(0).

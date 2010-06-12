@@ -162,7 +162,11 @@ module Glyph
 			children.join
 		end
 
-		alias contents to_s
+		# @return [String] a textual representation of the parameter contents
+		# @since 0.3.0 
+		def contents
+			parent[:escape] ? ".[=#{children.join}=]" : children.join
+		end
 
 		# @param [Glyph::MacroNode] context the context of the macro
 		# @param [Hash] options a hash of options
@@ -191,7 +195,7 @@ module Glyph
 		# @return [String] a textual representation of the attribute contents
 		# @since 0.3.0 
 		def contents
-			children.join
+			self[:escape] ? ".[=#{children.join}=]" : children.join
 		end
 
 		# @param [Glyph::MacroNode] context the context of the macro

@@ -44,11 +44,11 @@ module Glyph
 			# @option options :level the error level (:error, :warning)
 			# @return [Boolean] whether the validation passed or not
 			def max_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{raw_parameters.length} given)", options) do
+				validate("Macro '#{@name}' takes up to #{n} parameter(s) (#{@node.params.length} given)", options) do
 					if n == 0 then
 						no_parameters options
 					else
-						raw_parameters.length <= n 
+						@node.params.length <= n 
 					end
 				end
 			end
@@ -59,7 +59,7 @@ module Glyph
 			# @option options :level the error level (:error, :warning)
 			# @return [Boolean] whether the validation passed or not
 			def min_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes at least #{n} parameter(s) (#{raw_parameters.length} given)", options) { raw_parameters.length >= n }
+				validate("Macro '#{@name}' takes at least #{n} parameter(s) (#{@node.params.length} given)", options) { @node.params.length >= n }
 			end
 
 			# Ensures that the macro receives exactly _n_ parameters.
@@ -68,11 +68,11 @@ module Glyph
 			# @option options :level the error level (:error, :warning)
 			# @return [Boolean] whether the validation passed or not
 			def exact_parameters(n, options={:level=>:error})
-				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{raw_parameters.length} given)", options) do
+				validate("Macro '#{@name}' takes exactly #{n} parameter(s) (#{@node.params.length} given)", options) do
 					if n == 0 then
 						no_parameters options
 					else
-						raw_parameters.length == n 
+						@node.params.length == n 
 					end
 				end
 			end
@@ -82,13 +82,13 @@ module Glyph
 			# @option options :level the error level (:error, :warning)
 			# @return [Boolean] whether the validation passed or not
 			def no_parameters(options={:level=>:error})
-				validate("Macro '#{@name}' takes no parameters (#{raw_parameters.length} given)", options) do 
-					case raw_parameters.length
+				validate("Macro '#{@name}' takes no parameters (#{@node.params.length} given)", options) do 
+					case @node.params.length
 					when 0 then
 						true
 					when 1 then
 						result = true
-						raw_parameters[0].children.each do |p|
+						@node.param(0).children.each do |p|
 							result = p.is_a?(Glyph::TextNode) && p[:value].blank?
 							break unless result
 						end

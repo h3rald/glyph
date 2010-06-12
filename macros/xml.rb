@@ -27,7 +27,7 @@ macro "|xml|" do
 			xml_attributes = " "+xml_attributes unless xml_attributes.blank?
 			end_first_tag = param(0) ? ">" : ""
 			end_tag = param(0) ? "</#{name}>" : " />"
-			contents = (raw_param(0)&0) && (raw_param(0)&0)[:element] ? "\n#{param(0)}\n" : param(0)
+			contents = (@node.param(0)&0) && (@node.param(0)&0)[:element] ? "\n#{param(0)}\n" : param(0)
 			%{<#{name}#{xml_attributes}#{end_first_tag}#{contents}#{end_tag}}
 	end
 end

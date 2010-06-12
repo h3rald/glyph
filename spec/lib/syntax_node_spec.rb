@@ -98,5 +98,14 @@ describe Glyph::MacroNode do
 		@n.attribute(:a).should == @a
 		@n.attributes.should == [@a]
 	end
+
+	it "should convert escaping attributes and parameters to strings properly" do
+		@a[:escape] = true
+		@a.to_s.should == "@a[=test=]"
+		@a.contents.should == ".[=test=]"
+		@p.parent[:escape] = true
+		@p.to_s.should == "test"
+		@p.contents.should == ".[=test=]"
+	end
 	
 end

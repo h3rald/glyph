@@ -143,12 +143,12 @@ describe Glyph::Macro do
 		p10 = p_node 0
 		(p1&0) << p10
 		p10 << text_node("---")
-		m.raw_parameters.should == [p0, p1]
-		m.raw_parameters[0][:value].should == nil
-		m.raw_parameters[1][:value].should == nil
+		m.node.parameters.should == [p0, p1]
+		m.node.parameters[0][:value].should == nil
+		m.node.parameters[1][:value].should == nil
 		m.parameter(0).should == "<em>...</em>"
-		m.raw_parameters[0][:value].should == "<em>...</em>"
-		m.raw_parameters[1][:value].should == nil
+		m.node.parameters[0][:value].should == "<em>...</em>"
+		m.node.parameters[1][:value].should == nil
 	end
 
 	it "should not evaluate parameters unless specifically requested" do
@@ -168,12 +168,12 @@ describe Glyph::Macro do
 		p10 = p_node 0
 		(p1&0) << p10
 		p10 << text_node("---")
-		m.raw_attributes.should == [p0, p1]
-		m.raw_attribute(:a)[:value].should == nil
-		m.raw_attribute(:b)[:value].should == nil
+		m.node.attributes.should == [p0, p1]
+		m.node.attribute(:a)[:value].should == nil
+		m.node.attribute(:b)[:value].should == nil
 		m.attribute(:a).should == "<em>...</em>"
-		m.raw_attribute(:a)[:value].should == "<em>...</em>"
-		m.raw_attribute(:b)[:value].should == nil
+		m.node.attribute(:a)[:value].should == "<em>...</em>"
+		m.node.attribute(:b)[:value].should == nil
 	end
 
 	it "should expose a path method to determine its location" do

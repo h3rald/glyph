@@ -179,23 +179,21 @@ macro "rewrite:" do
 	safety_check
 	exact_parameters 2
 	macro_name = param(0).to_sym
-	raw_param(1).descend do |n, level|
+	@node.param(1).descend do |n, level|
 		if n[:name] == macro_name then
 			macro_error "Macro '#{macro_name}' cannot be defined by itself"
 		end
 	end
-	string = raw_param(1).to_s
+	string = raw_param(1)
 	Glyph.macro macro_name do
 		s = string.dup
 		# Parameters
 		s.gsub!(/\{\{(\d+)\}\}/) do
-			p = raw_param($1.to_i)
-			p.to_s.strip
+			raw_param($1.to_i).strip
 		end
 		# Attributes
 		s.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
-			a = raw_attr($1.to_sym)
-			a.contents.to_s.strip rescue ""
+			raw_attr($1.to_sym).strip
 		end
 		interpret s
 	end
