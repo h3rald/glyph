@@ -1,36 +1,40 @@
 section[
-@title[Filter Macros]
-@id[f_macros]
+	@title[Filter Macros]
+	@id[f_macros]
 
-ref_macro[markdown|
-Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the $>[filters.target] is set to @html@.
+	ref_macro[
+		@n[markdown]
+		@desc[
+Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the $>[filters.target] is set to @html@.
 
 &[called_on_files] with a @.markdown@ or a @.md@ extension. 
+		]
+		@aliases[md]
+		@example[=markdown[This is *emphasized* text.]=]
+		@params[-p[0|The Markdown text to filter.]]
+	]
 
-example[=markdown[This is *emphasized* text.]=]
-]
+	ref_macro[
+		@n[textile]
+		@desc[
+Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the $>[filters.target].
 
-ref_macro[textile|
-Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the $>[filters.target]. 
+&[called_on_files] with a @.textile@ or a @.txt@ extension. 
+		]
+		@aliases[txt]
+		@example[=textile[This is a *strong emphasis*.]=]
+		@params[-p[0|The Textile text to filter.]]
+	]
 
-&[called_on_files] with a @.textile@ extension. 
-
-example[=textile[This is a *strong emphasis*.]=]
-]
-
-ref_macro[highlight|
-Highlights a piece of source code (second parameter) according to the specified language (first parameter). fmi[code highligting|#source_code].
-
-*Example:*
-
-code[=
+	ref_macro[
+		@n[highlight]
+		@desc[Highlights a piece of source code (second parameter) according to the specified language (first parameter). fmi[code highligting|#source_code].]
+		@block_example[=
 highlight[ruby\|
   def hello
     puts "Hello World"
   end
 ]
-=]
-
+		=]
+	]
 ]
-] --[End filter macros]
-

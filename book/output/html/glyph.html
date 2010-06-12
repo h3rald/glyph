@@ -371,7 +371,7 @@ June 2010
 <li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li>
 <li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li>
 <li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li>
-<li class="bodymatter section"><a href="#h_21">Source Code</a></li>
+<li class="bodymatter section"><a href="#source_code">Source Code</a></li>
 <li class="bodymatter section"><a href="#other_elements">Other HTML Elements</a></li>
 <li><ol><li class="bodymatter section"><a href="#h_23">Textile or Markdown</a></li>
 <li class="bodymatter section"><a href="#h_24">XML Fallback</a></li>
@@ -548,20 +548,29 @@ June 2010
 </ol></li>
 <li class="appendix section"><a href="#m_todo"><code>todo</code></a></li>
 </ol></li>
+<li class="appendix section"><a href="#f_macros">Filter Macros</a></li>
+<li><ol><li class="appendix section"><a href="#m_markdown"><code>markdown</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_151">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_textile"><code>textile</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_153">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_highlight"><code>highlight</code></a></li>
+</ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_153">structure.*</a></li>
-<li class="appendix section"><a href="#h_154">tools.*</a></li>
+<li class="appendix section"><a href="#h_159">structure.*</a></li>
+<li class="appendix section"><a href="#h_160">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_155">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_156">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_157">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_158">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_161">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_162">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_163">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_164">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_159">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_165">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -1088,7 +1097,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div> 
 
 			<div class="section">
-<h3 id="h_21">Source Code</h3>
+<h3 id="source_code">Source Code</h3>
 <p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
 <p>Cosider the following piece of ruby code:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> def find_child(&amp;block)
@@ -1351,7 +1360,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 16:01:48 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 16:11:52 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -3497,6 +3506,83 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 </div>
 
 </div>
+			<div class="section">
+<h3 id="f_macros">Filter Macros</h3>
+<div class="section">
+<h4 id="m_markdown"><code>markdown</code></h4>
+<p>Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into <span class="caps">HTML</span> if the <a href="#s_filters_target">filters.target</a> setting is set to <code>html</code>.</p>
+<p>If the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.markdown</code> or a <code>.md</code> extension.</p>
+<strong>Aliases:</strong> <code>md</code>
+<p><strong>Example:</strong> <code>markdown[This is *emphasized* text.]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_151">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The Markdown text to filter.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_textile"><code>textile</code></h4>
+<p>Uses the RedCloth gem to transform the value into <span class="caps">HTML</span> or LaTeX, depending on the value of the <a href="#s_filters_target">filters.target</a> setting.</p>
+<p>If the <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.textile</code> or a <code>.txt</code> extension.</p>
+<strong>Aliases:</strong> <code>txt</code>
+<p><strong>Example:</strong> <code>textile[This is a *strong emphasis*.]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_153">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The Textile text to filter.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_highlight"><code>highlight</code></h4>
+<p>Highlights a piece of source code (second parameter) according to the specified language (first parameter). <span class="fmi">for more information on code highligting, see <a href="#source_code">Source Code</a></span>.</p>
+
+
+
+		<div class="example"><p>
+<strong>Example</strong>
+</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> highlight[ruby|
+<span class="line-numbers">   2 </span>   def hello
+<span class="line-numbers">   3 </span>     puts &quot;Hello World&quot;
+<span class="line-numbers">   4 </span>   end
+<span class="line-numbers">   5 </span> ]
+</pre></div>
+
+</div>
+
+</div>
 
 </div>
 		<div class="appendix">
@@ -3622,7 +3708,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 </div> 
 
 <div class="section">
-<h3 id="h_153">structure.*</h3>
+<h3 id="h_159">structure.*</h3>
 The following configuration settings are used internally by Glyph and should not be changed by the user.
 
 	<table><tr><th>Name</th>
@@ -3657,7 +3743,7 @@ The following configuration settings are used internally by Glyph and should not
 </div> 
 
 <div class="section">
-<h3 id="h_154">tools.*</h3>
+<h3 id="h_160">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
@@ -3671,11 +3757,11 @@ The following configuration settings are used internally by Glyph and should not
 
 </div>
 		<div class="appendix">
-<h2 id="h_155">Changelog</h2>
+<h2 id="h_161">Changelog</h2>
 <div class="section">
-<h3 id="h_156">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_162">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_157">23 Features Implemented</h4>
+<h4 id="h_163">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3717,7 +3803,7 @@ The following configuration settings are used internally by Glyph and should not
 	
 	
 		<div class="section">
-<h4 id="h_158">17 Bugs Fixed</h4>
+<h4 id="h_164">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3751,7 +3837,7 @@ The following configuration settings are used internally by Glyph and should not
 </div>
 
 	<div class="section">
-<h3 id="h_159">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_165">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

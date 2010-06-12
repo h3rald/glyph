@@ -84,8 +84,8 @@ book[
 			include[macros/macros_core]
 			include[macros/macros_block]
 			include[macros/macros_inline]
---[
 			include[macros/macros_filters]
+--[
 			include[macros/macros_structure]
 ]
 		]
