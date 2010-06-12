@@ -18,46 +18,13 @@ module Glyph
 			@name = @node[:name]
 			@source = @node[:source][:name] rescue "--"
 		end
-=begin
-		# Returns the macro's raw attribute syntax nodes (See Glyph::MacroNode#attributes). 
-		# @return [Array<Glyph::AttributeNode>, nil] an array of attribute nodes
-		# @since 0.3.0
-		def raw_attributes
-			return @raw_attributes if @raw_attributes
-			@raw_attributes = @node.attributes
-		end
-
-		# Returns the macro's raw parameter syntax nodes (See Glyph::MacroNode#parameters). 
-		# @return [Array<Glyph::ParameterNode>, nil] an array of parameter nodes
-		# @since 0.3.0
-		def raw_parameters
-			return @raw_parameters if @raw_parameters
-			@raw_parameters = @node.parameters
-		end
-
-		# Returns the attribute syntax node with the specified name (See Glyph::MacroNode#attribute). 
-		# @param [Symbol] name the name of the attribute
-		# @return [Glyph::AttributeNode, nil] an attribute node
-		# @since 0.3.0
-		def raw_attribute(name)
-			raw_attributes.select{|n| n[:name] == name}[0]
-		end
-
-		# Returns the parameter syntax node at the specified index (See Glyph::MacroNode#parameter). 
-		# @param [Fixnum] n the index of the parameter 
-		# @return [Glyph::ParameterNode, nil] a parameter node
-		# @since 0.3.0
-		def raw_parameter(n)
-			raw_parameters[n]
-		end
-=end
 		
 		def raw_parameter(n)
-			@node.parameter(n).contents.to_s
+			@node.parameter(n).contents.to_s rescue nil
 		end
 
 		def raw_attribute(name)
-			@node.attribute(name).contents.to_s
+			@node.attribute(name).contents.to_s rescue nil
 		end
 
 		# Returns an evaluated macro attribute by name

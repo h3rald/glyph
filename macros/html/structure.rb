@@ -29,12 +29,12 @@ end
 
 macro :article do
 	exact_parameters 1
-	head = @node.attr(:head).contents rescue nil
+	head = raw_attr(:head)
  	head ||= %{style[default.css]}
-	pre_title = @node.attr(:"pre-title").contents rescue nil
-	post_title = @node.attr(:"post-title").contents rescue nil
+	pre_title = raw_attr(:"pre-title")
+	post_title = raw_attr(:"post-title")
 	pubdate = @node.attr(:pubdate) ? "div[@class[pubdate]#{@node.attr(:pubdate).contents}]" : "pubdate[]"
-	halftitlepage = @node.attr(:halftitlepage).contents rescue nil
+	halftitlepage = raw_attr(:halftitlepage)
 	halftitlepage ||= %{
 			#{pre_title}
 			title[]
@@ -57,11 +57,11 @@ end
 
 macro :book do
 	no_parameters
-	head = @node.attr(:head).contents rescue nil 
+	head = raw_attr(:head) 
 	head ||= %{style[default.css]}
-	pre_title = @node.attr(:"pre-title").contents rescue nil
-	post_title = @node.attr(:"post-title").contents rescue nil
-	titlepage = @node.attr(:titlepage).contents rescue nil
+	pre_title = raw_attr(:"pre-title")
+	post_title = raw_attr(:"post-title")
+	titlepage = raw_attr(:titlepage)
 	pubdate = @node.attr(:pubdate) ? "div[@class[pubdate]#{@node.attr(:pubdate).contents}]" : "pubdate[]"
 	titlepage ||= %{
 			#{pre_title}
@@ -72,9 +72,9 @@ macro :book do
 			#{pubdate}
 			#{post_title}
 	}
-	frontmatter = @node.attr(:frontmatter).contents rescue nil
-	bodymatter = @node.attr(:bodymatter).contents rescue nil
-	backmatter = @node.attr(:backmatter).contents rescue nil
+	frontmatter = raw_attr(:frontmatter)
+	bodymatter = raw_attr(:bodymatter)
+	backmatter = raw_attr(:backmatter)
 	frontmatter = "frontmatter[\n#{frontmatter}\n]" if frontmatter
 	bodymatter = "bodymatter[\n#{bodymatter}\n]" if bodymatter
 	backmatter = "backmatter[\n#{backmatter}\n]" if backmatter
