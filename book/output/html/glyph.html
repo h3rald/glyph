@@ -588,11 +588,15 @@ June 2010
 <li class="appendix section"><a href="#h_176">tools.*</a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#h_177">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_178">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_179">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_180">17 Bugs Fixed</a></li>
+<li><ol><li class="appendix section"><a href="#h_178">v0.3.0 &ndash; June 13th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_179">27 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_180">7 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_181">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_181">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_182">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_183">17 Bugs Fixed</a></li>
+</ol></li>
+<li class="appendix section"><a href="#h_184">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -1382,7 +1386,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 22:03:36 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 22:37:06 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -4005,7 +4009,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>The title of the document, displayed using the <a href="#m_title">title</a> macro.</p></td>
 		<td><code>""</code></td></tr></table>
 
-</div> 
+</div>
 
 <div class="section">
 <h3 id="cfg_filters">filters.*</h3>
@@ -4120,9 +4124,78 @@ The following configuration settings are related to the current Glyph document. 
 		<div class="appendix">
 <h2 id="h_177">Changelog</h2>
 <div class="section">
-<h3 id="h_178">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_178">v0.3.0 &ndash; June 13th 2010</h3>
 <div class="section">
-<h4 id="h_179">23 Features Implemented</h4>
+<h4 id="h_179">27 Features Implemented</h4>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/39">#39</a></td>
+		<td><p>A new <a href="#c_outline">outline</a> command is available to display the document outline.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/110">#110</a></td>
+		<td><p>It is now possible to use Glyph language to produce arbitrary <span class="caps">XML</span> code.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/111">#111</a></td>
+		<td><p>System settings are now stored within a <code>system.*</code> namespace and cannot be changed via the <a href="#m_config_">config:</a> macro or the <a href="#c_config">config</a> command.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/116">#116</a></td>
+		<td><p>It is now possible to use named attributes within Glyph macros.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/119">#119</a></td>
+		<td><p><a id="new_parser"></a>A new parser was implemented from scratch to improve performance. Treetop gem no longer required.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/121">#121</a></td>
+		<td><p>Some macros have been removed in favor of <span class="caps">XML</span> fallback, others have been updated.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/123">#123</a></td>
+		<td><p>The SyntaxNode class has been specialized to differentiate between macros, attributes, parameters, text and escapes.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/124">#124</a></td>
+		<td><p>Implemented new <a href="#m_article">article</a> macro and <a href="#m_book">book</a> macro.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/126">#126</a></td>
+		<td><p>A new <a href="#m_rewrite_">rewrite:</a> macro has been implemented to create simple macros using just Glyph code.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/127">#127</a></td>
+		<td><p>A new <a href="#m_alias">alias</a> macro has been implemented to create macro aliases.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/128">#128</a></td>
+		<td><p>A blacklist for <span class="caps">XML</span> tags has been exposed via the <a href="#s_language_options_xml_blacklist">language.options.xml_blacklist</a> setting.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/129">#129</a></td>
+		<td><p>The <a href="#m_include">include</a> macro can now be used in lite mode, it can evaluate ruby files and requires relative paths.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/130">#130</a></td>
+		<td><p>A new &#8220;safe mode&#8221; has been implemented to explicitly forbid certain potentially unsafe macros.</p></td></tr></table>
+
+</div>
+	
+	
+		<div class="section">
+<h4 id="h_180">7 Bugs Fixed</h4>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/109">#109</a></td>
+		<td><p>Performance has been dramatically improved by implementing a parser from scratch (see <a href="#new_parser">#119</a>)</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/122">#122</a></td>
+		<td><p>Macro encoding/decoding no longer necessary due to the new parser (see <a href="#new_parser">#119</a>)</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/125">#125</a></td>
+		<td><p>Warning messages have been streamlined.</p></td></tr></table>
+
+</div>
+
+</div>
+
+	<div class="section">
+<h3 id="h_181">v0.2.0 &ndash; May 9th 2010</h3>
+<div class="section">
+<h4 id="h_182">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4164,7 +4237,7 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_180">17 Bugs Fixed</h4>
+<h4 id="h_183">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4198,7 +4271,7 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_181">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_184">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

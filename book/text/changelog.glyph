@@ -33,6 +33,29 @@ rw:[issue|
 ?[%[lite?]|
 	%:[%>|"#@value macro"]
 	%:[#>|"#@value command"]
+	%:[$>|"#@value setting"]
+]
+release[0.3.0|June 13th 2010|
+	features[
+		issue[39|A new #>[outline] is available to display the document outline.]
+		issue[110|It is now possible to use Glyph language to produce arbitrary XML code.]
+		issue[111|System settings are now stored within a @system.*@ namespace and cannot be changed via the %>[config:] or the #>[config].]
+		issue[116|It is now possible to use named attributes within Glyph macros.]
+		issue[119|#[new_parser]A new parser was implemented from scratch to improve performance. Treetop gem no longer required.]
+		issue[121|Some macros have been removed in favor of XML fallback, others have been updated.]
+		issue[123|The SyntaxNode class has been specialized to differentiate between macros, attributes, parameters, text and escapes.]
+		issue[124|Implemented new %>[article] and %>[book].]
+		issue[126|A new %>[rewrite:] has been implemented to create simple macros using just Glyph code.]
+		issue[127|A new %>[alias] has been implemented to create macro aliases.]
+		issue[128|A blacklist for XML tags has been exposed via the $>[language.options.xml_blacklist].]
+		issue[129|The %>[include] can now be used in lite mode, it can evaluate ruby files and requires relative paths.]
+		issue[130|A new "safe mode" has been implemented to explicitly forbid certain potentially unsafe macros.]
+	]
+	bugs[
+		issue[109|Performance has been dramatically improved by implementing a parser from scratch (see =>[#new_parser|#119])]
+		issue[122|Macro encoding/decoding no longer necessary due to the new parser (see =>[#new_parser|#119])]
+		issue[125|Warning messages have been streamlined.]
+	]
 ]
 release[0.2.0|May 9th 2010|
 	features[

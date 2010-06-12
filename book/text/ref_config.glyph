@@ -33,7 +33,7 @@ The subtitle of the document, displayed using the %>[subtitle].
 The title of the document, displayed using the %>[title].
 		]
 	]
-] --[End document section]
+]
 
 section[
 	@title[filters.*]

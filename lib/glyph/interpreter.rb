@@ -12,8 +12,8 @@ module Glyph
 		def initialize(text, context={})
 			@context = context
 			@context[:source] ||= {:name => "--"}
-			@parser = Glyph::Parser.new text, @context[:source][:name]
 			@text = text
+			@parser = Glyph::Parser.new text, @context[:source][:name]
 		end
 
 		# @see Glyph::Document#analyze

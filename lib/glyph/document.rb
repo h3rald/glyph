@@ -32,13 +32,7 @@ module Glyph
 			@headers = []
 			@errors = []
 			@todos = []
-			if @tree.is_a? String then
-				# Document wasn't interpreted because it didn't contain macros
-				@output = @tree
-				@state = :finalized
-			else 
-				@state = :new
-			end
+			@state = :new
 		end
 
 
