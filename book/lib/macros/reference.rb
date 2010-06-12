@@ -35,10 +35,10 @@ macro :"$>" do
 end
 
 macro :default do
-	%{*Default Value:* @#{raw_value}@}
+	%{<strong>Default Value:</strong> <code>#{value}</code>}
 end
 
-macro :"parameters" do
+macro :parameters do
 	interpret %{
 		section[
 			@title[#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-1]}]
@@ -75,6 +75,18 @@ macro :example do
 	%{<p><strong>Example:</strong> <code>#{value}</code></p>}
 end
 
+macro :block_example do
+	@node[:source] = {:node => @node, :name => "block_example[]"}
+	interpret %{
+		div[@class[example]
+			p[strong[Example]]
+			highlight[=html|
+#{value}
+			=]
+		]
+	}
+end
+
 macro :examples do
 	%{
 <div class="examples">
@@ -85,17 +97,38 @@ macro :examples do
 end
 
 macro :aliases do
-	%{*Aliases:* @#{value}@}
+	%{<strong>Aliases:</strong> <code>#{value}</code>}
 end
 
 macro :ref_macro do
-	m_name = param(0)
- 	m_value = param(1)
+	m_name = raw_attr(:n)
+	m_value = raw_attr(:desc)
+	m_params = "parameters[#{raw_attr(:params)}]" if raw_attr(:params)
+	m_attrs = "attributes[#{raw_attr(:attrs)}]" if raw_attr(:attrs)
+	m_examples = "examples[#{raw_attr(:examples)}]" if raw_attr(:examples)
+	m_example = "example[#{raw_attr(:example)}]" if raw_attr(:example)
+	m_block_example = "block_example[#{raw_attr(:block_example)}]" if raw_attr(:block_example)
+	m_aliases = "aliases[#{raw_attr(:aliases)}]" if raw_attr(:aliases)
+	m_remarks = %{section[
+		@title[Remarks]
+			txt[
+#{raw_attr(:remarks)}
+			]
+		]} if raw_attr(:remarks)
 	interpret %{
 	section[
-@title[#{m_name}]
-@id[m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
+		@title[<code>#{m_name}</code>]
+		@id[m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
+		txt[
 #{m_value}
+		]
+#{m_aliases}
+#{m_example}
+#{m_block_example}
+#{m_examples}
+#{m_params}
+#{m_attrs}
+#{m_remarks}
 	]
 	}
 end
@@ -138,5 +171,7 @@ end
 
 
 macro_alias :options => :parameters
+macro_alias :attributes => :parameters
 macro_alias '-p' => :ref_error
+macro_alias '-a' => :ref_error
 macro_alias '-o' => :option

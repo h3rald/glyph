@@ -1,0 +1,45 @@
+section[
+@title[Structure Macros]
+
+ref_macro[body|
+Creates a @<body>@ tag.
+]
+
+ref_macro[div|
+Creates a @<div>@ tag.
+
+*Aliases:* codeph[%[=Glyph['system.structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
+]
+
+ref_macro[document|
+The root macro used in every Glyph document. It creates an @<html>@ tag.
+]
+
+ref_macro[head|
+Creates a @<head>@ tag, pre-populated with @title@ and author/copyright @<meta>@ tags.
+]
+
+ref_macro[header|
+Creates an @h2@, @h3@, @h4@, etc. header (\.fmi[using headers|#sec_head]).
+
+examples[=
+header[Introduction]
+header[Getting Started\|gs]
+=]
+]
+
+ref_macro[section|See =>[#m_div].]
+
+ref_macro[style|
+Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).
+
+example[=style[default.css]=]
+]
+
+ref_macro[toc|
+Generates a _Table of Contents_ based on how sections and headers are nested in the current document.
+
+example[=toc[]=]
+]
+
+] --[End structure macros]

@@ -5,7 +5,7 @@ book[
 		?[eq[$[filters.highlighter]|coderay]|style[coderay.css]]
 		?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/lazy.css]]
 	]
-	@logo[
+	@pre-title[
 		?[eq[$[document.output]|pdf]|image[@width[20%]@height[20%]glyph.svg]]
 		?[eq[$[document.output]|html]|image[@width[20%]@height[20%]glyph.png]]
 	]
@@ -65,11 +65,11 @@ book[
 		]
 		chapter[
 			@title[Troubleshooting]
-			textile[include[troubleshooting/errors_intro]]
-			textile[include[troubleshooting/errors_generic]]
-			textile[include[troubleshooting/errors_parser]]
-			textile[include[troubleshooting/errors_command]]
-			textile[include[troubleshooting/errors_macro]]
+			include[troubleshooting/errors_intro]
+			include[troubleshooting/errors_generic]
+			include[troubleshooting/errors_parser]
+			include[troubleshooting/errors_command]
+			include[troubleshooting/errors_macro]
 		]
 	]
 	@backmatter[
@@ -81,7 +81,13 @@ book[
 		appendix[
 			@title[Macro Reference]
 			@id[macro_ref]
-			include[ref_macros]
+			include[macros/macros_core]
+--[
+			include[macros/macros_filters]
+			include[macros/macros_block]
+			include[macros/macros_inline]
+			include[macros/macros_structure]
+]
 		]
 		appendix[
 			@title[Configuration Reference]

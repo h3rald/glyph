@@ -1,0 +1,45 @@
+section[
+@title[Inline Macros]
+
+ref_macro[anchor|
+Creates a named anchor (or bookmark).
+
+aliases[bookmark, #]
+example[=#[test\|Test Bookmark]=]
+]
+
+ref_macro[codeph|
+Wraps the value in a @<code>@ tag.
+
+example[=codeph[Kernel.instance_eval]=]
+
+]
+
+ref_macro[draftcomment|
+If the $>[document.draft] is set to @true@, displays a draft comment within the document.
+
+aliases[dc]
+
+example[=dc[This is printed only in draft documents.]=]
+
+]
+
+ref_macro[fmi|
+Creates a _For More Information_ link (for an example usage, see the %>[link]).
+
+example[=fmi[creating links\|#links]=]
+]
+
+ref_macro[link|
+Creates an hyperlink (\.fmi[creating links|#links]).
+
+aliases[\.=>]
+examples[=
+=>[#introduction]
+=>[#troub\|Troubleshooting]
+=>[http://www.h3rald.com\|H3RALD.com]
+=]
+]
+
+] --[End inline macros]
+

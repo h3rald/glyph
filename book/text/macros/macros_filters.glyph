@@ -1,0 +1,22 @@
+section[
+@title[Filter Macros]
+@id[f_macros]
+
+ref_macro[markdown|
+Uses a markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the $>[filters.target] is set to @html@.
+
+&[called_on_files] with a @.markdown@ or a @.md@ extension. 
+
+example[=markdown[This is *emphasized* text.]=]
+]
+
+ref_macro[textile|
+Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the $>[filters.target]. 
+
+&[called_on_files] with a @.textile@ extension. 
+
+example[=textile[This is a *strong emphasis*.]=]
+]
+
+] --[End filter macros]
+

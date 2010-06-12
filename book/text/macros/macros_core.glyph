@@ -1,0 +1,208 @@
+section[
+	@title[Core Macros]
+
+	ref_macro[
+		@n[alias]
+		@desc[Creates a macro alias.]
+		@params[
+			-p[0|The name of the alias.]
+			-p[1|The name of an existing macro.]
+		]
+		@example[=alias[s\|section]=]
+	]
+
+	ref_macro[
+		@n[and]
+		@desc[Conditional code[and] operator, to be used with the %>[condition].]
+		@params[&[bin_params]]
+		@example[=?[and[true\|false]\|This is never displayed.]=]
+	]
+
+	ref_macro[
+		@n[comment]
+		@desc[
+Evaluates to nothing. Used to add comments in a Glyph document that will not be displayed in output files. 
+		]
+		@aliases[--]
+		@params[-p[0|The contents to comment out]]
+		@example[=--[\.=>[#link\|This link will not be evaluated]]=]
+		@remarks[Macros are not expanded within comments.]
+	]
+
+	ref_macro[
+		@n[condition]
+		@desc[
+Tests a conditional expression. For more information, see =>[#cond_macros].
+		]
+		@aliases[?]
+		@params[
+			-p[0|The condition to test]
+			-p[1|The contents to expand if the condition is satisfied.]
+		]
+		@remarks[
+For examples see any of the following:
+* %>[and]
+* %>[or]
+* %>[not]
+* %>[match]
+* %>[eq]
+		]
+	]
+
+	ref_macro[
+		@n[config]
+		@desc[Returns the value of a configuration setting.]
+		@aliases[$]
+		@example[=$[document.author]=]
+		@params[
+			-p[0|The full name of a configuration setting.]	
+		]
+	]
+
+	ref_macro[
+		@n[config:]
+		@desc[Sets the value of a configuration setting.]
+		@aliases[$:]
+		@example[=$:[document.draft\|true]=]
+		@remarks[&[unsafe]]
+		@params[
+			-p[0|The full name of a configuration setting.]	
+			-p[0|The new value of the configuration setting]	
+		]
+	]
+	
+	ref_macro[
+		@n[eq]
+		@desc[Conditional equality operator, to be used with the %>[condition].]
+		@example[=?[eq[$[document.draft]\|true]\|This is displayed only in draft documents.]=]
+		@params[&[bin_params]]
+	]
+
+	ref_macro[
+		@n[escape]
+		@desc[Evaluates to its value. Commonly used with the escaping delimiters code[\[\=] and code[\=\]].]
+		@aliases[.]
+		@example[=.\[=Macros are escaped here =>[#test].=\]=]
+		@params[-p[0|The contents to escape.]]
+	]
+
+	ref_macro[
+		@n[include]
+		@desc[
+Evaluates to the contents of a text file stored in the @text/@ directory referenced by its relative path. If &[filter_by_ext], filters the contents of the file using the =>[#f_macros|filter macro] corresponding to the file extension.
+		]
+		@aliases[@]
+		@example[=include[frontmatter/introduction]=]
+		@params[-p[0|The file to include.]]
+		@remarks[
+			ul[
+				li[&[unsafe]]
+				li[@.glyph@ is assumed if no file extension is specified.]
+				li[
+This macro can also be used to include @.rb@ ruby files within the @lib@ directory. File contents are evaluated in the context of the =>[&[yardoc]/Glyph|Glyph] module.
+				]
+			]
+		]
+	]
+
+	ref_macro[
+		@n[match]
+		@desc[
+Checks a string against a regular expression.
+		]
+		@params[
+			-p[0|The string to check.]
+			-p[1|The regular expression to match against the string.]
+			-p[2|The contents to expand if the string matches.]
+		]
+		@remarks[This macro must be used with the %>[condition].]
+		@example[=?[match[Hello!\|/^hell/i]\|This is always displayed]=]
+	]
+
+	ref_macro[
+		@n[macro:]
+		@desc[Defines a macro.]
+		@remarks[
+			ul[
+				li[&[unsafe]]
+				li[The new macro &[only_after_declaration].]
+			]
+		]
+		@aliases[%:]
+		@example[=%:[test\|"<em>test: #{value}</em>"]=]
+		@params[
+			-p[0|The name of the new macro.]
+			-p[1|The macro definition (Ruby code).]
+		]
+	]
+		
+	ref_macro[
+		@n[not]
+		@desc[Conditional @not@ operator, to be used with the %>[condition].]
+		@example[=?[not[false]\|This is always displayed.]=]
+		@params[-p[0|The expression to negate]]
+	]
+
+	ref_macro[
+		@n[or]
+		@desc[Conditional @or@ operator, to be used with the %>[condition].]
+		@example[=?[or[true\|false]\|This is always displayed.]=]
+		@params[&[bin_params]]
+	]
+
+	ref_macro[
+		@n[rewrite:]
+		@desc[Defines a new macro by rewriting (for more information, see =>[#rewriting])]
+		@aliases[rw:]
+		@params[
+			-p[0|The name of the new macro.]
+			-p[0|The macro definition (Glyph code).]
+		]
+		@block_example[=
+rw:[release\|
+  section[
+    @title[Release {{0}}]
+    {{1}}
+  ]
+]
+		=]
+		@remarks[
+			ul[
+				li[The new macro &[only_after_declaration].]
+				li[&[unsafe]]
+			]
+		]
+	]
+
+	ref_macro[
+		@n[ruby]
+		@desc[Evaluates its value as Ruby code within the context of the =>[&[yardoc]/Glyph|Glyph] module.]
+		@aliases[%]
+		@examples[=
+%[Time.now]
+%[Glyph::VERSION]
+		=]
+		@params[-p[0|The Ruby code to evaluate.]]
+		@remarks[&[unsafe]]
+	]
+
+	ref_macro[
+		@n[snippet]
+		@desc[Returns the value of a snippet.]
+		@aliases[&]
+		@example[=&[glang]=]
+		@params[-p[0|The ID of the snippet to retrieve.]]
+	]
+
+	ref_macro[
+		@n[snippet:]
+		@desc[Defines a snippet.]
+		@remarks[The new snippet &[only_after_declaration].]
+		@aliases[&:]
+		@example[=&:[test\|This is a test]=]
+		@params[
+			-p[0|The ID of the new snippet.]
+			-p[1|The contents of the new snippet.]
+		]
+	]
+]

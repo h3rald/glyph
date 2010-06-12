@@ -16,13 +16,22 @@ module Glyph
 		def initialize(node)
 			@node = node
 			@name = @node[:name]
+			@embedded_source = nil
 			@source = @node[:source][:name] rescue "--"
 		end
 		
+		# Returns a Glyph code representation of the specified parameter
+		# @param [Fixnum] n the index of the parameter
+		# @return [String, nil] the string representation of the parameter
+		# @since 0.3.0
 		def raw_parameter(n)
 			@node.parameter(n).contents.to_s rescue nil
 		end
 
+		# Returns a Glyph code representation of the specified attribute
+		# @param [String, Symbol] name the name of the attribute
+		# @return [String, nil] the string representation of the attribute
+		# @since 0.3.0
 		def raw_attribute(name)
 			@node.attribute(name).contents.to_s rescue nil
 		end
@@ -185,7 +194,7 @@ module Glyph
 				result = string 
 			else
 				context = {}
-				context[:source] = @node[:source] || {:node => @node, :name => "#@name[...]"}
+				context[:source] = @embedded_source || {:node => @node, :name => "#@name[...]"}
 				context[:embedded] = true
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context

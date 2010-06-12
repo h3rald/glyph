@@ -11,3 +11,5 @@
 :coderay: "=>[http://coderay.rubychan.de/|Coderay]"
 :uv: "=>[http://ultraviolet.rubyforge.org/|Ultraviolet]"
 :yardoc: "http://yardoc.org/docs/h3rald-glyph"
+:unsafe: "This macro cannot be used in =>[#modes|safe mode]."
+:bin_params: "-p[0|The first expression to test]-p[1|The second expression to test]"
