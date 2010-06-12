@@ -1,45 +1,50 @@
 section[
-@title[Inline Macros]
+	@title[Inline Macros]
+	
+	ref_macro[
+		@n[anchor]
+		@desc[Creates a named anchor (or bookmark).]
+		@aliases[bookmark, #]
+		@example[=#[test\|Test Bookmark]=]
+		@params[
+			-p[0|The identifier of the bookmark]
+			-p[1|The contents of the bookmark &[opt]]
+		]
+	]
 
-ref_macro[anchor|
-Creates a named anchor (or bookmark).
+	ref_macro[
+		@n[draftcomment]
+		@desc[If the $>[document.draft] is set to @true@, displays a draft comment within the document.]
+		@aliases[dc]
+		@example[=dc[This is printed only in draft documents.]=]
+		@params[-p[0|The text of the comment.]]
+	]
 
-aliases[bookmark, #]
-example[=#[test\|Test Bookmark]=]
+	ref_macro[
+		@n[fmi]
+		@desc[Creates a _For More Information_ link (for an example usage, see the %>[link]).]
+		@example[=fmi[creating links\|#links]=]
+		@params[
+			-p[0|The object that needs additional explanation.]
+			-p[0|A valid bookmark within the document.]
+		]
+	]
+
+	ref_macro[
+		@n[link]
+		@desc[Creates an hyperlink (\.fmi[creating links|#links]).]
+		@aliases[\.=>]
+		@example[=\.=>[http://www.h3rald.com\|H3RALD.com]=]
+		@params[
+			-p[0|A valid bookmark within the document or an URL.]
+			-p[1|The text of the link &[opt].]
+		]
+	]
+
+	ref_macro[
+		@n[todo]
+		@aliases[!]
+		@desc[Saves the value as a TODO item, which can be printed using the #>[todo] and included in the document if the $>[document.draft] is set to @true@.]
+		@example[=todo[Remember to do this.]=]
+	]
 ]
-
-ref_macro[codeph|
-Wraps the value in a @<code>@ tag.
-
-example[=codeph[Kernel.instance_eval]=]
-
-]
-
-ref_macro[draftcomment|
-If the $>[document.draft] is set to @true@, displays a draft comment within the document.
-
-aliases[dc]
-
-example[=dc[This is printed only in draft documents.]=]
-
-]
-
-ref_macro[fmi|
-Creates a _For More Information_ link (for an example usage, see the %>[link]).
-
-example[=fmi[creating links\|#links]=]
-]
-
-ref_macro[link|
-Creates an hyperlink (\.fmi[creating links|#links]).
-
-aliases[\.=>]
-examples[=
-=>[#introduction]
-=>[#troub\|Troubleshooting]
-=>[http://www.h3rald.com\|H3RALD.com]
-=]
-]
-
-] --[End inline macros]
-

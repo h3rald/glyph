@@ -13,3 +13,6 @@
 :yardoc: "http://yardoc.org/docs/h3rald-glyph"
 :unsafe: "This macro cannot be used in =>[#modes|safe mode]."
 :bin_params: "-p[0|The first expression to test]-p[1|The second expression to test]"
+:img_file: "The name of the image file (relative to the code[images/] folder)."
+:img_attrs: "Any attribute supported by the =>[http://www.w3schools.com/tags/tag_IMG.asp|img tag]."
+:opt: "em[(optional)]"

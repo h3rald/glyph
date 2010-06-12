@@ -18,5 +18,19 @@ Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on th
 example[=textile[This is a *strong emphasis*.]=]
 ]
 
+ref_macro[highlight|
+Highlights a piece of source code (second parameter) according to the specified language (first parameter). fmi[code highligting|#source_code].
+
+*Example:*
+
+code[=
+highlight[ruby\|
+  def hello
+    puts "Hello World"
+  end
+]
+=]
+
+]
 ] --[End filter macros]
 

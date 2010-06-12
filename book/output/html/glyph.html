@@ -509,20 +509,59 @@ June 2010
 <li class="appendix section"><a href="#h_120">Remarks</a></li>
 </ol></li>
 </ol></li>
+<li class="appendix section"><a href="#h_121">Block Macros</a></li>
+<li><ol><li class="appendix section"><a href="#m_box"><code>box</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_123">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_codeblock"><code>codeblock</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_125">Parameters</a></li>
+<li class="appendix section"><a href="#h_126">Remarks</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_figure"><code>figure</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_128">Parameters</a></li>
+<li class="appendix section"><a href="#h_129">Attributes</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_image"><code>image</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_131">Parameters</a></li>
+<li class="appendix section"><a href="#h_132">Attributes</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_note"><code>note</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_134">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_pubdate"><code>pubdate</code></a></li>
+<li class="appendix section"><a href="#m_revision"><code>revision</code></a></li>
+<li class="appendix section"><a href="#m_subtitle"><code>subtitle</code></a></li>
+<li class="appendix section"><a href="#m_title"><code>title</code></a></li>
+</ol></li>
+<li class="appendix section"><a href="#h_139">Inline Macros</a></li>
+<li><ol><li class="appendix section"><a href="#m_anchor"><code>anchor</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_141">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_draftcomment"><code>draftcomment</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_143">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_fmi"><code>fmi</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_145">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_link"><code>link</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_147">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_todo"><code>todo</code></a></li>
+</ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_125">structure.*</a></li>
-<li class="appendix section"><a href="#h_126">tools.*</a></li>
+<li class="appendix section"><a href="#h_153">structure.*</a></li>
+<li class="appendix section"><a href="#h_154">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_127">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_128">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_129">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_130">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_155">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_156">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_157">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_158">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_131">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_159">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -1312,7 +1351,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 15:16:11 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 16:01:48 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -3057,6 +3096,407 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 </div>
 
 </div>
+			<div class="section">
+<h3 id="h_121">Block Macros</h3>
+<div class="section">
+<h4 id="m_box"><code>box</code></h4>
+<p>Creates a titled box (<code>&lt;div&gt;</code> tag).</p>
+
+
+
+		<div class="example"><p>
+<strong>Example</strong>
+</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> box[Why boxes?|
+<span class="line-numbers">   2 </span>   Boxes can be used to make a section of text stand out from the rest of the document.
+<span class="line-numbers">   3 </span> ]
+</pre></div>
+	
+
+
+		<div class="section">
+<h5 id="h_123">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The box title.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>1</td>
+			<td>The box text.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_codeblock"><code>codeblock</code></h4>
+<p>Used to render a block of code within <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags.</p>
+
+
+
+		<div class="example"><p>
+<strong>Example</strong>
+</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> code[
+<span class="line-numbers">   2 </span>   def hello
+<span class="line-numbers">   3 </span>     puts &quot;Hello World&quot;
+<span class="line-numbers">   4 </span>   end
+<span class="line-numbers">   5 </span> ]
+</pre></div>
+	
+
+
+		<div class="section">
+<h5 id="h_125">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The code to be formatted.</td>
+		</tr>
+		</table>
+
+</div>
+	
+
+<div class="section">
+<h5 id="h_126">Remarks</h5>
+<p>For code highlighting, see the <a href="#m_highlight">highlight</a> macro.</p>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_figure"><code>figure</code></h4>
+<p>Includes an image in the document, with an optional caption (see <a href="#img_fig">Images and Figures</a>).</p>
+
+
+
+		<div class="example"><p>
+<strong>Example</strong>
+</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> figure[
+<span class="line-numbers">   2 </span>   graph.png|Monthly Pageviews
+<span class="line-numbers">   3 </span>   @width[90%]
+<span class="line-numbers">   4 </span> ]
+</pre></div>
+	
+
+
+		<div class="section">
+<h5 id="h_128">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The name of the image file (relative to the <code>images/</code> folder).</td>
+		</tr>
+	
+			
+		<tr>
+			<td>1</td>
+			<td>The image caption <em>(optional)</em>.</td>
+		</tr>
+		</table>
+
+</div>
+	
+
+		<div class="section">
+<h5 id="h_129">Attributes</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Attribute</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>*</td>
+			<td>Any attribute supported by the <a href="http://www.w3schools.com/tags/tag_IMG.asp">img tag</a>.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_image"><code>image</code></h4>
+<p>Includes an image in the document</p>
+
+
+
+		<div class="example"><p>
+<strong>Example</strong>
+</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> img[
+<span class="line-numbers">   2 </span>   holidays/landscape.jpg
+<span class="line-numbers">   3 </span>   @class[photo]
+<span class="line-numbers">   4 </span> 	@style[border: 1px solid black;]
+<span class="line-numbers">   5 </span> ]
+</pre></div>
+	
+
+
+		<div class="section">
+<h5 id="h_131">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The name of the image file (relative to the <code>images/</code> folder).</td>
+		</tr>
+		</table>
+
+</div>
+	
+
+		<div class="section">
+<h5 id="h_132">Attributes</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Attribute</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>*</td>
+			<td>Any attribute supported by the <a href="http://www.w3schools.com/tags/tag_IMG.asp">img tag</a>.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_note"><code>note</code></h4>
+<p>Creates a note <code>div</code> containing the value.</p>
+<strong>Aliases:</strong> <code>important, caution, tip</code>
+<p><strong>Example:</strong> <code>note[This is a note.]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_134">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The text of the note.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_pubdate"><code>pubdate</code></h4>
+<p>Evaluates to a date string (in the format: <em>current_month</em> <em>current_year</em>; i.e. <em>%B</em> <em>%Y</em>), within a <code>&lt;div&gt;</code> tag.</p>
+
+<p><strong>Example:</strong> <code>pubdate[]</code></p>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_revision"><code>revision</code></h4>
+<p>Renders the revision of the document (based on the <a href="#s_document_revision">document.revision</a> setting) within a <code>&lt;div&gt;</code> tag.</p>
+
+<p><strong>Example:</strong> <code>revision[]</code></p>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_subtitle"><code>subtitle</code></h4>
+<p>Renders the subtitle of the document (based on the <a href="#s_document_subtitle">document.subtitle</a> setting) within a <code>&lt;h2&gt;</code> tag.</p>
+
+<p><strong>Example:</strong> <code>subtitle[]</code></p>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_title"><code>title</code></h4>
+<p>Renders the title of the document (based on the <a href="#s_document_title">document.title</a> setting) within a <code>&lt;h1&gt;</code> tag.</p>
+
+<p><strong>Example:</strong> <code>title[]</code></p>
+
+</div>
+
+</div>
+			<div class="section">
+<h3 id="h_139">Inline Macros</h3>
+<div class="section">
+<h4 id="m_anchor"><code>anchor</code></h4>
+<p>Creates a named anchor (or bookmark).</p>
+<strong>Aliases:</strong> <code>bookmark, #</code>
+<p><strong>Example:</strong> <code>#[test|Test Bookmark]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_141">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The identifier of the bookmark</td>
+		</tr>
+	
+			
+		<tr>
+			<td>1</td>
+			<td>The contents of the bookmark <em>(optional)</em></td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_draftcomment"><code>draftcomment</code></h4>
+<p>If the <a href="#s_document_draft">document.draft</a> setting is set to <code>true</code>, displays a draft comment within the document.</p>
+<strong>Aliases:</strong> <code>dc</code>
+<p><strong>Example:</strong> <code>dc[This is printed only in draft documents.]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_143">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The text of the comment.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_fmi"><code>fmi</code></h4>
+<p>Creates a <em>For More Information</em> link (for an example usage, see the <a href="#m_link">link</a> macro).</p>
+
+<p><strong>Example:</strong> <code>fmi[creating links|#links]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_145">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The object that needs additional explanation.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>0</td>
+			<td>A valid bookmark within the document.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_link"><code>link</code></h4>
+<p>Creates an hyperlink (<span class="fmi">for more information on creating links, see <a href="#links">Links and Bookmarks</a></span>).</p>
+<strong>Aliases:</strong> <code>=></code>
+<p><strong>Example:</strong> <code>=>[http://www.h3rald.com|H3RALD.com]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_147">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>A valid bookmark within the document or an URL.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>1</td>
+			<td>The text of the link <em>(optional)</em>.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_todo"><code>todo</code></h4>
+<p>Saves the value as a <span class="caps">TODO</span> item, which can be printed using the <a href="#c_todo">todo</a> command and included in the document if the <a href="#s_document_draft">document.draft</a> setting is set to <code>true</code>.</p>
+<strong>Aliases:</strong> <code>!</code>
+<p><strong>Example:</strong> <code>todo[Remember to do this.]</code></p>
+
+</div>
+
+</div>
 
 </div>
 		<div class="appendix">
@@ -3182,7 +3622,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 </div> 
 
 <div class="section">
-<h3 id="h_125">structure.*</h3>
+<h3 id="h_153">structure.*</h3>
 The following configuration settings are used internally by Glyph and should not be changed by the user.
 
 	<table><tr><th>Name</th>
@@ -3217,7 +3657,7 @@ The following configuration settings are used internally by Glyph and should not
 </div> 
 
 <div class="section">
-<h3 id="h_126">tools.*</h3>
+<h3 id="h_154">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
@@ -3231,11 +3671,11 @@ The following configuration settings are used internally by Glyph and should not
 
 </div>
 		<div class="appendix">
-<h2 id="h_127">Changelog</h2>
+<h2 id="h_155">Changelog</h2>
 <div class="section">
-<h3 id="h_128">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_156">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_129">23 Features Implemented</h4>
+<h4 id="h_157">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3277,7 +3717,7 @@ The following configuration settings are used internally by Glyph and should not
 	
 	
 		<div class="section">
-<h4 id="h_130">17 Bugs Fixed</h4>
+<h4 id="h_158">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3311,7 +3751,7 @@ The following configuration settings are used internally by Glyph and should not
 </div>
 
 	<div class="section">
-<h3 id="h_131">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_159">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

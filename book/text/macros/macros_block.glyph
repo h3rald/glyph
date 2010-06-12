@@ -1,128 +1,99 @@
 section[
-@title[Block Macros]
+	@title[Block Macros]
 
-ref_macro[box|
-Creates a titled box (@<div>@ tag).
-
-*Example:*
-
-code[=
+	ref_macro[
+		@n[box]
+		@desc[Creates a titled box (@<div>@ tag).]
+		@block_example[=
 box[Why boxes?\|
-Boxes can be used to make a section of text stand out from the rest of the document.
+  Boxes can be used to make a section of text stand out from the rest of the document.
 ]
-=]
-]
+		=]
+		@params[
+			-p[0|The box title.]
+			-p[1|The box text.]
+		]
+	]
 
-ref_macro[code|
-Used to render a block of code within @<pre>@ and @<code>@ tags. 
-* For inline code, see the %>[codeph].
-* For code highlighting, see the %>[highlight].
-
-*Example:*
-
-code[=
+	ref_macro[
+		@n[codeblock]
+		@desc[Used to render a block of code within @<pre>@ and @<code>@ tags.]
+		@block_example[=
 code[
   def hello
     puts "Hello World"
   end
 ]
 =]
+		@remarks[For code highlighting, see the %>[highlight].]
+		@params[-p[0|The code to be formatted.]]
+	]
 
+	ref_macro[
+		@n[figure]
+		@desc[Includes an image in the document, with an optional caption (see =>[#img_fig]).]
+		@block_example[=
+figure[
+  graph.png\|Monthly Pageviews
+  @width[90%]
 ]
+		=]
+		@params[
+			-p[0|&[img_file]]
+			-p[1|The image caption &[opt].]
+		]
+		@attrs[
+			-a[*|&[img_attrs]]
+		]
+	]
 
-ref_macro[fig|
-Includes an image in the document, with an optional caption.
-
-examples[=
-fig[diagram.png]
-fig[graph.png\|Monthly pageviews]
-=]
+	ref_macro[
+		@n[image]
+		@desc[Includes an image in the document]
+		@block_example[=
+img[
+  holidays/landscape.jpg
+  @class[photo]
+	@style[border: 1px solid black;]
 ]
+		=]
+		@params[
+			-p[0|&[img_file]]
+		]
+		@attrs[
+			-a[*|&[img_attrs]]
+		]
+	]
 
-ref_macro[highlight|
-Highlights a piece of source code (second parameter) according to the specified language (first parameter). fmi[code highligting|#source_code].
+	ref_macro[
+		@n[note]
+		@desc[Creates a note @div@ containing the value.]
+		@aliases[important, caution, tip]
+		@example[=note[This is a note.]=]
+		@params[-p[0|The text of the note.]]
+	]
 
-*Example:*
+	ref_macro[
+		@n[pubdate]
+		@desc[Evaluates to a date string (in the format: em[current_month] em[current_year]; i.e. _%B_ _%Y_), within a @<div>@ tag.]
+		@example[=pubdate[]=]
+	]
 
-code[=
-highlight[ruby\|
-  def hello
-    puts "Hello World"
-  end
+	ref_macro[
+		@n[revision]
+		@desc[Renders the revision of the document (based on the $>[document.revision]) within a @<div>@ tag.]
+		@example[=revision[]=]
+	]
+
+	ref_macro[
+		@n[subtitle]
+		@desc[Renders the subtitle of the document (based on the $>[document.subtitle]) within a @<h2>@ tag.]
+		@example[=subtitle[]=]
+	]
+
+	ref_macro[
+		@n[title]
+		@desc[Renders the title of the document (based on the $>[document.title]) within a @<h1>@ tag.]
+		@example[=title[]=]
+	]
 ]
-=]
-
-]
-
-ref_macro[img|
-Includes an image in the document, optionally scaled according to the specified width and height. The image must be stored within the @images/@ directory of the current project.
-
-examples[=
-img[icon.png]
-img[holidays/landscape.jpg\|70%]
-img[logo.svg\|50%\|50%]
-=]
-]
-
-ref_macro[note|
-Creates a note @div@ containing the value.
-
-aliases[important, caution, tip]
-example[=note[This is a note.]=]
-]
-
-ref_macro[pubdate|
-Evaluates to a date string (in the format: _current-month_ _current-year_; or _%B_ _%Y_), within a @<div>@ tag.
-
-example[=pubdate[]=]
-]
-
-ref_macro[subtitle|
-Renders the subtitle of the document (based on the $>[document.subtitle]) within a @<h2>@ tag.
-
-example[=subtitle[]=]
-]
-
-ref_macro[table|
-Evaluates to an HTML table. Used in conjunction with the =>[#m_tr|@tr@], =>[#m_td|@td@] and =>[#m_th|@th@] macros.
-
-*Example:*
-
-code[=
-table[
-  tr[
-    th[Name]
-    th[Value]
-  ]
-  tr[
-    td[A]
-    td[1]
-  ]
-  tr[
-    td[B]
-    td[2]
-  ]
-]
-=]
-
-]
-
-ref_macro[td|See =>[#m_table].]
-
-ref_macro[title|
-Renders the title of the document (based on the $>[document.title]) within a @<h1>@ tag.
-
-example[=title[]=]
-]
-
-ref_macro[th|See =>[#m_table].]
-ref_macro[tr|See =>[#m_table].]
-
-ref_macro[todo|
-Saves the value as a TODO item, which can be printed using the #>[todo] or included in the document if the $>[document.draft] is set to @true@.
-
-example[=todo[Remember to do this.]=]
-]
-
-] --[End block macros]
-
