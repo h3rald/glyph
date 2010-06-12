@@ -76,7 +76,6 @@ macro :example do
 end
 
 macro :block_example do
-	@node[:source] = {:node => @node, :name => "block_example[]"}
 	interpret %{
 		div[@class[example]
 			p[strong[Example]]
@@ -140,7 +139,7 @@ macro :ref_config do
 	default = "nil" if default.blank?
 	interpret %{tr[
 		td[codeph[#{m_name}] #[s_#{m_name.gsub(/\./, '_')}]]
-		td[#{m_value}]
+		td[txt[#{m_value}]]
 		td[
 			code[=
 #{default}

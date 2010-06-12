@@ -1,4 +1,3 @@
-![Remove system settings from documentation]
 section[
 	@title[document.*]
 	@id[cfg_document]
@@ -20,6 +19,9 @@ The format of the output file. It can be set to any value stored in the $>[docum
 		ref_config[document.output_targets|
 An @Array@ containing all the possible output formats. This setting should not be changed by the user. 
 		]
+		ref_config[document.revision|
+The document's revision.
+		]
 		ref_config[document.source|
 The main source file to compile. It can be also be overridden by calling the #>[compile] with the @-s@ option.
 		]
@@ -34,8 +36,8 @@ The title of the document, displayed using the %>[title].
 ] --[End document section]
 
 section[
-@title[filters.*]
-@id[cfg_filters]
+	@title[filters.*]
+	@id[cfg_filters]
 	config_table[
 		ref_config[filters.by_file_extension|
 If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).  
@@ -49,69 +51,50 @@ The name of the markdown converter to use with the %>[markdown]. It can be set t
 
 If not set, Glyph tests for the presence of each gem in the same order, until one is found. 
 		]
+		ref_config[filters.coderay.*|
+Some &[coderay]-specific =>[http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html|options].
+		]
+		ref_config[filters.highlighter|
+The current highlighter to use. It can be set to @coderay@ or @ultraviolet@
+		]
 		ref_config[filters.redcloth.restrictions|
 An @Array@ containing restrictions applied to RedCloth, used by the %>[textile] (see =>[http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html|RedCloth Documentation] for more information). 
 		]
 		ref_config[filters.target|
 The output target for filters. It can be set to @html@ (for RedCloth and MarkDown) or @latex@ (RedCloth-only). 
 		]
-	]
-] --[End filters section]
-
-
-section[
-@title[highlighters.*]
-@id[s_highlighters]
-
-	config_table[
-		ref_config[highlighters.coderay.*|
-Some &[coderay]-specific =>[http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html|options].
-		]
-		ref_config[highlighters.current|
-The current highlighter to use. It can be set to @coderay@ or @ultraviolet@
-		]
-		ref_config[highlighters.target|
-The target output of the =>[#s_highlighters_current|current highlighter]. It can be set to anything the highlighter supports.
-		]
-		ref_config[highlighters.ultraviolet.line_numbers|
+		ref_config[filters.ultraviolet.line_numbers|
 Whether the &[uv] highlighter should display line numbers or not.
 		]
-		ref_config[highlighters.ultraviolet.theme|
+		ref_config[filters.ultraviolet.theme|
 The theme used by the &[uv] highlighter.
 		]
 	]
-
-] --[End highlighters section]
+] 
 
 section[
-@title[structure.*]
-The following configuration settings are used internally by Glyph and should not be changed by the user.
-
+	@title[language.*]
 	config_table[
-		ref_config[structure.backmatter|
-The section types used in the document backmatter.
+		ref_config[language.set|
+Determines which macro set will be loaded. It can be set to:
+* glyph &ndash; Loads core, filter, xml macros plus all macros necessary for the $>[document.output].
+* xml &ndash; Loads core and xml macros.
+* core &ndash; Loads core macros only.
 		]
-		ref_config[structure.bodymatter|
-The section types used in the document bodymatter.
+		ref_config[language.options.xml_blacklist|
+The XML tags listed here cannot be generated using Glyph code.
 		]
-		ref_config[structure.frontmatter|
-The section types used in the document frontmatter.
-		]
-		ref_config[structure.hidden|
-The section types that will not be shown in the Table of Contents.
-		]
-		ref_config[structure.special|
-The section types that will be considered _special_ and whose children will not be included in the Table of Contents.
+		ref_config[language.options.xml_fallback|
+If set to true, any unknown macro name will considered an XML element (see =>[#other_elements]).
 		]
 	]
-] --[End structure section]
+]
 
 section[
-@title[tools.*]
+	@title[tools.*]
 	config_table[
 		ref_config[tools.pdf_generator|
 The external program used to generate PDF files. It can only be set to @prince@.
 		]
 	]
-] --[End tools section]
-
+]

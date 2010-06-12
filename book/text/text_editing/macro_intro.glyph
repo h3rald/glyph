@@ -49,7 +49,7 @@ Glyph doesn't require any special control characters like LaTeX, and its macro s
 
 If a portion of your text contains an excessive amount of square brackets, you may consider using the %>[escape] (or its alias @.@) with the @\[=@ and @=\]@ delimiters. By itself, the escape macro doesn't do anything: it just evaluates to its contents, but the special delimiters act as an escape for any square bracket within them. As a consequence, any macro within @\[=@ and @=\]@ will _not_ be evaluated.
 
-You can use the quoting delimiters with _any_ macro identifier. Obviously, using them as delimiters for things like %>[section]s may not be a good idea, but they should be more or less mandatory with the %>[code], especially when it contains square brackets or even Glyph code, like this:
+You can use the quoting delimiters with _any_ macro identifier. Obviously, using them as delimiters for things like %>[section]s may not be a good idea, but they should be more or less mandatory with the %>[codeblock] or the %>[highlight], especially when it contains square brackets or even Glyph code, like this:
 	]
 
 	highlight[=html|

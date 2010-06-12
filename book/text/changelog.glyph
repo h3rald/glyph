@@ -56,7 +56,7 @@ release[0.2.0|May 9th 2010|
 		issue[101|Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.]
 		issue[103|Fixed a bug that caused test failures when deleting the test project directory.]
 		issue[104|Nested Glyph macros calling @Macro#interpret@ no longer ignore escape delimiters.]
-		issue[107|Added the possibility to encode (using the %>[encode]) and decode (using the %>[decode]) macros so that they can be interpreted later.]
+		issue[107|Added the possibility to encode (using the @encode@ macro) and decode (using the @decode@ macro) macros so that they can be interpreted later.]
 	]
 ]
 release[0.1.0|April 8th 2010|

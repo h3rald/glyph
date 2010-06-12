@@ -5,7 +5,7 @@ macro :snippet do
 	ident = value.to_sym
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
-			@embedded_source = {:node => @node, :name => "snippet[#{ident}]"}
+			update_source "snippet[#{ident}]"
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			case 
@@ -77,7 +77,7 @@ macro :include do
 				end
 			end
 			begin 
-				@embedded_source = {:node => @node, :name => v}
+				update_source v
 				interpret contents
 			rescue Glyph::MutualInclusionError => e
 				raise

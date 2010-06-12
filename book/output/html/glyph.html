@@ -326,8 +326,7 @@ pre.lazy .Comment {
 </style>
 </head>
 
-	<body>
-<div class="titlepage">
+	<body><div class="titlepage">
 <img src="images/glyph.png" width="20%" height="20%" />
 	
 			<h1>
@@ -378,7 +377,7 @@ June 2010
 <li class="bodymatter section"><a href="#xml_blacklist">Blacklisted XML tags</a></li>
 </ol></li>
 <li class="bodymatter section"><a href="#stylesheets">Adding Stylesheets</a></li>
-<li><ol><li class="bodymatter section"><a href="#default_styles">Default Stylesheets</a></li>
+<li><ol><li class="bodymatter section"><a href="#default_stylesheets">Default Stylesheets</a></li>
 </ol></li>
 <li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li>
 <li class="bodymatter section"><a href="#h_29">Evaluating Ruby code and Configuration Settings</a></li>
@@ -585,16 +584,15 @@ June 2010
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
-<li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_176">structure.*</a></li>
-<li class="appendix section"><a href="#h_177">tools.*</a></li>
+<li class="appendix section"><a href="#h_175">language.*</a></li>
+<li class="appendix section"><a href="#h_176">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_178">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_179">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_180">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_181">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_177">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_178">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_179">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_180">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_182">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_181">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -913,7 +911,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h3 id="esc_quot">Escaping and Quoting</h3>
 <p>Glyph doesn&#8217;t require any special control characters like LaTeX, and its macro syntax is very straightforward and liberal. This however comes with a price: because square brackets are used as delimiters, you must escape any square bracket in your text with a backslash. That&#8217;s not <em>too</em> bad if you think about it, unless you&#8217;re writing programming code, in which case escaping every single square bracket can be painful.</p>
 <p>If a portion of your text contains an excessive amount of square brackets, you may consider using the <a href="#m_escape">escape</a> macro (or its alias <code>.</code>) with the <code>[=</code> and <code>=]</code> delimiters. By itself, the escape macro doesn&#8217;t do anything: it just evaluates to its contents, but the special delimiters act as an escape for any square bracket within them. As a consequence, any macro within <code>[=</code> and <code>=]</code> will <em>not</em> be evaluated.</p>
-<p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <a href="#m_section">section</a> macros may not be a good idea, but they should be more or less mandatory with the <a href="#m_code">code</a> macro, especially when it contains square brackets or even Glyph code, like this:</p>
+<p>You can use the quoting delimiters with <em>any</em> macro identifier. Obviously, using them as delimiters for things like <a href="#m_section">section</a> macros may not be a good idea, but they should be more or less mandatory with the <a href="#m_codeblock">codeblock</a> macro or the <a href="#m_highlight">highlight</a> macro, especially when it contains square brackets or even Glyph code, like this:</p>
 
 	<pre class="lazy"><span class="line-numbers">   1 </span> codeblock[=
 <span class="line-numbers">   2 </span>   section[
@@ -1122,7 +1120,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 			<div class="section">
 <h3 id="source_code">Source Code</h3>
-<p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_code">code</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
+<p>If you&#8217;re a programmer, chances are that you&#8217;re going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the <a href="#m_codeblock">codeblock</a> macro, which simply wraps text into <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags, or the <a href="#m_highlight">highlight</a> macro. The last one requires either <a href="http://coderay.rubychan.de/">Coderay</a> or <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a>, but it provides syntax highlighting for the most common programming languages.</p>
 <p>Cosider the following piece of ruby code:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> def find_child(&amp;block)
 <span class="line-numbers">   2 </span>   children.each do |c|
@@ -1312,7 +1310,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </p>
 	<p>In this case, the <a href="#m_style">style</a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
 	<div class="section">
-<h4 id="default_styles">Default Stylesheets</h4>
+<h4 id="default_stylesheets">Default Stylesheets</h4>
 <p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style">style</a> macro:</p>
 		<table><tr><th>File name</th>
 				<th>Notes</th></tr>
@@ -1384,7 +1382,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 20:23:51 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 22:03:36 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1867,7 +1865,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   7 </span> <span class="String">  <span class="String">}</span></span>
 <span class="line-numbers">   8 </span> <span class="Keyword">end</span>
 </pre>
-		<p>The <code>issue</code> macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the <a href="#m_rewrite">rewrite</a> macro:</p>
+		<p>The <code>issue</code> macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the <a href="#m_rewrite_">rewrite:</a> macro:</p>
 		<pre class="lazy"><span class="line-numbers">   1 </span> rewrite:[issue|
 <span class="line-numbers">   2 </span>   tr[
 <span class="line-numbers">   3 </span>     td[.=&gt;[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}|#{{0}}]]
@@ -2132,7 +2130,7 @@ This chapter lists the most common error messages that can be returned when runn
 		
 		<tr>
 			<td>Filter macro '<em>extension</em>' not available</td>
-			<td>Returned by a filter macro if <a href="#s_<filters_byem>file</filters_byem>extension"><filters.byem>file</filters.byem>extension</a> setting is set to @true@, but the extension was not recognized.</td>
+			<td>Returned by a filter macro if <a href="#s_filters_by_file_extension">filters.by_file_extension</a> setting is set to @true@, but the extension was not recognized.</td>
 		</tr>
 	
 		
@@ -2156,13 +2154,13 @@ This chapter lists the most common error messages that can be returned when runn
 		
 		<tr>
 			<td>CodeRay highlighter not installed. Please run: gem install coderay</td>
-			<td>Returned by the <a href="#m_highlight">highlight</a> macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to @coderay@ but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro if <a href="#s_filters_highlighter">filters.highlighter</a> setting is set to @coderay@ but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
 		</tr>
 	
 		
 		<tr>
 			<td>UltraViolet highlighter not installed. Please run: gem install ultraviolet</td>
-			<td>Returned by the <a href="#m_highlight">highlight</a> macro if <a href="#s_highlighters_current">highlighters.current</a> setting is set to @ultraviolet@ but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight">highlight</a> macro if <a href="#s_filters_highlighter">filters.highlighter</a> setting is set to @ultraviolet@ but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
 		</tr>
 	
 		
@@ -2210,7 +2208,7 @@ This chapter lists the most common error messages that can be returned when runn
 		
 		<tr>
 			<td>Bookmark '<em>bookmark_name</em>' already exists</td>
-			<td>Returned by the <a href="#m_anchor">anchor</a> macro or by the <a href="#m_header">header</a> macro if the anchor ID supplied as parameter has already been used in the document.</td>
+			<td>Returned by the <a href="#m_anchor">anchor</a> macro or by the <a href="#m_section">section</a> macro if the anchor ID supplied as attribute has already been used in the document.</td>
 		</tr>
 	
 		
@@ -3953,7 +3951,6 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 </div>
 		<div class="appendix">
 <h2 id="cfg_ref">Configuration Reference</h2>
-<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Remove system settings from documentation</span>
 <div class="section">
 <h3 id="cfg_document">document.*</h3>
 The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.
@@ -3964,43 +3961,48 @@ The following configuration settings are related to the current Glyph document. 
 			<tr><td>
 <codeph>document.author</codeph> <a id="s_document_author"></a>
 </td>
-		<td>The author of the document.</td>
+		<td><p>The author of the document.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
 <codeph>document.draft</codeph> <a id="s_document_draft"></a>
 </td>
-		<td>If set to @true@, the document is considered a draft, so <a href="#m_draftcomment">draft comments</a> and <a href="#m_todo">todo items</a> will be displayed.</td>
+		<td><p>If set to <code>true</code>, the document is considered a draft, so <a href="#m_draftcomment">draft comments</a> and <a href="#m_todo">todo items</a> will be displayed.</p></td>
 		<td><code>false</code></td></tr>
 		<tr><td>
 <codeph>document.filename</codeph> <a id="s_document_filename"></a>
 </td>
-		<td>The name of the output file.</td>
+		<td><p>The name of the output file.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
 <codeph>document.output</codeph> <a id="s_document_output"></a>
 </td>
-		<td>The format of the output file. It can be set to any value stored in the <a href="#s_document_output_targets">document.output_targets</a> setting.</td>
+		<td><p>The format of the output file. It can be set to any value stored in the <a href="#s_document_output_targets">document.output_targets</a> setting.</p></td>
 		<td><code>html</code></td></tr>
 		<tr><td>
 <codeph>document.output_targets</codeph> <a id="s_document_output_targets"></a>
 </td>
-		<td>An @Array@ containing all the possible output formats. This setting should not be changed by the user.</td>
+		<td><p>An <code>Array</code> containing all the possible output formats. This setting should not be changed by the user.</p></td>
 		<td><code>nil</code></td></tr>
+		<tr><td>
+<codeph>document.revision</codeph> <a id="s_document_revision"></a>
+</td>
+		<td><p>The document&#8217;s revision.</p></td>
+		<td><code>""</code></td></tr>
 		<tr><td>
 <codeph>document.source</codeph> <a id="s_document_source"></a>
 </td>
-		<td>The main source file to compile. It can be also be overridden by calling the <a href="#c_compile">compile</a> command with the @-s@ option.</td>
+		<td><p>The main source file to compile. It can be also be overridden by calling the <a href="#c_compile">compile</a> command with the <code>-s</code> option.</p></td>
 		<td><code>document.glyph</code></td></tr>
 
 		<tr><td>
 <codeph>document.subtitle</codeph> <a id="s_document_subtitle"></a>
 </td>
-		<td>The subtitle of the document, displayed using the <a href="#m_subtitle">subtitle</a> macro.</td>
+		<td><p>The subtitle of the document, displayed using the <a href="#m_subtitle">subtitle</a> macro.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
 <codeph>document.title</codeph> <a id="s_document_title"></a>
 </td>
-		<td>The title of the document, displayed using the <a href="#m_title">title</a> macro.</td>
+		<td><p>The title of the document, displayed using the <a href="#m_title">title</a> macro.</p></td>
 		<td><code>""</code></td></tr></table>
 
 </div> 
@@ -4013,121 +4015,114 @@ The following configuration settings are related to the current Glyph document. 
 			<tr><td>
 <codeph>filters.by_file_extension</codeph> <a id="s_filters_by_file_extension"></a>
 </td>
-		<td>If set to @true@, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</td>
+		<td><p>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</p></td>
 		<td><code>true</code></td></tr>
 		<tr><td>
 <codeph>filters.markdown.converter</codeph> <a id="s_filters_markdown_converter"></a>
 </td>
-		<td>The name of the markdown converter to use with the <a href="#m_markdown">markdown</a> macro. It can be set to one of the following values:
-* BlueCloth
-* RDiscount
-* Maruku
-* Kramdown
-
-If not set, Glyph tests for the presence of each gem in the same order, until one is found.</td>
+		<td><p>The name of the markdown converter to use with the <a href="#m_markdown">markdown</a> macro. It can be set to one of the following values:</p>
+<ul>
+	<li>BlueCloth</li>
+	<li>RDiscount</li>
+	<li>Maruku</li>
+	<li>Kramdown</li>
+</ul>
+<p>If not set, Glyph tests for the presence of each gem in the same order, until one is found.</p></td>
 		<td><code>bluecloth</code></td></tr>
+		<tr><td>
+<codeph>filters.coderay.*</codeph> <a id="s_filters_coderay_*"></a>
+</td>
+		<td><p>Some <a href="http://coderay.rubychan.de/">Coderay</a>-specific <a href="http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html">options</a>.</p></td>
+		<td><code>nil</code></td></tr>
+		<tr><td>
+<codeph>filters.highlighter</codeph> <a id="s_filters_highlighter"></a>
+</td>
+		<td><p>The current highlighter to use. It can be set to <code>coderay</code> or <code>ultraviolet</code></p></td>
+		<td><code>coderay</code></td></tr>
 		<tr><td>
 <codeph>filters.redcloth.restrictions</codeph> <a id="s_filters_redcloth_restrictions"></a>
 </td>
-		<td>An @Array@ containing restrictions applied to RedCloth, used by the <a href="#m_textile">textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</td>
+		<td><p>An <code>Array</code> containing restrictions applied to RedCloth, used by the <a href="#m_textile">textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</p></td>
 		<td><code>[]</code></td></tr>
 		<tr><td>
 <codeph>filters.target</codeph> <a id="s_filters_target"></a>
 </td>
-		<td>The output target for filters. It can be set to @html@ (for RedCloth and MarkDown) or @latex@ (RedCloth-only).</td>
-		<td><code>html</code></td></tr></table>
+		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
+		<td><code>html</code></td></tr>
+		<tr><td>
+<codeph>filters.ultraviolet.line_numbers</codeph> <a id="s_filters_ultraviolet_line_numbers"></a>
+</td>
+		<td><p>Whether the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter should display line numbers or not.</p></td>
+		<td><code>true</code></td></tr>
+		<tr><td>
+<codeph>filters.ultraviolet.theme</codeph> <a id="s_filters_ultraviolet_theme"></a>
+</td>
+		<td><p>The theme used by the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter.</p></td>
+		<td><code>lazy</code></td></tr></table>
 
 </div> 
 
-
 <div class="section">
-<h3 id="s_highlighters">highlighters.*</h3>
+<h3 id="h_175">language.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
 			<tr><td>
-<codeph>highlighters.coderay.*</codeph> <a id="s_highlighters_coderay_*"></a>
+<codeph>language.set</codeph> <a id="s_language_set"></a>
 </td>
-		<td>Some <a href="http://coderay.rubychan.de/">Coderay</a>-specific <a href="http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html">options</a>.</td>
-		<td><code>nil</code></td></tr>
+		<td><p>Determines which macro set will be loaded. It can be set to:</p>
+<ul>
+	<li>glyph &ndash; Loads core, filter, xml macros plus all macros necessary for the <a href="#s_document_output">document.output</a> setting.</li>
+	<li>xml &ndash; Loads core and xml macros.</li>
+	<li>core &ndash; Loads core macros only.</li>
+</ul></td>
+		<td><code>glyph</code></td></tr>
 		<tr><td>
-<codeph>highlighters.current</codeph> <a id="s_highlighters_current"></a>
+<codeph>language.options.xml_blacklist</codeph> <a id="s_language_options_xml_blacklist"></a>
 </td>
-		<td>The current highlighter to use. It can be set to @coderay@ or @ultraviolet@</td>
-		<td><code>nil</code></td></tr>
+		<td><p>The <span class="caps">XML</span> tags listed here cannot be generated using Glyph code.</p></td>
+		<td><code>- applet
+- base
+- basefont
+- embed
+- frame
+- frameset
+- iframe
+- isindex
+- meta
+- noframes
+- noscript
+- object
+- param
+- title</code></td></tr>
 		<tr><td>
-<codeph>highlighters.target</codeph> <a id="s_highlighters_target"></a>
+<codeph>language.options.xml_fallback</codeph> <a id="s_language_options_xml_fallback"></a>
 </td>
-		<td>The target output of the <a href="#s_highlighters_current">current highlighter</a>. It can be set to anything the highlighter supports.</td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<codeph>highlighters.ultraviolet.line_numbers</codeph> <a id="s_highlighters_ultraviolet_line_numbers"></a>
-</td>
-		<td>Whether the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter should display line numbers or not.</td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<codeph>highlighters.ultraviolet.theme</codeph> <a id="s_highlighters_ultraviolet_theme"></a>
-</td>
-		<td>The theme used by the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter.</td>
-		<td><code>nil</code></td></tr></table>
+		<td><p>If set to true, any unknown macro name will considered an <span class="caps">XML</span> element (see <a href="#other_elements">Other <span class="caps">HTML</span> Elements</a>).</p></td>
+		<td><code>true</code></td></tr></table>
 
-</div> 
-
-<div class="section">
-<h3 id="h_176">structure.*</h3>
-The following configuration settings are used internally by Glyph and should not be changed by the user.
-
-	<table><tr><th>Name</th>
-				<th>Description</th>
-				<th>Default (YAML)</th></tr>
-			<tr><td>
-<codeph>structure.backmatter</codeph> <a id="s_structure_backmatter"></a>
-</td>
-		<td>The section types used in the document backmatter.</td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<codeph>structure.bodymatter</codeph> <a id="s_structure_bodymatter"></a>
-</td>
-		<td>The section types used in the document bodymatter.</td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<codeph>structure.frontmatter</codeph> <a id="s_structure_frontmatter"></a>
-</td>
-		<td>The section types used in the document frontmatter.</td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<codeph>structure.hidden</codeph> <a id="s_structure_hidden"></a>
-</td>
-		<td>The section types that will not be shown in the Table of Contents.</td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<codeph>structure.special</codeph> <a id="s_structure_special"></a>
-</td>
-		<td>The section types that will be considered _special_ and whose children will not be included in the Table of Contents.</td>
-		<td><code>nil</code></td></tr></table>
-
-</div> 
+</div>
 
 <div class="section">
-<h3 id="h_177">tools.*</h3>
+<h3 id="h_176">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
 			<tr><td>
 <codeph>tools.pdf_generator</codeph> <a id="s_tools_pdf_generator"></a>
 </td>
-		<td>The external program used to generate PDF files. It can only be set to @prince@.</td>
+		<td><p>The external program used to generate <span class="caps">PDF</span> files. It can only be set to <code>prince</code>.</p></td>
 		<td><code>prince</code></td></tr></table>
 
 </div>
 
 </div>
 		<div class="appendix">
-<h2 id="h_178">Changelog</h2>
+<h2 id="h_177">Changelog</h2>
 <div class="section">
-<h3 id="h_179">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_178">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_180">23 Features Implemented</h4>
+<h4 id="h_179">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4169,7 +4164,7 @@ The following configuration settings are used internally by Glyph and should not
 	
 	
 		<div class="section">
-<h4 id="h_181">17 Bugs Fixed</h4>
+<h4 id="h_180">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4196,22 +4191,20 @@ The following configuration settings are used internally by Glyph and should not
 		<td><p>Nested Glyph macros calling <code>Macro#interpret</code> no longer ignore escape delimiters.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/107">#107</a></td>
-		<td><p>Added the possibility to encode (using the <a href="#m_encode">encode</a> macro) and decode (using the <a href="#m_decode">decode</a> macro) macros so that they can be interpreted later.</p></td></tr></table>
+		<td><p>Added the possibility to encode (using the <code>encode</code> macro) and decode (using the <code>decode</code> macro) macros so that they can be interpreted later.</p></td></tr></table>
 
 </div>
 
 </div>
 
 	<div class="section">
-<h3 id="h_182">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_181">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>
 
 </div>
 
-</div>
-
-</body>
+</div></body>
 
 </html>

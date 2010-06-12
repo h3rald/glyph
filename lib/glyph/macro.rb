@@ -16,8 +16,15 @@ module Glyph
 		def initialize(node)
 			@node = node
 			@name = @node[:name]
-			@embedded_source = nil
+			@updated_source = nil
 			@source = @node[:source][:name] rescue "--"
+		end
+
+		# Resets the name of the updated source (call before calling 
+		# Macro#interpret)
+		# @param [String] name the source name
+		def update_source(name)
+			@updated_source = {:node => @node, :name => name}
 		end
 		
 		# Returns a Glyph code representation of the specified parameter
@@ -194,7 +201,7 @@ module Glyph
 				result = string 
 			else
 				context = {}
-				context[:source] = @embedded_source || {:node => @node, :name => "#@name[...]"}
+				context[:source] = @updated_source || @node[:source]
 				context[:embedded] = true
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context

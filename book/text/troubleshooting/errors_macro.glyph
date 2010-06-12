@@ -29,7 +29,7 @@ Returned if the macro was called with a different number of parameters than.
 Returned by the %>[include] if used in =>[#lite_mode|lite mode].
 		]
 		ref_error[Filter macro '\.em[extension]' not available|
-Returned by a filter macro if $>[filters.byem[file]extension] is set to @true@, but the extension was not recognized.
+Returned by a filter macro if $>[filters.by_file_extension] is set to @true@, but the extension was not recognized.
 		]
 		ref_error[Invalid regular expression: em[regexp]|
 Returned by the %>[match] if an invalid regular expression was supplied.
@@ -41,10 +41,10 @@ Returned if the macro was called with parameters but none are requested.
 Returned by the %>[highlight] if no highlighters are installed.
 		]
 		ref_error[CodeRay highlighter not installed. Please run: gem install coderay|
-Returned by the %>[highlight] if $>[highlighters.current] is set to @coderay@ but &[coderay] is not installed.
+Returned by the %>[highlight] if $>[filters.highlighter] is set to @coderay@ but &[coderay] is not installed.
 		]
 		ref_error[UltraViolet highlighter not installed. Please run: gem install ultraviolet|
-Returned by the %>[highlight] if $>[highlighters.current] is set to @ultraviolet@ but &[uv] is not installed.
+Returned by the %>[highlight] if $>[filters.highlighter] is set to @ultraviolet@ but &[uv] is not installed.
 		]
 		ref_error[Mutual Inclusion in parameter/attribute(\.em[name]): '\.em[value]'|
 Returned if a catch-22 situation occurs with macro inclusion, for example if the value of a snippet includes a reference to the same snippet.
@@ -68,7 +68,7 @@ Returned by the %>[markdown] if no valid Markdown converter gem is installed. Gl
 Retured by the %>[image] or the %>[figure] respectively, if the specified image file could not be found within the code[images/] folder.
 		]
 		ref_error[Bookmark '\.em[bookmark_name]' already exists|
-Returned by the %>[anchor] or by the %>[header] if the anchor ID supplied as parameter has already been used in the document.
+Returned by the %>[anchor] or by the %>[section] if the anchor ID supplied as attribute has already been used in the document.
 		]
 		ref_error[Bookmark '\.em[bookmark_name]' already exists|
 Returned by the %>[link] if the anchor ID supplied as parameter has not been used in the document.

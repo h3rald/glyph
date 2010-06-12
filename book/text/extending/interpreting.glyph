@@ -36,7 +36,7 @@ macro :issue do
   }
 end
 		=]
-		p[The code[issue] macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the %>[rewrite]:]
+		p[The code[issue] macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the %>[rewrite:]:]
 		highlight[=html|
 rewrite:[issue\|
   tr[
