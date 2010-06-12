@@ -1,45 +1,98 @@
 section[
-@title[Structure Macros]
+	@title[Structure Macros]
 
-ref_macro[body|
-Creates a @<body>@ tag.
+	ref_macro[
+		@n[article]
+		@desc[
+Used to create a simple article. By default, it includes the following macros:
+* @document@
+** @head@
+*** @style\[default.css\]@
+** @body@
+*** @halftitlepage@
+**** @title@
+**** @pubdate@
+**** @subtitle@
+**** @author@
+		]
+		@params[-p[0|The article contents.]]
+		@attrs[
+			-a[pre-title|Contents to include before the %>[title].]
+			-a[post-title|Contents to include after the %>[title].]
+			-a[head|Contents to include instead of the default code[head] macro.]
+			-a[pubdate|Contents to include instead of the default code[pubdate] macro.]
+			-a[halftitlepage|Contents to include instead of the default code[halftitlepage] macro.]
+		]
+	]
+
+	ref_macro[
+		@n[book]
+		@desc[
+Used to create a book. By default, it includes the following macros:
+* @document@
+** @head@
+*** @style\[default.css\]@
+** @body@
+*** @titlepage@
+**** @title@
+**** @pubdate@
+**** @subtitle@
+**** @revision@
+**** @author@
+		]
+		@params[-p[0|The article contents.]]
+		@attrs[
+			-a[pre-title|Contents to include before the %>[title].]
+			-a[post-title|Contents to include after the %>[title].]
+			-a[head|Contents to include instead of the default code[head] macro.]
+			-a[pubdate|Contents to include instead of the default code[pubdate] macro.]
+			-a[titlepage|Contents to include instead of the default code[titlepage] macro.]
+			-a[frontmatter|Contents to include within a code[frontmatter] macro.]
+			-a[bodymatter|Contents to include within a code[bodymatter] macro.]
+			-a[backmatter|Contents to include within a code[backmatter] macro.]
+		]
+	]
+
+	ref_macro[
+		@n[document]
+		@desc[Creates an @<html>@ tag and a DOCTYPE declaration. Called internally by the %>[book] and the %>[article].]
+		@params[-p[0|The document contents.]]
+	]
+
+	ref_macro[
+		@n[head]
+		@desc[Creates a @<head>@ tag, pre-populated with @title@ and author/copyright @<meta>@ tags.]
+		@params[-p[0|The head contents.]]
+	]
+
+	ref_macro[
+		@n[section]
+		@desc[Creates a section (@<div>@ tag).]
+		@aliases[%[=Glyph['system.structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
+		@block_example[=
+section[
+	@title[Test Section]
+	@id[test]
+...
 ]
+		=]
+		@params[-p[0|The text of the section]]
+		@attrs[
+			-a[title|The title of the section &[opt]]
+			-a[id|The ID of the section &[opt]]
+		]
+	]
 
-ref_macro[div|
-Creates a @<div>@ tag.
+	ref_macro[
+		@n[style]
+		@desc[Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).]
+		@example[=style[default.css]=]
+		@params[-p[0|The stylesheet file to embed.]]
+	]
 
-*Aliases:* codeph[%[=Glyph['system.structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
-]
-
-ref_macro[document|
-The root macro used in every Glyph document. It creates an @<html>@ tag.
-]
-
-ref_macro[head|
-Creates a @<head>@ tag, pre-populated with @title@ and author/copyright @<meta>@ tags.
-]
-
-ref_macro[header|
-Creates an @h2@, @h3@, @h4@, etc. header (\.fmi[using headers|#sec_head]).
-
-examples[=
-header[Introduction]
-header[Getting Started\|gs]
-=]
-]
-
-ref_macro[section|See =>[#m_div].]
-
-ref_macro[style|
-Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).
-
-example[=style[default.css]=]
-]
-
-ref_macro[toc|
-Generates a _Table of Contents_ based on how sections and headers are nested in the current document.
-
-example[=toc[]=]
-]
-
-] --[End structure macros]
+	ref_macro[
+		@n[toc]
+		@desc[Generates a _Table of Contents_ based on how sections are nested in the current document.]
+		@example[=toc[]=]
+	]
+] 

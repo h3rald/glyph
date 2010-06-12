@@ -557,20 +557,44 @@ June 2010
 </ol></li>
 <li class="appendix section"><a href="#m_highlight"><code>highlight</code></a></li>
 </ol></li>
+<li class="appendix section"><a href="#h_155">Structure Macros</a></li>
+<li><ol><li class="appendix section"><a href="#m_article"><code>article</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_157">Parameters</a></li>
+<li class="appendix section"><a href="#h_158">Attributes</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_book"><code>book</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_160">Parameters</a></li>
+<li class="appendix section"><a href="#h_161">Attributes</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_document"><code>document</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_163">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_head"><code>head</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_165">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_section"><code>section</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_167">Parameters</a></li>
+<li class="appendix section"><a href="#h_168">Attributes</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_style"><code>style</code></a></li>
+<li><ol><li class="appendix section"><a href="#h_170">Parameters</a></li>
+</ol></li>
+<li class="appendix section"><a href="#m_toc"><code>toc</code></a></li>
+</ol></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li>
 <li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li>
 <li class="appendix section"><a href="#cfg_filters">filters.*</a></li>
 <li class="appendix section"><a href="#s_highlighters">highlighters.*</a></li>
-<li class="appendix section"><a href="#h_159">structure.*</a></li>
-<li class="appendix section"><a href="#h_160">tools.*</a></li>
+<li class="appendix section"><a href="#h_176">structure.*</a></li>
+<li class="appendix section"><a href="#h_177">tools.*</a></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_161">Changelog</a></li>
-<li><ol><li class="appendix section"><a href="#h_162">v0.2.0 &ndash; May 9th 2010</a></li>
-<li><ol><li class="appendix section"><a href="#h_163">23 Features Implemented</a></li>
-<li class="appendix section"><a href="#h_164">17 Bugs Fixed</a></li>
+<li class="backmatter appendix"><a href="#h_178">Changelog</a></li>
+<li><ol><li class="appendix section"><a href="#h_179">v0.2.0 &ndash; May 9th 2010</a></li>
+<li><ol><li class="appendix section"><a href="#h_180">23 Features Implemented</a></li>
+<li class="appendix section"><a href="#h_181">17 Bugs Fixed</a></li>
 </ol></li>
-<li class="appendix section"><a href="#h_165">v0.1.0 &ndash; April 8th 2010</a></li>
+<li class="appendix section"><a href="#h_182">v0.1.0 &ndash; April 8th 2010</a></li>
 </ol></li>
 
 </ol>
@@ -1360,7 +1384,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 16:11:52 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sat Jun 12 20:23:51 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -3583,6 +3607,348 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 </div>
 
 </div>
+			<div class="section">
+<h3 id="h_155">Structure Macros</h3>
+<div class="section">
+<h4 id="m_article"><code>article</code></h4>
+<p>Used to create a simple article. By default, it includes the following macros:</p>
+<ul>
+	<li><code>document</code>
+	<ul>
+		<li><code>head</code>
+		<ul>
+			<li><code>style[default.css]</code></li>
+		</ul></li>
+		<li><code>body</code>
+		<ul>
+			<li><code>halftitlepage</code>
+			<ul>
+				<li><code>title</code></li>
+				<li><code>pubdate</code></li>
+				<li><code>subtitle</code></li>
+				<li><code>author</code></li>
+			</ul></li>
+		</ul></li>
+	</ul></li>
+</ul>
+
+
+
+
+
+		<div class="section">
+<h5 id="h_157">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The article contents.</td>
+		</tr>
+		</table>
+
+</div>
+	
+
+		<div class="section">
+<h5 id="h_158">Attributes</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Attribute</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>pre-title</td>
+			<td>Contents to include before the <a href="#m_title">title</a> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>post-title</td>
+			<td>Contents to include after the <a href="#m_title">title</a> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>head</td>
+			<td>Contents to include instead of the default <code>head</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>pubdate</td>
+			<td>Contents to include instead of the default <code>pubdate</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>halftitlepage</td>
+			<td>Contents to include instead of the default <code>halftitlepage</code> macro.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_book"><code>book</code></h4>
+<p>Used to create a book. By default, it includes the following macros:</p>
+<ul>
+	<li><code>document</code>
+	<ul>
+		<li><code>head</code>
+		<ul>
+			<li><code>style[default.css]</code></li>
+		</ul></li>
+		<li><code>body</code>
+		<ul>
+			<li><code>titlepage</code>
+			<ul>
+				<li><code>title</code></li>
+				<li><code>pubdate</code></li>
+				<li><code>subtitle</code></li>
+				<li><code>revision</code></li>
+				<li><code>author</code></li>
+			</ul></li>
+		</ul></li>
+	</ul></li>
+</ul>
+
+
+
+
+
+		<div class="section">
+<h5 id="h_160">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The article contents.</td>
+		</tr>
+		</table>
+
+</div>
+	
+
+		<div class="section">
+<h5 id="h_161">Attributes</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Attribute</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>pre-title</td>
+			<td>Contents to include before the <a href="#m_title">title</a> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>post-title</td>
+			<td>Contents to include after the <a href="#m_title">title</a> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>head</td>
+			<td>Contents to include instead of the default <code>head</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>pubdate</td>
+			<td>Contents to include instead of the default <code>pubdate</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>titlepage</td>
+			<td>Contents to include instead of the default <code>titlepage</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>frontmatter</td>
+			<td>Contents to include within a <code>frontmatter</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>bodymatter</td>
+			<td>Contents to include within a <code>bodymatter</code> macro.</td>
+		</tr>
+	
+			
+		<tr>
+			<td>backmatter</td>
+			<td>Contents to include within a <code>backmatter</code> macro.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_document"><code>document</code></h4>
+<p>Creates an <code>&lt;html&gt;</code> tag and a <span class="caps">DOCTYPE</span> declaration. Called internally by the <a href="#m_book">book</a> macro and the <a href="#m_article">article</a> macro.</p>
+
+
+
+
+
+		<div class="section">
+<h5 id="h_163">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The document contents.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_head"><code>head</code></h4>
+<p>Creates a <code>&lt;head&gt;</code> tag, pre-populated with <code>title</code> and author/copyright <code>&lt;meta&gt;</code> tags.</p>
+
+
+
+
+
+		<div class="section">
+<h5 id="h_165">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The head contents.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_section"><code>section</code></h4>
+<p>Creates a section (<code>&lt;div&gt;</code> tag).</p>
+<strong>Aliases:</strong> <code>acknowledgement, addendum, afterword, appendix, bibliography, chapter, colophon, dedication, epilogue, foreword, glossary, imprint, index, inspiration, introduction, lof, lot, part, postscript, preface, prologue, promotion, references, section, section, volume</code>
+
+
+		<div class="example"><p>
+<strong>Example</strong>
+</p>
+			<pre class="lazy"><span class="line-numbers">   1 </span> section[
+<span class="line-numbers">   2 </span> 	@title[Test Section]
+<span class="line-numbers">   3 </span> 	@id[test]
+<span class="line-numbers">   4 </span> ...
+<span class="line-numbers">   5 </span> ]
+</pre></div>
+	
+
+
+		<div class="section">
+<h5 id="h_167">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The text of the section</td>
+		</tr>
+		</table>
+
+</div>
+	
+
+		<div class="section">
+<h5 id="h_168">Attributes</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Attribute</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>title</td>
+			<td>The title of the section <em>(optional)</em></td>
+		</tr>
+	
+			
+		<tr>
+			<td>id</td>
+			<td>The ID of the section <em>(optional)</em></td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_style"><code>style</code></h4>
+<p>Embeds the content of a <span class="caps">CSS</span> or Sass file within a <code>&lt;style&gt;</code> tag (<span class="fmi">for more information on stylesheets, see <a href="#stylesheets">Adding Stylesheets</a></span>).</p>
+
+<p><strong>Example:</strong> <code>style[default.css]</code></p>
+
+
+
+		<div class="section">
+<h5 id="h_170">Parameters</h5>
+<table style="width:100%;">
+			<tr>
+				<th style="width:30%">Parameter</th>
+				<th>Description</th>
+			</tr>
+<tr>
+			<td>0</td>
+			<td>The stylesheet file to embed.</td>
+		</tr>
+		</table>
+
+</div>
+
+</div>
+	
+
+	
+	<div class="section">
+<h4 id="m_toc"><code>toc</code></h4>
+<p>Generates a <em>Table of Contents</em> based on how sections are nested in the current document.</p>
+
+<p><strong>Example:</strong> <code>toc[]</code></p>
+
+</div>
+
+</div>
 
 </div>
 		<div class="appendix">
@@ -3708,7 +4074,7 @@ If not set, Glyph tests for the presence of each gem in the same order, until on
 </div> 
 
 <div class="section">
-<h3 id="h_159">structure.*</h3>
+<h3 id="h_176">structure.*</h3>
 The following configuration settings are used internally by Glyph and should not be changed by the user.
 
 	<table><tr><th>Name</th>
@@ -3743,7 +4109,7 @@ The following configuration settings are used internally by Glyph and should not
 </div> 
 
 <div class="section">
-<h3 id="h_160">tools.*</h3>
+<h3 id="h_177">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
@@ -3757,11 +4123,11 @@ The following configuration settings are used internally by Glyph and should not
 
 </div>
 		<div class="appendix">
-<h2 id="h_161">Changelog</h2>
+<h2 id="h_178">Changelog</h2>
 <div class="section">
-<h3 id="h_162">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_179">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_163">23 Features Implemented</h4>
+<h4 id="h_180">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3803,7 +4169,7 @@ The following configuration settings are used internally by Glyph and should not
 	
 	
 		<div class="section">
-<h4 id="h_164">17 Bugs Fixed</h4>
+<h4 id="h_181">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3837,7 +4203,7 @@ The following configuration settings are used internally by Glyph and should not
 </div>
 
 	<div class="section">
-<h3 id="h_165">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_182">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

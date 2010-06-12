@@ -103,14 +103,6 @@ macro :document do
 </html>}
 end
 
-macro :body do
-	exact_parameters 1
-	%{<body>
-#{value}
-
-</body>}
-end
-
 macro :head do
 	exact_parameters 1
 	author = Glyph['document.author'].blank? ? "" : %{<meta name="author" content="#{Glyph["document.author"]}" />
