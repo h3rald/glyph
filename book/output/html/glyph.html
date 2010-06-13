@@ -236,17 +236,259 @@ td>div.code, td>code {
 }
 
 /* FONTS */
+
+/*
+@font-face {
+	font-family: "Gentium Book Basic";
+	src: local("Gentium Book Basic");
+}
+@font-face {
+	font-family: "Droid Sans Mono";
+	src: local("Droid Sans Mono");
+}
+*/
 body {
-	font-family: "Book Antiqua", "Times New Roman", "Serif";
+	font-family: "Gentium Book Basic", "Book Antiqua", "Times New Roman", "Serif";
 }
 
 code, pre {
 	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
 }
 
+</style>
+		<style type="text/css">
+@page {
+	size: A4;
+	margin: 40pt 30pt 40pt 30pt;
+	@top { 
+		content: string(book-title) " - " string(chapter-title);  
+		font-style: italic;
+	}
+  @bottom { content: counter(page, decimal); }
+}
+
+@page frontmatter {
+	@bottom { content: counter(page, lower-roman); }
+}
+
+@page backmatter {
+	@bottom { content: counter(page, decimal); }
+}
+
+@page:first { 
+	padding-top: 10%;
+  @top { content: normal; }
+  @bottom { content: normal; }
+}
+
+ol.toc {
+	margin-left: 1.5em;
+}
+.toc > li[class] {
+	font-weight: bold;
+}
+.toc li {
+	list-style-type: none;
+	margin-left: 0;
+}
+.toc li a, .toc li a:hover {
+	color: #000;
+}
+
+.toc li a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+
+.titlepage h1, .halftitlepage h1 { 
+	string-set: book-title content();
+}
+
+.toc>li[class~=chapter] {
+	counter-increment: toc1;
+	counter-reset: toc2;
+}
+
+.toc>li[class~=appendix] {
+	counter-increment: appendix1;
+	counter-reset: toc2;
+}
+
+.toc ol li[class] {
+	counter-increment: toc2;
+	counter-reset: toc3;
+}
+
+.toc ol ol li[class] {
+	counter-increment: toc3;
+	counter-reset: toc4;
+}
+
+.toc ol ol ol li[class] {
+	counter-increment: toc4;
+	counter-reset: toc5;
+}
+
+.toc ol ol ol ol li[class] {
+	counter-increment: toc5;
+}
+
+.toc>li[class~=chapter]::before {
+	content: counter(toc1) ". ";
+}
+
+
+.toc>li[class~=appendix]::before {
+	content: counter(appendix1, upper-latin) ". ";
+}
+
+.toc>li[class] {
+	margin: 1em 0;
+}
+
+.toc ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) " ";
+}
+.toc ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) " ";
+}
+
+
+.toc ol ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
+}
+.toc ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) " ";
+}
+
+.toc ol ol ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
+}
+.toc ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
+}
+
+.toc ol ol ol ol li[class~=bodymatter]::before {
+	margin-left: 1em;
+	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
+}
+.toc ol ol ol ol li[class~=appendix]::before {
+	margin-left: 1em;
+	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
+}
+
+div.frontmatter{
+	page: frontmatter;
+}
+
+div.backmatter{
+	page: backmatter;
+}
+
+.bodymatter h2::before {
+	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+	counter-reset: footnote;
+}
+
+.backmatter h2::before {
+	content: "Appendix " counter(a2, upper-latin) " &ndash; ";
+}
+
+.bodymatter h3::before {
+	content: counter(h2) "." counter(h3) " ";
+}
+
+.backmatter h3::before {
+	content: counter(a2, upper-latin) "." counter(h3) " ";
+}
+
+.bodymatter h4::before {
+	content: counter(h2) "." counter(h3) "." counter(h4) " ";
+}
+
+.backmatter h4::before {
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) " ";
+}
+
+.bodymatter h5::before {
+	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+}
+
+.backmatter h5::before {
+	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) " ";
+}
+
+h2 { 
+	string-set: chapter-title content();
+	page-break-before: always;
+}
+
+.halftitlepage h2, .titlepage h2 {
+	page-break-before: avoid;
+}
+
+.bodymatter h2{
+	counter-increment: h2;
+	counter-reset: h3;
+}
+
+.backmatter h2{
+	counter-increment: a2;
+	counter-reset: h3;
+}
+
+.bodymatter h3, .backmatter h3 {
+	counter-increment: h3;
+	counter-reset: h4;
+}	
+
+.bodymatter h4, .backmatter h4 {
+	counter-increment: h4;
+	counter-reset: h5;
+}	
+
+.bodymatter h5, .backmatter h5 {
+	counter-increment: h5;
+}
+
+h2, h3, h4, h5 { page-break-after: avoid }
+table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid }
+
+/* Footnotes */
+
+@page {
+	@footnotes {
+		border-top: 1px solid #000;
+	}
+}
+
+.fn {
+	font-size: 85%;
+	margin-left: 1.5em;
+  display: prince-footnote;
+  counter-increment: footnote;
+}
+
+.fn::footnote-call {
+	content: counter(footnote);
+	font-size: 85%;
+	vertical-align: super;
+	line-height: none;
+	font-weight: bold;
+	margin-left: 1pt;
+}
+
+.fn::footnote-marker {
+	font-weight: bold;
+	margin-right: 0.5em;
+}
 
 </style>
-		
 		
 		<style type="text/css">
 pre.lazy .OcamlInfixFPOperator {
@@ -327,7 +569,8 @@ pre.lazy .Comment {
 </head>
 
 	<body><div class="titlepage">
-<img src="images/glyph.png" width="20%" height="20%" />
+<img src="images/glyph.svg" width="20%" height="20%" />
+		
 	
 			<h1>
 			Glyph
@@ -1303,7 +1546,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Jun 13 10:49:15 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Jun 13 10:56:36 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>

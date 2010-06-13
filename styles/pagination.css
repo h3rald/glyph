@@ -1,20 +1,3 @@
-/* FONTS */
-
-@font-face {
-	font-family: "Gentium Book Basic";
-	src: local("Gentium Book Basic");
-}
-@font-face {
-	font-family: "Droid Sans Mono";
-	src: local("Droid Sans Mono");
-}
-body {
-	font-family: "Gentium Book Basic", "Book Antiqua", "Times New Roman", "Serif";
-}
-
-code, pre {
-	font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace";
-}
 @page {
 	size: A4;
 	margin: 40pt 30pt 40pt 30pt;
