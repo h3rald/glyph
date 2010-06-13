@@ -1,4 +1,3 @@
-
 Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, you can manage your documents tidily in _projects_ and generate deliverables in different formats such as HTML or PDF (through <a href="http://www.princexml.com/">Prince</a>).
