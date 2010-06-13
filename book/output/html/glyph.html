@@ -6,7 +6,7 @@
 <meta name="author" content="Fabio Cevasco" />
 
 <meta name="copyright" content="Fabio Cevasco" />
-<meta name="generator" content="Glyph v0.2.0 (http://www.h3rald.com/glyph)" />
+<meta name="generator" content="Glyph v0.3.0 (http://www.h3rald.com/glyph)" />
 <style type="text/css">
 * {
 	border: none;
@@ -850,7 +850,7 @@ renderer like =&gt;[http://www.princexml.com|Prince].
 	<li>Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a></li>
 	<li>Development Wiki <a href="http://wiki.github.com/h3rald/glyph">http://wiki.github.com/h3rald/glyph</a></li>
 	<li>RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a></li>
-	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/h3rald/glyph/raw/0.2.0/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/0.2.0/book/output/pdf/glyph.pdf</a></li>
+	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/h3rald/glyph/raw/0.3.0/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/0.3.0/book/output/pdf/glyph.pdf</a></li>
 	<li>Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a></li>
 	<li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
 </ul>
@@ -1561,8 +1561,8 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Jun 13 14:26:17 +0200 2010</li>
-	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Jun 13 14:33:00 +0200 2010</li>
+	<li><code>%[Glyph::VERSION]</code> &rarr; 0.3.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
 <p>Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <a href="#m_config">config</a> macro (aliased to <code>$</code>) makes things slightly simpler (e.g. <code>$[document.author]</code>).</p>
@@ -1633,7 +1633,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </p>
 		<p>The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.</p>
 		<div class="note">
-<span class="note-title">Note</span>Glyph v0.2.0 has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.
+<span class="note-title">Note</span>Glyph v0.3.0 has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.
 
 </div>
 
