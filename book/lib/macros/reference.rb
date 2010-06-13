@@ -42,6 +42,7 @@ macro :parameters do
 	interpret %{
 		section[
 			@title[#{@name.to_s[0..0].upcase+@name.to_s[1..@name.to_s.length-1]}]
+			@notoc[true]
 
 		<table style="width:100%;">
 			<tr>
@@ -110,6 +111,7 @@ macro :ref_macro do
 	m_aliases = "aliases[#{raw_attr(:aliases)}]" if raw_attr(:aliases)
 	m_remarks = %{section[
 		@title[Remarks]
+		@notoc[:true]
 			txt[
 #{raw_attr(:remarks)}
 			]
@@ -138,7 +140,7 @@ macro :ref_config do
 	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
 	default = "nil" if default.blank?
 	interpret %{tr[
-		td[codeph[#{m_name}] #[s_#{m_name.gsub(/\./, '_')}]]
+		td[code[#{m_name}] #[s_#{m_name.gsub(/\./, '_').gsub(/\*/,'')}]]
 		td[txt[#{m_value}]]
 		td[
 			code[=

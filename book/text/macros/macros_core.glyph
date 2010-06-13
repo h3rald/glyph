@@ -189,8 +189,8 @@ rw:[release\|
 	ref_macro[
 		@n[snippet]
 		@desc[Returns the value of a snippet.]
-		@aliases[&]
-		@example[=&[glang]=]
+		@aliases[&amp;]
+		@example[=&amp;[glang]=]
 		@params[-p[0|The ID of the snippet to retrieve.]]
 	]
 
@@ -198,8 +198,8 @@ rw:[release\|
 		@n[snippet:]
 		@desc[Defines a snippet.]
 		@remarks[The new snippet &[only_after_declaration].]
-		@aliases[&:]
-		@example[=&:[test\|This is a test]=]
+		@aliases[&amp;:]
+		@example[=&amp;:[test\|This is a test]=]
 		@params[
 			-p[0|The ID of the new snippet.]
 			-p[1|The contents of the new snippet.]

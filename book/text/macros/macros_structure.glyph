@@ -80,6 +80,7 @@ section[
 		@attrs[
 			-a[title|The title of the section &[opt]]
 			-a[id|The ID of the section &[opt]]
+			-a[notoc|If not blank, the header will not appear in the Table of Contents. &[opt]]
 		]
 	]
 

@@ -205,7 +205,8 @@ code, pre {
 }
 pre{
 	border: 1px solid #cecece;
-	padding-top: 1px;
+	padding: 0.5em;
+	background: #ededed;
 }
 span.line-numbers{
 	margin: 0;

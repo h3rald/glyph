@@ -5,6 +5,7 @@ macro :section do
 	h = ""
 	h_title = attr :title
 	h_id = attr :id
+	h_notoc = attr :notoc 
 	macro_warning "Please specify a title for section ##{h_id}" if h_id && !h_title
 	if h_title then
 		level = 1
@@ -15,7 +16,7 @@ macro :section do
 		end
 		h_id ||= "h_#{@node[:document].headers.length+1}"
 		h_id = h_id.to_sym
-		header :title => h_title, :level => level, :id => h_id
+		header :title => h_title, :level => level, :id => h_id, :notoc => h_notoc
 		@node[:header] = h_id
 		macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
 		bookmark :id => h_id, :title => h_title
@@ -43,8 +44,7 @@ macro :article do
 			#{pubdate}
 			#{post_title}
 	}
-	interpret %{
-document[
+	interpret %{document[
 	head[#{head}]
 	body[
 		halftitlepage[
@@ -78,8 +78,7 @@ macro :book do
 	frontmatter = "frontmatter[\n#{frontmatter}\n]" if frontmatter
 	bodymatter = "bodymatter[\n#{bodymatter}\n]" if bodymatter
 	backmatter = "backmatter[\n#{backmatter}\n]" if backmatter
-	interpret %{
-document[
+	interpret %{document[
 	head[#{head}]
 	body[
 		titlepage[
@@ -159,7 +158,7 @@ macro :toc do
 					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] }
 					header_id = n2[:header]
 					header_hash = document.header?(header_id)
-					next if depth && header_hash && (header_hash[:level]-1 > depth.to_i)
+					next if depth && header_hash && (header_hash[:level]-1 > depth.to_i) || header_hash && header_hash[:notoc]
 					next if added_headers.include? header_id
 					added_headers << header_id
 					# Check if part of frontmatter, bodymatter or backmatter

@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -216,7 +215,8 @@ code, pre {
 }
 pre{
 	border: 1px solid #cecece;
-	padding-top: 1px;
+	padding: 0.5em;
+	background: #ededed;
 }
 span.line-numbers{
 	margin: 0;
@@ -237,16 +237,6 @@ td>div.code, td>code {
 
 /* FONTS */
 
-/*
-@font-face {
-	font-family: "Gentium Book Basic";
-	src: local("Gentium Book Basic");
-}
-@font-face {
-	font-family: "Droid Sans Mono";
-	src: local("Droid Sans Mono");
-}
-*/
 body {
 	font-family: "Gentium Book Basic", "Book Antiqua", "Times New Roman", "Serif";
 }
@@ -256,239 +246,7 @@ code, pre {
 }
 
 </style>
-		<style type="text/css">
-@page {
-	size: A4;
-	margin: 40pt 30pt 40pt 30pt;
-	@top { 
-		content: string(book-title) " - " string(chapter-title);  
-		font-style: italic;
-	}
-  @bottom { content: counter(page, decimal); }
-}
-
-@page frontmatter {
-	@bottom { content: counter(page, lower-roman); }
-}
-
-@page backmatter {
-	@bottom { content: counter(page, decimal); }
-}
-
-@page:first { 
-	padding-top: 10%;
-  @top { content: normal; }
-  @bottom { content: normal; }
-}
-
-ol.toc {
-	margin-left: 1.5em;
-}
-.toc > li[class] {
-	font-weight: bold;
-}
-.toc li {
-	list-style-type: none;
-	margin-left: 0;
-}
-.toc li a, .toc li a:hover {
-	color: #000;
-}
-
-.toc li a::after {
-  content: leader('.') target-counter(attr(href), page);
-}
-
-.titlepage h1, .halftitlepage h1 { 
-	string-set: book-title content();
-}
-
-.toc>li[class~=chapter] {
-	counter-increment: toc1;
-	counter-reset: toc2;
-}
-
-.toc>li[class~=appendix] {
-	counter-increment: appendix1;
-	counter-reset: toc2;
-}
-
-.toc ol li[class] {
-	counter-increment: toc2;
-	counter-reset: toc3;
-}
-
-.toc ol ol li[class] {
-	counter-increment: toc3;
-	counter-reset: toc4;
-}
-
-.toc ol ol ol li[class] {
-	counter-increment: toc4;
-	counter-reset: toc5;
-}
-
-.toc ol ol ol ol li[class] {
-	counter-increment: toc5;
-}
-
-.toc>li[class~=chapter]::before {
-	content: counter(toc1) ". ";
-}
-
-
-.toc>li[class~=appendix]::before {
-	content: counter(appendix1, upper-latin) ". ";
-}
-
-.toc>li[class] {
-	margin: 1em 0;
-}
-
-.toc ol li[class~=bodymatter]::before {
-	margin-left: 1em;
-	content: counter(toc1) "." counter(toc2) " ";
-}
-.toc ol li[class~=appendix]::before {
-	margin-left: 1em;
-	content: counter(appendix1, upper-latin) "." counter(toc2) " ";
-}
-
-
-.toc ol ol li[class~=bodymatter]::before {
-	margin-left: 1em;
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
-}
-.toc ol ol li[class~=appendix]::before {
-	margin-left: 1em;
-	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) " ";
-}
-
-.toc ol ol ol li[class~=bodymatter]::before {
-	margin-left: 1em;
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
-}
-.toc ol ol ol li[class~=appendix]::before {
-	margin-left: 1em;
-	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
-}
-
-.toc ol ol ol ol li[class~=bodymatter]::before {
-	margin-left: 1em;
-	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
-}
-.toc ol ol ol ol li[class~=appendix]::before {
-	margin-left: 1em;
-	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
-}
-
-div.frontmatter{
-	page: frontmatter;
-}
-
-div.backmatter{
-	page: backmatter;
-}
-
-.bodymatter h2::before {
-	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
-	counter-reset: footnote;
-}
-
-.backmatter h2::before {
-	content: "Appendix " counter(a2, upper-latin) " &ndash; ";
-}
-
-.bodymatter h3::before {
-	content: counter(h2) "." counter(h3) " ";
-}
-
-.backmatter h3::before {
-	content: counter(a2, upper-latin) "." counter(h3) " ";
-}
-
-.bodymatter h4::before {
-	content: counter(h2) "." counter(h3) "." counter(h4) " ";
-}
-
-.backmatter h4::before {
-	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) " ";
-}
-
-.bodymatter h5::before {
-	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
-}
-
-.backmatter h5::before {
-	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) " ";
-}
-
-h2 { 
-	string-set: chapter-title content();
-	page-break-before: always;
-}
-
-.halftitlepage h2, .titlepage h2 {
-	page-break-before: avoid;
-}
-
-.bodymatter h2{
-	counter-increment: h2;
-	counter-reset: h3;
-}
-
-.backmatter h2{
-	counter-increment: a2;
-	counter-reset: h3;
-}
-
-.bodymatter h3, .backmatter h3 {
-	counter-increment: h3;
-	counter-reset: h4;
-}	
-
-.bodymatter h4, .backmatter h4 {
-	counter-increment: h4;
-	counter-reset: h5;
-}	
-
-.bodymatter h5, .backmatter h5 {
-	counter-increment: h5;
-}
-
-h2, h3, h4, h5 { page-break-after: avoid }
-table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid }
-
-/* Footnotes */
-
-@page {
-	@footnotes {
-		border-top: 1px solid #000;
-	}
-}
-
-.fn {
-	font-size: 85%;
-	margin-left: 1.5em;
-  display: prince-footnote;
-  counter-increment: footnote;
-}
-
-.fn::footnote-call {
-	content: counter(footnote);
-	font-size: 85%;
-	vertical-align: super;
-	line-height: none;
-	font-weight: bold;
-	margin-left: 1pt;
-}
-
-.fn::footnote-marker {
-	font-weight: bold;
-	margin-right: 0.5em;
-}
-
-</style>
+		
 		
 		<style type="text/css">
 pre.lazy .OcamlInfixFPOperator {
@@ -569,8 +327,7 @@ pre.lazy .Comment {
 </head>
 
 	<body><div class="titlepage">
-<img src="images/glyph.svg" width="20%" height="20%" />
-		
+<img alt="-" src="images/glyph.png" width="20%" height="20%" />
 	
 			<h1>
 			Glyph
@@ -669,23 +426,11 @@ June 2010
 <li><ol><li class="appendix section"><a href="#debug_switch"><code>-d</code>, <code>--debug</code></a></li>
 </ol></li>
 <li class="appendix section"><a href="#c_add"><code>add</code></a></li>
-<li><ol><li class="appendix section"><a href="#h_63">Parameters</a></li>
-</ol></li>
 <li class="appendix section"><a href="#c_compile"><code>compile</code></a></li>
-<li><ol><li class="appendix section"><a href="#h_65">Parameters</a></li>
-<li class="appendix section"><a href="#h_66">Options</a></li>
-</ol></li>
 <li class="appendix section"><a href="#c_config"><code>config</code></a></li>
-<li><ol><li class="appendix section"><a href="#h_68">Options</a></li>
-<li class="appendix section"><a href="#h_69">Parameters</a></li>
-</ol></li>
 <li class="appendix section"><a href="#c_help"><code>help</code></a></li>
-<li><ol><li class="appendix section"><a href="#h_71">Parameters</a></li>
-</ol></li>
 <li class="appendix section"><a href="#c_init"><code>init</code></a></li>
 <li class="appendix section"><a href="#c_outline"><code>outline</code></a></li>
-<li><ol><li class="appendix section"><a href="#h_74">Options</a></li>
-</ol></li>
 <li class="appendix section"><a href="#c_todo"><code>todo</code></a></li>
 </ol></li>
 <li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li>
@@ -764,10 +509,10 @@ June 2010
 		<div class="introduction">
 <h2 id="h_1">Introduction</h2>
 <p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
-<p>Think of it like a sort of <a href="http://www.rubyonrails.org">Ruby on Rails</a> but for creating text documents instead of web sites. With Glyph, you can manage your documents tidily in <em>projects</em> that can be used to generate deliverables in different formats such as <span class="caps">HTML</span> or <span class="caps">PDF</span> (through <a href="http://www.princexml.com/">Prince</a>).</p>
+<p>With Glyph, you can manage your documents tidily in <em>projects</em> and generate deliverables in different formats such as <span class="caps">HTML</span> or <span class="caps">PDF</span> (through <a href="http://www.princexml.com/">Prince</a>).</p>
 <div class="section">
 <h3 id="h_2">Main Features</h3>
-<p>Glyph uses a simple macro system to perform a wide variety of advanced tasks:</p>
+<p>Glyph comes with its very own macro system to perform a wide variety of advanced tasks:</p>
 <ul>
 	<li>Generate block-level <span class="caps">HTML</span> tags not commonly managed by lightweight markups, like <code>head</code>, <code>body</code>, <code>div</code> and <code>table</code>.</li>
 	<li>Create and validate internal and external links.</li>
@@ -781,10 +526,11 @@ June 2010
 	<li>Define macros, snippets and configuration settings directly within your document.</li>
 	<li>Highlight source code.</li>
 	<li>Call macros from other macros (including snippets), avoiding mutual calls.</li>
-	<li>Include text files in other text files.</li>
+	<li>Include text files within other text files.</li>
 	<li>Include the value of any configuration setting (like author, title) in the document.</li>
-	<li>Filter input explicitly or implicitly, based on file extensions when including files.</li>
+	<li>Filter input explicitly or implicitly (based on file extensions).</li>
 	<li>Manage draft comments and todo items.</li>
+	<li>Provide a simple, less-verbose syntax to write <span class="caps">XML</span> code.</li>
 </ul>
 </div>
 <div class="section">
@@ -801,39 +547,67 @@ June 2010
 	<li><code>glyph compile --auto</code> &#8212; to keep recompiling the current document every time a file is changed.</li>
 	<li><code>glyph compile -f pdf</code> &#8212; to compile the current document into <span class="caps">HTML</span> and then transform it into <span class="caps">PDF</span> using <a href="http://www.princexml.com/">Prince</a>.</li>
 	<li><code>glyph compile readme.glyph</code> &#8212; to compile a <em>readme.glyph</em> located in the current directory into a single <span class="caps">HTML</span> file.</li>
+	<li><code>glyph outline -l 2</code> &#8212; Display the document outline, up to second-level headers.</li>
 </ul>
 </div>
 <div class="section">
 <h3 id="macros_nutshell">Glyph macros in a nutshell</h3>
 <p>Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:</p>
 <p><b>Glyph Source:</b></p>
-<p><code>section[@title[Something about Glyph]
-You can use Glyph macros in conjunction
- with _Textile_ or _Markdown_ to
+<div class="code">
+<pre>
+<code>
+section[
+  @title[Something about Glyph]
+  txt[
+You can use Glyph macros in conjunction 
+with _Textile_ or _Markdown_ to
 produce HTML files effortlessly.
+  ]
+  p[
+Alternatively, you can just use em[Glyph itself]
+to generate HTML tags.
+  ]
   section[
-		@title[What about PDFs?]
-		@id[pdf]
+    @title[What about PDFs?]
+    @id[pdf]
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
 extremely easy with a 3rd-party 
 renderer like =&gt;[http://www.princexml.com|Prince].
   ]   
-]</code></p>
+]
+</code>
+</pre>
+</div>
 <p><b><span class="caps">HTML</span> Output:</b></p>
-<p><code>&lt;div class="section"&gt;
+<div class="code">
+<pre>
+<code>
+&lt;div class="section"&gt;
   &lt;h2 id="h_10"&gt;Something about Glyph&lt;/h2&gt;
-  &lt;p&gt;You can use Glyph macros in conjunction with 
-     &lt;em&gt;Textile&lt;/em&gt; or &lt;em&gt;Markdown&lt;/em&gt; to
-     produce HTML files effortlessly.&lt;/p&gt;
+  &lt;p&gt;
+    You can use Glyph macros in conjunction with 
+    &lt;em&gt;Textile&lt;/em&gt; or &lt;em&gt;Markdown&lt;/em&gt; to
+    produce HTML files effortlessly.
+  &lt;/p&gt;
   &lt;div class="section"&gt;
    &lt;h3 id="pdf"&gt;What about PDFs?&lt;/h3&gt;
-   &lt;p&gt;Once you have a single, well-formatted HTML 
-      file, converting it to PDF is
-      extremely easy with a 3rd-party renderer 
-      like &lt;a href="http://www.princexml.com"&gt;Prince&lt;/a&gt;.&lt;/p&gt;</p>
+   &lt;p&gt;
+     Once you have a single, well-formatted HTML 
+     file, converting it to PDF is
+     extremely easy with a 3rd-party renderer 
+     like &lt;a href="http://www.princexml.com"&gt;Prince&lt;/a&gt;.
+   &lt;/p&gt;
+   &lt;p&gt;
+     Alternatively, you can just use &lt;em&gt;Glyph itself&lt;/em&gt;
+     to generate HTML tags.
+   &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
 </div>
-<p></div></code></p>
 </div>
 <div class="section">
 <h3 id="h_6">Resources</h3>
@@ -844,28 +618,36 @@ renderer like =&gt;[http://www.princexml.com|Prince].
 	<li>Development Wiki <a href="http://wiki.github.com/h3rald/glyph">http://wiki.github.com/h3rald/glyph</a></li>
 	<li>RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a></li>
 	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/h3rald/glyph/raw/0.2.0/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/0.2.0/book/output/pdf/glyph.pdf</a></li>
-	<li>Reference Documentation: <a href="http://yardoc.org/docs/glyph/">http://yardoc.org/docs/glyph/</a></li>
+	<li>Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a></li>
 	<li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
 </ul>
 </div>
 			<div class="section">
 <h3 id="h_7">License</h3>
 <p>Copyright &#169; 2010 <b>Fabio Cevasco</b>, <a href="http://www.h3rald.com">http://www.h3rald.com</a></p>
-<p><code>Permission is hereby granted, free of charge, to any person obtaining a copy
+<div class="code">
+<pre>
+<code>
+Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in<br />
-all copies or substantial portions of the Software.</p>
-<p><span class="caps">THE</span> <span class="caps">SOFTWARE</span> IS <span class="caps">PROVIDED</span> &#8220;AS IS&#8221;, <span class="caps">WITHOUT</span> <span class="caps">WARRANTY</span> OF <span class="caps">ANY</span> <span class="caps">KIND</span>, <span class="caps">EXPRESS</span> OR<br />
-<span class="caps">IMPLIED</span>, <span class="caps">INCLUDING</span> <span class="caps">BUT</span> <span class="caps">NOT</span> <span class="caps">LIMITED</span> TO <span class="caps">THE</span> <span class="caps">WARRANTIES</span> OF <span class="caps">MERCHANTABILITY</span>,<br />
-<span class="caps">FITNESS</span> <span class="caps">FOR</span> A <span class="caps">PARTICULAR</span> <span class="caps">PURPOSE</span> <span class="caps">AND</span> <span class="caps">NONINFRINGEMENT</span>. IN NO <span class="caps">EVENT</span> <span class="caps">SHALL</span> <span class="caps">THE</span><br />
-<span class="caps">AUTHORS</span> OR <span class="caps">COPYRIGHT</span> <span class="caps">HOLDERS</span> BE <span class="caps">LIABLE</span> <span class="caps">FOR</span> <span class="caps">ANY</span> <span class="caps">CLAIM</span>, <span class="caps">DAMAGES</span> OR <span class="caps">OTHER</span><br />
-<span class="caps">LIABILITY</span>, <span class="caps">WHETHER</span> IN AN <span class="caps">ACTION</span> OF <span class="caps">CONTRACT</span>, <span class="caps">TORT</span> OR <span class="caps">OTHERWISE</span>, <span class="caps">ARISING</span> <span class="caps">FROM</span>,<br />
-<span class="caps">OUT</span> OF OR IN <span class="caps">CONNECTION</span> <span class="caps">WITH</span> <span class="caps">THE</span> <span class="caps">SOFTWARE</span> OR <span class="caps">THE</span> <span class="caps">USE</span> OR <span class="caps">OTHER</span> <span class="caps">DEALINGS</span> IN<br />
-<span class="caps">THE</span> <span class="caps">SOFTWARE</span>.</code></p>
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</code>
+</pre>
+</div>
 
 </div>
 
@@ -1532,7 +1314,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   9 </span>   This is a<span class="InvalidDeprecated"> </span>
 <span class="line-numbers">  10 </span>   Test snippet
 </pre>
-	<p>You can use <code>&[markups]</code> anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the <code>markups</code> snippet only in the <code>snippets.yml</code> file to change it everywhere else in the document.</p>
+	<p>You can use <code>&amp;[markups]</code> anywhere in your document instead of having to type "Textile or Markdown" every time. Additionally, later on you can change the value of the <code>markups</code> snippet only in the <code>snippets.yml</code> file to change it everywhere else in the document.</p>
 
 </div> 
 	<div class="tip">
@@ -1546,7 +1328,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Jun 13 10:56:36 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Jun 13 12:38:00 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.2.0</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1665,14 +1447,15 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>Filter text to <span class="caps">HTML</span> (using <code>Glyph#filter</code>)</li>
 	<li>Compile Glyph source files into <span class="caps">HTML</span> or <span class="caps">PDF</span> files (using <code>Glyph#compile</code>)</li>
 </ul>
-<p>That&#8217;s pretty much it. Of course, both the <code>filter</code> and <code>compile</code> method cause Glyph to run in <a href="#lite_mode"><em>lite</em> mode</a>, so the same <a href="#lite_limitations">limitations</a> apply. <br />
-		<div class="tip"><br />
-<span class="note-title">Tip</span>For an example on how to use Glyph programmatically (specifically in conjunction with the <a href="http://nanoc.stoneship.org/">nanoc</a> static site generator), see <a href="http://github.com/h3rald/h3rald">h3rald.com source code</a>, in particular:</p>
+<p>That&#8217;s pretty much it. Of course, both the <code>filter</code> and <code>compile</code> method cause Glyph to run in <a href="#lite_mode"><em>lite</em> mode</a>, so the same <a href="#lite_limitations">limitations</a> apply.</p>
+	<div class="tip">
+<span class="note-title">Tip</span><p>For an example on how to use Glyph programmatically (specifically in conjunction with the <a href="http://nanoc.stoneship.org/">nanoc</a> static site generator), see <a href="http://github.com/h3rald/h3rald">h3rald.com source code</a>, in particular:</p>
 <ul>
 	<li><a href="http://github.com/h3rald/h3rald/blob/master/lib/glyph-data.rb">lib/glyph-data.rb</a> &#8212; updating configuration settings.</li>
 	<li><a href="http://github.com/h3rald/h3rald/blob/master/lib/glyph-filter.rb">lib/glyph-data.rb</a> &#8212; using the <code>Glyph#filter</code> method.</li>
 	<li><a href="http://github.com/h3rald/h3rald/blob/master/Rules">Rules</a> &#8212; using the <code>Glyph#compile</code> method to generate <span class="caps">PDF</span> files.</li>
 </ul>
+
 </div>
 	<div class="section">
 <h4 id="modes">Modes</h4>
@@ -1744,7 +1527,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h3 id="h_42">A quick look at Glyph's internals</h3>
 <p>If you plan on extending Glyph, knowing how it works inside helps. It is not mandatory by any means, but it definitely helps, especially when creating complex macros.</p>
 	<p>What happens behind the scenes when you call <code>glyph compile</code>? Glyph's code is parsed, analyzed and then translated into text, and here's how:</p>
-	<div class="figure"><img src="images/document_generation.png" />
+	<div class="figure"><img alt="-" src="images/document_generation.png" />
 <div class="caption">A sequence diagram for document generation</div></div>
 	<p>From the diagram, it is possible to divide the document generation process into three phases:</p>
 <ul>
@@ -1792,7 +1575,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		<p>This output is produced by calling the <code>inspect</code> method on the AST. Each <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/SyntaxNode"><code>Glyph::SyntaxNode</code></a> object in the tree is basically an ordinary Glyph Hash with a parent and 0 or more chidren, so the code snippets above shows how the syntax nodes are nested.</p>
 		<p>The AST contains information about macro, parameter and attribute names, and escaping, and raw text values (the nodes without a <code>:name</code> key), but nothing more.</p>
 		<p>When the AST is analyzed, the resulting textual output is the following:</p>
-		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see ‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡
+		<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">span</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>fmi<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>for more information on something, see â€¡â€¡â€¡â€¡â€¡PLACEHOLDER Â¤ 1â€¡â€¡â€¡â€¡â€¡
 <span class="line-numbers">   2 </span> <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">span</span><span class="MetaTag">&gt;</span></span>
 <span class="line-numbers">   3 </span> \[...\]
 <span class="line-numbers">   4 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
@@ -3228,8 +3011,8 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 	<div class="section">
 <h4 id="m_snippet"><code>snippet</code></h4>
 <p>Returns the value of a snippet.</p>
-<strong>Aliases:</strong> <code>&</code>
-<p><strong>Example:</strong> <code>&[glang]</code></p>
+<strong>Aliases:</strong> <code>&amp;</code>
+<p><strong>Example:</strong> <code>&amp;[glang]</code></p>
 
 
 
@@ -3255,8 +3038,8 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 	<div class="section">
 <h4 id="m_snippet_"><code>snippet:</code></h4>
 <p>Defines a snippet.</p>
-<strong>Aliases:</strong> <code>&:</code>
-<p><strong>Example:</strong> <code>&:[test|This is a test]</code></p>
+<strong>Aliases:</strong> <code>&amp;:</code>
+<p><strong>Example:</strong> <code>&amp;:[test|This is a test]</code></p>
 
 
 
@@ -4067,6 +3850,12 @@ Prints all the todo items saved using the <a href="#m_todo">todo</a> macro.
 			<td>id</td>
 			<td>The ID of the section <em>(optional)</em></td>
 		</tr>
+	
+			
+		<tr>
+			<td>notoc</td>
+			<td>If not blank, the header will not appear in the Table of Contents. <em>(optional)</em></td>
+		</tr>
 		</table>
 
 </div>
@@ -4140,48 +3929,48 @@ The following configuration settings are related to the current Glyph document. 
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
 			<tr><td>
-<codeph>document.author</codeph> <a id="s_document_author"></a>
+<code>document.author</code> <a id="s_document_author"></a>
 </td>
 		<td><p>The author of the document.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
-<codeph>document.draft</codeph> <a id="s_document_draft"></a>
+<code>document.draft</code> <a id="s_document_draft"></a>
 </td>
 		<td><p>If set to <code>true</code>, the document is considered a draft, so <a href="#m_draftcomment">draft comments</a> and <a href="#m_todo">todo items</a> will be displayed.</p></td>
 		<td><code>false</code></td></tr>
 		<tr><td>
-<codeph>document.filename</codeph> <a id="s_document_filename"></a>
+<code>document.filename</code> <a id="s_document_filename"></a>
 </td>
 		<td><p>The name of the output file.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
-<codeph>document.output</codeph> <a id="s_document_output"></a>
+<code>document.output</code> <a id="s_document_output"></a>
 </td>
 		<td><p>The format of the output file. It can be set to any value stored in the <a href="#s_document_output_targets">document.output_targets</a> setting.</p></td>
 		<td><code>html</code></td></tr>
 		<tr><td>
-<codeph>document.output_targets</codeph> <a id="s_document_output_targets"></a>
+<code>document.output_targets</code> <a id="s_document_output_targets"></a>
 </td>
 		<td><p>An <code>Array</code> containing all the possible output formats. This setting should not be changed by the user.</p></td>
 		<td><code>nil</code></td></tr>
 		<tr><td>
-<codeph>document.revision</codeph> <a id="s_document_revision"></a>
+<code>document.revision</code> <a id="s_document_revision"></a>
 </td>
 		<td><p>The document&#8217;s revision.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
-<codeph>document.source</codeph> <a id="s_document_source"></a>
+<code>document.source</code> <a id="s_document_source"></a>
 </td>
 		<td><p>The main source file to compile. It can be also be overridden by calling the <a href="#c_compile">compile</a> command with the <code>-s</code> option.</p></td>
 		<td><code>document.glyph</code></td></tr>
 
 		<tr><td>
-<codeph>document.subtitle</codeph> <a id="s_document_subtitle"></a>
+<code>document.subtitle</code> <a id="s_document_subtitle"></a>
 </td>
 		<td><p>The subtitle of the document, displayed using the <a href="#m_subtitle">subtitle</a> macro.</p></td>
 		<td><code>""</code></td></tr>
 		<tr><td>
-<codeph>document.title</codeph> <a id="s_document_title"></a>
+<code>document.title</code> <a id="s_document_title"></a>
 </td>
 		<td><p>The title of the document, displayed using the <a href="#m_title">title</a> macro.</p></td>
 		<td><code>""</code></td></tr></table>
@@ -4194,12 +3983,12 @@ The following configuration settings are related to the current Glyph document. 
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
 			<tr><td>
-<codeph>filters.by_file_extension</codeph> <a id="s_filters_by_file_extension"></a>
+<code>filters.by_file_extension</code> <a id="s_filters_by_file_extension"></a>
 </td>
 		<td><p>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</p></td>
 		<td><code>true</code></td></tr>
 		<tr><td>
-<codeph>filters.markdown.converter</codeph> <a id="s_filters_markdown_converter"></a>
+<code>filters.markdown.converter</code> <a id="s_filters_markdown_converter"></a>
 </td>
 		<td><p>The name of the markdown converter to use with the <a href="#m_markdown">markdown</a> macro. It can be set to one of the following values:</p>
 <ul>
@@ -4211,32 +4000,32 @@ The following configuration settings are related to the current Glyph document. 
 <p>If not set, Glyph tests for the presence of each gem in the same order, until one is found.</p></td>
 		<td><code>bluecloth</code></td></tr>
 		<tr><td>
-<codeph>filters.coderay.*</codeph> <a id="s_filters_coderay_*"></a>
+<code>filters.coderay.*</code> <a id="s_filters_coderay_"></a>
 </td>
 		<td><p>Some <a href="http://coderay.rubychan.de/">Coderay</a>-specific <a href="http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html">options</a>.</p></td>
 		<td><code>nil</code></td></tr>
 		<tr><td>
-<codeph>filters.highlighter</codeph> <a id="s_filters_highlighter"></a>
+<code>filters.highlighter</code> <a id="s_filters_highlighter"></a>
 </td>
 		<td><p>The current highlighter to use. It can be set to <code>coderay</code> or <code>ultraviolet</code></p></td>
 		<td><code>coderay</code></td></tr>
 		<tr><td>
-<codeph>filters.redcloth.restrictions</codeph> <a id="s_filters_redcloth_restrictions"></a>
+<code>filters.redcloth.restrictions</code> <a id="s_filters_redcloth_restrictions"></a>
 </td>
 		<td><p>An <code>Array</code> containing restrictions applied to RedCloth, used by the <a href="#m_textile">textile</a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</p></td>
 		<td><code>[]</code></td></tr>
 		<tr><td>
-<codeph>filters.target</codeph> <a id="s_filters_target"></a>
+<code>filters.target</code> <a id="s_filters_target"></a>
 </td>
 		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
 		<td><code>html</code></td></tr>
 		<tr><td>
-<codeph>filters.ultraviolet.line_numbers</codeph> <a id="s_filters_ultraviolet_line_numbers"></a>
+<code>filters.ultraviolet.line_numbers</code> <a id="s_filters_ultraviolet_line_numbers"></a>
 </td>
 		<td><p>Whether the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter should display line numbers or not.</p></td>
 		<td><code>true</code></td></tr>
 		<tr><td>
-<codeph>filters.ultraviolet.theme</codeph> <a id="s_filters_ultraviolet_theme"></a>
+<code>filters.ultraviolet.theme</code> <a id="s_filters_ultraviolet_theme"></a>
 </td>
 		<td><p>The theme used by the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter.</p></td>
 		<td><code>lazy</code></td></tr></table>
@@ -4249,7 +4038,7 @@ The following configuration settings are related to the current Glyph document. 
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
 			<tr><td>
-<codeph>language.set</codeph> <a id="s_language_set"></a>
+<code>language.set</code> <a id="s_language_set"></a>
 </td>
 		<td><p>Determines which macro set will be loaded. It can be set to:</p>
 <ul>
@@ -4259,7 +4048,7 @@ The following configuration settings are related to the current Glyph document. 
 </ul></td>
 		<td><code>glyph</code></td></tr>
 		<tr><td>
-<codeph>language.options.xml_blacklist</codeph> <a id="s_language_options_xml_blacklist"></a>
+<code>language.options.xml_blacklist</code> <a id="s_language_options_xml_blacklist"></a>
 </td>
 		<td><p>The <span class="caps">XML</span> tags listed here cannot be generated using Glyph code.</p></td>
 		<td><code>- applet
@@ -4277,7 +4066,7 @@ The following configuration settings are related to the current Glyph document. 
 - param
 - title</code></td></tr>
 		<tr><td>
-<codeph>language.options.xml_fallback</codeph> <a id="s_language_options_xml_fallback"></a>
+<code>language.options.xml_fallback</code> <a id="s_language_options_xml_fallback"></a>
 </td>
 		<td><p>If set to true, any unknown macro name will considered an <span class="caps">XML</span> element (see <a href="#other_elements">Other <span class="caps">HTML</span> Elements</a>).</p></td>
 		<td><code>true</code></td></tr></table>
@@ -4290,7 +4079,7 @@ The following configuration settings are related to the current Glyph document. 
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
 			<tr><td>
-<codeph>tools.pdf_generator</codeph> <a id="s_tools_pdf_generator"></a>
+<code>tools.pdf_generator</code> <a id="s_tools_pdf_generator"></a>
 </td>
 		<td><p>The external program used to generate <span class="caps">PDF</span> files. It can only be set to <code>prince</code>.</p></td>
 		<td><code>prince</code></td></tr></table>

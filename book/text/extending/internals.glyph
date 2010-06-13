@@ -51,7 +51,7 @@ section[
 		p[The AST contains information about macro, parameter and attribute names, and escaping, and raw text values (the nodes without a code[:name] key), but nothing more.]
 		p[When the AST is analyzed, the resulting textual output is the following:]
 		highlight[=html|
-<span class="fmi">for more information on something, see ‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡
+<span class="fmi">for more information on something, see â€¡â€¡â€¡â€¡â€¡PLACEHOLDER Â¤ 1â€¡â€¡â€¡â€¡â€¡
 </span>
 \\\\\.[...\\\\\.]
 <div class="section">

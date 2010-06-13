@@ -7,7 +7,10 @@ Besides using Glyph from the command line, you can also use it straight from you
 * Compile Glyph source files into HTML or PDF files (using @Glyph#compile@)
 
 That's pretty much it. Of course, both the @filter@ and @compile@ method cause Glyph to run in =>[#lite_mode|_lite_ mode], so the same =>[#lite_limitations|limitations] apply. 
-		tip[For an example on how to use Glyph programmatically (specifically in conjunction with the =>[http://nanoc.stoneship.org/|nanoc] static site generator), see =>[http://github.com/h3rald/h3rald|h3rald.com source code], in particular:
+	]
+	tip[
+		txt[
+For an example on how to use Glyph programmatically (specifically in conjunction with the =>[http://nanoc.stoneship.org/|nanoc] static site generator), see =>[http://github.com/h3rald/h3rald|h3rald.com source code], in particular:
 * =>[http://github.com/h3rald/h3rald/blob/master/lib/glyph-data.rb|lib/glyph-data.rb] -- updating configuration settings.
 * =>[http://github.com/h3rald/h3rald/blob/master/lib/glyph-filter.rb|lib/glyph-data.rb] -- using the @Glyph#filter@ method.
 * =>[http://github.com/h3rald/h3rald/blob/master/Rules|Rules] -- using the @Glyph#compile@ method to generate PDF files.
