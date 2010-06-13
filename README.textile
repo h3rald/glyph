@@ -1,4 +1,3 @@
-
 Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, you can manage your documents tidily in _projects_ and generate deliverables in different formats such as HTML or PDF (through <a href="http://www.princexml.com/">Prince</a>).
@@ -120,7 +119,7 @@ renderer like =>[http://www.princexml.com|Prince].
 * Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a>
 * Development Wiki <a href="http://wiki.github.com/h3rald/glyph">http://wiki.github.com/h3rald/glyph</a>
 * RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a>
-* Book (PDF): <a href="http://github.com/h3rald/glyph/raw/0.2.0/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/0.2.0/book/output/pdf/glyph.pdf</a>
+* Book (PDF): <a href="http://github.com/h3rald/glyph/raw/0.3.0/book/output/pdf/glyph.pdf">http://github.com/h3rald/glyph/raw/0.3.0/book/output/pdf/glyph.pdf</a>
 * Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a>
 * User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a>
 
