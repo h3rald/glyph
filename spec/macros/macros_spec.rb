@@ -88,9 +88,6 @@ describe "Macro:" do
 			<h2 class="toc-header" id="h_toc">Table of Contents</h2>
 			<ol class="toc">
 				<li class=" section"><a href="#h_1">Container section</a></li>
-				<li><ol>
-					<li class=" section"><a href="#h_2">Test Section</a></li>
-				</ol></li>
 				<li class=" section"><a href="#md">Markdown</a></li>
 			</ol>
 			</div>

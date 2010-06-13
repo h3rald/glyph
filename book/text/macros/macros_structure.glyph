@@ -93,6 +93,7 @@ section[
 	ref_macro[
 		@n[toc]
 		@desc[Generates a _Table of Contents_ based on how sections are nested in the current document.]
-		@example[=toc[]=]
+		@example[=toc[1]=]
+		@params[-p[0|The maximum header depth of the TOC &[opt].]]
 	]
 ] 

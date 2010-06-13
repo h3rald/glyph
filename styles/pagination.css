@@ -1,16 +1,15 @@
 /* FONTS */
 
 @font-face {
-	font-family: "Serif"
-	src: local("Book Antiqua")
+	font-family: "Gentium Book Basic";
+	src: local("Gentium Book Basic");
 }
-
 @font-face {
-	font-family: "Monospace"
-	src: local("Droid Sans Mono")
+	font-family: "Droid Sans Mono";
+	src: local("Droid Sans Mono");
 }
 body {
-	font-family: "Book Antiqua", "Times New Roman", "Serif";
+	font-family: "Gentium Book Basic", "Book Antiqua", "Times New Roman", "Serif";
 }
 
 code, pre {

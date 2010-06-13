@@ -1,3 +1,3 @@
-toc[]
+toc[1]
 include[container.textile]
 include[a/b/c/markdown.markdown]

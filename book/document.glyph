@@ -10,7 +10,7 @@ book[
 		?[eq[$[document.output]|html]|image[@width[20%]@height[20%]glyph.png]]
 	]
 	@frontmatter[
-		toc[]
+		toc[3]
 		introduction[
 			@title[Introduction]
 			textile[include[introduction]]
