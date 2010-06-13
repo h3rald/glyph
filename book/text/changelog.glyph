@@ -31,9 +31,9 @@ rw:[issue|
 	]
 ]
 ?[%[lite?]|
-	%:[%>|"#@value macro"]
-	%:[#>|"#@value command"]
-	%:[$>|"#@value setting"]
+	%:[%>|"#{value} macro"]
+	%:[#>|"#{value} command"]
+	%:[$>|"#{value} setting"]
 ]
 release[0.3.0|June 13th 2010|
 	features[
