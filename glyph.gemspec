@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{glyph}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
@@ -42,7 +42,6 @@ Gem::Specification.new do |s|
      "book/script/authors",
      "book/script/changelog",
      "book/script/license",
-     "book/script/prof_results.htm",
      "book/script/readme",
      "book/snippets.yml",
      "book/text/acknowledgement.glyph",
