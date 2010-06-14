@@ -9,5 +9,3 @@
   :draft: true
 :filters:
   :highlighter: ultraviolet
-:tools:
-  :pdf_generator: wkhtmltopdf

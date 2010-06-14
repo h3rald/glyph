@@ -9,7 +9,8 @@ namespace :generate do
 		else
 			text = file_load Glyph::PROJECT/Glyph['document.source']
 		end
-		interpreter = Glyph::Interpreter.new text, :source => {:name => "#{Glyph['document.source']}"}, :info => true
+		name = Glyph['document.source']
+		interpreter = Glyph::Interpreter.new text, :source => {:name => name, :file => name}, :info => true
 		interpreter.parse
 		Glyph.info "Processing..."
 		interpreter.process

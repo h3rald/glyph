@@ -27,7 +27,7 @@
       - param
       - title
 :tools:
-  :pdf_generator: 'prince'
+  :pdf_generator: 'wkhtmltopdf'
 :filters:
   :by_file_extension: true
   :highlighter: 'coderay'

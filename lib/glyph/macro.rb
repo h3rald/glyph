@@ -23,8 +23,10 @@ module Glyph
 		# Resets the name of the updated source (call before calling 
 		# Macro#interpret)
 		# @param [String] name the source name
-		def update_source(name)
-			@updated_source = {:node => @node, :name => name}
+		# @param [String] file the source file
+		# @since 0.3.0
+		def update_source(name, file=nil)
+			@updated_source = {:node => @node, :name => name, :file => file}
 		end
 		
 		# Returns a Glyph code representation of the specified parameter
