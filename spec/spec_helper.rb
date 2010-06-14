@@ -57,10 +57,11 @@ end
 
 def run_command(cmd)
 	out = StringIO.new
+	err = StringIO.new
 	old_stdout = $stdout
 	old_stderr = $stderr
 	$stdout = out
-	$stderr = out 
+	$stderr = err 
 	Glyph['system.quiet'] = false
 	GLI.run cmd
 	Glyph['system.quiet'] = true

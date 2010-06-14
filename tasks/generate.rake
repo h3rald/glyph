@@ -58,17 +58,22 @@ namespace :generate do
 			file = "#{Glyph['document.filename']}.pdf"
 		end
 		out.mkpath
-		case Glyph['tools.pdf_generator']
-		when 'prince' then
-			ENV['PATH'] += ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin" if RUBY_PLATFORM.match /mswin/ 
-				res = system "prince #{src} -o #{out/"#{file}"}"
+		generate_pdf = lambda do |path, cmd|
+			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/ 
+				res = system cmd 
 			if res then
 				Glyph.info "'#{file}' generated successfully."
 			else
 				Glyph.error "An error occurred while generating #{file}"
 			end
-			# TODO: support other PDF renderers
+		end
+		case Glyph['tools.pdf_generator']
+		when 'prince' then
+			generate_pdf.call ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin", %{prince #{src} -o #{out/"#{file}"}}
+		when 'wkhtmltopdf' then
+			generate_pdf.call ";#{ENV['ProgramFiles']}\\wkhtmltopdf", %{wkhtmltopdf #{src} #{out/"#{file}"}}
 		else
+			# TODO: support other PDF renderers
 			Glyph.error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
 		end
 	end
