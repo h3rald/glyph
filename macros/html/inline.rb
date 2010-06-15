@@ -5,8 +5,8 @@ macro :anchor do
 	max_parameters 2
 	ident = param(0)
 	title = param(1) rescue nil
-	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
-	bookmark :id => ident, :title => title
+	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident, @source_file
+	bookmark :id => ident, :title => title, :file => @source_file
 	%{<a id="#{ident}">#{title}</a>}
 end
 
@@ -16,14 +16,15 @@ macro :link do
 	href = param(0)
 	title = param(1) rescue nil
 	if href.match /^#/ then
-		anchor = href.gsub(/^#/, '').to_sym
-		bmk = bookmark? anchor
+		file, anchor = href.split '#'
+		file = @source_file if file.blank?
+		bmk = bookmark? anchor, file
 		if bmk then
 			title ||= bmk[:title]
 		else
 			plac = placeholder do |document|
-				macro_error "Bookmark '#{anchor}' does not exist" unless document.bookmarks[anchor] 
-				document.bookmarks[anchor][:title]
+				macro_error "Bookmark '#{anchor}' does not exist" unless bookmark? anchor, file 
+				bookmark?(anchor, file)[:title]
 			end
 			title ||= plac
 		end
@@ -52,7 +53,7 @@ end
 
 macro :todo do
 	exact_parameters 1
-	todo = {:source => @source, :text => value}
+	todo = {:source => @source_name, :text => value}
 	 @node[:document].todos << todo unless @node[:document].todos.include? todo
 	if Glyph['document.draft']  then
 	 	%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>#{value}</span>} 

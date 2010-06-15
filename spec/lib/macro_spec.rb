@@ -44,10 +44,10 @@ describe Glyph::Macro do
 	end
 
 	it "should store and check bookmarks" do
-		h = { :id => "test2", :title => "Test 2" }
+		h = { :id => "test2", :title => "Test 2", :file => 'test.glyph' }
 		@macro.bookmark h
-		@doc.bookmark?(:test2).should == h
-		@macro.bookmark?(:test2).should == h
+		@doc.bookmark?(:test2, 'test.glyph').should == h
+		@macro.bookmark?(:test2, 'test.glyph').should == h
 	end
 
 	it "should store and check headers" do

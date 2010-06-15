@@ -24,11 +24,11 @@ module Glyph
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
 		# @param [Glyph::Node] context the context associated with the tree
 		# @raise [RuntimeError] unless tree responds to :evaluate
-		def initialize(tree, context)
+		def initialize(tree, context={:source => {:name => "--", :file => nil}})
 			@tree = tree
 			@context = context
-			@bookmarks = {}
 			@placeholders = {}
+			@bookmarks = []
 			@headers = []
 			@errors = []
 			@todos = []
@@ -62,20 +62,23 @@ module Glyph
 		end
 
 		# Returns a stored bookmark or nil
-		# @param [#to_sym] key the bookmark identifier
+		# @param [#to_sym] ident the bookmark identifier
+		# @param [String] file the file where the bookmark is defined
 		# @return [Hash, nil] the bookmark hash or nil if no bookmark is found
-		def bookmark?(key)
-			@bookmarks[key.to_sym]
+		def bookmark?(ident, file=nil)
+			@bookmarks.select{|h| h[:id] == ident.to_sym && h[:file] == file}[0] rescue nil
 		end
 
 		# Stores a new bookmark
-		# @param [Hash] hash the bookmark hash: {:id => "Bookmark ID", :title => "Bookmark Title"}
+		# @param [Hash] hash the bookmark hash: {:id => "BookmarkID", :title => "Bookmark Title", :file => "dir/preface.glyph"}
 		# @return [Hash] the stored bookmark (:id is converted to a symbol)
+		# @raise [RuntimeError] if the hash does not contain an :id and a :file key.
+		# @raise [RuntimeError] if the bookmark is already defined.
 		def bookmark(hash)
-			ident = hash[:id].to_sym
-			hash[:id] = ident
-			@bookmarks[ident] = hash
-			hash
+			raise RuntimeError, "Bookmark ID or file not specified" unless hash.has_key?(:id ) && hash.has_key?(:file)
+			hash[:id] = hash[:id].to_sym
+			raise RuntimeError, "Bookmark '#{hash[:file]}##{hash[:id]}' already defined" if bookmark?(hash[:id], hash[:file])
+			@bookmarks << hash
 		end
 
 		# Stores a new header
@@ -114,18 +117,14 @@ module Glyph
 			raise RuntimeError, "Document cannot be finalized due to previous errors" unless @context[:document].errors.blank?
 			# Substitute placeholders
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
-			begin
-				@placeholders.each_pair do |key, value| 
-					begin
-						@output.gsub! key.to_s, value.call(self).to_s
-					rescue Glyph::MacroError => e
-						e.macro.macro_warning e.message, e
-					rescue Exception => e
-						puts e.class
-						Glyph.warning e.message
-					end
+			@placeholders.each_pair do |key, value| 
+				begin
+					@output.gsub! key.to_s, value.call(self).to_s
+				rescue Glyph::MacroError => e
+					e.macro.macro_warning e.message, e
+				rescue Exception => e
+					Glyph.warning e.message
 				end
-			rescue Exception => e
 			end
 			@state = :finalized
 		end

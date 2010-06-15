@@ -9,7 +9,7 @@ module Glyph
 
 		include Validators
 
-		attr_reader :node, :source
+		attr_reader :node, :source_name, :source_file
 
 		# Creates a new macro instance from a Node
 		# @param [Node] node a node populated with macro data
@@ -17,7 +17,8 @@ module Glyph
 			@node = node
 			@name = @node[:name]
 			@updated_source = nil
-			@source = @node[:source][:name] rescue "--"
+			@source_name = @node[:source][:name] rescue "--"
+			@source_file = @node[:source][:file] rescue nil
 		end
 
 		# Resets the name of the updated source (call before calling 
@@ -182,7 +183,7 @@ module Glyph
 			if e.is_a?(Glyph::MacroError) then
 				e.display 
 			else
-				message = "#{msg}\n    source: #{@source}\n    path: #{path}"
+				message = "#{msg}\n    source: #{@source_name}\n    path: #{path}"
 				if Glyph.debug? then
 					message << %{\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}} 
 					if e then
@@ -226,8 +227,8 @@ module Glyph
 		end
 
 		# @see Glyph::Document#bookmark?
-		def bookmark?(ident)
-			@node[:document].bookmark? ident
+		def bookmark?(ident, file)
+			@node[:document].bookmark? ident, file
 		end
 
 		# @see Glyph::Document#header?

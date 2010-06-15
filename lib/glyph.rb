@@ -50,7 +50,7 @@ module Glyph
 		# Displays the error message, source, path and node value (if debugging)
 		def display
 			Glyph.warning exception.message
-			Glyph.msg "    source: #{@macro.source}\n    path: #{@macro.path}"
+			Glyph.msg "    source: #{@macro.source_name}\n    path: #{@macro.path}"
 			Glyph.msg "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
 		end
 	end

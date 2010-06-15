@@ -18,8 +18,7 @@ macro :section do
 		h_id = h_id.to_sym
 		header :title => h_title, :level => level, :id => h_id, :notoc => h_notoc
 		@node[:header] = h_id
-		macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
-		bookmark :id => h_id, :title => h_title
+		bookmark :id => h_id, :title => h_title, :file => @source_file
 		h = %{<h#{level} id="#{h_id}">#{h_title}</h#{level}>\n}	
 	end
 	%{<div class="#{@name}">

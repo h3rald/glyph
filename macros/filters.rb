@@ -6,8 +6,10 @@ macro :textile do
 	begin
 		require 'RedCloth'
 		rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
-	rescue Exception
+	rescue LoadError
 		macro_error "RedCloth gem not installed. Please run: gem install RedCloth"
+	rescue Exception => e
+		macro_error e.message, e
 	end
 	target = Glyph["filters.target"]
 	case target.to_sym

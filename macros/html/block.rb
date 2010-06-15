@@ -33,9 +33,9 @@ macro :image do
 	max_parameters 3
 	image = param(0)
 	alt = "@alt[-]" unless attr(:alt)
-	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
+	src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
-	Glyph.warning "Image '#{image}' not found" unless Pathname.new(dest_file).exist? 
+	Glyph.warning "Image '#{image}' not found" unless Pathname.new(src_file).exist? 
 	interpret "img[#{alt}@src[#{dest_file}]#{@node.attrs.join}]"
 end
 
@@ -46,9 +46,9 @@ macro :figure do
 	alt = "@alt[-]" unless attr(:alt)
 	caption = param(1) rescue nil
 	caption = "div[@class[caption]#{caption}]" if caption
-	source_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
+	src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
-	Glyph.warning "Figure '#{image}' not found" unless Pathname.new(dest_file).exist? 
+	Glyph.warning "Figure '#{image}' not found" unless Pathname.new(src_file).exist? 
 	interpret %{div[@class[figure]
 img[#{alt}@src[#{dest_file}]#{@node.attrs.join}]
 #{caption}
