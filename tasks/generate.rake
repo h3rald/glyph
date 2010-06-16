@@ -61,8 +61,13 @@ namespace :generate do
 		out.mkpath
 		generate_pdf = lambda do |path, cmd|
 			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/ 
-				res = system cmd 
-			if res then
+			IO.popen(cmd+" 2>&1") do |pipe|
+				pipe.sync = true
+				while str = pipe.gets do
+					puts str
+				end
+			end	
+			if (out/file).exist? then
 				Glyph.info "'#{file}' generated successfully."
 			else
 				Glyph.error "An error occurred while generating #{file}"

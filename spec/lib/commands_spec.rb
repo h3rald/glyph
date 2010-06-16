@@ -160,7 +160,7 @@ describe "glyph" do
 			out.unlink
 		end
 		generate_pdf.call 'prince'
-		#generate_pdf.call 'wkhtmltopdf'
+		generate_pdf.call 'wkhtmltopdf'
 		Glyph.lite_mode = false
 	end	
 
