@@ -18,8 +18,8 @@ describe "Macro:" do
 		interpret "this is a #[test|test]."
 		doc = @p.document
 		doc.output.should == "this is a <a id=\"test\">test</a>."
-		doc.bookmarks[0].should == {:file => nil, :title => 'test', :id => :test}
-		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(Glyph::MacroError)
+		doc.bookmarks[0].should == Glyph::Bookmark.new({:file => nil, :title => 'test', :id => :test})
+		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error
 	end
 
 	it "section, chapter, header" do
@@ -36,7 +36,7 @@ describe "Macro:" do
 					</div>
 				</div>
 		}.gsub(/\n|\t/, '')
-		doc.bookmark?(:"sec-y", nil).should == {:id => :"sec-y", :title => "Section Y", :file => nil} 
+		doc.bookmark?(:"sec-y", nil).should == Glyph::Bookmark.new({:id => :"sec-y", :title => "Section Y", :file => nil})
 	end
 
 	it "document, head, style" do

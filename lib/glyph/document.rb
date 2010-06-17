@@ -28,8 +28,8 @@ module Glyph
 			@tree = tree
 			@context = context
 			@placeholders = {}
-			@bookmarks = []
-			@headers = []
+			@bookmarks = Glyph::BookmarkCollection.new
+			@headers = Glyph::BookmarkCollection.new
 			@errors = []
 			@todos = []
 			@state = :new
@@ -61,39 +61,44 @@ module Glyph
 			key
 		end
 
+		# TODO
 		# Returns a stored bookmark or nil
 		# @param [#to_sym] ident the bookmark identifier
 		# @param [String] file the file where the bookmark is defined
 		# @return [Hash, nil] the bookmark hash or nil if no bookmark is found
-		def bookmark?(ident, file=nil)
-			@bookmarks.select{|h| h[:id] == ident.to_sym && h[:file] == file}[0] rescue nil
+		def bookmark?(ident, file)
+			@bookmarks.get ident, file
 		end
 
+		# TODO
 		# Stores a new bookmark
 		# @param [Hash] hash the bookmark hash: {:id => "BookmarkID", :title => "Bookmark Title", :file => "dir/preface.glyph"}
 		# @return [Hash] the stored bookmark (:id is converted to a symbol)
 		# @raise [RuntimeError] if the hash does not contain an :id and a :file key.
 		# @raise [RuntimeError] if the bookmark is already defined.
 		def bookmark(hash)
-			raise RuntimeError, "Bookmark ID or file not specified" unless hash.has_key?(:id ) && hash.has_key?(:file)
-			hash[:id] = hash[:id].to_sym
-			raise RuntimeError, "Bookmark '#{hash[:file]}##{hash[:id]}' already defined" if bookmark?(hash[:id], hash[:file])
-			@bookmarks << hash
+			b = Glyph::Bookmark.new(hash)
+			@bookmarks << b
+			b
 		end
 
+		# TODO
 		# Stores a new header
-		# @param [Hash] hash the header hash: {:id => "Bookmark ID", :title => "Bookmark Title", :level => 3}
+		# @param [Hash] hash the header hash: {:id => "Bookmark_ID", :title => "Bookmark Title", :level => 3}
 		# @return [Hash] the stored header
 		def header(hash)
-			@headers << hash
-			hash
+			b = Glyph::Bookmark.new(hash)
+			@bookmarks << b 
+			@headers << b
+			b
 		end
 
+		# TODO
 		# Returns a stored header or nil
 		# @param [String] key the header identifier
 		# @return [Hash, nil] the header hash or nil if no header is found
-		def header?(key)
-			@headers.select{|h| h[:id] == key}[0] rescue nil
+		def header?(ident, file)
+			@headers.get ident, file
 		end
 
 		# Analyzes the document by evaluating its @tree

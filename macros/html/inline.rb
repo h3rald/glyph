@@ -5,9 +5,8 @@ macro :anchor do
 	max_parameters 2
 	ident = param(0)
 	title = param(1) rescue nil
-	macro_error "Bookmark '#{ident}' already exists" if bookmark? ident, @source_file
-	bookmark :id => ident, :title => title, :file => @source_file
-	%{<a id="#{ident}">#{title}</a>}
+	bmk = bookmark :id => ident, :title => title, :file => @source_file, :type => :anchor
+	%{<a id="#{bmk}">#{title}</a>}
 end
 
 macro :link do
@@ -20,11 +19,11 @@ macro :link do
 		file = @source_file if file.blank?
 		bmk = bookmark? anchor, file
 		if bmk then
-			title ||= bmk[:title]
+			title ||= bmk.title
 		else
 			plac = placeholder do |document|
 				macro_error "Bookmark '#{anchor}' does not exist" unless bookmark? anchor, file 
-				bookmark?(anchor, file)[:title]
+				bookmark?(anchor, file).title
 			end
 			title ||= plac
 		end

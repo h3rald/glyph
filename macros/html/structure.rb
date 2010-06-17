@@ -16,10 +16,9 @@ macro :section do
 		end
 		h_id ||= "h_#{@node[:document].headers.length+1}"
 		h_id = h_id.to_sym
-		header :title => h_title, :level => level, :id => h_id, :notoc => h_notoc
-		@node[:header] = h_id
-		bookmark :id => h_id, :title => h_title, :file => @source_file
-		h = %{<h#{level} id="#{h_id}">#{h_title}</h#{level}>\n}	
+		bmk = header :title => h_title, :level => level, :id => h_id, :notoc => h_notoc, :file => @source_file
+		@node[:header] = bmk
+		h = %{<h#{level} id="#{bmk}">#{h_title}</h#{level}>\n}	
 	end
 	%{<div class="#{@name}">
 #{h}#{value}
@@ -145,8 +144,8 @@ end
 macro :toc do 
 	max_parameters 1
 	depth = param 0
-	link_header = lambda do |header|
-		%{<a href="##{header[:id]}">#{header[:title]}</a>}
+	link_header = lambda do |head|
+		%{<a href="#{head}">#{head.title}</a>}
 	end
 	toc = placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
@@ -155,17 +154,16 @@ macro :toc do
 			n1.descend do |n2, level|
 				if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
 					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] }
-					header_id = n2[:header]
-					header_hash = document.header?(header_id)
-					next if depth && header_hash && (header_hash[:level]-1 > depth.to_i) || header_hash && header_hash[:notoc]
-					next if added_headers.include? header_id
-					added_headers << header_id
+					header_hash = n2[:header]
+					next if depth && header_hash && (header_hash.contents[:level]-1 > depth.to_i) || header_hash && header_hash.contents[:notoc]
+					next if added_headers.include? header_hash
+					added_headers << header_hash
 					# Check if part of frontmatter, bodymatter or backmatter
 					container = n2.find_parent do |node| 
 						node.is_a?(Glyph::MacroNode) && 
 							node[:name].in?([:frontmatter, :bodymatter, :appendix, :backmatter])
 					end[:name] rescue nil
-					list << "<li class=\"#{container} #{n2[:name]}\">#{link_header.call(header_hash)}</li>\n" if header_id
+					list << "<li class=\"#{container} #{n2[:name]}\">#{link_header.call(header_hash)}</li>\n" if header_hash
 					child_list = ""
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)

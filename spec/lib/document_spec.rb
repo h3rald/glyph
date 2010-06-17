@@ -27,7 +27,7 @@ describe Glyph::Document do
 		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #1", :file => 'test.glyph')}.should raise_error
 		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #2", :file => 'test2.glyph')}.should_not raise_error
 		@doc.bookmarks.length.should == 2
-		@doc.bookmarks[1].should == {:id => :test, :title => "Test Bookmark #2", :file => "test2.glyph"}
+		@doc.bookmarks[1].should == Glyph::Bookmark.new(:id => :test, :title => "Test Bookmark #2", :file => "test2.glyph")
 	end
 
 	it "should store placeholders" do
@@ -40,16 +40,16 @@ describe Glyph::Document do
 		@doc.bookmark :id => :test1, :title => "Test #1", :file => "test.glyph"
 		@doc.bookmark :id => :test2, :title => "Test #2", :file => "test.glyph"
 		@doc.placeholder { "test" }
-		@doc.header :id => :test3, :title => "Test #3", :level => 3
+		@doc.header :id => :test3, :title => "Test #3", :level => 3, :file => "test.glyph"
 		doc2 = create_doc @tree
 		doc2.bookmarks.length.should == 0
 		doc2.placeholders.length.should == 0
 		doc2.bookmark :id => :test4, :title => "Test #4", :file => "test.glyph"
 		doc2.inherit_from @doc
-		doc2.bookmarks.length.should == 2
+		doc2.bookmarks.length.should == 3
 		doc2.placeholders.length.should == 1
 		doc2.headers.length.should == 1
-		doc2.bookmarks[0].should_not == {:id => :test4, :title => "Test #4", :file => "test.glyph"}
+		doc2.bookmarks[0].should_not == Glyph::Bookmark.new(:id => :test4, :title => "Test #4", :file => "test.glyph")
 	end
 
 	it "should analyze the syntax tree and finalize the document" do

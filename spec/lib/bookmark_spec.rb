@@ -9,15 +9,15 @@ describe Glyph::Bookmark do
 		@b = Glyph::Bookmark.new :id => :test, :file => "test.glyph"
 	end
 
-	it "must be initialized with at least id and file" do
+	it "must be initialized with at least an id" do
 		lambda { Glyph::Bookmark.new }.should raise_error
-		lambda { Glyph::Bookmark.new({:id => :test}) }.should raise_error
+		lambda { Glyph::Bookmark.new({:id => :test}) }.should_not raise_error
 		lambda { Glyph::Bookmark.new({:file => "test"}) }.should raise_error
 		lambda { Glyph::Bookmark.new({:id => "test", :file => "test.glyph"}) }.should_not raise_error
 	end
 
-	it "should expose: code, path, type, and title" do
-		@b.id.should == :test
+	it "should expose: code, file, type, and title" do
+		@b.code.should == :test
 		@b.type.should == :anchor
 		@b.file.should == :"test.glyph"
 	end
@@ -31,14 +31,25 @@ describe Glyph::Bookmark do
 		@b.header?.should == false
 	end
 
-	it "should format the reference for a single output file" do
+	it "should format the link for a single output file" do
+		@b.link.should == "#test_glyph___test"
+	end
+
+	it "should format the link for multiple output files" do
+		Glyph['document.output'] = 'web'
+		b = Glyph::Bookmark.new :id => :test, :file => "test.glyph"
+		b.link.should == "test.glyph#test"
+		reset_quiet
+	end
+
+	it "should format the ref for a single output file" do
 		@b.ref.should == "test_glyph___test"
 	end
 
-	it "should format the reference for multiple output files" do
+	it "should format the ref for multiple output files" do
 		Glyph['document.output'] = 'web'
 		b = Glyph::Bookmark.new :id => :test, :file => "test.glyph"
-		b.ref.should == "test.glyph#test"
+		b.ref.should == "test"
 		reset_quiet
 	end
 

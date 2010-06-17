@@ -232,8 +232,8 @@ module Glyph
 		end
 
 		# @see Glyph::Document#header?
-		def header?(ident)
-			@node[:document].header? ident
+		def header?(ident, file)
+			@node[:document].header? ident, file
 		end
 
 		# @see Glyph::Document#header
