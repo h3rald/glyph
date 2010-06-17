@@ -19,7 +19,7 @@ describe Glyph::Bookmark do
 	it "should expose: code, path, type, and title" do
 		@b.id.should == :test
 		@b.type.should == :anchor
-		@b.file.should == "test.glyph"
+		@b.file.should == :"test.glyph"
 	end
 
 	it "should expose methods to check the bookmark type" do
@@ -46,12 +46,37 @@ describe Glyph::Bookmark do
 		lambda { Glyph::Bookmark.new :id => "#test$", :file => "test.glyph"}.should raise_error(RuntimeError, "Invalid bookmark ID: #test$")		
 	end
 
-	it "should expose a check method to check bookmark attributes" do
-		@b.check(:id => :test).should == @b
-		@b.check(:id => :test, :file => 'test.glyph').should == @b
-		@b.check(:id => :test, :file => 'test1.glyph').should == nil
-		@b.check(:type => :anchor, :file => 'test.glyph').should == @b
-		@b.check(:type => :anchor, :file => 'test.glyph', :id => :test, :undefined => true).should == nil
+	it "should check bookmark equality" do
+		@b.should == Glyph::Bookmark.new(:id => :test, :file => 'test.glyph')
+		@b.should == Glyph::Bookmark.new(:id => :test, :file => :"test.glyph")
+		@b.should == Glyph::Bookmark.new(:id => :test, :file => 'test.glyph', :type => :header)
+		@b.should_not == Glyph::Bookmark.new(:id => :test1, :file => 'test.glyph')
+		@b.should_not == Glyph::Bookmark.new(:id => :test, :file => 'test1.glyph')
 	end
 
+end
+
+describe Glyph::BookmarkCollection do
+
+	before do
+		@b = Glyph::Bookmark.new :id => :test, :file => "test.glyph"
+		@c = Glyph::BookmarkCollection.new
+		@c << @b
+	end
+
+	it "should not add duplicate bookmarks" do
+		lambda { @c << @b }.should raise_error(RuntimeError, "Bookmark '#{@b.ref}' already defined")
+		b1 = Glyph::Bookmark.new :id => :test, :file => "introduction.glyph"
+		b2 = Glyph::Bookmark.new :id => :test2, :file => "test.glyph"
+		b3 = Glyph::Bookmark.new :id => :test, :file => "test.glyph", :type => :header
+		lambda { @c << b1 }.should_not raise_error
+		lambda { @c << b2 }.should_not raise_error
+		lambda { @c << b3 }.should raise_error
+		@c.should == Glyph::BookmarkCollection.new([@b, b1, b2])
+	end
+
+	it "should retrieve bookmarks by file and ID" do
+		@c.get("test", "test.glyph").should == @b 
+		@c.get("test", "test1.glyph").should == nil
+	end
 end
