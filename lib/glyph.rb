@@ -27,6 +27,7 @@ module Glyph
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'
+	require LIB/'bookmark'
 	require LIB/'document'
 	require LIB/'macro_validators'
 	require LIB/'macro'

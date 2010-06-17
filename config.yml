@@ -44,7 +44,9 @@
     :theme: 'lazy'
 :system:
   :quiet: false
-  :output_targets: [:html, :pdf]
+  :output_targets: [:html, :html5, :pdf, :web, :web5]
+  :multifile_targets: [:web, :web5]
+  :singlefile_targets: [:html, :html5, :pdf]
   :structure:
     :hidden:
       - :imprint
