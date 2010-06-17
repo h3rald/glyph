@@ -227,12 +227,12 @@ module Glyph
 		end
 
 		# @see Glyph::Document#bookmark?
-		def bookmark?(ident, file)
+		def bookmark?(ident, file=nil)
 			@node[:document].bookmark? ident, file
 		end
 
 		# @see Glyph::Document#header?
-		def header?(ident, file)
+		def header?(ident, file=nil)
 			@node[:document].header? ident, file
 		end
 

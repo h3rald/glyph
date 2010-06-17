@@ -66,7 +66,7 @@ module Glyph
 		# @param [#to_sym] ident the bookmark identifier
 		# @param [String] file the file where the bookmark is defined
 		# @return [Hash, nil] the bookmark hash or nil if no bookmark is found
-		def bookmark?(ident, file)
+		def bookmark?(ident, file=nil)
 			@bookmarks.get ident, file
 		end
 
@@ -87,7 +87,7 @@ module Glyph
 		# @param [Hash] hash the header hash: {:id => "Bookmark_ID", :title => "Bookmark Title", :level => 3}
 		# @return [Hash] the stored header
 		def header(hash)
-			b = Glyph::Bookmark.new(hash)
+			b = Glyph::Header.new(hash)
 			@bookmarks << b 
 			@headers << b
 			b
@@ -97,7 +97,7 @@ module Glyph
 		# Returns a stored header or nil
 		# @param [String] key the header identifier
 		# @return [Hash, nil] the header hash or nil if no header is found
-		def header?(ident, file)
+		def header?(ident, file=nil)
 			@headers.get ident, file
 		end
 

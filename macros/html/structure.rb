@@ -16,7 +16,7 @@ macro :section do
 		end
 		h_id ||= "h_#{@node[:document].headers.length+1}"
 		h_id = h_id.to_sym
-		bmk = header :title => h_title, :level => level, :id => h_id, :notoc => h_notoc, :file => @source_file
+		bmk = header :title => h_title, :level => level, :id => h_id, :toc => !h_notoc, :file => @source_file
 		@node[:header] = bmk
 		h = %{<h#{level} id="#{bmk}">#{h_title}</h#{level}>\n}	
 	end
@@ -145,7 +145,7 @@ macro :toc do
 	max_parameters 1
 	depth = param 0
 	link_header = lambda do |head|
-		%{<a href="#{head}">#{head.title}</a>}
+		%{<a href="#{head.link(@source_file)}">#{head.title}</a>}
 	end
 	toc = placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
@@ -155,7 +155,7 @@ macro :toc do
 				if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
 					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] }
 					header_hash = n2[:header]
-					next if depth && header_hash && (header_hash.contents[:level]-1 > depth.to_i) || header_hash && header_hash.contents[:notoc]
+					next if depth && header_hash && (header_hash.level-1 > depth.to_i) || header_hash && !header_hash.toc?
 					next if added_headers.include? header_hash
 					added_headers << header_hash
 					# Check if part of frontmatter, bodymatter or backmatter
@@ -174,8 +174,9 @@ macro :toc do
 			list
 		end
 		toc_title = attr(:title) || "Table of Contents"
+		toc_b = bookmark :id => :toc, :file => @source_file, :title => toc_title
 		%{<div class="contents">
-<h2 class="toc-header" id="h_toc">#{toc_title}</h2>
+<h2 class="toc-header" id="#{toc_b}">#{toc_b.title}</h2>
 <ol class="toc">
 #{descend_section.call(document.structure, nil)}
 </ol>
