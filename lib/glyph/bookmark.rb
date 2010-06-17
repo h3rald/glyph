@@ -1,16 +1,14 @@
 module Glyph
 	class Bookmark
 
-		attr_reader :type, :id, :file, :title, :contents
+		attr_reader :title, :file
 
 		def initialize(hash)
-			@contents = hash
 			@id = hash[:id].to_sym rescue nil
 			@file = hash[:file].to_sym rescue nil
+			@title = hash[:title]
 			raise RuntimeError, "Bookmark ID not specified" unless @id
 			raise RuntimeError, "Invalid bookmark ID: #{@id}" unless check_id
-			@type = hash[:type] || :anchor
-			@title = hash[:title]
 		end
 
 		def code
@@ -19,39 +17,49 @@ module Glyph
 
 		def ==(b)
 			raise RuntimeError, "#{b.inspect} is not a bookmark" unless b.is_a? Glyph::Bookmark
-			self.id == b.code && self.file == b.file
-		end
-
-		[:anchor, :header, :indexterm, :figure].each do |n|
-			define_method "#{n}?".to_sym do
-				@type == n
-			end
+			self.code == b.code && self.file == b.file
 		end
 
 		def link(file=nil)
 			if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
-				"#{@file}##{@id}"
+				f = (file.to_sym == @file) ? "" : @file rescue nil
+				"#{f}##{@id}"
 			else
-				pre = (file.to_s == @file.to_s) ? "" : "#{@file.to_s.gsub(/[^a-z0-9_-]/i, '_')}___"
-				"##{pre}#{@id}"
+				"##{@file.to_s.gsub(/[^a-z0-9_-]/i, '_')}___#{@id}"
 			end
 		end
 
 		def ref(file=nil)
 			if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
-				@id
+				@id.to_s
 			else
-				pre = (file.to_s == @file.to_s) ? "" : "#{@file.to_s.gsub(/[^a-z0-9_-]/i, '_')}___"
-				"#{pre}#{@id}"
+				"#{@file.to_s.gsub(/[^a-z0-9_-]/i, '_')}___#{@id}"
 			end
 		end
 
 		alias to_s ref
+		alias to_str ref
 
 		private
 
 		def check_id
 			@id.to_s.match(/[^a-z0-9_-]/i) ? false : true
+		end
+
+	end
+
+	class Header < Bookmark
+
+		attr_reader :level
+
+		def initialize(hash)
+			super(hash)
+			@level = hash[:level]
+			@toc = hash[:toc]
+		end
+
+		def toc?
+			@toc
 		end
 
 	end
@@ -64,7 +72,7 @@ module Glyph
 			super
 		end
 
-		def get(ident, file)
+		def get(ident, file=nil)
 			bmk = Glyph::Bookmark.new(:id => ident, :file => file)
 			select{|b| b == bmk }[0] rescue nil
 		end
