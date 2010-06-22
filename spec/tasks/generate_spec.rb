@@ -28,4 +28,17 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?.should == true
 	end
 
+	it ":web should generate multiple html documents"
+	#do
+		# lambda { Glyph.run! 'generate:web'}.should_not raise_error
+		# TODO: 
+	  # - check that the user didn't create a styles or images directory uunder /text
+		# - check that images are copied
+		# - check that stylesheets are copied
+		#	- check that index.html is created
+	  #	- check that containers are not copied 
+	  #	- check that topics are copied in the proper directories
+	#end
+
+
 end
