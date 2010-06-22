@@ -206,7 +206,7 @@ test_project - Outline
 		i_id = "[#h_2]"
 		m_id = "[#md]"
 		file_write Glyph::PROJECT/'document.glyph', "document[#{file_load(Glyph::PROJECT/'document.glyph')}]"
-		run_command(["outline"]).should == %{#{start}
+		run_command(["-d", "outline"]).should == %{#{start}
   #{c_title}
     #{i_title}
   #{m_title}

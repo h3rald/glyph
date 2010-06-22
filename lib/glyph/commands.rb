@@ -166,12 +166,12 @@ command :outline do |c|
 			if n.is_a?(Glyph::MacroNode) then
 				case
 				when n[:name].in?(Glyph['system.structure.headers']) then
-					header = Glyph.document.header?(n[:header])
-					next if !header || levels && header[:level]-1 > levels.to_i
-					last_level = header[:level]
-					h_id = ids ? "[##{header[:id]}]" : ""
-					h_title = titles ? "#{header[:title]} " : ""
-					text = ("  "*(header[:level]-1))+"- "+h_title+h_id
+					header = Glyph.document.header?(n[:header].code, n[:header].file)
+					next if !header || levels && header.level-1 > levels.to_i
+					last_level = header.level
+					h_id = ids ? "[##{header.code}]" : ""
+					h_title = titles ? "#{header.title} " : ""
+					text = ("  "*(header.level-1))+"- "+h_title+h_id
 					puts text unless text.blank?
 				when n[:name] == :include then
 					if files && n.find_parent{|p| p[:name] == :document && p.is_a?(Glyph::MacroNode)} then

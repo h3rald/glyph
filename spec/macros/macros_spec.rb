@@ -17,7 +17,7 @@ describe "Macro:" do
 	it "anchor" do
 		interpret "this is a #[test|test]."
 		doc = @p.document
-		doc.output.should == "this is a <a id=\"test\">test</a>."
+		doc.output.should == "this is a <a id=\"___test\">test</a>."
 		doc.bookmarks[0].should == Glyph::Bookmark.new({:file => nil, :title => 'test', :id => :test})
 		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error
 	end
@@ -27,11 +27,11 @@ describe "Macro:" do
 		interpret text
 		doc = @p.document
 		doc.output.gsub(/\n|\t/, '').should == %{<div class="chapter">
-					<h2 id="h_1">Chapter X</h2>... 
+					<h2 id="___h_1">Chapter X</h2>... 
 					<div class="section">
-					<h3 id="sec-y">Section Y</h3>... 
+					<h3 id="___sec-y">Section Y</h3>... 
 						<div class="section">
-						<h4 id="h_3">Another section</h4>...
+						<h4 id="___h_3">Another section</h4>...
 						</div>
 					</div>
 				</div>
@@ -85,10 +85,10 @@ describe "Macro:" do
 		doc.output.gsub!(/\n|\t/, '')
 		doc.output.slice(/(.+?<\/div>)/, 1).should == %{
 			<div class="contents">
-			<h2 class="toc-header" id="h_toc">Table of Contents</h2>
+			<h2 class="toc-header" id="___toc">Table of Contents</h2>
 			<ol class="toc">
-				<li class=" section"><a href="#h_1">Container section</a></li>
-				<li class=" section"><a href="#md">Markdown</a></li>
+				<li class=" section"><a href="#text_container_textile___h_1">Container section</a></li>
+				<li class=" section"><a href="#text_a_b_c_markdown_markdown___md">Markdown</a></li>
 			</ol>
 			</div>
 		}.gsub(/\n|\t/, '')
@@ -103,10 +103,10 @@ describe "Macro:" do
 		}
 		interpret text
 		@p.document.output.gsub(/\n|\t/, '').should == %{
-			<a href="#test_id">Test #1</a>
-			<a href="#test_id2">Test #2</a>
-			<a id="test_id">Test #1</a>
-			<a id="test_id2">Test #2</a>
+			<a href="#___test_id">Test #1</a>
+			<a href="#___test_id2">Test #2</a>
+			<a id="___test_id">Test #1</a>
+			<a id="___test_id2">Test #2</a>
 		}.gsub(/\n|\t/, '')
 	end
 
@@ -114,7 +114,7 @@ describe "Macro:" do
 		interpret "fmi[this topic|#test] #[test|Test]"
 		@p.document.output.should == %{<span class="fmi">
 			for more information on this topic, 
-			see <a href="#test">Test</a></span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
+			see <a href="#___test">Test</a></span> <a id="___test">Test</a>}.gsub(/\n|\t/, '')
 	end	
 
 	it "image" do
