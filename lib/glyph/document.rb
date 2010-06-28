@@ -18,7 +18,7 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders, :headers, :context, :errors, :todos
+		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
@@ -30,6 +30,7 @@ module Glyph
 			@placeholders = {}
 			@bookmarks = Glyph::BookmarkCollection.new
 			@headers = Glyph::BookmarkCollection.new
+			@styles = []
 			@errors = []
 			@todos = []
 			@state = :new
@@ -43,12 +44,13 @@ module Glyph
 			@tree
 		end
 
-		# Copies bookmarks, headers, todos and placeholders from another Glyph::Document
+		# Copies bookmarks, headers, todos, styles and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
 		def inherit_from(document)
 			@bookmarks = document.bookmarks
 			@headers = document.headers
 			@todos = document.todos
+			@styles = document.styles
 			@placeholders = document.placeholders
 		end
 
@@ -99,6 +101,13 @@ module Glyph
 		# @return [Hash, nil] the header hash or nil if no header is found
 		def header?(ident, file=nil)
 			@headers.get ident, file
+		end
+
+		# TODO
+		def style(file)
+			f = Pathname.new file
+			raise RuntimeError, "Stylesheet '#{f}' already specified for the current document" if @styles.include? f
+			@styles << f
 		end
 
 		# Analyzes the document by evaluating its @tree

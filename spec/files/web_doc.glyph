@@ -1,0 +1,15 @@
+document[
+	head[
+		style[default.css]
+		style[test.sass]
+	]
+	body[
+		toc[]
+		section[
+			@title[Web Document]
+...
+		]
+		include[a/web1.glyph]
+		include[a/b/web2.glyph]
+	]
+]

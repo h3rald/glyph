@@ -209,6 +209,7 @@ module Glyph
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context
 				subtree = interpreter.parse
+				subtree[:source] = context[:source]
 				@node << subtree
 				result = interpreter.document.output
 			end

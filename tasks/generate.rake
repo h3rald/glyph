@@ -2,7 +2,47 @@
 
 namespace :generate do
 
-	desc "Process source"
+	def with_files_from(dir, &block)
+		output = Glyph['document.output']
+		dir_path = Glyph::PROJECT/"output/#{output}/#{dir}"
+		dir_path.mkpath
+		# Copy images
+		(Glyph::PROJECT/dir).find do |i|
+			if i.file? then
+				dest = "#{Glyph::PROJECT/"output/#{output}/#{dir}"}/#{i.relative_path_from(Glyph::PROJECT/dir)}"
+				src = i.to_s
+				Pathname.new(dest).parent.mkpath
+				block.call src, dest
+			end
+		end
+	end
+
+	desc "Copy image files"
+	task :images => [:document] do
+		with_files_from('images') do |src, dest|
+			file_copy src, dest
+		end
+	end
+
+	desc "Copy style files"
+	task :styles => [:document] do
+		out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
+		out_dir.mkdir
+		Glyph.document.styles.each do |f|
+			case
+			when f.extname == ".css" then
+				file_copy f, out_dir/f.basename 
+			when f.extname == ".sass" then
+				style = Sass::Engine.new(file_load(f.to_s)).render
+				out_file = out_dir/f.basename.to_s.gsub(/\.sass$/, '.css')
+				file_write out_file, style
+			else
+				raise RuntimeError, "Unsupported stylesheet: '#{f.basename}'"
+			end
+		end
+	end
+
+	desc "Process source files and create a Glyph document"
 	task :document => ["load:all"] do
 		if Glyph.lite? then
 			text = file_load Pathname.new(Glyph['document.source'])
@@ -34,16 +74,39 @@ namespace :generate do
 		file_write out/file, Glyph.document.output
 		Glyph.info "'#{file}' generated successfully."
 		unless Glyph.lite? then
-			images = Glyph::PROJECT/'output/html/images'
-			images.mkpath
-			(Glyph::PROJECT/'images').find do |i|
-				if i.file? then
-					dest = "#{Glyph::PROJECT/'output/html/images'}/#{i.relative_path_from(Glyph::PROJECT/'images')}"
-					Pathname.new(dest).parent.mkpath
-					file_copy i.to_s, dest
-				end
+			with_files_from('images') do |src, dest|
+				file_copy src, dest
 			end
 		end
+	end
+
+	desc "Create multiple HTML files"
+	task :web => [:document, :images, :styles] do
+		Glyph.info "Generating HTML files..."
+		if Glyph.lite? then
+			out = Pathname.new Glyph['document.output_dir']
+		else
+			out = Glyph::PROJECT/"output/web"
+		end
+		raise RuntimeError, "You cannot have an 'images' directory under your 'text' directory." if (Glyph::PROJECT/"text/images").exist?
+		raise RuntimeError, "You cannot have a 'styles' directory under your 'text' directory." if (Glyph::PROJECT/"text/styles").exist?
+		out.mkpath
+		file_write out/"index.html", Glyph.document.output
+		Glyph.document.structure.descend do |node, level|
+			if node.is_a?(Glyph::MacroNode) && Glyph.macro_eq?(node[:name], :include) then
+				doc = Glyph::Document.new node.children.last, {:source => node.children.last[:source]}
+				doc.inherit_from Glyph.document
+				out_file = Pathname.new((out/doc.context[:source][:file]).to_s.gsub(/\..+$/, '.html').gsub(/text\//, ''))
+				out_file.parent.mkpath
+				# TODO: Refactor this: currently the document is evaluated twice:
+				# - for the whole thing
+				# - for each file
+				doc.analyze
+				doc.finalize
+				file_write out_file, doc.output
+			end
+		end
+		Glyph.info "'#{file}' generated successfully."
 	end
 
 	desc "Create a pdf file"

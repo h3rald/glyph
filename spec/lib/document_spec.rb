@@ -18,6 +18,7 @@ describe Glyph::Document do
 	it "should expose document data" do
 		@doc.bookmarks.should == []
 		@doc.headers.should == []
+		@doc.styles.should == []
 		@doc.placeholders.should == {}
 		@doc.new?.should == true
 	end
@@ -36,10 +37,16 @@ describe Glyph::Document do
 		@doc.placeholders["‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡".to_sym].should == p
 	end
 
+	it "should store styles" do
+		lambda {@doc.style "test.css"}.should_not raise_error
+		@doc.styles.include?(Pathname.new('test.css')).should == true
+	end
+
 	it "can inherit data from another document" do
 		@doc.bookmark :id => :test1, :title => "Test #1", :file => "test.glyph"
 		@doc.bookmark :id => :test2, :title => "Test #2", :file => "test.glyph"
 		@doc.placeholder { "test" }
+		@doc.style "test.css"
 		@doc.header :id => :test3, :title => "Test #3", :level => 3, :file => "test.glyph"
 		doc2 = create_doc @tree
 		doc2.bookmarks.length.should == 0
@@ -49,6 +56,7 @@ describe Glyph::Document do
 		doc2.bookmarks.length.should == 3
 		doc2.placeholders.length.should == 1
 		doc2.headers.length.should == 1
+		doc2.styles.length.should == 1
 		doc2.bookmarks[0].should_not == Glyph::Bookmark.new(:id => :test4, :title => "Test #4", :file => "test.glyph")
 	end
 

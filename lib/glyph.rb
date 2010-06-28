@@ -219,6 +219,11 @@ module Glyph
 		MACROS[name] = MACROS[pair.values[0].to_sym]
 	end
 
+	# TODO
+	def self.macro_eq?(ident1, ident2)
+		Glyph::MACROS[ident1.to_sym] == Glyph::MACROS[ident2.to_sym]
+	end
+
 	# Compiles a single Glyph file
 	# @param [String] src the full or relative path to the source file
 	# @param [String] out the full or relative path to the output file

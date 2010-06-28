@@ -1,0 +1,12 @@
+section[
+	@title[Test #1]
+...
+	section[
+		@title[Test #1a]
+...
+	]
+	section[
+		@title[Test #1b]
+...
+	]
+]

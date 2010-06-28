@@ -121,6 +121,7 @@ macro :style do
 	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value}"
 	file = Pathname.new Glyph::HOME/'styles'/value unless file.exist?
 	macro_error "Stylesheet '#{value}' not found" unless file.exist?
+	@node[:document].style file
 	style = ""
 	case file.extname
 	when ".css"

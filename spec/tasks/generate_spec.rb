@@ -28,17 +28,36 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?.should == true
 	end
 
-	it ":web should generate multiple html documents"
-	#do
-		# lambda { Glyph.run! 'generate:web'}.should_not raise_error
-		# TODO: 
-	  # - check that the user didn't create a styles or images directory uunder /text
-		# - check that images are copied
-		# - check that stylesheets are copied
-		#	- check that index.html is created
-	  #	- check that containers are not copied 
-	  #	- check that topics are copied in the proper directories
-	#end
+	it ":web should generate multiple html documents" do
+		reset_web = lambda do
+			delete_project
+			reset_quiet
+			create_web_project
+			Glyph['document.output'] = 'web'
+		end
+	  # check that the user didn't create a styles or images directory under /text
+		reset_web.call
+		(Glyph::PROJECT/'text/images').mkdir
+		lambda { Glyph.run! 'generate:web'}.should raise_error(RuntimeError, "You cannot have an 'images' directory under your 'text' directory.")
+		reset_web.call
+		(Glyph::PROJECT/'text/styles').mkdir
+		lambda { Glyph.run! 'generate:web'}.should raise_error(RuntimeError, "You cannot have a 'styles' directory under your 'text' directory.")
+		reset_web.call
+		# check that the task can be run without errors
+		reset_web.call
+		#lambda { 
+			Glyph.run! 'generate:web'#}.should_not raise_error
+		# check that images are copied
+		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true
+		# check that stylesheets are copied
+		(Glyph::PROJECT/'output/web/styles/default.css').exist?.should == true
+		(Glyph::PROJECT/'output/web/styles/test.css').exist?.should == true
+		# check that index.html is created
+		(Glyph::PROJECT/'output/web/index.html').exist?.should == true
+	  #	check that topics are copied in the proper directories
+		(Glyph::PROJECT/'output/web/a/web1.html').exist?.should == true
+		(Glyph::PROJECT/'output/web/a/b/web2.html').exist?.should == true
+	end
 
 
 end

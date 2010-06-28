@@ -39,6 +39,19 @@ def create_project
 	file_copy Glyph::SPEC_DIR/'files/ligature.jpg', Glyph::PROJECT/'images/ligature.jpg'
 end
 
+def create_web_project
+	reset_quiet
+	create_project_dir
+	return if Glyph.lite?
+	Glyph.run! 'project:create', Glyph::PROJECT.to_s
+	file_copy Glyph::SPEC_DIR/'files/web_doc.glyph', Glyph::PROJECT/'document.glyph'
+	(Glyph::PROJECT/'text/a/b').mkpath
+	file_copy Glyph::SPEC_DIR/'files/web1.glyph', Glyph::PROJECT/'text/a/web1.glyph'
+	file_copy Glyph::SPEC_DIR/'files/web2.glyph', Glyph::PROJECT/'text/a/b/web2.glyph'
+	file_copy Glyph::SPEC_DIR/'files/test.sass', Glyph::PROJECT/'styles/test.sass'
+	file_copy Glyph::SPEC_DIR/'files/ligature.jpg', Glyph::PROJECT/'images/ligature.jpg'
+end
+
 def delete_project_dir
 	return unless	Glyph::PROJECT.exist?
 	Glyph::PROJECT.children.each do |f|
