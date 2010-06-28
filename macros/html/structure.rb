@@ -110,6 +110,7 @@ macro :head do
 #{author}
 #{copy}
 <meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 #{value}
 </head>
 }
