@@ -18,7 +18,7 @@ macro :section do
 		h_id = h_id.to_sym
 		bmk = header :title => h_title, :level => level, :id => h_id, :toc => !h_notoc, :file => @source_file
 		@node[:header] = bmk
-		h = %{<h#{level} id="#{bmk.ref}">#{h_title}</h#{level}>\n}	
+		h = %{<h#{level} id="#{bmk}">#{h_title}</h#{level}>\n}	
 	end
 	%{<div class="#{@name}">
 #{h}#{value}

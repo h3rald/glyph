@@ -46,15 +46,15 @@ describe Glyph::Macro do
 	it "should store and check bookmarks" do
 		h = { :id => "test2", :title => "Test 2", :file => 'test.glyph' }
 		@macro.bookmark h
-		@doc.bookmark?(:test2, 'test.glyph').should == Glyph::Bookmark.new(h)
-		@macro.bookmark?(:test2, 'test.glyph').should == Glyph::Bookmark.new(h)
+		@doc.bookmark?(:test2).should == Glyph::Bookmark.new(h)
+		@macro.bookmark?(:test2).should == Glyph::Bookmark.new(h)
 	end
 
 	it "should store and check headers" do
 		h = { :level => 2, :id => "test3", :title => "Test 3", :file => "test.glyph"}
 		@macro.header h
-		@doc.header?("test3", "test.glyph").should == Glyph::Bookmark.new(h)
-		@macro.header?("test3", "test.glyph").should == Glyph::Bookmark.new(h)
+		@doc.header?("test3").should == Glyph::Bookmark.new(h)
+		@macro.header?("test3").should == Glyph::Bookmark.new(h)
 	end
 
 	it "should store placeholders" do

@@ -6,7 +6,7 @@ macro :anchor do
 	ident = param(0)
 	title = param(1) rescue nil
 	bmk = bookmark :id => ident, :title => title, :file => @source_file
-	%{<a id="#{bmk.ref}">#{title}</a>}
+	%{<a id="#{bmk}">#{title}</a>}
 end
 
 macro :link do
@@ -17,14 +17,14 @@ macro :link do
 	if href.match /^#/ then
 		file, anchor = href.split '#'
 		file = @source_file if file.blank?
-		bmk = bookmark? anchor, file
+		bmk = bookmark? anchor
 		href = Glyph::Bookmark.new(:id => anchor, :file => file).link
 		if bmk then
 			title ||= bmk.title
 		else
 			plac = placeholder do |document|
-				macro_error "Bookmark '#{anchor}' does not exist" unless bookmark? anchor, file 
-				bookmark?(anchor, file).title
+				macro_error "Bookmark '#{anchor}' does not exist" unless bookmark? anchor 
+				bookmark?(anchor).title
 			end
 			title ||= plac
 		end

@@ -28,8 +28,8 @@ module Glyph
 			@tree = tree
 			@context = context
 			@placeholders = {}
-			@bookmarks = Glyph::BookmarkCollection.new
-			@headers = Glyph::BookmarkCollection.new
+			@bookmarks = {}
+			@headers = {}
 			@styles = []
 			@errors = []
 			@todos = []
@@ -65,11 +65,11 @@ module Glyph
 
 		# TODO
 		# Returns a stored bookmark or nil
-		# @param [#to_sym] ident the bookmark identifier
+		# @param [#to_sym] key the bookmark identifier
 		# @param [String] file the file where the bookmark is defined
 		# @return [Hash, nil] the bookmark hash or nil if no bookmark is found
-		def bookmark?(ident, file=nil)
-			@bookmarks.get ident, file
+		def bookmark?(key)
+			@bookmarks[key.to_sym]
 		end
 
 		# TODO
@@ -80,7 +80,8 @@ module Glyph
 		# @raise [RuntimeError] if the bookmark is already defined.
 		def bookmark(hash)
 			b = Glyph::Bookmark.new(hash)
-			@bookmarks << b
+			raise RuntimeError, "Bookmark '#{b.code}' already exists" if @bookmarks.has_key? b.code
+			@bookmarks[b.code] = b
 			b
 		end
 
@@ -90,8 +91,9 @@ module Glyph
 		# @return [Hash] the stored header
 		def header(hash)
 			b = Glyph::Header.new(hash)
-			@bookmarks << b 
-			@headers << b
+			raise RuntimeError, "Bookmark '#{b.code}' already exists" if @bookmarks.has_key? b.code
+			@bookmarks[b.code] = b
+			@headers[b.code] = b
 			b
 		end
 
@@ -99,8 +101,8 @@ module Glyph
 		# Returns a stored header or nil
 		# @param [String] key the header identifier
 		# @return [Hash, nil] the header hash or nil if no header is found
-		def header?(ident, file=nil)
-			@headers.get ident, file
+		def header?(key)
+			@headers[key.to_sym]
 		end
 
 		# TODO

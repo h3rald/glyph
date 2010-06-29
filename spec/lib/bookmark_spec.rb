@@ -23,16 +23,16 @@ describe Glyph::Bookmark do
 		Glyph::Bookmark.new(:id => :test2, :title => "Test 2").title.should == "Test 2"
 	end
 
-	it "should convert to a string using the ref method" do
-		@b.ref.should == @b.to_s
-		"#{@b}".should == @b.ref
+	it "should convert to a string" do
+		@b.code.to_s == @b.to_s
+		"#{@b}".should == @b.to_s
 	end
 
 	it "should format the link for a single output file" do
 		# Link within the same file
-		@b.link.should == "#test_glyph___test"
+		@b.link.should == "#test"
 		# Link to a different file file
-		@b.link('intro.glyph').should == "#test_glyph___test"
+		@b.link('intro.glyph').should == "#test"
 	end
 
 	it "should format the link for multiple output files" do
@@ -42,23 +42,6 @@ describe Glyph::Bookmark do
 		@b.link.should == "#test"
 		# Link to a different file file
 		@b.link(:"intro.glyph").should == "test.glyph#test"
-		Glyph['document.output'] = out
-	end
-
-	it "should format the ref for a single output file" do
-		# Ref within the same file
-		@b.ref.should == "test_glyph___test"
-		# Ref to a different file file
-		@b.ref('intro.glyph').should == "test_glyph___test"
-	end
-
-	it "should format the ref for multiple output files" do
-		out = Glyph['document.output']
-		Glyph['document.output'] = 'web'
-		# Ref within the same file
-		@b.ref.should == "test"
-		# Ref to a different file file
-		@b.ref('intro.glyph').should == "test"
 		Glyph['document.output'] = out
 	end
 
@@ -74,29 +57,4 @@ describe Glyph::Bookmark do
 		@b.should_not == Glyph::Bookmark.new(:id => :test, :file => 'test1.glyph')
 	end
 
-end
-
-describe Glyph::BookmarkCollection do
-
-	before do
-		@b = Glyph::Bookmark.new :id => :test, :file => "test.glyph"
-		@c = Glyph::BookmarkCollection.new
-		@c << @b
-	end
-
-	it "should not add duplicate bookmarks" do
-		lambda { @c << @b }.should raise_error(RuntimeError, "Bookmark '#{@b}' already defined")
-		b1 = Glyph::Bookmark.new :id => :test, :file => "introduction.glyph"
-		b2 = Glyph::Bookmark.new :id => :test2, :file => "test.glyph"
-		b3 = Glyph::Bookmark.new :id => :test, :file => "test.glyph", :type => :header
-		lambda { @c << b1 }.should_not raise_error
-		lambda { @c << b2 }.should_not raise_error
-		lambda { @c << b3 }.should raise_error
-		@c.should == Glyph::BookmarkCollection.new([@b, b1, b2])
-	end
-
-	it "should retrieve bookmarks by file and ID" do
-		@c.get("test", "test.glyph").should == @b 
-		@c.get("test", "test1.glyph").should == nil
-	end
 end

@@ -166,7 +166,7 @@ command :outline do |c|
 			if n.is_a?(Glyph::MacroNode) then
 				case
 				when n[:name].in?(Glyph['system.structure.headers']) then
-					header = Glyph.document.header?(n[:header].code, n[:header].file)
+					header = Glyph.document.header?(n[:header].code)
 					next if !header || levels && header.level-1 > levels.to_i
 					last_level = header.level
 					h_id = ids ? "[##{header.code}]" : ""

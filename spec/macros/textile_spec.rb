@@ -44,7 +44,7 @@ Testing:
 ]]}
 		result =
 %{<div class="section">
-<h2 id="___h_1">Test</h2>
+<h2 id="h_1">Test</h2>
 #@html
 </div>}
 		filter(text1).should == result
@@ -108,7 +108,7 @@ Testing:
 </div>}
 		result = 
 %{<div class="section">
-<h2 id="___h_1">Test</h2>
+<h2 id="h_1">Test</h2>
 #@html
 <div class="code">
 <pre>

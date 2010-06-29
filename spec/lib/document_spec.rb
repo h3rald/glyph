@@ -16,8 +16,8 @@ describe Glyph::Document do
 	end
 
 	it "should expose document data" do
-		@doc.bookmarks.should == []
-		@doc.headers.should == []
+		@doc.bookmarks.should == {}
+		@doc.headers.should == {}
 		@doc.styles.should == []
 		@doc.placeholders.should == {}
 		@doc.new?.should == true
@@ -26,9 +26,9 @@ describe Glyph::Document do
 	it "should store bookmarks" do
 		lambda { @doc.bookmark(:id => "test", :title => "Test Bookmark #1", :file => 'test.glyph')}.should_not raise_error
 		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #1", :file => 'test.glyph')}.should raise_error
-		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #2", :file => 'test2.glyph')}.should_not raise_error
-		@doc.bookmarks.length.should == 2
-		@doc.bookmarks[1].should == Glyph::Bookmark.new(:id => :test, :title => "Test Bookmark #2", :file => "test2.glyph")
+		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #2", :file => 'test2.glyph')}.should raise_error
+		@doc.bookmarks.length.should == 1
+		@doc.bookmarks[:test].should == Glyph::Bookmark.new(:id => :test, :title => "Test Bookmark #1", :file => "test.glyph")
 	end
 
 	it "should store placeholders" do

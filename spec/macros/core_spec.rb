@@ -27,7 +27,7 @@ describe "Macro:" do
 		# Check snippets with links
 		Glyph::SNIPPETS[:c] = "This is a link to something afterwards: =>[#other]"
 		text = "Test. &[c]. #[other|Test]."
-		output_for(text).should == %{Test. This is a link to something afterwards: <a href="#___other">Test</a>. <a id="___other">Test</a>.}
+		output_for(text).should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
 	end
 
 	it "snippet:" do
@@ -85,10 +85,10 @@ describe "Macro:" do
 		interpret text
 		@p.document.output.gsub(/\n|\t/, '').should == %{
 			<div class="section">
-			<h2 id="___h_1">Container section</h2>
+			<h2 id="h_1">Container section</h2>
 			This is a test.
 				<div class="section">
-				<h3 id="text_a_b_c_included_textile___h_2">Test Section</h3>	
+				<h3 id="h_2">Test Section</h3>	
 				<p>&#8230;</p>
 				</div>
 			</div>
@@ -98,10 +98,10 @@ describe "Macro:" do
 	it "include should work in Lite mode" do
 		Glyph.lite_mode = true
 		result = %{<div class="section">
-<h2 id="___h_1">Container section</h2>
+<h2 id="h_1">Container section</h2>
 This is a test.
 	<div class="section">
-	<h3 id="included_textile___h_2">Test Section</h3>
+	<h3 id="h_2">Test Section</h3>
 		<p>&#8230;</p>
 	</div>
 

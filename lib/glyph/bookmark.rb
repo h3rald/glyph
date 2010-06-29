@@ -25,20 +25,15 @@ module Glyph
 				f = (file.to_sym == @file) ? "" : @file rescue nil
 				"#{f}##{@id}"
 			else
-				"##{@file.to_s.gsub(/[^a-z0-9_-]/i, '_')}___#{@id}"
+				"##{@id}"
 			end
 		end
 
-		def ref(file=nil)
-			if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
-				@id.to_s
-			else
-				"#{@file.to_s.gsub(/[^a-z0-9_-]/i, '_')}___#{@id}"
-			end
+		def to_s
+			@id.to_s
 		end
 
-		alias to_s ref
-		alias to_str ref
+		alias to_str to_s
 
 		private
 
@@ -64,20 +59,4 @@ module Glyph
 
 	end
 
-	class BookmarkCollection < Array 
-
-		def push(el)
-			raise RuntimeError, "'#{el}' is not a bookmark" unless el.is_a? Glyph::Bookmark
-			raise RuntimeError, "Bookmark '#{el}' already defined" if self.include? el
-			super
-		end
-
-		def get(ident, file=nil)
-			bmk = Glyph::Bookmark.new(:id => ident, :file => file)
-			select{|b| b == bmk }[0] rescue nil
-		end
-
-		alias << push
-
-	end
 end
