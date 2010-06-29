@@ -19,25 +19,31 @@ namespace :generate do
 
 	desc "Copy image files"
 	task :images => [:document] do
-		with_files_from('images') do |src, dest|
-			file_copy src, dest
+		unless Glyph.lite? then
+			Glyph.info "Copying images..."
+			with_files_from('images') do |src, dest|
+				file_copy src, dest
+			end
 		end
 	end
 
 	desc "Copy style files"
 	task :styles => [:document] do
-		out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
-		out_dir.mkdir
-		Glyph.document.styles.each do |f|
-			case
-			when f.extname == ".css" then
-				file_copy f, out_dir/f.basename 
-			when f.extname == ".sass" then
-				style = Sass::Engine.new(file_load(f.to_s)).render
-				out_file = out_dir/f.basename.to_s.gsub(/\.sass$/, '.css')
-				file_write out_file, style
-			else
-				raise RuntimeError, "Unsupported stylesheet: '#{f.basename}'"
+		if Glyph['document.styles'].in?(['link', 'import']) && !Glyph.lite? then
+			Glyph.info "Copying stylesheets..."
+			out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
+			out_dir.mkdir
+			Glyph.document.styles.each do |f|
+				case
+				when f.extname == ".css" then
+					file_copy f, out_dir/f.basename 
+				when f.extname == ".sass" then
+					style = Sass::Engine.new(file_load(f.to_s)).render
+					out_file = out_dir/f.basename.to_s.gsub(/\.sass$/, '.css')
+					file_write out_file, style
+				else
+					raise RuntimeError, "Unsupported stylesheet: '#{f.basename}'"
+				end
 			end
 		end
 	end
@@ -60,7 +66,7 @@ namespace :generate do
 	end
 
 	desc "Create a standalone html file"
-	task :html => :document do
+	task :html => [:document, :images, :styles] do
 		Glyph.info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
@@ -73,11 +79,6 @@ namespace :generate do
 		out.mkpath
 		file_write out/file, Glyph.document.output
 		Glyph.info "'#{file}' generated successfully."
-		unless Glyph.lite? then
-			with_files_from('images') do |src, dest|
-				file_copy src, dest
-			end
-		end
 	end
 
 	desc "Create multiple HTML files"

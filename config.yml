@@ -6,7 +6,8 @@
   :filename: ""
   :revision: ""
   :draft: false
-  :output: 'html'
+  :output: html
+  :styles: embed # link, import
 :language:
   :set: 'glyph' # xml, core, filters
   :options:

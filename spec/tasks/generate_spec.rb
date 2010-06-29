@@ -8,6 +8,7 @@ describe "generate" do
 	end
 
 	after do
+		reset_quiet
 		delete_project
 	end
 
@@ -28,12 +29,21 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?.should == true
 	end
 
+	it "should copy styles if necessary" do
+		Glyph['document.styles'] = 'import'
+		file_write Glyph::PROJECT/'document.glyph', "style[default.css]\nstyle[test.sass]"
+		lambda { Glyph.run! 'generate:html' }.should_not raise_error
+		(Glyph::PROJECT/'output/html/styles/default.css').exist?.should == true
+		(Glyph::PROJECT/'output/html/styles/test.css').exist?.should == true
+	end
+
 	it ":web should generate multiple html documents" do
 		reset_web = lambda do
 			delete_project
 			reset_quiet
 			create_web_project
 			Glyph['document.output'] = 'web'
+			Glyph['document.styles'] = 'link'
 		end
 	  # check that the user didn't create a styles or images directory under /text
 		reset_web.call
