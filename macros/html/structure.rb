@@ -122,25 +122,36 @@ macro :style do
 	file = Pathname.new Glyph::HOME/'styles'/value unless file.exist?
 	macro_error "Stylesheet '#{value}' not found" unless file.exist?
 	@node[:document].style file
-	style = ""
-	case file.extname
-	when ".css"
-		style = file_load file
-	when ".sass"
-		begin
-			require 'sass'
-			style = Sass::Engine.new(file_load(file)).render
-		rescue LoadError
-			macro_error "Haml is not installed. Please run: gem install haml"
-		rescue Exception
-			raise
+	case Glyph['document.styles'].to_s
+	when 'embed' then
+		style = ""
+		case file.extname
+		when ".css"
+			style = file_load file
+		when ".sass"
+			begin
+				require 'sass'
+				style = Sass::Engine.new(file_load(file)).render
+			rescue LoadError
+				macro_error "Haml is not installed. Please run: gem install haml"
+			rescue Exception
+				raise
+			end
+		else
+			macro_error "Extension '#{file.extname}' not supported."
 		end
-	else
-		macro_error "Extension '#{file.extname}' not supported."
-	end
-	%{<style type="text/css">
-#{style}
+%{<style type="text/css">
+			#{style}
 </style>}
+	when 'import' then
+%{<style type="text/css">
+	@import url("styles/#{value}");
+</style>}
+	when 'link' then
+%{<link href="styles/#{value}" type="text/css" />}
+	else
+		macro_error "Value '#{Glyph['document.styles']}' not allowed for 'document.styles' setting"
+	end
 end
 
 macro :toc do 

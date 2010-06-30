@@ -80,6 +80,16 @@ describe "Macro:" do
 		@p.document.output.gsub(/\n|\t/, '').should == result
 	end
 
+	it "style should import and link stylesheets" do
+		Glyph['document.styles'] = 'import'
+		output_for("style[default.css]").should == %{<style type="text/css">
+	@import url("styles/default.css");
+</style>}
+		Glyph['document.styles'] = 'link'
+		output_for("style[default.css]").should == %{<link href="styles/default.css" type="text/css" />}
+		Glyph['document.styles'] = 'embed'
+	end
+
 	it "toc" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
 		interpret file_load(Glyph::PROJECT/'document.glyph')
