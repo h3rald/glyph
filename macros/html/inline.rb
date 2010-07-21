@@ -62,6 +62,31 @@ macro :todo do
 	end
 end
 
+macro :topic do
+	n = Glyph::MacroNode.new.from @node
+	n[:change_topic] = true
+	n[:name] = :include
+	n.parameters[0] = attr(:src)
+	inc_macro = Glyph::Macro.new n
+	# Interpret file
+	contents = inc_macro.expand	
+	# Create topic
+	result = interpret %{
+		document[
+			head[
+				title[#{attr(:title)}]
+				style[default.css]
+			]
+			body[
+#{contents}
+			]
+		]
+	}
+	@node[:document].topics << {:src => attr(:src), :title => attr(:title), :contents => result}
+	# Return a link to the topic
+	interpret %{link[#{attr(:src)}|#{attr(:title)}]}
+end
+
 macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link

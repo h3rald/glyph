@@ -32,6 +32,17 @@ command :compile do |c|
 	c.switch [:a, :auto]
 	c.action do |global_options, options, args|
 		raise ArgumentError, "Too many arguments" if args.length > 2
+		# Set document.extension. Used ONLY internally for bookmarking purposes!
+		Glyph['document.extension'] = case Glyph['document.output']
+																	when 'html5'
+																		'.html'
+																	when 'web'
+																		'.html'
+																	when 'web5'
+																		'.html'
+																	else
+																		"."+Glyph['document.output']
+																	end
 		Glyph.lite_mode = true unless args.blank? 
 		Glyph.run! 'load:config'
 		original_config = Glyph::CONFIG.dup
@@ -51,7 +62,7 @@ command :compile do |c|
 			filename = source_file.basename(source_file.extname).to_s
 			destination_file = Pathname.new(args[1]) rescue nil
 			src_extension = Regexp.escape(source_file.extname) 
-			dst_extension = ".#{Glyph['document.output']}"
+			dst_extension = "."+Glyph['document.output']
 			destination_file ||= Pathname.new(source_file.to_s.gsub(/#{src_extension}$/, dst_extension))
 			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? 
 			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s

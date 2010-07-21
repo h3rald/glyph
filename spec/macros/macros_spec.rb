@@ -189,4 +189,13 @@ describe "Macro:" do
 		Glyph['document.draft'] = false
 	end
 
+	it "topic"
+		# TODO
+		# Store topic contents
+		# Return a link
+		# Use only in document.glyph
+		# Mandatory @title and @src
+		# Cannot be used in lite mode
+		# Link must be to a DIFFERENT FILE (with the proper extension)
+
 end	

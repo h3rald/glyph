@@ -75,7 +75,6 @@ namespace :generate do
 			out = Glyph::PROJECT/"output/html"
 			file = "#{Glyph['document.filename']}.html"
 		end
-		extension = '.html'
 		out.mkpath
 		file_write out/file, Glyph.document.output
 		Glyph.info "'#{file}' generated successfully."

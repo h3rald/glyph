@@ -9,7 +9,7 @@ document[
 			@title[Web Document]
 ...
 		]
-		include[a/web1.glyph]
-		include[a/b/web2.glyph]
+		topic[a/web1.glyph]
+		topic[a/b/web2.glyph]
 	]
 ]
