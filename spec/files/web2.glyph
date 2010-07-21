@@ -1,8 +1,10 @@
 section[
-		@title[Test #2a]
+	@title[Test #2a]
+	@id[w2_1]
+=>[web1.glyph#w1_3]
 ...
 ]
 section[
-		@title[Test #2b]
+	@title[Test #2b]
 ...
 ]

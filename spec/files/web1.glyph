@@ -3,10 +3,13 @@ section[
 ...
 	section[
 		@title[Test #1a]
+=>[web1.glyph#w2_1]
+=>[#w1_3]
 ...
 	]
 	section[
 		@title[Test #1b]
+		@id[w1_3]
 ...
 	]
 ]

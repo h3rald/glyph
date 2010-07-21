@@ -18,7 +18,7 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos
+		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
@@ -33,6 +33,7 @@ module Glyph
 			@styles = []
 			@errors = []
 			@todos = []
+			@topics = []
 			@state = :new
 		end
 

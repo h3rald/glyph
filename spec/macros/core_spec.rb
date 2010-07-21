@@ -191,5 +191,13 @@ Test -- Test Snippet
 		end.should raise_error(Glyph::MacroError)
 	end
 
+	it "topic"
+		# TODO
+		# Store topic contents
+		# Return a link
+		# Use only in document.glyph
+		# Mandatory @title and @src
+		# Cannot be used in lite mode
+		# Link must be to a DIFFERENT FILE (with the proper extension)
 
 end	

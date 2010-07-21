@@ -78,7 +78,8 @@ macro :include do
 			end
 			begin 
 				folder = Glyph.lite? ? "" : "text/" 
-				update_source v, folder+v
+				topic = @node[:change_topic] ? folder+v : nil
+				update_source v, folder+v, topic
 				interpret contents
 			rescue Glyph::MutualInclusionError => e
 				raise
@@ -94,6 +95,31 @@ macro :include do
 		macro_warning "File '#{value}' no found."
 		"[FILE '#{value}' NOT FOUND]"
 	end
+end
+
+macro :topic do
+	n = Glyph::SyntaxNode.new.from @node
+	n[:change_topic] = true
+	n[:name] = :include
+	n.parameters[0] = attr(:src)
+	inc_macro Glyph::Macro.new n
+	# Interpret file
+	contents = inc_macro.expand	
+	# Create topic
+	result = interpret %{
+		document[
+			head[
+				title[#{attr(:title)}]
+				style[default.css]
+			]
+			body[
+#{contents}
+			]
+		]
+	}
+	@node[:document].topics << {:src => attr(:src), :title => attr(:title), :contents => result}
+	# Return a link to the topic
+	interpret %{link[#{attr(:src)}|#{attr(:title)}]}
 end
 
 macro :ruby do

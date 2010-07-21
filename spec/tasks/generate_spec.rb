@@ -55,8 +55,7 @@ describe "generate" do
 		reset_web.call
 		# check that the task can be run without errors
 		reset_web.call
-		#lambda { 
-			Glyph.run! 'generate:web'#}.should_not raise_error
+		lambda { Glyph.run! 'generate:web' }.should_not raise_error
 		# check that images are copied
 		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true
 		# check that stylesheets are copied
