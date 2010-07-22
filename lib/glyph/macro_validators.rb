@@ -77,6 +77,13 @@ module Glyph
 				end
 			end
 
+			# TODO: docs
+			def required_attribute(name, options={:level=>:error})
+				validate("Macro '#{@name}' requires a '#{name}' attribute", options) do
+					!raw_attribute(name.to_sym).blank?
+				end
+			end
+
 			# Ensures that the macro receives no parameters.
 			# @param [Hash] options a hash containing validation options
 			# @option options :level the error level (:error, :warning)

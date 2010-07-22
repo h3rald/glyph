@@ -63,6 +63,11 @@ macro :todo do
 end
 
 macro :topic do
+	required_attribute :src
+	required_attribute :title
+	validate("Macro 'topic' can only be used in document source (#{Glyph['document.source']})") do
+		@node[:source][:file] == Glyph['document.source']
+	end
 	n = Glyph::MacroNode.new.from @node
 	n[:change_topic] = true
 	n[:name] = :include
@@ -74,7 +79,7 @@ macro :topic do
 	result = interpret %{
 		document[
 			head[
-				title[#{attr(:title)}]
+				title[]
 				style[default.css]
 			]
 			body[
@@ -83,8 +88,8 @@ macro :topic do
 		]
 	}
 	@node[:document].topics << {:src => attr(:src), :title => attr(:title), :contents => result}
-	# Return a link to the topic
-	interpret %{link[#{attr(:src)}|#{attr(:title)}]}
+	# Return nothing
+	nil
 end
 
 macro_alias :bookmark => :anchor

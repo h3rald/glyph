@@ -9,7 +9,13 @@ document[
 			@title[Web Document]
 ...
 		]
-		topic[a/web1.glyph]
-		topic[a/b/web2.glyph]
+		topic[
+			@src[a/web1.glyph]
+			@title[Topic #1]
+		]
+		topic[
+			@src[a/b/web2.glyph]
+			@title[Topic #2]
+		]
 	]
 ]

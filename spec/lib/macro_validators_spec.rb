@@ -51,5 +51,9 @@ describe Glyph::Macro::Validators do
 		output_for("test[test @.test[test]]").should == "<test>test</test>"
 	end
 
+	it "should validate required parameters" do
+		lambda { output_for("topic[test]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute")
+	end
+
 end
 

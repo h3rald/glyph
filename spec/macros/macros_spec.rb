@@ -189,13 +189,20 @@ describe "Macro:" do
 		Glyph['document.draft'] = false
 	end
 
-	it "topic"
+	it "topic" do
 		# TODO
 		# Store topic contents
-		# Return a link
+		# Returns nothing
 		# Use only in document.glyph
-		# Mandatory @title and @src
-		# Cannot be used in lite mode
+		# Behaves like include with standalone outputs	 
 		# Link must be to a DIFFERENT FILE (with the proper extension)
+		delete_project
+		create_web_project
+		Glyph.run! 'load:all'
+		Glyph['document.output'] = 'web'
+		lambda { output_for("topic[@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute") 
+		lambda { output_for("topic[@src[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'title' attribute") 
+		lambda { output_for("topic[@src[test]@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' can only be used in document source (document.glyph)") 
+	end
 
 end	
