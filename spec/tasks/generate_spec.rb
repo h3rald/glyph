@@ -45,6 +45,7 @@ describe "generate" do
 			create_web_project
 			Glyph['document.output'] = 'web'
 			Glyph['document.styles'] = 'link'
+			Glyph['document.extension'] = '.html'
 		end
 	  # check that the user didn't create a styles or images directory under /text
 		reset_web.call

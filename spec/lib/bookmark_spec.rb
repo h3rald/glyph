@@ -41,9 +41,9 @@ describe Glyph::Bookmark do
 		# Set document.extension (set automatically by the compile command, normally)
 		Glyph['document.extension'] = '.html'
 		# Link within the same file
-		@b.link.should == "#test"
+		@b.link("test.glyph").should == "#test"
 		# Link to a different file file
-		@b.link(:"intro.glyph").should == "test.html#test"
+		@b.link("intro.glyph").should == "test.html#test"
 		Glyph['document.output'] = out
 	end
 

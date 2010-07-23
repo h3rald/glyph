@@ -1,7 +1,7 @@
 module Glyph
 	class Bookmark
 
-		attr_reader :title, :file
+		attr_accessor :title, :file
 
 		def initialize(hash)
 			@id = hash[:id].to_sym rescue nil
@@ -23,7 +23,8 @@ module Glyph
 		def link(file=nil)
 			if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
 				raise RuntimeError, "document.extension not set" if Glyph['document.extension'].blank?
-				f = (file.to_sym == @file) ? "" : @file.to_s.gsub(/\..+$/, Glyph['document.extension']) rescue nil
+				external_file = @file.to_s.gsub(/\..+$/, Glyph['document.extension']) 
+				f = (file.blank? || file.to_sym != @file) ? external_file : ""
 				"#{f}##{@id}"
 			else
 				"##{@id}"

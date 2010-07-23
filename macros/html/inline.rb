@@ -5,32 +5,31 @@ macro :anchor do
 	max_parameters 2
 	ident = param(0)
 	title = param(1) rescue nil
-	bmk = bookmark :id => ident, :title => title, :file => @source_file
-	%{<a id="#{bmk}">#{title}</a>}
+	bookmark :id => ident, :title => title, :file => @source_file
+	%{<a id="#{ident}">#{title}</a>}
 end
 
 macro :link do
 	min_parameters 1
 	max_parameters 2
-	href = param(0)
+	target = param(0)
 	title = param(1) rescue nil
-	if href.match /^#/ then
-		file, anchor = href.split '#'
-		file = @source_file if file.blank?
+	if target.match /^#/ then
+		anchor = target.gsub /^#/, ''
 		bmk = bookmark? anchor
-		href = Glyph::Bookmark.new(:id => anchor, :file => file).link
-		if bmk then
-			title ||= bmk.title
-		else
-			plac = placeholder do |document|
-				macro_error "Bookmark '#{anchor}' does not exist" unless bookmark? anchor 
-				bookmark?(anchor).title
+		if !bmk then
+			placeholder do |document|
+				bmk = document.bookmark?(anchor)
+				macro_error "Bookmark '#{anchor}' does not exist" unless bmk
+				%{<a href="#{bmk.link(@source_file)}">#{bmk.title}</a>}
 			end
-			title ||= plac
+		else
+			%{<a href="#{bmk.link(@source_file)}">#{bmk.title}</a>}
 		end
+	else
+		title ||= target
+		%{<a href="#{target}">#{title}</a>}
 	end
-	title ||= href
-	%{<a href="#{href}">#{title.to_s}</a>}
 end
 
 macro :fmi do
@@ -65,31 +64,50 @@ end
 macro :topic do
 	required_attribute :src
 	required_attribute :title
+	topic_id = (attr(:id) || "t_#{@node[:document].topics.length}").to_sym
 	validate("Macro 'topic' can only be used in document source (#{Glyph['document.source']})") do
-		@node[:source][:file] == Glyph['document.source']
+		if Glyph['system.topics.ignore_file_restrictions'] then
+			true
+		else
+			@node[:source][:file] == Glyph['document.source']
+		end
 	end
-	n = Glyph::MacroNode.new.from @node
+	n = Glyph::MacroNode.new
 	n[:change_topic] = true
+	n[:source] = @node[:source]
 	n[:name] = :include
-	n.parameters[0] = attr(:src)
+	n.children.clear
+	p = Glyph::ParameterNode.new.from({:name => :"0"})
+	p << Glyph::TextNode.new.from({:value => attr(:src)})
+	n << p
 	inc_macro = Glyph::Macro.new n
 	# Interpret file
 	contents = inc_macro.expand	
-	# Create topic
-	result = interpret %{
+	if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
+		# Create topic
+		result = interpret %{
 		document[
 			head[
-				title[]
 				style[default.css]
 			]
 			body[
-#{contents}
+				section[
+					@title[#{attr(:title)}]
+					@id[#{topic_id}]
+			#{contents}
+				]
 			]
 		]
-	}
-	@node[:document].topics << {:src => attr(:src), :title => attr(:title), :contents => result}
-	# Return nothing
-	nil
+		}
+		# Fix file for topic bookmark
+		@node[:document].bookmark?(topic_id).file = attr(:src)
+		@node[:document].topics << {:src => attr(:src), :title => attr(:title), :id => topic_id, :contents => result}
+		# Return link
+		interpret %{link[##{topic_id}|#{attr(:title)}]}
+	else
+		# Behave exactly like include[]
+		contents
+	end
 end
 
 macro_alias :bookmark => :anchor

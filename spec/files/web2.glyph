@@ -1,7 +1,7 @@
 section[
 	@title[Test #2a]
 	@id[w2_1]
-=>[web1.glyph#w1_3]
+=>[#w1_3]
 ...
 ]
 section[
