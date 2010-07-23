@@ -8,6 +8,7 @@
   :draft: false
   :output: html
   :styles: embed # link, import
+  :base: ""
 :language:
   :set: 'glyph' # xml, core, filters
   :options:

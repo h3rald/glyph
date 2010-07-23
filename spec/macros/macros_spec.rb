@@ -206,7 +206,7 @@ describe "Macro:" do
 		topic[:title].should == "Test" 
 		topic[:src].should == "a/web1.glyph"
 		topic[:contents].match(/id="w1_3"/).blank?.should == false
-		@p.document.output.should == %{<a href="a/web1.html#t_0">Test</a>} 
+		@p.document.output.should == %{<span class="topic"><a href="a/web1.html#t_0">Test</a></span>} 
 		Glyph['document.output'] = 'html'
 		output_for("topic[@src[a/web1.glyph]@title[Test]]").match(/id="w1_3"/).blank?.should == false
 		Glyph['system.topics.ignore_file_restrictions'] = false

@@ -64,10 +64,14 @@ describe "generate" do
 		(Glyph::PROJECT/'output/web/styles/default.css').exist?.should == true
 		(Glyph::PROJECT/'output/web/styles/test.css').exist?.should == true
 		# check that index.html is created
-		(Glyph::PROJECT/'output/web/index.html').exist?.should == true
+		index = (Glyph::PROJECT/'output/web/index.html')
+		index.exist?.should == true
 	  #	check that topics are copied in the proper directories
-		(Glyph::PROJECT/'output/web/a/web1.html').exist?.should == true
-		(Glyph::PROJECT/'output/web/a/b/web2.html').exist?.should == true
+		web1 = (Glyph::PROJECT/'output/web/a/web1.html')
+		web1.exist?.should == true
+		web2 = (Glyph::PROJECT/'output/web/a/b/web2.html')
+		web2.exist?.should == true
+		# TODO: check topic contents
 	end
 
 

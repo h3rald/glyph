@@ -52,6 +52,7 @@ module Glyph
 			@headers = document.headers
 			@todos = document.todos
 			@styles = document.styles
+			@topics = document.topics
 			@placeholders = document.placeholders
 		end
 
@@ -138,7 +139,10 @@ module Glyph
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 
 				begin
-					@output.gsub! key.to_s, value.call(self).to_s
+					outs = Glyph.multiple_output_files? ? [@output]+[@topics] : [@output]
+					outs.each do |i|
+						i.gsub! key.to_s, value.call(self).to_s
+					end
 				rescue Glyph::MacroError => e
 					e.macro.macro_warning e.message, e
 				rescue Exception => e

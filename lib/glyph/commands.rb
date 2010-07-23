@@ -53,6 +53,11 @@ command :compile do |c|
 		target = nil if target.blank?
 		target ||= Glyph['filters.target']
 		Glyph['document.source'] = options[:s] if options[:s]
+		if Glyph.multiple_output_files? then
+			Glyph['document.base'] = Glyph::PROJECT/"output/#{Glyph['document.output']}/".to_s if Glyph['document.base'].blank?
+		else
+			Glyph['document.base'] = ""
+		end
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 

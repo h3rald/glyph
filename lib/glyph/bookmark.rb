@@ -21,11 +21,11 @@ module Glyph
 		end
 
 		def link(file=nil)
-			if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
+			if Glyph.multiple_output_files? then
 				raise RuntimeError, "document.extension not set" if Glyph['document.extension'].blank?
 				external_file = @file.to_s.gsub(/\..+$/, Glyph['document.extension']) 
 				f = (file.blank? || file.to_sym != @file) ? external_file : ""
-				"#{f}##{@id}"
+				"#{Glyph['document.base']}#{f}##{@id}"
 			else
 				"##{@id}"
 			end

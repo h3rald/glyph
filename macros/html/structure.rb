@@ -144,13 +144,11 @@ macro :style do
 			#{style}
 </style>}
 	when 'import' then
-		# TODO: Sass support
 %{<style type="text/css">
-	@import url("styles/#{value}");
+	@import url("#{Glyph['document.base']}styles/#{value.gsub(/\..+$/, '.css')}");
 </style>}
 	when 'link' then
-		# TODO: Sass support
-%{<link href="styles/#{value}" type="text/css" />}
+%{<link href="#{Glyph['document.base']}styles/#{value.gsub(/\..+$/, '.css')}" type="text/css" />}
 	else
 		macro_error "Value '#{Glyph['document.styles']}' not allowed for 'document.styles' setting"
 	end

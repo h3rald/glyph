@@ -92,21 +92,13 @@ namespace :generate do
 		raise RuntimeError, "You cannot have a 'styles' directory under your 'text' directory." if (Glyph::PROJECT/"text/styles").exist?
 		out.mkpath
 		file_write out/"index.html", Glyph.document.output
-		Glyph.document.structure.descend do |node, level|
-			if node.is_a?(Glyph::MacroNode) && Glyph.macro_eq?(node[:name], :include) then
-				doc = Glyph::Document.new node.children.last, {:source => node.children.last[:source]}
-				doc.inherit_from Glyph.document
-				out_file = Pathname.new((out/doc.context[:source][:file]).to_s.gsub(/\..+$/, '.html').gsub(/text\//, ''))
-				out_file.parent.mkpath
-				# TODO: Refactor this: currently the document is evaluated twice:
-				# - for the whole thing
-				# - for each file
-				doc.analyze
-				doc.finalize
-				file_write out_file, doc.output
-			end
+		Glyph.document.topics.each do |topic|
+			file = topic[:src].gsub(/\..+$/, '.html')
+			Glyph.info "Generating topic '#{file}'"
+			(out/file).parent.mkpath
+			file_write out/file, topic[:contents]
 		end
-		Glyph.info "'#{file}' generated successfully."
+		Glyph.info "Web output generated successfully."
 	end
 
 	desc "Create a pdf file"

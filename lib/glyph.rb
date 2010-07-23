@@ -303,6 +303,10 @@ module Glyph
 		puts message if Glyph.debug?
 	end
 
+	def self.multiple_output_files?
+		Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets']
+	end
+
 end
 
 Glyph.setup

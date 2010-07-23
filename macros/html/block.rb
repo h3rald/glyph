@@ -36,7 +36,7 @@ macro :image do
 	src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 	dest_file = Glyph.lite? ? image : "images/#{image}"
 	Glyph.warning "Image '#{image}' not found" unless Pathname.new(src_file).exist? 
-	interpret "img[#{alt}@src[#{dest_file}]#{@node.attrs.join}]"
+	interpret "img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]"
 end
 
 macro :figure do
@@ -50,7 +50,7 @@ macro :figure do
 	dest_file = Glyph.lite? ? image : "images/#{image}"
 	Glyph.warning "Figure '#{image}' not found" unless Pathname.new(src_file).exist? 
 	interpret %{div[@class[figure]
-img[#{alt}@src[#{dest_file}]#{@node.attrs.join}]
+img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]
 #{caption}
 ]}
 end

@@ -76,14 +76,13 @@ macro :topic do
 	n[:change_topic] = true
 	n[:source] = @node[:source]
 	n[:name] = :include
-	n.children.clear
 	p = Glyph::ParameterNode.new.from({:name => :"0"})
 	p << Glyph::TextNode.new.from({:value => attr(:src)})
 	n << p
 	inc_macro = Glyph::Macro.new n
 	# Interpret file
 	contents = inc_macro.expand	
-	if Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets'] then
+	if Glyph.multiple_output_files? then
 		# Create topic
 		result = interpret %{
 		document[
@@ -103,7 +102,7 @@ macro :topic do
 		@node[:document].bookmark?(topic_id).file = attr(:src)
 		@node[:document].topics << {:src => attr(:src), :title => attr(:title), :id => topic_id, :contents => result}
 		# Return link
-		interpret %{link[##{topic_id}|#{attr(:title)}]}
+		interpret %{span[@class[topic]link[##{topic_id}|#{attr(:title)}]]}
 	else
 		# Behave exactly like include[]
 		contents
