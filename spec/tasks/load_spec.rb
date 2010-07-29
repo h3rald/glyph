@@ -47,12 +47,18 @@ describe "load" do
 	end
 
 	it "[config] should load configuration files and apply overrides" do
-        Glyph.config_refresh
+    Glyph.config_refresh
 		lambda { Glyph.run! 'load:config'}.should_not raise_error
 		Glyph['system.quiet'] = true
 		Glyph::PROJECT_CONFIG.blank?.should == false
 		Glyph::SYSTEM_CONFIG.blank?.should == false
 		Glyph['system.structure.headers'].class.to_s.should == "Array"
+	end
+
+	it "[macros] should load HTML macros as well when generating web output" do
+		Glyph['document.output'] = 'web'
+		Glyph.run! 'load:macros'
+		Glyph::MACROS[:section].blank?.should == false
 	end
 
 end

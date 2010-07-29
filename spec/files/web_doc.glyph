@@ -4,16 +4,18 @@ document[
 		style[test.sass]
 	]
 	body[
-		section[
-			@title[Web Document]
+		contents[
+			section[
+				@title[Web Document]
 ...
-			topic[
-				@src[a/web1.glyph]
-				@title[Topic #1]
-			]
-			topic[
-				@src[a/b/web2.glyph]
-				@title[Topic #2]
+				topic[
+					@src[a/web1.glyph]
+					@title[Topic #1]
+				]
+				topic[
+					@src[a/b/web2.glyph]
+					@title[Topic #2]
+				]
 			]
 		]
 	]

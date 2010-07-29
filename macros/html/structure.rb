@@ -198,6 +198,14 @@ macro :toc do
 	toc
 end
 
+macro :contents do
+	interpret(@node.parameter(0).to_s)
+end
+
+macro :topic do
+	interpret "include[#{attr(:src)}]"
+end
+
 # See:
 #  http://microformats.org/wiki/book-brainstorming
 #  http://en.wikipedia.org/wiki/Book_design

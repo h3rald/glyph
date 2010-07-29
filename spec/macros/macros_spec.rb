@@ -189,27 +189,4 @@ describe "Macro:" do
 		Glyph['document.draft'] = false
 	end
 
-	it "topic" do
-		delete_project
-		create_web_project
-		Glyph.run! 'load:all'
-		Glyph['document.output'] = 'web'
-		Glyph['document.extension'] = '.html'
-		lambda { output_for("topic[@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute") 
-		lambda { output_for("topic[@src[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'title' attribute") 
-		lambda { output_for("topic[@src[test]@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' can only be used in document source (document.glyph)") 
-		Glyph['system.topics.ignore_file_restrictions'] = true
-		interpret("topic[@src[a/web1.glyph]@title[Test]]")
-		topic = @p.document.topics[0]
-		topic.blank?.should == false 
-		topic[:id].should == :t_0 
-		topic[:title].should == "Test" 
-		topic[:src].should == "a/web1.glyph"
-		topic[:contents].match(/id="w1_3"/).blank?.should == false
-		@p.document.output.should == %{<span class="topic"><a href="a/web1.html#t_0">Test</a></span>} 
-		Glyph['document.output'] = 'html'
-		output_for("topic[@src[a/web1.glyph]@title[Test]]").match(/id="w1_3"/).blank?.should == false
-		Glyph['system.topics.ignore_file_restrictions'] = false
-	end
-
 end	

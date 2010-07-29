@@ -31,7 +31,23 @@ namespace :load do
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb')
-			load_macros_from_dir.call Glyph::HOME/"macros"/Glyph["filters.target"].to_s
+			case Glyph['document.output']
+			when 'pdf'
+				load_macros_from_dir.call Glyph::HOME/"macros/html"
+			when 'html'
+				load_macros_from_dir.call Glyph::HOME/"macros/html"
+			when 'web'
+				load_macros_from_dir.call Glyph::HOME/"macros/html"
+				load_macros_from_dir.call Glyph::HOME/"macros/web"
+			when 'html5'
+				load_macros_from_dir.call Glyph::HOME/"macros/html5"
+			when 'web5'
+				load_macros_from_dir.call Glyph::HOME/"macros/html5"
+				load_macros_from_dir.call Glyph::HOME/"macros/web"
+				load_macros_from_dir.call Glyph::HOME/"macros/web5"
+			else
+				warning "No #{Glyph['document.output']} macros defined"
+			end
 		when 'xml' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 
