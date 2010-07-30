@@ -22,7 +22,7 @@ namespace :load do
 		load_macros_from_dir = lambda do |dir|
 			if dir.exist? then
 				dir.children.each do |c|
-					Glyph.instance_eval file_load(c) unless c.directory?
+					Glyph.instance_eval file_load(c) unless c.directory? || c.extname != '.rb'
 				end
 			end
 		end
