@@ -1,0 +1,12 @@
+document[
+	head[
+		style[default.css]
+	]
+	body[
+		section[
+			@title[{{title}}]
+			@id[{{id}}]
+{{contents}}
+		]
+	]
+]
