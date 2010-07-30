@@ -15,6 +15,7 @@ macro :topic do
 	n[:change_topic] = true
 	n[:source] = @node[:source]
 	n[:name] = :include
+	n[:document] = @node[:document]
 	p = Glyph::ParameterNode.new.from({:name => :"0"})
 	p << Glyph::TextNode.new.from({:value => attr(:src)})
 	n << p

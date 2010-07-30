@@ -24,8 +24,8 @@ module Glyph
 			if Glyph.multiple_output_files? then
 				raise RuntimeError, "document.extension not set" if Glyph['document.extension'].blank?
 				external_file = @file.to_s.gsub(/\..+$/, Glyph['document.extension']) 
-				f = (file.blank? || file.to_sym != @file) ? external_file : ""
-				"#{Glyph['document.base']}#{f}##{@id}"
+				f = (file.blank? || file.to_sym != @file) ? "#{Glyph['document.base']}#{external_file}" : ""
+				"#{f}##{@id}"
 			else
 				"##{@id}"
 			end

@@ -28,6 +28,7 @@ describe "Macro:" do
 		topic[:title].should == "Test" 
 		topic[:src].should == "a/web1.glyph"
 		topic[:contents].match(/id="w1_3"/).blank?.should == false
+		@p.document.placeholders.length.should == 2
 		@p.document.output.should == "" 
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'load:macros'

@@ -58,6 +58,7 @@ describe "generate" do
 		reset_web.call
 		# check that the task can be run without errors
 		reset_web.call 
+		Glyph['document.base'] = "/test/"
 		lambda { Glyph.run! 'generate:web' }.should_not raise_error
 		# check that images are copied
 		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true
@@ -72,7 +73,10 @@ describe "generate" do
 		web1.exist?.should == true
 		web2 = (Glyph::PROJECT/'output/web/a/b/web2.html')
 		web2.exist?.should == true
-		# TODO: check topic contents
+		# Check that placeholders are replaced correctly and that links are valid
+		file_load(web2).match(/<a href="\/test\/text\/a\/web1\.html#w1_3">Test #1b<\/a>/).blank?.should == false
+		file_load(web1).match(/<a href="\/test\/text\/a\/b\/web2\.html#w2_1">Test #2a<\/a>/).blank?.should == false
+		file_load(web1).match(/<a href="#w1_3">Test #1b<\/a>/).blank?.should == false
 	end
 
 

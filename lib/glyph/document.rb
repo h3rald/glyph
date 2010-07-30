@@ -139,9 +139,12 @@ module Glyph
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 
 				begin
-					outs = Glyph.multiple_output_files? ? [@output]+[@topics] : [@output]
-					outs.each do |i|
-						i.gsub! key.to_s, value.call(self).to_s
+					if Glyph.multiple_output_files? then
+						@topics.each do |t|
+							t[:contents].gsub! key.to_s, value.call(self).to_s
+						end
+					else
+						@output.gsub! key.to_s, value.call(self).to_s
 					end
 				rescue Glyph::MacroError => e
 					e.macro.macro_warning e.message, e

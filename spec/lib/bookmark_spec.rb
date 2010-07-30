@@ -44,6 +44,10 @@ describe Glyph::Bookmark do
 		@b.link("test.glyph").should == "#test"
 		# Link to a different file file
 		@b.link("intro.glyph").should == "test.html#test"
+		# Test that base directory is added correctly
+		Glyph['document.base'] = "/"
+		@b.link("intro.glyph").should == "/test.html#test"
+		@b.link("test.glyph").should == "#test"
 		Glyph['document.output'] = out
 	end
 
