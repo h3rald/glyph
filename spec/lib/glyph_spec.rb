@@ -73,4 +73,10 @@ describe Glyph do
 		Glyph.safe_mode = false
 	end
 
+	it "should rewrite macros using Glyph syntax" do
+		define_em_macro
+		Glyph.rewrite :test_rw_macro, %{em[{{0}} -- {{a}}]}
+		output_for("test_rw_macro[@a[!]?]").should == "<em>? -- !</em>"
+	end
+
 end

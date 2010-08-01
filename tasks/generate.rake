@@ -68,7 +68,7 @@ namespace :generate do
 	end
 
 	desc "Create a standalone html file"
-	task :html => [:document, :images, :styles] do
+	task :html => [:images, :styles] do
 		info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']

@@ -21,10 +21,13 @@ namespace :load do
 	task :macros do
 		raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project? || Glyph.lite?
 		load_macros_from_dir = lambda do |dir|
-			if dir.exist? then
-				dir.children.each do |c|
-					Glyph.instance_eval file_load(c) unless c.directory? || c.extname != '.rb'
-				end
+			load_files_from_dir(dir, ".rb") do |file, contents|
+				Glyph.instance_eval contents
+			end
+		end
+		load_layouts_from_dir = lambda do |dir|
+			load_files_from_dir(dir, ".glyph") do |file, contents|
+				Glyph.rewrite "layout:#{file.basename(file.extname)}".to_sym, contents
 			end
 		end
 		case  Glyph['language.set']
@@ -40,12 +43,14 @@ namespace :load do
 			when 'web'
 				load_macros_from_dir.call Glyph::HOME/"macros/html"
 				load_macros_from_dir.call Glyph::HOME/"macros/web"
+				load_layouts_from_dir.call Glyph::HOME/'layouts/web'
 			when 'html5'
 				load_macros_from_dir.call Glyph::HOME/"macros/html5"
 			when 'web5'
 				load_macros_from_dir.call Glyph::HOME/"macros/html5"
 				load_macros_from_dir.call Glyph::HOME/"macros/web"
 				load_macros_from_dir.call Glyph::HOME/"macros/web5"
+				load_layouts_from_dir.call Glyph::HOME/'layouts/web5'
 			else
 				warning "No #{Glyph['document.output']} macros defined"
 			end
@@ -62,6 +67,7 @@ namespace :load do
 		# load project macros
 		unless Glyph.lite? then
 			load_macros_from_dir.call Glyph::PROJECT/"lib/macros"
+			load_layouts_from_dir.call Glyph::PROJECT/'lib/layouts' if Glyph.multiple_output_files?
 		end
 	end
 

@@ -186,19 +186,7 @@ macro "rewrite:" do
 			macro_error "Macro '#{macro_name}' cannot be defined by itself"
 		end
 	end
-	string = raw_param(1)
-	Glyph.macro macro_name do
-		s = string.dup
-		# Parameters
-		s.gsub!(/\{\{(\d+)\}\}/) do
-			raw_param($1.to_i).strip
-		end
-		# Attributes
-		s.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
-			raw_attr($1.to_sym).strip
-		end
-		interpret s
-	end
+	Glyph.rewrite macro_name, raw_param(1).dup	
 	nil
 end
 

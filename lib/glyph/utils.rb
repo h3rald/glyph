@@ -78,5 +78,13 @@ module Glyph
 			FileUtils.cp source, dest, options
 		end
 
+		def load_files_from_dir(dir, extension, &block)
+			if dir.exist? then
+				dir.children.each do |c|
+					block.call(c, file_load(c)) unless c.directory? || c.extname != extension
+				end
+			end
+		end
+
 	end
 end

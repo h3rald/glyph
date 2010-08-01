@@ -203,9 +203,19 @@ module Glyph
 		MACROS[name.to_sym] = block
 	end
 
-	def self.rewrite(name, &block)
-		MACROS[name.to_sym] = lambda do
-			rewrite &block
+	#@since 0.4.0
+	def self.rewrite(name, text)
+		macro name do
+			body = text.dup
+			# Parameters
+			body.gsub!(/\{\{(\d+)\}\}/) do
+				raw_param($1.to_i).strip
+			end
+			# Attributes
+			body.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
+				raw_attr($1.to_sym).strip
+			end
+			interpret body
 		end
 	end
 

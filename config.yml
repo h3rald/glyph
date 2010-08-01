@@ -9,6 +9,7 @@
   :output: html
   :styles: embed # link, import
   :base: ""
+  :topic_layout: 'topic'
 :language:
   :set: 'glyph' # xml, core, filters
   :options:

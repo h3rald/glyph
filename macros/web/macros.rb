@@ -18,18 +18,13 @@ macro :topic do
 	# Interpret file
 	contents = inc_macro.expand	
 	# Create topic
-	result = interpret %{
-		document[
-			head[
-				style[default.css]
-			]
-			body[
-				section[
-					@title[#{attr(:title)}]
-					@id[#{topic_id}]
-		#{contents}
-				]
-			]
+	layout = attr(:layout) || Glyph['document.topic_layout'] || :topic
+	layout_name = "layout:#{layout}".to_sym
+	macro_error "Layout '#{layout}' not found" unless Glyph::MACROS[layout_name]
+	result = interpret %{#{layout_name}[
+			@title[#{attr(:title)}]
+			@id[#{topic_id}]
+			@contents[#{contents}]
 		]
 	}
 	# Fix file for topic bookmark
