@@ -48,102 +48,51 @@ module Glyph
 				end
 			end
 
-			def xml_note
-				%{<div class="#{@name}">
-<span class="note-title">#{@name.to_s.capitalize}</span>#{value}
-
-</div>}
-			end
-
-			def xml_box
-				%{<div class="box">
-<div class="box-title">#{param(0)}</div>
-#{param(1)}
-
-</div>}
-			end
-
-			def xml_codeblock
-				%{
-<div class="code">
-<pre>
-<code>
-#{value}
-</code>
-</pre>
-</div>}
-			end
-
-			def xml_image_for(image, alt)
+			def image_element_for(image, alt, &block)
 				src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 				dest_file = Glyph.lite? ? image : "images/#{image}"
 				Glyph.warning "Image '#{image}' not found" unless Pathname.new(src_file).exist? 
-				interpret "img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]"
+				block.call alt, dest_file
 			end
 
-			def xml_figure_for(image, alt, caption)
-				caption = "div[@class[caption]#{caption}]" if caption
+			def figure_element_for(image, alt, caption, &block)
 				src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 				dest_file = Glyph.lite? ? image : "images/#{image}"
 				Glyph.warning "Figure '#{image}' not found" unless Pathname.new(src_file).exist? 
-				interpret %{div[@class[figure]
-img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]
-					#{caption}
-]}
+				block.call alt, dest_file, caption
 			end
 
-			def xml_title
+			def title_element(&block)
 				unless Glyph["document.title"].blank? then
-					%{<h1>
-						#{Glyph["document.title"]}
-</h1>}
+					block.call
 				else
 					""
 				end
 			end
 
-			def xml_subtitle
+			def subtitle_element(&block)
 				unless Glyph["document.subtitle"].blank? then
-					%{<h2>
-						#{Glyph["document.subtitle"]}
-</h2>}
+					block.call
 				else
 					""
 				end
 			end
 
-			def xml_author
+			def author_element(&block)
 				unless Glyph['document.author'].blank? then
-					%{<div class="author">
-by <em>#{Glyph["document.author"]}</em>
-</div>}
+					block.call
 				else
 					""
 				end
 			end
 
-			def xml_pubdate
-				%{<div class="pubdate">
-#{Time.now.strftime("%B %Y")}
-</div>}
-			end
-			
-			def xml_revision
+			def revision_element(&block)
 				unless Glyph["document.revision"].blank? then
-					%{<div class="revision">#{Glyph['document.revision']}</div>}
+					block.call
 				else
 					""
 				end
 			end
-
-
-
-
-
-
-
-
-
 
 		end
 	end
