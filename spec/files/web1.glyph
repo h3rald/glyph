@@ -1,0 +1,11 @@
+	section[
+		@title[Test #1a]
+=>[#w2_1]
+=>[#w1_3]
+...
+	]
+	section[
+		@title[Test #1b]
+		@id[w1_3]
+...
+	]

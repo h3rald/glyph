@@ -17,15 +17,18 @@ describe Glyph::Document do
 
 	it "should expose document data" do
 		@doc.bookmarks.should == {}
+		@doc.headers.should == {}
+		@doc.styles.should == []
 		@doc.placeholders.should == {}
 		@doc.new?.should == true
 	end
 
 	it "should store bookmarks" do
-		lambda { @doc.bookmark(:id => "test", :title => "Test Bookmark #1")}.should_not raise_error
-		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #2")}.should_not raise_error
+		lambda { @doc.bookmark(:id => "test", :title => "Test Bookmark #1", :file => 'test.glyph')}.should_not raise_error
+		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #1", :file => 'test.glyph')}.should raise_error
+		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #2", :file => 'test2.glyph')}.should raise_error
 		@doc.bookmarks.length.should == 1
-		@doc.bookmarks[:test].should == {:id => :test, :title => "Test Bookmark #2"}
+		@doc.bookmarks[:test].should == Glyph::Bookmark.new(:id => :test, :title => "Test Bookmark #1", :file => "test.glyph")
 	end
 
 	it "should store placeholders" do
@@ -34,20 +37,27 @@ describe Glyph::Document do
 		@doc.placeholders["‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡".to_sym].should == p
 	end
 
+	it "should store styles" do
+		lambda {@doc.style "test.css"}.should_not raise_error
+		@doc.styles.include?(Pathname.new('test.css')).should == true
+	end
+
 	it "can inherit data from another document" do
-		@doc.bookmark :id => :test1, :title => "Test #1"
-		@doc.bookmark :id => :test2, :title => "Test #2"
+		@doc.bookmark :id => :test1, :title => "Test #1", :file => "test.glyph"
+		@doc.bookmark :id => :test2, :title => "Test #2", :file => "test.glyph"
 		@doc.placeholder { "test" }
-		@doc.header :id => :test3, :title => "Test #3", :level => 3
+		@doc.style "test.css"
+		@doc.header :id => :test3, :title => "Test #3", :level => 3, :file => "test.glyph"
 		doc2 = create_doc @tree
 		doc2.bookmarks.length.should == 0
 		doc2.placeholders.length.should == 0
-		doc2.bookmark :id => :test4, :title => "Test #4"
+		doc2.bookmark :id => :test4, :title => "Test #4", :file => "test.glyph"
 		doc2.inherit_from @doc
-		doc2.bookmarks.length.should == 2
+		doc2.bookmarks.length.should == 3
 		doc2.placeholders.length.should == 1
 		doc2.headers.length.should == 1
-		doc2.bookmarks[:test3].should == nil
+		doc2.styles.length.should == 1
+		doc2.bookmarks[0].should_not == Glyph::Bookmark.new(:id => :test4, :title => "Test #4", :file => "test.glyph")
 	end
 
 	it "should analyze the syntax tree and finalize the document" do

@@ -149,9 +149,18 @@ describe "glyph" do
 		Glyph.enable 'generate:html'
 		(Glyph::PROJECT/'article.html').unlink
 		Glyph['document.output'] = 'pdf'
-		run_command_successfully(["compile", "article.glyph"]).should == true
-		(Glyph::PROJECT/'article.html').exist?.should == true
-		(Glyph::PROJECT/'article.pdf').exist?.should == true
+		src = Glyph::PROJECT/'article.html'
+		out = Glyph::PROJECT/'article.pdf'
+		generate_pdf = lambda do |gen|
+			Glyph.enable 'generate:pdf'
+			Glyph['tools.pdf_generator'] = gen
+			run_command_successfully(["compile", "article.glyph"]).should == true
+			src.exist?.should == true
+			out.exist?.should == true
+			out.unlink
+		end
+		generate_pdf.call 'prince'
+		generate_pdf.call 'wkhtmltopdf'
 		Glyph.lite_mode = false
 	end	
 
@@ -197,7 +206,7 @@ test_project - Outline
 		i_id = "[#h_2]"
 		m_id = "[#md]"
 		file_write Glyph::PROJECT/'document.glyph', "document[#{file_load(Glyph::PROJECT/'document.glyph')}]"
-		run_command(["outline"]).should == %{#{start}
+		run_command(["-d", "outline"]).should == %{#{start}
   #{c_title}
     #{i_title}
   #{m_title}

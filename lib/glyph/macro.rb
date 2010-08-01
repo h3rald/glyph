@@ -5,11 +5,12 @@ module Glyph
 	# A Macro object is instantiated by a Glyph::Interpreter whenever a macro is found in the parsed text.
 	# The Macro class contains shortcut methods to access the current node and document, as well as other
 	# useful methods to be used in macro definitions.
+	# TODO : update docs
 	class Macro
 
 		include Validators
 
-		attr_reader :node, :source
+		attr_reader :node, :source_name, :source_file, :source_topic
 
 		# Creates a new macro instance from a Node
 		# @param [Node] node a node populated with macro data
@@ -17,14 +18,18 @@ module Glyph
 			@node = node
 			@name = @node[:name]
 			@updated_source = nil
-			@source = @node[:source][:name] rescue "--"
+			@source_name = @node[:source][:name] || "--" rescue "--"
+			@topic = @node[:source][:topic] || "--" rescue "--"
+			@source_file = @node[:source][:file] rescue nil
 		end
 
 		# Resets the name of the updated source (call before calling 
 		# Macro#interpret)
 		# @param [String] name the source name
-		def update_source(name)
-			@updated_source = {:node => @node, :name => name}
+		# @param [String] file the source file
+		# @since 0.3.0
+		def update_source(name, file=nil, topic=nil)
+			@updated_source = {:node => @node, :name => name, :file => file, :topic => topic}
 		end
 		
 		# Returns a Glyph code representation of the specified parameter
@@ -180,7 +185,7 @@ module Glyph
 			if e.is_a?(Glyph::MacroError) then
 				e.display 
 			else
-				message = "#{msg}\n    source: #{@source}\n    path: #{path}"
+				message = "#{msg}\n    source: #{@source_name}\n    path: #{path}"
 				if Glyph.debug? then
 					message << %{\n#{"-"*54}\n#{@node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}} 
 					if e then
@@ -206,6 +211,7 @@ module Glyph
 				context[:document] = @node[:document]
 				interpreter = Glyph::Interpreter.new string, context
 				subtree = interpreter.parse
+				subtree[:source] = context[:source]
 				@node << subtree
 				result = interpreter.document.output
 			end

@@ -6,7 +6,9 @@
   :filename: ""
   :revision: ""
   :draft: false
-  :output: 'html'
+  :output: html
+  :styles: embed # link, import
+  :base: ""
 :language:
   :set: 'glyph' # xml, core, filters
   :options:
@@ -27,7 +29,7 @@
       - param
       - title
 :tools:
-  :pdf_generator: 'prince'
+  :pdf_generator: 'wkhtmltopdf'
 :filters:
   :by_file_extension: true
   :highlighter: 'coderay'
@@ -44,7 +46,11 @@
     :theme: 'lazy'
 :system:
   :quiet: false
-  :output_targets: [:html, :pdf]
+  :topics:
+    :ignore_file_restrictions: false
+  :output_targets: [:html, :html5, :pdf, :web, :web5]
+  :multifile_targets: [:web, :web5]
+  :singlefile_targets: [:html, :html5, :pdf]
   :structure:
     :hidden:
       - :imprint

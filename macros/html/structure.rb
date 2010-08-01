@@ -16,11 +16,9 @@ macro :section do
 		end
 		h_id ||= "h_#{@node[:document].headers.length+1}"
 		h_id = h_id.to_sym
-		header :title => h_title, :level => level, :id => h_id, :notoc => h_notoc
-		@node[:header] = h_id
-		macro_error "Bookmark '#{h_id}' already exists" if bookmark? h_id
-		bookmark :id => h_id, :title => h_title
-		h = %{<h#{level} id="#{h_id}">#{h_title}</h#{level}>\n}	
+		bmk = header :title => h_title, :level => level, :id => h_id, :toc => !h_notoc, :file => @source_file
+		@node[:header] = bmk
+		h = %{<h#{level} id="#{bmk}">#{h_title}</h#{level}>\n}	
 	end
 	%{<div class="#{@name}">
 #{h}#{value}
@@ -112,6 +110,7 @@ macro :head do
 #{author}
 #{copy}
 <meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 #{value}
 </head>
 }
@@ -122,32 +121,44 @@ macro :style do
 	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value}"
 	file = Pathname.new Glyph::HOME/'styles'/value unless file.exist?
 	macro_error "Stylesheet '#{value}' not found" unless file.exist?
-	style = ""
-	case file.extname
-	when ".css"
-		style = file_load file
-	when ".sass"
-		begin
-			require 'sass'
-			style = Sass::Engine.new(file_load(file)).render
-		rescue LoadError
-			macro_error "Haml is not installed. Please run: gem install haml"
-		rescue Exception
-			raise
+	@node[:document].style file
+	case Glyph['document.styles'].to_s
+	when 'embed' then
+		style = ""
+		case file.extname
+		when ".css"
+			style = file_load file
+		when ".sass"
+			begin
+				require 'sass'
+				style = Sass::Engine.new(file_load(file)).render
+			rescue LoadError
+				macro_error "Haml is not installed. Please run: gem install haml"
+			rescue Exception
+				raise
+			end
+		else
+			macro_error "Extension '#{file.extname}' not supported."
 		end
-	else
-		macro_error "Extension '#{file.extname}' not supported."
-	end
-	%{<style type="text/css">
-#{style}
+%{<style type="text/css">
+			#{style}
 </style>}
+	when 'import' then
+%{<style type="text/css">
+	@import url("#{Glyph['document.base']}styles/#{value.gsub(/\..+$/, '.css')}");
+</style>}
+	when 'link' then
+%{<link href="#{Glyph['document.base']}styles/#{value.gsub(/\..+$/, '.css')}" type="text/css" />}
+	else
+		macro_error "Value '#{Glyph['document.styles']}' not allowed for 'document.styles' setting"
+	end
 end
 
 macro :toc do 
 	max_parameters 1
 	depth = param 0
-	link_header = lambda do |header|
-		%{<a href="##{header[:id]}">#{header[:title]}</a>}
+	link_header = lambda do |head|
+		%{<a href="#{head.link(@source_file)}">#{head.title}</a>}
 	end
 	toc = placeholder do |document|
 		descend_section = lambda do |n1, added_headers|
@@ -156,17 +167,16 @@ macro :toc do
 			n1.descend do |n2, level|
 				if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
 					next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] }
-					header_id = n2[:header]
-					header_hash = document.header?(header_id)
-					next if depth && header_hash && (header_hash[:level]-1 > depth.to_i) || header_hash && header_hash[:notoc]
-					next if added_headers.include? header_id
-					added_headers << header_id
+					header_hash = n2[:header]
+					next if depth && header_hash && (header_hash.level-1 > depth.to_i) || header_hash && !header_hash.toc?
+					next if added_headers.include? header_hash
+					added_headers << header_hash
 					# Check if part of frontmatter, bodymatter or backmatter
 					container = n2.find_parent do |node| 
 						node.is_a?(Glyph::MacroNode) && 
 							node[:name].in?([:frontmatter, :bodymatter, :appendix, :backmatter])
 					end[:name] rescue nil
-					list << "<li class=\"#{container} #{n2[:name]}\">#{link_header.call(header_hash)}</li>\n" if header_id
+					list << "<li class=\"#{container} #{n2[:name]}\">#{link_header.call(header_hash)}</li>\n" if header_hash
 					child_list = ""
 					n2.children.each do |c|
 						child_list << descend_section.call(c, added_headers)
@@ -177,14 +187,23 @@ macro :toc do
 			list
 		end
 		toc_title = attr(:title) || "Table of Contents"
+		toc_b = bookmark :id => :toc, :file => @source_file, :title => toc_title
 		%{<div class="contents">
-<h2 class="toc-header" id="h_toc">#{toc_title}</h2>
+<h2 class="toc-header" id="#{toc_b}">#{toc_b.title}</h2>
 <ol class="toc">
 #{descend_section.call(document.structure, nil)}
 </ol>
 </div>}
 	end
 	toc
+end
+
+macro :contents do
+	interpret(@node.parameter(0).to_s)
+end
+
+macro :topic do
+	interpret "include[#{attr(:src)}]"
 end
 
 # See:

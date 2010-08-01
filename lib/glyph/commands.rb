@@ -32,6 +32,17 @@ command :compile do |c|
 	c.switch [:a, :auto]
 	c.action do |global_options, options, args|
 		raise ArgumentError, "Too many arguments" if args.length > 2
+		# Set document.extension. Used ONLY internally for bookmarking purposes!
+		Glyph['document.extension'] = case Glyph['document.output']
+																	when 'html5'
+																		'.html'
+																	when 'web'
+																		'.html'
+																	when 'web5'
+																		'.html'
+																	else
+																		"."+Glyph['document.output']
+																	end
 		Glyph.lite_mode = true unless args.blank? 
 		Glyph.run! 'load:config'
 		original_config = Glyph::CONFIG.dup
@@ -42,6 +53,11 @@ command :compile do |c|
 		target = nil if target.blank?
 		target ||= Glyph['filters.target']
 		Glyph['document.source'] = options[:s] if options[:s]
+		if Glyph.multiple_output_files? then
+			Glyph['document.base'] = Glyph::PROJECT/"output/#{Glyph['document.output']}/".to_s if Glyph['document.base'].blank?
+		else
+			Glyph['document.base'] = ""
+		end
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
 
@@ -51,7 +67,7 @@ command :compile do |c|
 			filename = source_file.basename(source_file.extname).to_s
 			destination_file = Pathname.new(args[1]) rescue nil
 			src_extension = Regexp.escape(source_file.extname) 
-			dst_extension = ".#{Glyph['document.output']}"
+			dst_extension = "."+Glyph['document.output']
 			destination_file ||= Pathname.new(source_file.to_s.gsub(/#{src_extension}$/, dst_extension))
 			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? 
 			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s
@@ -166,12 +182,12 @@ command :outline do |c|
 			if n.is_a?(Glyph::MacroNode) then
 				case
 				when n[:name].in?(Glyph['system.structure.headers']) then
-					header = Glyph.document.header?(n[:header])
-					next if !header || levels && header[:level]-1 > levels.to_i
-					last_level = header[:level]
-					h_id = ids ? "[##{header[:id]}]" : ""
-					h_title = titles ? "#{header[:title]} " : ""
-					text = ("  "*(header[:level]-1))+"- "+h_title+h_id
+					header = Glyph.document.header?(n[:header].code)
+					next if !header || levels && header.level-1 > levels.to_i
+					last_level = header.level
+					h_id = ids ? "[##{header.code}]" : ""
+					h_title = titles ? "#{header.title} " : ""
+					text = ("  "*(header.level-1))+"- "+h_title+h_id
 					puts text unless text.blank?
 				when n[:name] == :include then
 					if files && n.find_parent{|p| p[:name] == :document && p.is_a?(Glyph::MacroNode)} then

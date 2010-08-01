@@ -27,6 +27,7 @@ module Glyph
 	require LIB/'system_extensions'
 	require LIB/'config'
 	require LIB/'node'
+	require LIB/'bookmark'
 	require LIB/'document'
 	require LIB/'macro_validators'
 	require LIB/'macro'
@@ -50,7 +51,7 @@ module Glyph
 		# Displays the error message, source, path and node value (if debugging)
 		def display
 			Glyph.warning exception.message
-			Glyph.msg "    source: #{@macro.source}\n    path: #{@macro.path}"
+			Glyph.msg "    source: #{@macro.source_name}\n    path: #{@macro.path}"
 			Glyph.msg "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
 		end
 	end
@@ -218,6 +219,11 @@ module Glyph
 		MACROS[name] = MACROS[pair.values[0].to_sym]
 	end
 
+	# TODO
+	def self.macro_eq?(ident1, ident2)
+		Glyph::MACROS[ident1.to_sym] == Glyph::MACROS[ident2.to_sym]
+	end
+
 	# Compiles a single Glyph file
 	# @param [String] src the full or relative path to the source file
 	# @param [String] out the full or relative path to the output file
@@ -295,6 +301,10 @@ module Glyph
 	# @param [String] message the message to print
 	def self.debug(message)
 		puts message if Glyph.debug?
+	end
+
+	def self.multiple_output_files?
+		Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets']
 	end
 
 end

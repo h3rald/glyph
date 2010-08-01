@@ -18,8 +18,8 @@ describe "Macro:" do
 		interpret "this is a #[test|test]."
 		doc = @p.document
 		doc.output.should == "this is a <a id=\"test\">test</a>."
-		doc.bookmarks.has_key?(:test).should == true 
-		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error(Glyph::MacroError)
+		doc.bookmarks[:test].should == Glyph::Bookmark.new({:file => nil, :title => 'test', :id => :test})
+		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error
 	end
 
 	it "section, chapter, header" do
@@ -36,7 +36,7 @@ describe "Macro:" do
 					</div>
 				</div>
 		}.gsub(/\n|\t/, '')
-		doc.bookmark?(:"sec-y").should == {:id => :"sec-y", :title => "Section Y"} 
+		doc.bookmark?(:"sec-y").should == Glyph::Bookmark.new({:id => :"sec-y", :title => "Section Y", :file => nil})
 	end
 
 	it "document, head, style" do
@@ -50,6 +50,7 @@ describe "Macro:" do
 				<meta name="author" content="#{Glyph["document.author"]}" />
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
+				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 				<style type=\"text/css\">#main {  background-color: blue; }</style>
 			</head>
 		</html>
@@ -66,6 +67,7 @@ describe "Macro:" do
 				<meta name="author" content="#{Glyph["document.author"]}" />
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
+				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 				<style type=\"text/css\">#main {  background-color: blue; }</style>
 			</head>
 		</html>
@@ -78,6 +80,16 @@ describe "Macro:" do
 		@p.document.output.gsub(/\n|\t/, '').should == result
 	end
 
+	it "style should import and link stylesheets" do
+		Glyph['document.styles'] = 'import'
+		output_for("style[default.css]").should == %{<style type="text/css">
+	@import url("styles/default.css");
+</style>}
+		Glyph['document.styles'] = 'link'
+		output_for("style[default.css]").should == %{<link href="styles/default.css" type="text/css" />}
+		Glyph['document.styles'] = 'embed'
+	end
+
 	it "toc" do
 		file_copy Glyph::PROJECT/'../files/document_with_toc.glyph', Glyph::PROJECT/'document.glyph'
 		interpret file_load(Glyph::PROJECT/'document.glyph')
@@ -85,7 +97,7 @@ describe "Macro:" do
 		doc.output.gsub!(/\n|\t/, '')
 		doc.output.slice(/(.+?<\/div>)/, 1).should == %{
 			<div class="contents">
-			<h2 class="toc-header" id="h_toc">Table of Contents</h2>
+			<h2 class="toc-header" id="toc">Table of Contents</h2>
 			<ol class="toc">
 				<li class=" section"><a href="#h_1">Container section</a></li>
 				<li class=" section"><a href="#md">Markdown</a></li>

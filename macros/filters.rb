@@ -2,13 +2,12 @@
 
 macro :textile do
 	exact_parameters 1
-	rc = nil
 	begin
 		require 'RedCloth'
-		rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
 	rescue Exception
 		macro_error "RedCloth gem not installed. Please run: gem install RedCloth"
 	end
+	rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
 	target = Glyph["filters.target"]
 	case target.to_sym
 	when :html

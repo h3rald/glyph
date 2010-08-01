@@ -39,6 +39,19 @@ def create_project
 	file_copy Glyph::SPEC_DIR/'files/ligature.jpg', Glyph::PROJECT/'images/ligature.jpg'
 end
 
+def create_web_project
+	reset_quiet
+	create_project_dir
+	return if Glyph.lite?
+	Glyph.run! 'project:create', Glyph::PROJECT.to_s
+	file_copy Glyph::SPEC_DIR/'files/web_doc.glyph', Glyph::PROJECT/'document.glyph'
+	(Glyph::PROJECT/'text/a/b').mkpath
+	file_copy Glyph::SPEC_DIR/'files/web1.glyph', Glyph::PROJECT/'text/a/web1.glyph'
+	file_copy Glyph::SPEC_DIR/'files/web2.glyph', Glyph::PROJECT/'text/a/b/web2.glyph'
+	file_copy Glyph::SPEC_DIR/'files/test.sass', Glyph::PROJECT/'styles/test.sass'
+	file_copy Glyph::SPEC_DIR/'files/ligature.jpg', Glyph::PROJECT/'images/ligature.jpg'
+end
+
 def delete_project_dir
 	return unless	Glyph::PROJECT.exist?
 	Glyph::PROJECT.children.each do |f|
@@ -57,10 +70,11 @@ end
 
 def run_command(cmd)
 	out = StringIO.new
+	err = StringIO.new
 	old_stdout = $stdout
 	old_stderr = $stderr
 	$stdout = out
-	$stderr = out 
+	$stderr = err 
 	Glyph['system.quiet'] = false
 	GLI.run cmd
 	Glyph['system.quiet'] = true
@@ -105,7 +119,7 @@ def create_tree(text)
 end
 
 def create_doc(tree)
-	Glyph::Document.new tree, {} 
+	Glyph::Document.new tree 
 end
 
 def filter(text)

@@ -77,7 +77,9 @@ macro :include do
 				end
 			end
 			begin 
-				update_source v
+				folder = Glyph.lite? ? "" : "text/" 
+				topic = @node[:change_topic] ? folder+v : nil
+				update_source v, folder+v, topic
 				interpret contents
 			rescue Glyph::MutualInclusionError => e
 				raise

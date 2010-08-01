@@ -1,0 +1,22 @@
+document[
+	head[
+		style[default.css]
+		style[test.sass]
+	]
+	body[
+		contents[
+			section[
+				@title[Web Document]
+...
+				topic[
+					@src[a/web1.glyph]
+					@title[Topic #1]
+				]
+				topic[
+					@src[a/b/web2.glyph]
+					@title[Topic #2]
+				]
+			]
+		]
+	]
+]

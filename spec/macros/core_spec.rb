@@ -83,7 +83,7 @@ describe "Macro:" do
 		Glyph["filters.by_extension"] = true
 		text = file_load(Glyph::PROJECT/'text/container.textile')
 		interpret text
-		@p.document.output.gsub(/\n|\t|_\d{1,3}/, '').should == %{
+		@p.document.output.gsub(/\n|\t/, '').should == %{
 			<div class="section">
 			<h2 id="h_1">Container section</h2>
 			This is a test.
@@ -92,7 +92,7 @@ describe "Macro:" do
 				<p>&#8230;</p>
 				</div>
 			</div>
-		}.gsub(/\n|\t|_\d{1,3}/, '')
+		}.gsub(/\n|\t/, '')
 	end
 
 	it "include should work in Lite mode" do
@@ -190,6 +190,5 @@ Test -- Test Snippet
 			interpret("rw:[rw_test2|em[rw_test2[{{0}}]]]").process
 		end.should raise_error(Glyph::MacroError)
 	end
-
 
 end	

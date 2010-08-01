@@ -18,20 +18,22 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders, :headers, :context, :errors, :todos
+		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
 		# @param [Glyph::Node] context the context associated with the tree
 		# @raise [RuntimeError] unless tree responds to :evaluate
-		def initialize(tree, context)
+		def initialize(tree, context={:source => {:name => "--", :file => nil}})
 			@tree = tree
 			@context = context
-			@bookmarks = {}
 			@placeholders = {}
-			@headers = []
+			@bookmarks = {}
+			@headers = {}
+			@styles = []
 			@errors = []
 			@todos = []
+			@topics = []
 			@state = :new
 		end
 
@@ -43,12 +45,14 @@ module Glyph
 			@tree
 		end
 
-		# Copies bookmarks, headers, todos and placeholders from another Glyph::Document
+		# Copies bookmarks, headers, todos, styles and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
 		def inherit_from(document)
 			@bookmarks = document.bookmarks
 			@headers = document.headers
 			@todos = document.todos
+			@styles = document.styles
+			@topics = document.topics
 			@placeholders = document.placeholders
 		end
 
@@ -61,36 +65,55 @@ module Glyph
 			key
 		end
 
+		# TODO
 		# Returns a stored bookmark or nil
 		# @param [#to_sym] key the bookmark identifier
+		# @param [String] file the file where the bookmark is defined
 		# @return [Hash, nil] the bookmark hash or nil if no bookmark is found
 		def bookmark?(key)
 			@bookmarks[key.to_sym]
 		end
 
+		# TODO
 		# Stores a new bookmark
-		# @param [Hash] hash the bookmark hash: {:id => "Bookmark ID", :title => "Bookmark Title"}
+		# @param [Hash] hash the bookmark hash: {:id => "BookmarkID", :title => "Bookmark Title", :file => "dir/preface.glyph"}
 		# @return [Hash] the stored bookmark (:id is converted to a symbol)
+		# @raise [RuntimeError] if the hash does not contain an :id and a :file key.
+		# @raise [RuntimeError] if the bookmark is already defined.
 		def bookmark(hash)
-			ident = hash[:id].to_sym
-			hash[:id] = ident
-			@bookmarks[ident] = hash
-			hash
+			b = Glyph::Bookmark.new(hash)
+			raise RuntimeError, "Bookmark '#{b.code}' already exists" if @bookmarks.has_key? b.code
+			@bookmarks[b.code] = b
+			b
 		end
 
+		# TODO
 		# Stores a new header
-		# @param [Hash] hash the header hash: {:id => "Bookmark ID", :title => "Bookmark Title", :level => 3}
+		# @param [Hash] hash the header hash: {:id => "Bookmark_ID", :title => "Bookmark Title", :level => 3}
 		# @return [Hash] the stored header
 		def header(hash)
-			@headers << hash
-			hash
+			b = Glyph::Header.new(hash)
+			raise RuntimeError, "Bookmark '#{b.code}' already exists" if @bookmarks.has_key? b.code
+			@bookmarks[b.code] = b
+			@headers[b.code] = b
+			b
 		end
 
+		# TODO
 		# Returns a stored header or nil
 		# @param [String] key the header identifier
 		# @return [Hash, nil] the header hash or nil if no header is found
 		def header?(key)
-			@headers.select{|h| h[:id] == key}[0] rescue nil
+			@headers[key.to_sym]
+		end
+
+		# TODO
+		def style(file)
+			f = Pathname.new file
+			if @styles.include? f && !Glyph['document.output'].to_sym.in?(Glyph['system.multifile_targets']) then
+				raise RuntimeError, "Stylesheet '#{f}' already specified for the current document" 
+			end
+			@styles << f
 		end
 
 		# Analyzes the document by evaluating its @tree
@@ -114,18 +137,20 @@ module Glyph
 			raise RuntimeError, "Document cannot be finalized due to previous errors" unless @context[:document].errors.blank?
 			# Substitute placeholders
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
-			begin
-				@placeholders.each_pair do |key, value| 
-					begin
+			@placeholders.each_pair do |key, value| 
+				begin
+					if Glyph.multiple_output_files? then
+						@topics.each do |t|
+							t[:contents].gsub! key.to_s, value.call(self).to_s
+						end
+					else
 						@output.gsub! key.to_s, value.call(self).to_s
-					rescue Glyph::MacroError => e
-						e.macro.macro_warning e.message, e
-					rescue Exception => e
-						puts e.class
-						Glyph.warning e.message
 					end
+				rescue Glyph::MacroError => e
+					e.macro.macro_warning e.message, e
+				rescue Exception => e
+					Glyph.warning e.message
 				end
-			rescue Exception => e
 			end
 			@state = :finalized
 		end
