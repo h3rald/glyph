@@ -54,8 +54,21 @@ describe Glyph::Macro::Validators do
 	it "should validate required attributes" do
 		Glyph['document.output'] = 'web'
 		Glyph.run! 'load:macros'
-		lambda { output_for("topic[test]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute")
+		lambda { output_for("contents[topic[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute")
 	end
+
+	it "should validate if a macro is within another one" do
+		Glyph['document.output'] = 'web'
+		Glyph.run! 'load:macros'
+		lambda { output_for("topic[@src[test]@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' must be within a 'contents' macro")
+	end	
+
+	it "should validate if a macro is not within another one" do
+		Glyph['document.output'] = 'web'
+		Glyph.run! 'load:macros'
+		lambda { output_for("contents[topic[@src[test]@title[test]topic[@src[test]@title[test]]]]") }.should 
+		raise_error(Glyph::MacroError, "Macro 'topic' must not be within a 'topic' macro")
+	end	
 
 end
 

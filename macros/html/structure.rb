@@ -203,6 +203,10 @@ macro :contents do
 end
 
 macro :topic do
+	within :contents
+	not_within :topic
+	required_attribute :src
+	required_attribute :title
 	interpret "include[#{attr(:src)}]"
 end
 

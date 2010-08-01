@@ -140,8 +140,21 @@ module Glyph
 					macro_error "Mutual Inclusion in #{check_type}(#{arg}): '#{check_value}'", Glyph::MutualInclusionError 
 				end
 			end
+			
+			#@since 0.4.0
+			def within(arg, options={:level => :error})
+				validate("Macro '#{@name}' must be within a '#{arg}' macro", options) do 
+					@node.find_parent {|n| Glyph.macro_eq? arg.to_sym, n[:name]}
+				end
+			end
+
+			#@since 0.4.0
+			def not_within(arg, options={:level => :error})
+				validate("Macro '#{@name}' must not be within a '#{arg}' macro", options) do 
+					!@node.find_parent {|n| Glyph.macro_eq? arg.to_sym, n[:name]}
+				end
+			end
+
 		end
-
 	end
-
 end

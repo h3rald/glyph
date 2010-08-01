@@ -1,16 +1,11 @@
 #!/usr/bin/env ruby
 
 macro :topic do
+	within :contents
+	not_within :topic
 	required_attribute :src
 	required_attribute :title
 	topic_id = (attr(:id) || "t_#{@node[:document].topics.length}").to_sym
-	validate("Macro 'topic' can only be used in document source (#{Glyph['document.source']})") do
-		if Glyph['system.topics.ignore_file_restrictions'] then
-			true
-		else
-			@node[:source][:file] == Glyph['document.source']
-		end
-	end
 	n = Glyph::MacroNode.new
 	n[:change_topic] = true
 	n[:source] = @node[:source]

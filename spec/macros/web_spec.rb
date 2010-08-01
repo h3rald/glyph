@@ -17,10 +17,9 @@ describe "Macro:" do
 	end
 
 	it "topic" do
-		lambda { output_for("topic[@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute") 
-		lambda { output_for("topic[@src[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'title' attribute") 
-		lambda { output_for("topic[@src[test]@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' can only be used in document source (document.glyph)") 
-		Glyph['system.topics.ignore_file_restrictions'] = true
+		lambda { output_for("contents[topic[@title[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute") 
+		lambda { output_for("contents[topic[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'title' attribute") 
+		lambda { output_for("topic[@src[test]@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' must be within a 'contents' macro") 
 		interpret("contents[topic[@src[a/web1.glyph]@title[Test]]]")
 		topic = @p.document.topics[0]
 		topic.blank?.should == false 
