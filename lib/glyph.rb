@@ -30,6 +30,7 @@ module Glyph
 	require LIB/'bookmark'
 	require LIB/'document'
 	require LIB/'macro_validators'
+	require LIB/'macro_actions'
 	require LIB/'macro'
 	require LIB/'syntax_node'
 	require LIB/'parser'

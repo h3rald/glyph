@@ -9,6 +9,7 @@ module Glyph
 	class Macro
 
 		include Validators
+		include Actions
 
 		attr_reader :node, :source_name, :source_file, :source_topic
 
