@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 namespace :project do
+	include Glyph::Utils
 
 	desc "Create a new Glyph project"
 	task :create, [:dir] do |t, args|
@@ -20,7 +21,7 @@ namespace :project do
 		config[:document][:author] = ENV['USER'] || ENV['USERNAME'] 	
 		config.delete(:system)
 		yaml_dump Glyph::PROJECT/'config.yml', config
-		Glyph.info "Project '#{dir.basename}' created successfully."
+		info "Project '#{dir.basename}' created successfully."
 	end
 
 	desc "Add a new text file to the project"

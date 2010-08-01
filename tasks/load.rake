@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 namespace :load do
+	include Glyph::Utils
 
 	desc "Load all files"
 	task :all => [:config, :snippets, :macros] do

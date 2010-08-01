@@ -25,6 +25,7 @@ module Glyph
 	TASKS_DIR = Pathname(__FILE__).dirname.expand_path/'../tasks'
 
 	require LIB/'system_extensions'
+	require LIB/'utils'
 	require LIB/'config'
 	require LIB/'node'
 	require LIB/'bookmark'
@@ -35,10 +36,12 @@ module Glyph
 	require LIB/'syntax_node'
 	require LIB/'parser'
 	require LIB/'interpreter'
+	extend Glyph::Utils
 
 	class Error < RuntimeError; end
 	class SyntaxError < Error; end
 	class MacroError < Error
+		include Glyph::Utils
 		attr_reader :macro
 
 		# Initializes a new Glyph::MacroError
@@ -51,9 +54,9 @@ module Glyph
 
 		# Displays the error message, source, path and node value (if debugging)
 		def display
-			Glyph.warning exception.message
-			Glyph.msg "    source: #{@macro.source_name}\n    path: #{@macro.path}"
-			Glyph.msg "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
+			warning exception.message
+			msg "    source: #{@macro.source_name}\n    path: #{@macro.path}"
+			msg "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
 		end
 	end
 	class MutualInclusionError < MacroError; end
@@ -214,7 +217,7 @@ module Glyph
 		name = pair.keys[0].to_sym
 		found = MACROS[name]
 		if found then
-			self.warning "Invalid alias: macro '#{name}' already exists."
+			warning "Invalid alias: macro '#{name}' already exists."
 			return
 		end
 		MACROS[name] = MACROS[pair.values[0].to_sym]
@@ -271,37 +274,6 @@ module Glyph
 			self['system.quiet'] = false
 		end
 		result
-	end
-
-
-	# Prints a message
-	# @param [String] message the message to print
-	def self.msg(message)
-		puts message unless Glyph['system.quiet']
-	end
-
-	# Prints an informational message
-	# @param [String] message the message to print
-	def self.info(message)
-		puts "-- #{message}" unless Glyph['system.quiet']
-	end
-
-	# Prints a warning
-	# @param [String] message the message to print
-	def self.warning(message)
-		puts "-> warning: #{message}" unless Glyph['system.quiet']
-	end
-
-	# Prints an error
-	# @param [String] message the message to print
-	def self.error(message)
-		puts "=> error: #{message}" unless Glyph['system.quiet']
-	end
-	
-	# Prints a message if running in debug mode
-	# @param [String] message the message to print
-	def self.debug(message)
-		puts message if Glyph.debug?
 	end
 
 	def self.multiple_output_files?

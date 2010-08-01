@@ -2,6 +2,8 @@
 
 namespace :generate do
 
+	include Glyph::Utils
+
 	def with_files_from(dir, &block)
 		output = Glyph['document.output']
 		dir_path = Glyph::PROJECT/"output/#{output}/#{dir}"
@@ -20,7 +22,7 @@ namespace :generate do
 	desc "Copy image files"
 	task :images => [:document] do
 		unless Glyph.lite? then
-			Glyph.info "Copying images..."
+			info "Copying images..."
 			with_files_from('images') do |src, dest|
 				file_copy src, dest
 			end
@@ -30,7 +32,7 @@ namespace :generate do
 	desc "Copy style files"
 	task :styles => [:document] do
 		if Glyph['document.styles'].in?(['link', 'import']) && !Glyph.lite? then
-			Glyph.info "Copying stylesheets..."
+			info "Copying stylesheets..."
 			out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
 			out_dir.mkdir
 			Glyph.document.styles.each do |f|
@@ -58,16 +60,16 @@ namespace :generate do
 		name = Glyph['document.source']
 		interpreter = Glyph::Interpreter.new text, :source => {:name => name, :file => name}, :info => true
 		interpreter.parse
-		Glyph.info "Processing..."
+		info "Processing..."
 		interpreter.process
-		Glyph.info "Post-processing..."
+		info "Post-processing..."
 		interpreter.postprocess
 		Glyph.document = interpreter.document
 	end
 
 	desc "Create a standalone html file"
 	task :html => [:document, :images, :styles] do
-		Glyph.info "Generating HTML file..."
+		info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 			file = (Glyph['document.output'] == 'pdf') ? Glyph['document.filename']+".html" : Glyph['document.output_file']
@@ -77,12 +79,12 @@ namespace :generate do
 		end
 		out.mkpath
 		file_write out/file, Glyph.document.output
-		Glyph.info "'#{file}' generated successfully."
+		info "'#{file}' generated successfully."
 	end
 
 	desc "Create multiple HTML files"
 	task :web => [:document, :images, :styles] do
-		Glyph.info "Generating HTML files..."
+		info "Generating HTML files..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 		else
@@ -94,16 +96,16 @@ namespace :generate do
 		file_write out/"index.html", Glyph.document.output
 		Glyph.document.topics.each do |topic|
 			file = topic[:src].gsub(/\..+$/, '.html')
-			Glyph.info "Generating topic '#{file}'"
+			info "Generating topic '#{file}'"
 			(out/file).parent.mkpath
 			file_write out/file, topic[:contents]
 		end
-		Glyph.info "Web output generated successfully."
+		info "Web output generated successfully."
 	end
 
 	desc "Create a pdf file"
 	task :pdf => :html do
-		Glyph.info "Generating PDF file..."
+		info "Generating PDF file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 			src = out/"#{Glyph['document.filename']}.html"
@@ -123,9 +125,9 @@ namespace :generate do
 				end
 			end	
 			if (out/file).exist? then
-				Glyph.info "'#{file}' generated successfully."
+				info "'#{file}' generated successfully."
 			else
-				Glyph.error "An error occurred while generating #{file}"
+				error "An error occurred while generating #{file}"
 			end
 		end
 		case Glyph['tools.pdf_generator']
@@ -135,7 +137,7 @@ namespace :generate do
 			generate_pdf.call ";#{ENV['ProgramFiles']}\\wkhtmltopdf", %{wkhtmltopdf #{src} #{out/"#{file}"}}
 		else
 			# TODO: support other PDF renderers
-			Glyph.error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
+			error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
 		end
 	end
 
