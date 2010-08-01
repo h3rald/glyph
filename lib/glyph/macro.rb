@@ -10,6 +10,7 @@ module Glyph
 
 		include Validators
 		include Helpers
+		include Glyph::Utils
 
 		attr_reader :node, :source_name, :source_file, :source_topic
 

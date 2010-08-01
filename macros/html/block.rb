@@ -54,7 +54,7 @@ end
 
 macro :title do
 	no_parameters
-	title do
+	title_element do
 		%{<h1>
 	#{Glyph["document.title"]}
 </h1>}
