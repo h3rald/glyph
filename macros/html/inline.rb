@@ -24,12 +24,12 @@ macro :fmi do
 end
 
 macro :draftcomment do
-	xml_draftcomment_for value
+	xml_draftcomment
 end
 
 macro :todo do
 	exact_parameters 1
-	xml_todo_for value
+	xml_todo
 end
 
 macro_alias :bookmark => :anchor
