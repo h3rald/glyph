@@ -169,6 +169,20 @@ module Glyph
 				end
 			end
 
+			def navigation_element_for(topic_id, procs)
+				# Get the previous topic
+				previous_topic = @node[:document].topics.last
+				previous_link = procs[:previous].call previous_topic
+				# The next topic is not going to be available yet, use a placeholder
+				next_link = placeholder do |document|
+					current_topic = document.topics.select{|t| t[:id] == topic_id}[0] rescue nil
+					next_topic = document.topics[document.topics.index(current_topic)+1] rescue nil
+					procs[:next].call next_topic
+				end
+				contents_link = procs[:contents].call
+				procs[:navigation].call contents_link, previous_link, next_link
+			end
+
 
 		end
 	end

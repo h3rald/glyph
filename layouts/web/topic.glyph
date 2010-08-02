@@ -8,5 +8,6 @@ document[
 			@id[{{id}}]
 {{contents}}
 		]
+		navigation[{{id}}]
 	]
 ]

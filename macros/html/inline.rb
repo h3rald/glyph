@@ -35,6 +35,32 @@ macro :todo do
 	end
 end
 
+macro :navigation do
+	exact_parameters 1
+	procs = {}
+	procs[:contents] = lambda do
+		%{<li><a href="#{Glyph['document.base']}index.html">Contents</a></li>}
+	end
+	procs[:previous] = lambda do |topic|
+		if topic then
+			%{<li><a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">&larr; Previous</a></li>}
+		else
+			""
+		end
+	end
+	procs[:next] = lambda do |topic|
+		if topic then
+			%{<li><a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">Next &rarr;</a></li>}
+		else
+			""
+		end
+	end
+	procs[:navigation] = lambda do |contents, prev_link, next_link|
+		%{<ul class="navigation">#{prev_link}#{contents}#{next_link}</ul>}
+	end
+	navigation_element_for param(0).to_sym, procs
+end
+
 macro_alias :bookmark => :anchor
 macro_alias '#' => :anchor
 macro_alias '=>' => :link
