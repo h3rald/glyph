@@ -1,0 +1,15 @@
+document[
+	head[
+		style[default.css]
+	]
+	body[
+		=article[
+			section[
+				@title[{{title}}]
+				@id[{{id}}]
+{{contents}}
+			]
+			navigation[{{id}}]
+		]
+	]
+]

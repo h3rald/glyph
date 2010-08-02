@@ -42,14 +42,13 @@ namespace :load do
 				load_macros_from_dir.call Glyph::HOME/"macros/html"
 			when 'web'
 				load_macros_from_dir.call Glyph::HOME/"macros/html"
-				load_macros_from_dir.call Glyph::HOME/"macros/web"
 				load_layouts_from_dir.call Glyph::HOME/'layouts/web'
 			when 'html5'
+				load_macros_from_dir.call Glyph::HOME/"macros/html"
 				load_macros_from_dir.call Glyph::HOME/"macros/html5"
 			when 'web5'
+				load_macros_from_dir.call Glyph::HOME/"macros/html"
 				load_macros_from_dir.call Glyph::HOME/"macros/html5"
-				load_macros_from_dir.call Glyph::HOME/"macros/web"
-				load_macros_from_dir.call Glyph::HOME/"macros/web5"
 				load_layouts_from_dir.call Glyph::HOME/'layouts/web5'
 			else
 				warning "No #{Glyph['document.output']} macros defined"
