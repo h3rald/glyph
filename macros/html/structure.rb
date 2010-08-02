@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
 macro :section do 
-	exact_parameters 1
-	required_attribute :title, :level => :warning
+	max_parameters 1
+	level = (raw_attribute(:src) && Glyph.multiple_output_files?) ? :error : :warning
+	required_attribute :title, :level => level
 	procs = {}
 	procs[:title] = lambda do |level, ident, title|
 		%{<h#{level} id="#{ident}">#{title}</h#{level}>\n}	
@@ -13,7 +14,7 @@ macro :section do
 
 </div>}	
 	end
-	section_element_for attr(:title), attr(:id), attr(:notoc), procs
+	section_element_for procs
 end
 
 macro :article do

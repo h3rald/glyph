@@ -17,10 +17,8 @@ describe "Macro:" do
 	end
 
 	it "topic" do
-		lambda { output_for("contents[topic[@title[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'src' attribute") 
-		lambda { output_for("contents[topic[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' requires a 'title' attribute") 
-		lambda { output_for("topic[@src[test]@title[test]]") }.should raise_error(Glyph::MacroError, "Macro 'topic' must be within a 'contents' macro") 
-		interpret("contents[topic[@src[a/web1.glyph]@title[Test]]]")
+		lambda { output_for("contents[section[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute") 
+		interpret("contents[section[@src[a/web1.glyph]@title[Test]]]")
 		topic = @p.document.topics[0]
 		topic.blank?.should == false 
 		topic[:id].should == :t_0 
@@ -31,8 +29,7 @@ describe "Macro:" do
 		@p.document.output.should == "" 
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'load:macros'
-		output_for("contents[topic[@src[a/web1.glyph]@title[Test]]]").match(/id="w1_3"/).blank?.should == false
-		Glyph['system.topics.ignore_file_restrictions'] = false
+		output_for("contents[section[@src[a/web1.glyph]@title[Test]]]").match(/id="w1_3"/).blank?.should == false
 	end
 
 end	

@@ -129,22 +129,44 @@ module Glyph
 				toc
 			end
 
-			def section_element_for(title, ident, notoc, procs={})
+			def section_element_for(procs={})
 				h = ""
-				if title then
+				if attr(:title) then
 					level = 1
 					@node.ascend do |n| 
 						if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
 							level+=1
 						end
 					end
-					ident ||= "h_#{@node[:document].headers.length+1}"
-					ident = ident.to_sym
-					bmk = header :title => title, :level => level, :id => ident, :toc => !notoc, :file => @source_file
+					ident = (attr(:id) || "h_#{@node[:document].headers.length+1}").to_sym
+					bmk = header :title => attr(:title), :level => level, :id => ident, :toc => !attr(:notoc), :file => @source_file
 					@node[:header] = bmk
-					h = procs[:title].call level, bmk, title
+					h = procs[:title].call level, bmk, attr(:title)
 				end
-				procs[:body].call h, value
+				if attr(:src) then 
+					# Create topic
+					if Glyph.multiple_output_files? 
+						topic_id = (attr(:id) || "t_#{@node[:document].topics.length}").to_sym
+						layout = attr(:layout) || Glyph['document.topic_layout'] || :topic
+						layout_name = "layout:#{layout}".to_sym
+						macro_error "Layout '#{layout}' not found" unless Glyph::MACROS[layout_name]
+						@node[:change_topic] = true
+						result = interpret %{#{layout_name}[
+											@title[#{attr(:title)}]
+											@id[#{topic_id}]
+											@contents[include[#{attr(:src)}]]
+									]}
+						# Fix file for topic bookmark
+						@node[:document].bookmark?(topic_id).file = attr(:src)
+						@node[:document].topics << {:src => attr(:src), :title => attr(:title), :id => topic_id, :contents => result}
+						# Return nothing
+						nil
+					else
+						procs[:body].call h, interpret("include[#{attr(:src)}]")
+					end
+				else
+					procs[:body].call h, value
+				end
 			end
 
 

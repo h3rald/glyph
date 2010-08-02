@@ -8,11 +8,11 @@ document[
 			section[
 				@title[Web Document]
 ...
-				topic[
+				section[
 					@src[a/web1.glyph]
 					@title[Topic #1]
 				]
-				topic[
+				section[
 					@src[a/b/web2.glyph]
 					@title[Topic #2]
 				]
