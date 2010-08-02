@@ -39,7 +39,7 @@ describe Glyph do
 		lambda { Glyph.macro_alias("->" => :ref)}.should_not raise_error
 		Glyph::MACROS[:"->"].should == Glyph::MACROS[:ref]
 		Glyph.macro_alias :em => :ref
-		Glyph::MACROS[:em].should_not == Glyph::MACROS[:ref]
+		Glyph::MACROS[:em].should == Glyph::MACROS[:ref]
 	end
 
 	it "should provide a filter method to convert raw text into HTML" do

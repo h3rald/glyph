@@ -23,7 +23,7 @@ macro :figure do
 	alt = "@alt[-]" unless attr(:alt)
 	caption = "figcaption[#{param(1)}]" rescue nil
 	figure_element_for image, alt, caption do |alt, dest_file, caption|
-		interpret %{figure[
+		interpret %{=figure[
 img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]
 					#{caption}
 ]}

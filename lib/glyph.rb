@@ -225,11 +225,6 @@ module Glyph
 	# 	{:old_name => :new_name}
 	def self.macro_alias(pair)
 		name = pair.keys[0].to_sym
-		found = MACROS[name]
-		if found then
-			warning "Invalid alias: macro '#{name}' already exists."
-			return
-		end
 		MACROS[name] = MACROS[pair.values[0].to_sym]
 	end
 

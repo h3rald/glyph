@@ -90,8 +90,7 @@ end
 
 macro :document do
 	exact_parameters 1
-	%{<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html >
+	%{<!DOCTYPE html>
 <html lang="en">
 #{value}
 
@@ -105,7 +104,7 @@ macro :toc do
 	end
 	toc_list_proc = lambda do |descend_proc, bmk, document|
 		%{<nav class="contents">
-<h2 class="toc-header" id="#{bmk}">#{bmk.title}</h2>
+<h1 class="toc-header" id="#{bmk}">#{bmk.title}</h1>
 <ol class="toc">
 						#{descend_proc.call(document.structure, nil)}
 </ol>
