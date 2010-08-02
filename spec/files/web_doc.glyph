@@ -4,6 +4,7 @@ document[
 		style[test.sass]
 	]
 	body[
+		toc[]
 		contents[
 			section[
 				@title[Web Document]

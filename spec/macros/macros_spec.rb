@@ -99,8 +99,8 @@ describe "Macro:" do
 			<div class="contents">
 			<h2 class="toc-header" id="toc">Table of Contents</h2>
 			<ol class="toc">
-				<li class=" section"><a href="#h_1">Container section</a></li>
-				<li class=" section"><a href="#md">Markdown</a></li>
+				<li class="section"><a href="#h_1">Container section</a></li>
+				<li class="section"><a href="#md">Markdown</a></li>
 			</ol>
 			</div>
 		}.gsub(/\n|\t/, '')

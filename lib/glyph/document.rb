@@ -149,9 +149,8 @@ module Glyph
 						@topics.each do |t|
 							t[:contents].gsub! key_s, value_s
 						end
-					else
-						@output.gsub! key_s, value_s
 					end
+					@output.gsub! key_s, value_s
 				rescue Glyph::MacroError => e
 					e.macro.macro_warning e.message, e
 				rescue Exception => e

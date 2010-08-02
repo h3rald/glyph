@@ -3,6 +3,7 @@
 macro :section do 
 	max_parameters 1
 	level = (raw_attribute(:src) && Glyph.multiple_output_files?) ? :error : :warning
+	within :contents if Glyph.multiple_output_files?
 	required_attribute :title, :level => level
 	procs = {}
 	procs[:title] = lambda do |level, ident, title|
@@ -159,7 +160,7 @@ macro :toc do
 </div>}
 	end
 	toc_item_proc = lambda do |classes, header|
-		"<li class=\"#{classes.join(" ")}\">#{header}</li>"
+		"<li class=\"#{classes.join(" ").strip}\">#{header}</li>"
 	end
 	toc_sublist_proc = lambda do |contents|
 		"<li><ol>#{contents}</ol></li>\n"
@@ -172,15 +173,8 @@ macro :toc do
 end
 
 macro :contents do
-	interpret(@node.parameter(0).to_s)
-end
-
-macro :topic do
-	within :contents
-	not_within :topic
-	required_attribute :src
-	required_attribute :title
-	interpret "include[#{attr(:src)}]"
+	result = interpret(@node.parameter(0).to_s)
+	Glyph.multiple_output_files? ? "" : result
 end
 
 # See:

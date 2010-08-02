@@ -78,7 +78,7 @@ macro :include do
 			end
 			begin 
 				folder = Glyph.lite? ? "" : "text/" 
-				topic = @node[:change_topic] ? folder+v : nil
+				topic = (attr(:topic) && Glyph.multiple_output_files?) ? folder+v : nil
 				update_source v, folder+v, topic
 				interpret contents
 			rescue Glyph::MutualInclusionError => e

@@ -103,6 +103,7 @@ module Glyph
 						added_headers ||= []
 						n1.descend do |n2, level|
 							if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
+								next if Glyph.multiple_output_files? && !n2.attribute(:src) # Only consider topics when building TOC for web/web5
 								next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] }
 								header_hash = n2[:header]
 								next if depth && header_hash && (header_hash.level-1 > depth.to_i) || header_hash && !header_hash.toc?
@@ -141,7 +142,7 @@ module Glyph
 						end
 					end
 					ident = (attr(:id) || "h_#{@node[:document].headers.length+1}").to_sym
-					bmk = header :title => attr(:title), :level => level, :id => ident, :toc => !attr(:notoc), :file => @source_file
+					bmk = header :title => attr(:title), :level => level, :id => ident, :toc => !attr(:notoc), :file => attr(:src) || @source_file
 					@node[:header] = bmk
 					h = procs[:title].call level, bmk, attr(:title)
 				end
@@ -152,11 +153,10 @@ module Glyph
 						layout = attr(:layout) || Glyph['document.topic_layout'] || :topic
 						layout_name = "layout:#{layout}".to_sym
 						macro_error "Layout '#{layout}' not found" unless Glyph::MACROS[layout_name]
-						@node[:change_topic] = true
 						result = interpret %{#{layout_name}[
 											@title[#{attr(:title)}]
 											@id[#{topic_id}]
-											@contents[include[#{attr(:src)}]]
+											@contents[include[@topic[true]#{attr(:src)}]]
 									]}
 						# Fix file for topic bookmark
 						@node[:document].bookmark?(topic_id).file = attr(:src)
