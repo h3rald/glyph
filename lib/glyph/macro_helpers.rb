@@ -95,6 +95,7 @@ module Glyph
 			end
 
 			def toc_element_for(depth, title, procs={})
+				return @node[:document].toc if @node[:document].toc
 				link_header = procs[:link]
 				toc = placeholder do |document|
 					descend_section = lambda do |n1, added_headers|
@@ -126,6 +127,7 @@ module Glyph
 					bmk = bookmark :id => :toc, :file => @source_file, :title => title
 					procs[:toc_list].call descend_section, bmk, document
 				end
+				@node[:document].toc = toc.to_s
 				toc
 			end
 

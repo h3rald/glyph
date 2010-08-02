@@ -19,6 +19,7 @@ module Glyph
 		]
 
 		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics
+		attr_accessor :toc
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
@@ -34,6 +35,7 @@ module Glyph
 			@errors = []
 			@todos = []
 			@topics = []
+			@toc = nil
 			@state = :new
 		end
 
@@ -54,6 +56,7 @@ module Glyph
 			@styles = document.styles
 			@topics = document.topics
 			@placeholders = document.placeholders
+			@toc = document.toc
 		end
 
 		# Defines a placeholder block that will be evaluated after the whole document has been analyzed
@@ -139,12 +142,15 @@ module Glyph
 			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 
 				begin
+					key_s = key.to_s
+					value_s = value.call(self).to_s
+					toc.gsub! key_s, value_s if toc.to_s.match key_s 
 					if Glyph.multiple_output_files? then
 						@topics.each do |t|
-							t[:contents].gsub! key.to_s, value.call(self).to_s
+							t[:contents].gsub! key_s, value_s
 						end
 					else
-						@output.gsub! key.to_s, value.call(self).to_s
+						@output.gsub! key_s, value_s
 					end
 				rescue Glyph::MacroError => e
 					e.macro.macro_warning e.message, e
