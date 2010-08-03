@@ -82,11 +82,9 @@ describe "Macro:" do
 
 	it "style should import and link stylesheets" do
 		Glyph['document.styles'] = 'import'
-		output_for("style[default.css]").should == %{<style type="text/css">
-	@import url("styles/default.css");
-</style>}
+		output_for("head[style[default.css]]").gsub(/\n|\t/, '').match(/@import url\("styles\/default\.css"\)/).blank?.should == false
 		Glyph['document.styles'] = 'link'
-		output_for("style[default.css]").should == %{<link href="styles/default.css" type="text/css" />}
+		output_for("head[style[default.css]]").match(%{<link href="styles/default.css" type="text/css" />}).blank?.should == false
 		Glyph['document.styles'] = 'embed'
 	end
 

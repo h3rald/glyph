@@ -32,7 +32,7 @@ describe "generate" do
 	it "should copy styles if necessary" do
 		Glyph['document.styles'] = 'import'
 		require 'sass'
-		file_write Glyph::PROJECT/'document.glyph', "style[default.css]\nstyle[test.sass]"
+		file_write Glyph::PROJECT/'document.glyph', "head[style[default.css]\nstyle[test.sass]]"
 		lambda { Glyph.run! 'generate:html' }.should_not raise_error
 		(Glyph::PROJECT/'output/html/styles/default.css').exist?.should == true
 		(Glyph::PROJECT/'output/html/styles/test.css').exist?.should == true

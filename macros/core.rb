@@ -137,18 +137,21 @@ macro :condition do
 end
 
 macro :eq do
+	within :condition
 	min_parameters 1
 	max_parameters 2
 	(param(0).to_s == param(1).to_s)	? true : nil
 end
 
 macro :not do
+	within :condition
 	max_parameters 1
 	v = param(0).to_s
 	(v.blank? || v == "false") ? true : nil 
 end
 
 macro :and do
+	within :condition
 	min_parameters 1
 	max_parameters 2
 	res_a = !param(0).blank?
@@ -157,6 +160,7 @@ macro :and do
 end
 
 macro :or do
+	within :condition
 	min_parameters 1
 	max_parameters 2
 	res_a = !param(0).blank?
@@ -165,6 +169,7 @@ macro :or do
 end
 
 macro :match do
+	within :condition
 	exact_parameters 2
 	val = param(0).to_s
 	regexp = param(1).to_s

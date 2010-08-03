@@ -110,6 +110,7 @@ macro :head do
 end
 
 macro :style do 
+	within :head
 	exact_parameters 1
 	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value}"
 	file = Pathname.new Glyph::HOME/'styles'/value unless file.exist?
