@@ -155,7 +155,7 @@ module Glyph
 
 	# Returns true if the PROJECT constant is set to a valid Glyph project directory
 	def self.project?
-		children = ["text", "output", "snippets.yml", "config.yml", "document.glyph"].sort
+		children = ["text", "snippets.yml", "config.yml", "document.glyph"].sort
 		actual_children = PROJECT.children.map{|c| c.basename.to_s}.sort 
 		(actual_children & children) == children
 	end

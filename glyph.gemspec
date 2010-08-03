@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-07-30}
+  s.date = %q{2010-08-03}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -90,22 +90,30 @@ Gem::Specification.new do |s|
      "config.yml",
      "document.glyph",
      "glyph.gemspec",
+     "layouts/web/topic.glyph",
+     "layouts/web5/topic.glyph",
      "lib/glyph.rb",
+     "lib/glyph/bookmark.rb",
      "lib/glyph/commands.rb",
      "lib/glyph/config.rb",
      "lib/glyph/document.rb",
      "lib/glyph/interpreter.rb",
      "lib/glyph/macro.rb",
+     "lib/glyph/macro_helpers.rb",
      "lib/glyph/macro_validators.rb",
      "lib/glyph/node.rb",
      "lib/glyph/parser.rb",
      "lib/glyph/syntax_node.rb",
      "lib/glyph/system_extensions.rb",
+     "lib/glyph/utils.rb",
      "macros/core.rb",
      "macros/filters.rb",
      "macros/html/block.rb",
      "macros/html/inline.rb",
      "macros/html/structure.rb",
+     "macros/html5/block.rb",
+     "macros/html5/inline.rb",
+     "macros/html5/structure.rb",
      "macros/xml.rb",
      "spec/files/article.glyph",
      "spec/files/container.textile",
@@ -115,6 +123,10 @@ Gem::Specification.new do |s|
      "spec/files/ligature.jpg",
      "spec/files/markdown.markdown",
      "spec/files/test.sass",
+     "spec/files/web1.glyph",
+     "spec/files/web2.glyph",
+     "spec/files/web_doc.glyph",
+     "spec/lib/bookmark_spec.rb",
      "spec/lib/commands_spec.rb",
      "spec/lib/config_spec.rb",
      "spec/lib/document_spec.rb",
@@ -127,8 +139,11 @@ Gem::Specification.new do |s|
      "spec/lib/syntax_node_spec.rb",
      "spec/macros/core_spec.rb",
      "spec/macros/filters_spec.rb",
+     "spec/macros/html5_spec.rb",
      "spec/macros/macros_spec.rb",
      "spec/macros/textile_spec.rb",
+     "spec/macros/web5_spec.rb",
+     "spec/macros/web_spec.rb",
      "spec/macros/xml_spec.rb",
      "spec/spec_helper.rb",
      "spec/tasks/generate_spec.rb",
@@ -165,10 +180,11 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://www.h3rald.com/glyph/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Glyph -- A Ruby-powered Document Authoring Framework}
   s.test_files = [
-    "spec/lib/commands_spec.rb",
+    "spec/lib/bookmark_spec.rb",
+     "spec/lib/commands_spec.rb",
      "spec/lib/config_spec.rb",
      "spec/lib/document_spec.rb",
      "spec/lib/glyph_spec.rb",
@@ -180,8 +196,11 @@ Gem::Specification.new do |s|
      "spec/lib/syntax_node_spec.rb",
      "spec/macros/core_spec.rb",
      "spec/macros/filters_spec.rb",
+     "spec/macros/html5_spec.rb",
      "spec/macros/macros_spec.rb",
      "spec/macros/textile_spec.rb",
+     "spec/macros/web5_spec.rb",
+     "spec/macros/web_spec.rb",
      "spec/macros/xml_spec.rb",
      "spec/spec_helper.rb",
      "spec/tasks/generate_spec.rb",
@@ -193,7 +212,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<gli>, [">= 0.3.1"])
       s.add_runtime_dependency(%q<extlib>, [">= 0.9.12"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])

@@ -32,6 +32,15 @@ command :compile do |c|
 	c.switch [:a, :auto]
 	c.action do |global_options, options, args|
 		raise ArgumentError, "Too many arguments" if args.length > 2
+		Glyph.lite_mode = true unless args.blank? 
+		Glyph.run! 'load:config'
+		original_config = Glyph::CONFIG.dup
+		output_targets = Glyph['system.output_targets']
+		target = nil
+		Glyph['document.output'] = options[:f] if options[:f]
+		target = Glyph['document.output']
+		target = nil if target.blank?
+		target ||= Glyph['filters.target']
 		# Set document.extension. Used ONLY internally for bookmarking purposes!
 		Glyph['document.extension'] = case Glyph['document.output']
 																	when 'html5'
@@ -43,15 +52,6 @@ command :compile do |c|
 																	else
 																		"."+Glyph['document.output']
 																	end
-		Glyph.lite_mode = true unless args.blank? 
-		Glyph.run! 'load:config'
-		original_config = Glyph::CONFIG.dup
-		output_targets = Glyph['system.output_targets']
-		target = nil
-		Glyph['document.output'] = options[:f] if options[:f]
-		target = Glyph['document.output']
-		target = nil if target.blank?
-		target ||= Glyph['filters.target']
 		Glyph['document.source'] = options[:s] if options[:s]
 		if Glyph.multiple_output_files? then
 			Glyph['document.base'] = Glyph::PROJECT/"output/#{Glyph['document.output']}/".to_s if Glyph['document.base'].blank?
