@@ -84,10 +84,37 @@ describe "project:stats" do
 			:definitions => [:"snippet:", :toc, :include, :textile, 
 				:section, :markdown, :snippet, :"#", :"=>"]
 		}
-		# TODO: stats on a specific macro.
+		Glyph.run! 'project:stats', :macro, 'section'
+		Glyph::STATS[:macro].should == {
+			:total_instances=>4, 
+			:files=>{"text/a/b/c/included.textile"=>1, 
+				"text/container.textile"=>1, 
+				"document.glyph"=>1, 
+				"text/a/b/c/markdown.markdown"=>1}
+		}
 	end
 
-	it "should collect bookmark stats"
+	it "should collect bookmark stats" do
+		Glyph.run "project:stats", :bookmarks
+		Glyph::STATS[:bookmarks].blank?.should == false
+		Glyph::STATS[:bookmarks].should == {
+			:codes=>[:h_1, :h_2, :md, :refs, :toc], 
+			:total=>5, 
+			:files=>{
+				:"text/a/b/c/markdown.markdown"=>{:codes=>[:md], :total=>1}, 
+				:"document.glyph"=>{:codes=>[:toc], :total=>1}, 
+				:"text/a/b/c/included.textile"=>{:codes=>[:h_2], :total=>1}, 
+				:"references.glyph"=>{:codes=>[:refs], :total=>1}, 
+				:"text/container.textile"=>{:codes=>[:h_1], :total=>1}
+			},
+			:unreferenced=>[:h_1, :h_2, :md, :toc]
+		}
+		Glyph.run! 'project:stats', :bookmark, '#refs'
+		Glyph::STATS[:bookmark].should == {
+			:file=>:"references.glyph", 
+			:references=>["text/references.glyph"]
+		}
+	end
 
 	it "should collect link stats"
 	
