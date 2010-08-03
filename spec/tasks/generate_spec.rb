@@ -45,7 +45,6 @@ describe "generate" do
 			create_web_project
 			Glyph['document.output'] = 'web'
 			Glyph['document.styles'] = 'link'
-			Glyph['document.extension'] = '.html'
 			Glyph.run! 'load:all'
 		end
 	  # check that the user didn't create a styles or images directory under /text
@@ -58,7 +57,7 @@ describe "generate" do
 		reset_web.call
 		# check that the task can be run without errors
 		reset_web.call 
-		Glyph['document.base'] = "/test/"
+		Glyph["output.#{Glyph['document.output']}.base"] = "/test/"
 		lambda { Glyph.run! 'generate:web' }.should_not raise_error
 		# check that images are copied
 		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true

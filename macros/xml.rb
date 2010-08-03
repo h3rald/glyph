@@ -12,7 +12,7 @@ macro "|xml|" do
 		end
 	end
 	name = @node[:element]
- 	if name.to_s.in? Glyph['language.options.xml_blacklist'] then
+ 	if Glyph["output.#{Glyph['document.output']}.blacklist"] && name.to_s.in?(Glyph['output.xml.html_blacklist']) then
 		""
 	else
 		attributes # evaluate attributes

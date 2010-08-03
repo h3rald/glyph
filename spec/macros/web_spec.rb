@@ -6,7 +6,6 @@ describe "Macro:" do
 	before do
 		create_web_project
 		Glyph['document.output'] = 'web'
-		Glyph['document.extension'] = '.html'
 		Glyph.run! 'load:all'
 	end
 

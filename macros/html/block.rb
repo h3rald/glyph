@@ -34,7 +34,7 @@ macro :image do
 	image = param(0)
 	alt = "@alt[-]" unless attr(:alt)
 	image_element_for image, alt do |alt, dest_file|
-		interpret "img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]"
+		interpret "img[#{alt}@src[#{Glyph["output.#{Glyph['document.output']}.base"]}#{dest_file}]#{@node.attrs.join}]"
 	end
 end
 
@@ -46,7 +46,7 @@ macro :figure do
 	caption = "div[@class[caption]#{param(1)}]" rescue nil
 	figure_element_for image, alt, caption do |alt, dest_file, caption|
 		interpret %{div[@class[figure]
-img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]
+img[#{alt}@src[#{Glyph["output.#{Glyph['document.output']}.base"]}#{dest_file}]#{@node.attrs.join}]
 					#{caption}
 ]}
 	end

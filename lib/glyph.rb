@@ -144,6 +144,7 @@ module Glyph
 	# Restores Glyph configuration (keeping all overrides and project settings)
 	def self.config_refresh
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
+		Glyph.safe_mode = Glyph['language.options.safe_mode']
 	end
 
 	# Resets Glyph configuration (removing all overrides and project settings)
@@ -282,7 +283,7 @@ module Glyph
 	end
 
 	def self.multiple_output_files?
-		Glyph['document.output'].to_sym.in? Glyph['system.multifile_targets']
+		Glyph["output.#{Glyph['document.output']}.multifile"]
 	end
 
 end

@@ -39,18 +39,18 @@ macro :navigation do
 	exact_parameters 1
 	procs = {}
 	procs[:contents] = lambda do
-		%{<li><a href="#{Glyph['document.base']}index.html">Contents</a></li>}
+		%{<li><a href="#{Glyph["output.#{Glyph['document.output']}.base"]}index.html">Contents</a></li>}
 	end
 	procs[:previous] = lambda do |topic|
 		if topic then
-			%{<li><a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">&larr; Previous</a></li>}
+			%{<li><a href="#{Glyph["output.#{Glyph['document.output']}.base"]}#{topic[:src].gsub(/\..+$/, '.html')}">&larr; Previous</a></li>}
 		else
 			""
 		end
 	end
 	procs[:next] = lambda do |topic|
 		if topic then
-			%{<li><a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">Next &rarr;</a></li>}
+			%{<li><a href="#{Glyph["output.#{Glyph['document.output']}.base"]}#{topic[:src].gsub(/\..+$/, '.html')}">Next &rarr;</a></li>}
 		else
 			""
 		end

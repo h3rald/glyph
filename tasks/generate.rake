@@ -130,14 +130,14 @@ namespace :generate do
 				error "An error occurred while generating #{file}"
 			end
 		end
-		case Glyph['tools.pdf_generator']
+		case Glyph['output.pdf.generator']
 		when 'prince' then
 			generate_pdf.call ";#{ENV['ProgramFiles']}\\Prince\\Engine\\bin", %{prince #{src} -o #{out/"#{file}"}}
 		when 'wkhtmltopdf' then
 			generate_pdf.call ";#{ENV['ProgramFiles']}\\wkhtmltopdf", %{wkhtmltopdf #{src} #{out/"#{file}"}}
 		else
 			# TODO: support other PDF renderers
-			error "Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting."
+			error "Glyph cannot generate PDF. Please specify a valid output.pdf.generator setting."
 		end
 	end
 

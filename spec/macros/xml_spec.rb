@@ -46,7 +46,7 @@ describe "Glyph Language" do
 	end
 
 	it "should notify the user that a macro is not found for invalid elements if xml_fallback is enabled" do
-		# Assuming language.options.xml_fallback = true
+		# Assuming output.html.xml_fallback = true
 		language('glyph')
 		lambda { interpret("*a[test]").document }.should raise_error(Glyph::MacroError, "Unknown macro '*a'")
 	end	

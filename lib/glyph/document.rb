@@ -113,7 +113,7 @@ module Glyph
 		# TODO
 		def style(file)
 			f = Pathname.new file
-			if @styles.include? f && !Glyph['document.output'].to_sym.in?(Glyph['system.multifile_targets']) then
+			if @styles.include?(f) && !Glyph.multiple_output_files? then
 				raise RuntimeError, "Stylesheet '#{f}' already specified for the current document" 
 			end
 			@styles << f

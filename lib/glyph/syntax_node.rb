@@ -127,7 +127,7 @@ module Glyph
 				self[:element] = name
 				self[:name] = :"|xml|" 
 				# Fallback to XML syntax
-			when Glyph['language.options.xml_fallback'] then
+			when Glyph["output.#{Glyph['document.output']}.xml_fallback"] then
 				unless known_macro then
 					self[:element] = name
 					self[:fallback] = true

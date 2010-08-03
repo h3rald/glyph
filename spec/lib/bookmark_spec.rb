@@ -38,14 +38,12 @@ describe Glyph::Bookmark do
 	it "should format the link for multiple output files" do
 		out = Glyph['document.output']
 		Glyph['document.output'] = 'web'
-		# Set document.extension (set automatically by the compile command, normally)
-		Glyph['document.extension'] = '.html'
 		# Link within the same file
 		@b.link("test.glyph").should == "#test"
 		# Link to a different file file
 		@b.link("intro.glyph").should == "test.html#test"
 		# Test that base directory is added correctly
-		Glyph['document.base'] = "/"
+		Glyph["output.#{Glyph['document.output']}.base"] = "/"
 		@b.link("intro.glyph").should == "/test.html#test"
 		@b.link("test.glyph").should == "#test"
 		Glyph['document.output'] = out

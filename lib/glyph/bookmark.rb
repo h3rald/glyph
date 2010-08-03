@@ -22,9 +22,8 @@ module Glyph
 
 		def link(file=nil)
 			if Glyph.multiple_output_files? then
-				raise RuntimeError, "document.extension not set" if Glyph['document.extension'].blank?
-				external_file = @file.to_s.gsub(/\..+$/, Glyph['document.extension']) 
-				f = (file.blank? || file.to_sym != @file) ? "#{Glyph['document.base']}#{external_file}" : ""
+				external_file = @file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
+				f = (file.blank? || file.to_sym != @file) ? "#{Glyph["output.#{Glyph['document.output']}.base"]}#{external_file}" : ""
 				"#{f}##{@id}"
 			else
 				"##{@id}"

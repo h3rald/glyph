@@ -8,7 +8,7 @@ macro :textile do
 		macro_error "RedCloth gem not installed. Please run: gem install RedCloth"
 	end
 	rc = RedCloth.new value, Glyph::CONFIG.get("filters.redcloth.restrictions")
-	target = Glyph["filters.target"]
+	target = Glyph["output.#{Glyph['document.output']}.filter_target"]
 	case target.to_sym
 	when :html
 		rc.to_html.gsub /<p><\/p>/, ''
@@ -62,7 +62,7 @@ macro :markdown do
 	else
 	 macro_error "No supported MarkDown converter installed. Please run: gem install bluecloth"
 	end
-	target = Glyph["filters.target"]
+	target = Glyph["output.#{Glyph['document.output']}.filter_target"]
 	if target.to_sym == :html then
 		md.to_html
 	else
@@ -97,7 +97,7 @@ macro :highlight do
 		end
 	end
 	Glyph["highlighter.current"] = highlighter
-	target = Glyph["filters.target"]
+	target = Glyph["output.#{Glyph['document.output']}.filter_target"]
 	result = ""
 	case highlighter.to_sym
 	when :coderay

@@ -17,10 +17,10 @@ describe "Filter Macros" do
 		text = "textile[This is a _TEST_(TM).]"
 		interpret text
 		@p.document.output.should == "<p>This is a <em><span class=\"caps\">TEST</span></em>&#8482;.</p>"
-		Glyph['filters.target'] = :latex
+		Glyph["output.#{Glyph['document.output']}.filter_target"] = :latex
 		interpret text
 		@p.document.output.should == "This is a \\emph{TEST}\\texttrademark{}.\n\n"
-		Glyph['filters.target'] = :html
+		Glyph["output.#{Glyph['document.output']}.filter_target"] = :html
 		Glyph['filters.redcloth.restrictions'] = [:no_span_caps]
 		interpret text
 		@p.document.output.should == "<p>This is a <em>TEST</em>&#8482;.</p>"

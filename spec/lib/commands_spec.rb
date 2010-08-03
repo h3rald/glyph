@@ -23,7 +23,7 @@ describe "glyph" do
 	it "[config] should read configuration settings" do
 		create_project
 		run_command_successfully(["config", "-g"]).should == false
-		run_command(["config", "filters.target"]).match(/html/m).should_not == nil
+		run_command(["config", "document.html.filter_target"]).match(/html/m).should_not == nil
 	end
 
 	it "[config] should write configuration settings" do
@@ -153,7 +153,7 @@ describe "glyph" do
 		out = Glyph::PROJECT/'article.pdf'
 		generate_pdf = lambda do |gen|
 			Glyph.enable 'generate:pdf'
-			Glyph['tools.pdf_generator'] = gen
+			Glyph['output.pdf.generator'] = gen
 			run_command_successfully(["compile", "article.glyph"]).should == true
 			src.exist?.should == true
 			out.exist?.should == true

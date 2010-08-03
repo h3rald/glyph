@@ -114,6 +114,7 @@ macro :style do
 	file = Glyph.lite? ? Pathname.new(value) : Glyph::PROJECT/"styles/#{value}"
 	file = Pathname.new Glyph::HOME/'styles'/value unless file.exist?
 	macro_error "Stylesheet '#{value}' not found" unless file.exist?
+
 	@node[:document].style file
 	case Glyph['document.styles'].to_s
 	when 'embed' then
@@ -138,10 +139,10 @@ macro :style do
 </style>}
 	when 'import' then
 %{<style type="text/css">
-	@import url("#{Glyph['document.base']}styles/#{value.gsub(/\..+$/, '.css')}");
+	@import url("#{Glyph["output.#{Glyph['document.output']}.base"]}styles/#{value.gsub(/\..+$/, '.css')}");
 </style>}
 	when 'link' then
-%{<link href="#{Glyph['document.base']}styles/#{value.gsub(/\..+$/, '.css')}" type="text/css" />}
+%{<link href="#{Glyph["output.#{Glyph['document.output']}.base"]}styles/#{value.gsub(/\..+$/, '.css')}" type="text/css" />}
 	else
 		macro_error "Value '#{Glyph['document.styles']}' not allowed for 'document.styles' setting"
 	end

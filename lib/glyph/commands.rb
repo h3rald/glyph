@@ -35,28 +35,17 @@ command :compile do |c|
 		Glyph.lite_mode = true unless args.blank? 
 		Glyph.run! 'load:config'
 		original_config = Glyph::CONFIG.dup
-		output_targets = Glyph['system.output_targets']
+		output_targets = Glyph['output'].keys
 		target = nil
 		Glyph['document.output'] = options[:f] if options[:f]
 		target = Glyph['document.output']
 		target = nil if target.blank?
-		target ||= Glyph['filters.target']
-		# Set document.extension. Used ONLY internally for bookmarking purposes!
-		Glyph['document.extension'] = case Glyph['document.output']
-																	when 'html5'
-																		'.html'
-																	when 'web'
-																		'.html'
-																	when 'web5'
-																		'.html'
-																	else
-																		"."+Glyph['document.output']
-																	end
+		target ||= Glyph["output.#{Glyph['document.output']}.filter_target"]
 		Glyph['document.source'] = options[:s] if options[:s]
 		if Glyph.multiple_output_files? then
-			Glyph['document.base'] = Glyph::PROJECT/"output/#{Glyph['document.output']}/".to_s if Glyph['document.base'].blank?
+			Glyph["output.#{Glyph['document.output']}.base"] = Glyph::PROJECT/"output/#{Glyph['document.output']}/".to_s if Glyph["output.#{Glyph['document.output']}.base"].blank?
 		else
-			Glyph['document.base'] = ""
+			Glyph["output.#{Glyph['document.output']}.base"] = ""
 		end
 		raise ArgumentError, "Output target not specified" unless target
 		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
