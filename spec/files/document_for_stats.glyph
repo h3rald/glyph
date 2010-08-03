@@ -1,0 +1,12 @@
+snippet:[test|A test]
+snippet:[unused|...]
+toc[1]
+include[container.textile]
+include[a/b/c/markdown.markdown]
+section[
+	@id[refs]
+	@title[Refs.]
+	@src[references.glyph]
+	snippet[test]
+	#[unused]
+]
