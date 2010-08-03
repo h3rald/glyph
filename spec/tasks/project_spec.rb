@@ -26,6 +26,12 @@ describe "project:create" do
 		(Glyph::PROJECT/'output').exist?.should == true
 	end
 
+	it "[create] should create a project in a directory containing just Gemfiles or hidden files" do
+		file_write Glyph::PROJECT/".test", "..." 
+		file_write Glyph::PROJECT/"Gemfile", "..." 
+		lambda { Glyph.run! 'project:create', Glyph::PROJECT }.should_not raise_error
+	end
+
 	it "[add] should add new files to project" do
 		create_project
 		lambda { Glyph.run 'project:add', 'test.textile'}.should_not raise_error
