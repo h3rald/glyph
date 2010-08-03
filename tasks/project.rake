@@ -7,7 +7,7 @@ namespace :project do
 	task :create, [:dir] do |t, args|
 		dir = Pathname.new args[:dir]
 		raise ArgumentError, "Directory #{dir} does not exist." unless dir.exist?
-		raise ArgumentError, "Directory #{dir} is not empty." unless dir.children.select{|f| !f.basename.to_s.match(/^(\..+|Gemfile)$/)}.blank?
+		raise ArgumentError, "Directory #{dir} is not empty." unless dir.children.select{|f| !f.basename.to_s.match(/^(\..+|Gemfile[.\w]*|Rakefile)$/)}.blank?
 		# Create subdirectories
 		subdirs = ['lib/tasks', 'lib/macros', 'lib/macros', 'lib', 'text', 'output', 'images', 'styles', 'lib/layouts']
 		subdirs.each {|d| (dir/d).mkpath }
