@@ -91,8 +91,10 @@ namespace :project do
 			files[file] = 0 if files[file].blank?
 			files[file] +=1
 		end
-		c_stats[:internal] = internal
-		c_stats[:external] = external
+		internal_targets = internal.keys.map{|e| "##{e.to_s}" }.sort
+		external_targets = external.keys.map{|e| e.to_s}.sort
+		c_stats[:internal] = {:details => internal, :targets => internal_targets}
+		c_stats[:external] = {:details => external, :targets => external_targets}
 	end
 
 	def stats_for_snippets(c_stats)
@@ -165,15 +167,26 @@ namespace :project do
 		when :links
 			stats_for_links c_stats
 		when :link
-			raise ArgumentError, "Please specify a link URL (regexp)" unless args[:value]
+			raise ArgumentError, "Please specify a link URL or ID (regexp)" unless args[:value]
 			link = args[:value]
 			regexp = /#{link}/
-			links = get_macros(:link).select do |l| 
+			instances = get_macros(:link).select do |l| 
 				l.parameters[0].to_s.match regexp
 			end.map do |i|
 				{:target => i.parameters[0].to_s, :file => (i[:source][:file] rescue Glyph['document.source'])}
 			end
-			Glyph::STATS[:link] = links
+			# remove duplicates
+			links = []
+			instances.each do |i|
+				existing = links.select{|s| s == i}[0] rescue nil
+				if existing then
+					existing[:total] += 1
+				else
+					i[:total] = 1
+					links << i
+				end
+			end
+			Glyph::STATS[:link] = links.sort{|a, b| a[:target] <=> b[:target]}
 		when :snippets
 			stats_for_snippets c_stats
 		when :snippet

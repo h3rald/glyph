@@ -249,6 +249,12 @@ test_project - Outline
 		out.match(/Total Instances: 4/).should_not be_blank
 		out = run_command(['stats', 'macro', 'unknown'])
 		out.match(/is not used/).should_not be_blank
+		out = run_command(['stats', 'links'])
+		out.match(/-- #refs \(1\):/).should_not be_blank
+		out = run_command(['stats', 'link', 'r'])
+		out.match(/-- #refs \[text\/references\.glyph\] \(1\)/).should_not be_blank
+		out = run_command(['stats', 'link', 'unknown'])
+		out.match(/No link targets/).should_not be_blank
 	end
 
 end

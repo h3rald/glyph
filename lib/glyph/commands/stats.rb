@@ -10,7 +10,7 @@ command :stats do |c|
 		Glyph.info "Collecting statistics..."
 		if s[:files] then
 			c = s[:files]
-			puts sep+'Files:'
+			puts sep+'Files'
 			Glyph.info "Text Files: #{c[:text]}"
 			Glyph.info "Library Files: #{c[:lib]}"
 			Glyph.info "Images: #{c[:images]}"
@@ -19,7 +19,7 @@ command :stats do |c|
 		end
 		if s[:bookmarks] then
 			c = s[:bookmarks]
-			puts sep+"Bookmarks:"
+			puts sep+"Bookmarks"
 			Glyph.info "Total: #{c[:total]}"
 			Glyph.info "IDs: "+c[:codes].join(", ")
 			Glyph.info "Unreferenced: "+c[:unreferenced].join(", ")
@@ -42,7 +42,7 @@ command :stats do |c|
 		end
 		if s[:macros] then
 			c = s[:macros]
-			puts sep+"Macros:"
+			puts sep+"Macros"
 			Glyph.info "Total Instances: #{c[:total_definitions]}"
 			Glyph.info "#{c[:total_definitions]} Definitions Used: "+c[:definitions].join(", ")
 		end
@@ -55,6 +55,31 @@ command :stats do |c|
 				puts c[:files].to_a.sort.map{|e| "   - #{e[0]} (#{e[1]})"}
 			else
 				Glyph.info "Macro '#{args[1]}' is not used in this document"
+			end
+		end
+		if s[:links] then
+			c = s[:links]
+			print_links = lambda do |t| 
+				puts sep+"#{c[t][:targets].length} #{t.to_s.capitalize} Links"
+				c[t][:targets].each do |l|
+					s_link = l.gsub(/^#/, '').to_sym
+					link = c[t][:details][s_link]
+					Glyph.info "#{l} (#{link[:total]}):"
+					puts link[:files].to_a.sort.map{|e| "   - #{e[0]} (#{e[1]})"}.join("\n")
+				end
+			end
+			print_links.call :internal
+			print_links.call :external
+		end
+		if s[:link] then
+			c = s[:link]
+			unless c.blank? then
+				puts sep+"Link targets matching /#{args[1]}/"
+				c.each do |i|
+					Glyph.info "#{i[:target]} [#{i[:file]}] (#{i[:total]})"
+				end
+			else
+				Glyph.info "No link targets matching /#{args[1]}/ found in this document"
 			end
 		end
 	end
