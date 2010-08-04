@@ -116,11 +116,18 @@ describe "project:stats" do
 		}
 	end
 
-	it "should collect link stats"
+	it "should collect link stats" do
+		Glyph.run "project:stats", :links
+		Glyph::STATS[:links].blank?.should == false
+		Glyph::STATS[:links].should == {
+			:internal=>{:refs=>{:total=>1, :files=>{:"text/references.glyph"=>1}}}, 
+			:external=>{:"http://www.h3rald.com"=>{:total=>1, :files=>{:"text/references.glyph"=>1}}}
+		}
+		Glyph.run! 'project:stats', :link, 'h3rald'
+		Glyph::STATS[:link].should == [{:file=>"text/references.glyph", :target=>"http://www.h3rald.com"}]
+	end
 	
 	it "should collect snippet stats"
-
-	it "should collect file stats"
 
 	it "should collect global stats"
 	

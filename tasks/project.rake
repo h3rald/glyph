@@ -74,6 +74,26 @@ namespace :project do
 		c_stats[:unreferenced] = c_stats[:codes]-links.map{|l|	l.param(0).to_s.gsub(/^#/, '').to_sym}
 	end
 
+	def stats_for_links(c_stats)
+		links = get_macros :link
+		internal = {}
+		external = {}
+		links.each do |l|
+			target = l.parameter(0)[:value]
+			collection =  target.match(/^#/) ? internal : external
+			code = target.gsub(/^#/, '').to_sym
+			collection[code] = {:total => 0, :files => {}} if collection[code].blank?
+			coll = collection[code]
+			coll[:total] += 1
+			files = coll[:files]
+			file = (l[:source][:file] rescue Glyph['document.source']).to_sym
+			files[file] = 0 if files[file].blank?
+			files[file] +=1
+		end
+		c_stats[:internal] = internal
+		c_stats[:external] = external
+	end
+
 	def get_macros(name=nil)
 		nodes = []
 		Glyph.document.structure.descend do |n, level|
@@ -84,13 +104,10 @@ namespace :project do
 		nodes
 	end
 
-
-
 	desc "Display project statistics"
 	task :stats, :object, :value, :needs => ["generate:document"]  do |t, args|
 		stats = Glyph::STATS
 		stats.clear
-		# TODO remove
 		if args[:object] then
 			stats[args[:object]] = {}
 			c_stats = stats[args[:object]]
@@ -126,11 +143,17 @@ namespace :project do
 			c_stats[:file] = Glyph.document.bookmark?(code).file rescue nil
 			c_stats[:references] = references.map{|n| n[:source][:file] rescue Glyph['document.source']}
 		when :links
+			stats_for_links c_stats
 		when :link
 			raise ArgumentError, "Please specify a link URL (regexp)" unless args[:value]
-		when :files
-		when :file
-			raise ArgumentError, "Please specify a file path" unless args[:value]
+			link = args[:value]
+			regexp = /#{link}/
+			links = get_macros(:link).select do |l| 
+				l.parameter(0)[:value].match regexp
+			end.map do |i|
+				{:target => i.parameter(0)[:value], :file => (i[:source][:file] rescue Glyph['document.source'])}
+			end
+			Glyph::STATS[:link] = links
 		when :snippets
 		when :snippet
 			raise ArgumentError, "Please specify a snippet ID" unless args[:value]
