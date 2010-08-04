@@ -147,7 +147,7 @@ module Glyph
 	# Restores Glyph configuration (keeping all overrides and project settings)
 	def self.config_refresh
 		CONFIG.merge!(SYSTEM_CONFIG.merge(GLOBAL_CONFIG.merge(PROJECT_CONFIG)))
-		Glyph.safe_mode = Glyph['language.options.safe_mode']
+		Glyph.safe_mode = Glyph['options.safe_mode']
 	end
 
 	# Resets Glyph configuration (removing all overrides and project settings)

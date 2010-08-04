@@ -66,7 +66,7 @@ Benchmark.bm(30) do |x|
 	sep
 	puts " => Macro Set: XML"
 	reset_glyph
-	Glyph['language.set'] = 'xml'
+	Glyph['options.macro_set'] = 'xml'
 	Glyph.run! 'load:all'
 	rep(x, "HTML text") { macro_exec html }
 end

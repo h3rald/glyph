@@ -8,19 +8,35 @@
   :draft: false
   :output: html
   :styles: embed # link, import
+:options:
+  :macro_set: 'glyph' # core, xml, filters
+  :safe_mode: false
+  :filter_by_file_extension: true
+  :xml_fallback: true
+  :xml_blacklist:
+    - applet
+    - base
+    - basefont
+    - embed
+    - frame
+    - frameset
+    - iframe
+    - isindex
+    - meta
+    - noframes
+    - noscript
+    - object
+    - param
+    - title
 :output:
   :html:
     :multifile: false
     :extension: '.html'
     :filter_target: 'html'
-    :xml_fallback: true
-    :blacklist: true
   :html5:
     :multifile: false
     :extension: '.html'
     :filter_target: 'html'
-    :xml_fallback: true
-    :blacklist: true
   :pdf:
     :multifile: false
     :extension: '.pdf'
@@ -30,39 +46,15 @@
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
-    :xml_fallback: true
-    :blacklist: true
     :layout: 'topic'
     :base: ""
   :web5:
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
-    :xml_fallback: true
-    :blacklist: true
     :layout: 'topic'
     :base: ""
-  :xml:
-    :html_blacklist:
-      - applet
-      - base
-      - basefont
-      - embed
-      - frame
-      - frameset
-      - iframe
-      - isindex
-      - meta
-      - noframes
-      - noscript
-      - object
-      - param
-      - title
-:language:
-  :set: 'glyph' # xml, core, filters
-  :safe_mode: false
 :filters:
-  :by_file_extension: true
   :highlighter: 'coderay'
   :markdown:
     :converter: 'bluecloth'

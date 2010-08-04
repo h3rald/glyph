@@ -102,7 +102,7 @@ end
 def language(set)
 	reset_quiet
 	Glyph.run 'load:config'
-	Glyph['language.set'] = set
+	Glyph['options.macro_set'] = set
 	Glyph.run 'load:macros'
 end
 

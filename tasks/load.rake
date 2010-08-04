@@ -30,7 +30,7 @@ namespace :load do
 				Glyph.rewrite "layout:#{file.basename(file.extname)}".to_sym, contents
 			end
 		end
-		case  Glyph['language.set']
+		case  Glyph['options.macro_set']
 		when 'glyph' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb')

@@ -37,8 +37,8 @@ describe "load" do
 
 	it "[macros] should be able to load only core macros" do
 		language 'core'
-		output_for("$:[language.set|glyph]").blank?.should == true
-		Glyph['language.set'].should == 'glyph'
+		output_for("$:[options.macro_set|glyph]").blank?.should == true
+		Glyph['options.macro_set'].should == 'glyph'
 	end
 	
 	it "[macros] should be able to load only filter macros" do

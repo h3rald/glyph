@@ -69,7 +69,7 @@ macro :include do
 				macro_warning e.message, e
 			end
 		else
-			if Glyph["filters.by_file_extension"] && !ext.in?(['rb','glyph']) then
+			if Glyph["options.filter_by_file_extension"] && !ext.in?(['rb','glyph']) then
 				if Glyph::MACROS.include?(ext.to_sym) then
 					contents = "#{ext}[#{contents}]"
 				else 
