@@ -9,7 +9,7 @@ namespace :project do
 		raise ArgumentError, "Directory #{dir} does not exist." unless dir.exist?
 		raise ArgumentError, "Directory #{dir} is not empty." unless dir.children.select{|f| !f.basename.to_s.match(/^(\..+|Gemfile[.\w]*|Rakefile)$/)}.blank?
 		# Create subdirectories
-		subdirs = ['lib/tasks', 'lib/macros', 'lib/macros', 'lib', 'text', 'output', 'images', 'styles', 'lib/layouts']
+		subdirs = ['lib/macros', 'lib/tasks', 'lib/layouts', 'text', 'output', 'images', 'styles']
 		subdirs.each {|d| (dir/d).mkpath }
 		# Create snippets
 		yaml_dump Glyph::PROJECT/'snippets.yml', {:test => "This is a \nTest snippet"}
@@ -190,6 +190,17 @@ namespace :project do
 			stats_for_bookmarks stats[:bookmarks]
 			stats_for_links stats[:links]
 			stats_for_snippets stats[:snippets]
+			stats[:files] = {}
+			count_files_in = lambda do |dir|
+				files = []
+				(Glyph::PROJECT/"#{dir}").find{|f| files << f if f.file? }
+				files.length
+			end
+			stats[:files][:text] = count_files_in.call 'text'
+			stats[:files][:lib] = count_files_in.call 'lib'
+			stats[:files][:styles] = count_files_in.call 'styles'
+			stats[:files][:layouts] = count_files_in.call 'layouts'
+			stats[:files][:images] = count_files_in.call 'images'
 		end
 	end
 

@@ -69,12 +69,6 @@ describe "project:stats" do
 		delete_project_dir
 	end
 
-	it "should populate Glyph::STATS and generate a Glyph document" do
-		lambda { Glyph.run 'project:stats' }.should_not raise_error
-		Glyph.document.blank?.should == false
-		Glyph::STATS.blank?.should == false
-	end
-
 	it "should collect macro stats" do
 		Glyph.run "project:stats", :macros
 		Glyph::STATS[:macros].blank?.should == false
@@ -141,7 +135,16 @@ describe "project:stats" do
 		Glyph::STATS[:snippet].should == ["document.glyph", "text/references.glyph"]
 	end
 
-	it "should collect global stats"
+	it "should collect global stats" do
+		lambda { Glyph.run 'project:stats' }.should_not raise_error
+		Glyph.document.blank?.should == false
+		Glyph.run "project:stats"
+		Glyph::STATS[:bookmarks].blank?.should == false
+		Glyph::STATS[:links].blank?.should == false
+		Glyph::STATS[:snippets].blank?.should == false
+		Glyph::STATS[:macros].blank?.should == false
+		Glyph::STATS[:files].should == {:layouts=>0, :images=>1, :styles=>1, :text=>4, :lib=>0}
+	end
 	
 
 end
