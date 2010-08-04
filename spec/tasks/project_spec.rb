@@ -75,8 +75,8 @@ describe "project:stats" do
 		Glyph::STATS[:macros].should == {
 			:total_definitions => 9,
 			:total_instances => 19,
-			:definitions => [:"snippet:", :toc, :include, :textile, 
-				:section, :markdown, :&, :"#", :"=>"]
+			:definitions=>["#", "&", "=>", "include", "markdown", 
+				"section", "snippet:", "textile", "toc"]
 		}
 		Glyph.run! 'project:stats', :macro, 'section'
 		Glyph::STATS[:macro].should == {
@@ -94,13 +94,13 @@ describe "project:stats" do
 		Glyph::STATS[:bookmarks].should == {
 			:codes=>[:h_1, :h_2, :md, :refs, :toc], 
 			:total=>5, 
-			:files=>{
-				:"text/a/b/c/markdown.markdown"=>{:codes=>[:md], :total=>1}, 
-				:"document.glyph"=>{:codes=>[:toc], :total=>1}, 
-				:"text/a/b/c/included.textile"=>{:codes=>[:h_2], :total=>1}, 
-				:"references.glyph"=>{:codes=>[:refs], :total=>1}, 
-				:"text/container.textile"=>{:codes=>[:h_1], :total=>1}
-			},
+			:files=>[
+				{:file=>:"document.glyph", :total=>1, :codes=>[:toc]}, 
+				{:file=>:"references.glyph", :total=>1, :codes=>[:refs]}, 
+				{:file=>:"text/a/b/c/included.textile", :total=>1, :codes=>[:h_2]}, 
+				{:file=>:"text/a/b/c/markdown.markdown", :total=>1, :codes=>[:md]}, 
+				{:file=>:"text/container.textile", :total=>1, :codes=>[:h_1]}
+			],
 			:unreferenced=>[:h_1, :h_2, :md, :toc]
 		}
 		Glyph.run! 'project:stats', :bookmark, '#refs'

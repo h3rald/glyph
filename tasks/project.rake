@@ -50,9 +50,9 @@ namespace :project do
 					break
 				end
 			end
-			element
+			element.to_s
 		end.uniq!
-		c_stats[:definitions] = definitions
+		c_stats[:definitions] = definitions.sort
 		c_stats[:total_definitions] = definitions.length
 		c_stats
 	end
@@ -66,10 +66,11 @@ namespace :project do
 		bmks.each_value do |b|
 			files[b.file] = {:total => 0, :codes => []} unless files[b.file]
 			files[b.file][:total] = files[b.file][:total]+1
+			files[b.file][:file] = b.file
 			files[b.file][:codes] << b.code
 			files[b.file][:codes].sort!{|a, b| a.to_s <=> b.to_s}
 		end
-		c_stats[:files] = files
+		c_stats[:files] = files.values.sort{|a, b| a[:file].to_s <=> b[:file].to_s }
 		# Check unreferenced bookmarks
 		links = get_macros :link
 		c_stats[:unreferenced] = c_stats[:codes]-links.map{|l|	l.param(0).to_s.gsub(/^#/, '').to_sym}
@@ -127,7 +128,7 @@ namespace :project do
 	task :stats, :object, :value, :needs => ["generate:document"]  do |t, args|
 		stats = Glyph::STATS
 		stats.clear
-		if args[:object] then
+		unless args[:object].blank? then
 			stats[args[:object]] = {}
 			c_stats = stats[args[:object]]
 		else
