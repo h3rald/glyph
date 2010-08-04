@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-08-03}
+  s.date = %q{2010-08-04}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
      "README.textile"
   ]
   s.files = [
-    "AUTHORS.textile",
+    ".gitignore",
+     "AUTHORS.textile",
      "CHANGELOG.textile",
      "LICENSE.textile",
      "README.textile",
@@ -95,6 +96,13 @@ Gem::Specification.new do |s|
      "lib/glyph.rb",
      "lib/glyph/bookmark.rb",
      "lib/glyph/commands.rb",
+     "lib/glyph/commands/add.rb",
+     "lib/glyph/commands/compile.rb",
+     "lib/glyph/commands/config.rb",
+     "lib/glyph/commands/init.rb",
+     "lib/glyph/commands/outline.rb",
+     "lib/glyph/commands/stats.rb",
+     "lib/glyph/commands/todo.rb",
      "lib/glyph/config.rb",
      "lib/glyph/document.rb",
      "lib/glyph/interpreter.rb",
@@ -118,10 +126,12 @@ Gem::Specification.new do |s|
      "spec/files/article.glyph",
      "spec/files/container.textile",
      "spec/files/document.glyph",
+     "spec/files/document_for_stats.glyph",
      "spec/files/document_with_toc.glyph",
      "spec/files/included.textile",
      "spec/files/ligature.jpg",
      "spec/files/markdown.markdown",
+     "spec/files/references.glyph",
      "spec/files/test.sass",
      "spec/files/web1.glyph",
      "spec/files/web2.glyph",
