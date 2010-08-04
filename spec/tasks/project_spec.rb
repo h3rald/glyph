@@ -82,7 +82,7 @@ describe "project:stats" do
 			:total_definitions => 9,
 			:total_instances => 19,
 			:definitions => [:"snippet:", :toc, :include, :textile, 
-				:section, :markdown, :snippet, :"#", :"=>"]
+				:section, :markdown, :&, :"#", :"=>"]
 		}
 		Glyph.run! 'project:stats', :macro, 'section'
 		Glyph::STATS[:macro].should == {
@@ -127,7 +127,19 @@ describe "project:stats" do
 		Glyph::STATS[:link].should == [{:file=>"text/references.glyph", :target=>"http://www.h3rald.com"}]
 	end
 	
-	it "should collect snippet stats"
+	it "should collect snippet stats" do 
+		Glyph.run "project:stats", :snippets
+		Glyph::STATS[:snippets].blank?.should == false
+		Glyph::STATS[:snippets].should == {
+			:ids=>{:test=>{:total=>1, :files=>{:"document.glyph"=>1}}}, 
+			:total_instances=>2, 
+			:total_used_definitions=>1, 
+			:total_unused_definitions=>1, 
+			:unused_definitions=>[:unused]
+		}
+		Glyph.run! 'project:stats', :snippet, 'test'
+		Glyph::STATS[:snippet].should == ["document.glyph", "text/references.glyph"]
+	end
 
 	it "should collect global stats"
 	

@@ -42,15 +42,16 @@ namespace :project do
 		c_stats[:total_instances] = macros.length			
 		definitions = macros.map{|n| n[:name] }.uniq
 		uniqs = definitions.dup
-		definitions.delete_if do |el| 
-			found = false
+		definitions.map! do |el| 
+			element = el
 			uniqs.each do |name| 
-				if Glyph.macro_eq? name, el then
-					found = true
+				if el != name && Glyph.macro_eq?(name, el) && definitions.include?(name) then
+					element = name
 					break
 				end
 			end
-		end
+			element
+		end.uniq!
 		c_stats[:definitions] = definitions
 		c_stats[:total_definitions] = definitions.length
 		c_stats
@@ -75,14 +76,13 @@ namespace :project do
 	end
 
 	def stats_for_links(c_stats)
-		links = get_macros :link
 		internal = {}
 		external = {}
-		links.each do |l|
-			target = l.parameter(0)[:value]
+		get_macros(:link).each do |l|
+			target = l.parameters[0].to_s
 			collection =  target.match(/^#/) ? internal : external
 			code = target.gsub(/^#/, '').to_sym
-			collection[code] = {:total => 0, :files => {}} if collection[code].blank?
+			collection[code] = {:total => 0, :files => {}} unless collection[code]
 			coll = collection[code]
 			coll[:total] += 1
 			files = coll[:files]
@@ -92,6 +92,25 @@ namespace :project do
 		end
 		c_stats[:internal] = internal
 		c_stats[:external] = external
+	end
+
+	def stats_for_snippets(c_stats)
+		snippets = get_macros(:snippet)
+		ids = {}
+		snippets.each do |s|
+			code = s.parameters[0].to_s.to_sym
+			ids[code] = {:total => 0, :files => {}} unless ids[:code]
+			ids[code][:total] += 1
+			file = (l[:source][:file] rescue Glyph['document.source']).to_sym
+			files = ids[code][:files]
+			files[file] = 0 if files[file].blank?
+			files[file] +=1
+		end
+		c_stats[:total_instances] = snippets.length
+		c_stats[:total_used_definitions] = ids.length
+		c_stats[:total_unused_definitions] = Glyph::SNIPPETS.length - ids.keys.length
+		c_stats[:unused_definitions] = Glyph::SNIPPETS.keys - ids.keys
+		c_stats[:ids] = ids
 	end
 
 	def get_macros(name=nil)
@@ -149,18 +168,28 @@ namespace :project do
 			link = args[:value]
 			regexp = /#{link}/
 			links = get_macros(:link).select do |l| 
-				l.parameter(0)[:value].match regexp
+				l.parameters[0].to_s.match regexp
 			end.map do |i|
-				{:target => i.parameter(0)[:value], :file => (i[:source][:file] rescue Glyph['document.source'])}
+				{:target => i.parameters[0].to_s, :file => (i[:source][:file] rescue Glyph['document.source'])}
 			end
 			Glyph::STATS[:link] = links
 		when :snippets
+			stats_for_snippets c_stats
 		when :snippet
 			raise ArgumentError, "Please specify a snippet ID" unless args[:value]
+			snippet = args[:value].to_sym
+			snippets = get_macros(:snippet).select do |l| 
+				l.parameters[0].to_s.to_sym == snippet
+			end.map do |i|
+				i[:source][:file] rescue Glyph['document.source']
+			end
+			Glyph::STATS[:snippet] = snippets
 		else
 			# Load all stats
 			stats_for_macros stats[:macros]
 			stats_for_bookmarks stats[:bookmarks]
+			stats_for_links stats[:links]
+			stats_for_snippets stats[:snippets]
 		end
 	end
 
