@@ -255,6 +255,9 @@ test_project - Outline
 		out.match(/-- #refs \[text\/references\.glyph\] \(1\)/).should_not be_blank
 		out = run_command(['stats', 'link', 'unknown'])
 		out.match(/No link targets/).should_not be_blank
+		out = run_command(['-d', 'stats', 'snippets'])
+		out.match(/-- 1 Unused Snippet Definition\(s\): unused/).should_not be_blank
+		out.match(/-- Total Definitions: 2 \(1 used\)/).should_not be_blank
 	end
 
 end

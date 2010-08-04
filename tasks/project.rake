@@ -102,9 +102,9 @@ namespace :project do
 		ids = {}
 		snippets.each do |s|
 			code = s.parameters[0].to_s.to_sym
-			ids[code] = {:total => 0, :files => {}} unless ids[:code]
+			ids[code] = {:total => 0, :files => {}} unless ids[code]
 			ids[code][:total] += 1
-			file = (l[:source][:file] rescue Glyph['document.source']).to_sym
+			file = (s[:source][:file] rescue Glyph['document.source'])
 			files = ids[code][:files]
 			files[file] = 0 if files[file].blank?
 			files[file] +=1

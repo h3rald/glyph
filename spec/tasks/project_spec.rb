@@ -131,7 +131,7 @@ describe "project:stats" do
 		Glyph.run "project:stats", :snippets
 		Glyph::STATS[:snippets].blank?.should == false
 		Glyph::STATS[:snippets].should == {
-			:ids=>{:test=>{:total=>1, :files=>{:"document.glyph"=>1}}}, 
+			:ids=>{:test=>{:total=>2, :files=>{"document.glyph"=>1, "text/references.glyph" => 1}}}, 
 			:total_instances=>2, 
 			:total_used_definitions=>1, 
 			:total_unused_definitions=>1, 

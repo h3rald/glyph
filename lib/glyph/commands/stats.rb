@@ -16,6 +16,35 @@ command :stats do |c|
 			Glyph.info "Images: #{c[:images]}"
 			Glyph.info "Styles: #{c[:styles]}"
 			Glyph.info "Layouts: #{c[:layouts]}"
+		end		
+		if s[:macros] then
+			c = s[:macros]
+			puts sep+"Macros"
+			Glyph.info "Total Instances: #{c[:total_instances]}"
+			Glyph.info "#{c[:total_definitions]} Definitions Used: "+c[:definitions].join(", ")
+		end
+		if s[:macro] then
+			c = s[:macro]
+			if c[:total_instances] > 0 then
+				puts sep+"Macro '#{args[1]}'"
+				Glyph.info "Total Instances: #{c[:total_instances]}"
+				Glyph.info "Files:"
+				puts c[:files].to_a.sort.map{|e| "   - #{e[0]} (#{e[1]})"}
+			else
+				Glyph.info "Macro '#{args[1]}' is not used in this document"
+			end
+		end
+		if s[:snippets] then
+			c = s[:snippets]
+			puts sep+"Snippets"
+			Glyph.info "Total Definitions: #{c[:total_used_definitions]+c[:total_unused_definitions]} (#{c[:total_used_definitions]} used)"
+			Glyph.info "Total Instances: #{c[:total_instances]}"
+			sorted = c[:ids].to_a.sort{|a,b| a[0]<=>b[0]}
+			sorted.each do |snip|
+				puts "   - #{snip[0]} (#{snip[1][:total]}):"
+				puts snip[1][:files].to_a.sort{|a,b| a[0]<=>b[0]}.map{|e| "     - #{e[0]} (#{e[1]})"}.join("\n")
+			end
+			Glyph.info "#{c[:total_unused_definitions]} Unused Snippet Definition(s): #{c[:unused_definitions].map{|e| e.to_s}.sort.join(", ")}"
 		end
 		if s[:bookmarks] then
 			c = s[:bookmarks]
@@ -38,23 +67,6 @@ command :stats do |c|
 				end
 			else
 				Glyph.info "Bookmark '#{args[1]}' is not used in this document"
-			end
-		end
-		if s[:macros] then
-			c = s[:macros]
-			puts sep+"Macros"
-			Glyph.info "Total Instances: #{c[:total_definitions]}"
-			Glyph.info "#{c[:total_definitions]} Definitions Used: "+c[:definitions].join(", ")
-		end
-		if s[:macro] then
-			c = s[:macro]
-			if c[:total_instances] > 0 then
-				puts sep+"Macro '#{args[1]}'"
-				Glyph.info "Total Instances: #{c[:total_instances]}"
-				Glyph.info "Files:"
-				puts c[:files].to_a.sort.map{|e| "   - #{e[0]} (#{e[1]})"}
-			else
-				Glyph.info "Macro '#{args[1]}' is not used in this document"
 			end
 		end
 		if s[:links] then
