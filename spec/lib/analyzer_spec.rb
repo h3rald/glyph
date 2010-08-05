@@ -45,6 +45,10 @@ describe Glyph::Analyzer do
 		@a.macro_array_for(:section).length.should == 4
 	end
 
+	it "should raise an error if a stat is not available" do
+		lambda { @a.stats_for :unknown }.should raise_error(RuntimeError, "Unable to calculate unknown stats")
+	end
+
 	it "should calculate stats for all macros" do
 		lambda {@a.stats_for :macros}.should_not raise_error
 		@a.stats[:macros].blank?.should == false
@@ -89,6 +93,23 @@ describe Glyph::Analyzer do
 		c[:references].should == ["text/references.glyph"]
 		c[:type].should == :header
 	end
+
+	it "should calculate stats for all links do" do
+		lambda {@a.stats_for :links}.should_not raise_error
+		c = @a.stats[:links]
+		c[:internal].should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
+			 ["#refs", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		c[:external].should == [["http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+	end
+
+	it "should calculate stats for a single link" do
+		lambda {@a.stats_for :link, 'q'}.should raise_error(ArgumentError, "No link matching /q/ was found")
+		lambda {@a.stats_for :link, 'h'}.should_not raise_error
+		c = @a.stats[:link]
+		c.should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
+			["http://www.h3rald.com",{:total=>1, :files=>[["text/references.glyph", 1]]}]]
+	end
+
 
 
 

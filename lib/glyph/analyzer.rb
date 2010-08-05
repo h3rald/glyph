@@ -52,7 +52,11 @@ module Glyph
 		end	
 
 		def stats_for(stats_type, *args)
-			send :"stats_#{stats_type}", *args
+			begin
+				send :"stats_#{stats_type}", *args 
+			rescue NoMethodError
+				raise RuntimeError, "Unable to calculate #{stats_type} stats"
+			end
 		end
 
 		protected
@@ -122,6 +126,45 @@ module Glyph
 				c[:references] << n.source_file unless c[:references].include? n.source_file
 			end
 			c[:references].sort!
+		end
+
+		def stats_links
+			c = @stats[:links] = {}
+			internal = {}
+			external = {}
+			with_macros(:link) do |n|
+				target = n.parameters[0][:value].to_s
+				collection =  target.match(/^#/) ? internal : external
+				code = target.gsub(/^#/, '').to_sym
+				collection[target] = {:total => 0} unless collection[code]
+				coll = collection[target]
+				coll[:total] += 1
+				files = {} 
+				file = n.source_file 
+				files[file] ||= 0 
+				files[file] +=1
+				coll[:files] = files.to_a.sort
+			end
+			c[:internal] = internal.to_a.sort
+			c[:external] = external.to_a.sort
+		end
+
+		def stats_link(name)
+			regexp = /#{name}/ 
+			links = {}
+			with_macros(:link) do |n|
+				target = n.parameters[0][:value].to_s
+				if target.match regexp then
+					links[target] ||= {:total => 0, :files =>[]} unless links[target]
+					links[target][:total] += 1
+					files = {}
+					files[n.source_file] ||= 0
+					files[n.source_file] += 1
+					links[target][:files] = files.to_a.sort
+				end
+			end
+			raise ArgumentError, "No link matching /#{name}/ was found" if links.blank?
+			@stats[:link] = links.to_a.sort 
 		end
 
 

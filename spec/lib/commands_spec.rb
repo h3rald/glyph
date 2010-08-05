@@ -227,37 +227,4 @@ test_project - Outline
 }
 	end
 
-	it "[stats] should display stats" do
-		reset_quiet
-		create_project_dir
-		create_project
-		Glyph.file_copy Glyph::SPEC_DIR/'files/document_for_stats.glyph', Glyph::PROJECT/'document.glyph'
-		Glyph.file_copy Glyph::SPEC_DIR/'files/references.glyph', Glyph::PROJECT/'text/references.glyph'
-		out = run_command(['-d', 'stats'])
-		out.match(/Text Files: 4/).should_not be_blank
-		out = run_command(['stats', 'bookmarks'])
-		out.match(/   - text\/container\.textile \(1\): h_1/).should_not be_blank
-		out = run_command(['stats', 'bookmark', 'refs'])
-		out.match(/Referenced in:/).should_not be_blank
-		out = run_command(['stats', 'bookmark', 'h_1'])
-		out.match(/\(unreferenced\)/).should_not be_blank
-		out = run_command(['stats', 'bookmark', 'unknown'])
-		out.match(/is not used/).should_not be_blank
-		out = run_command(['stats', 'macros'])
-		out.match(/9 Definitions Used/).should_not be_blank
-		out = run_command(['stats', 'macro', 'section'])
-		out.match(/Total Instances: 4/).should_not be_blank
-		out = run_command(['stats', 'macro', 'unknown'])
-		out.match(/is not used/).should_not be_blank
-		out = run_command(['stats', 'links'])
-		out.match(/-- #refs \(1\):/).should_not be_blank
-		out = run_command(['stats', 'link', 'r'])
-		out.match(/-- #refs \[text\/references\.glyph\] \(1\)/).should_not be_blank
-		out = run_command(['stats', 'link', 'unknown'])
-		out.match(/No link targets/).should_not be_blank
-		out = run_command(['-d', 'stats', 'snippets'])
-		out.match(/-- 1 Unused Snippet Definition\(s\): unused/).should_not be_blank
-		out.match(/-- Total Definitions: 2 \(1 used\)/).should_not be_blank
-	end
-
 end

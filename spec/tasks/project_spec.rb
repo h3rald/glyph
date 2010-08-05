@@ -69,45 +69,6 @@ describe "project:stats" do
 		delete_project_dir
 	end
 
-	it "should collect bookmark stats" do
-		Glyph.run "project:stats", :bookmarks
-		Glyph::STATS[:bookmarks].blank?.should == false
-		Glyph::STATS[:bookmarks].should == {
-			:codes=>[:h_1, :h_2, :md, :refs, :toc], 
-			:total=>5, 
-			:files=>[
-				{:file=>:"document.glyph", :total=>1, :codes=>[:toc]}, 
-				{:file=>:"references.glyph", :total=>1, :codes=>[:refs]}, 
-				{:file=>:"text/a/b/c/included.textile", :total=>1, :codes=>[:h_2]}, 
-				{:file=>:"text/a/b/c/markdown.markdown", :total=>1, :codes=>[:md]}, 
-				{:file=>:"text/container.textile", :total=>1, :codes=>[:h_1]}
-			],
-			:unreferenced=>[:h_1, :h_2, :md, :toc]
-		}
-		Glyph.run! 'project:stats', :bookmark, '#refs'
-		Glyph::STATS[:bookmark].should == {
-			:file=>:"references.glyph", 
-			:references=>["text/references.glyph"]
-		}
-	end
-
-	it "should collect link stats" do
-		Glyph.run "project:stats", :links
-		Glyph::STATS[:links].blank?.should == false
-		Glyph::STATS[:links].should == {
-			:internal=>{
-				:details => {:refs=>{:total=>1, :files=>{:"text/references.glyph"=>1}}},
-				:targets=>["#refs"]
-			}, 
-			:external=>{
-				:details => {:"http://www.h3rald.com"=>{:total=>1, :files=>{:"text/references.glyph"=>1}}},
-				:targets=>["http://www.h3rald.com"]
-			}
-		}
-		Glyph.run! 'project:stats', :link, 'h3rald'
-		Glyph::STATS[:link].should == [{:file=>"text/references.glyph", :target=>"http://www.h3rald.com", :total =>1}]
-	end
-	
 	it "should collect snippet stats" do 
 		Glyph.run "project:stats", :snippets
 		Glyph::STATS[:snippets].blank?.should == false
