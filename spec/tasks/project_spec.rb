@@ -69,25 +69,6 @@ describe "project:stats" do
 		delete_project_dir
 	end
 
-	it "should collect macro stats" do
-		Glyph.run "project:stats", :macros
-		Glyph::STATS[:macros].blank?.should == false
-		Glyph::STATS[:macros].should == {
-			:total_definitions => 9,
-			:total_instances => 19,
-			:definitions=>["#", "&", "=>", "include", "markdown", 
-				"section", "snippet:", "textile", "toc"]
-		}
-		Glyph.run! 'project:stats', :macro, 'section'
-		Glyph::STATS[:macro].should == {
-			:total_instances=>4, 
-			:files=>{"text/a/b/c/included.textile"=>1, 
-				"text/container.textile"=>1, 
-				"document.glyph"=>1, 
-				"text/a/b/c/markdown.markdown"=>1}
-		}
-	end
-
 	it "should collect bookmark stats" do
 		Glyph.run "project:stats", :bookmarks
 		Glyph::STATS[:bookmarks].blank?.should == false

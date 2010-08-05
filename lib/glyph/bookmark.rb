@@ -21,7 +21,7 @@ module Glyph
 		end
 
 		def link(file=nil)
-			if Glyph.multiple_output_files? then
+			if multiple_output_files? then
 				external_file = @file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
 				f = (file.blank? || file.to_sym != @file) ? "#{Glyph["output.#{Glyph['document.output']}.base"]}#{external_file}" : ""
 				"#{f}##{@id}"

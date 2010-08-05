@@ -161,13 +161,6 @@ module Glyph
 		self.config_refresh
 	end
 
-	# Returns true if the PROJECT constant is set to a valid Glyph project directory
-	def self.project?
-		children = ["text", "snippets.yml", "config.yml", "document.glyph"].sort
-		actual_children = PROJECT.children.map{|c| c.basename.to_s}.sort 
-		(actual_children & children) == children
-	end
-
 	# Resets Glyph completely, i.e.:
 	# * Re-enables all Glyph Rake tasks
 	# * Resets the configuration to system defaults
@@ -240,23 +233,6 @@ module Glyph
 		MACROS[name] = MACROS[orig]
 	end
 
-	def self.macro_alias?(name)
-		ALIASES[:by_alias].include? name.to_sym
-	end
-
-	def self.macro_definition_for(name)
-		ALIASES[:by_alias][name.to_sym]
-	end
-
-	def self.macro_aliases_for(name)
-		ALIASES[:by_def][name.to_sym]
-	end
-
-	# TODO
-	def self.macro_eq?(ident1, ident2)
-		Glyph::MACROS[ident1.to_sym] == Glyph::MACROS[ident2.to_sym]
-	end
-
 	# Compiles a single Glyph file
 	# @param [String] src the full or relative path to the source file
 	# @param [String] out the full or relative path to the output file
@@ -305,9 +281,6 @@ module Glyph
 		result
 	end
 
-	def self.multiple_output_files?
-		Glyph["output.#{Glyph['document.output']}.multifile"]
-	end
 
 end
 

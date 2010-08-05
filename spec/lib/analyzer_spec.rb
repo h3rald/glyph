@@ -45,7 +45,7 @@ describe Glyph::Analyzer do
 		@a.macro_array_for(:section).length.should == 4
 	end
 
-	it "should calculate macro stats" do
+	it "should calculate stats for all macros" do
 		lambda {@a.stats_for :macros}.should_not raise_error
 		@a.stats[:macros].blank?.should == false
 		c = @a.stats[:macros]
@@ -54,6 +54,21 @@ describe Glyph::Analyzer do
 		c[:instances].length.should == 19
 		c[:used_definitions].should == [:anchor, :include, :link, :markdown, 
 			:section, :snippet, :"snippet:", :textile, :toc]
+	end
+
+	it "should calculate stats for all macros" do
+		lambda {@a.stats_for :macro, :dsfash }.should raise_error(ArgumentError, "Unknown macro 'dsfash'")
+		lambda {@a.stats_for :macro, :frontmatter }.should 
+		raise_error(ArgumentError, "Alias 'frontmatter' is not used in this document, did you mean 'section'?")
+		lambda {@a.stats_for :macro, :section }.should_not raise_error
+		c = @a.stats[:macro]
+		c[:instances].length.should == 4
+		c[:files].should == [["document.glyph", 1], ["text/a/b/c/included.textile", 1], 
+			["text/a/b/c/markdown.markdown", 1], ["text/container.textile", 1]]
+		@a.stats_for :macro, :"&"
+		c = @a.stats[:macro]
+		c[:alias_for].should == :snippet
+		c[:instances].length.should == 2
 	end
 
 

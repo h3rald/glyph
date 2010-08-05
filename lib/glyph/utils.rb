@@ -86,5 +86,33 @@ module Glyph
 			end
 		end
 
+		def macro_alias?(name)
+			ALIASES[:by_alias].include? name.to_sym
+		end
+
+		def macro_definition_for(name)
+			ALIASES[:by_alias][name.to_sym]
+		end
+
+		def macro_aliases_for(name)
+			ALIASES[:by_def][name.to_sym]
+		end
+
+		# TODO
+		def macro_eq?(ident1, ident2)
+			Glyph::MACROS[ident1.to_sym] == Glyph::MACROS[ident2.to_sym]
+		end
+
+		# Returns true if the PROJECT constant is set to a valid Glyph project directory
+		def project?
+			children = ["text", "snippets.yml", "config.yml", "document.glyph"].sort
+			actual_children = PROJECT.children.map{|c| c.basename.to_s}.sort 
+			(actual_children & children) == children
+		end
+
+		def multiple_output_files?
+			Glyph["output.#{Glyph['document.output']}.multifile"]
+		end
+
 	end
 end

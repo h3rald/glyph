@@ -112,6 +112,10 @@ module Glyph
 			Glyph::Macro.new(self).expand
 		end
 
+		def source_file
+			self[:source][:file].to_s rescue Glyph['document.source']
+		end
+
 		protected
 
 		def xml_element(context)
