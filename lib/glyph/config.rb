@@ -4,6 +4,8 @@ module Glyph
 	# and provides some useful methods to access keys and subkeys.
 	class Config
 
+		include Glyph::Utils
+
 		# Initializes the configuration with a hash of options:
 		# * :file (default: nil) - A YAML file to read data from
 		# * :data (default: {})- The initial contents

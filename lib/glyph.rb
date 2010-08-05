@@ -36,6 +36,7 @@ module Glyph
 	require LIB/'syntax_node'
 	require LIB/'parser'
 	require LIB/'interpreter'
+	require LIB/'analyzer'
 	extend Glyph::Utils
 
 	class Error < RuntimeError; end
@@ -69,6 +70,9 @@ module Glyph
 
 	# All the currently-loaded macros
 	MACROS = {}
+
+	# All macro aliases
+	ALIASES = {:by_alias => {}, :by_def => {}}
 
 	begin
 		unless const_defined? :MODE then
@@ -229,7 +233,23 @@ module Glyph
 	# 	{:old_name => :new_name}
 	def self.macro_alias(pair)
 		name = pair.keys[0].to_sym
-		MACROS[name] = MACROS[pair.values[0].to_sym]
+		orig = pair.values[0].to_sym
+		ALIASES[:by_def][orig] = [] unless ALIASES[:by_def][orig]
+		ALIASES[:by_def][orig] << name unless ALIASES[:by_def][orig].include? name
+		ALIASES[:by_alias][name] = orig 
+		MACROS[name] = MACROS[orig]
+	end
+
+	def self.macro_alias?(name)
+		ALIASES[:by_alias].include? name.to_sym
+	end
+
+	def self.macro_definition_for(name)
+		ALIASES[:by_alias][name.to_sym]
+	end
+
+	def self.macro_aliases_for(name)
+		ALIASES[:by_def][name.to_sym]
 	end
 
 	# TODO

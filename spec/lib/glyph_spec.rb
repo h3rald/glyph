@@ -79,4 +79,18 @@ describe Glyph do
 		output_for("test_rw_macro[@a[!]?]").should == "<em>? -- !</em>"
 	end
 
+	it "should store alias information" do
+		delete_project_dir
+		create_project_dir
+		Glyph.run! 'project:create', Glyph::PROJECT
+		Glyph.run 'load:all'
+		Glyph::ALIASES[:by_def][:snippet].should == [:&]
+		Glyph::ALIASES[:by_alias][:"?"].should == :condition
+		Glyph.macro_aliases_for(:link).should == [:"=>"]
+		Glyph.macro_aliases_for(:"=>").should == nil
+		Glyph.macro_definition_for(:"=>").should == :link
+		Glyph.macro_definition_for(:link).should == nil
+		Glyph.macro_alias?(:"#").should == true
+	end
+
 end
