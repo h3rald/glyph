@@ -61,6 +61,14 @@ module Glyph
 
 		protected
 
+		def stats_global
+			stats_macros
+			stats_bookmarks
+			stats_links
+			stats_snippets
+			stats_files
+		end
+
 		def stats_macros
 			c = @stats[:macros] = {}
 			c[:definitions] = Glyph::ALIASES[:by_def].keys.sort
@@ -133,17 +141,10 @@ module Glyph
 			internal = {}
 			external = {}
 			with_macros(:link) do |n|
-				target = n.parameters[0][:value].to_s
+				target = n.parameters[0].to_s
 				collection =  target.match(/^#/) ? internal : external
 				code = target.gsub(/^#/, '').to_sym
-				collection[target] = {:total => 0} unless collection[code]
-				coll = collection[target]
-				coll[:total] += 1
-				files = {} 
-				file = n.source_file 
-				files[file] ||= 0 
-				files[file] +=1
-				coll[:files] = files.to_a.sort
+				count_occurrences_for collection, code, n
 			end
 			c[:internal] = internal.to_a.sort
 			c[:external] = external.to_a.sort
@@ -153,20 +154,71 @@ module Glyph
 			regexp = /#{name}/ 
 			links = {}
 			with_macros(:link) do |n|
-				target = n.parameters[0][:value].to_s
+				target = n.parameters[0].to_s
 				if target.match regexp then
-					links[target] ||= {:total => 0, :files =>[]} unless links[target]
-					links[target][:total] += 1
-					files = {}
-					files[n.source_file] ||= 0
-					files[n.source_file] += 1
-					links[target][:files] = files.to_a.sort
+					count_occurrences_for links, target, n
 				end
 			end
 			raise ArgumentError, "No link matching /#{name}/ was found" if links.blank?
 			@stats[:link] = links.to_a.sort 
 		end
 
+		def stats_snippets
+			c = @stats[:snippets] = {}
+			snippets = {}
+			c[:definitions] = Glyph::SNIPPETS.keys.sort
+			c[:used] = []
+			c[:unused] = []
+			c[:total] = 0
+			with_macros(:snippet) do |n|
+				code = n.parameters[0].to_s.to_sym
+				c[:used] << code unless c[:used].include? code
+				c[:total] += 1
+				count_occurrences_for snippets, code, n
+			end
+			c[:used_details] = snippets.to_a.sort
+			c[:used].sort!
+			c[:unused] = (c[:definitions] - c[:used]).sort
+		end
+
+		def stats_snippet(name)
+			name = name.to_sym
+			snippets = {}
+			raise ArgumentError, "Snippet '#{name}' does not exist" unless Glyph::SNIPPETS[name]
+			with_macros(:snippet) do |n|
+				code = n.parameters[0].to_s.to_sym
+				if code == name then
+					count_occurrences_for snippets, code, n
+				end
+			end
+			raise ArgumentError, "Snippet '#{name}' is not used in this document" if snippets.blank?
+			@stats[:snippet] = snippets[name]
+		end
+
+		def stats_files
+			@stats[:files] = {}
+			count_files_in = lambda do |dir|
+				files = []
+				(Glyph::PROJECT/"#{dir}").find{|f| files << f if f.file? }
+				files.length
+			end
+			@stats[:files][:text] = count_files_in.call 'text'
+			@stats[:files][:lib] = count_files_in.call 'lib'
+			@stats[:files][:styles] = count_files_in.call 'styles'
+			@stats[:files][:layouts] = count_files_in.call 'layouts'
+			@stats[:files][:images] = count_files_in.call 'images'
+		end
+
+		private
+
+		def count_occurrences_for(collection, code, n)
+			collection[code] ||= {:total => 0, :files =>[]} unless collection[code]
+			collection[code][:total] += 1
+			files = {}
+			files[n.source_file] ||= 0
+			files[n.source_file] += 1
+			collection[code][:files].concat files.to_a.sort
+		end
 
 	end
 end

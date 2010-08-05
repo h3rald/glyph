@@ -97,9 +97,9 @@ describe Glyph::Analyzer do
 	it "should calculate stats for all links do" do
 		lambda {@a.stats_for :links}.should_not raise_error
 		c = @a.stats[:links]
-		c[:internal].should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
-			 ["#refs", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
-		c[:external].should == [["http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		c[:internal].should == [[:h_1, {:total=>1, :files=>[["text/references.glyph", 1]]}], 
+			 [:refs, {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		c[:external].should == [[:"http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
 	end
 
 	it "should calculate stats for a single link" do
@@ -110,11 +110,34 @@ describe Glyph::Analyzer do
 			["http://www.h3rald.com",{:total=>1, :files=>[["text/references.glyph", 1]]}]]
 	end
 
+	it "should calculate stats for all snippets" do
+		lambda {@a.stats_for :snippets}.should_not raise_error
+		c = @a.stats[:snippets]
+		c[:used_details].should == [
+			[:test, {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}]
+		] 
+		c[:used].should == [:test]
+		c[:total].should == 2
+		c[:unused].should == [:unused]
+	 	c[:definitions].should == [:test, :unused]	
+	end
 
+	it "should calculate stats for a single snippet" do
+		lambda {@a.stats_for :snippet, 'test1'}.should raise_error(ArgumentError, "Snippet 'test1' does not exist")
+		lambda {@a.stats_for :snippet, 'unused'}.should raise_error(ArgumentError, "Snippet 'unused' is not used in this document")
+		lambda {@a.stats_for :snippet, 'test'}.should_not raise_error
+		c = @a.stats[:snippet]
+		c.should == {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}
+	end
 
-
-
-
-
+	it "should calculate global stats" do
+		lambda {@a.stats_for :global}.should_not raise_error
+		c = @a.stats
+		c[:bookmarks].blank?.should == false
+		c[:links].blank?.should == false
+		c[:snippets].blank?.should == false
+		c[:macros].blank?.should == false
+		c[:files].should == {:layouts=>0, :images=>1, :styles=>1, :text=>4, :lib=>0}
+	end
 
 end
