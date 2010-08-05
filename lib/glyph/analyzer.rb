@@ -85,6 +85,45 @@ module Glyph
 			c[:files] = files.to_a.sort
 		end
 
+		def stats_bookmarks
+			c = @stats[:bookmarks] = {}
+			c[:codes] = []
+			files = {}
+			@doc.bookmarks.each_pair do |k, v|
+				c[:codes] << k
+				files[v.file] ||= 0
+				files[v.file] +=1
+			end
+			c[:codes].sort!
+			c[:files] = files.to_a.sort
+			referenced = {}
+			with_macros(:link) do |n|
+				target =n.parameters[0][:value].to_s
+				if target.match(/^#/) then
+					code = target.gsub(/^#/, '').to_sym 
+					referenced[code] ||= 0
+					referenced[code] += 1	
+				end
+			end
+			c[:referenced] = referenced.to_a.sort
+			c[:unreferenced] = c[:codes] - c[:referenced].map{|e| e[0]}
+		end
+
+		def stats_bookmark(name)
+			code = name.to_s.gsub(/^#/, '').to_sym
+			raise ArgumentError, "Bookmark '#{code}' does not exist" unless @doc.bookmark? code
+			c = @stats[:bookmark] = {}
+			bmk = @doc.bookmark? code
+			c[:file] = bmk.file.to_s
+			c[:type] = bmk.is_a?(Glyph::Header) ? :header : :anchor
+			c[:references] = []
+			with_macros(:link) do |n|
+				target = n.parameters[0][:value].to_s.gsub(/^#/, '').to_sym
+				c[:references] << n.source_file unless c[:references].include? n.source_file
+			end
+			c[:references].sort!
+		end
+
 
 	end
 end

@@ -28,13 +28,13 @@ describe Glyph::Analyzer do
 		lambda { @a.with_macros }.should raise_error(ArgumentError, "No block given")
 		count = 0
 		lambda { @a.with_macros {|n| count+=1} }.should_not raise_error
-		count.should == 19
+		count.should == 20
 		count = 0
 		lambda { @a.with_macros(:snippet) {|n| count+=1} }.should_not raise_error
 		count.should == 2
-		#count = 0
-		#lambda { @a.with_macros(:&) {|n| count+=1} }.should_not raise_error
-		#count.should == 2
+		count = 0
+		lambda { @a.with_macros(:&) {|n| count+=1} }.should_not raise_error
+		count.should == 2
 	end
 
 	it "should access macro instance arrays by definition" do
@@ -51,12 +51,12 @@ describe Glyph::Analyzer do
 		c = @a.stats[:macros]
 		c[:definitions].should == Glyph::ALIASES[:by_def].keys.sort
 		c[:aliases].should == Glyph::ALIASES[:by_alias].keys.sort
-		c[:instances].length.should == 19
+		c[:instances].length.should == 20
 		c[:used_definitions].should == [:anchor, :include, :link, :markdown, 
 			:section, :snippet, :"snippet:", :textile, :toc]
 	end
 
-	it "should calculate stats for all macros" do
+	it "should calculate stats for a single macro" do
 		lambda {@a.stats_for :macro, :dsfash }.should raise_error(ArgumentError, "Unknown macro 'dsfash'")
 		lambda {@a.stats_for :macro, :frontmatter }.should 
 		raise_error(ArgumentError, "Alias 'frontmatter' is not used in this document, did you mean 'section'?")
@@ -70,6 +70,26 @@ describe Glyph::Analyzer do
 		c[:alias_for].should == :snippet
 		c[:instances].length.should == 2
 	end
+
+	it "should calculate stats for all bookmarks" do
+		lambda {@a.stats_for :bookmarks}.should_not raise_error
+		c = @a.stats[:bookmarks]
+		c[:codes].should == [:h_1, :h_2, :md, :refs, :toc]
+		c[:files].should == [[:"document.glyph", 1], [:"references.glyph", 1], [:"text/a/b/c/included.textile", 1], 
+			[:"text/a/b/c/markdown.markdown", 1], [:"text/container.textile", 1]] 
+		c[:unreferenced].should == [:h_2, :md, :toc]
+		c[:referenced].should == [[:h_1, 1], [:refs, 1]]
+	end
+
+	it "should calculate stats for a single bookmark" do
+		lambda {@a.stats_for :bookmark, '#h_7'}.should raise_error(ArgumentError, "Bookmark 'h_7' does not exist")
+		lambda {@a.stats_for :bookmark, '#h_1'}.should_not raise_error
+		c = @a.stats[:bookmark]
+		c[:file].should == "text/container.textile"
+		c[:references].should == ["text/references.glyph"]
+		c[:type].should == :header
+	end
+
 
 
 
