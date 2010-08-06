@@ -54,9 +54,3 @@ describe "project:add" do
 	end
 
 end
-
-describe "project:stats" do
-
-	it "should collect project statistics"
-
-end

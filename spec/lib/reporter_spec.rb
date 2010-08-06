@@ -132,7 +132,4 @@ describe Glyph::Analyzer do
 		out.should match "-- Total Snippets: 2"
 		out.should match "-- Bookmarks: h_1, h_2, md, refs, toc"
 	end
-
-	
-
 end

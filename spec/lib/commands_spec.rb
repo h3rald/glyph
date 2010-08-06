@@ -227,6 +227,19 @@ test_project - Outline
 }
 	end
 
-	it "[stats] should display project statistics"
+	it "[stats] should display project statistics" do
+		create_project
+		out = run_command(["stats", "-ms"])
+		out.should match "-- Total Macro Definitions: 18" 
+		out.should match "-- Unused Snippets: test"
+		out = run_command(["stats"])
+		out.should match "-- Total Macro Definitions: 18" 
+		out.should match "-- Unused Snippets: test"
+		out.should match "-- Total Unreferenced Bookmarks: 3"
+		out = run_command(["stats", "-lb", "--bookmark=md"])
+		out.should match "-- Unreferenced Bookmarks: h_1, h_2, md" 
+		out.should match "-- Defined in: text/a/b/c/markdown.markdown"
+		out.should_not match "-- Total Macro Definitions: 18"
+	end
 
 end

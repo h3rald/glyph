@@ -138,7 +138,7 @@ module Glyph
 				target = n.parameters[0].to_s.gsub(/^#/, '').to_sym
 				count_occurrences_for references, target, n if target == code
 			end
-			c[:references]= references[code][:files]
+			c[:references]= references[code][:files] rescue []
 		end
 
 		def stats_links

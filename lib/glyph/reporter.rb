@@ -127,10 +127,12 @@ module Glyph
 		end
 
 		def inline_list(name, arr)
+			return if arr.blank?
 			info "#{name.to_s.title_case}: #{arr.join(', ')}"
 		end
 
 		def occurrences(arr, label="Occurrences:")
+			return if arr.blank?
 			info label
 			arr.each do |f|
 				total = f[1].is_a?(Numeric) ? "(#{f[1]})" : ""
@@ -139,6 +141,7 @@ module Glyph
 		end
 
 		def grouped_occurrences(arr, label="Details:")
+			return if arr.blank?
 			info label
 			arr.each do |f|
 				puts "   - #{f[0]} (#{f[1][:total]})"

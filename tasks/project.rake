@@ -16,8 +16,8 @@ namespace :project do
 		# Create files
 		file_copy Glyph::HOME/'document.glyph', Glyph::PROJECT/'document.glyph'
 		config = yaml_load Glyph::HOME/'config.yml'
-	 	config[:document][:filename] = dir.basename.to_s
-	 	config[:document][:title] = dir.basename.to_s
+		config[:document][:filename] = dir.basename.to_s
+		config[:document][:title] = dir.basename.to_s
 		config[:document][:author] = ENV['USER'] || ENV['USERNAME'] 	
 		config.delete(:system)
 		yaml_dump Glyph::PROJECT/'config.yml', config
@@ -33,3 +33,5 @@ namespace :project do
 		File.new(file.to_s, "w").close
 	end
 end
+
+
