@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
-$: << File.expand_path(File.dirname(__FILE__) + '/lib')
+lib = File.expand_path(File.dirname(__FILE__) + '/lib')
+$: << lib
 require 'rubygems'
 require 'rake/clean'
-require 'glyph'
+require "#{lib}/glyph.rb"
 
 task :default => :spec
 
@@ -29,14 +30,14 @@ begin
 		s.authors = ["Fabio Cevasco"]
 		s.files.include "styles/**/*"
 		s.files.include "book/**/*"
-		s.add_dependency 'gli', '>= 0.3.1' # Command line interface
-		s.add_dependency 'extlib', '>= 0.9.12' # Extension methods
+		s.add_dependency 'gli', '>= 1.1.1' # Command line interface
+		s.add_dependency 'extlib', '>= 0.9.15' # Extension methods
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks
-		s.add_development_dependency 'rspec', '>= 1.1.11' # Test suite
-		s.add_development_dependency 'yard', '>= 1.5.4' # Documentation suite
+		s.add_development_dependency 'rspec', '>= 1.3.0' # Test suite
+		s.add_development_dependency 'yard', '>= 0.5.8' # Documentation suite
 		s.add_development_dependency 'jeweler', '1.4.0' # Gem management
 		s.add_development_dependency 'directory_watcher', ">= 1.3.2" # Auto-regeneration
-		s.add_development_dependency 'haml', ">= 3.0.6" # Sass filter
+		s.add_development_dependency 'haml', ">= 3.0.15" # Sass filter
 		s.add_development_dependency 'RedCloth', ">= 4.2.3" # Textile filter
 		s.add_development_dependency 'bluecloth', ">= 2.0.7" # Markdown filter
 		s.add_development_dependency 'coderay', ">= 0.9.3" # Syntax Highlighting
@@ -47,7 +48,7 @@ rescue LoadError
 end
 
 begin
-	require 'spec/rake/spectask'
+	require "spec/rake/spectask"
 	Spec::Rake::SpecTask.new('spec') do |t|
 		t.spec_files = FileList['spec/**/*_spec.rb']
 		t.spec_opts = ["--color"]

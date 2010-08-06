@@ -6,6 +6,7 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 describe Glyph::Analyzer do
 
 	before do
+		delete_project
 		reset_quiet
 		create_project_dir
 		create_project

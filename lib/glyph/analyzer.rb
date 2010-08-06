@@ -55,9 +55,6 @@ module Glyph
 			begin
 				send :"stats_#{stats_type}", *args 
 			rescue NoMethodError => e
-				debug "Analyzer -- NoMethodError"
-				debug e.message
-				debug e.backtrace
 				raise RuntimeError, "Unable to calculate #{stats_type} stats"
 			end
 		end
@@ -208,7 +205,7 @@ module Glyph
 			@stats[:files] = {}
 			count_files_in = lambda do |dir|
 				files = []
-				(Glyph::PROJECT/"#{dir}").find{|f| files << f if f.file? }
+				(Glyph::PROJECT/"#{dir}").find{|f| files << f if f.file? } rescue nil
 				files.length
 			end
 			@stats[:files][:text] = count_files_in.call 'text'
@@ -223,10 +220,17 @@ module Glyph
 		def count_occurrences_for(collection, code, n)
 			collection[code] ||= {:total => 0, :files =>[]} unless collection[code]
 			collection[code][:total] += 1
-			files = {}
-			files[n.source_file] ||= 0
-			files[n.source_file] += 1
-			collection[code][:files].concat files.to_a.sort
+			coll = collection[code][:files]
+			added = false
+			coll.each do |file|
+				if file[0] == n.source_file then
+					file[1] += 1
+					added = true
+					break
+				end
+			end
+			coll << [n.source_file, 1] unless added
+			coll.sort!
 		end
 
 	end

@@ -42,6 +42,8 @@ command :stats do |c|
 		puts "#{Glyph['document.title']} - Statistics"
 		puts "====================================="
 		puts
-		Glyph::Reporter.new(analyzer.stats).display
+		reporter = Glyph::Reporter.new(analyzer.stats)
+		reporter.detailed = false if no_switches && no_flags 
+		reporter.display
 	end
 end
