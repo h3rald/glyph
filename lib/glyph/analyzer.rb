@@ -54,7 +54,10 @@ module Glyph
 		def stats_for(stats_type, *args)
 			begin
 				send :"stats_#{stats_type}", *args 
-			rescue NoMethodError
+			rescue NoMethodError => e
+				debug "Analyzer -- NoMethodError"
+				debug e.message
+				debug e.backtrace
 				raise RuntimeError, "Unable to calculate #{stats_type} stats"
 			end
 		end
@@ -82,6 +85,7 @@ module Glyph
 			name = name.to_sym
 			raise ArgumentError, "Unknown macro '#{name}'" unless Glyph::MACROS.include? name
 			c = @stats[:macro] = {}
+			c[:param] = name
 			c[:instances] = []
 			c[:alias_for] = macro_definition_for name 
 			files = {}
@@ -126,6 +130,7 @@ module Glyph
 			raise ArgumentError, "Bookmark '#{code}' does not exist" unless @doc.bookmark? code
 			c = @stats[:bookmark] = {}
 			bmk = @doc.bookmark? code
+			c[:param] = name
 			c[:file] = bmk.file.to_s
 			c[:type] = bmk.is_a?(Glyph::Header) ? :header : :anchor
 			c[:references] = []
@@ -160,7 +165,9 @@ module Glyph
 				end
 			end
 			raise ArgumentError, "No link matching /#{name}/ was found" if links.blank?
-			@stats[:link] = links.to_a.sort 
+			@stats[:link] = {}
+			@stats[:link][:stats] = links.to_a.sort 
+			@stats[:link][:param] = name 
 		end
 
 		def stats_snippets
@@ -192,7 +199,9 @@ module Glyph
 				end
 			end
 			raise ArgumentError, "Snippet '#{name}' is not used in this document" if snippets.blank?
-			@stats[:snippet] = snippets[name]
+			@stats[:snippet] = {}
+			@stats[:snippet][:stats] = snippets[name]
+			@stats[:snippet][:param] = name
 		end
 
 		def stats_files

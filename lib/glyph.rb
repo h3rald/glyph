@@ -37,6 +37,7 @@ module Glyph
 	require LIB/'parser'
 	require LIB/'interpreter'
 	require LIB/'analyzer'
+	require LIB/'reporter'
 	extend Glyph::Utils
 
 	class Error < RuntimeError; end

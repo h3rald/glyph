@@ -105,7 +105,7 @@ describe Glyph::Analyzer do
 	it "should calculate stats for a single link" do
 		lambda {@a.stats_for :link, 'q'}.should raise_error(ArgumentError, "No link matching /q/ was found")
 		lambda {@a.stats_for :link, 'h'}.should_not raise_error
-		c = @a.stats[:link]
+		c = @a.stats[:link][:stats]
 		c.should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
 			["http://www.h3rald.com",{:total=>1, :files=>[["text/references.glyph", 1]]}]]
 	end
@@ -126,7 +126,7 @@ describe Glyph::Analyzer do
 		lambda {@a.stats_for :snippet, 'test1'}.should raise_error(ArgumentError, "Snippet 'test1' does not exist")
 		lambda {@a.stats_for :snippet, 'unused'}.should raise_error(ArgumentError, "Snippet 'unused' is not used in this document")
 		lambda {@a.stats_for :snippet, 'test'}.should_not raise_error
-		c = @a.stats[:snippet]
+		c = @a.stats[:snippet][:stats]
 		c.should == {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}
 	end
 

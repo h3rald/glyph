@@ -69,6 +69,12 @@ def delete_project
 end
 
 def run_command(cmd)
+	stdout_for do
+		GLI.run cmd
+	end
+end
+
+def stdout_for(&block)
 	out = StringIO.new
 	err = StringIO.new
 	old_stdout = $stdout
@@ -76,7 +82,7 @@ def run_command(cmd)
 	$stdout = out
 	$stderr = err 
 	Glyph['system.quiet'] = false
-	GLI.run cmd
+	block.call
 	Glyph['system.quiet'] = true
 	$stdout = old_stdout
 	$stderr = old_stderr

@@ -227,4 +227,6 @@ test_project - Outline
 }
 	end
 
+	it "[stats] should display project statistics"
+
 end
