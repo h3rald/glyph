@@ -76,9 +76,25 @@ describe Glyph::Analyzer do
 		out.should_not match "-- Referenced in:"
 	end
 
-	it "should display snippet stats"
+	it "should display snippet stats" do
+		stats :snippets
+		out = stdout_for { rep.display }
+		out.should match "-- Total Snippets: 2"
+		out.should match "     - text/references.glyph \\(1\\)"
+		@r.detailed = false
+		out = stdout_for { @r.display }
+		out.should_not match "-- Usage Details:"
+	end
 
-	it "should display stats for a single snippet"
+	it "should display stats for a single snippet" do
+		stats :snippet, :test
+		out = stdout_for { rep.display }
+		out.should match "-- Total Used Instances: 2"
+		out.should match "   - text/references.glyph \\(1\\)"
+		@r.detailed = false
+		out = stdout_for { @r.display }
+		out.should_not match "-- Usage Details:"
+	end
 
 	it "should display link stats"
 

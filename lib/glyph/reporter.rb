@@ -62,6 +62,28 @@ module Glyph
 			occurrences s[:references], "Referenced in:" if @detailed 
 		end
 
+		def display_snippets
+			s = @stats[:snippets]
+			section :snippets
+			total :snippets, s[:definitions].length
+			total :used_snippets, s[:used].length
+			total :unused_snippets, s[:unused].length
+			if @detailed then
+				inline_list :snippets, s[:definitions]
+				inline_list :used_snippets, s[:used]
+				inline_list :unused_snippets, s[:unused]
+				grouped_occurrences s[:used_details], "Usage Details:"
+			end
+		end
+
+		def display_snippet
+			s = @stats[:snippet]
+			section "Snippet '#{s[:param]}'"
+			total :used_instances, s[:stats][:total]
+			occurrences s[:stats][:files], "Usage Details:" if @detailed
+		end
+
+
 		private
 
 		def total(objects, total)
@@ -78,10 +100,21 @@ module Glyph
 
 		def occurrences(arr, label="Occurrences:")
 			info label
-			arr.sort{|a,b| a[1] <=> b[1]}.each do |f|
+			arr.each do |f|
 				puts "   - #{f[0]} (#{f[1]})"
 			end
 		end
+
+		def grouped_occurrences(arr, label="Details:")
+			info label
+			arr.each do |f|
+				puts "   - #{f[0]} (#{f[1][:total]})"
+				f[1][:files].each do |i|
+					puts "     - #{i[0]} (#{i[1]})"
+				end
+			end
+		end
+
 
 		
 
