@@ -37,13 +37,35 @@ module Glyph
 			alias_for = s[:alias_for] ? " (alias for: #{s[:alias_for]})" : " "
 			section "Macro '#{s[:param]}'#{alias_for}"
 			total :instances, s[:instances].length
-			file_occurrences s[:files] if @detailed
+			occurrences s[:files] if @detailed
+		end
+
+		def display_bookmarks
+			s = @stats[:bookmarks]
+			section :bookmarks
+			total :bookmarks, s[:codes].length
+			total :referenced_bookmarks, s[:referenced].length
+			total :unreferenced_bookmarks, s[:unreferenced].length
+			if @detailed then
+				inline_list :bookmarks, s[:codes]
+				occurrences s[:referenced], "Referenced Bookmarks:"
+				inline_list :unreferenced_bookmarks, s[:unreferenced]
+				occurrences s[:files] 
+			end
+		end
+
+		def display_bookmark
+			s = @stats[:bookmark]
+			b_type = (s[:type] != :bookmark) ? " (#{s[:type]})" : " " 
+			section "Bookmark '#{s[:param]}'#{b_type}"
+			info "Defined in: #{s[:file]}"
+			occurrences s[:references], "Referenced in:" if @detailed 
 		end
 
 		private
 
 		def total(objects, total)
-			Glyph.info "Total #{objects.to_s.title_case}: #{total}"
+			info "Total #{objects.to_s.title_case}: #{total}"
 		end
 
 		def section(name)
@@ -51,12 +73,12 @@ module Glyph
 		end
 
 		def inline_list(name, arr)
-			Glyph.info "#{name.to_s.title_case}: #{arr.join(', ')}"
+			info "#{name.to_s.title_case}: #{arr.join(', ')}"
 		end
 
-		def file_occurrences(files)
-			Glyph.info "Occurrences:"
-			files.sort{|a,b| a[1] <=> b[1]}.each do |f|
+		def occurrences(arr, label="Occurrences:")
+			info label
+			arr.sort{|a,b| a[1] <=> b[1]}.each do |f|
 				puts "   - #{f[0]} (#{f[1]})"
 			end
 		end

@@ -90,7 +90,7 @@ describe Glyph::Analyzer do
 		lambda {@a.stats_for :bookmark, '#h_1'}.should_not raise_error
 		c = @a.stats[:bookmark]
 		c[:file].should == "text/container.textile"
-		c[:references].should == ["text/references.glyph"]
+		c[:references].should == [["text/references.glyph", 1]]
 		c[:type].should == :header
 	end
 

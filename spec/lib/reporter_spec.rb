@@ -55,9 +55,26 @@ describe Glyph::Analyzer do
 		out.should match "alias for: link"
 	end
 
-	it "should display bookmark stats"
+	it "should display bookmark stats" do
+		stats :bookmarks
+		out = stdout_for { rep.display }
+		out.should match "-- Total Bookmarks: 5"
+		out.should match "-- Bookmarks: h_1, h_2, md, refs, toc"
+		out.should match "   - h_1 \\(1\\)"
+		@r.detailed = false
+		out = stdout_for { @r.display }
+		out.should_not match "-- Occurrences:"
+	end
 
-	it "should display stats for a single bookmark"
+	it "should display stats for a single bookmark" do
+		stats :bookmark, 'refs'
+		out = stdout_for { rep.display }
+		out.should match "===== Bookmark 'refs' \\(header\\)"
+		out.should match "   - text/references.glyph \\(1\\)"
+		@r.detailed = false
+		out = stdout_for { @r.display }
+		out.should_not match "-- Referenced in:"
+	end
 
 	it "should display snippet stats"
 

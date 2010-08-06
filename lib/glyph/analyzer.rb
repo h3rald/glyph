@@ -133,12 +133,12 @@ module Glyph
 			c[:param] = name
 			c[:file] = bmk.file.to_s
 			c[:type] = bmk.is_a?(Glyph::Header) ? :header : :anchor
-			c[:references] = []
+			references = {}
 			with_macros(:link) do |n|
-				target = n.parameters[0][:value].to_s.gsub(/^#/, '').to_sym
-				c[:references] << n.source_file unless c[:references].include? n.source_file
+				target = n.parameters[0].to_s.gsub(/^#/, '').to_sym
+				count_occurrences_for references, target, n if target == code
 			end
-			c[:references].sort!
+			c[:references]= references[code][:files]
 		end
 
 		def stats_links
