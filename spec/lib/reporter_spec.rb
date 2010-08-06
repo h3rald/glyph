@@ -96,13 +96,42 @@ describe Glyph::Analyzer do
 		out.should_not match "-- Usage Details:"
 	end
 
-	it "should display link stats"
+	it "should display link stats" do
+		stats :links
+		out = stdout_for { rep.display }
+		out.should match "   - http://www.h3rald.com \\(1\\)"
+		out.should match "-- Total Internal Links: 2"
+		@r.detailed = false
+		out = stdout_for { @r.display }
+		out.should_not match "     - text/references.glyph (1)"
+	end
 
-	it "should display stats for a single link"
+	it "should display stats for a single link" do
+		stats :link, 'h3'
+		out = stdout_for { rep.display }
+		out.should match "===== Links matching \\/h3\\/"
+		out.should match "   - http://www.h3rald.com \\(1\\)"
+		@r.detailed = false
+		out = stdout_for { @r.display }
+		out.should_not match "   - http://www.h3rald.com \\(1\\)"
+	end
 
-	it "should display files stats"
+	it "should display files stats" do
+		stats :files
+		out = stdout_for { rep.display }
+		out.should match "-- Total Files: 6"
+		out.should match "-- /text    -- 4"
+	end
 
-	it "should display global stats"
+	it "should display global stats" do
+		stats :global
+		out = stdout_for { rep.display }
+		out.should match "-- Total Files: 6"
+		out.should match "   - http://www.h3rald.com \\(1\\)"
+		out.should match "Total Macro Instances: 20"
+		out.should match "-- Total Snippets: 2"
+		out.should match "-- Bookmarks: h_1, h_2, md, refs, toc"
+	end
 
 	
 

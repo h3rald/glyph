@@ -13,7 +13,10 @@ module Glyph
 		def display
 			[:files, :macros, :snippets, :bookmarks, :links, 
 				:macro, :snippet, :bookmark, :link].each do |s|
-				send :"display_#{s}" unless @stats[s].blank?
+				unless @stats[s].blank? then
+					send :"display_#{s}" 
+					puts
+				end
 			end
 		end
 
@@ -83,11 +86,40 @@ module Glyph
 			occurrences s[:stats][:files], "Usage Details:" if @detailed
 		end
 
+		def display_links
+			s = @stats[:links]
+			section :links
+			total :internal_links, s[:internal].length
+			grouped_occurrences s[:internal] if @detailed
+			total :external_links, s[:external].length
+			grouped_occurrences s[:external] if @detailed
+		end
+
+		def display_link
+			s = @stats[:link]
+			section "Links matching /#{s[:param]}/"
+			total :links, s[:stats].length
+			occurrences s[:stats], "Link Targets:"
+			grouped_occurrences s[:stats], "Details:" if @detailed
+		end
+
+		def display_files
+			s = @stats[:files]
+			section :files 
+			total :files, s.values.inject{|sum, n| sum+n}
+			total "/text    --", s[:text]
+			total "/images  --", s[:images]
+			total "/styles  --", s[:styles]
+			total "/layouts --", s[:layouts]
+			total "/lib     --", s[:lib]
+		end
+
 
 		private
 
 		def total(objects, total)
-			info "Total #{objects.to_s.title_case}: #{total}"
+			label = objects.is_a?(Symbol) ? "Total #{objects.to_s.title_case}:" : objects
+			info "#{label} #{total}"
 		end
 
 		def section(name)
@@ -101,7 +133,8 @@ module Glyph
 		def occurrences(arr, label="Occurrences:")
 			info label
 			arr.each do |f|
-				puts "   - #{f[0]} (#{f[1]})"
+				total = f[1].is_a?(Numeric) ? "(#{f[1]})" : ""
+				puts "   - #{f[0]} #{total}"
 			end
 		end
 
