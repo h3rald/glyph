@@ -128,7 +128,22 @@ module Glyph
 
 		def inline_list(name, arr)
 			return if arr.blank?
-			info "#{name.to_s.title_case}: #{arr.join(', ')}"
+			label = name.to_s.title_case
+			columns = 5
+			max = arr.map{|e| e.to_s.length}.max
+			if arr.length < columns+1 then
+				info "#{label}: #{arr.join(', ')}"
+			else
+				info "#{label}:"
+				count = 0
+				arr.each do |i|
+					print "     " if count%columns == 0 
+					print "#{i}#{' '*(max-i.to_s.length+1)}"
+					print "\n" if count%columns == 4
+					count +=1
+				end
+				puts
+			end
 		end
 
 		def occurrences(arr, label="Occurrences:")
@@ -150,10 +165,6 @@ module Glyph
 				end
 			end
 		end
-
-
-		
-
 
 	end
 end

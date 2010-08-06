@@ -222,14 +222,15 @@ module Glyph
 			collection[code][:total] += 1
 			coll = collection[code][:files]
 			added = false
+			source = n.source_file || Glyph['document.source']
 			coll.each do |file|
-				if file[0] == n.source_file then
+				if file[0] == source then
 					file[1] += 1
 					added = true
 					break
 				end
 			end
-			coll << [n.source_file, 1] unless added
+			coll << [source, 1] unless added
 			coll.sort!
 		end
 

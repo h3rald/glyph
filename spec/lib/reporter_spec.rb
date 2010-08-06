@@ -37,10 +37,10 @@ describe Glyph::Analyzer do
 		stats :macros
 		out = stdout_for { rep.display }
 		out.should match "Total Macro Instances: 20"
-		out.should match "-- Used Macro Definitions: anchor, include, link, markdown, section, snippet, snippet:, textile, toc"
+		out.should match "-- Used Macro Definitions:"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "-- Used Macro Definitions: anchor, include, link, markdown, section, snippet, snippet:, textile, toc"
+		out.should_not match "-- Used Macro Definitions:"
 	end
 
 	it "should display stats for a single macro" do
