@@ -4,7 +4,26 @@ namespace :load do
 	include Glyph::Utils
 
 	desc "Load all files"
-	task :all => [:config, :snippets, :macros] do
+	task :all => [:config, :tasks, :commands, :snippets, :macros] do
+	end
+
+	desc "Load tasks"
+	task :tasks => [:config] do
+		unless Glyph.lite? then
+			load_files_from_dir(Glyph::PROJECT/'lib/tasks', '.rake') do |f, contents|
+				load f
+			end	
+		end
+	end
+
+	desc "Load commands"
+	task :commands => [:config] do
+		unless Glyph.lite? then
+			include GLI if (Glyph::PROJECT/'lib/commands').exist?
+			load_files_from_dir(Glyph::PROJECT/'lib/commands', '.rb') do |f, contents|
+				require f
+			end
+		end
 	end
 
 	desc "Load snippets"
@@ -66,6 +85,7 @@ namespace :load do
 		# load project macros
 		unless Glyph.lite? then
 			load_macros_from_dir.call Glyph::PROJECT/"lib/macros"
+			load_macros_from_dir.call Glyph::PROJECT/"lib/macros/#{Glyph['document.output']}"
 			load_layouts_from_dir.call Glyph::PROJECT/'lib/layouts' if Glyph.multiple_output_files?
 		end
 	end

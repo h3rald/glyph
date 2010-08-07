@@ -67,4 +67,18 @@ describe "load" do
 		Glyph::MACROS[:"layout:topic"].blank?.should == false
 	end
 
+	it "[tasks] should load tasks" do
+		reset_quiet
+		file_copy Glyph::PROJECT/"../files/custom_tasks.rake", Glyph::PROJECT/"lib/tasks/custom_tasks.rake"
+		Glyph.run 'load:all'
+		stdout_for { Glyph.run 'custom:hello'}.should == "Hello, World!\n"
+	end
+
+	it "[commands] should load tasks" do
+		reset_quiet
+		file_copy Glyph::PROJECT/"../files/custom_command.rb", Glyph::PROJECT/"lib/commands/custom_command.rb"
+		Glyph.run 'load:all'
+		run_command(['hello']).should == "Hello, World!\n"
+	end
+
 end
