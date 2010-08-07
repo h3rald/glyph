@@ -16,7 +16,7 @@ command :config do |c|
 		when 1 then # read current config
 			setting = Glyph[args[0]]
 			raise RuntimeError, "Unknown setting '#{args[0]}'" if setting.blank?
-			Glyph.info setting
+			Glyph.info setting.inspect
 		when 2 then
 			if args[0].match /^system\..+/ then
 				Glyph.warning "Cannot reset '#@value' setting (system use only)."

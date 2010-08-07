@@ -1,11 +1,11 @@
 --- 
 :document: 
-  :output: html
-  :title: Glyph
   :subtitle: Rapid Document Authoring Framework
+  :revision: v0.3.0
   :author: Fabio Cevasco
-  :revision: "v0.3.0"
-  :filename: glyph
+  :output: html
   :draft: true
-:filters:
+  :filename: glyph
+  :title: Glyph
+:filters: 
   :highlighter: ultraviolet
