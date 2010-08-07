@@ -18,7 +18,7 @@ module Glyph
 			['\\|', '|']
 		]
 
-		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics
+		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics, :links
 		attr_accessor :toc
 
 		# Creates a new document
@@ -35,6 +35,7 @@ module Glyph
 			@errors = []
 			@todos = []
 			@topics = []
+			@links = []
 			@toc = nil
 			@state = :new
 		end
@@ -57,6 +58,7 @@ module Glyph
 			@topics = document.topics
 			@placeholders = document.placeholders
 			@toc = document.toc
+			@links = document.links
 		end
 
 		# Defines a placeholder block that will be evaluated after the whole document has been analyzed

@@ -19,9 +19,8 @@ command :stats do |c|
 	c.desc "Display stats about a single snippet"
 	c.flag :snippet
 	c.action do |global_options, options, args|
-		Glyph['system.quiet'] = true
+		Glyph.info "Collecting stats..."
 		Glyph.run 'generate:document'
-		Glyph['system.quiet'] = false
 		analyzer = Glyph::Analyzer.new
 		no_switches = true
 		[[:m, :macros], [:s, :snippets], [:b, :bookmarks], [:l, :links], [:f, :files]].each do |s|

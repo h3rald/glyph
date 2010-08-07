@@ -6,6 +6,7 @@ module Glyph
 
 			def link_element_for(target, title, &block)
 				if target.match /^#/ then
+					@node[:document].links << target 
 					anchor = target.gsub /^#/, ''
 					bmk = bookmark? anchor
 					if !bmk then
@@ -18,6 +19,19 @@ module Glyph
 						block.call bmk.link(@source_file), bmk.title
 					end
 				else
+					if Glyph['options.url_validation'] && !@node[:document].links.include?(target) then
+						begin
+							url = URI.parse(target.gsub(/\\\./, ''))
+						rescue Exception => e
+							macro_warning "Invalid URL: #{url||target}", e
+						end
+						response = Net::HTTP.get_response(url)
+						debug "Checking link URL: #{url} (#{response.code})"
+						if response.code.to_i > 302 then
+							macro_warning "Linked URL '#{url}' returned status #{response.code} (#{response.message})"
+						end
+					end
+					@node[:document].links << target 
 					title ||= target
 					block.call target, title
 				end

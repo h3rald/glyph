@@ -57,6 +57,7 @@ namespace :generate do
 		else
 			text = file_load Glyph::PROJECT/Glyph['document.source']
 		end
+		require 'net/http' if Glyph['options.url_validation']
 		name = Glyph['document.source']
 		interpreter = Glyph::Interpreter.new text, :source => {:name => name, :file => name}, :info => true
 		interpreter.parse

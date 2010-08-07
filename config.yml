@@ -9,6 +9,7 @@
   :output: html
   :styles: embed # link, import
 :options:
+  :url_validation: false
   :macro_set: 'glyph' # core, xml, filters
   :safe_mode: false
   :filter_by_file_extension: true
