@@ -113,7 +113,9 @@ module Glyph
 		end
 
 		def source_file
-			self[:source][:file].to_s rescue Glyph['document.source']
+			source = self[:source][:file].to_s rescue nil
+			source = Glyph['document.source'] if source.blank?
+			source
 		end
 
 		protected
