@@ -35,7 +35,7 @@ body {
 	margin: auto;
 	text-align: center;
 }
-.title, h1 {
+.titlepage h1, .halftitlepage h1 {
 	font-size: 2.5em;
 	font-weight: bold;
 	line-height: 1.5em;
@@ -174,18 +174,18 @@ body {
 	color: #000;
 	font-size: 1em;
 }
-h2 {
+h2, section section h1, h1.toc-header {
 	display: block;
 	font-size: 2em;
 	font-weight: bold;
 	margin: 3em 0 1em 0;
 }
-h3 {
+h3, section section section h1 {
 	font-size: 1.6em;
 	font-weight: bold;
 	margin: 3em 0 1em 0;
 }
-h4 {
+h4, section section section section h1 {
 	font-size: 1.3em;
 	font-weight: bold;
 	margin: 3em 0 1em 0;
@@ -211,6 +211,16 @@ pre{
 span.line-numbers{
 	margin: 0;
 	padding: 3px;
+}
+
+nav {
+	display: block;
+}
+
+mark {
+	font-weight:bolder;
+	font-style: italic;
+	background: none;
 }
 
 pre>code {

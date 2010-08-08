@@ -131,40 +131,40 @@ div.backmatter{
 	page: backmatter;
 }
 
-.bodymatter h2::before {
+.bodymatter h2::before, .bodymatter h1:before {
 	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
 	counter-reset: footnote;
 }
 
-.backmatter h2::before {
+.backmatter h2::before, .bodymatter section h1:before {
 	content: "Appendix " counter(a2, upper-latin) " &ndash; ";
 }
 
-.bodymatter h3::before {
+.bodymatter h3::before,.bodymatter section  h1:before {
 	content: counter(h2) "." counter(h3) " ";
 }
 
-.backmatter h3::before {
+.backmatter h3::before, .bodymatter section section h1:before {
 	content: counter(a2, upper-latin) "." counter(h3) " ";
 }
 
-.bodymatter h4::before {
+.bodymatter h4::before, .bodymatter section section h1:before {
 	content: counter(h2) "." counter(h3) "." counter(h4) " ";
 }
 
-.backmatter h4::before {
+.backmatter h4::before, .bodymatter section section section h2:before {
 	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) " ";
 }
 
-.bodymatter h5::before {
+.bodymatter h5::before, .bodymatter section section section section h2:before {
 	content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
-.backmatter h5::before {
+.backmatter h5::before, .bodymatter section section section section h2:before {
 	content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
 
-h2 { 
+h2, section h1 { 
 	string-set: chapter-title content();
 	page-break-before: always;
 }
@@ -173,31 +173,31 @@ h2 {
 	page-break-before: avoid;
 }
 
-.bodymatter h2{
+.bodymatter h2, .bodymatter h1{
 	counter-increment: h2;
 	counter-reset: h3;
 }
 
-.backmatter h2{
+.backmatter h2, .backmatter h1{
 	counter-increment: a2;
 	counter-reset: h3;
 }
 
-.bodymatter h3, .backmatter h3 {
+.bodymatter h3, .backmatter h3, .bodymatter section h1, .backmatter section h1 {
 	counter-increment: h3;
 	counter-reset: h4;
 }	
 
-.bodymatter h4, .backmatter h4 {
+.bodymatter h4, .backmatter h4, .bodymatter section section h1, .backmatter section section h1 {
 	counter-increment: h4;
 	counter-reset: h5;
 }	
 
-.bodymatter h5, .backmatter h5 {
+.bodymatter h5, .backmatter h5, .bodymatter section section section h1, .backmatter section section section h1 {
 	counter-increment: h5;
 }
 
-h2, h3, h4, h5 { page-break-after: avoid }
+h1, h2, h3, h4, h5 { page-break-after: avoid }
 table, .box, .note, .important, .tip, .caution, .code { page-break-inside: avoid }
 
 /* Footnotes */

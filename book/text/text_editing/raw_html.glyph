@@ -103,7 +103,7 @@ table[@class[features]
 		@id[xml_blacklist]
 		txt[
 By default, the following tags are blacklisted and will be ignored:
-%[="* "+Glyph['language.options.xml_blacklist'].join("\n* ")=]
+%[="* "+Glyph['options.xml_blacklist'].join("\n* ")=]
 
 tip[You can change this list by modifying the $>[language.options.xml_blacklist].]
 		]

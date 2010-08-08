@@ -2,9 +2,10 @@
 
 macro :section do 
 	max_parameters 1
-	level = (raw_attribute(:src) && Glyph.multiple_output_files?) ? :error : :warning
-	within :contents if Glyph.multiple_output_files?
-	required_attribute :title, :level => level
+	if raw_attribute(:src) && Glyph.multiple_output_files? then
+		within :contents
+		required_attribute :title
+	end
 	procs = {}
 	procs[:title] = lambda do |level, ident, title|
 		%{<header><h1 id="#{ident}">#{title}</h1></header>\n}	

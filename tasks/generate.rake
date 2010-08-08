@@ -34,14 +34,16 @@ namespace :generate do
 		if Glyph['document.styles'].in?(['link', 'import']) && !Glyph.lite? then
 			info "Copying stylesheets..."
 			out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
-			out_dir.mkdir
 			Glyph.document.styles.each do |f|
+				subdir = f.parent.relative_path_from(Glyph::HOME/'styles').to_s.gsub(/^\./, '')
+				dir = out_dir/subdir
+				dir.mkpath
 				case
 				when f.extname == ".css" then
-					file_copy f, out_dir/f.basename 
+					file_copy f, dir/f.basename 
 				when f.extname == ".sass" then
 					style = Sass::Engine.new(file_load(f.to_s)).render
-					out_file = out_dir/f.basename.to_s.gsub(/\.sass$/, '.css')
+					out_file = dir/f.basename.to_s.gsub(/\.sass$/, '.css')
 					file_write out_file, style
 				else
 					raise RuntimeError, "Unsupported stylesheet: '#{f.basename}'"
@@ -68,20 +70,24 @@ namespace :generate do
 		Glyph.document = interpreter.document
 	end
 
-	desc "Create a standalone html file"
+	desc "Create a standalone HTML file"
 	task :html => [:images, :styles] do
 		info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 			file = (Glyph['document.output'] == 'pdf') ? Glyph['document.filename']+".html" : Glyph['document.output_file']
 		else
-			out = Glyph::PROJECT/"output/html"
-			file = "#{Glyph['document.filename']}.html"
+			out = Glyph::PROJECT/"output/#{Glyph['document.output']}"
+			extension = (Glyph['document.output'] == 'pdf') ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
+			file = "#{Glyph['document.filename']}#{extension}"
 		end
 		out.mkpath
 		file_write out/file, Glyph.document.output
 		info "'#{file}' generated successfully."
 	end
+
+	desc "Create a standalone HTML 5 file"
+	task :html5 => [:html] do; end
 
 	desc "Create multiple HTML files"
 	task :web => [:document, :images, :styles] do
@@ -89,20 +95,23 @@ namespace :generate do
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
 		else
-			out = Glyph::PROJECT/"output/web"
+			out = Glyph::PROJECT/"output/#{Glyph['document.output']}"
 		end
 		raise RuntimeError, "You cannot have an 'images' directory under your 'text' directory." if (Glyph::PROJECT/"text/images").exist?
 		raise RuntimeError, "You cannot have a 'styles' directory under your 'text' directory." if (Glyph::PROJECT/"text/styles").exist?
 		out.mkpath
 		file_write out/"index.html", Glyph.document.output
 		Glyph.document.topics.each do |topic|
-			file = topic[:src].gsub(/\..+$/, '.html')
+			file = topic[:src].gsub(/\..+$/, "#{Glyph["document.#{Glyph['document.output']}.extension"]}")
 			info "Generating topic '#{file}'"
 			(out/file).parent.mkpath
 			file_write out/file, topic[:contents]
 		end
 		info "Web output generated successfully."
 	end
+
+	desc "Create multiple HTML 5 files"
+	task :web5 => [:web] do; end
 
 	desc "Create a pdf file"
 	task :pdf => :html do
