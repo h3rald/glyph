@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-08-08}
+  s.date = %q{2010-08-09}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -38,13 +38,6 @@ Gem::Specification.new do |s|
      "book/output/html/images/document_generation.png",
      "book/output/html/images/glyph.png",
      "book/output/html/images/glyph.svg",
-     "book/output/html5/glyph.html",
-     "book/output/html5/images/document_generation.png",
-     "book/output/html5/images/glyph.png",
-     "book/output/html5/images/glyph.svg",
-     "book/output/html5/styles/default.css",
-     "book/output/html5/styles/lazy.css",
-     "book/output/html5/styles/ultraviolet/lazy.css",
      "book/output/pdf/glyph.pdf",
      "book/resources/document_generation.txt",
      "book/script/authors",
@@ -202,7 +195,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://www.h3rald.com/glyph/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Glyph -- A Ruby-powered Document Authoring Framework}
   s.test_files = [
     "spec/macros/core_spec.rb",
@@ -237,7 +230,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<gli>, [">= 1.1.1"])
       s.add_runtime_dependency(%q<extlib>, [">= 0.9.15"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])

@@ -35,7 +35,8 @@ namespace :generate do
 			info "Copying stylesheets..."
 			out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
 			Glyph.document.styles.each do |f|
-				subdir = f.parent.relative_path_from(Glyph::HOME/'styles').to_s.gsub(/^\./, '')
+				styles_dir = f.parent.to_s.include?(Glyph::HOME/'styles') ? Glyph::HOME/'styles' : Glyph::PROJECT/'styles'
+				subdir = f.parent.relative_path_from(styles_dir).to_s.gsub(/^\./, '')
 				dir = out_dir/subdir
 				dir.mkpath
 				case
@@ -102,7 +103,7 @@ namespace :generate do
 		out.mkpath
 		file_write out/"index.html", Glyph.document.output
 		Glyph.document.topics.each do |topic|
-			file = topic[:src].gsub(/\..+$/, "#{Glyph["document.#{Glyph['document.output']}.extension"]}")
+			file = topic[:src].gsub(/\..+$/, "#{Glyph["output.#{Glyph['document.output']}.extension"]}")
 			info "Generating topic '#{file}'"
 			(out/file).parent.mkpath
 			file_write out/file, topic[:contents]
