@@ -5,12 +5,11 @@ module Glyph
 	# A Macro object is instantiated by a Glyph::Interpreter whenever a macro is found in the parsed text.
 	# The Macro class contains shortcut methods to access the current node and document, as well as other
 	# useful methods to be used in macro definitions.
-	# TODO : update docs
 	class Macro
 
 		include Validators
 		include Helpers
-		include Glyph::Utils
+		include Utils
 
 		attr_reader :node, :source_name, :source_file, :source_topic
 
@@ -29,6 +28,7 @@ module Glyph
 		# Macro#interpret)
 		# @param [String] name the source name
 		# @param [String] file the source file
+		# @param [String] topic the topic file
 		# @since 0.3.0
 		def update_source(name, file=nil, topic=nil)
 			@updated_source = {:node => @node, :name => name, :file => file, :topic => topic}

@@ -2,6 +2,7 @@ module Glyph
 	class Macro
 
 		# @since 0.4.0
+		# This module includes some output-agnostic methods used by the most common Glyph macros.
 		module Helpers
 
 			def link_element_for(target, title, &block)

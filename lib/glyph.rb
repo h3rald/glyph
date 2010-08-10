@@ -203,6 +203,9 @@ module Glyph
 	end
 
 	#@since 0.4.0
+	# Creates a new macro by rewriting.
+	# @param [Symbol, String] name the name of the macro
+	# @param [String] text the Glyph code used to define the macro
 	def self.rewrite(name, text)
 		macro name do
 			body = text.dup

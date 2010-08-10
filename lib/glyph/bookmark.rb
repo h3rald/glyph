@@ -1,8 +1,16 @@
 module Glyph
+
+	# @since 0.4.0
+	# This class is used to model bookmarks within a Glyph document. It contains methods to store 
+	# bookmark data and resolve link paths automatically.
 	class Bookmark
 
 		attr_accessor :title, :file
 
+		# Initializes a bookmark object from a hash containing bookmark data.
+		# @param [Hash] hash the bookmark hash: {:id => 'bookmark_id', :file => 'source_file', :title => 'Bookmark Title'}
+		# @raise [RuntimeError] if the bookmark ID is not specified
+		# @raise [RuntimeError] if the bookmark ID is invalid (it must contain only letters, numbers, - or _)
 		def initialize(hash)
 			@id = hash[:id].to_sym rescue nil
 			@file = hash[:file].to_sym rescue nil
@@ -11,15 +19,22 @@ module Glyph
 			raise RuntimeError, "Invalid bookmark ID: #{@id}" unless check_id
 		end
 
+		# Returns the bookmark ID.
 		def code
 			@id
 		end
 
+		# Returns true if the two bookmarks have the same ID and file
+		# @param [Glyph::Bookmark] b the bookmark to compare
+		# @raises [RuntimeError] if the parameter supplied is not a bookmark
 		def ==(b)
 			raise RuntimeError, "#{b.inspect} is not a bookmark" unless b.is_a? Glyph::Bookmark
 			self.code == b.code && self.file == b.file
 		end
 
+		# Returns the appropriate link path to the bookmark, depending on the specified file
+		# @param [String] file the file where the link to the bookmark must be placed
+		#	@return [String] the link to the bookmark
 		def link(file=nil)
 			if multiple_output_files? then
 				external_file = @file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
@@ -30,6 +45,8 @@ module Glyph
 			end
 		end
 
+		# Returns the bookmark id
+		# @return [String] the bookmark ID
 		def to_s
 			@id.to_s
 		end
@@ -44,16 +61,20 @@ module Glyph
 
 	end
 
+	# This class is used to model bookmark headers
 	class Header < Bookmark
 
 		attr_reader :level
 
+		# Initializes the bookmark from a hash. The header hash takes two additional options: 
+		# :level (the header level within the document), :toc (whether the header should appear in the Table of Contents or not)
 		def initialize(hash)
 			super(hash)
 			@level = hash[:level]
 			@toc = hash[:toc]
 		end
 
+		# Returns true if the header is displayed in the Table of contents
 		def toc?
 			@toc
 		end

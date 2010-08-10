@@ -70,20 +70,16 @@ module Glyph
 			key
 		end
 
-		# TODO
 		# Returns a stored bookmark or nil
 		# @param [#to_sym] key the bookmark identifier
-		# @param [String] file the file where the bookmark is defined
-		# @return [Hash, nil] the bookmark hash or nil if no bookmark is found
+		# @return [Glyph::Bookmark, nil] the bookmark or nil if no bookmark is found
 		def bookmark?(key)
 			@bookmarks[key.to_sym]
 		end
 
-		# TODO
 		# Stores a new bookmark
 		# @param [Hash] hash the bookmark hash: {:id => "BookmarkID", :title => "Bookmark Title", :file => "dir/preface.glyph"}
-		# @return [Hash] the stored bookmark (:id is converted to a symbol)
-		# @raise [RuntimeError] if the hash does not contain an :id and a :file key.
+		# @return [Glyph::Bookmark] the stored bookmark
 		# @raise [RuntimeError] if the bookmark is already defined.
 		def bookmark(hash)
 			b = Glyph::Bookmark.new(hash)
@@ -92,10 +88,10 @@ module Glyph
 			b
 		end
 
-		# TODO
 		# Stores a new header
 		# @param [Hash] hash the header hash: {:id => "Bookmark_ID", :title => "Bookmark Title", :level => 3}
-		# @return [Hash] the stored header
+		# @return [Glyph::Header] the stored header
+		# @raise [RuntimeError] if the bookmark is already defined.
 		def header(hash)
 			b = Glyph::Header.new(hash)
 			raise RuntimeError, "Bookmark '#{b.code}' already exists" if @bookmarks.has_key? b.code
@@ -104,15 +100,17 @@ module Glyph
 			b
 		end
 
-		# TODO
 		# Returns a stored header or nil
-		# @param [String] key the header identifier
-		# @return [Hash, nil] the header hash or nil if no header is found
+		# @param [String, Symbol] key the header identifier
+		# @return [Glyph::Header, nil] the header or nil if no header is found
 		def header?(key)
 			@headers[key.to_sym]
 		end
 
-		# TODO
+		# @since 0.4.0
+		# Stores a stylesheet
+		# @param [String] file the stylesheet file
+		# @raises [RuntimeError] if the stylesheet is already specified for the document (unless the output has more than one file)
 		def style(file)
 			f = Pathname.new file
 			if @styles.include?(f) && !Glyph.multiple_output_files? then

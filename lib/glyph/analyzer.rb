@@ -1,10 +1,15 @@
 module Glyph
+
+	# @since 0.4.0
+	# This class is used to collect statistics about a Glyph document.
 	class Analyzer
 
 		include Glyph::Utils
 
 		attr_reader :stats
 
+		# Initializes a new Analyzer
+		# @param [Glyph::Document] doc the document to analyze
 		def initialize(doc=Glyph.document)
 			@doc = doc
 			@stats = {}
@@ -12,6 +17,8 @@ module Glyph
 			@macros_by_def = {}
 		end
 
+		# Helper method used to return an array of specific macro instances
+		# @param [String, Symbol] name the name of the macro definition
 		def macro_array_for(name)
 			return @macros_by_def[name.to_sym] if @macros_by_def[name.to_sym]
 			key = @macros_by_def.keys.select{|k| macro_eq?(k, name.to_sym) }[0] || name.to_sym
@@ -19,6 +26,9 @@ module Glyph
 			@macros_by_def[key]
 		end
 
+		# Iterator over specific macro instances
+		# @param [String, Symbol] name the name of the macro definition (if left blank, iterates over all macro instances)
+		# @yieldparam [Glyph::MacroNode] n the macro node
 		def with_macros(name=nil, &block)
 			raise ArgumentError, "No block given" unless block_given?
 			name = name.to_sym if name
@@ -51,6 +61,10 @@ module Glyph
 			end
 		end	
 
+		# Retrieves statistics of a given type
+		# @param [String, Symbol] stats_type the type of stats to retrieve 
+		# (:macros, :bookmarks, :links, :snippets, :files, :global, :macro, :bookmark, :snippet, :link)
+		# @param [String, Symbol] *args Stats parameter(s) (e.g. a macro name, bookmark ID, etc.)
 		def stats_for(stats_type, *args)
 			begin
 				send :"stats_#{stats_type}", *args 
