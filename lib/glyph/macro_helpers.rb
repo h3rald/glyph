@@ -1,10 +1,16 @@
 module Glyph
 	class Macro
 
-		# @since 0.4.0
 		# This module includes some output-agnostic methods used by the most common Glyph macros.
+		# @since 0.4.0
 		module Helpers
 
+			# Renders a link
+			# @param [String] target the target of the link
+			# @param[String] title the title of the link
+			# @yield [link_path, link_title] the block to call to render the link
+			# @yieldparam [String] link_path the path to the link target
+			# @yieldparam [String] link_title the title of the link
 			def link_element_for(target, title, &block)
 				if target.match /^#/ then
 					@node[:document].links << target 
@@ -38,6 +44,10 @@ module Glyph
 				end
 			end
 
+			# Renders a For More Information note
+			# @param [String] topic the topic of the note
+			# @param [String] href the reference to link to
+			# @yield [topic, link] the block used to render the FMI note
 			def fmi_element_for(topic, href, &block)
 				link = placeholder do |document| 
 					interpret "link[#{href}]"
@@ -45,6 +55,9 @@ module Glyph
 				block.call topic, link
 			end
 
+			# Renders a draft comment element
+			# @yield [value] the block used to render the comment
+			# @yieldparam [String] value the comment text
 			def draftcomment_element(&block)
 				if Glyph['document.draft'] then
 					block.call value
@@ -53,6 +66,9 @@ module Glyph
 				end
 			end
 
+			# Renders a todo element
+			# @yield [value] the block used to render the todo element 
+			# @yieldparam [String] value the todo text
 			def todo_element(&block)
 				todo = {:source => @source_name, :text => value}
 				@node[:document].todos << todo unless @node[:document].todos.include? todo
@@ -63,6 +79,10 @@ module Glyph
 				end
 			end
 
+			# Renders an image element
+			# @param [String] image the image to render
+			# @param [String] alt the value of the image's ALT tag
+			# @yield [alt, dest_file] the block used to render the image
 			def image_element_for(image, alt, &block)
 				src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 				dest_file = Glyph.lite? ? image : "images/#{image}"
@@ -70,6 +90,11 @@ module Glyph
 				block.call alt, dest_file
 			end
 
+			# Renders a figure element
+			# @param [String] image the image to render
+			# @param [String] alt the value of the image's ALT tag
+			# @param [String] caption
+			# @yield alt, dest_file, caption] the block used to render the figure
 			def figure_element_for(image, alt, caption, &block)
 				src_file = Glyph.lite? ? image : Glyph::PROJECT/"images/#{image}"
 				dest_file = Glyph.lite? ? image : "images/#{image}"
@@ -77,6 +102,7 @@ module Glyph
 				block.call alt, dest_file, caption
 			end
 
+			# Renders a title element
 			def title_element(&block)
 				unless Glyph["document.title"].blank? then
 					block.call
@@ -85,6 +111,7 @@ module Glyph
 				end
 			end
 
+			# Renders a subtitle element
 			def subtitle_element(&block)
 				unless Glyph["document.subtitle"].blank? then
 					block.call
@@ -93,6 +120,7 @@ module Glyph
 				end
 			end
 
+			# Renders an author element
 			def author_element(&block)
 				unless Glyph['document.author'].blank? then
 					block.call
@@ -101,6 +129,7 @@ module Glyph
 				end
 			end
 
+			# Renders a revision element
 			def revision_element(&block)
 				unless Glyph["document.revision"].blank? then
 					block.call
@@ -109,6 +138,14 @@ module Glyph
 				end
 			end
 
+			# Renders a Table of Contents
+			# @param [Integer] depth the maximum header level
+			# @param [String] title the title of the TOC
+			# @param [Hash] procs the Proc objects used to render the TOC
+			# @option procs [Proc] :link used to render TOC header links (parameters: Glyph::Header). 
+			# @option procs [Proc] :toc_list used to render the TOC list (parameters: a Proc used to traverse the document tree, the Glyph::Bookmark used for the TOC header, a Glyph::Document)
+			# @option procs [Proc] :toc_item used to render a TOC item (parameters: an Array of header classes, a String used for the header link)
+			# @option procs [Proc] :toc_sublist used to render a TOC sublist (parameters: a String containing the contents of the list)
 			def toc_element_for(depth, title, procs={})
 				return @node[:document].toc if @node[:document].toc
 				link_header = procs[:link]
@@ -147,6 +184,10 @@ module Glyph
 				toc
 			end
 
+			# Renders a section element
+			# @param [Hash] procs the Proc objects used to render the section
+			# @option procs [Proc] :title used to render the section header (parameters: the header level, the section ID, the section title)
+			# @option procs [Proc] :body used to render the section body (parameters: the section title, the section body)
 			def section_element_for(procs={})
 				h = ""
 				if attr(:title) then
@@ -186,7 +227,13 @@ module Glyph
 				end
 			end
 
-			def navigation_element_for(topic_id, procs)
+			# Renders a navigation element
+			# @param [String] topic_id the ID of the current topic
+			# @param [Hash] procs the Proc objects used to render the navigation element
+			#	@option procs [Proc] :previous the link to the previous topic
+			#	@option procs [Proc] :next the link to the next topic 
+			#	@option procs [Proc] :contents the link to the document contents 
+			def navigation_element_for(topic_id, procs={})
 				# Get the previous topic
 				previous_topic = @node[:document].topics.last
 				previous_link = procs[:previous].call previous_topic
