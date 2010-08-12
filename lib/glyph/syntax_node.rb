@@ -112,6 +112,8 @@ module Glyph
 			Glyph::Macro.new(self).expand
 		end
 
+		# Returns the path to the file where the macro was used
+		# @since 0.4.0
 		def source_file
 			source = self[:source][:file].to_s rescue nil
 			source = Glyph['document.source'] if source.blank?

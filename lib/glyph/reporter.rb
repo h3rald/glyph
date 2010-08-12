@@ -1,15 +1,21 @@
 module Glyph
+
+	# This class is used to display statistics collected by a Glyph::Analyzer. 
+	# @since 0.4.0
 	class Reporter
 
 		include Glyph::Utils
 
 		attr_accessor :detailed
 
+		# Initializes the reporter
+		# @param [Hash] stats the collected statistics
 		def initialize(stats)
 			@stats = stats
 			@detailed = true
 		end
 
+		# Displays the statistics
 		def display
 			[:files, :macros, :snippets, :bookmarks, :links, 
 				:macro, :snippet, :bookmark, :link].each do |s|

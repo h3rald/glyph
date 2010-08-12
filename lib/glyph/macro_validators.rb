@@ -77,7 +77,12 @@ module Glyph
 				end
 			end
 
-			# TODO: docs
+			# Ensures that the macro receives the specified attribute
+			# @param [String, Symbol] name the name of the attribute
+			# @param [Hash] options a hash containing validation options
+			# @option options :level the error level (:error, :warning)
+			# @return [Boolean] whether the validation passed or not
+			# @since 0.4.0
 			def required_attribute(name, options={:level=>:error})
 				validate("Macro '#{@name}' requires a '#{name}' attribute", options) do
 					!raw_attribute(name.to_sym).blank?
@@ -140,15 +145,25 @@ module Glyph
 					macro_error "Mutual Inclusion in #{check_type}(#{arg}): '#{check_value}'", Glyph::MutualInclusionError 
 				end
 			end
-			
-			#@since 0.4.0
+
+			# Ensure that the macros is within another
+			# @param [String, Symbol] arg the name of the container macro
+			# @param [Hash] options a hash containing validation options
+			# @option options :level the error level (:error, :warning)
+			# @return [Boolean] whether the validation passed or not
+			# @since 0.4.0
 			def within(arg, options={:level => :error})
 				validate("Macro '#{@name}' must be within a '#{arg}' macro", options) do 
 					@node.find_parent {|n| Glyph.macro_eq? arg.to_sym, n[:name]}
 				end
 			end
 
-			#@since 0.4.0
+			# Ensure that the macros is _not_ within another
+			# @param [String, Symbol] arg the name of the container macro
+			# @param [Hash] options a hash containing validation options
+			# @option options :level the error level (:error, :warning)
+			# @return [Boolean] whether the validation passed or not
+			# @since 0.4.0
 			def not_within(arg, options={:level => :error})
 				validate("Macro '#{@name}' must not be within a '#{arg}' macro", options) do 
 					!@node.find_parent {|n| Glyph.macro_eq? arg.to_sym, n[:name]}

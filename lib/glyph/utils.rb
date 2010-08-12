@@ -78,6 +78,11 @@ module Glyph
 			FileUtils.cp source, dest, options
 		end
 
+		# Loads all child elements of the given directory, matching a given extension
+		# @param [Pathname] dir the directory containing the files
+		# @param [String] extension the file extension to check
+		# @yield [file, contents] the file (Pathname) and its contents
+		# @since 0.4.0
 		def load_files_from_dir(dir, extension, &block)
 			if dir.exist? then
 				dir.children.each do |c|
@@ -86,10 +91,14 @@ module Glyph
 			end
 		end
 
+		# Returns true if the macro name is used as an alias
+		# @param [String, Symbol] name the macro name to check
 		def macro_alias?(name)
 			ALIASES[:by_alias].include? name.to_sym
 		end
 
+		# Returns the name of the macro definition referenced by the supplied alias
+		# @param [String, Symbol] name the alias name to check
 		def macro_definition_for(name)
 			ALIASES[:by_alias][name.to_sym]
 		end
@@ -98,7 +107,9 @@ module Glyph
 			ALIASES[:by_def][name.to_sym]
 		end
 
-		# TODO
+		# Returns true if the macro names point to the same definition
+		# @param [String, Symbol] ident1 the first macro to compare
+		# @param [String, Symbol] ident2 the second macro to compare
 		def macro_eq?(ident1, ident2)
 			Glyph::MACROS[ident1.to_sym] == Glyph::MACROS[ident2.to_sym]
 		end
@@ -110,6 +121,7 @@ module Glyph
 			(actual_children & children) == children
 		end
 
+		# Returns true if multiple output files are being generated
 		def multiple_output_files?
 			Glyph["output.#{Glyph['document.output']}.multifile"]
 		end
