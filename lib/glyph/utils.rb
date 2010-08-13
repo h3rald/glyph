@@ -91,6 +91,21 @@ module Glyph
 			end
 		end
 
+		def with_files_from(dir, &block)
+			output = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
+			dir_path = Glyph::PROJECT/"output/#{output}/#{dir}"
+			dir_path.mkpath
+			# Copy images
+			(Glyph::PROJECT/dir).find do |i|
+				if i.file? then
+					dest = "#{Glyph::PROJECT/"output/#{output}/#{dir}"}/#{i.relative_path_from(Glyph::PROJECT/dir)}"
+					src = i.to_s
+					Pathname.new(dest).parent.mkpath
+					block.call src, dest
+				end
+			end
+		end
+
 		# Returns true if the macro name is used as an alias
 		# @param [String, Symbol] name the macro name to check
 		def macro_alias?(name)

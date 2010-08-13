@@ -4,21 +4,6 @@ namespace :generate do
 
 	include Glyph::Utils
 
-	def with_files_from(dir, &block)
-		output = Glyph['document.output']
-		dir_path = Glyph::PROJECT/"output/#{output}/#{dir}"
-		dir_path.mkpath
-		# Copy images
-		(Glyph::PROJECT/dir).find do |i|
-			if i.file? then
-				dest = "#{Glyph::PROJECT/"output/#{output}/#{dir}"}/#{i.relative_path_from(Glyph::PROJECT/dir)}"
-				src = i.to_s
-				Pathname.new(dest).parent.mkpath
-				block.call src, dest
-			end
-		end
-	end
-
 	desc "Copy image files"
 	task :images => [:document] do
 		unless Glyph.lite? then
@@ -33,7 +18,8 @@ namespace :generate do
 	task :styles => [:document] do
 		if Glyph['document.styles'].in?(['link', 'import']) && !Glyph.lite? then
 			info "Copying stylesheets..."
-			out_dir = Glyph::PROJECT/"output/#{Glyph['document.output']}/styles"
+			output = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
+			out_dir = Glyph::PROJECT/"output/#{output}/styles"
 			Glyph.document.styles.each do |f|
 				styles_dir = f.parent.to_s.include?(Glyph::HOME/'styles') ? Glyph::HOME/'styles' : Glyph::PROJECT/'styles'
 				subdir = f.parent.relative_path_from(styles_dir).to_s.gsub(/^\./, '')
@@ -78,7 +64,8 @@ namespace :generate do
 			out = Pathname.new Glyph['document.output_dir']
 			file = (Glyph['document.output'] == 'pdf') ? Glyph['document.filename']+".html" : Glyph['document.output_file']
 		else
-			out = Glyph::PROJECT/"output/#{Glyph['document.output']}"
+			out = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
+			out = Glyph::PROJECT/"output/#{out}"
 			extension = (Glyph['document.output'] == 'pdf') ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
 			file = "#{Glyph['document.filename']}#{extension}"
 		end
