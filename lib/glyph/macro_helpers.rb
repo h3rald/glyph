@@ -196,6 +196,7 @@ module Glyph
 				if attr(:title) then
 					level = 1
 					@node.ascend do |n| 
+						break if n.respond_to?(:attribute) && n.attribute(:class) && n.attribute(:class).children.join.strip == "topic"
 						if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
 							level+=1
 						end
