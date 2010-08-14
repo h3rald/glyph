@@ -100,7 +100,7 @@ end
 macro :toc do 
 	max_parameters 1
 	link_proc = lambda do |head|
-		%{<a href="#{head.link(@source_file)}">#{head.title}</a>}
+		(!Glyph.multiple_output_files? || (head.definition != head.file)) ? %{<a href="#{head.link(@source_file)}">#{head.title}</a>} : head.title
 	end
 	toc_list_proc = lambda do |descend_proc, bmk, document|
 		%{<nav class="contents">

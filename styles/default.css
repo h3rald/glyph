@@ -220,8 +220,18 @@ nav, .navigation {
 	border: 1px solid #E6E6E6;
 }
 
+nav.contents {
+	margin: auto;
+	text-align: left;
+	border: none;
+}
+
 nav a, .navigation a {
 	margin: 1em;
+}
+
+nav.contents a {
+	margin: 0;
 }
 
 mark {

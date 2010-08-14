@@ -1,3 +1,4 @@
+txt[
 &:[prince|=>[http://www.princexml.com/|Prince]]
 Glyph is a _Rapid Document Authoring Framework_. 
 
@@ -118,4 +119,5 @@ section[
 * Book (PDF): =>[http://github.com/h3rald/glyph/raw/\.%[Glyph::VERSION.strip]/book/output/pdf/glyph.pdf]
 * Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
 * User Group: =>[http://groups.google.com/group/glyph-framework]
+]
 ]

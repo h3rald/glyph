@@ -235,9 +235,8 @@ module Glyph
 					else
 						procs[:body].call h, interpret("include[#{attr(:src)}]")
 					end
-				else
-					procs[:body].call h, value
 				end
+				procs[:body].call h, value
 			end
 
 			# Renders a navigation element
