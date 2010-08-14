@@ -213,8 +213,15 @@ span.line-numbers{
 	padding: 3px;
 }
 
-nav {
+nav, .navigation {
 	display: block;
+	margin: 1em auto;
+	text-align: center;
+	border: 1px solid #E6E6E6;
+}
+
+nav a, .navigation a {
+	margin: 1em;
 }
 
 mark {

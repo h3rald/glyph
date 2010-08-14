@@ -26,7 +26,7 @@ describe "Macro:" do
 		Glyph.run! 'generate:web5'
 		web1 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/web1.html')
 		web2 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/b/web2.html')
-		web1.match(%{<nav><a href="index.html">Contents</a><a href="a/b/web2.html">Next &rarr;</a></nav>}).blank?.should == false
-		web2.match(%{<nav><a href="a/web1.html">&larr; Previous</a><a href="index.html">Contents</a></nav>}).blank?.should == false
+		web1.match(%{<nav><a href="index.html">Contents</a><a href="a/b/web2.html">&rarr; Topic #2</a></nav>}).blank?.should == false
+		web2.match(%{<nav><a href="a/web1.html">Topic #1 &larr;</a><a href="index.html">Contents</a></nav>}).blank?.should == false
 	end
 end	

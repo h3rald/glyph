@@ -6,8 +6,9 @@ document[
 		section[
 			@title[{{title}}]
 			@id[{{id}}]
+			navigation[{{id}}]
 {{contents}}
+			navigation[{{id}}]
 		]
-		navigation[{{id}}]
 	]
 ]

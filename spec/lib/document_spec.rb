@@ -48,7 +48,7 @@ describe Glyph::Document do
 		@doc.placeholder { "test" }
 		@doc.style "test.css"
 		@doc.header :id => :test3, :title => "Test #3", :level => 3, :file => "test.glyph"
-		@doc.toc = "TOC goes here..."
+		@doc.toc[:contents] = "TOC goes here..."
 		doc2 = create_doc @tree
 		doc2.bookmarks.length.should == 0
 		doc2.placeholders.length.should == 0
@@ -58,7 +58,7 @@ describe Glyph::Document do
 		doc2.placeholders.length.should == 1
 		doc2.headers.length.should == 1
 		doc2.styles.length.should == 1
-		doc2.toc = "TOC goes here..."
+		doc2.toc[:contents] = "TOC goes here..."
 		doc2.bookmarks[0].should_not == Glyph::Bookmark.new(:id => :test4, :title => "Test #4", :file => "test.glyph")
 	end
 
@@ -145,7 +145,7 @@ describe Glyph::Document do
 		doc = create_doc tree
 		doc.analyze
 		doc.finalize
-		doc.toc.match(%{<div class="contents">}).blank?.should == false
+		doc.toc[:contents].match(%{<div class="contents">}).blank?.should == false
 		reset_quiet
 	end
 

@@ -39,24 +39,24 @@ macro :navigation do
 	exact_parameters 1
 	procs = {}
 	procs[:contents] = lambda do
-		%{<li><a href="#{Glyph["output.#{Glyph['document.output']}.base"]}index.html">Contents</a></li>}
+		%{<a href="#{Glyph["output.#{Glyph['document.output']}.base"]}index.html">Contents</a>}
 	end
 	procs[:previous] = lambda do |topic|
 		if topic then
-			%{<li><a href="#{Glyph["output.#{Glyph['document.output']}.base"]}#{topic[:src].gsub(/\..+$/, '.html')}">&larr; Previous</a></li>}
+			%{<a href="#{Glyph["output.#{Glyph['document.output']}.base"]}#{topic[:src].gsub(/\..+$/, '.html')}">#{topic[:title]} &larr;</a>}
 		else
 			""
 		end
 	end
 	procs[:next] = lambda do |topic|
 		if topic then
-			%{<li><a href="#{Glyph["output.#{Glyph['document.output']}.base"]}#{topic[:src].gsub(/\..+$/, '.html')}">Next &rarr;</a></li>}
+			%{<a href="#{Glyph["output.#{Glyph['document.output']}.base"]}#{topic[:src].gsub(/\..+$/, '.html')}">&rarr; #{topic[:title]}</a>}
 		else
 			""
 		end
 	end
 	procs[:navigation] = lambda do |contents, prev_link, next_link|
-		%{<ul class="navigation">#{prev_link}#{contents}#{next_link}</ul>}
+		%{<div class="navigation">#{prev_link}#{contents}#{next_link}</div>}
 	end
 	navigation_element_for param(0).to_sym, procs
 end

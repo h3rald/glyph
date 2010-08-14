@@ -28,14 +28,14 @@ macro :navigation do
 	end
 	procs[:previous] = lambda do |topic|
 		if topic then
-			%{<a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">&larr; Previous</a>}
+			%{<a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">#{topic[:title]} &larr;</a>}
 		else
 			""
 		end
 	end
 	procs[:next] = lambda do |topic|
 		if topic then
-			%{<a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">Next &rarr;</a>}
+			%{<a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">&rarr; #{topic[:title]}</a>}
 		else
 			""
 		end
