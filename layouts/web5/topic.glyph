@@ -3,6 +3,7 @@ document[
 		style[default.css]
 	]
 	body[
+		@class[topic]
 		=article[
 			section[
 				@title[{{title}}]

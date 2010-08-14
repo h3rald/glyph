@@ -3,6 +3,7 @@ document[
 		style[default.css]
 	]
 	body[
+		@class[topic]
 		halftitlepage[
 			title[]
 			subtitle[]

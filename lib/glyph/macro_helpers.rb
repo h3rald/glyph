@@ -155,7 +155,10 @@ module Glyph
 						added_headers ||= []
 						n1.descend do |n2, level|
 							if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
-								next if Glyph.multiple_output_files? && !n2.attribute(:src) # Only consider topics when building TOC for web/web5
+								if Glyph.multiple_output_files? then
+									# Only consider topics/booklets when building TOC for web/web5
+									next if !n2.attribute(:src) && n2.child_macros.select{|child| child.attribute(:src)}.blank? 
+								end
 								next if n2.find_parent{|node| Glyph['system.structure.special'].include? node[:name] }
 								header_hash = n2[:header]
 								next if depth && header_hash && (header_hash.level-1 > depth.to_i) || header_hash && !header_hash.toc?

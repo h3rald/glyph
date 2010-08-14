@@ -17,7 +17,7 @@ module Glyph
 		# @raise [RuntimeError] if the bookmark ID is invalid (it must contain only letters, numbers, - or _)
 		def initialize(hash)
 			@id = hash[:id].to_sym rescue nil
-			@file = hash[:file].to_sym rescue nil
+			@file = hash[:file]
 			@title = hash[:title]
 			@definition = hash[:definition]
 			raise RuntimeError, "Bookmark ID not specified" unless @id
@@ -45,7 +45,7 @@ module Glyph
 				dest_file = @file.to_s
 				dest_file += '.glyph' unless dest_file.match /\..+$/
 				external_file = dest_file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
-				f = (file.blank? || file.to_sym != @file) ? "#{Glyph["output.#{Glyph['document.output']}.base"]}#{external_file}" : ""
+				f = (file.blank? || file != @file) ? "#{Glyph["output.#{Glyph['document.output']}.base"]}#{external_file}" : ""
 				"#{f}##{@id}"
 			else
 				"##{@id}"

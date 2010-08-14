@@ -3,6 +3,7 @@ document[
 		style[default.css]
 	]
 	body[
+		@class[topic]
 		section[
 			@title[{{title}}]
 			@id[{{id}}]

@@ -38,6 +38,32 @@ macro :pubdate do
 </time>}
 end
 
+macro :navigation do
+	exact_parameters 1
+	procs = {}
+	procs[:contents] = lambda do
+		%{<a href="#{Glyph['document.base']}index.html">Contents</a>}
+	end
+	procs[:previous] = lambda do |topic|
+		if topic then
+			%{<a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">#{topic[:title]} &larr;</a>}
+		else
+			""
+		end
+	end
+	procs[:next] = lambda do |topic|
+		if topic then
+			%{<a href="#{Glyph['document.base']}#{topic[:src].gsub(/\..+$/, '.html')}">&rarr; #{topic[:title]}</a>}
+		else
+			""
+		end
+	end
+	procs[:navigation] = lambda do |contents, prev_link, next_link|
+		%{<nav>#{prev_link}#{contents}#{next_link}</nav>}
+	end
+	navigation_element_for param(0).to_sym, procs
+end
+
 macro_alias :important => :note
 macro_alias :tip => :note
 macro_alias :caution => :note

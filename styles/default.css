@@ -242,6 +242,10 @@ td>div.code, td>code {
 	padding: 0.2em;
 }
 
+.topic{
+	margin: 2em auto;
+}
+
 /* FONTS */
 
 body {

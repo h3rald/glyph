@@ -17,7 +17,7 @@ describe Glyph::Bookmark do
 	end
 
 	it "shiuld expose title, code and file" do
-		@b.file.should == :"test.glyph"
+		@b.file.should == "test.glyph"
 		@b.code.should == :test
 		@b.title.should == nil
 		Glyph::Bookmark.new(:id => :test2, :title => "Test 2").title.should == "Test 2"
@@ -55,7 +55,7 @@ describe Glyph::Bookmark do
 
 	it "should check bookmark equality" do
 		@b.should == Glyph::Bookmark.new(:id => :test, :file => 'test.glyph')
-		@b.should == Glyph::Bookmark.new(:id => :test, :file => :"test.glyph")
+		@b.should == Glyph::Bookmark.new(:id => :test, :file => "test.glyph")
 		@b.should == Glyph::Bookmark.new(:id => :test, :file => 'test.glyph', :level => 2)
 		@b.should_not == Glyph::Bookmark.new(:id => :test1, :file => 'test.glyph')
 		@b.should_not == Glyph::Bookmark.new(:id => :test, :file => 'test1.glyph')

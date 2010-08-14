@@ -63,6 +63,16 @@ module Glyph
 			children.select{|n| n.is_a? ParameterNode }
 		end
 
+		# @return [Array<Glyph::MacroNode>] an array of the child macro nodes
+		# @since 0.4.0
+		def child_macros
+			macros = []
+			parameters.each do |p|
+				macros += p.children.select{|n| n.is_a? MacroNode }
+			end
+			macros
+		end
+
 		# 
 		# Returns the parameter syntax node at the specified index
 		# @param [Fixnum] n the index of the parameter 
