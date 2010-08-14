@@ -16,16 +16,14 @@ describe "Macro:" do
 	end
 
 	it "section (topic)" do
-		lambda { output_for("contents[section[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute") 
-		lambda { output_for("section[@src[test]]") }.should raise_error(Glyph::MacroError, "Macro 'section' must be within a 'contents' macro") 
-		interpret("contents[section[@src[a/web1.glyph]@title[Test]]]")
+		lambda { output_for("section[@src[test]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute") 
+		interpret("section[@src[a/web1.glyph]@title[Test]]")
 		topic = @p.document.topics[0]
 		topic.blank?.should == false 
 		topic[:id].should == :t_0 
 		topic[:title].should == "Test" 
 		topic[:src].should == "a/web1.glyph"
 		topic[:contents].match(/id="w1_3"/).blank?.should == false
-		@p.document.output.should == "" 
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'load:macros'
 		output_for("contents[section[@src[a/web1.glyph]@title[Test]]]").match(/id="w1_3"/).blank?.should == false

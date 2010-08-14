@@ -88,7 +88,14 @@ namespace :generate do
 		raise RuntimeError, "You cannot have an 'images' directory under your 'text' directory." if (Glyph::PROJECT/"text/images").exist?
 		raise RuntimeError, "You cannot have a 'styles' directory under your 'text' directory." if (Glyph::PROJECT/"text/styles").exist?
 		out.mkpath
-		file_write out/"index.html", Glyph.document.output
+		index_layout = Glyph["output.#{Glyph['document.output']}.layouts.index"] || :index
+		# Generate index topic
+		context = {} 
+		context[:document] = Glyph.document
+		context[:source] = {:name => "layout:#{index_layout}", :file => "layouts/#{index_layout}.glyph"}
+		index_topic = Glyph::Interpreter.new("layout:#{index_layout}[]", context).document.output
+		file_write out/"index.html", index_topic
+		# Generate all topics
 		Glyph.document.topics.each do |topic|
 			file = topic[:src].gsub(/\..+$/, "#{Glyph["output.#{Glyph['document.output']}.extension"]}")
 			info "Generating topic '#{file}'"

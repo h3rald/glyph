@@ -3,7 +3,6 @@
 macro :section do 
 	max_parameters 1
 	if raw_attribute(:src) && Glyph.multiple_output_files? then
-		within :contents
 		required_attribute :title
 	end
 	procs = {}
@@ -122,11 +121,6 @@ macro :toc do
 		:toc_list => toc_list_proc, 
 		:toc_item => toc_item_proc, 
 		:toc_sublist => toc_sublist_proc
-end
-
-macro :contents do
-	result = interpret(@node.parameter(0).to_s)
-	Glyph.multiple_output_files? ? "" : result
 end
 
 # See:

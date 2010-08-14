@@ -47,13 +47,17 @@
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
-    :layout: 'topic'
+    :layouts:
+      :topic: 'topic'
+      :index: 'index'
     :base: ""
   :web5:
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
-    :layout: 'topic'
+    :layouts:
+      :topic: 'topic'
+      :index: 'index'
     :base: ""
 :filters:
   :highlighter: 'coderay'

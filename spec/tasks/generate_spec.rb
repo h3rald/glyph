@@ -58,7 +58,9 @@ describe "generate" do
 		# check that the task can be run without errors
 		reset_web.call 
 		Glyph["output.#{Glyph['document.output']}.base"] = "/test/"
-		lambda { Glyph.run! 'generate:web' }.should_not raise_error
+		#lambda { 
+			Glyph.run! 'generate:web' 
+		#}.should_not raise_error
 		# check that images are copied
 		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true
 		# check that stylesheets are copied
@@ -67,6 +69,7 @@ describe "generate" do
 		# check that index.html is created
 		index = (Glyph::PROJECT/'output/web/index.html')
 		index.exist?.should == true
+		file_load(index).should match(/<li class="section"><a href="\/test\/a\/b\/web2.html#h_6">Topic #2<\/a>/)
 	  #	check that topics are copied in the proper directories
 		web1 = (Glyph::PROJECT/'output/web/a/web1.html')
 		web1.exist?.should == true
