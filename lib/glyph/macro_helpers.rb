@@ -199,7 +199,13 @@ module Glyph
 					end
 					ident = (attr(:id) || "h_#{@node[:document].headers.length+1}").to_sym
 					# The bookmark is added when the section is first processed; therefore it will exist already when a topic layout is processed
-					bmk = @node[:document].bookmark?(ident) || header(:title => attr(:title), :level => level, :id => ident, :toc => !attr(:notoc), :file => attr(:src) || @source_file) 
+					bmk = @node[:document].bookmark?(ident)
+					bmk ||=  header	:title => attr(:title), 
+													:level => level, 
+													:id => ident, 
+													:toc => !attr(:notoc),
+													:definition => @source_file,
+													:file => (attr(:src) || @source_file)
 					@node[:header] = bmk
 					h = procs[:title].call level, bmk, attr(:title)
 				end

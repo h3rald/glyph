@@ -142,6 +142,7 @@ module Glyph
 			c = @stats[:bookmark] = {}
 			bmk = @doc.bookmark? code
 			c[:param] = name
+			c[:definition] = bmk.definition.to_s
 			c[:file] = bmk.file.to_s
 			c[:type] = bmk.is_a?(Glyph::Header) ? :header : :anchor
 			references = {}

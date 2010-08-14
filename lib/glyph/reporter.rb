@@ -67,7 +67,11 @@ module Glyph
 			s = @stats[:bookmark]
 			b_type = (s[:type] != :bookmark) ? " (#{s[:type]})" : " " 
 			section "Bookmark '#{s[:param]}'#{b_type}"
-			info "Defined in: #{s[:file]}"
+			if s[:file] == s[:definition] then
+				info "Defined in: #{s[:file]}"
+			else
+				info "Defined in: #{s[:definition]} (pointing to: #{s[:file]})"
+			end
 			occurrences s[:references], "Referenced in:" if @detailed 
 		end
 

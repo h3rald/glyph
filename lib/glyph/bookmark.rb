@@ -5,16 +5,21 @@ module Glyph
 	# bookmark data and resolve link paths automatically.
 	class Bookmark
 
-		attr_accessor :title, :file
+		attr_accessor :title, :file, :definition
 
 		# Initializes a bookmark object from a hash containing bookmark data.
-		# @param [Hash] hash the bookmark hash: {:id => 'bookmark_id', :file => 'source_file', :title => 'Bookmark Title'}
+		# @param [Hash] hash the bookmark hash
+		# @option hash [String] :id the bookmark ID
+		# @option hash [String] :file the file containing the bookmark
+		# @option hash [String] :title the title of the bookmark
+		# @option hash [String] :definition the file where the bookmark was defined
 		# @raise [RuntimeError] if the bookmark ID is not specified
 		# @raise [RuntimeError] if the bookmark ID is invalid (it must contain only letters, numbers, - or _)
 		def initialize(hash)
 			@id = hash[:id].to_sym rescue nil
 			@file = hash[:file].to_sym rescue nil
 			@title = hash[:title]
+			@definition = hash[:definition]
 			raise RuntimeError, "Bookmark ID not specified" unless @id
 			raise RuntimeError, "Invalid bookmark ID: #{@id}" unless check_id
 		end
