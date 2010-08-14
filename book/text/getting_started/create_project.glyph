@@ -1,7 +1,4 @@
-section[
-	@title[Creating your first Glyph Project]
-
-	textile[
+textile[
 To install Glyph, simply run @gem install glyph@, like with any other Ruby gem. Then, create a new directory and initialize a new Glyph project, like so:
 
 @mkdir@ _==test_document==_
@@ -37,5 +34,4 @@ Additionally, the following files are also created at top level:
 * @config.yml@ -- containing your =>[#cfg|Project Configuration].
 * @document.glyph@ -- containing the =>[#struct|structure] of your document.
 * @snippets.yml@ -- containing your text =>[#incl|snippets].
-	]
 ]

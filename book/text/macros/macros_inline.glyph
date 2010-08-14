@@ -1,6 +1,3 @@
-section[
-	@title[Inline Macros]
-	
 	ref_macro[
 		@n[anchor]
 		@desc[Creates a named anchor (or bookmark).]
@@ -47,4 +44,3 @@ section[
 		@desc[Saves the value as a TODO item, which can be printed using the #>[todo] and included in the document if the $>[document.draft] is set to @true@.]
 		@example[=todo[Remember to do this.]=]
 	]
-]

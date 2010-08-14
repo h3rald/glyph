@@ -1,6 +1,3 @@
-section[
-	@title[Interpreting Glyph Code]
-	@id[interpreting]
 
 	txt[What if you need to evaluate some Glyph code _within_ a macro? Say for example you want to transform a parameter in a link, and you want to make sure that link gets validated exactly like the others, in this case, you can use the @interpret@ method, as follows:]
 
@@ -48,4 +45,3 @@ rewrite:[issue\|
 		p[Within the %>[rewrite:], it is possible to use a special syntax to call the code[raw_attr] or code[raw_param] methods: br[]
 			code[{{]em[parameter_number] or em[attribute_name]code[}}]]
 	]
-]

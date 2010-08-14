@@ -37,7 +37,9 @@ module Glyph
 		#	@return [String] the link to the bookmark
 		def link(file=nil)
 			if multiple_output_files? then
-				external_file = @file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
+				dest_file = @file.to_s
+				dest_file += '.glyph' unless dest_file.match /\..+$/
+				external_file = dest_file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
 				f = (file.blank? || file.to_sym != @file) ? "#{Glyph["output.#{Glyph['document.output']}.base"]}#{external_file}" : ""
 				"#{f}##{@id}"
 			else

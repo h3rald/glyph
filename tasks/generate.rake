@@ -91,13 +91,15 @@ namespace :generate do
 		index_layout = Glyph["output.#{Glyph['document.output']}.layouts.index"] || :index
 		# Generate index topic
 		context = {} 
-		context[:document] = Glyph.document
+		context[:document] = Glyph::Document.new(Glyph::DocumentNode.new).inherit_from(Glyph.document)
 		context[:source] = {:name => "layout:#{index_layout}", :file => "layouts/#{index_layout}.glyph"}
 		index_topic = Glyph::Interpreter.new("layout:#{index_layout}[]", context).document.output
 		file_write out/"index.html", index_topic
 		# Generate all topics
 		Glyph.document.topics.each do |topic|
-			file = topic[:src].gsub(/\..+$/, "#{Glyph["output.#{Glyph['document.output']}.extension"]}")
+			extension = "#{Glyph["output.#{Glyph['document.output']}.extension"]}"
+			file = topic[:src].gsub(/\..+$/, extension)
+			file += extension unless file.match /#{Regexp.escape(extension)}$/
 			info "Generating topic '#{file}'"
 			(out/file).parent.mkpath
 			file_write out/file, topic[:contents]

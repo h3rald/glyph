@@ -147,7 +147,7 @@ module Glyph
 			# @option procs [Proc] :toc_item used to render a TOC item (parameters: an Array of header classes, a String used for the header link)
 			# @option procs [Proc] :toc_sublist used to render a TOC sublist (parameters: a String containing the contents of the list)
 			def toc_element_for(depth, title, procs={})
-				return @node[:document].toc if @node[:document].toc
+				return @node[:document].toc[:contents] if @node[:document].toc[:contents]
 				link_header = procs[:link]
 				toc = placeholder do |document|
 					descend_section = lambda do |n1, added_headers|
@@ -177,10 +177,10 @@ module Glyph
 						list
 					end
 					title ||= "Table of Contents"
-					bmk = bookmark :id => :toc, :file => @source_file, :title => title
+					bmk = @node[:document].bookmark?(:toc) || bookmark(:id => :toc, :file => @source_file, :title => title)
 					procs[:toc_list].call descend_section, bmk, document
 				end
-				@node[:document].toc = toc.to_s
+				@node[:document].toc[:contents] = toc.to_s
 				toc
 			end
 
@@ -198,7 +198,8 @@ module Glyph
 						end
 					end
 					ident = (attr(:id) || "h_#{@node[:document].headers.length+1}").to_sym
-					bmk = header :title => attr(:title), :level => level, :id => ident, :toc => !attr(:notoc), :file => attr(:src) || @source_file
+					# The bookmark is added when the section is first processed; therefore it will exist already when a topic layout is processed
+					bmk = @node[:document].bookmark?(ident) || header(:title => attr(:title), :level => level, :id => ident, :toc => !attr(:notoc), :file => attr(:src) || @source_file) 
 					@node[:header] = bmk
 					h = procs[:title].call level, bmk, attr(:title)
 				end
@@ -216,7 +217,9 @@ module Glyph
 									]}
 						# Fix file for topic bookmark
 						@node[:document].bookmark?(topic_id).file = attr(:src)
-						@node[:document].topics << {:src => attr(:src), :title => attr(:title), :id => topic_id, :contents => result}
+						topic_src = attr(:src)
+						topic_src += ".glyph" unless topic_src.match /\..+$/
+						@node[:document].topics << {:src => topic_src, :title => attr(:title), :id => topic_id, :contents => result}
 						# Return nothing
 						nil
 					else

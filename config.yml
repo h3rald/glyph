@@ -50,7 +50,7 @@
     :layouts:
       :topic: 'topic'
       :index: 'index'
-    :base: ""
+    :base: "/"
   :web5:
     :multifile: true
     :extension: '.html'
@@ -58,7 +58,7 @@
     :layouts:
       :topic: 'topic'
       :index: 'index'
-    :base: ""
+    :base: "/"
 :filters:
   :highlighter: 'coderay'
   :markdown:

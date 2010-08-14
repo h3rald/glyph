@@ -1,7 +1,3 @@
-section[
-	@title[Filter Macros]
-	@id[f_macros]
-
 	ref_macro[
 		@n[markdown]
 		@desc[
@@ -37,4 +33,3 @@ highlight[ruby\|
 ]
 		=]
 	]
-]

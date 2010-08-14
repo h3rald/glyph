@@ -1,6 +1,3 @@
-section[
-	@title[Block Macros]
-
 	ref_macro[
 		@n[box]
 		@desc[Creates a titled box (@<div>@ tag).]
@@ -96,4 +93,3 @@ img[
 		@desc[Renders the title of the document (based on the $>[document.title]) within a @<h1>@ tag.]
 		@example[=title[]=]
 	]
-]

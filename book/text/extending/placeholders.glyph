@@ -1,5 +1,3 @@
-section[
-	@title[Using Placeholders]
 	txt[
 Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that's easy) or even _after_ the link. 
 
@@ -30,5 +28,3 @@ If there's already a bookmark stored in the current document, then it is possibl
 
 Within the @placeholder@ block, the @document@ parameter is, by all means, the fully analyzed document.
 	]
-]
-

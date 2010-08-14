@@ -1,6 +1,3 @@
-section[
-	@title[Images and Figures]
-	@id[img_fig]
 	p[Same as for =>[#links|links], you can also include images and figures using &[markups]. If you want additional features, you can use the %>[image] and the %>[figure], as shown in the following example:]
 
 	box[Example|
@@ -25,5 +22,3 @@ figure[example.png\|An example figure.
 		txt[Any attribute passed to the %>[image] or the %>[figure] is automatically passed to the underlying @<img>@ tag.]
 	]
 	note[In future releases, figures will be numbered automatically and included in a em[List of Figures] section.]
-] 
-

@@ -1,5 +1,3 @@
-section[
-	@title[Core Macros]
 
 	ref_macro[
 		@n[alias]
@@ -205,4 +203,3 @@ rw:[release\|
 			-p[1|The contents of the new snippet.]
 		]
 	]
-]

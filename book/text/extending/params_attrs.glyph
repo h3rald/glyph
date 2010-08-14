@@ -1,5 +1,3 @@
-section[
-	@title[Parameters and Attributes]
 	txt[
 Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the _raw value_ of and attribute or parameter or its _expanded value_. The difference between the two will become clearer in the following sections and also in the =>[#interpreting] section.
 	]
@@ -67,4 +65,3 @@ To access raw values, use the following methods:
 * @raw_attribute@ (or @raw_attr@): Returns the attribute value of the attribute specified by name.
 		]
 	]
-]

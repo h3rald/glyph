@@ -1,5 +1,3 @@
-section[
-	@title[Parsing Errors]
 	error_table[
 		ref_error[Macro delimiter '\.em[delimiter]' not escaped|
 Returned in case of unescaped code[\[]or code[\]].
@@ -26,4 +24,3 @@ Returned if an escaping macro contains another escaping macro.
 Returned if a parameter delimiter is outside a macro or inside an attribute.
 		]
 	]
-]

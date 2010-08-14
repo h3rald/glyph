@@ -1,5 +1,3 @@
-section[
-	@title[Macro Errors]
 	txt[
 The following errors are displayed in the form:
 
@@ -95,4 +93,3 @@ Returned by the =>[config:] when attempting to override a setting in the code[sy
 Returned by the =>[rewrite:] if it contains a macro with the same name.
 		]
 	]
-]

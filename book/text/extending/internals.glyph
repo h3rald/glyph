@@ -1,5 +1,3 @@
-section[
-	@title[A quick look at Glyph's internals]
 	p[If you plan on extending Glyph, knowing how it works inside helps. It is not mandatory by any means, but it definitely helps, especially when creating complex macros.]
 	p[What happens behind the scenes when you call code[glyph compile]? Glyph's code is parsed, analyzed and then translated into text, and here's how:]
 	figure[document_generation.png|A sequence diagram for document generation]
@@ -76,4 +74,3 @@ section[
 </div>
 	=]
 	]
-]

@@ -1,5 +1,3 @@
-section[
-	@title[Generic Errors]
 	error_table[
 		ref_error[Invalid alias: macro '\.em[macro_name]' already exists|
 The alias name supplied to the @macro_alias@ method has already been used for another macro or alias.
@@ -26,4 +24,3 @@ The code[snippet.yml] file contains invalid data. Most likely, it does not evalu
 Returned if the name of an existing file was specified as a parameter for the #>[add].
 		]
 	]
-] 

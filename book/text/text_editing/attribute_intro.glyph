@@ -1,0 +1,22 @@
+	txt[
+Although a macro can take any number of parameters, they are often no more than two or three, for readibility reasons: parameters have no name, but their position within a macro is significant.
+
+If you have something like this:
+	]
+
+	highlight[=html|custom_image[test.png\|50%\|50%\|Test Image]=]
+	txt[
+it may still be easy enough to understand what each parameter is used for, but:
+* you can easily forget that the third parameter is the image width
+* if you don't want to resize the image, you still have to pass _empty parameters_ to the macro, like this: code[=custom_image[test2.png\|\|\|Test Image]=]
+
+To avoid these situations, some macros which would normally take three or four parameters take optional attributes instead, so you can write:
+	]
+	highlight[=html|
+image[test.png
+  @width[50%]
+  @alt[Test Image]
+  @height[50%]
+]=]
+	p[More verbose, of course, but definitely more readable. In this way, if you won't want to scale an image, you can safely omit the code[@width] and code[@height] attributes.]
+	note[Like parameters, attributes can contain other macros, too.]

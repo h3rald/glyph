@@ -1,6 +1,3 @@
-section[
-	@title[Project Configuration]
-	@id[cfg]
 
 	textile[
 Glyph stores configuration settings in the following YAML files:
@@ -46,4 +43,3 @@ There are plenty of configuration settings that can be modified, but most of the
 
 For a complete reference, see =>[#cfg_ref]. For everyday use, you may just want to change the settings defined in the =>[#cfg_document] namespace.
 	] --[End textile]
-]

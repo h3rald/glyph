@@ -1,3 +1,0 @@
-This chapter lists the most common error messages that can be returned when running a Glyph command. It does not aim to be an exhaustive list, especially if you =>[#extending|extended] Glyph by creating your own macros or you're embedding Ruby code using the %>[ruby].
-
-tip[As a general rule, more diagnostic information is provided if Glyph is run in =>[#debug_switch|debug mode].]

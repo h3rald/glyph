@@ -1,6 +1,3 @@
-section[
-	@title[Adding Stylesheets]
-	@id[stylesheets]
 	p[Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.]
 	p[You can embed CSS files using the %>[style], like this:]
 	p[code[= style[default.css] =]]
@@ -32,5 +29,3 @@ section[
 			]
 		]
 	]
-]
-

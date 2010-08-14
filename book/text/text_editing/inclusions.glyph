@@ -1,6 +1,3 @@
-section[
-	@title[Including Files and Snippets]
-	@id[incl]
 	txt[
 If you're authoring a user manual, a long article, or a book, writing everything inside a single @document.glyph@ file may not be optimal. For this reason, Glyph provides an %>[include] that can be used to include the contents of any file within the @text/@ directory:
 
@@ -41,4 +38,3 @@ tip[Besides storing snippets in the @snippets.yml@ file, you can also define the
 	tip[
 Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
 	]
-]

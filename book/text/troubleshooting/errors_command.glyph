@@ -1,5 +1,3 @@
-section[
-	@title[Command Errors]
 	error_table[
 		ref_error[Source file '\.em[source_file]' does not exist|
 Returned if Glyph is running in =>[#lite_mode|lite mode] and the specified source file was not found.
@@ -36,4 +34,3 @@ The name of an unknown setting was specified for the #>[config].
 Returned by the #>[config] when attempting to override a setting in the code[system.*] namespace.
 		]
 	]
-] 

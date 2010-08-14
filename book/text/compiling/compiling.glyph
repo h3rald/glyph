@@ -1,6 +1,3 @@
-section[
-	@title[Compiling a project]
-	@id[compile]
 	p[By default, a Glyph project can be "compiled" into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more output targets will be supported.]
 	section[
 		@title[HTML output]
@@ -20,4 +17,3 @@ section[
 		txt[You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed.]
 		note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
 	]
-]

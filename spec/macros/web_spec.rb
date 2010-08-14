@@ -33,16 +33,16 @@ describe "Macro:" do
 		Glyph.run! 'generate:web'
 		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
 		web2 = Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html')
-		web1.match(%{<ul class="navigation"><li><a href="index.html">Contents</a></li><li><a href="a/b/web2.html">Next &rarr;</a></li></ul>}).blank?.should == false
-		web2.match(%{<ul class="navigation"><li><a href="a/web1.html">&larr; Previous</a></li><li><a href="index.html">Contents</a></li></ul>}).blank?.should == false
+		web1.match(%{<ul class="navigation"><li><a href="/index.html">Contents</a></li><li><a href="/a/b/web2.html">Next &rarr;</a></li></ul>}).blank?.should == false
+		web2.match(%{<ul class="navigation"><li><a href="/a/web1.html">&larr; Previous</a></li><li><a href="/index.html">Contents</a></li></ul>}).blank?.should == false
 	end
 
 	it "toc should only list topics" do
 		Glyph.run! 'generate:web'
 		index = Glyph.file_load(Glyph::PROJECT/'output/web/index.html')
 		index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?.should == true
-		index.match(%{href="a/web1.html#h_2"}).blank?.should == false
-		index.match(%{href="a/b/web2.html#h_6"}).blank?.should == false
+		index.match(%{href="/a/web1.html#h_2"}).blank?.should == false
+		index.match(%{href="/a/b/web2.html#h_6"}).blank?.should == false
 		delete_project
 		reset_quiet
 		create_web_project

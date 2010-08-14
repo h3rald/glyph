@@ -48,6 +48,4 @@ on_error do |exception|
 		end
 		true
 	end
-	# Error logic here
-	# return false to skip default error handling
 end

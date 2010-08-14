@@ -1,5 +1,3 @@
-section[
-	@title[Using Glyph programmatically]
 	txt[
 Besides using Glyph from the command line, you can also use it straight from your code. Glyph's public =>[http://yardoc.org/docs/glyph/Glyph|API] is simple and can be used to:
 * Retrieve and update configuration settings (using @Glyph\[\]@ and @Glyph\[\]=@)
@@ -74,4 +72,3 @@ If enabled, the following macros cannot be used and will return an error:
 			]
 		]
 	]
-]

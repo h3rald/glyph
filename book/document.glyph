@@ -13,87 +13,222 @@ book[
 		toc[3]
 		introduction[
 			@title[Introduction]
-			textile[include[introduction]]
+			@src[introduction]
 			section[
 				@title[License]
-				textile[include[license]]
+				@src[license]
 			]
 		]
 		acknowledgement[
 			@title[Acknowledgement]
-			textile[include[acknowledgement]]
+			@src[acknowledgement]
 		]
 	]
 	@bodymatter[
 		chapter[
 			@title[Getting Started]
-			include[getting_started/create_project]
-			include[getting_started/structure]
-			include[getting_started/configuration]
+			section[
+				@title[Creating your first Glyph Project]
+				@src[getting_started/create_project]
+			]
+			section[
+				@title[Document Structure]
+				@id[struct]
+				@src[getting_started/structure]
+			]
+			section[
+				@title[Project Configuration]
+				@id[cfg]
+				@src[getting_started/configuration]
+			]
 		]
 		chapter[
 			@title[Authoring Documents]
-			include[text_editing/glyph_files]
-			include[text_editing/macro_intro]
-			include[text_editing/sections]
-			include[text_editing/links]
-			include[text_editing/images]
-			include[text_editing/code]
-			include[text_editing/raw_html]
-			include[text_editing/stylesheets]
-			include[text_editing/inclusions]
-			include[text_editing/evaluation]
-			include[text_editing/conditionals]
+			section[
+				@title[.glyph files]
+				@src[text_editing/glyph_files]
+			]
+			section[
+				@title[Introducing &[macros]]
+				@id[macro_intro]
+				@src[text_editing/macro_intro]
+			]
+			section[
+				@title[Macro attributes]
+				@id[attribute_intro]
+				@src[text_editing/attribute_intro]
+			]
+			section[
+				@title[Escaping and Quoting]
+				@id[esc_quot]
+				@src[text_editing/esc_quot]
+			]
+			section[
+				@title[Sections and Headers]
+				@id[sec_head]
+				@src[text_editing/sections]
+			]
+			section[
+				@title[Links and Bookmarks]
+				@id[links]
+				@src[text_editing/links]
+			]
+			section[
+				@title[Images and Figures]
+				@id[img_fig]
+				@src[text_editing/images]
+			]
+			section[
+				@title[Source Code]
+				@id[source_code]
+				@src[text_editing/code]
+			]
+			section[
+				@title[Other HTML Elements]
+				@id[other_elements]
+				section[
+					@title[&[markups]]
+					@src[text_editing/raw_html]
+				]
+				section[
+					@title[XML Fallback]
+					@src[text_editing/xml_fallback]
+				]
+			]
+			section[
+				@title[Adding Stylesheets]
+				@id[stylesheets]
+				@src[text_editing/stylesheets]
+			]
+			section[
+				@title[Including Files and Snippets]
+				@id[incl]
+				@src[text_editing/inclusions]
+			]
+			section[
+				@title[Evaluating Ruby code and Configuration Settings]
+				@src[text_editing/evaluation]
+			]
+			section[
+				@title[Conditional Macros]
+				@id[cond_macros]
+				@src[text_editing/conditionals]
+			]
 		]
 		chapter[
 			@title[Generating Output Files]
-			include[compiling/compiling]
-			include[compiling/lite_mode]
-			include[compiling/programmatic_usage]
+			section[
+				@title[Compiling a project]
+				@id[compile]
+				@src[compiling/compiling]
+			]
+			section[
+				@title[Compiling single Glyph files]
+				@id[lite_mode]
+				@src[compiling/lite_mode]
+			]
+			section[
+				@title[Using Glyph programmatically]
+				@src[compiling/programmatic_usage]
+			]
 		]
 		chapter[
 			@title[Extending Glyph]
 			@id[extending]
-			include[extending/internals]
-			include[extending/macro_def]
-			include[extending/params_attrs]
-			include[extending/bookmarks_headers]
-			include[extending/placeholders]
-			include[extending/validators]
-			include[extending/interpreting]
-			include[extending/further_reading]
+			section[
+				@title[A quick look at Glyph's internals]
+				@src[extending/internals]
+			]
+			section[
+				@title[Defining Macros]
+				@id[macro_def]
+				@src[extending/macro_def]
+			]
+			section[
+				@title[Parameters and Attributes]
+				@src[extending/params_attrs]
+			]
+			section[
+				@title[Bookmarks and Headers]
+				@src[extending/bookmarks_headers]
+			]
+			section[
+				@title[Using Placeholders]
+				@src[extending/placeholders]
+			]
+			section[
+				@title[Using Validators]
+				@src[extending/validators]
+			]
+			section[
+				@title[Interpreting Glyph Code]
+				@id[interpreting]
+				@src[extending/interpreting]
+			]
+			section[
+				@title[Further Reading]
+				@src[extending/further_reading]
+			]
 		]
 		chapter[
 			@title[Troubleshooting]
-			include[troubleshooting/errors_intro]
-			include[troubleshooting/errors_generic]
-			include[troubleshooting/errors_parser]
-			include[troubleshooting/errors_command]
-			include[troubleshooting/errors_macro]
+			section[
+				@title[Generic Errors]
+				@src[troubleshooting/errors_generic]
+			]
+			section[
+				@title[Parsing Errors]
+				@src[troubleshooting/errors_parser]
+			]
+			section[
+				@title[Command Errors]
+				@src[troubleshooting/errors_command]
+			]
+			section[
+				@title[Macro Errors]
+				@src[troubleshooting/errors_macro]
+			]
 		]
 	]
 	@backmatter[
 		appendix[
 			@title[Command Reference]
 			@id[cmd_ref]
-			include[ref_commands]
+			@src[ref_commands]
 		]
 		appendix[
 			@title[Macro Reference]
 			@id[macro_ref]
-			include[macros/macros_core]
-			include[macros/macros_block]
-			include[macros/macros_inline]
-			include[macros/macros_filters]
-			include[macros/macros_structure]
+			section[
+				@title[Core Macros]
+				@src[macros/macros_core]
+			]
+			section[
+				@title[Block Macros]
+				@src[macros/macros_block]
+			]
+			section[
+				@title[Inline Macros]
+				@src[macros/macros_inline]
+			]
+			section[
+				@title[Filter Macros]
+				@id[f_macros]
+				@src[macros/macros_filters]
+			]
+			section[
+				@title[Structure Macros]
+				@src[macros/macros_structure]
+			]
 		]
 		appendix[
 			@title[Configuration Reference]
 			@id[cfg_ref]
-			include[ref_config]
+			@src[ref_config]
 		]
-		appendix[@title[Changelog]
-		include[changelog]
+		appendix[
+			@title[Changelog]
+			@src[changelog]
 		]
 	]
 ]

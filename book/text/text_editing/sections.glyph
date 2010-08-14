@@ -1,6 +1,3 @@
-section[
-	@title[Sections and Headers]
-	@id[sec_head]
 
 	p[Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section], like so:]
 
@@ -60,4 +57,3 @@ The following table lists the identifiers of all section-like macros, divided ac
 	note[
 		code[frontmatter], code[bodymatter] and code[backmatter] are also macro identifiers, but they are exposed as attributes for the %>[book] and the %>[article], so if you're using either of these two macros as your root macro for your document, there's no need to use them explicitly.
 	]
-] 

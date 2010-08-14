@@ -1,6 +1,3 @@
-section[
-	@title[Document Structure]
-	@id[struct]
 
 	p[Every Glyph project contains a code[document.glyph] file that is typically used to define the document structure. The default code[document.glyph] generated automatically when creating a new project is the following:]
 
@@ -52,4 +49,3 @@ More specifically, in this @document.glyph@ file:
 * Then, the code[@frontmatter], code[@bodymatter], and code[@backmatter] attributes are used to divide the portions of your document according to the rules of =>[http://en.wikipedia.org/wiki/Book_design|book design]. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.
 * @preface@, @chapter@, @appendix@ are just a way to wrap content in @<div>@ tags, from an HTML point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together through code[@title] attributes.
 	]
-]
