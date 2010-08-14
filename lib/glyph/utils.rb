@@ -91,11 +91,14 @@ module Glyph
 			end
 		end
 
+		# Iterates through the files in a source directory recursively
+		# @param [String] dir the directory to operate on (mirrored in the output directory)
+                # @yield [src, dest] the source file and the corresponding output file
+		# @since 0.4.0
 		def with_files_from(dir, &block)
 			output = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
 			dir_path = Glyph::PROJECT/"output/#{output}/#{dir}"
 			dir_path.mkpath
-			# Copy images
 			(Glyph::PROJECT/dir).find do |i|
 				if i.file? then
 					dest = "#{Glyph::PROJECT/"output/#{output}/#{dir}"}/#{i.relative_path_from(Glyph::PROJECT/dir)}"
