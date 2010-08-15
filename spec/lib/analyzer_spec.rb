@@ -78,10 +78,10 @@ describe Glyph::Analyzer do
 	it "should calculate stats for all bookmarks" do
 		lambda {@a.stats_for :bookmarks}.should_not raise_error
 		c = @a.stats[:bookmarks]
-		c[:codes].should == [:h_1, :h_2, :md, :refs, :toc]
-		c[:files].should == [["document.glyph", 1], ["references.glyph", 1], ["text/a/b/c/included.textile", 1], 
+		c[:codes].should == [:h_1, :h_2, :md, :refs, :toc, :unused]
+		c[:files].should == [["document.glyph", 2], ["references.glyph", 1], ["text/a/b/c/included.textile", 1], 
 			["text/a/b/c/markdown.markdown", 1], ["text/container.textile", 1]] 
-		c[:unreferenced].should == [:h_2, :md, :toc]
+		c[:unreferenced].should == [:h_2, :md, :toc, :unused]
 		c[:referenced].should == [[:h_1, 1], [:refs, 1]]
 	end
 

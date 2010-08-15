@@ -28,8 +28,9 @@ begin
 		s.email = "h3rald@h3rald.com"
 		s.homepage = "http://www.h3rald.com/glyph/"
 		s.authors = ["Fabio Cevasco"]
-		s.files.include "styles/**/*"
-		s.files.include "book/**/*"
+		s.files.exclude 'book/output/web/**/*'
+		s.files.exclude 'book/output/web5/**/*'
+		s.files.exclude 'book/output/html5/**/*'
 		s.add_dependency 'gli', '>= 1.1.1' # Command line interface
 		s.add_dependency 'extlib', '>= 0.9.15' # Extension methods
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks

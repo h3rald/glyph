@@ -3,7 +3,7 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
-describe Glyph::Analyzer do
+describe Glyph::Reporter do
 
 	before do
 		delete_project
@@ -59,8 +59,8 @@ describe Glyph::Analyzer do
 	it "should display bookmark stats" do
 		stats :bookmarks
 		out = stdout_for { rep.display }
-		out.should match "-- Total Bookmarks: 5"
-		out.should match "-- Bookmarks: h_1, h_2, md, refs, toc"
+		out.should match "-- Total Bookmarks: 6"
+		out.should match "h_1    h_2    md     refs   toc"
 		out.should match "   - h_1 \\(1\\)"
 		@r.detailed = false
 		out = stdout_for { @r.display }
@@ -131,6 +131,6 @@ describe Glyph::Analyzer do
 		out.should match "   - http://www.h3rald.com \\(1\\)"
 		out.should match "Total Macro Instances: 20"
 		out.should match "-- Total Snippets: 2"
-		out.should match "-- Bookmarks: h_1, h_2, md, refs, toc"
+		out.should match "h_1    h_2    md     refs   toc"
 	end
 end

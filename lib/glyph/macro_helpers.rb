@@ -230,13 +230,16 @@ module Glyph
 						topic_src = attr(:src)
 						topic_src += ".glyph" unless topic_src.match /\..+$/
 						@node[:document].topics << {:src => topic_src, :title => attr(:title), :id => topic_id, :contents => result}
+						# Process section contents
+						procs[:body].call h, value
 						# Return nothing
 						nil
 					else
-						procs[:body].call h, interpret("include[#{attr(:src)}]")
+						procs[:body].call h, interpret("include[#{attr(:src)}]+#{value}")
 					end
+				else
+					procs[:body].call h, value
 				end
-				procs[:body].call h, value
 			end
 
 			# Renders a navigation element
