@@ -36,34 +36,35 @@ August 2010
 <div class="contents">
 <h2 class="toc-header" id="toc">Table of Contents</h2>
 <ol class="toc">
-						<li class="frontmatter introduction"><a href="#h_1">Introduction</a></li><li><ol><li class="frontmatter section"><a href="#h_2">License</a></li><li class="frontmatter section"><a href="#h_3">Main Features</a></li><li class="frontmatter section"><a href="#h_4">Installation</a></li><li class="frontmatter section"><a href="#h_5">Essential Glyph commands</a></li><li class="frontmatter section"><a href="#macros_nutshell">Glyph macros in a nutshell</a></li><li class="frontmatter section"><a href="#h_7">Resources</a></li></ol></li>
+						<li class="frontmatter introduction"><a href="#h_1">Introduction</a></li><li><ol><li class="frontmatter section"><a href="#h_2">Main Features</a></li><li class="frontmatter section"><a href="#h_3">Installation</a></li><li class="frontmatter section"><a href="#h_4">Essential Glyph commands</a></li><li class="frontmatter section"><a href="#macros_nutshell">Glyph macros in a nutshell</a></li><li class="frontmatter section"><a href="#h_6">Resources</a></li><li class="frontmatter section"><a href="#h_7">License</a></li></ol></li>
 <li class="frontmatter acknowledgement"><a href="#h_8">Acknowledgement</a></li><li class="bodymatter chapter"><a href="#h_9">Getting Started</a></li><li><ol><li class="bodymatter section"><a href="#h_10">Creating your first Glyph Project</a></li><li class="bodymatter section"><a href="#struct">Document Structure</a></li><li class="bodymatter section"><a href="#cfg">Project Configuration</a></li></ol></li>
-<li class="bodymatter chapter"><a href="#h_13">Authoring Documents</a></li><li><ol><li class="bodymatter section"><a href="#h_14">.glyph files</a></li><li class="bodymatter section"><a href="#macro_intro">Introducing Glyph Macros</a></li><li class="bodymatter section"><a href="#attribute_intro">Macro attributes</a></li><li class="bodymatter section"><a href="#esc_quot">Escaping and Quoting</a></li><li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li><li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li><li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li><li class="bodymatter section"><a href="#source_code">Source Code</a></li><li class="bodymatter section"><a href="#other_elements">Other HTML Elements</a></li><li><ol><li class="bodymatter section"><a href="#h_23">Textile or Markdown</a></li><li class="bodymatter section"><a href="#h_24">XML Fallback</a></li></ol></li>
+<li class="bodymatter chapter"><a href="#h_13">Authoring Documents</a></li><li><ol><li class="bodymatter section"><a href="#h_14">.glyph files</a></li><li class="bodymatter section"><a href="#macro_intro">Introducing Glyph Macros</a></li><li class="bodymatter section"><a href="#attribute_intro">Macro attributes</a></li><li class="bodymatter section"><a href="#esc_quot">Escaping and Quoting</a></li><li class="bodymatter section"><a href="#sec_head">Sections and Headers</a></li><li><ol><li class="bodymatter section"><a href="#h_19">Section Aliases</a></li><li class="bodymatter section"><a href="#topics">Topics</a></li></ol></li>
+<li class="bodymatter section"><a href="#links">Links and Bookmarks</a></li><li class="bodymatter section"><a href="#img_fig">Images and Figures</a></li><li class="bodymatter section"><a href="#source_code">Source Code</a></li><li class="bodymatter section"><a href="#other_elements">Other HTML Elements</a></li><li><ol><li class="bodymatter section"><a href="#h_25">Textile or Markdown</a></li><li class="bodymatter section"><a href="#h_26">XML Fallback</a></li></ol></li>
 <li class="bodymatter section"><a href="#stylesheets">Adding Stylesheets</a></li><li><ol><li class="bodymatter section"><a href="#default_stylesheets">Default Stylesheets</a></li></ol></li>
-<li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li><li class="bodymatter section"><a href="#h_29">Evaluating Ruby code and Configuration Settings</a></li><li class="bodymatter section"><a href="#cond_macros">Conditional Macros</a></li><li><ol><li class="bodymatter section"><a href="#h_31">Results of conditional expressions</a></li></ol></li>
+<li class="bodymatter section"><a href="#incl">Including Files and Snippets</a></li><li class="bodymatter section"><a href="#h_31">Evaluating Ruby code and Configuration Settings</a></li><li class="bodymatter section"><a href="#cond_macros">Conditional Macros</a></li><li><ol><li class="bodymatter section"><a href="#h_33">Results of conditional expressions</a></li></ol></li>
 </ol></li>
-<li class="bodymatter chapter"><a href="#h_32">Generating Output Files</a></li><li><ol><li class="bodymatter section"><a href="#compile">Compiling a project</a></li><li><ol><li class="bodymatter section"><a href="#h_34">HTML output</a></li><li class="bodymatter section"><a href="#h_35">PDF Output</a></li><li class="bodymatter section"><a href="#auto_regeneration">Auto Regeneration</a></li></ol></li>
+<li class="bodymatter chapter"><a href="#h_34">Generating Output Files</a></li><li><ol><li class="bodymatter section"><a href="#compile">Compiling a project</a></li><li><ol><li class="bodymatter section"><a href="#h_36">HTML/HTML5 output</a></li><li class="bodymatter section"><a href="#h_37">PDF Output</a></li><li class="bodymatter section"><a href="#web_output">Web/Web5 Output</a></li><li class="bodymatter section"><a href="#auto_regeneration">Auto Regeneration</a></li></ol></li>
 <li class="bodymatter section"><a href="#lite_mode">Compiling single Glyph files</a></li><li><ol><li class="bodymatter section"><a href="#lite_limitations">Limitations</a></li></ol></li>
-<li class="bodymatter section"><a href="#h_39">Using Glyph programmatically</a></li><li><ol><li class="bodymatter section"><a href="#modes">Modes</a></li></ol></li>
+<li class="bodymatter section"><a href="#h_42">Using Glyph programmatically</a></li><li><ol><li class="bodymatter section"><a href="#modes">Modes</a></li></ol></li>
 </ol></li>
-<li class="bodymatter chapter"><a href="#extending">Extending Glyph</a></li><li><ol><li class="bodymatter section"><a href="#h_42">A quick look at Glyph's internals</a></li><li><ol><li class="bodymatter section"><a href="#h_43">Example: A short note</a></li></ol></li>
-<li class="bodymatter section"><a href="#macro_def">Defining Macros</a></li><li class="bodymatter section"><a href="#h_45">Parameters and Attributes</a></li><li><ol><li class="bodymatter section"><a href="#expanded_values">Accessing Expanded Values</a></li><li class="bodymatter section"><a href="#h_47">Accessing Raw Values</a></li></ol></li>
-<li class="bodymatter section"><a href="#h_48">Bookmarks and Headers</a></li><li class="bodymatter section"><a href="#h_49">Using Placeholders</a></li><li class="bodymatter section"><a href="#h_50">Using Validators</a></li><li class="bodymatter section"><a href="#interpreting">Interpreting Glyph Code</a></li><li><ol><li class="bodymatter section"><a href="#rewriting">Rewriting</a></li></ol></li>
-<li class="bodymatter section"><a href="#h_53">Further Reading</a></li></ol></li>
-<li class="bodymatter chapter"><a href="#h_54">Troubleshooting</a></li><li><ol><li class="bodymatter section"><a href="#h_55">Generic Errors</a></li><li class="bodymatter section"><a href="#h_56">Parsing Errors</a></li><li class="bodymatter section"><a href="#h_57">Command Errors</a></li><li class="bodymatter section"><a href="#h_58">Macro Errors</a></li></ol></li>
-<li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li><li><ol><li class="appendix section"><a href="#h_60">Global Options</a></li><li><ol><li class="appendix section"><a href="#debug_switch"><code>-d</code>, <code>--debug</code></a></li></ol></li>
+<li class="bodymatter chapter"><a href="#extending">Extending Glyph</a></li><li><ol><li class="bodymatter section"><a href="#h_45">A quick look at Glyph's internals</a></li><li><ol><li class="bodymatter section"><a href="#h_46">Example: A short note</a></li></ol></li>
+<li class="bodymatter section"><a href="#macro_def">Defining Macros</a></li><li class="bodymatter section"><a href="#h_48">Parameters and Attributes</a></li><li><ol><li class="bodymatter section"><a href="#expanded_values">Accessing Expanded Values</a></li><li class="bodymatter section"><a href="#h_50">Accessing Raw Values</a></li></ol></li>
+<li class="bodymatter section"><a href="#h_51">Bookmarks and Headers</a></li><li class="bodymatter section"><a href="#h_52">Using Placeholders</a></li><li class="bodymatter section"><a href="#h_53">Using Validators</a></li><li class="bodymatter section"><a href="#interpreting">Interpreting Glyph Code</a></li><li><ol><li class="bodymatter section"><a href="#rewriting">Rewriting</a></li></ol></li>
+<li class="bodymatter section"><a href="#h_56">Further Reading</a></li></ol></li>
+<li class="bodymatter chapter"><a href="#h_57">Troubleshooting</a></li><li><ol><li class="bodymatter section"><a href="#h_58">Generic Errors</a></li><li class="bodymatter section"><a href="#h_59">Parsing Errors</a></li><li class="bodymatter section"><a href="#h_60">Command Errors</a></li><li class="bodymatter section"><a href="#h_61">Macro Errors</a></li></ol></li>
+<li class="backmatter appendix"><a href="#cmd_ref">Command Reference</a></li><li><ol><li class="appendix section"><a href="#h_63">Global Options</a></li><li><ol><li class="appendix section"><a href="#debug_switch"><code>-d</code>, <code>--debug</code></a></li></ol></li>
 <li class="appendix section"><a href="#c_add"><code>add</code></a></li><li class="appendix section"><a href="#c_compile"><code>compile</code></a></li><li class="appendix section"><a href="#c_config"><code>config</code></a></li><li class="appendix section"><a href="#c_help"><code>help</code></a></li><li class="appendix section"><a href="#c_init"><code>init</code></a></li><li class="appendix section"><a href="#c_outline"><code>outline</code></a></li><li class="appendix section"><a href="#c_todo"><code>todo</code></a></li></ol></li>
-<li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li><li><ol><li class="appendix section"><a href="#h_77">Core Macros</a></li><li><ol><li class="appendix section"><a href="#m_alias"><code>alias</code></a></li><li class="appendix section"><a href="#m_and"><code>and</code></a></li><li class="appendix section"><a href="#m_comment"><code>comment</code></a></li><li class="appendix section"><a href="#m_condition"><code>condition</code></a></li><li class="appendix section"><a href="#m_config"><code>config</code></a></li><li class="appendix section"><a href="#m_config_"><code>config:</code></a></li><li class="appendix section"><a href="#m_eq"><code>eq</code></a></li><li class="appendix section"><a href="#m_escape"><code>escape</code></a></li><li class="appendix section"><a href="#m_include"><code>include</code></a></li><li class="appendix section"><a href="#m_match"><code>match</code></a></li><li class="appendix section"><a href="#m_macro_"><code>macro:</code></a></li><li class="appendix section"><a href="#m_not"><code>not</code></a></li><li class="appendix section"><a href="#m_or"><code>or</code></a></li><li class="appendix section"><a href="#m_rewrite_"><code>rewrite:</code></a></li><li class="appendix section"><a href="#m_ruby"><code>ruby</code></a></li><li class="appendix section"><a href="#m_snippet"><code>snippet</code></a></li><li class="appendix section"><a href="#m_snippet_"><code>snippet:</code></a></li></ol></li>
-<li class="appendix section"><a href="#h_121">Block Macros</a></li><li><ol><li class="appendix section"><a href="#m_box"><code>box</code></a></li><li class="appendix section"><a href="#m_codeblock"><code>codeblock</code></a></li><li class="appendix section"><a href="#m_figure"><code>figure</code></a></li><li class="appendix section"><a href="#m_image"><code>image</code></a></li><li class="appendix section"><a href="#m_note"><code>note</code></a></li><li class="appendix section"><a href="#m_pubdate"><code>pubdate</code></a></li><li class="appendix section"><a href="#m_revision"><code>revision</code></a></li><li class="appendix section"><a href="#m_subtitle"><code>subtitle</code></a></li><li class="appendix section"><a href="#m_title"><code>title</code></a></li></ol></li>
-<li class="appendix section"><a href="#h_139">Inline Macros</a></li><li><ol><li class="appendix section"><a href="#m_anchor"><code>anchor</code></a></li><li class="appendix section"><a href="#m_draftcomment"><code>draftcomment</code></a></li><li class="appendix section"><a href="#m_fmi"><code>fmi</code></a></li><li class="appendix section"><a href="#m_link"><code>link</code></a></li><li class="appendix section"><a href="#m_todo"><code>todo</code></a></li></ol></li>
+<li class="backmatter appendix"><a href="#macro_ref">Macro Reference</a></li><li><ol><li class="appendix section"><a href="#h_80">Core Macros</a></li><li><ol><li class="appendix section"><a href="#m_alias"><code>alias</code></a></li><li class="appendix section"><a href="#m_and"><code>and</code></a></li><li class="appendix section"><a href="#m_comment"><code>comment</code></a></li><li class="appendix section"><a href="#m_condition"><code>condition</code></a></li><li class="appendix section"><a href="#m_config"><code>config</code></a></li><li class="appendix section"><a href="#m_config_"><code>config:</code></a></li><li class="appendix section"><a href="#m_eq"><code>eq</code></a></li><li class="appendix section"><a href="#m_escape"><code>escape</code></a></li><li class="appendix section"><a href="#m_include"><code>include</code></a></li><li class="appendix section"><a href="#m_match"><code>match</code></a></li><li class="appendix section"><a href="#m_macro_"><code>macro:</code></a></li><li class="appendix section"><a href="#m_not"><code>not</code></a></li><li class="appendix section"><a href="#m_or"><code>or</code></a></li><li class="appendix section"><a href="#m_rewrite_"><code>rewrite:</code></a></li><li class="appendix section"><a href="#m_ruby"><code>ruby</code></a></li><li class="appendix section"><a href="#m_snippet"><code>snippet</code></a></li><li class="appendix section"><a href="#m_snippet_"><code>snippet:</code></a></li></ol></li>
+<li class="appendix section"><a href="#h_124">Block Macros</a></li><li><ol><li class="appendix section"><a href="#m_box"><code>box</code></a></li><li class="appendix section"><a href="#m_codeblock"><code>codeblock</code></a></li><li class="appendix section"><a href="#m_figure"><code>figure</code></a></li><li class="appendix section"><a href="#m_image"><code>image</code></a></li><li class="appendix section"><a href="#m_note"><code>note</code></a></li><li class="appendix section"><a href="#m_pubdate"><code>pubdate</code></a></li><li class="appendix section"><a href="#m_revision"><code>revision</code></a></li><li class="appendix section"><a href="#m_subtitle"><code>subtitle</code></a></li><li class="appendix section"><a href="#m_title"><code>title</code></a></li></ol></li>
+<li class="appendix section"><a href="#h_142">Inline Macros</a></li><li><ol><li class="appendix section"><a href="#m_anchor"><code>anchor</code></a></li><li class="appendix section"><a href="#m_draftcomment"><code>draftcomment</code></a></li><li class="appendix section"><a href="#m_fmi"><code>fmi</code></a></li><li class="appendix section"><a href="#m_link"><code>link</code></a></li><li class="appendix section"><a href="#m_todo"><code>todo</code></a></li></ol></li>
 <li class="appendix section"><a href="#f_macros">Filter Macros</a></li><li><ol><li class="appendix section"><a href="#m_markdown"><code>markdown</code></a></li><li class="appendix section"><a href="#m_textile"><code>textile</code></a></li><li class="appendix section"><a href="#m_highlight"><code>highlight</code></a></li></ol></li>
-<li class="appendix section"><a href="#h_155">Structure Macros</a></li><li><ol><li class="appendix section"><a href="#m_article"><code>article</code></a></li><li class="appendix section"><a href="#m_book"><code>book</code></a></li><li class="appendix section"><a href="#m_document"><code>document</code></a></li><li class="appendix section"><a href="#m_head"><code>head</code></a></li><li class="appendix section"><a href="#m_section"><code>section</code></a></li><li class="appendix section"><a href="#m_style"><code>style</code></a></li><li class="appendix section"><a href="#m_toc"><code>toc</code></a></li></ol></li>
+<li class="appendix section"><a href="#h_158">Structure Macros</a></li><li><ol><li class="appendix section"><a href="#m_article"><code>article</code></a></li><li class="appendix section"><a href="#m_book"><code>book</code></a></li><li class="appendix section"><a href="#m_document"><code>document</code></a></li><li class="appendix section"><a href="#m_head"><code>head</code></a></li><li class="appendix section"><a href="#m_section"><code>section</code></a></li><li class="appendix section"><a href="#m_style"><code>style</code></a></li><li class="appendix section"><a href="#m_toc"><code>toc</code></a></li></ol></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li><li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li><li class="appendix section"><a href="#cfg_filters">filters.*</a></li><li class="appendix section"><a href="#h_176">language.*</a></li><li class="appendix section"><a href="#h_177">tools.*</a></li></ol></li>
-<li class="backmatter appendix"><a href="#h_178">Changelog</a></li><li><ol><li class="appendix section"><a href="#h_179">v0.4.0 &ndash; ???</a></li><li><ol><li class="appendix section"><a href="#h_180">27 Features Implemented</a></li><li class="appendix section"><a href="#h_181">13 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_182">v0.3.0 &ndash; June 13th 2010</a></li><li><ol><li class="appendix section"><a href="#h_183">27 Features Implemented</a></li><li class="appendix section"><a href="#h_184">7 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_185">v0.2.0 &ndash; May 9th 2010</a></li><li><ol><li class="appendix section"><a href="#h_186">23 Features Implemented</a></li><li class="appendix section"><a href="#h_187">17 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_188">v0.1.0 &ndash; April 8th 2010</a></li></ol></li>
+<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li><li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li><li class="appendix section"><a href="#cfg_filters">filters.*</a></li><li class="appendix section"><a href="#h_179">language.*</a></li><li class="appendix section"><a href="#h_180">tools.*</a></li></ol></li>
+<li class="backmatter appendix"><a href="#h_181">Changelog</a></li><li><ol><li class="appendix section"><a href="#h_182">v0.4.0 &ndash; ???</a></li><li><ol><li class="appendix section"><a href="#h_183">27 Features Implemented</a></li><li class="appendix section"><a href="#h_184">13 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_185">v0.3.0 &ndash; June 13th 2010</a></li><li><ol><li class="appendix section"><a href="#h_186">27 Features Implemented</a></li><li class="appendix section"><a href="#h_187">7 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_188">v0.2.0 &ndash; May 9th 2010</a></li><li><ol><li class="appendix section"><a href="#h_189">23 Features Implemented</a></li><li class="appendix section"><a href="#h_190">17 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_191">v0.1.0 &ndash; April 8th 2010</a></li></ol></li>
 
 </ol>
 </div>
@@ -72,7 +73,7 @@ August 2010
 <p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
 <p>With Glyph, you can manage your documents tidily in <em>projects</em> and generate deliverables in different formats such as <span class="caps">HTML</span> or <span class="caps">PDF</span> (through <a href="http://www.princexml.com/">Prince</a>).</p>
 <div class="section">
-<h3 id="h_3">Main Features</h3>
+<h3 id="h_2">Main Features</h3>
 <p>Glyph comes with its very own macro system to perform a wide variety of advanced tasks:</p>
 <ul>
 	<li>Generate block-level <span class="caps">HTML</span> tags not commonly managed by lightweight markups, like <code>head</code>, <code>body</code>, <code>div</code> and <code>table</code>.</li>
@@ -95,11 +96,11 @@ August 2010
 </ul>
 </div>
 <div class="section">
-<h3 id="h_4">Installation</h3>
+<h3 id="h_3">Installation</h3>
 <p><code>gem install glyph</code> &#8212; simple, as always.</p>
 </div>
 <div class="section">
-<h3 id="h_5">Essential Glyph commands</h3>
+<h3 id="h_4">Essential Glyph commands</h3>
 <p>Glyph is 100% command line. Its interface resambles <a href="http://git-scm.com/">Git&#8217;s</a> for its simplicity and power (thanks to the <a href="http://github.com/davetron5000/gli">gli</a> gem). Here are some example commands:</p>
 <ul>
 	<li><code>glyph init</code> &#8212; to initialize a new Glyph project in the current (empty) directory.</li>
@@ -171,7 +172,7 @@ renderer like =&gt;[http://www.princexml.com|Prince].
 </div>
 </div>
 <div class="section">
-<h3 id="h_7">Resources</h3>
+<h3 id="h_6">Resources</h3>
 <ul>
 	<li>Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a></li>
 	<li>Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a></li>
@@ -182,8 +183,11 @@ renderer like =&gt;[http://www.princexml.com|Prince].
 	<li>Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a></li>
 	<li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
 </ul>
-</div><div class="section">
-<h3 id="h_2">License</h3>
+</div>
+			
+			
+			<div class="section">
+<h3 id="h_7">License</h3>
 <p>Copyright &#169; 2010 <b>Fabio Cevasco</b>, <a href="http://www.h3rald.com">http://www.h3rald.com</a></p>
 <p><div class="code"><br />
 <pre><br />
@@ -206,8 +210,12 @@ all copies or substantial portions of the Software.</p>
 </code><br />
 </pre></p>
 </div>
+				
+				
+			
 
 </div>
+		
 
 </div>
 		<div class="acknowledgement">
@@ -220,6 +228,9 @@ Special thanks to the following individuals who contributed to Glyph by reportin
 
 
     
+			
+			
+		
 
 </div>
 
@@ -265,6 +276,9 @@ Special thanks to the following individuals who contributed to Glyph by reportin
 	<li><code>document.glyph</code> &#8212; containing the <a href="#struct">Document Structure</a> of your document.</li>
 	<li><code>snippets.yml</code> &#8212; containing your text <a href="#incl">Including Files and Snippets</a>.</li>
 </ul>
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -318,6 +332,10 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 	<li>Then, the <code>@frontmatter</code>, <code>@bodymatter</code>, and <code>@backmatter</code> attributes are used to divide the portions of your document according to the rules of <a href="http://en.wikipedia.org/wiki/Book_design">book design</a>. They are not mandatory, but they can be used, for example, to number your appendixes with letters instead of numbers and similar.</li>
 	<li><code>preface</code>, <code>chapter</code>, <code>appendix</code> are just a way to wrap content in <code>&lt;div&gt;</code> tags, from an <span class="caps">HTML</span> point of view, but they are also necessary to nest the content of your document and generate the Table of Contents automatically, together through <code>@title</code> attributes.</li>
 </ul>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -360,6 +378,10 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 </div>
 <p>There are plenty of configuration settings that can be modified, but most of them are best if left alone (and in the System Configuration file).</p>
 <p>For a complete reference, see <a href="#cfg_ref">Configuration Reference</a>. For everyday use, you may just want to change the settings defined in the <a href="#cfg_document">document.*</a> namespace.</p> 
+				
+				
+				
+			
 
 </div>
 
@@ -370,6 +392,9 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 <h3 id="h_14">.glyph files</h3>
 	<p>The <code>text</code> folder of any Glyph folder contains all the text source files used to produce a document. Although there are no restrictions on the extension of the files in this folder, you may want to use <code>.glyph</code>, especially if <a href="http://www.vim.org">Vim</a> is your favorite text editor.<br />
 The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts/script.php?script_id=3086">available on vim.org</a>. Although not essential, syntax highlighting does help when editing Glyph files.</p>
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -388,6 +413,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><code>=&gt;[#test|Test Section]</code></li>
 	<li><code>link[#test|Test Section]</code></li>
 </ul>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -414,6 +443,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="note-title">Note</span>Like parameters, attributes can contain other macros, too.
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -485,6 +518,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </td>
    		<td />
    		<td>An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters: <br /><code>_\\.=>[#link|This link is emphasized using Textile]_</code></td></tr></table>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -502,7 +539,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   8 </span> ] --[End of Section #1]
 </pre>
 
-	<p>This example defines two nested sections. If the <code>@title</code> attribute is specified like in this case, it will be converted to a proper <span class="caps">HTML</span> header and it will appear in the table of contents (see the <a href="#m_toc"><code>toc</code></a> macro).</p>
+	<p>This example defines two nested sections. If the <code>@title</code> attribute is specified like in this case, it will be converted to a proper <span class="caps">HTML</span> header and it will appear in the Table of Contents (see the <a href="#m_toc"><code>toc</code></a> macro).</p>
 <p>Note an important difference from <span class="caps">HTML</span>: there is no need for an explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following <span class="caps">HTML</span> code:</p>
 
 	<pre class="lazy"><span class="line-numbers">   1 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">div</span> <span class="MetaTag">class</span>=<span class="String"><span class="String">&quot;</span>section<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
@@ -516,7 +553,12 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre>
 
 	<p>By default, in Glyph the first header level is <em>2</em>, so the two headers are rendered as <code>h2</code> and <code>h3</code>, respectively (<code>--[...]</code> macros are <em>comments</em>, therefore they are not included in the final output).</p>
-<p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element commonly used in <a href="http://en.wikipedia.org/wiki/Book_design">book design</a>. Each one of them is a simple wrapper for a <code>&lt;div&gt;</code> tag with a <code>class</code> attribute set to its name.</p>
+				
+				
+				
+				<div class="section">
+<h4 id="h_19">Section Aliases</h4>
+	<p>There are <em>a lot</em> of macros that can be used in the same way as <code>section</code>, one for each element commonly used in <a href="http://en.wikipedia.org/wiki/Book_design">book design</a>. Each one of them is a simple wrapper for a <code>&lt;div&gt;</code> tag with a <code>class</code> attribute set to its name.</p>
 <p>The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:</p>
 	<table><tr><th>Frontmatter</th>
     	<td><p><code>imprint</code> <sup>&dagger;</sup>, <code>dedication</code> <sup>&dagger;</sup>, <code>inspiration</code> <sup>&dagger;</sup>, <code>foreword</code> <sup>&Dagger;</sup>, <code>introduction</code> <sup>&Dagger;</sup>, <code>acknowledgement</code> <sup>&Dagger;</sup>, <code>prologue</code> <sup>&Dagger;</sup>, <code>toc</code> <sup>*</sup></p></td></tr>
@@ -542,6 +584,48 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="note-title">Note</span><code>frontmatter</code>, <code>bodymatter</code> and <code>backmatter</code> are also macro identifiers, but they are exposed as attributes for the <a href="#m_book"><code>book</code></a> macro and the <a href="#m_article"><code>article</code></a> macro, so if you're using either of these two macros as your root macro for your document, there's no need to use them explicitly.
 
 </div>
+					
+					
+				
+
+</div>
+				<div class="section">
+<h4 id="topics">Topics</h4>
+<p>Sections can also be used to create <em>topics</em>. In a technical writing context, the term topic identifies a single page of an online help (e.g. a Compiled <span class="caps">HTML</span> file, or <span class="caps">CHM</span>). Topics should generally be:</p>
+<ul>
+	<li>self-contained, in the sense that they should make sense on their own, ideally without the need to be read in sequence</li>
+	<li>be used for either <em>concepts</em>, <em>tasks</em> or <em>references</em></li>
+	<li>be divided into meaningful sections like <em>Introduction</em>, <em>Procedure</em>, <em>Result</em></li>
+</ul>
+<p>Glyph does not formally enforce the correctness of topic composition and usage, but it does enable authors to create them as a sort of external sections. Consider the following Glyph code:</p>
+<pre class="lazy"><span class="line-numbers">   1 </span> section[
+<span class="line-numbers">   2 </span> 	@title[My First Topic]
+<span class="line-numbers">   3 </span> 	@id[first_topic]
+<span class="line-numbers">   4 </span> 	@src[test/first_topic.glyph]
+<span class="line-numbers">   5 </span> ]
+</pre>
+<p>This is an ordinary section with a title and an explicit ID, but it has no contents. Instead, its <code>@src</code> attribute references an external file. If you are generating a single-file document, like a standalone <span class="caps">HTML</span> file or a <span class="caps">PDF</span> file, the code snippet above is exactly the same as the following:</p>
+<pre class="lazy"><span class="line-numbers">   1 </span> section[
+<span class="line-numbers">   2 </span> 	@title[My First Topic]
+<span class="line-numbers">   3 </span> 	@id[first_topic]
+<span class="line-numbers">   4 </span> 	include[test/first_topic.glyph]
+<span class="line-numbers">   5 </span> ]
+</pre>
+<p>On the other hand, if you are planning on producing a document comprised of multiple files (see <a href="#web_output">Web/Web5 Output</a>), the <code>@src</code> attribute tells Glyph to create a <em>topic</em> for the section. In this case:</p>
+<ul>
+	<li>The <code>@title</code> attribute must be specified and is used as the topic title</li>
+	<li>The body of the topic is constituted by the contents of the file referenced by the <code>@src</code> attribute.</li>
+	<li>The topic file is rendered according to a specific layout. <span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>Write a section about layouts and reference it here</span></li>
+	<li>The location of the topic is the same as the location of the included file, mirrored in the output folder.</li>
+	<li>Glyph takes care of changing the file extensions and resolving links automatically, regardless of the output target.</li>
+</ul>
+					
+					
+					
+				
+
+</div>
+			
 
 </div>
 			<div class="section">
@@ -594,6 +678,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link"><code>link</code></a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external (http) links as well.
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -625,6 +713,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="note-title">Note</span>In future releases, figures will be numbered automatically and included in a <em>List of Figures</em> section.
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -671,12 +763,16 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </ul>
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
 <h3 id="other_elements">Other HTML Elements</h3>
 <div class="section">
-<h4 id="h_23">Textile or Markdown</h4>
+<h4 id="h_25">Textile or Markdown</h4>
 		<p>Textile or Markdown are very easy and intuitive to use, and they can produce HTML markup with almost no effort. Using them with Glyph is as simple as using the <a href="#m_textile"><code>textile</code></a> macro (aliased to <code>txt</code>) and the <a href="#m_markdown"><code>markdown</code></a> macro (aliased to <code>md</code>).</p>
 		<div class="box">
 <div class="box-title">Example</div>
@@ -705,10 +801,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="note-title">Important</span>Be careful when using block-level HTML with Textile and Markdown: sometimes it may be necessary to add extra empty lines or escape tags.
 
 </div>
+					
+					
+				
 
 </div>
 				<div class="section">
-<h4 id="h_24">XML Fallback</h4>
+<h4 id="h_26">XML Fallback</h4>
 	<p>Sure Textile and Markdown are great, but sometimes you may want to just use HTML, without the extra verbosity, of course. Take tables for example: Textile offers an easy way to create them, but things may get dirty when you need to have multiple paragraphs or lists within cells.</p>
 	<p>Very early versions of Glyph used to offered some simple <code>table</code>, <code>tr</code>, <code>tr</code>, <code>td</code> macros just for that. Of course the problem was that thy didn't offer any way to customize the markup by adding, for example, CSS classes.</p>
 	<p>Instead, by default, Glyph can convert any unrecognized macro to the corresponding XML element and macro attributes to XML attributes.</p>
@@ -798,6 +897,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 
 </div>
+					
+					
+				
 
 </div>
 
@@ -833,6 +935,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 				<td>This folder contains the following <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> stylesheets, used for syntax highlighting: <code>active4d.css, all_hallows_eve.css, amy.css, blackboard.css, brilliance_black.css, brilliance_dull.css, cobalt.css, dawn.css, eiffel.css, espresso_libre.css, idle.css, iplastic.css, lazy.css, mac_classic.css, magicwb_amiga.css, pastels_on_dark.css, slush_poppies.css, spacecadet.css, sunburst.css, twilight.css, zenburnesque.css</code></td></tr></table>
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -875,18 +981,25 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="note-title">Tip</span>Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_29">Evaluating Ruby code and Configuration Settings</h3>
+<h3 id="h_31">Evaluating Ruby code and Configuration Settings</h3>
 	<p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Aug 15 13:59:43 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Aug 15 15:50:57 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.4.0.dev</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
 <p>Although it is possible to retrieve Glyph configuration settings in this way (e.g. <code>%[cfg('document.author')]</code>), the <a href="#m_config"><code>config</code></a> macro (aliased to <code>$</code>) makes things slightly simpler (e.g. <code>$[document.author]</code>).</p>
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -923,7 +1036,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre>
 	<p>In this case, the <code>pagination.css</code> stylesheet is included only when you're generating a PDF document using Prince XML.</p>
   <div class="section">
-<h4 id="h_31">Results of conditional expressions</h4>
+<h4 id="h_33">Results of conditional expressions</h4>
 <p>The <a href="#m_condition"><code>condition</code></a> macro in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:</p>
 <ul>
 	<li>A conditional expression is satisfied if it evaluates to a non-empty string except &#8220;false&#8221;.</li>
@@ -931,43 +1044,74 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </ul>
 
 </div>
+				
+				
+				
+			
 
 </div>
 
 </div>
 		<div class="chapter">
-<h2 id="h_32">Generating Output Files</h2>
+<h2 id="h_34">Generating Output Files</h2>
 <div class="section">
 <h3 id="compile">Compiling a project</h3>
-	<p>By default, a Glyph project can be "compiled" into an HTML document. Additionally, Glyph can also be used to produce PDF documents through <a href="http://www.princexml.com/">Prince</a>, and in future releases more output targets will be supported.</p>
-	<div class="section">
-<h4 id="h_34">HTML output</h4>
+<p>By default, a Glyph project can be &#8220;compiled&#8221; into an <span class="caps">HTML</span> document. Additionally, Glyph can also be used to produce documents in the following formats:</p>
+<ul>
+	<li>HTML5</li>
+	<li><span class="caps">PDF</span> (generated from <span class="caps">HTML</span> using a third-party generator like <a href="http://www.princexml.com/">Prince</a> or <a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a>)</li>
+	<li>Web (i.e. multiple <span class="caps">HTML</span> files)</li>
+	<li>Web5 (i.e. multiple HTML5 files)</li>
+</ul>
+<div class="section">
+<h4 id="h_36">HTML/HTML5 output</h4>
 <p>To compile a Glyph project to an HTML document, use the <a href="#c_compile"><code>compile</code></a> command within your Glyph project folder. Glyph parses the <code>document.glyph</code> file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the <code>/output/html</code> folder.</p> 
-		<p>The name of the HTML file can be set in the configuration (<a href="#s_document_filename"></a> setting).</p>
+	<p>The name of the HTML file can be set in the configuration (<a href="#s_document_filename"></a> setting).</p>
+	<p>To create an HTML5 file instead, you must specify it explicitly like this:</p>
+	<p>
+<code>glyph compile -f html5</code>
+</p>
 
 </div>
-	<div class="section">
-<h4 id="h_35">PDF Output</h4>
+<div class="section">
+<h4 id="h_37">PDF Output</h4>
 <p>To generate a PDF document, you must specify <code>pdf</code> as format, like this:</p>
-		<p>
+	<p>
 <code>glyph compile -f pdf</code>
 </p>
-		<p>The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.</p>
-		<div class="note">
+	<p>The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install <a href="http://www.princexml.com/">Prince</a>. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.</p>
+	<div class="note">
 <span class="note-title">Note</span>Glyph v0.4.0.dev has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.
 
 </div>
 
 </div>
-	<div class="section">
+<div class="section">
+<h4 id="web_output">Web/Web5 Output</h4>
+<p>To generate a Web or Web5 output, specify <code>web</code> or <code>web5</code> as format. These two output formats behave different way from the others, and require that your project uses <a href="#topics">Topics</a> and layouts.</p>
+<p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>link to layout section goes here</span><br />
+Basically, here&#8217;s what happens when you compile your project in web or web5 format:</p>
+<ol>
+	<li>The document code is parsed as normal</li>
+	<li>Separate topic files are generated according to the <code>@src</code> attributes of your sections</li>
+	<li>The <code>document.glyph</code> (or whatever file you&#8217;re using as document source) is <em>not</em> rendered. Instead, an <code>index.html</code> file will be created in the output folder based on the contents of your <code>index</code> layout.</li>
+</ol>
+<p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>link to index layout</span></p>
+
+</div>
+<div class="section">
 <h4 id="auto_regeneration">Auto Regeneration</h4>
 <p>You can also call the <a href="#c_compile"><code>compile</code></a> command with a <code>--auto</code> switch. If you do so, your project will be recompiled automatically every time any source file is changed.</p>
-		<div class="note">
+	<div class="note">
 <span class="note-title">Note</span>Auto regeneration requires the <a href="http://rubygems.org/gems/directory_watcher">directory_watcher</a> gem to be installed.
 
 </div>
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -991,10 +1135,14 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </ul>
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_39">Using Glyph programmatically</h3>
+<h3 id="h_42">Using Glyph programmatically</h3>
 	<p>Besides using Glyph from the command line, you can also use it straight from your code. Glyph&#8217;s public <a href="http://yardoc.org/docs/glyph/Glyph"><span class="caps">API</span></a> is simple and can be used to:</p>
 <ul>
 	<li>Retrieve and update configuration settings (using <code>Glyph[]</code> and <code>Glyph[]=</code>)</li>
@@ -1071,6 +1219,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </ul></td></tr></table>
 
 </div>
+				
+				
+			
 
 </div>
 
@@ -1078,7 +1229,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		<div class="chapter">
 <h2 id="extending">Extending Glyph</h2>
 <div class="section">
-<h3 id="h_42">A quick look at Glyph's internals</h3>
+<h3 id="h_45">A quick look at Glyph's internals</h3>
 	<p>If you plan on extending Glyph, knowing how it works inside helps. It is not mandatory by any means, but it definitely helps, especially when creating complex macros.</p>
 	<p>What happens behind the scenes when you call <code>glyph compile</code>? Glyph's code is parsed, analyzed and then translated into text, and here's how:</p>
 	<div class="figure"><img alt="-" src="images/document_generation.png" />
@@ -1090,7 +1241,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>The <em>Finalization Phase</em> (Post-Processing) starts when the interpreter calls the <code>finalyze</code> method, causing the <code>Glyph::Document</code> object to perform a series of finalizations on the string obtained after analysis, i.e. it replaces escape sequences and placeholders.</li>
 </ul>
 	<div class="section">
-<h4 id="h_43">Example: A short note</h4>
+<h4 id="h_46">Example: A short note</h4>
 <p>As an example, consider the following Glyph code:</p>
 		<pre class="lazy"><span class="line-numbers">   1 </span> fmi[something|#test]
 <span class="line-numbers">   2 </span> ...
@@ -1152,6 +1303,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre>
 
 </div>
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -1202,10 +1356,14 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <code>@source</code>
 </td>
     <td>A <code>String</code> identifying the source of the macro (a file, a snippet, etc.).</td></tr></table>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_45">Parameters and Attributes</h3>
+<h3 id="h_48">Parameters and Attributes</h3>
 	<p>Perhaps the most common things to do in a macro definition is accessing parameters and attributes. When doing so, it is important to consider whether we want to retrieve the <em>raw value</em> of and attribute or parameter or its <em>expanded value</em>. The difference between the two will become clearer in the following sections and also in the <a href="#interpreting">Interpreting Glyph Code</a> section.</p>
 	<div class="section">
 <h4 id="expanded_values">Accessing Expanded Values</h4>
@@ -1221,7 +1379,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 
 </div>
 	<div class="section">
-<h4 id="h_47">Accessing Raw Values</h4>
+<h4 id="h_50">Accessing Raw Values</h4>
 <p>While accessing expanded values is simple and immediate, in some cases it may not produce the desired results. Consider the following macro definition:</p>
 		<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>nest_section</span> <span class="Keyword">do</span>
 <span class="line-numbers">   2 </span>   interpret <span class="String"><span class="String">%{</span>section[</span>
@@ -1268,10 +1426,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </ul>
 
 </div>
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_48">Bookmarks and Headers</h3>
+<h3 id="h_51">Bookmarks and Headers</h3>
 	<p>The <a href="http://yardoc.org/docs/h3rald-glyph/Macro"><code>Glyph::Macro</code></a> class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the <a href="#m_anchor"><code>anchor</code></a> macro:</p>
 
 	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>anchor</span> <span class="Keyword">do </span>
@@ -1283,10 +1444,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre> 
 
 	<p>The <code>bookmark?</code> method can be used to check the existance of a particular ID within the whole document, while the <code>bookmark</code> method is used to store bookmark IDs and titles. In a similar way, you can use <code>header?</code> and <code>header</code> methods to check the existance of headers within the documents or store new ones.</p>
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_49">Using Placeholders</h3>
+<h3 id="h_52">Using Placeholders</h3>
 	<p>Sometimes you may need to access some data that will not be available until the entire document has been fully parsed and analyzed. For example, in order to be able to validate internal links, it is necessary to know in advance if the bookmark ID referenced in the link exists or not, either before (that&#8217;s easy) or even <em>after</em> the link.</p>
 <p>Here&#8217;s the source code of the <a href="#m_link"><code>link</code></a> macro:</p>
 	<pre class="lazy"><span class="line-numbers">   1 </span> macro <span class="Constant"><span class="Constant">:</span>link</span> <span class="Keyword">do</span>
@@ -1310,10 +1474,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre>
 	<p>If there&#8217;s already a bookmark stored in the current document, then it is possible to retrieve its title and use it as link text. Otherwise, it is necessary to wait until the entire document has been fully processed and then check if the bookmark exists. To do so, use the <code>placeholder</code> method. When called, this method returns an unique placeholder, which is then substituted with the value of the block, right before the document is finalized.</p>
 <p>Within the <code>placeholder</code> block, the <code>document</code> parameter is, by all means, the fully analyzed document.</p>
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_50">Using Validators</h3>
+<h3 id="h_53">Using Validators</h3>
 	<p>If you need to make sure that a macro is used properly, consider using <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro/Validators">validators</a>. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.</p>
 	<p>If you want to create your own validators, you can call the generic <code>validate</code> method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.</p>
 	<div class="box">
@@ -1327,6 +1494,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>Even if you consider all the possibilities within the scope of the default macros provided with Glyph, this would also make the <code>box</code> macro unusable within custom macros.</p>
 
 </div>
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -1375,10 +1545,14 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 			<code>{{</code><em>parameter_number</em> or <em>attribute_name</em><code>}}</code></p>
 
 </div>
+				
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_53">Further Reading</h3>
+<h3 id="h_56">Further Reading</h3>
 	<p>For more examples on how to create more complex macros, have a look at the <a href="http://github.com/h3rald/glyph/tree/master/macros/">source code</a> of the existing ones.</p>
 <p>To gain a deeper understanding on how macros are executed, have a look at the following Glyph classes:</p>
 <ul>
@@ -1388,14 +1562,17 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Document"><code>Glyph::Document</code></a></li>
 	<li><a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro"><code>Glyph::Macro</code></a></li>
 </ul>
+				
+				
+			
 
 </div>
 
 </div>
 		<div class="chapter">
-<h2 id="h_54">Troubleshooting</h2>
+<h2 id="h_57">Troubleshooting</h2>
 <div class="section">
-<h3 id="h_55">Generic Errors</h3>
+<h3 id="h_58">Generic Errors</h3>
 	
 		<table style="width:100%;">
 			<tr>
@@ -1450,10 +1627,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		</tr>
 		</table>
 	
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_56">Parsing Errors</h3>
+<h3 id="h_59">Parsing Errors</h3>
 	
 		<table style="width:100%;">
 			<tr>
@@ -1508,10 +1688,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		</tr>
 		</table>
 	
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_57">Command Errors</h3>
+<h3 id="h_60">Command Errors</h3>
 	
 		<table style="width:100%;">
 			<tr>
@@ -1580,10 +1763,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		</tr>
 		</table>
 	
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_58">Macro Errors</h3>
+<h3 id="h_61">Macro Errors</h3>
 	<p>The following errors are displayed in the form:</p>
 <p><em>message</em><br />
 &nbsp; source: <em>macro_source</em><br />
@@ -1758,6 +1944,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		</tr>
 		</table>
 	
+				
+				
+			
 
 </div>
 
@@ -1775,7 +1964,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><em>parameters</em> are separated by whitespaces, and can be wrapped in quotes.</li>
 </ul>
 <div class="section">
-<h3 id="h_60">Global Options</h3>
+<h3 id="h_63">Global Options</h3>
 <div class="section">
 <h4 id="debug_switch"><code>-d</code>, <code>--debug</code></h4>
 <p>If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.</p>
@@ -1789,7 +1978,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p><strong>Example:</strong> <code>glyph add introduction.textile</code></p>
 	
 		<div class="section">
-<h4 id="h_63">Parameters</h4>
+<h4 id="h_66">Parameters</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -1810,7 +1999,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p><strong>Example:</strong> <code>glyph compile -f pdf</code></p>
 	
 		<div class="section">
-<h4 id="h_65">Parameters</h4>
+<h4 id="h_68">Parameters</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -1832,7 +2021,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	
 	
 		<div class="section">
-<h4 id="h_66">Options</h4>
+<h4 id="h_69">Options</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Option</th>
@@ -1879,7 +2068,7 @@ Gets or sets a configuration setting in the project or global configuration file
 	
 	
 		<div class="section">
-<h4 id="h_68">Options</h4>
+<h4 id="h_71">Options</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Option</th>
@@ -1898,7 +2087,7 @@ If specified, the global configuration file is processed instead of the project 
 	
 	
 		<div class="section">
-<h4 id="h_69">Parameters</h4>
+<h4 id="h_72">Parameters</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -1930,7 +2119,7 @@ Prints information about all Glyph commands or about one specific command.
 	
 	
 		<div class="section">
-<h4 id="h_71">Parameters</h4>
+<h4 id="h_74">Parameters</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -1956,7 +2145,7 @@ Creates a new Glyph project in the current directory (if empty).
 Display an outline of the current document.
 	
 		<div class="section">
-<h4 id="h_74">Options</h4>
+<h4 id="h_77">Options</h4>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Option</th>
@@ -2009,12 +2198,16 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	<p><strong>Example:</strong> <code>glyph todo</code></p>
 
 </div>
+			
+			
+			
+		
 
 </div>
 		<div class="appendix">
 <h2 id="macro_ref">Macro Reference</h2>
 <div class="section">
-<h3 id="h_77">Core Macros</h3>
+<h3 id="h_80">Core Macros</h3>
 
 	
 	<div class="section">
@@ -2026,7 +2219,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_79">Parameters</h5>
+<h5 id="h_82">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2059,7 +2252,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_81">Parameters</h5>
+<h5 id="h_84">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2091,7 +2284,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_83">Parameters</h5>
+<h5 id="h_86">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2107,7 +2300,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_84">Remarks</h5>
+<h5 id="h_87">Remarks</h5>
 <p>Macros are not expanded within comments.</p>
 
 </div>
@@ -2125,7 +2318,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_86">Parameters</h5>
+<h5 id="h_89">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2147,7 +2340,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_87">Remarks</h5>
+<h5 id="h_90">Remarks</h5>
 <p>For examples see any of the following:</p>
 <ul>
 	<li><a href="#m_and"><code>and</code></a> macro</li>
@@ -2172,7 +2365,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_89">Parameters</h5>
+<h5 id="h_92">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2199,7 +2392,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_91">Parameters</h5>
+<h5 id="h_94">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2221,7 +2414,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_92">Remarks</h5>
+<h5 id="h_95">Remarks</h5>
 <p>This macro cannot be used in <a href="#modes">Modes</a>.</p>
 
 </div>
@@ -2239,7 +2432,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_94">Parameters</h5>
+<h5 id="h_97">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2271,7 +2464,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_96">Parameters</h5>
+<h5 id="h_99">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2298,7 +2491,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_98">Parameters</h5>
+<h5 id="h_101">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2314,7 +2507,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_99">Remarks</h5>
+<h5 id="h_102">Remarks</h5>
 <ul><li>This macro cannot be used in <a href="#modes">Modes</a>.</li>
 				<li><code>.glyph</code> is assumed if no file extension is specified.</li>
 				<li>This macro can also be used to include <code>.rb</code> ruby files within the <code>lib</code> directory. File contents are evaluated in the context of the <a href="http://yardoc.org/docs/h3rald-glyph/Glyph">Glyph</a> module.</li></ul>
@@ -2334,7 +2527,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_101">Parameters</h5>
+<h5 id="h_104">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2362,7 +2555,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_102">Remarks</h5>
+<h5 id="h_105">Remarks</h5>
 <p>This macro must be used with the <a href="#m_condition"><code>condition</code></a> macro.</p>
 
 </div>
@@ -2380,7 +2573,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_104">Parameters</h5>
+<h5 id="h_107">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2402,7 +2595,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_105">Remarks</h5>
+<h5 id="h_108">Remarks</h5>
 <ul><li>This macro cannot be used in <a href="#modes">Modes</a>.</li>
 				<li>The new macro can only be used <em>after</em> its declaration.</li></ul>
 
@@ -2421,7 +2614,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_107">Parameters</h5>
+<h5 id="h_110">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2448,7 +2641,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_109">Parameters</h5>
+<h5 id="h_112">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2491,7 +2684,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_111">Parameters</h5>
+<h5 id="h_114">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2513,7 +2706,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_112">Remarks</h5>
+<h5 id="h_115">Remarks</h5>
 <ul><li>The new macro can only be used <em>after</em> its declaration.</li>
 				<li>This macro cannot be used in <a href="#modes">Modes</a>.</li></ul>
 
@@ -2537,7 +2730,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 		<div class="section">
-<h5 id="h_114">Parameters</h5>
+<h5 id="h_117">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2553,7 +2746,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_115">Remarks</h5>
+<h5 id="h_118">Remarks</h5>
 <p>This macro cannot be used in <a href="#modes">Modes</a>.</p>
 
 </div>
@@ -2571,7 +2764,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_117">Parameters</h5>
+<h5 id="h_120">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2598,7 +2791,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_119">Parameters</h5>
+<h5 id="h_122">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2620,17 +2813,20 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_120">Remarks</h5>
+<h5 id="h_123">Remarks</h5>
 <p>The new snippet can only be used <em>after</em> its declaration.</p>
 
 </div>
 
 </div>
 	
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_121">Block Macros</h3>
+<h3 id="h_124">Block Macros</h3>
 	
 	<div class="section">
 <h4 id="m_box"><code>box</code></h4>
@@ -2649,7 +2845,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_123">Parameters</h5>
+<h5 id="h_126">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2692,7 +2888,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_125">Parameters</h5>
+<h5 id="h_128">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2708,7 +2904,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 <div class="section">
-<h5 id="h_126">Remarks</h5>
+<h5 id="h_129">Remarks</h5>
 <p>For code highlighting, see the <a href="#m_highlight"><code>highlight</code></a> macro.</p>
 
 </div>
@@ -2735,7 +2931,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_128">Parameters</h5>
+<h5 id="h_131">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2757,7 +2953,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 		<div class="section">
-<h5 id="h_129">Attributes</h5>
+<h5 id="h_132">Attributes</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Attribute</th>
@@ -2794,7 +2990,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_131">Parameters</h5>
+<h5 id="h_134">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2810,7 +3006,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 		<div class="section">
-<h5 id="h_132">Attributes</h5>
+<h5 id="h_135">Attributes</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Attribute</th>
@@ -2837,7 +3033,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_134">Parameters</h5>
+<h5 id="h_137">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2893,10 +3089,13 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 </div>
 	
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_139">Inline Macros</h3>
+<h3 id="h_142">Inline Macros</h3>
 	
 	<div class="section">
 <h4 id="m_anchor"><code>anchor</code></h4>
@@ -2907,7 +3106,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_141">Parameters</h5>
+<h5 id="h_144">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2940,7 +3139,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_143">Parameters</h5>
+<h5 id="h_146">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -2967,7 +3166,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_145">Parameters</h5>
+<h5 id="h_148">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3000,7 +3199,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_147">Parameters</h5>
+<h5 id="h_150">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3032,6 +3231,9 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 </div>
 	
+				
+				
+			
 
 </div>
 			<div class="section">
@@ -3047,7 +3249,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_151">Parameters</h5>
+<h5 id="h_154">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3075,7 +3277,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_153">Parameters</h5>
+<h5 id="h_156">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3111,10 +3313,14 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 </div>
 	
+				
+				
+				
+			
 
 </div>
 			<div class="section">
-<h3 id="h_155">Structure Macros</h3>
+<h3 id="h_158">Structure Macros</h3>
 	
 	<div class="section">
 <h4 id="m_article"><code>article</code></h4>
@@ -3144,7 +3350,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_157">Parameters</h5>
+<h5 id="h_160">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3160,7 +3366,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 		<div class="section">
-<h5 id="h_158">Attributes</h5>
+<h5 id="h_161">Attributes</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Attribute</th>
@@ -3231,7 +3437,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_160">Parameters</h5>
+<h5 id="h_163">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3247,7 +3453,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 		<div class="section">
-<h5 id="h_161">Attributes</h5>
+<h5 id="h_164">Attributes</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Attribute</th>
@@ -3316,7 +3522,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_163">Parameters</h5>
+<h5 id="h_166">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3343,7 +3549,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_165">Parameters</h5>
+<h5 id="h_168">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3380,7 +3586,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_167">Parameters</h5>
+<h5 id="h_170">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3396,7 +3602,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 
 		<div class="section">
-<h5 id="h_168">Attributes</h5>
+<h5 id="h_171">Attributes</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Attribute</th>
@@ -3435,7 +3641,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_170">Parameters</h5>
+<h5 id="h_173">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3462,7 +3668,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 
 		<div class="section">
-<h5 id="h_172">Parameters</h5>
+<h5 id="h_175">Parameters</h5>
 <table style="width:100%;">
 			<tr>
 				<th style="width:30%">Parameter</th>
@@ -3478,6 +3684,9 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 </div>
 	
+				
+				
+			
 
 </div>
 
@@ -3596,7 +3805,7 @@ The following configuration settings are related to the current Glyph document. 
 </div> 
 
 <div class="section">
-<h3 id="h_176">language.*</h3>
+<h3 id="h_179">language.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
@@ -3624,7 +3833,7 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 <div class="section">
-<h3 id="h_177">tools.*</h3>
+<h3 id="h_180">tools.*</h3>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default (YAML)</th></tr>
@@ -3635,19 +3844,23 @@ The following configuration settings are related to the current Glyph document. 
 		<td><code>nil</code></td></tr></table>
 
 </div>
+			
+			
+			
+		
 
 </div>
 		<div class="appendix">
-<h2 id="h_178">Changelog</h2>
+<h2 id="h_181">Changelog</h2>
 
 
 
 
 
 	<div class="section">
-<h3 id="h_179">v0.4.0 &ndash; ???</h3>
+<h3 id="h_182">v0.4.0 &ndash; ???</h3>
 <div class="section">
-<h4 id="h_180">27 Features Implemented</h4>
+<h4 id="h_183">27 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3695,7 +3908,7 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_181">13 Bugs Fixed</h4>
+<h4 id="h_184">13 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3723,9 +3936,9 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_182">v0.3.0 &ndash; June 13th 2010</h3>
+<h3 id="h_185">v0.3.0 &ndash; June 13th 2010</h3>
 <div class="section">
-<h4 id="h_183">27 Features Implemented</h4>
+<h4 id="h_186">27 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3773,7 +3986,7 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_184">7 Bugs Fixed</h4>
+<h4 id="h_187">7 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3792,9 +4005,9 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_185">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_188">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_186">23 Features Implemented</h4>
+<h4 id="h_189">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3836,7 +4049,7 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_187">17 Bugs Fixed</h4>
+<h4 id="h_190">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -3870,10 +4083,13 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_188">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_191">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>
+			
+			
+		
 
 </div>
 

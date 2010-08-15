@@ -76,8 +76,8 @@ describe "generate" do
 		web2 = (Glyph::PROJECT/'output/web/a/b/web2.html')
 		web2.exist?.should == true
 		# Check that placeholders are replaced correctly and that links are valid
-		file_load(web2).match(/<a href="\/test\/text\/a\/web1\.html#w1_3">Test #1b<\/a>/).blank?.should == false
-		file_load(web1).match(/<a href="\/test\/text\/a\/b\/web2\.html#w2_1">Test #2a<\/a>/).blank?.should == false
+		file_load(web2).match(/<a href="\/test\/a\/web1\.html#w1_3">Test #1b<\/a>/).blank?.should == false
+		file_load(web1).match(/<a href="\/test\/a\/b\/web2\.html#w2_1">Test #2a<\/a>/).blank?.should == false
 		file_load(web1).match(/<a href="#w1_3">Test #1b<\/a>/).blank?.should == false
 	end
 

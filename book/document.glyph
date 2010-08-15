@@ -67,6 +67,15 @@ book[
 				@title[Sections and Headers]
 				@id[sec_head]
 				@src[text_editing/sections]
+				section[
+					@title[Section Aliases]
+					@src[text_editing/section_aliases]
+				]
+				section[
+					@title[Topics]
+					@id[topics]
+					@src[text_editing/topics]
+				]
 			]
 			section[
 				@title[Links and Bookmarks]

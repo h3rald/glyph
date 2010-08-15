@@ -36,7 +36,7 @@ describe Glyph::Reporter do
 	it "should display macro stats" do
 		stats :macros
 		out = stdout_for { rep.display }
-		out.should match "Total Macro Instances: 20"
+		out.should match "Total Macro Instances: 22"
 		out.should match "-- Used Macro Definitions:"
 		@r.detailed = false
 		out = stdout_for { @r.display }
@@ -90,7 +90,7 @@ describe Glyph::Reporter do
 	it "should display stats for a single snippet" do
 		stats :snippet, :test
 		out = stdout_for { rep.display }
-		out.should match "-- Total Used Instances: 2"
+		out.should match "-- Total Used Instances: 3"
 		out.should match "   - text/references.glyph \\(1\\)"
 		@r.detailed = false
 		out = stdout_for { @r.display }
@@ -129,7 +129,7 @@ describe Glyph::Reporter do
 		out = stdout_for { rep.display }
 		out.should match "-- Total Files: 6"
 		out.should match "   - http://www.h3rald.com \\(1\\)"
-		out.should match "Total Macro Instances: 20"
+		out.should match "Total Macro Instances: 22"
 		out.should match "-- Total Snippets: 2"
 		out.should match "h_1    h_2    md     refs   toc"
 	end

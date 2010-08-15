@@ -44,6 +44,7 @@ module Glyph
 			if multiple_output_files? then
 				dest_file = @file.to_s
 				dest_file += '.glyph' unless dest_file.match /\..+$/
+				dest_file.gsub!(/^text\//, '') unless Glyph.lite?
 				external_file = dest_file.to_s.gsub(/\..+$/, Glyph["output.#{Glyph['document.output']}.extension"]) 
 				f = (file.blank? || file != @file) ? "#{Glyph["output.#{Glyph['document.output']}.base"]}#{external_file}" : ""
 				"#{f}##{@id}"

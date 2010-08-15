@@ -1,0 +1,33 @@
+txt[
+Sections can also be used to create _topics_. In a technical writing context, the term topic identifies a single page of an online help (e.g. a Compiled HTML file, or CHM). Topics should generally be:
+* self-contained, in the sense that they should make sense on their own, ideally without the need to be read in sequence
+* be used for either _concepts_, _tasks_ or _references_
+* be divided into meaningful sections like _Introduction_, _Procedure_, _Result_
+
+Glyph does not formally enforce the correctness of topic composition and usage, but it does enable authors to create them as a sort of external sections. Consider the following Glyph code:
+]
+highlight[=html|
+section[
+	@title[My First Topic]
+	@id[first_topic]
+	@src[test/first_topic.glyph]
+]
+=]
+txt[
+This is an ordinary section with a title and an explicit ID, but it has no contents. Instead, its code[@src] attribute references an external file. If you are generating a single-file document, like a standalone HTML file or a PDF file, the code snippet above is exactly the same as the following:
+]
+highlight[=html|
+section[
+	@title[My First Topic]
+	@id[first_topic]
+	include[test/first_topic.glyph]
+]
+=]
+txt[
+On the other hand, if you are planning on producing a document comprised of multiple files (see =>[#web_output]), the code[@src] attribute tells Glyph to create a _topic_ for the section. In this case:
+* The code[@title] attribute must be specified and is used as the topic title
+* The body of the topic is constituted by the contents of the file referenced by the code[@src] attribute.
+* The topic file is rendered according to a specific layout. ![Write a section about layouts and reference it here]
+* The location of the topic is the same as the location of the included file, mirrored in the output folder.
+* Glyph takes care of changing the file extensions and resolving links automatically, regardless of the output target.
+]

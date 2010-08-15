@@ -1,19 +1,42 @@
-	p[By default, a Glyph project can be "compiled" into an HTML document. Additionally, Glyph can also be used to produce PDF documents through &[prince], and in future releases more output targets will be supported.]
-	section[
-		@title[HTML output]
-		p[To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the code[document.glyph] file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the code[/output/html] folder.] 
-		p[The name of the HTML file can be set in the configuration (\.$>[document.filename]).]
-	]
-	section[
-		@title[PDF Output]
-		p[To generate a PDF document, you must specify code[pdf] as format, like this:]
-		p[code[= glyph compile -f pdf =]]
-		p[The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.]
-		note[Glyph v\.%[Glyph::VERSION] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
-	]
-	section[
-		@title[Auto Regeneration]
-		@id[auto_regeneration]
-		txt[You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed.]
-		note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
-	]
+txt[
+By default, a Glyph project can be "compiled" into an HTML document. Additionally, Glyph can also be used to produce documents in the following formats:
+* HTML5
+* PDF (generated from HTML using a third-party generator like &[prince] or &[wkhtml])
+* Web (i.e. multiple HTML files)
+* Web5 (i.e. multiple HTML5 files)
+]
+section[
+	@title[HTML/HTML5 output]
+	p[To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the code[document.glyph] file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the code[/output/html] folder.] 
+	p[The name of the HTML file can be set in the configuration (\.$>[document.filename]).]
+	p[To create an HTML5 file instead, you must specify it explicitly like this:]
+	p[code[= glyph compile -f html5 =]]
+]
+section[
+	@title[PDF Output]
+	p[To generate a PDF document, you must specify code[pdf] as format, like this:]
+	p[code[= glyph compile -f pdf =]]
+	p[The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.]
+	note[Glyph v\.%[Glyph::VERSION] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
+]
+section[
+	@title[Web/Web5 Output]
+	@id[web_output]
+	txt[
+To generate a Web or Web5 output, specify @web@ or @web5@ as format. These two output formats behave different way from the others, and require that your project uses =>[#topics|topics] and layouts. 
+
+![link to layout section goes here]
+Basically, here's what happens when you compile your project in web or web5 format:
+# The document code is parsed as normal
+# Separate topic files are generated according to the code[@src] attributes of your sections
+# The code[document.glyph] (or whatever file you're using as document source) is _not_ rendered. Instead, an @index.html@ file will be created in the output folder based on the contents of your @index@ layout. 
+
+![link to index layout] 
+	]	
+]
+section[
+	@title[Auto Regeneration]
+	@id[auto_regeneration]
+	txt[You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed.]
+	note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
+]
