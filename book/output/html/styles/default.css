@@ -213,8 +213,25 @@ span.line-numbers{
 	padding: 3px;
 }
 
-nav {
+nav, .navigation {
 	display: block;
+	margin: 1em auto;
+	text-align: center;
+	border: 1px solid #E6E6E6;
+}
+
+nav.contents {
+	margin: auto;
+	text-align: left;
+	border: none;
+}
+
+nav a, .navigation a {
+	margin: 1em;
+}
+
+nav.contents a {
+	margin: 0;
 }
 
 mark {
@@ -233,6 +250,10 @@ td>div.code, td>code {
 	width: auto;
 	margin: 0.2em;
 	padding: 0.2em;
+}
+
+.topic{
+	margin: 2em auto;
 }
 
 /* FONTS */

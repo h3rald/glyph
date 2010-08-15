@@ -146,6 +146,7 @@ module Glyph
 					toc[:contents].gsub! key_s, value_s if toc[:contents].to_s.match key_s 
 					if Glyph.multiple_output_files? then
 						@topics.each do |t|
+							ESCAPES.each{|e| t[:contents].gsub! e[0], e[1]}
 							t[:contents].gsub! key_s, value_s
 						end
 					end
