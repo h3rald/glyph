@@ -235,7 +235,7 @@ module Glyph
 						# Return nothing
 						nil
 					else
-						procs[:body].call h, interpret("include[#{attr(:src)}]+#{value}")
+						procs[:body].call h, interpret("include[#{attr(:src)}]#{value}")
 					end
 				else
 					procs[:body].call h, value

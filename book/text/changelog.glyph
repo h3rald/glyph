@@ -35,6 +35,31 @@ rw:[issue|
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
 ]
+release[0.4.0|???|
+	features[
+		issue[40|![stats command]]
+		issue[73|![online links validation]]
+		issue[112|![wkhtmltopdf]]
+		issue[114|![multiple file output]]
+		issue[115|![layout macros]]
+		issue[120|![html5]]
+		issue[135|![link stylesheets]]
+		issue[138|![macro inheritance]]
+		issue[142|![navigation macros]]
+		issue[143|![topic based toc]]
+		issue[144|!["within" validators]]
+		issue[147|![stylesheets compatible with html5]]
+		issue[148|![customization enhancement]]
+	]
+	bugs[
+		issue[133|![html charset]]
+		issue[136|![utils module refactoring]]
+		issue[139|![configuration refactoring]]
+		issue[140|![macro helpers]]
+		issue[141|![non-rb files loaded with macros]]
+		issue[145|![bundler conflicts]]
+	]
+]
 release[0.3.0|June 13th 2010|
 	features[
 		issue[39|A new #>[outline] is available to display the document outline.]
