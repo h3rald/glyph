@@ -39,10 +39,10 @@ release[0.4.0|???|
 	features[
 		issue[40|![stats command]]
 		issue[73|![online links validation]]
-		issue[112|![wkhtmltopdf]]
+		issue[112|It is now possible to use _wkhtmltopdf_ instead of Prince to generate PDF files from HTML files.]
 		issue[114|![multiple file output]]
 		issue[115|![layout macros]]
-		issue[120|![html5]]
+		issue[120|![It is now possible to compile your project to a single HTML5 file (_html5_ output) or multiple files (_web5_ output)]]
 		issue[135|![link stylesheets]]
 		issue[138|![macro inheritance]]
 		issue[142|![navigation macros]]

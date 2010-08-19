@@ -16,8 +16,15 @@ section[
 	@title[PDF Output]
 	p[To generate a PDF document, you must specify code[pdf] as format, like this:]
 	p[code[= glyph compile -f pdf =]]
-	p[The command above will attempt to compile the project into an HTML document and then call Prince to generate a PDF document from it. In order for this to work, you must download and install &[prince]. It's not open source, but the free version is fully functional, and it just adds a small logo on the first page.]
-	note[Glyph v\.%[Glyph::VERSION] has been successfully tested with Prince v7.0, and the PDF version of this very book was generated with it.]
+	p[The command above will attempt to compile the project into an HTML document and then call a third-party PDF generator to convert it into a PDF file.]
+	txt[
+Currently, Glyph supports:
+* &[prince] (version 7.0 or higher) -- a commercial generator that can be used freely for personal use. Prince produces high-quality PDF files and implement most of the new features introduced in CSS3, used heavily in Glyph's =>[#default_stylesheets|code[pagination.css]] default stylesheet.
+* &[wkhtml] (version 1.0 beta4 or higher) -- an open source generator that uses the WebKit rendering engine to transform HTML files into PDF. Although not as advanced as Prince, it produces very satisfactory results.
+
+By default, Glyph attempts to use wkhtmltopdf. To change this, set the $>[s_output_pdf_generator] to code[prince]. 
+	]
+	note[Glyph expects PDF generators to be installed on the local machine and callable via command line using the code[wkhtmltopdf] or the code[prince] commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).]
 ]
 section[
 	@title[Web/Web5 Output]
