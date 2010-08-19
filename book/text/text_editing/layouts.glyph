@@ -1,0 +1,59 @@
+txt[
+When generating =>[#topics|topic]-based outputs, Glyph uses _layouts_ to render topics as standalone documents. By default, the following two layout are used:
+* code[topic] -- used to render standard topics.
+* code[index] -- used to render the index page of your document.
+
+Layouts are nothing more than "fancy" Glyph macros defined using the Glyph language (i.e. by using =>[#rewriting|macro rewriting]) within a single code[.glyph] file.
+]
+![Add link to section about layout creation]
+![Explain how to override layouts using the layout attribute]
+section[
+	@title[Topic Layout]
+	p[The default layout used to render all web topics (the layout used for web5 topics is very similar) is defined as follows:]
+	codeblock[=html|
+document[
+  head[
+    style[default.css]
+  ]
+  body[
+    @class[topic]
+    section[
+      @title[{{title}}]
+      @id[{{id}}]
+      navigation[{{id}}]
+{{contents}}
+      navigation[{{id}}]
+    ]
+  ]
+]
+	=]
+	txt[Note that it takes the following attributes, passed automatically by Glyph when processing each topic:
+* code[title] -- the title of the topic.
+* code[id] -- the ID of the topic.
+* code[contents] -- the body of the topic.
+	]
+]
+section[
+	@title[Index Layout]
+	p[The default layout used to render the web index page (the layout used for the web5 index is very similar) is defined as follows:]
+	codeblock[=html|
+document[
+  head[
+    style[default.css]
+  ]
+  body[
+    @class[topic]
+    halftitlepage[
+      title[]
+      subtitle[]
+      author[]
+    ]
+    frontmatter[
+      toc[]
+    ]
+  ]
+]
+	=]
+	p[Index layouts do not take any attribute or parameter (basically because they are used to produce only one page).]
+]
+

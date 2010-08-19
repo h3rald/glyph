@@ -78,6 +78,11 @@ book[
 				]
 			]
 			section[
+				@title[Layouts]
+				@id[layouts]
+				@src[text_editing/layouts]
+			]
+			section[
 				@title[Links and Bookmarks]
 				@id[links]
 				@src[text_editing/links]
