@@ -1,12 +1,15 @@
 --- 
 :document: 
-  :revision: v0.4.0
   :draft: true
-  :author: Fabio Cevasco
-  :output: html
-  :filename: glyph
-  :subtitle: Rapid Document Authoring Framework
   :title: Glyph
+  :subtitle: Rapid Document Authoring Framework
   :styles: link
+  :author: Fabio Cevasco
+  :revision: v0.4.0
+  :filename: glyph
+  :output: html
+:output: 
+  :pdf: 
+    :generator: prince
 :filters: 
   :highlighter: ultraviolet

@@ -10,7 +10,7 @@ Layouts are nothing more than "fancy" Glyph macros defined using the Glyph langu
 section[
 	@title[Topic Layout]
 	p[The default layout used to render all web topics (the layout used for web5 topics is very similar) is defined as follows:]
-	codeblock[=html|
+	highlight[=html|
 document[
   head[
     style[default.css]
@@ -36,7 +36,7 @@ document[
 section[
 	@title[Index Layout]
 	p[The default layout used to render the web index page (the layout used for the web5 index is very similar) is defined as follows:]
-	codeblock[=html|
+	highlight[=html|
 document[
   head[
     style[default.css]
