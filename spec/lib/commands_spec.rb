@@ -231,10 +231,10 @@ test_project - Outline
 		reset_quiet
 		create_project
 		out = run_command(["stats", "-ms"])
-		out.should match "-- Total Macro Definitions: 19" 
+		out.should match "-- Total Macro Definitions: 44" 
 		out.should match "-- Unused Snippets: test"
 		out = run_command(["stats"])
-		out.should match "-- Total Macro Definitions: 19" 
+		out.should match "-- Total Macro Definitions: 44" 
 		out.should_not match "-- Unused Snippets: test"
 		out.should match "-- Total Unreferenced Bookmarks: 3"
 		out = run_command(["stats", "-lb", "--bookmark=md"])

@@ -85,8 +85,8 @@ module Glyph
 
 		def stats_macros
 			c = @stats[:macros] = {}
-			c[:definitions] = Glyph::ALIASES[:by_def].keys.sort
 			c[:aliases] = Glyph::ALIASES[:by_alias].keys.sort
+			c[:definitions] = (Glyph::MACROS.keys - c[:aliases]).uniq.sort
 			c[:instances] = []
 			with_macros {|n|  c[:instances] << n[:name]}
 			c[:used_definitions] = c[:instances].map{|m| macro_definition_for(m) || m}.uniq.sort

@@ -53,11 +53,10 @@ describe Glyph::Analyzer do
 		lambda {@a.stats_for :macros}.should_not raise_error
 		@a.stats[:macros].blank?.should == false
 		c = @a.stats[:macros]
-		c[:definitions].should == Glyph::ALIASES[:by_def].keys.sort
+		c[:definitions].should == (Glyph::MACROS.keys - Glyph::ALIASES[:by_alias].keys).uniq.sort
 		c[:aliases].should == Glyph::ALIASES[:by_alias].keys.sort
 		c[:instances].length.should == 22
-		c[:used_definitions].should == [:anchor, :include, :link, :markdown, 
-			:section, :snippet, :"snippet:", :textile, :toc]
+		c[:used_definitions].should == [:anchor, :include, :link, :markdown, :section, :snippet, :"snippet:", :textile, :toc]
 	end
 
 	it "should calculate stats for a single macro" do
