@@ -1,0 +1,43 @@
+section[
+	@title[Displaying stats about all macros]
+	stats_for[all macros|--macros|
+ ===== Macros
+-- Total Macro Instances: 2975
+-- Total Macro Definitions: 65
+-- Total Macro Aliases: 57
+-- Total Used Macro Definitions: 61
+-- Macro Definitions:
+     #>            $>            %>            alias:        aliases       
+     anchor        and           article       author        block_example 
+     book          box           class         codeblock     comment       
+     condition     config        config:       config_table  default       
+     document      draftcomment  eq            error_table   escape        
+     example       examples      features      figure        fmi           
+     head          highlight     image         include       issue         
+     link          macro:        markdown      match         navigation    
+     not           note          option        or            parameters    
+     pubdate       ref_config    ref_error     ref_macro     release       
+     revision      rewrite:      ruby          section       snippet       
+     snippet:      stats_for     style         subtitle      textile       
+     title         toc           todo          values        \|xml\|         
+
+-- Used Macro Definitions:
+     #>            $>            %>            aliases       anchor        
+     author        block_example book          box           class         
+     code          codeblock     comment       condition     config        
+     config_table  default       document      em            eq            
+     error_table   escape        example       examples      features      
+     figure        fmi           head          highlight     image         
+     include       issue         li            link          macro:        
+     note          option        parameters    pubdate       ref_config    
+     ref_error     ref_macro     release       revision      rewrite:      
+     ruby          section       snippet       snippet:      stats_for     
+     style         subtitle      td            textile       title         
+     toc           todo          tr            ul            values        
+     \|xml\|         
+  ]
+	note[txt[Only macro _definitions_ (not their _aliases_) are displayed, both default and user-defined.]]
+]
+section[
+	@title[Displaying stats about a single macro]
+]

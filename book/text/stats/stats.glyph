@@ -1,0 +1,70 @@
+rewrite:[stats_for|
+	txt[To display statistics about {{0}}, execute @glyph stats {{1}}@. Glyph displays something like this:]
+	highlight[=html|
+{{2}}
+	=]
+]
+p[Glyph includes a code[stats] command that can be used to display useful statistics about your Glyph project. If you try running Glyph's command help, you'll see that this command can take quite a few options:
+]
+highlight[html|
+$ glyph help stats
+=====================================
+Glyph v\.%[Glyph::VERSION]
+=====================================
+stats \[options\] 
+    Display statistics
+
+Options:
+    -b, --bookmarks - Display stats about bookmarks
+    --bookmark=arg  - Display stats about a single bookmark
+    -f, --files     - Display stats about project files
+    -l, --links     - Display stats about links
+    --link=arg      - Display stats about links matching a regular expression
+    -m, --macros    - Display stats about macros
+    --macro=arg     - Display stats about a single macro
+    -s, --snippets  - Display stats about snippets
+    --snippet=arg   - Display stats about a single snippet
+]
+txt[
+If no options are specified, the command returns a summary containing different element totals, i.e.:
+* The files used in the project
+* Macro definitions and instances
+* Snippets
+* Bookmarks
+* Links and references
+
+Example:
+]
+highlight[=html|
+=====================================
+Glyph - Statistics
+=====================================
+
+===== Files
+-- Total Files: 50
+-- /text    -- 46
+-- /images  -- 3
+-- /styles  -- 0
+-- /layouts -- 0
+-- /lib     -- 1
+
+===== Macros
+-- Total Macro Instances: 2950
+-- Total Macro Definitions: 22
+-- Total Macro Aliases: 57
+-- Total Used Macro Definitions: 60
+
+===== Snippets
+-- Total Snippets: 21
+-- Total Used Snippets: 21
+-- Total Unused Snippets: 0
+
+===== Bookmarks
+-- Total Bookmarks: 221
+-- Total Referenced Bookmarks: 87
+-- Total Unreferenced Bookmarks: 135
+
+===== Links
+-- Total Internal Links: 87
+-- Total External Links: 97
+=]

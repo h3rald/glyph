@@ -147,6 +147,29 @@ book[
 			]
 		]
 		chapter[
+			@title[Document Statistics]
+			section[
+				@title[Using the stats command]
+				@src[stats/stats]
+			]
+			section[
+				@title[Macro Statistics]
+				@src[stats/macros]
+			]
+			section[
+				@title[Snippet Statistics]
+				@src[stats/snippets]
+			]
+			section[
+				@title[Bookmark Statistics]
+				@src[stats/bookmarks]
+			]
+			section[
+				@title[Link Statistics]
+				@src[stats/links]
+			]
+		]
+		chapter[
 			@title[Extending Glyph]
 			@id[extending]
 			section[
