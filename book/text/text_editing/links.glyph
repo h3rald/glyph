@@ -44,6 +44,5 @@ section[
 ...
 ]
 	=]
-	note[
-At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the %>[link] starts with a code[#]). In the future, the macro could be extended to support external (http) links as well. 
-	]
+	p[By default, validation is only enabled for internal links (i.e. the check occurs if the first parameter of the %>[link] starts with a code[#]). You can enable it for external links as well by setting the $>[options.url_validation] to code[true]. If URL validation is enabled, an error is returned if a link returns an HTTP status greater than 302.]
+	important[Enabling URL validation may significantly slow down compilation if a lot of external links are present.]

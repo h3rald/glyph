@@ -2,12 +2,14 @@
 	p[If you want to create your own validators, you can call the generic code[validate] method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.]
 	box[Validating macro placement|
 		txt[
-You can, of course, create your own validators to check whether a macro is used within another. While this may seem a good idea to enforce constraints into the way documents are created, it has one major drawback: if you define a macro with such validation, you're effectively limiting its usage, so for example you won't be able to use within snippets or other custom macros.
+You can, of course, create your own validators to check whether a macro is used directly within another. While this may seem a good idea to enforce constraints into the way documents are created, it has one major drawback: if you define a macro with such validation, you're effectively limiting its usage, so for example you won't be able to use within snippets or other custom macros.
 
-Suppose, for example, that the %>[box] is only allowed within a @section@ macro. This means that, for example:
+Suppose, for example, that the %>[box] is only allowed directly under a @section@ macro. This means that, for example:
 * the macro cannot be used within @chapter@ or @appendix@ macros.
 * the macro cannot be used in snippets
 
-Even if you consider all the possibilities within the scope of the default macros provided with Glyph, this would also make the @box@ macro unusable within custom macros.
+Even if you consider all the possibilities within the scope of the default macros provided with Glyph, this could still make the @box@ macro unusable within custom macros. 
+
+For the specific cases where a macro does not make sense unless is within another (e.g. the %>[eq]), a @within@ validator is used. Note though, that this validator only checks that the macro is used within another, but it is not necessarily its child.
 		]
 	]

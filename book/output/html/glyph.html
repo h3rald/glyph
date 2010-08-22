@@ -751,8 +751,9 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   4 </span> ...
 <span class="line-numbers">   5 </span> ]
 </pre>
-	<div class="note">
-<span class="note-title">Note</span>At present, link validation and automatic title retrieval only works with internal links (i.e. the check occurs if the first parameter of the <a href="#m_link"><code>link</code></a> macro starts with a <code>#</code>). In the future, the macro could be extended to support external (http) links as well.
+	<p>By default, validation is only enabled for internal links (i.e. the check occurs if the first parameter of the <a href="#m_link"><code>link</code></a> macro starts with a <code>#</code>). You can enable it for external links as well by setting the ‡‡‡‡‡PLACEHOLDER¤43‡‡‡‡‡ setting to <code>true</code>. If URL validation is enabled, an error is returned if a link returns an HTTP status greater than 302.</p>
+	<div class="important">
+<span class="note-title">Important</span>Enabling URL validation may significantly slow down compilation if a lot of external links are present.
 
 </div>
 				
@@ -989,6 +990,10 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <code>style[default.css]</code>
 </p>
 	<p>In this case, the <a href="#m_style"><code>style</code></a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
+	<div class="tip">
+<span class="note-title">Tip</span>By default, stylesheets are embedded within text files. If necessary, you can choose to link them or import them by changing the values of the ‡‡‡‡‡PLACEHOLDER¤59‡‡‡‡‡ setting.
+
+</div>
 	<div class="section">
 <h4 id="default_stylesheets">Default Stylesheets</h4>
 <p>Glyph provides the following default stylesheets, that can be referenced directly using the <a href="#m_style"><code>style</code></a> macro:</p>
@@ -1069,7 +1074,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Sun Aug 22 15:03:03 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Sun Aug 22 16:56:45 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.4.0.dev</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1162,7 +1167,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><a href="http://www.princexml.com/">Prince</a> (version 7.0 or higher) &#8212; a commercial generator that can be used freely for personal use. Prince produces high-quality <span class="caps">PDF</span> files and implement most of the new features introduced in CSS3, used heavily in Glyph&#8217;s <a href="#default_stylesheets">Default Stylesheets</a> default stylesheet.</li>
 	<li><a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a> (version 1.0 beta4 or higher) &#8212; an open source generator that uses the WebKit rendering engine to transform <span class="caps">HTML</span> files into <span class="caps">PDF</span>. Although not as advanced as Prince, it produces very satisfactory results.</li>
 </ul>
-<p>By default, Glyph attempts to use wkhtmltopdf. To change this, set the ‡‡‡‡‡PLACEHOLDER¤77‡‡‡‡‡ setting to <code>prince</code>.</p>
+<p>By default, Glyph attempts to use wkhtmltopdf. To change this, set the ‡‡‡‡‡PLACEHOLDER¤79‡‡‡‡‡ setting to <code>prince</code>.</p>
 	<div class="note">
 <span class="note-title">Note</span>Glyph expects PDF generators to be installed on the local machine and callable via command line using the <code>wkhtmltopdf</code> or the <code>prince</code> commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).
 
@@ -1314,7 +1319,7 @@ Basically, here&#8217;s what happens when you compile your project in web or web
 <div class="section">
 <h3 id="h_48">Using the stats command</h3>
 
-<p>Glyph includes a ‡‡‡‡‡PLACEHOLDER¤92‡‡‡‡‡ command that can be used to display useful statistics about your Glyph project. If you try running Glyph's command help, you'll see that this command can take quite a few options:</p>
+<p>Glyph includes a ‡‡‡‡‡PLACEHOLDER¤94‡‡‡‡‡ command that can be used to display useful statistics about your Glyph project. If you try running Glyph's command help, you'll see that this command can take quite a few options:</p>
 <pre class="lazy"><span class="line-numbers">   1 </span> $ glyph help stats
 <span class="line-numbers">   2 </span> =====================================
 <span class="line-numbers">   3 </span> Glyph v.0.4.0.dev
@@ -1423,7 +1428,7 @@ Basically, here&#8217;s what happens when you compile your project in web or web
 <h5 id="h_51">Remarks</h5>
 <ul>
 	<li>Only macro <em>definitions</em> (not their <em>aliases</em>) are displayed, both default and user-defined.</li>
-	<li>The <code>|xml|</code> macro is a special macro used if the ‡‡‡‡‡PLACEHOLDER¤93‡‡‡‡‡ setting is enabled.</li>
+	<li>The <code>|xml|</code> macro is a special macro used if the ‡‡‡‡‡PLACEHOLDER¤95‡‡‡‡‡ setting is enabled.</li>
 	<li>There&#8217;s no distinction between macros defined by the user and macros defined by Glyph itself.</li>
 </ul>
 
@@ -1962,13 +1967,14 @@ Basically, here&#8217;s what happens when you compile your project in web or web
 	<p>If you want to create your own validators, you can call the generic <code>validate</code> method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.</p>
 	<div class="box">
 <div class="box-title">Validating macro placement</div>
-<p>You can, of course, create your own validators to check whether a macro is used within another. While this may seem a good idea to enforce constraints into the way documents are created, it has one major drawback: if you define a macro with such validation, you&#8217;re effectively limiting its usage, so for example you won&#8217;t be able to use within snippets or other custom macros.</p>
-<p>Suppose, for example, that the <a href="#m_box"><code>box</code></a> macro is only allowed within a <code>section</code> macro. This means that, for example:</p>
+<p>You can, of course, create your own validators to check whether a macro is used directly within another. While this may seem a good idea to enforce constraints into the way documents are created, it has one major drawback: if you define a macro with such validation, you&#8217;re effectively limiting its usage, so for example you won&#8217;t be able to use within snippets or other custom macros.</p>
+<p>Suppose, for example, that the <a href="#m_box"><code>box</code></a> macro is only allowed directly under a <code>section</code> macro. This means that, for example:</p>
 <ul>
 	<li>the macro cannot be used within <code>chapter</code> or <code>appendix</code> macros.</li>
 	<li>the macro cannot be used in snippets</li>
 </ul>
-<p>Even if you consider all the possibilities within the scope of the default macros provided with Glyph, this would also make the <code>box</code> macro unusable within custom macros.</p>
+<p>Even if you consider all the possibilities within the scope of the default macros provided with Glyph, this could still make the <code>box</code> macro unusable within custom macros.</p>
+<p>For the specific cases where a macro does not make sense unless is within another (e.g. the <a href="#m_eq"><code>eq</code></a> macro), a <code>within</code> validator is used. Note though, that this validator only checks that the macro is used within another, but it is not necessarily its child.</p>
 
 </div>
 				
@@ -4346,7 +4352,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>A new <code>stats</code> command can be used to display statistics about project files, snippets, macros, bookmarks and links.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/73">#73</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>online links validation</span></p></td></tr>
+		<td><p>It is now possible to validate online <span class="caps">HTTP</span> links.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/112">#112</a></td>
 		<td><p>It is now possible to use <em>wkhtmltopdf</em> instead of Prince to generate <span class="caps">PDF</span> files from <span class="caps">HTML</span> files.</p></td></tr>
@@ -4361,7 +4367,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>It is now possible to compile your project to a single HTML5 file (<em>html5</em> output) or multiple files (<em>web5</em> output)</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/135">#135</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>link stylesheets</span></p></td></tr>
+		<td><p>Stylesheets can now be linked and imported as well as embedded.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/138">#138</a></td>
 		<td><p><code>web</code> and <code>web5</code> output formats inherit <code>html</code> macros.</p></td></tr>
@@ -4373,7 +4379,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>A topic-based <span class="caps">TOC</span> is generated when compiling to <code>web</code> or <code>web5</code></p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/144">#144</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>&#8220;within&#8221; validators</span></p></td></tr>
+		<td><p>Two new validators are now available to check whether a macro has (or doesn&#8217;t have) a certain ancestor: <code>within</code> and <code>not_within</code>.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/147">#147</a></td>
 		<td><p>The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).</p></td></tr>

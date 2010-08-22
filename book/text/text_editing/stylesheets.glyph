@@ -2,6 +2,9 @@
 	p[You can embed CSS files using the %>[style], like this:]
 	p[code[= style[default.css] =]]
 	txt[In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).]
+	tip[
+By default, stylesheets are embedded within text files. If necessary, you can choose to link them or import them by changing the values of the $>[document.styles].
+	]
 	section[
 		@title[Default Stylesheets]
 		@id[default_stylesheets]
