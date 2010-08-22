@@ -124,7 +124,6 @@ module Glyph
 				files[v.file] +=1
 			end
 			c[:codes].sort!
-			c[:files] = files.to_a.sort
 			referenced = {}
 			with_macros(:link) do |n|
 				target =n.parameters[0][:value].to_s
@@ -162,8 +161,8 @@ module Glyph
 			with_macros(:link) do |n|
 				target = n.parameters[0].to_s
 				collection =  target.match(/^#/) ? internal : external
-				code = target.gsub(/^#/, '').to_sym
-				count_occurrences_for collection, code, n
+				#code = target.gsub(/^#/, '').to_sym
+				count_occurrences_for collection, target, n
 			end
 			c[:internal] = internal.to_a.sort
 			c[:external] = external.to_a.sort

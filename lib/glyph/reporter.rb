@@ -59,7 +59,6 @@ module Glyph
 				inline_list :bookmarks, s[:codes]
 				occurrences s[:referenced], "Referenced Bookmarks:"
 				inline_list :unreferenced_bookmarks, s[:unreferenced]
-				occurrences s[:files] 
 			end
 		end
 
@@ -103,9 +102,9 @@ module Glyph
 			s = @stats[:links]
 			section :links
 			total :internal_links, s[:internal].length
-			grouped_occurrences s[:internal] if @detailed
+			occurrences s[:internal], "Internal Links" if @detailed
 			total :external_links, s[:external].length
-			grouped_occurrences s[:external] if @detailed
+			occurrences s[:external], "External Links" if @detailed
 		end
 
 		def display_link

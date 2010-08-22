@@ -78,8 +78,6 @@ describe Glyph::Analyzer do
 		lambda {@a.stats_for :bookmarks}.should_not raise_error
 		c = @a.stats[:bookmarks]
 		c[:codes].should == [:h_1, :h_2, :md, :refs, :toc, :unused]
-		c[:files].should == [["document.glyph", 2], ["references.glyph", 1], ["text/a/b/c/included.textile", 1], 
-			["text/a/b/c/markdown.markdown", 1], ["text/container.textile", 1]] 
 		c[:unreferenced].should == [:h_2, :md, :toc, :unused]
 		c[:referenced].should == [[:h_1, 1], [:refs, 1]]
 	end
@@ -96,9 +94,9 @@ describe Glyph::Analyzer do
 	it "should calculate stats for all links do" do
 		lambda {@a.stats_for :links}.should_not raise_error
 		c = @a.stats[:links]
-		c[:internal].should == [[:h_1, {:total=>1, :files=>[["text/references.glyph", 1]]}], 
-			 [:refs, {:total=>1, :files=>[["text/references.glyph", 1]]}]]
-		c[:external].should == [[:"http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		c[:internal].should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
+			 ["#refs", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		c[:external].should == [["http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
 	end
 
 	it "should calculate stats for a single link" do

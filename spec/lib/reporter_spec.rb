@@ -96,7 +96,7 @@ describe Glyph::Reporter do
 	it "should display link stats" do
 		stats :links
 		out = stdout_for { rep.display }
-		out.should match "   - http://www.h3rald.com \\(1\\)"
+		out.should match "http://www.h3rald.com"
 		out.should match "-- Total Internal Links: 2"
 		@r.detailed = false
 		out = stdout_for { @r.display }
@@ -124,7 +124,7 @@ describe Glyph::Reporter do
 		stats :global
 		out = stdout_for { rep.display }
 		out.should match "-- Total Files: 6"
-		out.should match "   - http://www.h3rald.com \\(1\\)"
+		out.should match "   - http://www.h3rald.com"
 		out.should match "Total Macro Instances: 20"
 		out.should match "-- Total Snippets: 2"
 		out.should match "h_1    h_2    md     refs   toc"
