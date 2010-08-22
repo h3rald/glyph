@@ -28,20 +28,20 @@ describe Glyph::Analyzer do
 		lambda { @a.with_macros }.should raise_error(ArgumentError, "No block given")
 		count = 0
 		lambda { @a.with_macros {|n| count+=1} }.should_not raise_error
-		count.should == 22
+		count.should == 20
 		count = 0
 		lambda { @a.with_macros(:snippet) {|n| count+=1} }.should_not raise_error
-		count.should == 3
+		count.should == 2
 		count = 0
 		lambda { @a.with_macros(:&) {|n| count+=1} }.should_not raise_error
-		count.should == 3
+		count.should == 2
 	end
 
 	it "should access macro instance arrays by definition" do
 		@a.macro_array_for(:snippet).should == []
 		@a.with_macros {}
-		@a.macro_array_for(:snippet).length.should == 3
-		@a.macro_array_for(:&).length.should == 3
+		@a.macro_array_for(:snippet).length.should == 2
+		@a.macro_array_for(:&).length.should == 2
 		@a.macro_array_for(:section).length.should == 4
 	end
 
@@ -55,7 +55,7 @@ describe Glyph::Analyzer do
 		c = @a.stats[:macros]
 		c[:definitions].should == (Glyph::MACROS.keys - Glyph::ALIASES[:by_alias].keys).uniq.sort
 		c[:aliases].should == Glyph::ALIASES[:by_alias].keys.sort
-		c[:instances].length.should == 22
+		c[:instances].length.should == 20
 		c[:used_definitions].should == [:anchor, :include, :link, :markdown, :section, :snippet, :"snippet:", :textile, :toc]
 	end
 
@@ -71,7 +71,7 @@ describe Glyph::Analyzer do
 		@a.stats_for :macro, :"&"
 		c = @a.stats[:macro]
 		c[:alias_for].should == :snippet
-		c[:instances].length.should == 3
+		c[:instances].length.should == 2
 	end
 
 	it "should calculate stats for all bookmarks" do
@@ -110,13 +110,14 @@ describe Glyph::Analyzer do
 	end
 
 	it "should calculate stats for all snippets" do
+		file_write "/home/h3rald/Desktop/test.rb", Glyph.document.structure.inspect
 		lambda {@a.stats_for :snippets}.should_not raise_error
 		c = @a.stats[:snippets]
 		c[:used_details].should == [
-			[:test, {:total=>3, :files=>[["document.glyph", 2], ["text/references.glyph", 1]]}]
+			[:test, {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}]
 		] 
 		c[:used].should == [:test]
-		c[:total].should == 3
+		c[:total].should == 2
 		c[:unused].should == [:unused]
 	 	c[:definitions].should == [:test, :unused]	
 	end
@@ -126,7 +127,7 @@ describe Glyph::Analyzer do
 		lambda {@a.stats_for :snippet, 'unused'}.should raise_error(ArgumentError, "Snippet 'unused' is not used in this document")
 		lambda {@a.stats_for :snippet, 'test'}.should_not raise_error
 		c = @a.stats[:snippet][:stats]
-		c.should == {:total=>3, :files=>[["document.glyph", 2], ["text/references.glyph", 1]]}
+		c.should == {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}
 	end
 
 	it "should calculate global stats" do

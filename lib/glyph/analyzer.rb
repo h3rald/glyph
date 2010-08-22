@@ -37,7 +37,7 @@ module Glyph
 					@macros.each(&block)
 				else
 					@doc.structure.descend do |n, level|
-						if n.is_a?(Glyph::MacroNode)
+						if n.is_a?(Glyph::MacroNode) && n.source
 							@macros << n
 							macro_array_for(n[:name]) << n
 							block.call n
@@ -51,7 +51,7 @@ module Glyph
 				else
 					macros = []
 					@doc.structure.descend do |n, level|
-						if n.is_a?(Glyph::MacroNode) && macro_eq?(name, n[:name])
+						if n.is_a?(Glyph::MacroNode) && macro_eq?(name, n[:name]) && n.source
 							macros << n
 							block.call n
 						end
@@ -101,9 +101,11 @@ module Glyph
 			c[:alias_for] = macro_definition_for name 
 			files = {}
 			with_macros(name) do |n|
-				c[:instances] << n[:name]
-				files[n.source_file] ||= 0
-			 	files[n.source_file]	+= 1
+				unless n.source.blank? then	
+					c[:instances] << n[:name]
+					files[n.source] ||= 0
+					files[n.source]	+= 1
+				end
 			end
 			raise ArgumentError, "Macro '#{name}' is not used in this document" if c[:instances].blank?
 			if c[:alias_for] && !name.in?(c[:instances]) then
@@ -169,7 +171,7 @@ module Glyph
 
 		def stats_link(name)
 			regexp = /#{name}/ 
-			links = {}
+				links = {}
 			with_macros(:link) do |n|
 				target = n.parameters[0].to_s
 				if target.match regexp then
@@ -237,15 +239,14 @@ module Glyph
 			collection[code][:total] += 1
 			coll = collection[code][:files]
 			added = false
-			source = n.source_file || Glyph['document.source']
 			coll.each do |file|
-				if file[0] == source then
+				if file[0] == n.source then
 					file[1] += 1
 					added = true
 					break
 				end
 			end
-			coll << [source, 1] unless added
+			coll << [n.source, 1] unless added
 			coll.sort!
 		end
 

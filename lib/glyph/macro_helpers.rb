@@ -235,7 +235,10 @@ module Glyph
 						# Return nothing
 						nil
 					else
-						procs[:body].call h, interpret("include[#{attr(:src)}]#{raw_value}")
+						v = raw_value
+						@node.children.delete_if{|c| !c.is_a?(Glyph::AttributeNode)}
+						body = interpret "include[#{attr(:src)}]#{v}"
+						procs[:body].call h, body
 					end
 				else
 					procs[:body].call h, value

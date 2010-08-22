@@ -11,6 +11,18 @@ module Glyph
 			""
 		end
 
+		# @return [String] a textual representation of self
+		# @since 0.4.0
+		def inspect
+			string = ""
+			descend do |e, level|
+				# Remove document key to avoid endless resursion
+				hash = e.to_hash.reject{|k,v| k == :document}
+				string << "  "*level+"(#{e.class})"+hash.inspect+"\n"
+			end
+			string.chomp
+		end
+
 		# @return [String] the value of the :value key
 		# @since 0.3.0
 		def evaluate(context, options={})
@@ -49,7 +61,7 @@ module Glyph
 			e = self[:escape] ? "=" : ""
 			"#{self[:name]}["+e+attributes.join+parameters.join("|")+e+"]"
 		end
-
+		
 		# Expands the macro
 		# @return [String] the value of the macro
 		# @since 0.3.0
@@ -73,7 +85,6 @@ module Glyph
 			macros
 		end
 
-		# 
 		# Returns the parameter syntax node at the specified index
 		# @param [Fixnum] n the index of the parameter 
 		# @return [Glyph::ParameterNode, nil] a parameter node
@@ -113,21 +124,19 @@ module Glyph
 		# @since 0.3.0 
 		def expand(context)
 			xml_element(context)	
-			self.merge!({
-				:source => context[:source], 
-				:document => context[:document], 
-				:info => context[:info],
-				:value => ""
-			})
+			self[:source] = context[:source]
+			self[:document] = context[:document] 
+			self[:info] = context[:info]
+			self[:value] = ""
 			Glyph::Macro.new(self).expand
 		end
 
-		# Returns the path to the file where the macro was used
+		# Returns where the macro was used (used in Glyph::Analyzer)
 		# @since 0.4.0
-		def source_file
-			source = self[:source][:file].to_s rescue nil
-			source = Glyph['document.source'] if source.blank?
-			source
+		def source
+			s = self[:source][:file] rescue nil 
+			s ||= self[:source][:name] rescue nil
+			s
 		end
 
 		protected

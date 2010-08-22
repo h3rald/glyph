@@ -48,7 +48,7 @@ namespace :generate do
 		end
 		require 'net/http' if Glyph['options.url_validation']
 		name = Glyph['document.source']
-		interpreter = Glyph::Interpreter.new text, :source => {:name => name, :file => name}, :info => true
+		interpreter = Glyph::Interpreter.new text, :source => {:name => name, :file => name, :topic => nil}, :info => true
 		interpreter.parse
 		info "Processing..."
 		interpreter.process

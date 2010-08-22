@@ -11,7 +11,7 @@ module Glyph
 		# @param [Hash] context the context to pass along when expanding macros
 		def initialize(text, context={})
 			@context = context
-			@context[:source] ||= {:name => "--", :file => nil}
+			@context[:source] ||= {:name => "--", :file => nil, :topic => nil}
 			@text = text
 			@parser = Glyph::Parser.new text, @context[:source][:name]
 		end
@@ -47,7 +47,7 @@ module Glyph
 			@document.inherit_from @context[:document] if @context[:document]
 			@tree
 		end
-	
+
 	end
 end
 

@@ -24,9 +24,10 @@ module Glyph
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
 		# @param [Glyph::Node] context the context associated with the tree
 		# @raise [RuntimeError] unless tree responds to :evaluate
-		def initialize(tree, context={:source => {:name => "--", :file => nil}})
+		def initialize(tree, context={})
 			@tree = tree
 			@context = context
+			@context[:source] ||= {:file => nil, :name => '--', :topic => nil}
 			@placeholders = {}
 			@bookmarks = {}
 			@headers = {}

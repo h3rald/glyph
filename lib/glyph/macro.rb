@@ -19,8 +19,8 @@ module Glyph
 			@node = node
 			@name = @node[:name]
 			@updated_source = nil
-			@source_name = @node[:source][:name] || "--" rescue "--"
-			@topic = @node[:source][:topic] || "--" rescue "--"
+			@source_name = @node[:source][:name] || nil rescue "--"
+			@source_topic = @node[:source][:topic] || nil rescue "--"
 			@source_file = @node[:source][:file] rescue nil
 		end
 
@@ -31,7 +31,8 @@ module Glyph
 		# @param [String] topic the topic file
 		# @since 0.3.0
 		def update_source(name, file=nil, topic=nil)
-			@updated_source = {:node => @node, :name => name, :file => file, :topic => topic}
+			file ||= @node[:source][:file] rescue nil
+			@updated_source = {:name => name, :file => file, :topic => topic}
 		end
 		
 		# Returns a Glyph code representation of the specified parameter
