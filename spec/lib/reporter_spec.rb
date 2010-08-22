@@ -81,10 +81,6 @@ describe Glyph::Reporter do
 		stats :snippets
 		out = stdout_for { rep.display }
 		out.should match "-- Total Snippets: 2"
-		out.should match "     - text/references.glyph \\(1\\)"
-		@r.detailed = false
-		out = stdout_for { @r.display }
-		out.should_not match "-- Usage Details:"
 	end
 
 	it "should display stats for a single snippet" do

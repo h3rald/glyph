@@ -195,9 +195,9 @@ module Glyph
 				code = n.parameters[0].to_s.to_sym
 				c[:used] << code unless c[:used].include? code
 				c[:total] += 1
-				count_occurrences_for snippets, code, n
+				#count_occurrences_for snippets, code, n
 			end
-			c[:used_details] = snippets.to_a.sort
+			#c[:used_details] = snippets.to_a.sort
 			c[:used].sort!
 			c[:unused] = (c[:definitions] - c[:used]).sort
 		end

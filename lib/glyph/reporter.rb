@@ -85,13 +85,16 @@ module Glyph
 				inline_list :snippets, s[:definitions]
 				inline_list :used_snippets, s[:used]
 				inline_list :unused_snippets, s[:unused]
-				grouped_occurrences s[:used_details], "Usage Details:"
 			end
 		end
 
 		def display_snippet
 			s = @stats[:snippet]
 			section "Snippet '#{s[:param]}'"
+			info "Definition:"
+			puts "-------------------"
+			puts SNIPPETS[s[:param]]
+			puts "-------------------"
 			total :used_instances, s[:stats][:total]
 			occurrences s[:stats][:files], "Usage Details:" if @detailed
 		end

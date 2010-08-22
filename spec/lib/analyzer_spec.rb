@@ -113,9 +113,6 @@ describe Glyph::Analyzer do
 		file_write "/home/h3rald/Desktop/test.rb", Glyph.document.structure.inspect
 		lambda {@a.stats_for :snippets}.should_not raise_error
 		c = @a.stats[:snippets]
-		c[:used_details].should == [
-			[:test, {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}]
-		] 
 		c[:used].should == [:test]
 		c[:total].should == 2
 		c[:unused].should == [:unused]
