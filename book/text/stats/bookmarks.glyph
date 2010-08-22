@@ -1,0 +1,49 @@
+stats_for[
+	@title[all bookmarks]
+	@object[all bookmarks]
+	@command[--bookmarks]
+	@example[
+===== Bookmarks
+-- Total Bookmarks: 241
+-- Total Referenced Bookmarks: 89
+-- Total Unreferenced Bookmarks: 155
+-- Bookmarks:
+     attribute_intro     auto_regeneration      c_add         c_compile    c_config                           
+     c_help              c_init                 c_outline     c_todo       cfg                                
+     cfg_document        cfg_filters            cfg_ref       cmd_ref      compile  
+\[...\]
+-- Referenced Bookmarks:
+   - attribute_intro (1)
+   - auto_regeneration (2)
+   - c_add (2)
+   - c_compile (10)
+   - c_config (6)
+   - c_init (1)
+   - c_outline (1)
+\[...\]
+-- Unreferenced Bookmarks:
+     c_help     cmd_ref    expanded_values        extending     h_1                                
+     h_10       h_102      h_105                  h_107         h_109                              
+     h_111      h_112      h_114                  h_115         h_117    
+\[...\] 
+  ]
+	@remarks[
+* All the automatically-generated bookmarks (like headers, starting with @h_@) are included as well. 
+	]
+]
+stats_for[
+	@title[a single bookmark]
+	@object[a single bookmark (e.g. code[yardoc])]
+	@command[--bookmark=c_config]
+	@example[
+===== Bookmark 'c_config' (header)
+-- Defined in: text/ref_commands.glyph
+-- Referenced in:
+   - text/changelog.glyph (2)
+   - text/getting_started/configuration.glyph (1)
+   - text/troubleshooting/errors_command.glyph (3)
+	]
+	@remarks[
+* Do not prepend the bookmark ID with @#@.
+	]
+]

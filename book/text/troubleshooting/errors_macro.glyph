@@ -87,9 +87,9 @@ An invalid XML attribute name was supplied to the code[\|xml\|] system macro (se
 Returned if a forbidden macro was used in safe mode (see =>[#modes]).
 		]
 		ref_error[Cannot reset 'system.\.em[setting_name]' setting (system use only).|
-Returned by the =>[config:] when attempting to override a setting in the code[system.*] namespace.
+Returned by the =>[#m_config_] when attempting to override a setting in the code[system.*] namespace.
 		]
 		ref_error[Macro '\.em[macro_name]' cannot be defined by itself|
-Returned by the =>[rewrite:] if it contains a macro with the same name.
+Returned by the =>[#m_rewrite_] if it contains a macro with the same name.
 		]
 	]

@@ -1,11 +1,13 @@
-section[
-	@title[Displaying stats about all macros]
-	stats_for[all macros|--macros|
- ===== Macros
--- Total Macro Instances: 2975
+stats_for[
+	@title[all macros]
+	@object[all macros]
+	@command[--macros]
+	@example[
+===== Macros
+-- Total Macro Instances: 2497
 -- Total Macro Definitions: 65
 -- Total Macro Aliases: 57
--- Total Used Macro Definitions: 61
+-- Total Used Macro Definitions: 56
 -- Macro Definitions:
      #>            $>            %>            alias:        aliases       
      anchor        and           article       author        block_example 
@@ -23,21 +25,49 @@ section[
 
 -- Used Macro Definitions:
      #>            $>            %>            aliases       anchor        
-     author        block_example book          box           class         
-     code          codeblock     comment       condition     config        
-     config_table  default       document      em            eq            
-     error_table   escape        example       examples      features      
-     figure        fmi           head          highlight     image         
-     include       issue         li            link          macro:        
-     note          option        parameters    pubdate       ref_config    
-     ref_error     ref_macro     release       revision      rewrite:      
-     ruby          section       snippet       snippet:      stats_for     
-     style         subtitle      td            textile       title         
-     toc           todo          tr            ul            values        
+     and           author        block_example book          box           
+     class         codeblock     comment       condition     config        
+     config_table  default       document      eq            error_table   
+     escape        example       examples      features      figure        
+     fmi           head          highlight     image         include       
+     issue         link          note          option        or            
+     parameters    pubdate       ref_config    ref_error     ref_macro     
+     release       revision      rewrite:      ruby          section       
+     snippet       snippet:      stats_for     style         subtitle      
+     textile       title         toc           todo          values        
      \|xml\|         
   ]
-	note[txt[Only macro _definitions_ (not their _aliases_) are displayed, both default and user-defined.]]
+	@remarks[
+* Only macro _definitions_ (not their _aliases_) are displayed, both default and user-defined.
+* The @\|xml\|@ macro is a special macro used if the $>[options.xml_fallback] is enabled.
+* There's no distinction between macros defined by the user and macros defined by Glyph itself.
+	]
 ]
-section[
-	@title[Displaying stats about a single macro]
+stats_for[
+	@title[a single macro]
+	@object[a single macro (e.g. code[note])]
+	@command[--macro=note]
+	@example[
+===== Macro 'note' 
+-- Total Instances: 18
+-- Occurrences:
+   - text/compiling/compiling.glyph (2)
+   - text/compiling/programmatic_usage.glyph (1)
+   - text/extending/params_attrs.glyph (1)
+   - text/getting_started/configuration.glyph (1)
+   - text/stats/macros.glyph (2)
+   - text/text_editing/attribute_intro.glyph (1)
+   - text/text_editing/esc_quot.glyph (1)
+   - text/text_editing/images.glyph (1)
+   - text/text_editing/inclusions.glyph (3)
+   - text/text_editing/links.glyph (1)
+   - text/text_editing/raw_html.glyph (1)
+   - text/text_editing/section_aliases.glyph (1)
+   - text/text_editing/xml_fallback.glyph (2)
+	]
+	@remarks[
+* All the instances of the specified macro definition _and all its aliases_ are collected, regardless whether a definition or an alias is specified.
+* If you use custom macros, make sure they call the =>[&[yardoc]/Glyph/Macro:update_source|Macro#update_source] appropriately method if necessary.
+* If macros are used within =>[#rewriting|rewritten] macros, they'll be also listed in each file where the rewritten macro is used. 
+	]
 ]

@@ -1,0 +1,50 @@
+stats_for[
+	@title[all snippets]
+	@object[all snippets]
+	@command[--snippets]
+	@example[
+===== Snippets
+-- Total Snippets: 21
+-- Total Used Snippets: 21
+-- Total Unused Snippets: 0
+-- Snippets:
+     bin_params             called_on_files        coderay                filter_by_ext          gcode                  
+     glang                  htmlcode               img_attrs              img_file               macros                 
+     markups                only_after_declaration only_defined_through   opt                    prince                 
+     referenced_with_path   sq_esc                 unsafe                 uv                     wkhtml                 
+     yardoc                 
+-- Used Snippets:
+     bin_params             called_on_files        coderay                filter_by_ext          gcode                  
+     glang                  htmlcode               img_attrs              img_file               macros                 
+     markups                only_after_declaration only_defined_through   opt                    prince                 
+     referenced_with_path   sq_esc                 unsafe                 uv                     wkhtml                 
+     yardoc                 
+	]
+	@remarks[
+* Information on snippet usage and definitions is available only when displaying statistics for a single snippet.
+	]
+]
+stats_for[
+	@title[a single snippet]
+	@object[a single snippet (e.g. code[yardoc])]
+	@command[--snippet=yardoc]
+	@example[
+===== Snippet 'yardoc'
+-- Definition:
+-------------------
+http://yardoc.org/docs/h3rald-glyph
+-------------------
+-- Total Used Instances: 18
+-- Usage Details:
+   - text/extending/bookmarks_headers.glyph (1)
+   - text/extending/further_reading.glyph (5)
+   - text/extending/internals.glyph (5)
+   - text/extending/macro_def.glyph (3)
+   - text/extending/validators.glyph (1)
+   - text/macros/macros_core.glyph (2)
+   - text/stats/macros.glyph (1)
+	]
+	@remarks[
+* Nested snippets appear as within the file containing the top-level snippet.
+	]
+]

@@ -1,0 +1,90 @@
+stats_for[
+	@title[all links]
+	@object[all links]
+	@command[--links]
+	@example[
+===== Links
+-- Total Internal Links: 89
+-- Internal Links
+   - #attribute_intro 
+   - #auto_regeneration 
+   - #c_add 
+   - #c_compile 
+   - #c_config 
+   - #c_init 
+   - #c_outline 
+   - #c_stats 
+   - #c_todo 
+   - #cfg 
+   - #cfg_document 
+   - #cfg_filters 
+\[...\]
+-- Total External Links: 95
+-- External Links
+   - &\[yardoc\]/Glyph 
+   - &\[yardoc\]/Glyph/Document 
+   - &\[yardoc\]/Glyph/Interpreter 
+   - &\[yardoc\]/Glyph/Macro 
+   - &\[yardoc\]/Glyph/Macro/Validators 
+   - &\[yardoc\]/Glyph/Macro:update_source 
+   - &\[yardoc\]/Glyph/MacroNode 
+   - &\[yardoc\]/Glyph/Parser 
+   - &\[yardoc\]/Glyph/SyntaxNode 
+   - &\[yardoc\]/Macro 
+   - http://code.google.com/p/wkhtmltopdf/ 
+   - http://coderay.rubychan.de/ 
+   - http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html 
+\[...\]   
+  ]
+	@remarks[
+* The only criteria used to determine if a link is internal is whether it starts with a @#@ or not.
+	]
+]
+stats_for[
+	@title[links matching a regular expression]
+	@object[links matching a regular expression (e.g. code[/c_/])]
+	@command[--link=c_]
+	@example[
+===== Links matching /c_/
+-- Total Links: 8
+-- Link Targets:
+   - #c_add 
+   - #c_compile 
+   - #c_config 
+   - #c_init 
+   - #c_outline 
+   - #c_stats 
+   - #c_todo 
+   - #esc_quot 
+-- Details:
+   - #c_add (2)
+     - text/troubleshooting/errors_command.glyph (1)
+     - text/troubleshooting/errors_generic.glyph (1)
+   - #c_compile (10)
+     - text/changelog.glyph (1)
+     - text/compiling/compiling.glyph (2)
+     - text/compiling/lite_mode.glyph (1)
+     - text/compiling/programmatic_usage.glyph (2)
+     - text/getting_started/create_project.glyph (1)
+     - text/ref_config.glyph (1)
+     - text/troubleshooting/errors_command.glyph (2)
+   - #c_config (6)
+     - text/changelog.glyph (2)
+     - text/getting_started/configuration.glyph (1)
+     - text/troubleshooting/errors_command.glyph (3)
+   - #c_init (1)
+     - text/troubleshooting/errors_generic.glyph (1)
+   - #c_outline (1)
+     - text/changelog.glyph (1)
+   - #c_stats (1)
+     - text/stats/stats.glyph (1)
+   - #c_todo (1)
+     - text/macros/macros_inline.glyph (1)
+   - #esc_quot (2)
+     - text/extending/macro_def.glyph (1)
+     - text/text_editing/macro_intro.glyph (1)
+	]
+	@remarks[
+* No distinction between external and internal targets is made.
+	]
+]

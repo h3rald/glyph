@@ -1,10 +1,19 @@
 rewrite:[stats_for|
-	txt[To display statistics about {{0}}, execute @glyph stats {{1}}@. Glyph displays something like this:]
-	highlight[=html|
-{{2}}
-	=]
+	section[
+		@title[Displaying stats about {{title}}]
+		txt[To display statistics about {{object}}, execute @glyph stats {{command}}@. Glyph displays something like this:]
+		highlight[=html|
+{{example}}
+		=]
+		section[
+			@title[Remarks]
+			txt[
+{{remarks}}
+			]
+		]
+	]
 ]
-p[Glyph includes a code[stats] command that can be used to display useful statistics about your Glyph project. If you try running Glyph's command help, you'll see that this command can take quite a few options:
+p[Glyph includes a #>[stats] that can be used to display useful statistics about your Glyph project. If you try running Glyph's command help, you'll see that this command can take quite a few options:
 ]
 highlight[html|
 $ glyph help stats
