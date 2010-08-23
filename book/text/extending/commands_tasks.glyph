@@ -1,0 +1,5 @@
+txt[
+In most cases, you can extend Glyph just by creating your own =>[#macro_def|custom macros]. In some cases though, you may want to further customize Glyph to fit the needs of your project, in terms of creating =>[#custom_command|custom commands] and =>[#custom_task|custom tasks].
+
+In other words, Glyph's modular architecture (and the Ruby language itself) lets you to add _arbitrary_ functionality to its core, simply by creating a few Ruby files and putting them in the right places.
+]

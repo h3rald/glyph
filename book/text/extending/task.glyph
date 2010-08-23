@@ -1,0 +1,49 @@
+txt[
+Glyph relies on =>[http://rake.rubyforge.org/|Rake] to perform most of its core operations. Typically, Rake tasks are used do define the high level logic that is used by Glyph commands to, for example, compile a project or load configuration files.
+
+Furthermore, Rake provides an easy mechanism to create dependencies among tasks: for example, to make sure that Glyph's configuration files are loaded before everything else happens.
+]
+section[
+	@title[Creating a 'custom:generate' task]
+	@id[custom_generate_task]
+	txt[
+A custom task has been defined for the Glyph project used to produce this document. This custom task is used to compile a few of the documents files into standalone files, deployed in Glyph's root folder:
+* @book/text/introduction.glyph@ &rarr; @README.textile@
+* @book/text/changelog.glyph@ &rarr; @CHANGELOG.textile@
+* @book/text/license.glyph@ &rarr; @LICENSE.textile@
+* @book/text/acknowledgement.glyph@ &rarr; @AUTHORS.textile@
+
+First of all, create a @lib/tasks@ folder in your project directory. Then, create a @.rake@ file within it, e.g. @tasks.rake@. 
+
+Finally, here's the source of the task:
+	]
+	highlight[=ruby|
+namespace :custom do
+  task :generate, [:file] do \|t, args\|
+    generate = lambda do \|source, destination\|
+      Glyph.info "Generating #{destination}..."
+      Glyph.compile Glyph::PROJECT/"text/#{source}.glyph", Glyph::PROJECT/"../#{destination}.textile"
+    end
+    files = {
+      :AUTHORS => :acknowledgement, 
+      :CHANGELOG => :changelog, 
+      :LICENSE => :license, 
+      :README => :introduction
+    }
+    arg = args[:file].upcase.to_sym
+    case arg
+    when :ALL then
+      files.each_pair { \|k,v\| generate.call v, k }
+    else
+      raise RuntimeError, "Unknown file '#{arg}.glyph'" unless files.keys.include? arg
+      generate.call files[arg], arg
+    end
+    Glyph.info "Done."
+  end
+end
+	=]
+	txt[
+That's it. Note that this task is pretty useless without a command that calls it, and it won't even show up if you run @rake -T@ within your project directory. fmi[creating custom commands|#custom_command].
+	]
+]
+

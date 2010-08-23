@@ -1,0 +1,59 @@
+txt[
+Glyph relies on =>[http://davetron5000.github.com/gli/|GLI] for defining commands. This useful library provides a high-level framework for creating command-line interface similar to =>[http://git-scm.com/|Git], its DSL takes care of pretty much everything, from managing command line arguments and options to providing an interactive help system.
+]
+section[
+	@title[Creating a 'glyph generate' command]
+	txt[
+Consider the custom task defined in =>[#custom_generate_task]. Creating a custom command to call it is fairly straightforward. 
+
+First of all, create a @lib/commands@ folder in your project directory. Then, create a @.rb@ file within it, e.g. @commands.rake@.
+ 
+Finally, here's the source of the command:
+	]
+	highlight[=ruby|
+GLI.desc 'Generates one or more specific files required for Glyph releases'
+arg_name "file_name"
+command :generate do \|c\|
+  c.action do \|global_options,options,args\|
+    if args.blank? then
+      raise RuntimeError, "You must specify a file to generate or 'all'"
+    else
+      Glyph.run 'custom:generate', args[0]
+    end
+  end
+end
+	=]
+	txt[
+That's it. If you try to run @glyph help@ within your project directory, notice that there's a new entry for the generate command:
+	]
+	highlight[html|
+$ glyph help
+=====================================
+Glyph v\.%[Glyph::VERSION]
+=====================================
+usage: glyph command \[options\]
+
+Options:
+    -d, --debug - Enable debugging
+
+Commands:
+    add      - Add a new text file to the project
+    compile  - Compile the project
+    config   - Get/set configuration settings
+    generate - Generates one or more specific files required for Glyph releases
+    help     - Shows list of commands or help for one command
+    init     - Create a new Glyph project
+    outline  - Display the document outline
+    stats    - Display statistics
+    todo     - Display all project TODO items
+	]
+	p[You can now run the Glyph command as expected:]
+	highlight[=html|
+$ glyph -d generate all
+-- Generating LICENSE...
+-- Generating README...
+-- Generating AUTHORS...
+-- Generating CHANGELOG...
+-- Done.
+	=]
+]

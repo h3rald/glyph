@@ -218,7 +218,22 @@ book[
 			]
 			section[
 				@title[Defining Custom Commands and Tasks]
-				![Add sections about custom commands and tasks]
+				@src[extending/commands_tasks]
+				section[
+					@title[Defining Custom Tasks]
+					@src[extending/task]
+					@id[custom_task]
+				]
+				section[
+					@title[Defining Custom Commands]
+					@src[extending/command]
+					@id[custom_command]
+				]
+				section[
+					@title[Adding Output Formats]
+					@src[extending/output_formats]
+					![Describe how to create tasks for new output formats]
+				]
 			]
 		]
 		chapter[
