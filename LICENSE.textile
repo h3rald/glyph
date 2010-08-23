@@ -1,5 +1,4 @@
-Copyright (c) 2010 **Fabio Cevasco**, <a href="http://www.h3rald.com">http://www.h3rald.com</a>  
-
+<p>Copyright &copy; 2010 <strong>Fabio Cevasco</strong>, <a href="http://www.h3rald.com">http://www.h3rald.com</a></p> 
 
 <div class="code">
 <pre>

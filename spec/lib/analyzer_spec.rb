@@ -108,7 +108,6 @@ describe Glyph::Analyzer do
 	end
 
 	it "should calculate stats for all snippets" do
-		file_write "/home/h3rald/Desktop/test.rb", Glyph.document.structure.inspect
 		lambda {@a.stats_for :snippets}.should_not raise_error
 		c = @a.stats[:snippets]
 		c[:used].should == [:test]

@@ -187,34 +187,38 @@ book[
 				@src[extending/internals]
 			]
 			section[
-				@title[Defining Macros]
+				@title[Defining Custom Macros]
 				@id[macro_def]
 				@src[extending/macro_def]
+				section[
+					@title[Parameters and Attributes]
+					@src[extending/params_attrs]
+				]
+				section[
+					@title[Bookmarks and Headers]
+					@src[extending/bookmarks_headers]
+				]
+				section[
+					@title[Using Placeholders]
+					@src[extending/placeholders]
+				]
+				section[
+					@title[Using Validators]
+					@src[extending/validators]
+				]
+				section[
+					@title[Interpreting Glyph Code]
+					@id[interpreting]
+					@src[extending/interpreting]
+				]
+				section[
+					@title[Further Reading]
+					@src[extending/further_reading]
+				]
 			]
 			section[
-				@title[Parameters and Attributes]
-				@src[extending/params_attrs]
-			]
-			section[
-				@title[Bookmarks and Headers]
-				@src[extending/bookmarks_headers]
-			]
-			section[
-				@title[Using Placeholders]
-				@src[extending/placeholders]
-			]
-			section[
-				@title[Using Validators]
-				@src[extending/validators]
-			]
-			section[
-				@title[Interpreting Glyph Code]
-				@id[interpreting]
-				@src[extending/interpreting]
-			]
-			section[
-				@title[Further Reading]
-				@src[extending/further_reading]
+				@title[Defining Custom Commands and Tasks]
+				![Add sections about custom commands and tasks]
 			]
 		]
 		chapter[

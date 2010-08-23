@@ -4,9 +4,87 @@
 
 
 	<div class="section">
-<h2 id="h_1">v0.3.0 &ndash; June 13th 2010</h2>
+<h2 id="h_1">v0.4.0 &ndash; ???</h2>
 <div class="section">
 <h3 id="h_2">27 Features Implemented</h3>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/40">#40</a></td>
+		<td><p>A new <code>stats</code> command can be used to display statistics about project files, snippets, macros, bookmarks and links.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/73">#73</a></td>
+		<td><p>It is now possible to validate online <span class="caps">HTTP</span> links.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/112">#112</a></td>
+		<td><p>It is now possible to use <em>wkhtmltopdf</em> instead of Prince to generate <span class="caps">PDF</span> files from <span class="caps">HTML</span> files.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/114">#114</a></td>
+		<td><p>It is now possible to generate documents comprised of multiple files (topics).</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/115">#115</a></td>
+		<td><p>It is now possible to define layouts (used when generating multi-file outputs) using Glyph macros.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/120">#120</a></td>
+		<td><p>It is now possible to compile your project to a single HTML5 file (<em>html5</em> output) or multiple files (<em>web5</em> output)</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/135">#135</a></td>
+		<td><p>Stylesheets can now be linked and imported as well as embedded.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/138">#138</a></td>
+		<td><p><code>web</code> and <code>web5</code> output formats inherit <code>html</code> macros.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/142">#142</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>navigation macros</span></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/143">#143</a></td>
+		<td><p>A topic-based <span class="caps">TOC</span> is generated when compiling to <code>web</code> or <code>web5</code></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/144">#144</a></td>
+		<td><p>Two new validators are now available to check whether a macro has (or doesn&#8217;t have) a certain ancestor: <code>within</code> and <code>not_within</code>.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/147">#147</a></td>
+		<td><p>The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/148">#148</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>customization enhancements</span></p></td></tr></table>
+
+</div>
+	
+	
+		<div class="section">
+<h3 id="h_3">13 Bugs Fixed</h3>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/133">#133</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>html charset</span></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/136">#136</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>utils module refactoring</span></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/139">#139</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>configuration refactoring</span></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/140">#140</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>macro helpers</span></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/141">#141</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>non-rb files loaded with macros</span></p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/145">#145</a></td>
+		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>bundler conflicts</span></p></td></tr></table>
+
+</div>
+
+</div>
+
+	<div class="section">
+<h2 id="h_4">v0.3.0 &ndash; June 13th 2010</h2>
+<div class="section">
+<h3 id="h_5">27 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -54,16 +132,16 @@
 	
 	
 		<div class="section">
-<h3 id="h_3">7 Bugs Fixed</h3>
+<h3 id="h_6">7 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/109">#109</a></td>
-		<td><p>Performance has been dramatically improved by implementing a parser from scratch (see <a href="#new_parser">#119</a>)</p></td></tr>
+		<td><p>Performance has been dramatically improved by implementing a parser from scratch (see <a href="#new_parser"></a>)</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/122">#122</a></td>
-		<td><p>Macro encoding/decoding no longer necessary due to the new parser (see <a href="#new_parser">#119</a>)</p></td></tr>
+		<td><p>Macro encoding/decoding no longer necessary due to the new parser (see <a href="#new_parser"></a>)</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/125">#125</a></td>
 		<td><p>Warning messages have been streamlined.</p></td></tr></table>
@@ -73,9 +151,9 @@
 </div>
 
 	<div class="section">
-<h2 id="h_4">v0.2.0 &ndash; May 9th 2010</h2>
+<h2 id="h_7">v0.2.0 &ndash; May 9th 2010</h2>
 <div class="section">
-<h3 id="h_5">23 Features Implemented</h3>
+<h3 id="h_8">23 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -108,7 +186,7 @@
 		<td><p>Added a <code>document.draft</code> setting. If set to <code>true</code>, comments and TODOs are rendered in output files.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/100">#100</a></td>
-		<td><p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied">#93</a>).</p></td></tr>
+		<td><p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied"></a>).</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/108">#108</a></td>
 		<td><p>It is now possible to define Glyph macros within Glyph source files using the macro: macro.</p></td></tr></table>
@@ -117,7 +195,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_6">17 Bugs Fixed</h3>
+<h3 id="h_9">17 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -126,7 +204,7 @@
 		<td><p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p></td></tr> 
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/93">#93</a></td>
-		<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the style macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p></td></tr>
+		<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the style macro to reference Glyph&#8217;s system styles (see also <a href="#system_css"></a>).</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/95">#95</a></td>
 		<td><p>The config command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p></td></tr>
@@ -151,7 +229,7 @@
 </div>
 
 	<div class="section">
-<h2 id="h_7">v0.1.0 &ndash; April 8th 2010</h2>
+<h2 id="h_10">v0.1.0 &ndash; April 8th 2010</h2>
 Initial release.
 
 </div>

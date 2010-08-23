@@ -12,6 +12,9 @@ require Glyph::LIB/'commands/todo'
 require Glyph::LIB/'commands/outline'
 require Glyph::LIB/'commands/stats'
 
+Glyph.run 'load:tasks'
+Glyph.run 'load:commands'
+
 pre do |global,command,options,args|
 	# Pre logic here
 	# Return true to proceed; false to abourt and not call the
