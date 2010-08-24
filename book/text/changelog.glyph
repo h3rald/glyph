@@ -30,7 +30,7 @@ rw:[issue|
 		td[txt[{{1}}]]
 	]
 ]
-?[%[lite?]|
+?[eq[%[ARGV\[0\]]|generate]|
 	%:[%>|"#{value} macro"]
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
@@ -49,7 +49,7 @@ release[0.4.0|???|
 		issue[143|A topic-based TOC is generated when compiling to @web@ or @web5@]
 		issue[144|Two new validators are now available to check whether a macro has (or doesn't have) a certain ancestor: @within@ and @not_within@.]
 		issue[147|The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).]
-		issue[148|![customization enhancements]]
+		issue[148|It is now possible to create custom tasks and commands to extend Glyph functionality.]
 	]
 	bugs[
 		issue[133|![html charset]]

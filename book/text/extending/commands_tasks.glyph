@@ -1,5 +1,39 @@
 txt[
 In most cases, you can extend Glyph just by creating your own =>[#macro_def|custom macros]. In some cases though, you may want to further customize Glyph to fit the needs of your project, in terms of creating =>[#custom_command|custom commands] and =>[#custom_task|custom tasks].
 
-In other words, Glyph's modular architecture (and the Ruby language itself) lets you to add _arbitrary_ functionality to its core, simply by creating a few Ruby files and putting them in the right places.
+Glyph's modular architecture (and the Ruby language itself) lets you to add _arbitrary_ functionality to its core, simply by creating a few Ruby files and putting them in the right places.
+]
+section[
+	@title[How Commands and Tasks work]
+	@id[cmd_tasks_arch]
+	txt[
+Before creating custom Glyph commands and tasks, you should have a basic understanding on how they work, and which commands -- or better, which tasks -- are already available.
+
+The following diagram outlines the relationships between commands and tasks:
+	]
+	image[commands_tasks.png]
+	txt[
+As you can see:
+* All commands call at at least one task.
+* There are several task inter-dependencies spanning across three main Rake namespaces:
+** @project:@ -- used for tasks affecting only the physical structure of the Glyph project.
+** @load:@ -- used to load all kinds of files.
+** @generate:@ -- used to generate files or copy files from source to output directories 
+	]
+	box[Example|
+		txt[
+Suppose you want to generate a PDF file by issuing the @glyph compile -f pdf@ command. Under the hood, Glyph calls the following tasks:
+# @load:config@ -- Load the configuration files
+# @load:tasks@  -- Load custom tasks (if any)
+# @load:commands@ -- Load custom commands (if any)
+# @load:snippets@ -- Load snippets from the @snippet.yml@ file
+# @load:macros@ -- Load macros
+# @load:all@ -- Dummy task used to call the previous ones
+# @generate:document@ -- Parse, analyze and finalize the Glyph document
+# @generate:images@ -- Copy images to the output directory (if any)
+# @generate:styles@ -- Copy stylesheets to the output directory (if necessary)
+# @generate:html@ -- Generate a standalone HTML file
+# @generate:pdf@ -- Generate a PDF file from a standalone HTML file
+		]
+	]
 ]
