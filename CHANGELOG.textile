@@ -48,7 +48,7 @@
 		<td><p>The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/148">#148</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>customization enhancements</span></p></td></tr></table>
+		<td><p>It is now possible to create custom tasks and commands to extend Glyph functionality.</p></td></tr></table>
 
 </div>
 	

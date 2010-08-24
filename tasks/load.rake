@@ -8,7 +8,7 @@ namespace :load do
 	end
 
 	desc "Load tasks"
-	task :tasks => [:config] do
+	task :tasks do
 		unless Glyph.lite? then
 			load_files_from_dir(Glyph::PROJECT/'lib/tasks', '.rake') do |f, contents|
 				load f
@@ -17,7 +17,7 @@ namespace :load do
 	end
 
 	desc "Load commands"
-	task :commands => [:config] do
+	task :commands do
 		unless Glyph.lite? then
 			include GLI if (Glyph::PROJECT/'lib/commands').exist?
 			load_files_from_dir(Glyph::PROJECT/'lib/commands', '.rb') do |f, contents|

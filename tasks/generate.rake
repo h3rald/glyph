@@ -78,7 +78,7 @@ namespace :generate do
 	task :html5 => [:html] do; end
 
 	desc "Create multiple HTML files"
-	task :web => [:document, :images, :styles] do
+	task :web => [:images, :styles] do
 		info "Generating HTML files..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']

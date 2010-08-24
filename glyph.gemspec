@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-08-23}
+  s.date = %q{2010-08-24}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -31,12 +31,16 @@ Gem::Specification.new do |s|
      "bin/glyph",
      "book/config.yml",
      "book/document.glyph",
+     "book/images/commands_tasks.png",
      "book/images/document_generation.png",
      "book/images/glyph.eps",
      "book/images/glyph.png",
      "book/images/glyph.svg",
+     "book/lib/commands/commands.rb",
      "book/lib/macros/reference.rb",
+     "book/lib/tasks/tasks.rake",
      "book/output/html/glyph.html",
+     "book/output/html/images/commands_tasks.png",
      "book/output/html/images/document_generation.png",
      "book/output/html/images/glyph.eps",
      "book/output/html/images/glyph.png",
@@ -45,10 +49,6 @@ Gem::Specification.new do |s|
      "book/output/html/styles/ultraviolet/lazy.css",
      "book/output/pdf/glyph.pdf",
      "book/resources/document_generation.txt",
-     "book/script/authors",
-     "book/script/changelog",
-     "book/script/license",
-     "book/script/readme",
      "book/snippets.yml",
      "book/text/acknowledgement.glyph",
      "book/text/changelog.glyph",
@@ -56,12 +56,15 @@ Gem::Specification.new do |s|
      "book/text/compiling/lite_mode.glyph",
      "book/text/compiling/programmatic_usage.glyph",
      "book/text/extending/bookmarks_headers.glyph",
+     "book/text/extending/command.glyph",
+     "book/text/extending/commands_tasks.glyph",
      "book/text/extending/further_reading.glyph",
      "book/text/extending/internals.glyph",
      "book/text/extending/interpreting.glyph",
      "book/text/extending/macro_def.glyph",
      "book/text/extending/params_attrs.glyph",
      "book/text/extending/placeholders.glyph",
+     "book/text/extending/task.glyph",
      "book/text/extending/validators.glyph",
      "book/text/getting_started/configuration.glyph",
      "book/text/getting_started/create_project.glyph",
