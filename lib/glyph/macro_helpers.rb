@@ -225,8 +225,13 @@ module Glyph
 											@id[#{topic_id}]
 											@contents[include[@topic[true]#{attr(:src)}]]
 									]}
-						# Fix file for topic bookmark
-						@node[:document].bookmark?(topic_id).file = attr(:src)
+						bmk = @node[:document].bookmark? topic_id
+						if bmk then
+							# Fix file for topic bookmark
+							@node[:document].bookmark?(topic_id).file = attr(:src)
+						else
+							bookmark :title => attr(:title), :id => topic_id, :file => attr(:src), :definition => @source_file
+						end
 						topic_src = attr(:src)
 						topic_src += ".glyph" unless topic_src.match /\..+$/
 						@node[:document].topics << {:src => topic_src, :title => attr(:title), :id => topic_id, :contents => result}
