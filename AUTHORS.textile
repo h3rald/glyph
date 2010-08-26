@@ -3,6 +3,6 @@ Glyph was designed and developed by <a href="http://www.h3rald.com">Fabio Cevasc
 Special thanks to the following individuals who contributed to Glyph by reporting and fixing issues and/or proposing and implementing new features:
 * <a href="http://www.jabbslad.com">Jamie Atkinson</a> (Jabbslad)
 * <a href="http://koraktor.github.com">Sebastian Staudt</a> (koraktor)
-
-
+* <a href="http://balcone.eveel.ru">Dmitry A. Ustalov</a> (eveel)
+* <a href="http://www.stuartellis.eu">Stuart Ellis</a> (stuartellis)
     

@@ -27,7 +27,7 @@
 		<td><p>It is now possible to define layouts (used when generating multi-file outputs) using Glyph macros.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/120">#120</a></td>
-		<td><p>It is now possible to compile your project to a single HTML5 file (<em>html5</em> output) or multiple files (<em>web5</em> output)</p></td></tr>
+		<td><p>It is now possible to compile your project to a single HTML5 file (<code>html5</code> output) or multiple files (<code>web5</code> output)</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/135">#135</a></td>
 		<td><p>Stylesheets can now be linked and imported as well as embedded.</p></td></tr>
@@ -36,7 +36,7 @@
 		<td><p><code>web</code> and <code>web5</code> output formats inherit <code>html</code> macros.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/142">#142</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>navigation macros</span></p></td></tr>
+		<td><p>A new navigation macro can be used in <code>web</code> and <code>web5</code> outputs to navigate through topics.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/143">#143</a></td>
 		<td><p>A topic-based <span class="caps">TOC</span> is generated when compiling to <code>web</code> or <code>web5</code></p></td></tr>
@@ -60,22 +60,22 @@
 				
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/133">#133</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>html charset</span></p></td></tr>
+		<td><p>Added <span class="caps">HTML</span> charset to Glyph documents (utf-8).</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/136">#136</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>utils module refactoring</span></p></td></tr>
+		<td><p>Moved utility functions to separate <code>Glyph::Utils</code> module.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/139">#139</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>configuration refactoring</span></p></td></tr>
+		<td><p>Heavily restructured Glyph configuration.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/140">#140</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>macro helpers</span></p></td></tr>
+		<td><p>Added <code>Glyph::Macro::Helpers</code> module to avoid code duplication in macros for different output formats.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/141">#141</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>non-rb files loaded with macros</span></p></td></tr>
+		<td><p>Prevented non-rb files to be loaded as macros.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/145">#145</a></td>
-		<td><p><span class="todo"><span class="todo-pre"><strong><span class="caps">TODO</span>:</strong> </span>bundler conflicts</span></p></td></tr></table>
+		<td><p>Dotfiles are now ignored by init command.</p></td></tr></table>
 
 </div>
 

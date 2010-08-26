@@ -11,13 +11,8 @@ namespace :custom do
 			:README => :introduction
 		}
 		arg = args[:file].upcase.to_sym
-		case arg
-		when :ALL then
-			files.each_pair { |k,v| generate.call v, k }
-		else
-			raise RuntimeError, "Unknown file '#{arg}.glyph'" unless files.keys.include? arg
-			generate.call files[arg], arg
-		end
+		raise RuntimeError, "Unknown file '#{arg}.glyph'" unless files.keys.include? arg
+		generate.call files[arg], arg
 		Glyph.info "Done."
 	end
 end
