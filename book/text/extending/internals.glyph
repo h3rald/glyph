@@ -1,6 +1,6 @@
 	p[If you plan on extending Glyph, knowing how it works inside helps. It is not mandatory by any means, but it definitely helps, especially when creating complex macros.]
 	p[What happens behind the scenes when you call code[glyph compile]? Glyph's code is parsed, analyzed and then translated into text, and here's how:]
-	figure[document_generation.png|A sequence diagram for document generation]
+	figure[glyph/document_generation.png|A sequence diagram for document generation]
 	txt[From the diagram, it is possible to divide the document generation process into three phases:
 * The _Parsing Phase_ starts when a chunk of Glyph code is passed (by the code[generate:document] Rake task, for example) to a class[Glyph::Interpreter]. The interpreter initializes a class[Glyph::Parser] that parses the code and returns an _Abstract Syntax Tree_ (AST) of class[Glyph::SyntaxNode] objects.
 * The _Analysis Phase_ (Processing) starts when the interpreter method calls the @analyze@ method, instantiating a new class[Glyph::Document]. The @Glyph::Document@ object evaluates the AST expanding all macro nodesth (that's when macros are executed) and generates string.

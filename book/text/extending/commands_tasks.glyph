@@ -11,7 +11,7 @@ Before creating custom Glyph commands and tasks, you should have a basic underst
 
 The following diagram outlines the relationships between commands and tasks:
 	]
-	image[commands_tasks.png]
+	image[glyph/commands_tasks.png]
 	txt[
 As you can see:
 * All commands call at at least one task.

@@ -9,11 +9,17 @@
   :title: Glyph
   :styles: link
 :output: 
-  :pdf: 
-    :generator: prince
-  :web: 
+  :h3rald: 
+    :multifile: true
+    :extension: '.html'
+    :filter_target: 'html'
+    :base: '/glyph/book/'
+    :macro_dirs: ['html']
+    :layout_dirs: ['web']
     :layouts: 
       :topic: bookpage
       :index: bookindex
+  :pdf: 
+    :generator: prince
 :filters: 
   :highlighter: ultraviolet
