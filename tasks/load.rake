@@ -54,24 +54,14 @@ namespace :load do
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb')
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb')
-			case Glyph['document.output']
-			when 'pdf'
-				load_macros_from_dir.call Glyph::HOME/"macros/html"
-			when 'html'
-				load_macros_from_dir.call Glyph::HOME/"macros/html"
-			when 'web'
-				load_macros_from_dir.call Glyph::HOME/"macros/html"
-				load_layouts_from_dir.call Glyph::HOME/'layouts/web'
-			when 'html5'
-				load_macros_from_dir.call Glyph::HOME/"macros/html"
-				load_macros_from_dir.call Glyph::HOME/"macros/html5"
-			when 'web5'
-				load_macros_from_dir.call Glyph::HOME/"macros/html"
-				load_macros_from_dir.call Glyph::HOME/"macros/html5"
-				load_layouts_from_dir.call Glyph::HOME/'layouts/web5'
+			macro_dirs = Glyph["output.#{Glyph['document.output']}.macro_dirs"]
+			layout_dirs = Glyph["output.#{Glyph['document.output']}.layout_dirs"] || []
+			unless macro_dirs.blank?
+				macro_dirs.each {|d| load_macros_from_dir.call Glyph::HOME/"macros/#{d}" }
 			else
 				warning "No #{Glyph['document.output']} macros defined"
 			end
+			layout_dirs.each {|d| load_layouts_from_dir.call Glyph::HOME/"layouts/#{d}" }
 		when 'xml' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb') 
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb') 

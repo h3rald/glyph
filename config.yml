@@ -34,19 +34,24 @@
     :multifile: false
     :extension: '.html'
     :filter_target: 'html'
+    :macro_dirs: ['html']
   :html5:
     :multifile: false
     :extension: '.html'
     :filter_target: 'html'
+    :macro_dirs: ['html', 'html5']
   :pdf:
     :multifile: false
     :extension: '.pdf'
     :filter_target: 'html'
     :generator: 'wkhtmltopdf'
+    :macro_dirs: ['html']
   :web:
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
+    :macro_dirs: ['html']
+    :layout_dirs: ['web']
     :layouts:
       :topic: 'topic'
       :index: 'index'
@@ -55,6 +60,8 @@
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
+    :macro_dirs: ['html', 'html5']
+    :layout_dirs: ['web5']
     :layouts:
       :topic: 'topic'
       :index: 'index'
