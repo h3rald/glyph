@@ -5,8 +5,6 @@ When generating =>[#topics|topic]-based outputs, Glyph uses _layouts_ to render 
 
 Layouts are nothing more than "fancy" Glyph macros defined using the Glyph language (i.e. by using =>[#rewriting|macro rewriting]) within a single code[.glyph] file.
 ]
-![Add link to section about layout creation]
-![Explain how to override layouts using the layout attribute]
 section[
 	@title[Topic Layout]
 	p[The default layout used to render all web topics (the layout used for web5 topics is very similar) is defined as follows:]
@@ -35,6 +33,7 @@ document[
 ]
 section[
 	@title[Index Layout]
+	@id[index_layout]
 	p[The default layout used to render the web index page (the layout used for the web5 index is very similar) is defined as follows:]
 	highlight[=html|
 document[
@@ -55,5 +54,15 @@ document[
 ]
 	=]
 	p[Index layouts do not take any attribute or parameter (basically because they are used to produce only one page).]
+]
+section[
+	@title[Creating a Custom Layout]
+	txt[
+To create a custom layout, proceed as follows:
+* Create a @.glyph@ file in the @lib/layouts@ directory, within your project, e.g. @mytopic.glyph@
+* Add the layout code, making sure (for topic layouts) that all the attributes (@title@, @id@, @contents@) are specified correctly.
+* Set the @output.*.layouts.topic@ setting to the name of the new layout (@mytopic@).
+	]
+	tip[You can override which layout to use on a specific topic by specifying it in a code[@layout] attribute.]
 ]
 

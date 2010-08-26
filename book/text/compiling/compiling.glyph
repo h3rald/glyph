@@ -30,15 +30,12 @@ section[
 	@title[Web/Web5 Output]
 	@id[web_output]
 	txt[
-To generate a Web or Web5 output, specify @web@ or @web5@ as format. These two output formats behave different way from the others, and require that your project uses =>[#topics|topics] and layouts. 
+To generate a Web or Web5 output, specify @web@ or @web5@ as format. These two output formats behave different way from the others, and require that your project uses =>[#topics|topics] and =>[#layouts|layouts]. 
 
-![link to layout section goes here]
 Basically, here's what happens when you compile your project in web or web5 format:
 # The document code is parsed as normal
 # Separate topic files are generated according to the code[@src] attributes of your sections
-# The code[document.glyph] (or whatever file you're using as document source) is _not_ rendered. Instead, an @index.html@ file will be created in the output folder based on the contents of your @index@ layout. 
-
-![link to index layout] 
+# The code[document.glyph] (or whatever file you're using as document source) is _not_ rendered. Instead, an @index.html@ file will be created in the output folder based on the contents of your =>[#index_layout|index layout]. 
 	]	
 ]
 section[

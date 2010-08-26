@@ -88,11 +88,6 @@ book[
 				]
 			]
 			section[
-				@title[Layouts]
-				@id[layouts]
-				@src[text_editing/layouts]
-			]
-			section[
 				@title[Links and Bookmarks]
 				@id[links]
 				@src[text_editing/links]
@@ -210,6 +205,11 @@ book[
 					@title[Interpreting Glyph Code]
 					@id[interpreting]
 					@src[extending/interpreting]
+				]
+				section[
+					@title[Layouts]
+					@id[layouts]
+					@src[extending/layouts]
 				]
 				section[
 					@title[Further Reading]
