@@ -1,0 +1,17 @@
+section[
+	@title[language.*]
+	config_table[
+		ref_config[language.set|
+Determines which macro set will be loaded. It can be set to:
+* glyph &ndash; Loads core, filter, xml macros plus all macros necessary for the $>[document.output].
+* xml &ndash; Loads core and xml macros.
+* core &ndash; Loads core macros only.
+		]
+		ref_config[language.options.xml_blacklist|
+The XML tags listed here cannot be generated using Glyph code.
+		]
+		ref_config[language.options.xml_fallback|
+If set to true, any unknown macro name will considered an XML element (see =>[#other_elements]).
+		]
+	]
+]

@@ -1,0 +1,8 @@
+section[
+	@title[tools.*]
+	config_table[
+		ref_config[tools.pdf_generator|
+The external program used to generate PDF files. It can only be set to @prince@.
+		]
+	]
+]

@@ -289,7 +289,26 @@ book[
 		appendix[
 			@title[Configuration Reference]
 			@id[cfg_ref]
-			@src[ref_config]
+			section[
+				@title[document.*]
+				@id[cfg_document]
+				@src[config/document]
+			]
+			section[
+				@title[filters.*]
+				@id[cfg_filters]
+				@src[config/filters]
+			]
+			section[
+				@title[options.*]
+				@id[cfg_options]
+				@src[config/options]
+			]
+			section[
+				@title[output.*]
+				@id[cfg_output]
+				@src[config/output]
+			]
 		]
 		appendix[
 			@title[Changelog]
