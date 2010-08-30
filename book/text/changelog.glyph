@@ -1,7 +1,7 @@
 %[=
 macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
-	total = @node.children[0].children.length
+	total = @node.child_macros.length
 	interpret %{
 		section[
 			@title[#{total} #{@name.to_s.capitalize} #{verb}]
