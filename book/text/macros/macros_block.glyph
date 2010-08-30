@@ -63,6 +63,14 @@ img[
 	]
 
 	ref_macro[
+		@n[navigation]
+		@desc[Displays links to the document's TOC and the previous/next topic (used only in =>[#layouts|layouts]). ]
+		@params[
+			-p[0|The ID of the current topic.]
+		]
+	]
+
+	ref_macro[
 		@n[note]
 		@desc[Creates a note @div@ containing the value.]
 		@aliases[important, caution, tip]
