@@ -8,8 +8,8 @@ The document contains a macro that does not exist, i.e. it is not a standard or 
 		ref_error[An error occurred when generating _file-name_.pdf|
 Returned if Prince could not generate the PDF file or if Prince is not installed. Normally, Prince provides additional details on the specific error(s).
 		]
-		ref_error[Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting|
-Returned if the $>[tools.pdf_generator] has not be set to a valid PDF renderer. Currently, the only supported value for this setting is code[prince].
+		ref_error[Glyph cannot generate PDF. Please specify a valid output.pdf.generator setting|
+Returned if the $>[output.pdf.generator] has not be set to a valid PDF renderer. Currently, the only supported values for this setting are code[prince] and code[wkhtmltopdf].
 		]
 		ref_error[The current directory is not a valid Glyph project|
 Returned if a glyph command was executed outside a valid glyph project directory.

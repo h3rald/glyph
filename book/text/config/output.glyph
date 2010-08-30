@@ -1,8 +1,83 @@
+&:[o_multifile|
+If set to _true_, the document will be rendered in multiple files, according to the specified =>[#topics|topics].
+]
+&:[o_extension|
+The extension to use for the output file(s).
+]
+&:[o_filter_target|
+The output target for filters. It can be set to @html@ (for RedCloth and MarkDown) or @latex@ (RedCloth-only). 
+]
+&:[o_macro_dirs|
+The directories from which macros will be loaded (both in Glyph's home and the current project directory).
+]
+&:[o_layout_dirs|
+The directories from which layout macros will be loaded (both in Glyph's home and the current project directory).
+]
+&:[o_layouts.topic|
+The name of the layout to use to render topic files.
+]
+&:[o_layouts.index|
+The name of the layout to use to render the document index file.
+]
+&:[o_base|
+The directory to use as root for all link paths.
+]
+These settings are used to configure output-specific options.
+
+
 section[
-	@title[tools.*]
+	@title[output.pdf.*]
 	config_table[
-		ref_config[tools.pdf_generator|
-The external program used to generate PDF files. It can only be set to @prince@.
+		out_cfg[pdf.extension]
+		out_cfg[pdf.filter_target]
+		ref_config[output.pdf.generator|
+The external program used to generate PDF files. It can be set to @prince@ or @wkhtmltopdf@.
 		]
+		out_cfg[pdf.macro_dirs]
+		out_cfg[pdf.multifile]
+	]
+]
+section[
+	@title[output.html.*]
+	config_table[
+		out_cfg[html.extension]
+		out_cfg[html.filter_target]
+		out_cfg[html.macro_dirs]
+		out_cfg[html.multifile]
+	]
+]
+section[
+	@title[output.html5.*]
+	config_table[
+		out_cfg[html5.extension]
+		out_cfg[html5.filter_target]
+		out_cfg[html5.macro_dirs]
+		out_cfg[html5.multifile]
+	]
+]
+section[
+	@title[output.web.*]
+	config_table[
+		out_cfg[web.base]
+		out_cfg[web.extension]
+		out_cfg[web.filter_target]
+		out_cfg[web.layout_dirs]
+		out_cfg[web.layouts.index]
+		out_cfg[web.layouts.topic]
+		out_cfg[web.macro_dirs]
+		out_cfg[web.multifile]
+	]
+]
+section[
+	@title[output.web5.*]
+	config_table[
+		out_cfg[web5.base]
+		out_cfg[web5.extension]
+		out_cfg[web5.filter_target]
+		out_cfg[web5.layout_dirs]
+		out_cfg[web5.layouts.index]
+		out_cfg[web5.layouts.topic]
+		out_cfg[web5.macro_dirs]
+		out_cfg[web5.multifile]
 	]
 ]

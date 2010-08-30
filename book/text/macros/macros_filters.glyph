@@ -1,7 +1,7 @@
 	ref_macro[
 		@n[markdown]
 		@desc[
-Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the $>[filters.target] is set to @html@.
+Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into HTML if the =>[#cfg_output|code[output.*.filter_target]] setting is set to @html@.
 
 &[called_on_files] with a @.markdown@ or a @.md@ extension. 
 		]
@@ -13,7 +13,7 @@ Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transfor
 	ref_macro[
 		@n[textile]
 		@desc[
-Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the $>[filters.target].
+Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on the value of the =>[#cfg_output|code[output.*.filter_target]].
 
 &[called_on_files] with a @.textile@ or a @.txt@ extension. 
 		]

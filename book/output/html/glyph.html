@@ -65,12 +65,12 @@ August 2010
 <li class="appendix section"><a href="#f_macros">Filter Macros</a></li><li><ol><li class="appendix section"><a href="#m_markdown"><code>markdown</code></a></li><li class="appendix section"><a href="#m_textile"><code>textile</code></a></li><li class="appendix section"><a href="#m_highlight"><code>highlight</code></a></li></ol></li>
 <li class="appendix section"><a href="#h_193">Structure Macros</a></li><li><ol><li class="appendix section"><a href="#m_article"><code>article</code></a></li><li class="appendix section"><a href="#m_book"><code>book</code></a></li><li class="appendix section"><a href="#m_document"><code>document</code></a></li><li class="appendix section"><a href="#m_head"><code>head</code></a></li><li class="appendix section"><a href="#m_section"><code>section</code></a></li><li class="appendix section"><a href="#m_style"><code>style</code></a></li><li class="appendix section"><a href="#m_toc"><code>toc</code></a></li></ol></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li><li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li><li class="appendix section"><a href="#cfg_filters">filters.*</a></li><li class="appendix section"><a href="#cfg_options">options.*</a></li><li class="appendix section"><a href="#cfg_output">output.*</a></li><li><ol><li class="appendix section"><a href="#h_216">tools.*</a></li></ol></li>
+<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li><li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li><li class="appendix section"><a href="#cfg_filters">filters.*</a></li><li class="appendix section"><a href="#cfg_options">options.*</a></li><li class="appendix section"><a href="#cfg_output">output.*</a></li><li><ol><li class="appendix section"><a href="#h_216">output.pdf.*</a></li><li class="appendix section"><a href="#h_217">output.html.*</a></li><li class="appendix section"><a href="#h_218">output.html5.*</a></li><li class="appendix section"><a href="#h_219">output.web.*</a></li><li class="appendix section"><a href="#h_220">output.web5.*</a></li></ol></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_217">Changelog</a></li><li><ol><li class="appendix section"><a href="#h_218">v0.4.0 &ndash; ???</a></li><li><ol><li class="appendix section"><a href="#h_219">27 Features Implemented</a></li><li class="appendix section"><a href="#h_220">13 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_221">v0.3.0 &ndash; June 13th 2010</a></li><li><ol><li class="appendix section"><a href="#h_222">27 Features Implemented</a></li><li class="appendix section"><a href="#h_223">7 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_224">v0.2.0 &ndash; May 9th 2010</a></li><li><ol><li class="appendix section"><a href="#h_225">23 Features Implemented</a></li><li class="appendix section"><a href="#h_226">17 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_227">v0.1.0 &ndash; April 8th 2010</a></li></ol></li>
+<li class="backmatter appendix"><a href="#h_221">Changelog</a></li><li><ol><li class="appendix section"><a href="#h_222">v0.4.0 &ndash; ???</a></li><li><ol><li class="appendix section"><a href="#h_223">27 Features Implemented</a></li><li class="appendix section"><a href="#h_224">13 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_225">v0.3.0 &ndash; June 13th 2010</a></li><li><ol><li class="appendix section"><a href="#h_226">27 Features Implemented</a></li><li class="appendix section"><a href="#h_227">7 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_228">v0.2.0 &ndash; May 9th 2010</a></li><li><ol><li class="appendix section"><a href="#h_229">23 Features Implemented</a></li><li class="appendix section"><a href="#h_230">17 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_231">v0.1.0 &ndash; April 8th 2010</a></li></ol></li>
 
 </ol>
 </div>
@@ -1006,7 +1006,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Mon Aug 30 15:44:48 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Mon Aug 30 17:40:20 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.4.0.dev</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1099,7 +1099,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><a href="http://www.princexml.com/">Prince</a> (version 7.0 or higher) &#8212; a commercial generator that can be used freely for personal use. Prince produces high-quality <span class="caps">PDF</span> files and implement most of the new features introduced in CSS3, used heavily in Glyph&#8217;s <a href="#default_stylesheets"><code>pagination.css</code></a> default stylesheet.</li>
 	<li><a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a> (version 1.0 beta4 or higher) &#8212; an open source generator that uses the WebKit rendering engine to transform <span class="caps">HTML</span> files into <span class="caps">PDF</span>. Although not as advanced as Prince, it produces very satisfactory results.</li>
 </ul>
-<p>By default, Glyph attempts to use wkhtmltopdf. To change this, set the ‡‡‡‡‡PLACEHOLDER¤79‡‡‡‡‡ setting to <code>prince</code>.</p>
+<p>By default, Glyph attempts to use wkhtmltopdf. To change this, set the <a href="#s_output_pdf_generator"><code>output_pdf_generator</code></a> setting to <code>prince</code>.</p>
 	<div class="note">
 <span class="note-title">Note</span>Glyph expects PDF generators to be installed on the local machine and callable via command line using the <code>wkhtmltopdf</code> or the <code>prince</code> commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).
 
@@ -2305,8 +2305,8 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	
 		
 		<tr>
-			<td>Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting</td>
-			<td>Returned if the <a href="#s_tools_pdf_generator"><code>tools.pdf_generator</code></a> setting has not be set to a valid PDF renderer. Currently, the only supported value for this setting is <code>prince</code>.</td>
+			<td>Glyph cannot generate PDF. Please specify a valid output.pdf.generator setting</td>
+			<td>Returned if the <a href="#s_output_pdf_generator"><code>output.pdf.generator</code></a> setting has not be set to a valid PDF renderer. Currently, the only supported values for this setting are <code>prince</code> and <code>wkhtmltopdf</code>.</td>
 		</tr>
 	
 		
@@ -3948,7 +3948,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_markdown"><code>markdown</code></h4>
-<p>Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into <span class="caps">HTML</span> if the <a href="#s_filters_target"><code>filters.target</code></a> setting is set to <code>html</code>.</p>
+<p>Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into <span class="caps">HTML</span> if the <a href="#cfg_output"><code>output.*.filter_target</code></a> setting is set to <code>html</code>.</p>
 <p>If the <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.markdown</code> or a <code>.md</code> extension.</p>
 <strong>Aliases:</strong> <code>md</code>
 <p><strong>Example:</strong> <code>markdown[This is *emphasized* text.]</code></p>
@@ -3976,7 +3976,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_textile"><code>textile</code></h4>
-<p>Uses the RedCloth gem to transform the value into <span class="caps">HTML</span> or LaTeX, depending on the value of the <a href="#s_filters_target"><code>filters.target</code></a> setting.</p>
+<p>Uses the RedCloth gem to transform the value into <span class="caps">HTML</span> or LaTeX, depending on the value of the <a href="#cfg_output"><code>output.*.filter_target</code></a>.</p>
 <p>If the <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.textile</code> or a <code>.txt</code> extension.</p>
 <strong>Aliases:</strong> <code>txt</code>
 <p><strong>Example:</strong> <code>textile[This is a *strong emphasis*.]</code></p>
@@ -4472,10 +4472,22 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 			<div class="section">
 <h3 id="cfg_filters">filters.*</h3>
-	<table><tr><th>Name</th>
+These settings are used to configure some special options related to output filters and highlighters.
+
+<table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default</th></tr>
 			<tr><td>
+<code>filters.coderay.*</code> <a id="s_filters_coderay_"></a>
+</td>
+		<td><p>Some <a href="http://coderay.rubychan.de/">Coderay</a>-specific <a href="http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html">options</a>.</p></td>
+		<td><code>nil</code></td></tr>
+	<tr><td>
+<code>filters.highlighter</code> <a id="s_filters_highlighter"></a>
+</td>
+		<td><p>The current highlighter to use. It can be set to <code>coderay</code> or <code>ultraviolet</code></p></td>
+		<td><code>"coderay"</code></td></tr>
+	<tr><td>
 <code>filters.markdown.converter</code> <a id="s_filters_markdown_converter"></a>
 </td>
 		<td><p>The name of the markdown converter to use with the <a href="#m_markdown"><code>markdown</code></a> macro. It can be set to one of the following values:</p>
@@ -4487,32 +4499,17 @@ The following configuration settings are related to the current Glyph document. 
 </ul>
 <p>If not set, Glyph tests for the presence of each gem in the same order, until one is found.</p></td>
 		<td><code>"bluecloth"</code></td></tr>
-		<tr><td>
-<code>filters.coderay.*</code> <a id="s_filters_coderay_"></a>
-</td>
-		<td><p>Some <a href="http://coderay.rubychan.de/">Coderay</a>-specific <a href="http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html">options</a>.</p></td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<code>filters.highlighter</code> <a id="s_filters_highlighter"></a>
-</td>
-		<td><p>The current highlighter to use. It can be set to <code>coderay</code> or <code>ultraviolet</code></p></td>
-		<td><code>"coderay"</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>filters.redcloth.restrictions</code> <a id="s_filters_redcloth_restrictions"></a>
 </td>
 		<td><p>An <code>Array</code> containing restrictions applied to RedCloth, used by the <a href="#m_textile"><code>textile</code></a> macro (see <a href="http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html">RedCloth Documentation</a> for more information).</p></td>
 		<td><code>[]</code></td></tr>
-		<tr><td>
-<code>filters.target</code> <a id="s_filters_target"></a>
-</td>
-		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>filters.ultraviolet.line_numbers</code> <a id="s_filters_ultraviolet_line_numbers"></a>
 </td>
 		<td><p>Whether the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter should display line numbers or not.</p></td>
 		<td><code>true</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>filters.ultraviolet.theme</code> <a id="s_filters_ultraviolet_theme"></a>
 </td>
 		<td><p>The theme used by the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter.</p></td>
@@ -4573,16 +4570,195 @@ The following configuration settings are used to enable or disable specific Glyp
 </div>
 			<div class="section">
 <h3 id="cfg_output">output.*</h3>
+
+
+
+
+
+
+
+
+These settings are used to configure output-specific options.
+
+
 <div class="section">
-<h4 id="h_216">tools.*</h4>
+<h4 id="h_216">output.pdf.*</h4>
 <table><tr><th>Name</th>
 				<th>Description</th>
 				<th>Default</th></tr>
 			<tr><td>
-<code>tools.pdf_generator</code> <a id="s_tools_pdf_generator"></a>
+<code>output.pdf.extension</code> <a id="s_output_pdf_extension"></a>
 </td>
-		<td><p>The external program used to generate <span class="caps">PDF</span> files. It can only be set to <code>prince</code>.</p></td>
-		<td><code>nil</code></td></tr></table>
+		<td><p>The extension to use for the output file(s).</p></td>
+		<td><code>".pdf"</code></td></tr>
+		<tr><td>
+<code>output.pdf.filter_target</code> <a id="s_output_pdf_filter_target"></a>
+</td>
+		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
+		<td><code>"html"</code></td></tr>
+		<tr><td>
+<code>output.pdf.generator</code> <a id="s_output_pdf_generator"></a>
+</td>
+		<td><p>The external program used to generate <span class="caps">PDF</span> files. It can be set to <code>prince</code> or <code>wkhtmltopdf</code>.</p></td>
+		<td><code>"wkhtmltopdf"</code></td></tr>
+		<tr><td>
+<code>output.pdf.macro_dirs</code> <a id="s_output_pdf_macro_dirs"></a>
+</td>
+		<td><p>The directories from which macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["html"]</code></td></tr>
+		<tr><td>
+<code>output.pdf.multifile</code> <a id="s_output_pdf_multifile"></a>
+</td>
+		<td><p>If set to <em>true</em>, the document will be rendered in multiple files, according to the specified <a href="#topics">topics</a>.</p></td>
+		<td><code>false</code></td></tr></table>
+
+</div>
+<div class="section">
+<h4 id="h_217">output.html.*</h4>
+<table><tr><th>Name</th>
+				<th>Description</th>
+				<th>Default</th></tr>
+			<tr><td>
+<code>output.html.extension</code> <a id="s_output_html_extension"></a>
+</td>
+		<td><p>The extension to use for the output file(s).</p></td>
+		<td><code>".html"</code></td></tr>
+		<tr><td>
+<code>output.html.filter_target</code> <a id="s_output_html_filter_target"></a>
+</td>
+		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
+		<td><code>"html"</code></td></tr>
+		<tr><td>
+<code>output.html.macro_dirs</code> <a id="s_output_html_macro_dirs"></a>
+</td>
+		<td><p>The directories from which macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["html"]</code></td></tr>
+		<tr><td>
+<code>output.html.multifile</code> <a id="s_output_html_multifile"></a>
+</td>
+		<td><p>If set to <em>true</em>, the document will be rendered in multiple files, according to the specified <a href="#topics">topics</a>.</p></td>
+		<td><code>false</code></td></tr></table>
+
+</div>
+<div class="section">
+<h4 id="h_218">output.html5.*</h4>
+<table><tr><th>Name</th>
+				<th>Description</th>
+				<th>Default</th></tr>
+			<tr><td>
+<code>output.html5.extension</code> <a id="s_output_html5_extension"></a>
+</td>
+		<td><p>The extension to use for the output file(s).</p></td>
+		<td><code>".html"</code></td></tr>
+		<tr><td>
+<code>output.html5.filter_target</code> <a id="s_output_html5_filter_target"></a>
+</td>
+		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
+		<td><code>"html"</code></td></tr>
+		<tr><td>
+<code>output.html5.macro_dirs</code> <a id="s_output_html5_macro_dirs"></a>
+</td>
+		<td><p>The directories from which macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["html", "html5"]</code></td></tr>
+		<tr><td>
+<code>output.html5.multifile</code> <a id="s_output_html5_multifile"></a>
+</td>
+		<td><p>If set to <em>true</em>, the document will be rendered in multiple files, according to the specified <a href="#topics">topics</a>.</p></td>
+		<td><code>false</code></td></tr></table>
+
+</div>
+<div class="section">
+<h4 id="h_219">output.web.*</h4>
+<table><tr><th>Name</th>
+				<th>Description</th>
+				<th>Default</th></tr>
+			<tr><td>
+<code>output.web.base</code> <a id="s_output_web_base"></a>
+</td>
+		<td><p>The directory to use as root for all link paths.</p></td>
+		<td><code>"/"</code></td></tr>
+		<tr><td>
+<code>output.web.extension</code> <a id="s_output_web_extension"></a>
+</td>
+		<td><p>The extension to use for the output file(s).</p></td>
+		<td><code>".html"</code></td></tr>
+		<tr><td>
+<code>output.web.filter_target</code> <a id="s_output_web_filter_target"></a>
+</td>
+		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
+		<td><code>"html"</code></td></tr>
+		<tr><td>
+<code>output.web.layout_dirs</code> <a id="s_output_web_layout_dirs"></a>
+</td>
+		<td><p>The directories from which layout macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["web"]</code></td></tr>
+		<tr><td>
+<code>output.web.layouts.index</code> <a id="s_output_web_layouts_index"></a>
+</td>
+		<td><p>The name of the layout to use to render the document index file.</p></td>
+		<td><code>"index"</code></td></tr>
+		<tr><td>
+<code>output.web.layouts.topic</code> <a id="s_output_web_layouts_topic"></a>
+</td>
+		<td><p>The name of the layout to use to render topic files.</p></td>
+		<td><code>"topic"</code></td></tr>
+		<tr><td>
+<code>output.web.macro_dirs</code> <a id="s_output_web_macro_dirs"></a>
+</td>
+		<td><p>The directories from which macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["html"]</code></td></tr>
+		<tr><td>
+<code>output.web.multifile</code> <a id="s_output_web_multifile"></a>
+</td>
+		<td><p>If set to <em>true</em>, the document will be rendered in multiple files, according to the specified <a href="#topics">topics</a>.</p></td>
+		<td><code>true</code></td></tr></table>
+
+</div>
+<div class="section">
+<h4 id="h_220">output.web5.*</h4>
+<table><tr><th>Name</th>
+				<th>Description</th>
+				<th>Default</th></tr>
+			<tr><td>
+<code>output.web5.base</code> <a id="s_output_web5_base"></a>
+</td>
+		<td><p>The directory to use as root for all link paths.</p></td>
+		<td><code>"/"</code></td></tr>
+		<tr><td>
+<code>output.web5.extension</code> <a id="s_output_web5_extension"></a>
+</td>
+		<td><p>The extension to use for the output file(s).</p></td>
+		<td><code>".html"</code></td></tr>
+		<tr><td>
+<code>output.web5.filter_target</code> <a id="s_output_web5_filter_target"></a>
+</td>
+		<td><p>The output target for filters. It can be set to <code>html</code> (for RedCloth and MarkDown) or <code>latex</code> (RedCloth-only).</p></td>
+		<td><code>"html"</code></td></tr>
+		<tr><td>
+<code>output.web5.layout_dirs</code> <a id="s_output_web5_layout_dirs"></a>
+</td>
+		<td><p>The directories from which layout macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["web5"]</code></td></tr>
+		<tr><td>
+<code>output.web5.layouts.index</code> <a id="s_output_web5_layouts_index"></a>
+</td>
+		<td><p>The name of the layout to use to render the document index file.</p></td>
+		<td><code>"index"</code></td></tr>
+		<tr><td>
+<code>output.web5.layouts.topic</code> <a id="s_output_web5_layouts_topic"></a>
+</td>
+		<td><p>The name of the layout to use to render topic files.</p></td>
+		<td><code>"topic"</code></td></tr>
+		<tr><td>
+<code>output.web5.macro_dirs</code> <a id="s_output_web5_macro_dirs"></a>
+</td>
+		<td><p>The directories from which macros will be loaded (both in Glyph&#8217;s home and the current project directory).</p></td>
+		<td><code>["html", "html5"]</code></td></tr>
+		<tr><td>
+<code>output.web5.multifile</code> <a id="s_output_web5_multifile"></a>
+</td>
+		<td><p>If set to <em>true</em>, the document will be rendered in multiple files, according to the specified <a href="#topics">topics</a>.</p></td>
+		<td><code>true</code></td></tr></table>
 
 </div>
 				
@@ -4594,16 +4770,16 @@ The following configuration settings are used to enable or disable specific Glyp
 
 </div>
 		<div class="appendix">
-<h2 id="h_217">Changelog</h2>
+<h2 id="h_221">Changelog</h2>
 
 
 
 
 
 	<div class="section">
-<h3 id="h_218">v0.4.0 &ndash; ???</h3>
+<h3 id="h_222">v0.4.0 &ndash; ???</h3>
 <div class="section">
-<h4 id="h_219">27 Features Implemented</h4>
+<h4 id="h_223">27 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4651,7 +4827,7 @@ The following configuration settings are used to enable or disable specific Glyp
 	
 	
 		<div class="section">
-<h4 id="h_220">13 Bugs Fixed</h4>
+<h4 id="h_224">13 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4679,9 +4855,9 @@ The following configuration settings are used to enable or disable specific Glyp
 </div>
 
 	<div class="section">
-<h3 id="h_221">v0.3.0 &ndash; June 13th 2010</h3>
+<h3 id="h_225">v0.3.0 &ndash; June 13th 2010</h3>
 <div class="section">
-<h4 id="h_222">27 Features Implemented</h4>
+<h4 id="h_226">27 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4729,7 +4905,7 @@ The following configuration settings are used to enable or disable specific Glyp
 	
 	
 		<div class="section">
-<h4 id="h_223">7 Bugs Fixed</h4>
+<h4 id="h_227">7 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4748,9 +4924,9 @@ The following configuration settings are used to enable or disable specific Glyp
 </div>
 
 	<div class="section">
-<h3 id="h_224">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_228">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_225">23 Features Implemented</h4>
+<h4 id="h_229">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4792,7 +4968,7 @@ The following configuration settings are used to enable or disable specific Glyp
 	
 	
 		<div class="section">
-<h4 id="h_226">17 Bugs Fixed</h4>
+<h4 id="h_230">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4826,7 +5002,7 @@ The following configuration settings are used to enable or disable specific Glyp
 </div>
 
 	<div class="section">
-<h3 id="h_227">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_231">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

@@ -22,7 +22,7 @@ Currently, Glyph supports:
 * &[prince] (version 7.0 or higher) -- a commercial generator that can be used freely for personal use. Prince produces high-quality PDF files and implement most of the new features introduced in CSS3, used heavily in Glyph's =>[#default_stylesheets|code[pagination.css]] default stylesheet.
 * &[wkhtml] (version 1.0 beta4 or higher) -- an open source generator that uses the WebKit rendering engine to transform HTML files into PDF. Although not as advanced as Prince, it produces very satisfactory results.
 
-By default, Glyph attempts to use wkhtmltopdf. To change this, set the $>[s_output_pdf_generator] to code[prince]. 
+By default, Glyph attempts to use wkhtmltopdf. To change this, set the $>[output_pdf_generator] to code[prince]. 
 	]
 	note[Glyph expects PDF generators to be installed on the local machine and callable via command line using the code[wkhtmltopdf] or the code[prince] commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).]
 ]

@@ -149,6 +149,14 @@ macro :ref_config do
 	]}
 end
 
+macro :out_cfg do
+	setting = param(0)
+	snippet = "&[o_#{setting.gsub(/^.+?\./, '')}]"
+	interpret %{ref_config[output.#{setting}|
+#{snippet}
+	]}
+end
+
 macro :config_table do
 	interpret %{table[
 			tr[
