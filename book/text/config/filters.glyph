@@ -1,7 +1,5 @@
 	config_table[
-		ref_config[filters.by_file_extension|
-If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).  
-		]
+
 		ref_config[filters.markdown.converter|
 The name of the markdown converter to use with the %>[markdown]. It can be set to one of the following values:
 * BlueCloth

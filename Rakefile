@@ -35,7 +35,7 @@ begin
 		s.add_dependency 'extlib', '>= 0.9.15' # Extension methods
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks
 		s.add_development_dependency 'rspec', '>= 1.3.0' # Test suite
-		s.add_development_dependency 'yard', '>= 0.5.8' # Documentation suite
+		s.add_development_dependency 'yard', '>= 0.6.0' # Documentation suite
 		s.add_development_dependency 'jeweler', '1.4.0' # Gem management
 		s.add_development_dependency 'directory_watcher', ">= 1.3.2" # Auto-regeneration
 		s.add_development_dependency 'haml', ">= 3.0.15" # Sass filter

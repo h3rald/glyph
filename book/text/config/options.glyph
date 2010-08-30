@@ -1,17 +1,25 @@
-section[
-	@title[language.*]
-	config_table[
-		ref_config[language.set|
+The following configuration settings are used to enable or disable specific Glyph functionalities and behaviors.
+
+config_table[
+	ref_config[options.filters_by_file_extension|
+If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).  
+	]
+	ref_config[options.macro_set|
 Determines which macro set will be loaded. It can be set to:
-* glyph &ndash; Loads core, filter, xml macros plus all macros necessary for the $>[document.output].
-* xml &ndash; Loads core and xml macros.
-* core &ndash; Loads core macros only.
-		]
-		ref_config[language.options.xml_blacklist|
+* glyph -- Loads core, filter, xml macros plus all macros necessary for the $>[document.output].
+* xml -- Loads core and xml macros.
+* core -- Loads core macros only.
+	]
+	ref_config[options.safe_mode|
+Enables Safe Mode (\.fmi[Glyph modes|#modes]).
+	]
+	ref_config[options.url_validation|
+If set to _true_, every external link will be validated (see =>[#links]). 
+	]
+	ref_config[options.xml_blacklist|
 The XML tags listed here cannot be generated using Glyph code.
-		]
-		ref_config[language.options.xml_fallback|
+	]
+	ref_config[options.xml_fallback|
 If set to true, any unknown macro name will considered an XML element (see =>[#other_elements]).
-		]
 	]
 ]

@@ -20,10 +20,14 @@ module Glyph
 						placeholder do |document|
 							bmk = document.bookmark?(anchor)
 							macro_error "Bookmark '#{anchor}' does not exist" unless bmk
-							block.call bmk.link(@source_file), bmk.title
+							bmk_title = title
+							bmk_title = bmk.title if bmk_title.blank?
+							block.call bmk.link(@source_file), bmk_title
 						end
 					else
-						block.call bmk.link(@source_file), bmk.title
+						bmk_title = title
+						bmk_title = bmk.title if bmk_title.blank?
+						block.call bmk.link(@source_file), bmk_title
 					end
 				else
 					if Glyph['options.url_validation'] && !@node[:document].links.include?(target) then

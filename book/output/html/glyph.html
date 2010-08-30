@@ -65,13 +65,12 @@ August 2010
 <li class="appendix section"><a href="#f_macros">Filter Macros</a></li><li><ol><li class="appendix section"><a href="#m_markdown"><code>markdown</code></a></li><li class="appendix section"><a href="#m_textile"><code>textile</code></a></li><li class="appendix section"><a href="#m_highlight"><code>highlight</code></a></li></ol></li>
 <li class="appendix section"><a href="#h_193">Structure Macros</a></li><li><ol><li class="appendix section"><a href="#m_article"><code>article</code></a></li><li class="appendix section"><a href="#m_book"><code>book</code></a></li><li class="appendix section"><a href="#m_document"><code>document</code></a></li><li class="appendix section"><a href="#m_head"><code>head</code></a></li><li class="appendix section"><a href="#m_section"><code>section</code></a></li><li class="appendix section"><a href="#m_style"><code>style</code></a></li><li class="appendix section"><a href="#m_toc"><code>toc</code></a></li></ol></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li><li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li><li class="appendix section"><a href="#cfg_filters">filters.*</a></li><li class="appendix section"><a href="#cfg_options">options.*</a></li><li><ol><li class="appendix section"><a href="#h_215">language.*</a></li></ol></li>
-<li class="appendix section"><a href="#cfg_output">output.*</a></li><li><ol><li class="appendix section"><a href="#h_217">tools.*</a></li></ol></li>
+<li class="backmatter appendix"><a href="#cfg_ref">Configuration Reference</a></li><li><ol><li class="appendix section"><a href="#cfg_document">document.*</a></li><li class="appendix section"><a href="#cfg_filters">filters.*</a></li><li class="appendix section"><a href="#cfg_options">options.*</a></li><li class="appendix section"><a href="#cfg_output">output.*</a></li><li><ol><li class="appendix section"><a href="#h_216">tools.*</a></li></ol></li>
 </ol></li>
-<li class="backmatter appendix"><a href="#h_218">Changelog</a></li><li><ol><li class="appendix section"><a href="#h_219">v0.4.0 &ndash; ???</a></li><li><ol><li class="appendix section"><a href="#h_220">27 Features Implemented</a></li><li class="appendix section"><a href="#h_221">13 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_222">v0.3.0 &ndash; June 13th 2010</a></li><li><ol><li class="appendix section"><a href="#h_223">27 Features Implemented</a></li><li class="appendix section"><a href="#h_224">7 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_225">v0.2.0 &ndash; May 9th 2010</a></li><li><ol><li class="appendix section"><a href="#h_226">23 Features Implemented</a></li><li class="appendix section"><a href="#h_227">17 Bugs Fixed</a></li></ol></li>
-<li class="appendix section"><a href="#h_228">v0.1.0 &ndash; April 8th 2010</a></li></ol></li>
+<li class="backmatter appendix"><a href="#h_217">Changelog</a></li><li><ol><li class="appendix section"><a href="#h_218">v0.4.0 &ndash; ???</a></li><li><ol><li class="appendix section"><a href="#h_219">27 Features Implemented</a></li><li class="appendix section"><a href="#h_220">13 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_221">v0.3.0 &ndash; June 13th 2010</a></li><li><ol><li class="appendix section"><a href="#h_222">27 Features Implemented</a></li><li class="appendix section"><a href="#h_223">7 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_224">v0.2.0 &ndash; May 9th 2010</a></li><li><ol><li class="appendix section"><a href="#h_225">23 Features Implemented</a></li><li class="appendix section"><a href="#h_226">17 Bugs Fixed</a></li></ol></li>
+<li class="appendix section"><a href="#h_227">v0.1.0 &ndash; April 8th 2010</a></li></ol></li>
 
 </ol>
 </div>
@@ -283,8 +282,8 @@ Special thanks to the following individuals who contributed to Glyph by reportin
 <p>Additionally, the following files are also created at top level:</p>
 <ul>
 	<li><code>config.yml</code> &#8212; containing your <a href="#cfg">Project Configuration</a>.</li>
-	<li><code>document.glyph</code> &#8212; containing the <a href="#struct">Document Structure</a> of your document.</li>
-	<li><code>snippets.yml</code> &#8212; containing your text <a href="#incl">Including Files and Snippets</a>.</li>
+	<li><code>document.glyph</code> &#8212; containing the <a href="#struct">structure</a> of your document.</li>
+	<li><code>snippets.yml</code> &#8212; containing your text <a href="#incl">snippets</a>.</li>
 </ul>
 				
 				
@@ -328,7 +327,7 @@ Special thanks to the following individuals who contributed to Glyph by reportin
 </pre>
 
 	<p>Even without knowing anything about Glyph Language, you can easily figure out that this file defines a document with a Table of Contents, a Preface some Chapters and an Appendix.</p>
-<p>As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for <em><a href="#macro_intro">Introducing Glyph Macros</a></em> and <em><a href="#attribute_intro">Macro attributes</a></em>. The only syntactic difference between macros and attributes is that attributes are preceded by a <code>@</code>.</p>
+<p>As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for <em><a href="#macro_intro">macros</a></em> and <em><a href="#attribute_intro">attributes</a></em>. The only syntactic difference between macros and attributes is that attributes are preceded by a <code>@</code>.</p>
 <p>For now, think about a macro as something that performs a certain action and &#8212; generally &#8212; produces some text output or manipulation of the text inside it. In this way, it becomes easy to understand that the <code>chapter</code> macro creates a chapter and the <a href="#m_include"><code>include</code></a> macro includes an external file, for example.<br />
 Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case the <a href="#m_book"><code>book</code></a> macro has the following attributes:</p>
 <ul>
@@ -362,7 +361,7 @@ Attributes &#8220;belong&#8221; to the macro they&#8217;re in, so in this case t
 	<li>A setting configured in the <em>Project Configuration</em> overrides the same setting in both Global and System configuration.</li>
 	<li>A setting configured in the <em>Global Configuration</em> overrides the same setting in the <em>System Configuration</em>.</li>
 </ul>
-<p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set the <a href="#s_document_author"></a> setting in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
+<p>Typically, you should use the <em>Project Configuration</em> for all project-specific settings and the <em>Global Configuration</em> for settings affecting all your projects (for example, you may want to set the <a href="#s_document_author"><code>document.author</code></a> setting in the Global Configuration instead of setting it in the Project Configuration of all your Glyph projects). The <em>System Configuration</em> is best left untouched.</p>
 <p>Instead of editing your configuration settings directly, you can use the <a href="#c_config"><code>config</code></a> command, as follows:</p>
 <p><code>glyph config</code> <em>setting</em> <em>[value]</em></p>
 <p>If no <em>value</em> is specified, glyph prints the value of the configuration setting, so typing <code>glyph config document.author</code> right after creating a project (assuming you didn&#8217;t set this in the Global Configuration) will print nothing, because this setting is blank by default.</p>
@@ -625,7 +624,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <ul>
 	<li>The <code>@title</code> attribute must be specified and is used as the topic title</li>
 	<li>The body of the topic is constituted by the contents of the file referenced by the <code>@src</code> attribute.</li>
-	<li>The topic file is rendered according to a specific <a href="#layouts">Layouts</a>.</li>
+	<li>The topic file is rendered according to a specific <a href="#layouts">layout</a>.</li>
 	<li>The location of the topic is the same as the location of the included file, mirrored in the output folder.</li>
 	<li>Glyph takes care of changing the file extensions and resolving links automatically, regardless of the output target.</li>
 </ul>
@@ -664,7 +663,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   3 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag">href</span>=<span class="String"><span class="String">&quot;</span>#wrong<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>#wrong<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
 <span class="line-numbers">   4 </span> <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>This is a <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">a</span> <span class="MetaTag"><span class="MetaTag">id</span><span class="MetaTag">=</span><span class="String"><span class="String">&quot;</span><span class="String">test</span><span class="String">&quot;</span></span></span><span class="MetaTag">&gt;</span></span>test anchor<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">a</span><span class="MetaTag">&gt;</span></span>.<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">p</span><span class="MetaTag">&gt;</span></span>
 </pre>
-		<p>Additionally, the following warning message is displayed when <a href="#compile">Compiling a project</a>:</p>
+		<p>Additionally, the following warning message is displayed when <a href="#compile">compiling</a>:</p>
 		<pre class="lazy"><span class="line-numbers">   1 </span> warning: Bookmark 'wrong' does not exist
 <span class="line-numbers">   2 </span>  -&gt; source: @: authoring.textile
 <span class="line-numbers">   3 </span>  -&gt; path: document/body/bodymatter/chapter/@/textile/section/section/box/link
@@ -684,7 +683,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <span class="line-numbers">   4 </span> ...
 <span class="line-numbers">   5 </span> ]
 </pre>
-	<p>By default, validation is only enabled for internal links (i.e. the check occurs if the first parameter of the <a href="#m_link"><code>link</code></a> macro starts with a <code>#</code>). You can enable it for external links as well by setting the ‡‡‡‡‡PLACEHOLDER¤43‡‡‡‡‡ setting to <code>true</code>. If URL validation is enabled, an error is returned if a link returns an HTTP status greater than 302.</p>
+	<p>By default, validation is only enabled for internal links (i.e. the check occurs if the first parameter of the <a href="#m_link"><code>link</code></a> macro starts with a <code>#</code>). You can enable it for external links as well by setting the <a href="#s_options_url_validation"><code>options.url_validation</code></a> setting to <code>true</code>. If URL validation is enabled, an error is returned if a link returns an HTTP status greater than 302.</p>
 	<div class="important">
 <span class="note-title">Important</span>Enabling URL validation may significantly slow down compilation if a lot of external links are present.
 
@@ -697,7 +696,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 			<div class="section">
 <h3 id="img_fig">Images and Figures</h3>
-	<p>Same as for <a href="#links">Links and Bookmarks</a>, you can also include images and figures using Textile or Markdown. If you want additional features, you can use the <a href="#m_image"><code>image</code></a> macro and the <a href="#m_figure"><code>figure</code></a> macro, as shown in the following example:</p>
+	<p>Same as for <a href="#links">links</a>, you can also include images and figures using Textile or Markdown. If you want additional features, you can use the <a href="#m_image"><code>image</code></a> macro and the <a href="#m_figure"><code>figure</code></a> macro, as shown in the following example:</p>
 
 	<div class="box">
 <div class="box-title">Example</div>
@@ -878,7 +877,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </pre>
 
 </div>
-	<p>Basically, if the <a href="#s_language_options_xml_fallback"></a> setting is set to <code>true</code>, any macro unknown to Glyph with at most one parameter will be converted to an XML tag with the same name and any attribute will be converted to the corresponding XML attribute.</p>
+	<p>Basically, if the <a href="#s_options_xml_fallback"><code>options.xml_fallback</code></a> setting is set to <code>true</code>, any macro unknown to Glyph with at most one parameter will be converted to an XML tag with the same name and any attribute will be converted to the corresponding XML attribute.</p>
 	<div class="important">
 <span class="note-title">Important</span>While macro names and attributes are validated so that an error is returned if they contain illegal character, no check is performed against any particular XML schema.
 
@@ -888,23 +887,23 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h5 id="xml_blacklist">Blacklisted XML tags</h5>
 <p>By default, the following tags are blacklisted and will be ignored:</p>
 <ul>
-	<li>applet</li>
-	<li>base</li>
-	<li>basefont</li>
-	<li>embed</li>
-	<li>frame</li>
-	<li>frameset</li>
-	<li>iframe</li>
-	<li>isindex</li>
-	<li>meta</li>
-	<li>noframes</li>
-	<li>noscript</li>
-	<li>object</li>
-	<li>param</li>
-	<li>title</li>
+	<li><code>applet</code></li>
+	<li><code>base</code></li>
+	<li><code>basefont</code></li>
+	<li><code>embed</code></li>
+	<li><code>frame</code></li>
+	<li><code>frameset</code></li>
+	<li><code>iframe</code></li>
+	<li><code>isindex</code></li>
+	<li><code>meta</code></li>
+	<li><code>noframes</code></li>
+	<li><code>noscript</code></li>
+	<li><code>object</code></li>
+	<li><code>param</code></li>
+	<li><code>title</code></li>
 </ul>
 <div class="tip">
-<p><span class="note-title">Tip</span>You can change this list by modifying the <a href="#s_language_options_xml_blacklist"></a> setting.</p>
+<p><span class="note-title">Tip</span>You can change this list by modifying the <a href="#s_options_xml_blacklist"><code>options.xml_blacklist</code></a> setting.</p>
 </div>
 
 </div>
@@ -924,7 +923,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </p>
 	<p>In this case, the <a href="#m_style"><code>style</code></a> macro looks for a <code>default.css</code> file in the <code>/styles</code> folder of your Glyph project <em>and</em> among the default Glyph stylesheets, and embeds it within a <code>&lt;style&gt;</code> tag. If you supply a file with a <code>.sass</code> extension, it will interpret it as a Sass file and convert it to <span class="caps">CSS</span> automatically (if the <em>Haml</em> gem is installed).</p>
 	<div class="tip">
-<span class="note-title">Tip</span>By default, stylesheets are embedded within text files. If necessary, you can choose to link them or import them by changing the values of the ‡‡‡‡‡PLACEHOLDER¤59‡‡‡‡‡ setting.
+<span class="note-title">Tip</span>By default, stylesheets are embedded within text files. If necessary, you can choose to link them or import them by changing the values of the <a href="#s_document_styles"><code>document.styles</code></a> setting.
 
 </div>
 	<div class="section">
@@ -1007,7 +1006,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Thu Aug 26 14:45:30 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Mon Aug 30 15:44:48 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.4.0.dev</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -1019,7 +1018,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 			<div class="section">
 <h3 id="cond_macros">Conditional Macros</h3>
-	<p>Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see the <a href="#s_document_draft"></a> setting), or use a particular stylesheet only if when you generate a <span class="caps">PDF</span> document.</p>
+	<p>Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see the <a href="#s_document_draft"><code>document.draft</code></a> setting), or use a particular stylesheet only if when you generate a <span class="caps">PDF</span> document.</p>
 <p>To do so, you can use the <a href="#m_condition"><code>condition</code></a> macro (aliased by <code>?</code>), and a set of additional macros that can be used as conditional operators i.e.:</p>
 <ul>
 	<li><a href="#m_eq"><code>eq</code></a> macro</li>
@@ -1081,7 +1080,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <div class="section">
 <h4 id="h_36">HTML/HTML5 output</h4>
 <p>To compile a Glyph project to an HTML document, use the <a href="#c_compile"><code>compile</code></a> command within your Glyph project folder. Glyph parses the <code>document.glyph</code> file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the <code>/output/html</code> folder.</p> 
-	<p>The name of the HTML file can be set in the configuration (<a href="#s_document_filename"></a> setting).</p>
+	<p>The name of the HTML file can be set in the configuration (<a href="#s_document_filename"><code>document.filename</code></a> setting).</p>
 	<p>To create an HTML5 file instead, you must specify it explicitly like this:</p>
 	<p>
 <code>glyph compile -f html5</code>
@@ -1097,7 +1096,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>The command above will attempt to compile the project into an HTML document and then call a third-party PDF generator to convert it into a PDF file.</p>
 	<p>Currently, Glyph supports:</p>
 <ul>
-	<li><a href="http://www.princexml.com/">Prince</a> (version 7.0 or higher) &#8212; a commercial generator that can be used freely for personal use. Prince produces high-quality <span class="caps">PDF</span> files and implement most of the new features introduced in CSS3, used heavily in Glyph&#8217;s <a href="#default_stylesheets">Default Stylesheets</a> default stylesheet.</li>
+	<li><a href="http://www.princexml.com/">Prince</a> (version 7.0 or higher) &#8212; a commercial generator that can be used freely for personal use. Prince produces high-quality <span class="caps">PDF</span> files and implement most of the new features introduced in CSS3, used heavily in Glyph&#8217;s <a href="#default_stylesheets"><code>pagination.css</code></a> default stylesheet.</li>
 	<li><a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a> (version 1.0 beta4 or higher) &#8212; an open source generator that uses the WebKit rendering engine to transform <span class="caps">HTML</span> files into <span class="caps">PDF</span>. Although not as advanced as Prince, it produces very satisfactory results.</li>
 </ul>
 <p>By default, Glyph attempts to use wkhtmltopdf. To change this, set the ‡‡‡‡‡PLACEHOLDER¤79‡‡‡‡‡ setting to <code>prince</code>.</p>
@@ -1109,12 +1108,12 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 <div class="section">
 <h4 id="web_output">Web/Web5 Output</h4>
-<p>To generate a Web or Web5 output, specify <code>web</code> or <code>web5</code> as format. These two output formats behave different way from the others, and require that your project uses <a href="#topics">Topics</a> and <a href="#layouts">Layouts</a>.</p>
+<p>To generate a Web or Web5 output, specify <code>web</code> or <code>web5</code> as format. These two output formats behave different way from the others, and require that your project uses <a href="#topics">topics</a> and <a href="#layouts">layouts</a>.</p>
 <p>Basically, here&#8217;s what happens when you compile your project in web or web5 format:</p>
 <ol>
 	<li>The document code is parsed as normal</li>
 	<li>Separate topic files are generated according to the <code>@src</code> attributes of your sections</li>
-	<li>The <code>document.glyph</code> (or whatever file you&#8217;re using as document source) is <em>not</em> rendered. Instead, an <code>index.html</code> file will be created in the output folder based on the contents of your <a href="#index_layout">Index Layout</a>.</li>
+	<li>The <code>document.glyph</code> (or whatever file you&#8217;re using as document source) is <em>not</em> rendered. Instead, an <code>index.html</code> file will be created in the output folder based on the contents of your <a href="#index_layout">index layout</a>.</li>
 </ol>
 
 </div>
@@ -1149,7 +1148,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>Project configuration settings can only be defined inside the source file, using the <a href="#m_config_"><code>config:</code></a> macro.</li>
 	<li>Custom macros can only be defined inside the source file, using the <a href="#m_macro_"><code>macro:</code></a> macro.</li>
 	<li>Images must be referenced with their absolute path, or a path relative to the current directory, and will not be copied anywhere when the output file is generated.</li>
-	<li>Stylesheets must be referenced with their absolute path, or a path relative to the current directory, or the name of an existing Glyph <a href="#default_stylesheets">Default Stylesheets</a>.</li>
+	<li>Stylesheets must be referenced with their absolute path, or a path relative to the current directory, or the name of an existing Glyph <a href="#default_stylesheets">system stylesheet</a>.</li>
 	<li>The files included through the <a href="#m_include"><code>include</code></a> macro must be referenced with their absolute path, or a path relative to the current directory.</li>
 </ul>
 
@@ -1168,7 +1167,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li>Filter text to <span class="caps">HTML</span> (using <code>Glyph#filter</code>)</li>
 	<li>Compile Glyph source files into <span class="caps">HTML</span> or <span class="caps">PDF</span> files (using <code>Glyph#compile</code>)</li>
 </ul>
-<p>That&#8217;s pretty much it. Of course, both the <code>filter</code> and <code>compile</code> method cause Glyph to run in <a href="#lite_mode">Compiling single Glyph files</a>, so the same <a href="#lite_limitations">Limitations</a> apply.</p>
+<p>That&#8217;s pretty much it. Of course, both the <code>filter</code> and <code>compile</code> method cause Glyph to run in <a href="#lite_mode"><em>lite</em> mode</a>, so the same <a href="#lite_limitations">limitations</a> apply.</p>
 	<div class="tip">
 <span class="note-title">Tip</span><p>For an example on how to use Glyph programmatically (specifically in conjunction with the <a href="http://nanoc.stoneship.org/">nanoc</a> static site generator), see <a href="http://github.com/h3rald/h3rald">h3rald.com source code</a>, in particular:</p>
 <ul>
@@ -1208,7 +1207,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 				<td>
 <code>Glyph.debug?</code>
 </td>
-				<td>If enabled, additional diagnostic information (such as backtraces or macro values) will be displayed. Enabled by specifying the <a href="#debug_switch"><code>-d</code>, <code>--debug</code></a> when running a Glyph command.</td></tr>
+				<td>If enabled, additional diagnostic information (such as backtraces or macro values) will be displayed. Enabled by specifying the <a href="#debug_switch">debug switch</a> when running a Glyph command.</td></tr>
 			<tr><td>Lite Mode</td>
 				<td>
 <code>Glyph.lite_mode=</code>
@@ -1216,7 +1215,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 				<td>
 <code>Glyph.lite?</code>
 </td>
-				<td><p>Used to compile <a href="#lite_mode">Compiling single Glyph files</a>. Enabled by:</p>
+				<td><p>Used to compile <a href="#lite_mode">single files</a>. Enabled by:</p>
 <ul>
 	<li>The <code>Glyph.compile</code> and <code>Glyph.filter</code> methods.</li>
 	<li>The <a href="#c_compile"><code>compile</code></a> command, if at least one parameter is supplied.</li>
@@ -1359,7 +1358,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <h5 id="h_48">Remarks</h5>
 <ul>
 	<li>Only macro <em>definitions</em> (not their <em>aliases</em>) are displayed, both default and user-defined.</li>
-	<li>The <code>|xml|</code> macro is a special macro used if the ‡‡‡‡‡PLACEHOLDER¤97‡‡‡‡‡ setting is enabled.</li>
+	<li>The <code>|xml|</code> macro is a special macro used if the <a href="#s_options_xml_fallback"><code>options.xml_fallback</code></a> setting is enabled.</li>
 	<li>There&#8217;s no distinction between macros defined by the user and macros defined by Glyph itself.</li>
 </ul>
 
@@ -1392,7 +1391,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <ul>
 	<li>All the instances of the specified macro definition <em>and all its aliases</em> are collected, regardless whether a definition or an alias is specified.</li>
 	<li>If you use custom macros, make sure they call the <a href="http://yardoc.org/docs/h3rald-glyph/Glyph/Macro:update_source">Macro#update_source</a> appropriately method if necessary.</li>
-	<li>If macros are used within <a href="#rewriting">Rewriting</a> macros, they&#8217;ll be also listed in each file where the rewritten macro is used.</li>
+	<li>If macros are used within <a href="#rewriting">rewritten</a> macros, they&#8217;ll be also listed in each file where the rewritten macro is used.</li>
 </ul>
 
 </div>
@@ -1729,7 +1728,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 <p>You can also define macros:</p>
 <ul>
 	<li>inside your document, using the <a href="#m_macro_"><code>macro:</code></a> macro.</li>
-	<li>Using the <a href="#m_include"><code>include</code></a> macro specifying the path to an <code>.rb</code> file containing macro definitions stored in the <code>lib/</code> directory (useful especially when <a href="#lite_mode">Compiling single Glyph files</a>).</li>
+	<li>Using the <a href="#m_include"><code>include</code></a> macro specifying the path to an <code>.rb</code> file containing macro definitions stored in the <code>lib/</code> directory (useful especially when <a href="#lite_mode">compiling single Glyph files</a>).</li>
 </ul>
 </div>
 <p>This is the source code of a fairly simple macro used to format a note:</p>
@@ -1757,7 +1756,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><code>:name</code>, the name of the macro.</li>
 	<li><code>:source</code>, a <code>String</code> identifying the source of the macro (a file, a snippet, etc.)</li>
 	<li><code>:value</code>, the value of the macro (populated after the document has been parsed and analyzed).</li>
-	<li><code>:escape</code>, whether the macro is a <a href="#esc_quot">Escaping and Quoting</a> or not.</li>
+	<li><code>:escape</code>, whether the macro is a <a href="#esc_quot">quoting macro</a> or not.</li>
 	<li><code>:document</code>, the instance of <code>Document</code> the macro is contained in (populated after the document has been parsed and analyzed).</li>
 </ul>
 <p>Note that the first two keys can also be accessed via instance variables.</p></td></tr>
@@ -1964,12 +1963,12 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 				<div class="section">
 <h4 id="layouts">Layouts</h4>
-<p>When generating <a href="#topics">Topics</a>-based outputs, Glyph uses <em>layouts</em> to render topics as standalone documents. By default, the following two layout are used:</p>
+<p>When generating <a href="#topics">topic</a>-based outputs, Glyph uses <em>layouts</em> to render topics as standalone documents. By default, the following two layout are used:</p>
 <ul>
 	<li><code>topic</code> &#8212; used to render standard topics.</li>
 	<li><code>index</code> &#8212; used to render the index page of your document.</li>
 </ul>
-<p>Layouts are nothing more than &#8220;fancy&#8221; Glyph macros defined using the Glyph language (i.e. by using <a href="#rewriting">Rewriting</a>) within a single <code>.glyph</code> file.</p>
+<p>Layouts are nothing more than &#8220;fancy&#8221; Glyph macros defined using the Glyph language (i.e. by using <a href="#rewriting">macro rewriting</a>) within a single <code>.glyph</code> file.</p>
 <div class="section">
 <h5 id="h_79">Topic Layout</h5>
 <p>The default layout used to render all web topics (the layout used for web5 topics is very similar) is defined as follows:</p>
@@ -2062,7 +2061,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 </div>
 			<div class="section">
 <h3 id="h_83">Defining Custom Commands and Tasks</h3>
-<p>In most cases, you can extend Glyph just by creating your own <a href="#macro_def">Defining Custom Macros</a>. In some cases though, you may want to further customize Glyph to fit the needs of your project, in terms of creating <a href="#custom_command">Defining Custom Commands</a> and <a href="#custom_task">Defining Custom Tasks</a>.</p>
+<p>In most cases, you can extend Glyph just by creating your own <a href="#macro_def">custom macros</a>. In some cases though, you may want to further customize Glyph to fit the needs of your project, in terms of creating <a href="#custom_command">custom commands</a> and <a href="#custom_task">custom tasks</a>.</p>
 <p>Glyph&#8217;s modular architecture (and the Ruby language itself) lets you to add <em>arbitrary</em> functionality to its core, simply by creating a few Ruby files and putting them in the right places.</p>
 <div class="section">
 <h4 id="cmd_tasks_arch">How Commands and Tasks work</h4>
@@ -2295,7 +2294,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		
 		<tr>
 			<td>Undefined macro '<em>macro_name</em>'</td>
-			<td>The document contains a macro that does not exist, i.e. it is not a standard or used-defined <a href="#macro_ref">Macro Reference</a>.</td>
+			<td>The document contains a macro that does not exist, i.e. it is not a standard or used-defined <a href="#macro_ref">Glyph macro or alias</a>.</td>
 		</tr>
 	
 		
@@ -2307,7 +2306,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		
 		<tr>
 			<td>Glyph cannot generate PDF. Please specify a valid tools.pdf_generator setting</td>
-			<td>Returned if the <a href="#s_tools_pdf_generator"></a> setting has not be set to a valid PDF renderer. Currently, the only supported value for this setting is <code>prince</code>.</td>
+			<td>Returned if the <a href="#s_tools_pdf_generator"><code>tools.pdf_generator</code></a> setting has not be set to a valid PDF renderer. Currently, the only supported value for this setting is <code>prince</code>.</td>
 		</tr>
 	
 		
@@ -2411,19 +2410,19 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 			</tr>
 			<tr>
 			<td>Source file '<em>source_file</em>' does not exist</td>
-			<td>Returned if Glyph is running in <a href="#lite_mode">Compiling single Glyph files</a> and the specified source file was not found.</td>
+			<td>Returned if Glyph is running in <a href="#lite_mode">lite mode</a> and the specified source file was not found.</td>
 		</tr>
 	
 		
 		<tr>
 			<td>Source and destination file are the same</td>
-			<td>Returned if Glyph is running in <a href="#lite_mode">Compiling single Glyph files</a> and you specified the same source and destination files.</td>
+			<td>Returned if Glyph is running in <a href="#lite_mode">lite mode</a> and you specified the same source and destination files.</td>
 		</tr>
 	
 		
 		<tr>
 			<td>DirectoryWatcher is not available. Install it with: gem install directory_watcher</td>
-			<td>Returned if <a href="#auto_regeneration">Auto Regeneration</a> is enabled but the <code>directory_watcher</code> gem in not installed.</td>
+			<td>Returned if <a href="#auto_regeneration">auto regeneration</a> is enabled but the <code>directory_watcher</code> gem in not installed.</td>
 		</tr>
 	
 		
@@ -2441,7 +2440,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		
 		<tr>
 			<td>Output target not specified</td>
-			<td>Returned if no target was specified for the <a href="#c_compile"><code>compile</code></a> command _and_ if the <a href="#s_document_output"></a> setting is not set.</td>
+			<td>Returned if no target was specified for the <a href="#c_compile"><code>compile</code></a> command _and_ if the <a href="#s_document_output"><code>document.output</code></a> setting is not set.</td>
 		</tr>
 	
 		
@@ -2488,7 +2487,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<li><em>message</em> is the error message.</li>
 	<li><em>macro_source</em> is the file or snippet where the error occurred.</li>
 	<li><em>macro_path</em> is the full path to the macro that returned the error, within the document syntax tree, e.g. <code>document/body/bodymatter/chapter/section/header/&amp;</code> if the error occurrent in a snippet within the header of a section in the <code>bodymatter</code> part of the document.</li>
-	<li><em>macro_value</em> is the value of the macro (shown only if Glyph is running in <a href="#debug_switch"><code>-d</code>, <code>--debug</code></a>).</li>
+	<li><em>macro_value</em> is the value of the macro (shown only if Glyph is running in <a href="#debug_switch">debug mode</a>).</li>
 </ul>
 	
 		<table style="width:100%;">
@@ -2516,13 +2515,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		
 		<tr>
 			<td>Macro not available when compiling a single file.</td>
-			<td>Returned by the <a href="#m_include"><code>include</code></a> macro if used in <a href="#lite_mode">Compiling single Glyph files</a>.</td>
+			<td>Returned by the <a href="#m_include"><code>include</code></a> macro if used in <a href="#lite_mode">lite mode</a>.</td>
 		</tr>
 	
 		
 		<tr>
 			<td>Filter macro '<em>extension</em>' not available</td>
-			<td>Returned by a filter macro if <a href="#s_filters_by_file_extension"></a> setting is set to @true@, but the extension was not recognized.</td>
+			<td>Returned by a filter macro if <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is set to @true@, but the extension was not recognized.</td>
 		</tr>
 	
 		
@@ -2546,13 +2545,13 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		
 		<tr>
 			<td>CodeRay highlighter not installed. Please run: gem install coderay</td>
-			<td>Returned by the <a href="#m_highlight"><code>highlight</code></a> macro if <a href="#s_filters_highlighter"></a> setting is set to @coderay@ but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight"><code>highlight</code></a> macro if <a href="#s_filters_highlighter"><code>filters.highlighter</code></a> setting is set to @coderay@ but <a href="http://coderay.rubychan.de/">Coderay</a> is not installed.</td>
 		</tr>
 	
 		
 		<tr>
 			<td>UltraViolet highlighter not installed. Please run: gem install ultraviolet</td>
-			<td>Returned by the <a href="#m_highlight"><code>highlight</code></a> macro if <a href="#s_filters_highlighter"></a> setting is set to @ultraviolet@ but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
+			<td>Returned by the <a href="#m_highlight"><code>highlight</code></a> macro if <a href="#s_filters_highlighter"><code>filters.highlighter</code></a> setting is set to @ultraviolet@ but <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> is not installed.</td>
 		</tr>
 	
 		
@@ -2576,7 +2575,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		
 		<tr>
 			<td>Filter macro '<em>macro_name</em>' not found</td>
-			<td>Returned by the <a href="#m_include"><code>include</code></a> macro if the <a href="#s_filters_by_file_extension"></a> setting is set to @true@ but the file extension of the included file is not recognized as a filter macro.</td>
+			<td>Returned by the <a href="#m_include"><code>include</code></a> macro if the <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is set to @true@ but the file extension of the included file is not recognized as a filter macro.</td>
 		</tr>
 	
 		
@@ -2757,7 +2756,7 @@ The format of the output file.
 		<tr>
 			<td><code>-a</code> (<code>--auto</code>)</td>
 			<td>
-If specified, enable <a href="#auto_regeneration">Auto Regeneration</a> (requires the <a href="http://rubygems.org/gems/directory_watcher">directory_watcher</a> gem to be installed).
+If specified, enable <a href="#auto_regeneration">auto regeneration</a> (requires the <a href="http://rubygems.org/gems/directory_watcher">directory_watcher</a> gem to be installed).
 			</td>
 		</tr>
 		</table>
@@ -2803,7 +2802,7 @@ If specified, the global configuration file is processed instead of the project 
 			</tr>
 <tr>
 			<td><em>setting</em></td>
-			<td>The name of a valid <a href="#cfg_ref">Configuration Reference</a>.</td>
+			<td>The name of a valid <a href="#cfg_ref">configuration setting</a>.</td>
 		</tr>
 	
 		
@@ -3123,7 +3122,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 <div class="section">
 <h5 id="h_130">Remarks</h5>
-<p>This macro cannot be used in <a href="#modes">Modes</a>.</p>
+<p>This macro cannot be used in <a href="#modes">safe mode</a>.</p>
 
 </div>
 
@@ -3192,7 +3191,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_include"><code>include</code></h4>
-<p>Evaluates to the contents of a text file stored in the <code>text/</code> directory referenced by its relative path. If the <a href="#s_filters_by_file_extension"></a> setting is <code>true</code>, filters the contents of the file using the <a href="#f_macros">Filter Macros</a> corresponding to the file extension.</p>
+<p>Evaluates to the contents of a text file stored in the <code>text/</code> directory referenced by its relative path. If the <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is <code>true</code>, filters the contents of the file using the <a href="#f_macros">filter macro</a> corresponding to the file extension.</p>
 <strong>Aliases:</strong> <code>@</code>
 <p><strong>Example:</strong> <code>include[frontmatter/introduction]</code></p>
 
@@ -3216,7 +3215,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 <div class="section">
 <h5 id="h_137">Remarks</h5>
-<ul><li>This macro cannot be used in <a href="#modes">Modes</a>.</li>
+<ul><li>This macro cannot be used in <a href="#modes">safe mode</a>.</li>
 				<li><code>.glyph</code> is assumed if no file extension is specified.</li>
 				<li>This macro can also be used to include <code>.rb</code> ruby files within the <code>lib</code> directory. File contents are evaluated in the context of the <a href="http://yardoc.org/docs/h3rald-glyph/Glyph">Glyph</a> module.</li></ul>
 
@@ -3304,7 +3303,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 <div class="section">
 <h5 id="h_143">Remarks</h5>
-<ul><li>This macro cannot be used in <a href="#modes">Modes</a>.</li>
+<ul><li>This macro cannot be used in <a href="#modes">safe mode</a>.</li>
 				<li>The new macro can only be used <em>after</em> its declaration.</li></ul>
 
 </div>
@@ -3416,7 +3415,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 <div class="section">
 <h5 id="h_150">Remarks</h5>
 <ul><li>The new macro can only be used <em>after</em> its declaration.</li>
-				<li>This macro cannot be used in <a href="#modes">Modes</a>.</li></ul>
+				<li>This macro cannot be used in <a href="#modes">safe mode</a>.</li></ul>
 
 </div>
 
@@ -3455,7 +3454,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 
 <div class="section">
 <h5 id="h_153">Remarks</h5>
-<p>This macro cannot be used in <a href="#modes">Modes</a>.</p>
+<p>This macro cannot be used in <a href="#modes">safe mode</a>.</p>
 
 </div>
 
@@ -3771,7 +3770,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_revision"><code>revision</code></h4>
-<p>Renders the revision of the document (based on the <a href="#s_document_revision"></a> setting) within a <code>&lt;div&gt;</code> tag.</p>
+<p>Renders the revision of the document (based on the <a href="#s_document_revision"><code>document.revision</code></a> setting) within a <code>&lt;div&gt;</code> tag.</p>
 
 <p><strong>Example:</strong> <code>revision[]</code></p>
 
@@ -3781,7 +3780,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_subtitle"><code>subtitle</code></h4>
-<p>Renders the subtitle of the document (based on the <a href="#s_document_subtitle"></a> setting) within a <code>&lt;h2&gt;</code> tag.</p>
+<p>Renders the subtitle of the document (based on the <a href="#s_document_subtitle"><code>document.subtitle</code></a> setting) within a <code>&lt;h2&gt;</code> tag.</p>
 
 <p><strong>Example:</strong> <code>subtitle[]</code></p>
 
@@ -3791,7 +3790,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_title"><code>title</code></h4>
-<p>Renders the title of the document (based on the <a href="#s_document_title"></a> setting) within a <code>&lt;h1&gt;</code> tag.</p>
+<p>Renders the title of the document (based on the <a href="#s_document_title"><code>document.title</code></a> setting) within a <code>&lt;h1&gt;</code> tag.</p>
 
 <p><strong>Example:</strong> <code>title[]</code></p>
 
@@ -3840,7 +3839,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_draftcomment"><code>draftcomment</code></h4>
-<p>If the <a href="#s_document_draft"></a> setting is set to <code>true</code>, displays a draft comment within the document.</p>
+<p>If the <a href="#s_document_draft"><code>document.draft</code></a> setting is set to <code>true</code>, displays a draft comment within the document.</p>
 <strong>Aliases:</strong> <code>dc</code>
 <p><strong>Example:</strong> <code>dc[This is printed only in draft documents.]</code></p>
 
@@ -3933,7 +3932,7 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_todo"><code>todo</code></h4>
-<p>Saves the value as a <span class="caps">TODO</span> item, which can be printed using the <a href="#c_todo"><code>todo</code></a> command and included in the document if the <a href="#s_document_draft"></a> setting is set to <code>true</code>.</p>
+<p>Saves the value as a <span class="caps">TODO</span> item, which can be printed using the <a href="#c_todo"><code>todo</code></a> command and included in the document if the <a href="#s_document_draft"><code>document.draft</code></a> setting is set to <code>true</code>.</p>
 <strong>Aliases:</strong> <code>!</code>
 <p><strong>Example:</strong> <code>todo[Remember to do this.]</code></p>
 
@@ -3949,8 +3948,8 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_markdown"><code>markdown</code></h4>
-<p>Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into <span class="caps">HTML</span> if the <a href="#s_filters_target"></a> setting is set to <code>html</code>.</p>
-<p>If the <a href="#s_filters_by_file_extension"></a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include"><code>include</code></a> files with a <code>.markdown</code> or a <code>.md</code> extension.</p>
+<p>Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transform the value into <span class="caps">HTML</span> if the <a href="#s_filters_target"><code>filters.target</code></a> setting is set to <code>html</code>.</p>
+<p>If the <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.markdown</code> or a <code>.md</code> extension.</p>
 <strong>Aliases:</strong> <code>md</code>
 <p><strong>Example:</strong> <code>markdown[This is *emphasized* text.]</code></p>
 
@@ -3977,8 +3976,8 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 	
 	<div class="section">
 <h4 id="m_textile"><code>textile</code></h4>
-<p>Uses the RedCloth gem to transform the value into <span class="caps">HTML</span> or LaTeX, depending on the value of the <a href="#s_filters_target"></a> setting.</p>
-<p>If the <a href="#s_filters_by_file_extension"></a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include"><code>include</code></a> files with a <code>.textile</code> or a <code>.txt</code> extension.</p>
+<p>Uses the RedCloth gem to transform the value into <span class="caps">HTML</span> or LaTeX, depending on the value of the <a href="#s_filters_target"><code>filters.target</code></a> setting.</p>
+<p>If the <a href="#s_options_filters_by_file_extension"><code>options.filters_by_file_extension</code></a> setting is <code>true</code>, this macro is called automatically on <a href="#m_include">included</a> files with a <code>.textile</code> or a <code>.txt</code> extension.</p>
 <strong>Aliases:</strong> <code>txt</code>
 <p><strong>Example:</strong> <code>textile[This is a *strong emphasis*.]</code></p>
 
@@ -4405,51 +4404,62 @@ Prints all the todo items saved using the <a href="#m_todo"><code>todo</code></a
 <h3 id="cfg_document">document.*</h3>
 The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.
 
-	<table><tr><th>Name</th>
+<table><tr><th>Name</th>
 				<th>Description</th>
-				<th>Default (YAML)</th></tr>
+				<th>Default</th></tr>
 			<tr><td>
 <code>document.author</code> <a id="s_document_author"></a>
 </td>
 		<td><p>The author of the document.</p></td>
 		<td><code>""</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>document.draft</code> <a id="s_document_draft"></a>
 </td>
-		<td><p>If set to <code>true</code>, the document is considered a draft, so <a href="#m_draftcomment"><code>draftcomment</code></a> and <a href="#m_todo"><code>todo</code></a> will be displayed.</p></td>
+		<td><p>If set to <code>true</code>, the document is considered a draft, so <a href="#m_draftcomment">draft comments</a> and <a href="#m_todo">todo items</a> will be displayed.</p></td>
 		<td><code>false</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>document.filename</code> <a id="s_document_filename"></a>
 </td>
 		<td><p>The name of the output file.</p></td>
 		<td><code>""</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>document.output</code> <a id="s_document_output"></a>
 </td>
-		<td><p>The format of the output file. It can be set to any value stored in the <a href="#s_document_output_targets"></a> setting.</p></td>
-		<td><code>html</code></td></tr>
-		<tr><td>
-<code>document.output_targets</code> <a id="s_document_output_targets"></a>
-</td>
-		<td><p>An <code>Array</code> containing all the possible output formats. This setting should not be changed by the user.</p></td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
+		<td><p>The format of the output file. It can be set to:</p>
+<ul>
+	<li><code>html5</code></li>
+	<li><code>html</code></li>
+	<li><code>pdf</code></li>
+	<li><code>web5</code></li>
+	<li><code>web</code></li>
+</ul></td>
+		<td><code>"html"</code></td></tr>
+	<tr><td>
 <code>document.revision</code> <a id="s_document_revision"></a>
 </td>
 		<td><p>The document&#8217;s revision.</p></td>
 		<td><code>""</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>document.source</code> <a id="s_document_source"></a>
 </td>
 		<td><p>The main source file to compile. It can be also be overridden by calling the <a href="#c_compile"><code>compile</code></a> command with the <code>-s</code> option.</p></td>
-		<td><code>document.glyph</code></td></tr>
-
-		<tr><td>
+		<td><code>"document.glyph"</code></td></tr>
+	<tr><td>
+<code>document.styles</code> <a id="s_document_styles"></a>
+</td>
+		<td><p>How to process stylesheets. It can be set to one of the following values:</p>
+<ul>
+	<li><code>embed</code> &#8212; Embed stylesheets within the document.</li>
+	<li><code>link</code> &#8212; Link stylesheets.</li>
+	<li><code>import</code> &#8212; Import stylesheets using the <code>@import</code> <span class="caps">CSS</span> directive.</li>
+</ul></td>
+		<td><code>"embed"</code></td></tr>
+	<tr><td>
 <code>document.subtitle</code> <a id="s_document_subtitle"></a>
 </td>
 		<td><p>The subtitle of the document, displayed using the <a href="#m_subtitle"><code>subtitle</code></a> macro.</p></td>
 		<td><code>""</code></td></tr>
-		<tr><td>
+	<tr><td>
 <code>document.title</code> <a id="s_document_title"></a>
 </td>
 		<td><p>The title of the document, displayed using the <a href="#m_title"><code>title</code></a> macro.</p></td>
@@ -4464,13 +4474,8 @@ The following configuration settings are related to the current Glyph document. 
 <h3 id="cfg_filters">filters.*</h3>
 	<table><tr><th>Name</th>
 				<th>Description</th>
-				<th>Default (YAML)</th></tr>
+				<th>Default</th></tr>
 			<tr><td>
-<code>filters.by_file_extension</code> <a id="s_filters_by_file_extension"></a>
-</td>
-		<td><p>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</p></td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
 <code>filters.markdown.converter</code> <a id="s_filters_markdown_converter"></a>
 </td>
 		<td><p>The name of the markdown converter to use with the <a href="#m_markdown"><code>markdown</code></a> macro. It can be set to one of the following values:</p>
@@ -4481,7 +4486,7 @@ The following configuration settings are related to the current Glyph document. 
 	<li>Kramdown</li>
 </ul>
 <p>If not set, Glyph tests for the presence of each gem in the same order, until one is found.</p></td>
-		<td><code>bluecloth</code></td></tr>
+		<td><code>"bluecloth"</code></td></tr>
 		<tr><td>
 <code>filters.coderay.*</code> <a id="s_filters_coderay_"></a>
 </td>
@@ -4491,7 +4496,7 @@ The following configuration settings are related to the current Glyph document. 
 <code>filters.highlighter</code> <a id="s_filters_highlighter"></a>
 </td>
 		<td><p>The current highlighter to use. It can be set to <code>coderay</code> or <code>ultraviolet</code></p></td>
-		<td><code>coderay</code></td></tr>
+		<td><code>"coderay"</code></td></tr>
 		<tr><td>
 <code>filters.redcloth.restrictions</code> <a id="s_filters_redcloth_restrictions"></a>
 </td>
@@ -4511,7 +4516,7 @@ The following configuration settings are related to the current Glyph document. 
 <code>filters.ultraviolet.theme</code> <a id="s_filters_ultraviolet_theme"></a>
 </td>
 		<td><p>The theme used by the <a href="http://ultraviolet.rubyforge.org/">Ultraviolet</a> highlighter.</p></td>
-		<td><code>lazy</code></td></tr></table>
+		<td><code>"lazy"</code></td></tr></table>
 				
 				
 				
@@ -4520,33 +4525,46 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 			<div class="section">
 <h3 id="cfg_options">options.*</h3>
-<div class="section">
-<h4 id="h_215">language.*</h4>
+The following configuration settings are used to enable or disable specific Glyph functionalities and behaviors.
+
 <table><tr><th>Name</th>
 				<th>Description</th>
-				<th>Default (YAML)</th></tr>
+				<th>Default</th></tr>
 			<tr><td>
-<code>language.set</code> <a id="s_language_set"></a>
+<code>options.filters_by_file_extension</code> <a id="s_options_filters_by_file_extension"></a>
+</td>
+		<td><p>If set to <code>true</code>, a filter macro is applied to included files, based on their extensions (<span class="fmi">for more information on including files, see <a href="#incl">Including Files and Snippets</a></span>).</p></td>
+		<td><code>nil</code></td></tr>
+	<tr><td>
+<code>options.macro_set</code> <a id="s_options_macro_set"></a>
 </td>
 		<td><p>Determines which macro set will be loaded. It can be set to:</p>
 <ul>
-	<li>glyph &ndash; Loads core, filter, xml macros plus all macros necessary for the <a href="#s_document_output"></a> setting.</li>
-	<li>xml &ndash; Loads core and xml macros.</li>
-	<li>core &ndash; Loads core macros only.</li>
+	<li>glyph &#8212; Loads core, filter, xml macros plus all macros necessary for the <a href="#s_document_output"><code>document.output</code></a> setting.</li>
+	<li>xml &#8212; Loads core and xml macros.</li>
+	<li>core &#8212; Loads core macros only.</li>
 </ul></td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<code>language.options.xml_blacklist</code> <a id="s_language_options_xml_blacklist"></a>
+		<td><code>"glyph"</code></td></tr>
+	<tr><td>
+<code>options.safe_mode</code> <a id="s_options_safe_mode"></a>
+</td>
+		<td><p>Enables Safe Mode (<span class="fmi">for more information on Glyph modes, see <a href="#modes">Modes</a></span>).</p></td>
+		<td><code>false</code></td></tr>
+	<tr><td>
+<code>options.url_validation</code> <a id="s_options_url_validation"></a>
+</td>
+		<td><p>If set to <em>true</em>, every external link will be validated (see <a href="#links">Links and Bookmarks</a>).</p></td>
+		<td><code>false</code></td></tr>
+	<tr><td>
+<code>options.xml_blacklist</code> <a id="s_options_xml_blacklist"></a>
 </td>
 		<td><p>The <span class="caps">XML</span> tags listed here cannot be generated using Glyph code.</p></td>
-		<td><code>nil</code></td></tr>
-		<tr><td>
-<code>language.options.xml_fallback</code> <a id="s_language_options_xml_fallback"></a>
+		<td><code>["applet", "base", "basefont", "embed", "frame", "frameset", "iframe", "isindex", "meta", "noframes", "noscript", "object", "param", "title"]</code></td></tr>
+	<tr><td>
+<code>options.xml_fallback</code> <a id="s_options_xml_fallback"></a>
 </td>
 		<td><p>If set to true, any unknown macro name will considered an <span class="caps">XML</span> element (see <a href="#other_elements">Other <span class="caps">HTML</span> Elements</a>).</p></td>
-		<td><code>nil</code></td></tr></table>
-
-</div>
+		<td><code>true</code></td></tr></table>
 				
 				
 				
@@ -4556,10 +4574,10 @@ The following configuration settings are related to the current Glyph document. 
 			<div class="section">
 <h3 id="cfg_output">output.*</h3>
 <div class="section">
-<h4 id="h_217">tools.*</h4>
+<h4 id="h_216">tools.*</h4>
 <table><tr><th>Name</th>
 				<th>Description</th>
-				<th>Default (YAML)</th></tr>
+				<th>Default</th></tr>
 			<tr><td>
 <code>tools.pdf_generator</code> <a id="s_tools_pdf_generator"></a>
 </td>
@@ -4576,16 +4594,16 @@ The following configuration settings are related to the current Glyph document. 
 
 </div>
 		<div class="appendix">
-<h2 id="h_218">Changelog</h2>
+<h2 id="h_217">Changelog</h2>
 
 
 
 
 
 	<div class="section">
-<h3 id="h_219">v0.4.0 &ndash; ???</h3>
+<h3 id="h_218">v0.4.0 &ndash; ???</h3>
 <div class="section">
-<h4 id="h_220">27 Features Implemented</h4>
+<h4 id="h_219">27 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4633,7 +4651,7 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_221">13 Bugs Fixed</h4>
+<h4 id="h_220">13 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4661,9 +4679,9 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_222">v0.3.0 &ndash; June 13th 2010</h3>
+<h3 id="h_221">v0.3.0 &ndash; June 13th 2010</h3>
 <div class="section">
-<h4 id="h_223">27 Features Implemented</h4>
+<h4 id="h_222">27 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4699,7 +4717,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>A new <a href="#m_alias"><code>alias</code></a> macro has been implemented to create macro aliases.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/128">#128</a></td>
-		<td><p>A blacklist for <span class="caps">XML</span> tags has been exposed via the <a href="#s_language_options_xml_blacklist"></a> setting.</p></td></tr>
+		<td><p>A blacklist for <span class="caps">XML</span> tags has been exposed via the <code>language.options.xml_blacklist</code> setting.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/129">#129</a></td>
 		<td><p>The <a href="#m_include"><code>include</code></a> macro can now be used in lite mode, it can evaluate ruby files and requires relative paths.</p></td></tr>
@@ -4711,16 +4729,16 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_224">7 Bugs Fixed</h4>
+<h4 id="h_223">7 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/109">#109</a></td>
-		<td><p>Performance has been dramatically improved by implementing a parser from scratch (see <a href="#new_parser"></a>)</p></td></tr>
+		<td><p>Performance has been dramatically improved by implementing a parser from scratch (see <a href="#new_parser">#119</a>)</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/122">#122</a></td>
-		<td><p>Macro encoding/decoding no longer necessary due to the new parser (see <a href="#new_parser"></a>)</p></td></tr>
+		<td><p>Macro encoding/decoding no longer necessary due to the new parser (see <a href="#new_parser">#119</a>)</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/125">#125</a></td>
 		<td><p>Warning messages have been streamlined.</p></td></tr></table>
@@ -4730,9 +4748,9 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_225">v0.2.0 &ndash; May 9th 2010</h3>
+<h3 id="h_224">v0.2.0 &ndash; May 9th 2010</h3>
 <div class="section">
-<h4 id="h_226">23 Features Implemented</h4>
+<h4 id="h_225">23 Features Implemented</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4765,7 +4783,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>Added a <code>document.draft</code> setting. If set to <code>true</code>, comments and TODOs are rendered in output files.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/100">#100</a></td>
-		<td><p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied"></a>).</p></td></tr>
+		<td><p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied">#93</a>).</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/108">#108</a></td>
 		<td><p>It is now possible to define Glyph macros within Glyph source files using the <a href="#m_macro_"><code>macro:</code></a> macro.</p></td></tr></table>
@@ -4774,7 +4792,7 @@ The following configuration settings are related to the current Glyph document. 
 	
 	
 		<div class="section">
-<h4 id="h_227">17 Bugs Fixed</h4>
+<h4 id="h_226">17 Bugs Fixed</h4>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -4783,7 +4801,7 @@ The following configuration settings are related to the current Glyph document. 
 		<td><p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p></td></tr> 
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/93">#93</a></td>
-		<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style"><code>style</code></a> macro to reference Glyph&#8217;s system styles (see also <a href="#system_css"></a>).</p></td></tr>
+		<td><p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the <a href="#m_style"><code>style</code></a> macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/95">#95</a></td>
 		<td><p>The <a href="#c_config"><code>config</code></a> command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p></td></tr>
@@ -4808,7 +4826,7 @@ The following configuration settings are related to the current Glyph document. 
 </div>
 
 	<div class="section">
-<h3 id="h_228">v0.1.0 &ndash; April 8th 2010</h3>
+<h3 id="h_227">v0.1.0 &ndash; April 8th 2010</h3>
 Initial release.
 
 </div>

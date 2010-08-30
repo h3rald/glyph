@@ -1,32 +1,35 @@
 The following configuration settings are related to the current Glyph document. Therefore, you should update them right after creating a project.
 
-	config_table[
-		ref_config[document.author|
+config_table[
+	ref_config[document.author|
 The author of the document.
-		]
-		ref_config[document.draft|
-If set to @true@, the document is considered a draft, so =>[#m_draftcomment|draft comments] and =>[#m_todo|todo items] will be displayed.
-		]
-		ref_config[document.filename|
-The name of the output file.
-		]
-		ref_config[document.output|
-The format of the output file. It can be set to any value stored in the $>[document.output_targets].
-		]
-		ref_config[document.output_targets|
-An @Array@ containing all the possible output formats. This setting should not be changed by the user. 
-		]
-		ref_config[document.revision|
-The document's revision.
-		]
-		ref_config[document.source|
-The main source file to compile. It can be also be overridden by calling the #>[compile] with the @-s@ option.
-		]
-
-		ref_config[document.subtitle|
-The subtitle of the document, displayed using the %>[subtitle].
-		]
-		ref_config[document.title|
-The title of the document, displayed using the %>[title].
-		]
 	]
+	ref_config[document.draft|
+If set to @true@, the document is considered a draft, so =>[#m_draftcomment|draft comments] and =>[#m_todo|todo items] will be displayed.
+	]
+	ref_config[document.filename|
+The name of the output file.
+	]
+	ref_config[document.output|
+The format of the output file. It can be set to:
+%[=Glyph['output'].keys.reject{\|v\| v == :h3rald }.map{\|v\| "* @#{v}@"}.sort.join("\n")=]
+	]
+	ref_config[document.revision|
+The document's revision.
+	]
+	ref_config[document.source|
+The main source file to compile. It can be also be overridden by calling the #>[compile] with the @-s@ option.
+	]
+	ref_config[document.styles|
+How to process stylesheets. It can be set to one of the following values:
+* @embed@ -- Embed stylesheets within the document.
+* @link@ -- Link stylesheets.
+* @import@ -- Import stylesheets using the code[@import] CSS directive. 
+	]
+	ref_config[document.subtitle|
+The subtitle of the document, displayed using the %>[subtitle].
+	]
+	ref_config[document.title|
+The title of the document, displayed using the %>[title].
+	]
+]

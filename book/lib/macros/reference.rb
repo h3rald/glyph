@@ -22,16 +22,15 @@ macro :ref_error do
 end
 
 macro :"%>" do
-	interpret "=>[#m_#{value.gsub(/[^a-z0-1_-]/, '_')}|#{value}] macro"
+	interpret "=>[#m_#{value.gsub(/[^a-z0-1_-]/, '_')}|code[#{value}]] macro"
 end
 
 macro :"#>" do
-	interpret "=>[#c_#{value}|#{value}] command"
+	interpret "=>[#c_#{value}|code[#{value}]] command"
 end
 
 macro :"$>" do
-	val = value.gsub /\./, "_"
-	interpret "=>[#s_#{val}|#{value}] setting"
+	interpret "=>[#s_#{value.gsub(/\./, '_')}|code[#{value}]] setting"
 end
 
 macro :default do
@@ -137,7 +136,7 @@ end
 macro :ref_config do
 	m_name = param(0)
 	m_value = param(1)
-	default = Glyph::SYSTEM_CONFIG.get(m_name).to_yaml.gsub(/^---/, '')
+	default = Glyph::SYSTEM_CONFIG.get(m_name).inspect
 	default = "nil" if default.blank?
 	interpret %{tr[
 		td[code[#{m_name}] #[s_#{m_name.gsub(/\./, '_').gsub(/\*/,'')}]]
@@ -155,7 +154,7 @@ macro :config_table do
 			tr[
 				th[Name]
 				th[Description]
-				th[Default (YAML)]
+				th[Default]
 			]
 			#{value}
 		]}

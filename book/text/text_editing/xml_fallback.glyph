@@ -57,7 +57,7 @@ table[@class[features]
 </table>
     =]
 	]
-	p[Basically, if the $>[language.options.xml_fallback] is set to code[true], any macro unknown to Glyph with at most one parameter will be converted to an XML tag with the same name and any attribute will be converted to the corresponding XML attribute.]
+	p[Basically, if the $>[options.xml_fallback] is set to code[true], any macro unknown to Glyph with at most one parameter will be converted to an XML tag with the same name and any attribute will be converted to the corresponding XML attribute.]
 	important[While macro names and attributes are validated so that an error is returned if they contain illegal character, no check is performed against any particular XML schema.]
 	txt[Additionally, it is possible to force macro-to-XML conversion by prepending an equal sign to any macro, so for example code[=\.=snippet[test]=] will be converted into @<snippet>test</snippet>@.]
 	section[
@@ -65,9 +65,9 @@ table[@class[features]
 		@id[xml_blacklist]
 		txt[
 By default, the following tags are blacklisted and will be ignored:
-%[="* "+Glyph['options.xml_blacklist'].join("\n* ")=]
+%[=Glyph['options.xml_blacklist'].map{\|v\| "* @#{v}@"}.join("\n")=]
 
-			tip[You can change this list by modifying the $>[language.options.xml_blacklist].]
+			tip[You can change this list by modifying the $>[options.xml_blacklist].]
 		]
  
 	]

@@ -10,7 +10,7 @@ end
 macro :link do
 	min_parameters 1
 	max_parameters 2
-	link_element_for param(0), (param(1) rescue nil) do |target, title|
+	link_element_for param(0), param(1) do |target, title|
 		%{<a href="#{target}">#{title}</a>}
 	end
 end

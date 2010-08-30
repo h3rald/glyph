@@ -72,7 +72,7 @@ release[0.3.0|June 13th 2010|
 		issue[124|Implemented new %>[article] and %>[book].]
 		issue[126|A new %>[rewrite:] has been implemented to create simple macros using just Glyph code.]
 		issue[127|A new %>[alias] has been implemented to create macro aliases.]
-		issue[128|A blacklist for XML tags has been exposed via the $>[language.options.xml_blacklist].]
+		issue[128|A blacklist for XML tags has been exposed via the @language.options.xml_blacklist@ setting.]
 		issue[129|The %>[include] can now be used in lite mode, it can evaluate ruby files and requires relative paths.]
 		issue[130|A new "safe mode" has been implemented to explicitly forbid certain potentially unsafe macros.]
 	]
