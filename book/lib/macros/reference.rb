@@ -67,6 +67,19 @@ macro :option do
 	}
 end
 
+macro :long_option do
+	ident = param(0)
+	desc = param(1)
+	%{
+		<tr>
+			<td><code>--#{ident}</code></td>
+			<td>
+#{desc}
+			</td>
+		</tr>
+	}
+end
+
 macro :values do
 	%{*Possible Values:* @#{value}@}
 end

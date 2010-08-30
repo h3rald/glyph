@@ -37,7 +37,7 @@ rw:[issue|
 ]
 release[0.4.0|???|
 	features[
-		issue[40|A new @stats@ command can be used to display statistics about project files, snippets, macros, bookmarks and links.]
+		issue[40|A new #>[stats] can be used to display statistics about project files, snippets, macros, bookmarks and links.]
 		issue[73|It is now possible to validate online HTTP links.]
 		issue[112|It is now possible to use _wkhtmltopdf_ instead of Prince to generate PDF files from HTML files.]
 		issue[114|It is now possible to generate documents comprised of multiple files (topics).]

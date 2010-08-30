@@ -25,6 +25,30 @@ section[
 	]
 ]
 section[
+	@title[code[stats]]	
+	@id[c_stats]
+	rw:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
+	rw:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
+	p[Displays project statistics (\.fmi[this command|#stats]).]
+	examples[
+glyph	stats -m 
+glyph stats --link=h3rald.com
+	]
+	options[
+		stats_option[bookmarks]
+		stats_long_option[bookmark]
+		-o[files|If specified, general statistics about project files are displayed.]
+		stats_option[links]
+		long_option[link|Display detailed statistics about all links whose target matches the specified regular expression.]
+		stats_option[macros]
+		stats_long_option[macro]
+		stats_option[snippets]
+		stats_long_option[snippet]
+	]
+]
+
+
+section[
 	@title[code[compile]]
 	@id[c_compile]
 	p[Compiles a Glyph document into an output file. If no options are specified, the code[document.glyph] file is used as source to produce a standalone HTML file.]

@@ -153,6 +153,7 @@ book[
 		]
 		chapter[
 			@title[Document Statistics]
+			@id[stats]
 			section[
 				@title[Using the stats command]
 				@src[stats/stats]
@@ -160,18 +161,22 @@ book[
 			section[
 				@title[Macro Statistics]
 				@src[stats/macros]
+				@id[stats_macros]
 			]
 			section[
 				@title[Snippet Statistics]
 				@src[stats/snippets]
+				@id[stats_snippets]
 			]
 			section[
 				@title[Bookmark Statistics]
 				@src[stats/bookmarks]
+				@id[stats_bookmarks]
 			]
 			section[
 				@title[Link Statistics]
 				@src[stats/links]
+				@id[stats_links]
 			]
 		]
 		chapter[
