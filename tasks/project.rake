@@ -19,7 +19,7 @@ namespace :project do
 		config[:document][:filename] = dir.basename.to_s
 		config[:document][:title] = dir.basename.to_s
 		config[:document][:author] = ENV['USER'] || ENV['USERNAME'] 	
-		config.delete(:system)
+		config.each_pair { |k, v| config.delete(k) unless k == :document }
 		yaml_dump Glyph::PROJECT/'config.yml', config
 		info "Project '#{dir.basename}' created successfully."
 	end
