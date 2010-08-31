@@ -1006,7 +1006,7 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 	<p>Glyph Language is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the <code>ruby</code> macro (aliased to <code>%</code>), like this:</p>
 <ul>
 	<li><code>%[2 + 2]</code> &rarr; 4</li>
-	<li><code>%[Time.now]</code> &rarr; Mon Aug 30 18:18:26 +0200 2010</li>
+	<li><code>%[Time.now]</code> &rarr; Tue Aug 31 13:44:29 +0200 2010</li>
 	<li><code>%[Glyph::VERSION]</code> &rarr; 0.4.0.dev</li>
 </ul>
 <p>The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself).</p>
@@ -2336,6 +2336,42 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 			<td>File '<em>file_name</em>' already exists</td>
 			<td>Returned if the name of an existing file was specified as a parameter for the <a href="#c_add"><code>add</code></a> command.</td>
 		</tr>
+	
+		
+		<tr>
+			<td>Unknown macro '<em>macro_name</em>'</td>
+			<td>Returned by the <a href="#c_stats"><code>stats</code></a> command if the specified macro was not found.</td>
+		</tr>
+	
+		
+		<tr>
+			<td>Macro '<em>macro_name</em>' is not used in this document</td>
+			<td>Returned by the <a href="#c_stats"><code>stats</code></a> command if the specified macro is defined but unused.</td>
+		</tr>
+	
+		
+		<tr>
+			<td>Bookmark '<em>bookmark_name</em>' does not exist</td>
+			<td>Returned by the <a href="#c_stats"><code>stats</code></a> command if the specified bookmark does not exist.</td>
+		</tr>
+	
+		
+		<tr>
+			<td>No link matching /<em>regexp</em>/ was found</td>
+			<td>Returned by the <a href="#c_stats"><code>stats</code></a> command if the no link target matches the supplied regular expression.</td>
+		</tr>
+	
+		
+		<tr>
+			<td>Unknown snippet '<em>snippet_name</em>'</td>
+			<td>Returned by the <a href="#c_stats"><code>stats</code></a> command if the specified snippet was not found.</td>
+		</tr>
+	
+		
+		<tr>
+			<td>Snippet '<em>snippet_name</em>' is not used in this document</td>
+			<td>Returned by the <a href="#c_stats"><code>stats</code></a> command if the specified snippet is defined but unused.</td>
+		</tr>
 		</table>
 	
 				
@@ -2652,6 +2688,18 @@ The reason is simple: a Glyph syntax file is <a href="http://www.vim.org/scripts
 		<tr>
 			<td>Macro '<em>macro_name</em>' cannot be defined by itself</td>
 			<td>Returned by the <a href="#m_rewrite_"><code>rewrite:</code></a> if it contains a macro with the same name.</td>
+		</tr>
+	
+		
+		<tr>
+			<td>Macro '<em>macro_a</em>' must be within a '<em>macro_b</em>' macro</td>
+			<td>Returned if a macro was used in the wrong place.</td>
+		</tr>
+	 
+		
+		<tr>
+			<td>Macro '<em>macro_a</em>' must not be within a '<em>macro_b</em>' macro</td>
+			<td>Returned if a macro was used in the wrong place.</td>
 		</tr>
 		</table>
 	

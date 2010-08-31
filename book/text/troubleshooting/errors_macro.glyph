@@ -92,4 +92,10 @@ Returned by the =>[#m_config_] when attempting to override a setting in the code
 		ref_error[Macro '\.em[macro_name]' cannot be defined by itself|
 Returned by the =>[#m_rewrite_] if it contains a macro with the same name.
 		]
+		ref_error[Macro '\.em[macro_a]' must be within a '\.em[macro_b]' macro|
+Returned if a macro was used in the wrong place.
+		] 
+		ref_error[Macro '\.em[macro_a]' must not be within a '\.em[macro_b]' macro|
+Returned if a macro was used in the wrong place.
+		] 
 	]

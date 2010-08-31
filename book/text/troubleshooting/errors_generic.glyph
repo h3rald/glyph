@@ -23,4 +23,22 @@ The code[snippet.yml] file contains invalid data. Most likely, it does not evalu
 		ref_error[File '\.em[file_name]' already exists|
 Returned if the name of an existing file was specified as a parameter for the #>[add].
 		]
+		ref_error[Unknown macro '\.em[macro_name]'|
+Returned by the #>[stats] if the specified macro was not found.
+		]
+		ref_error[Macro '\.em[macro_name]' is not used in this document|
+Returned by the #>[stats] if the specified macro is defined but unused.
+		]
+		ref_error[Bookmark '\.em[bookmark_name]' does not exist|
+Returned by the #>[stats] if the specified bookmark does not exist.
+		]
+		ref_error[No link matching /\.em[regexp]/ was found|
+Returned by the #>[stats] if the no link target matches the supplied regular expression.
+		]
+		ref_error[Unknown snippet '\.em[snippet_name]'|
+Returned by the #>[stats] if the specified snippet was not found.
+		]
+		ref_error[Snippet '\.em[snippet_name]' is not used in this document|
+Returned by the #>[stats] if the specified snippet is defined but unused.
+		]
 	]
