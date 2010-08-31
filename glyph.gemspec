@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-08-30}
+  s.date = %q{2010-08-31}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -39,17 +39,9 @@ Gem::Specification.new do |s|
      "book/lib/commands/commands.rb",
      "book/lib/layouts/bookindex.glyph",
      "book/lib/layouts/bookpage.glyph",
+     "book/lib/layouts/project.glyph",
      "book/lib/macros/reference.rb",
      "book/lib/tasks/tasks.rake",
-     "book/output/html/glyph.html",
-     "book/output/html/images/glyph/commands_tasks.png",
-     "book/output/html/images/glyph/document_generation.png",
-     "book/output/html/images/glyph/glyph.eps",
-     "book/output/html/images/glyph/glyph.png",
-     "book/output/html/images/glyph/glyph.svg",
-     "book/output/html/styles/default.css",
-     "book/output/html/styles/ultraviolet/lazy.css",
-     "book/output/pdf/glyph.pdf",
      "book/resources/document_generation.txt",
      "book/snippets.yml",
      "book/text/acknowledgement.glyph",

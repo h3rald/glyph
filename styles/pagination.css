@@ -132,12 +132,12 @@ div.backmatter{
 }
 
 .bodymatter h2::before, .bodymatter h1:before {
-	content: "Chapter " counter(h2, upper-roman) " &ndash; ";
+	content: "Chapter " counter(h2, upper-roman) ": ";
 	counter-reset: footnote;
 }
 
 .backmatter h2::before, .bodymatter section h1:before {
-	content: "Appendix " counter(a2, upper-latin) " &ndash; ";
+	content: "Appendix " counter(a2, upper-latin) ": ";
 }
 
 .bodymatter h3::before,.bodymatter section  h1:before {
