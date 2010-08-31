@@ -3,9 +3,5 @@ thumbs.db
 .rvmrc*
 .bundle
 Gemfile.lock
-book/output/html5
-book/output/web
-book/output/web5
-book/output/html5/*
-book/output/web/*
-book/output/web5/*
+book/output
+book/output/*

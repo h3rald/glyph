@@ -41,5 +41,8 @@ namespace :generate do
 				c.directory? ? c.rmtree : c.unlink
 			end
 		end
+		# Create project page
+		project = Glyph.filter "layout:project[@contents[#{file_load(Glyph::PROJECT/'text/introduction.glyph')}]]"
+		file_write dir/"glyph.textile", project
 	end	
 end

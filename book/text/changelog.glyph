@@ -35,7 +35,7 @@ rw:[issue|
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
 ]
-release[0.4.0|???|
+release[0.4.0|September 4th 2010|
 	features[
 		issue[40|A new #>[stats] can be used to display statistics about project files, snippets, macros, bookmarks and links.]
 		issue[73|It is now possible to validate online HTTP links.]

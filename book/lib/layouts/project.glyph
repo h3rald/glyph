@@ -1,0 +1,25 @@
+----- 
+permalink: glyph
+filters_pre: 
+- erb
+- redcloth
+title: "Project: Glyph"
+type: project
+github: glyph
+links:
+- "Repository": http://www.github.com/h3rald/glyph/
+- "Bug Tracking": http://www.github.com/h3rald/glyph/issues
+- "Development Wiki": http://wiki.github.com/h3rald/glyph
+- "Download": http://www.rubygems.org/gems/glyph
+- "Book (PDF)": http://github.com/h3rald/glyph/blob/master/book/output/pdf/glyph.pdf
+- "Docs": http://yardoc.org/docs/h3rald-glyph/
+- "User Group": http://groups.google.com/group/glyph-framework
+status: Active
+version: %[Glyph::VERSION]
+-----
+
+<%= render 'project_data', :tag => 'glyph' %>
+
+{{contents}}
+
+<%= render 'project_updates', :tag => 'glyph' %>
