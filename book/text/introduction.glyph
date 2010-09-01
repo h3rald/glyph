@@ -1,65 +1,51 @@
-txt[
 &:[prince|=>[http://www.princexml.com/|Prince]]
 &:[wkhtml|=>[http://code.google.com/p/wkhtmltopdf/|wkhtmltopdf]]
+txt[
 Glyph is a _Rapid Document Authoring Framework_. 
 
-With Glyph, you can manage your documents tidily in _projects_ and generate deliverables in different formats such as HTML or PDF (through &[prince]).
+With Glyph, creating and maintaining any kind of document -- be it a short article or a long book -- becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
+]
+section[
+	@title[What's wrong with Word Processors?]
+	txt[
+Depends on the particular software. Common shortcomings include:
+* Lack of proper content reuse capabilities
+* Inadequate and often even counter-productive WYSIWYG user interface
+* Lack of tools for managing and validating links and references
+* Mainly focused on one or a few similar output formats, normally tied to the very same layout
+	]
+]
+section[
+	@title[What's wrong with LaTeX?]
+	txt[
+LaTeX is _the_ tool that anyone should be using to produce high-quality publications. Glyph does not aim to be a LaTeX replacement, but there is a certain overlap of functionality. 
 
+LaTeX is a typesetting system, while Glyph is a document authoring tool. Arguably, Glyph could be simpler to learn and use, and require less software prerequisites and configurations. Looking at the type of documents that can be produced by both, it is safe to say that Glyph documents are normally _good enough_ for most needs and they can be written with less effort on the writer's part.
+	]
+]
 section[
 @title[Main Features]
-
-Glyph comes with its very own macro system to perform a wide variety of advanced tasks:
-* Generate block-level HTML tags not commonly managed by lightweight markups, like @head@, @body@, @div@ and @table@.
-* Create and validate internal and external links.
-* Include and validate images and figures.
-* Automatically determine header levels based on the document structure.
-* Automatically generate a Table of Contents based on the document structure.
-* Store common snippets of text in a single YAML file and use them anywhere in your document, as many times as you need.
-* Store configuration settings in a YAML file and use them anywhere in your document, as many times as you need.
-* Evaluate Ruby code within your document.
-* Include content only if certain conditions are satisfied.
-* Define macros, snippets and configuration settings directly within your document.
-* Highlight source code.
-* Call macros from other macros (including snippets), avoiding mutual calls.
-* Include text files within other text files.
-* Include the value of any configuration setting (like author, title) in the document.
-* Filter input explicitly or implicitly (based on file extensions). 
-* Manage draft comments and todo items.
-* Provide a simple, less-verbose syntax to write XML code.
-
-]
-
-section[
-@title[Installation]
-
-@gem install glyph@ -- simple, as always.
-
-]
-
-section[
-@title[Essential Glyph commands]
-
+	
+	section[
+		@title[Command Line Interface]
+		txt[
 Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's] for its simplicity and power (thanks to the =>[http://github.com/davetron5000/gli|gli] gem). Here are some example commands: 
 
 * @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
 * @glyph add introduction.textile@ -- to create a new file called _introduction.textile_.
 * @glyph compile@ -- to compile the current document into a single HTML file.
 * @glyph compile --auto@ -- to keep recompiling the current document every time a file is changed.
-* @glyph compile -f pdf@ -- to compile the current document into HTML and then transform it into PDF using &[prince].
+* @glyph compile -f pdf@ -- to compile the current document into HTML and then transform it into PDF.
 * @glyph compile readme.glyph@ -- to compile a _readme.glyph_ located in the current directory into a single HTML file.
 * @glyph outline -l 2@ -- Display the document outline, up to second-level headers.
+* @glyph stats@ -- Display project statistics.
 
-]
-
-section[
-@title[Glyph macros in a nutshell]
-@id[macros_nutshell]
-
-Format your documents using Textile or Markdown, and use Glyph Macros to do everything else:
-
-**Glyph Source:**
-
-codeblock[=
+		]
+	]
+	section[
+		@title[Minimalist Syntax]
+		p[Glyph syntax rules can be explained using Glyph itself:]
+		codeblock[=
 section[
   @title[Something about Glyph]
   txt[
@@ -67,24 +53,23 @@ You can use Glyph macros in conjunction
 with _Textile_ or _Markdown_ to
 produce HTML files effortlessly.
   ]
-  p[
-Alternatively, you can just use em[Glyph itself]
-to generate HTML tags.
-  ]
+  p[Alternatively, you can just use em[Glyph itself] to generate HTML tags.]
   section[
     @title[What about PDFs?]
     @id[pdf]
+		p[
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
-extremely easy with a 3rd-party 
-renderer like =>[http://www.princexml.com\|Prince].
+extremely easy with a free 3rd-party 
+renderer like =>[http://www.princexml.com\|Prince] 
+or =>[http://code.google.com/p/wkhtmltopdf/\|wkhtmltopdf].
+		]
   ]   
 ]
-=]
-
-**HTML Output:**
-
-codeblock[=
+		=]
+		p[The Glyph code above corresponds to the following HTML code:]
+		txt[
+			codeblock[=
 <div class="section">
   <h2 id="h_10">Something about Glyph</h2>
   <p>
@@ -92,33 +77,87 @@ codeblock[=
     <em>Textile</em> or <em>Markdown</em> to
     produce HTML files effortlessly.
   </p>
+  <p>
+    Alternatively, you can just use <em>Glyph itself</em>
+    to generate HTML tags.
+  </p>
   <div class="section">
    <h3 id="pdf">What about PDFs?</h3>
    <p>
      Once you have a single, well-formatted HTML 
      file, converting it to PDF is
-     extremely easy with a 3rd-party renderer 
-     like <a href="http://www.princexml.com">Prince</a>.
-   </p>
-   <p>
-     Alternatively, you can just use <em>Glyph itself</em>
-     to generate HTML tags.
+     extremely easy with a free 3rd-party renderer 
+     like <a href="http://www.princexml.com">Prince</a> 
+			or <a href="http://code.google.com/p/wkhtmltopdf/\">wkhtmltopdf</a>.
    </p>
   </div>
 </div>
 =]
-]
+			]
+		]
+	]
+	section[
+		@title[Content Reuse]
+		txt[
+Finding yourself repeating the same sentence over an over? Glyph allows you to create snippets. Within snippets. Within other snippets (and so on, for a long long time...) as long as you don't define a snippet by defining itself, which would be kinda nasty (and Glyph would complain!):
+		]
+		codeblock[=
+snippet:[entities\|snippets and macros]
+snippet:[custom_definitions\|p[Glyph allows you to define your own &amp;[entities].]]
+		&amp;[custom_definitions]
+		=]
+		p[...which results in:]
+		codeblock[=
+<p>Glyph allows you to define your own snippets and macros.</p>
+		=]
+		p[If yourself dreaming about _parametric_ snippets, just create your own macros (see the =>[http://github.com/h3rald/glyph/blob/master/book/text/changelog.glyph|source] of Glyph's changelog, just to have an idea).]
+	]
+	section[
+		@title[Automation of Common Tasks]
+		txt[
+If you're writing a book, you shouldn't have to worry about pagination, headers, footers, table of contents, section numbering or similar. Glyph understands you, and will take care of everything for you (with a little help from CSS3, sometimes).
+		]
+	]
+	section[
+		@title[Reference Validation]
+		txt[
+Feel free to add plenty of links, snippets, bookmarks, ... if Glyph doesn't find something, it will definitely complain. Broken references are a thing on the past, and you don't need to worry about it.
+		]
+	]
+	section[
+		@title[Extreme Extensibility]
+		txt[
+* You miss a code[=!!!=] macro to format really, _really_ important things? Create it. In under 3 seconds, in Ruby or Glyph itself. And yes, you can use special characters, too.
+* You want your own, very special special @glyph create --everything@ command to create all _you_ need in a Glyph project? You can do it. Using your own Rake tasks, too.
+* You want Glyph to output ODF files? You can do it, and you'll be able to run @glyph generate -f odf@. This would probably require a little more time, but it's trivial, from a technical point of view.
+		]
+	]
+	section[
+		@title[Convention over Configuration]
+		txt[
+Put your text files in @/text@, your images in @/images@, add custom macros in a @macro@ folder within your @/lib@ folder... you get the picture: Glyph has its special places.
 
+Nonetheless, you also have 1 (_one_) configuration file to customize to your heart's content (with smart defaults).
+		]
+	]
+	section[
+		@title[Free and Open Source]
+		txt[
+Glyph is 100% Open Source Software, developed using the Ruby Programming Language and licensed under the very permissive terms of the =>[http://www.opensource.org/licenses/mit-license.php|MIT License].
+
+If you have Ruby installed, just run @gem install glyph@. That's all it takes.
+		]
+	]
 section[
-@title[Resources]
-
+	@title[Resources]
+	txt[
 * Home Page: =>[http://www.h3rald.com/glyph/]
 * Repository: =>[http://www.github.com/h3rald/glyph/]
 * Bug Tracking: =>[http://www.github.com/h3rald/glyph/issues]
 * Development Wiki =>[http://wiki.github.com/h3rald/glyph]
 * RubyGem Download =>[http://www.rubygems.org/gems/glyph]
-* Book (PDF): =>[http://github.com/h3rald/glyph/raw/\.%[Glyph::VERSION.strip]/book/output/pdf/glyph.pdf]
+* Book (PDF): =>[http://github.com/downloads/h3rald/glyph/glyph.pdf]
 * Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
 * User Group: =>[http://groups.google.com/group/glyph-framework]
-]
+	]
 ]

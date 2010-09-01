@@ -1,8 +1,9 @@
-Glyph was designed and developed by <a href="http://www.h3rald.com">Fabio Cevasco</a> (h3rald).
-
-Special thanks to the following individuals who contributed to Glyph by reporting and fixing issues and/or proposing and implementing new features:
-* <a href="http://www.jabbslad.com">Jamie Atkinson</a> (Jabbslad)
-* <a href="http://koraktor.github.com">Sebastian Staudt</a> (koraktor)
-* <a href="http://balcone.eveel.ru">Dmitry A. Ustalov</a> (eveel)
-* <a href="http://www.stuartellis.eu">Stuart Ellis</a> (stuartellis)
+<p>Glyph was designed and developed by <a href="http://www.h3rald.com">Fabio Cevasco</a> (h3rald).</p>
+<p>Special thanks to the following individuals who contributed to Glyph by reporting and fixing issues and/or proposing and implementing new features:</p>
+<ul>
+	<li><a href="http://www.jabbslad.com">Jamie Atkinson</a> (Jabbslad)</li>
+	<li><a href="http://koraktor.github.com">Sebastian Staudt</a> (koraktor)</li>
+	<li><a href="http://balcone.eveel.ru">Dmitry A. Ustalov</a> (eveel)</li>
+	<li><a href="http://www.stuartellis.eu">Stuart Ellis</a> (stuartellis)</li>
+</ul>
     
