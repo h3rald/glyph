@@ -30,8 +30,8 @@ book[
 			]
 		]
 		acknowledgement[
-			@title[Acknowledgement]
-			@src[acknowledgement]
+			@title[Acknowledgements]
+			@src[acknowledgements]
 		]
 	]
 	@bodymatter[

@@ -44,6 +44,8 @@ ol.toc {
 	string-set: book-title content();
 }
 
+/* TOC Counters */
+
 .toc>li[class~=chapter] {
 	counter-increment: toc1;
 	counter-reset: toc2;
@@ -86,40 +88,55 @@ ol.toc {
 	margin: 1em 0;
 }
 
-.toc ol li[class~=bodymatter]::before {
+/* TOC Margins */
+
+.toc ol li[class]::before {
 	margin-left: 1em;
+}
+
+.toc ol ol li[class]::before {
+	margin-left: 2em;
+}
+
+.toc ol ol ol li[class]::before {
+	margin-left: 3em;
+}
+
+.toc ol ol ol ol li[class]::before {
+	margin-left: 4em;
+}
+
+/* TOC Numbers */
+
+.toc ol li[class~=frontmatter]::before {
+	content: " ";
+}
+
+.toc ol li[class~=bodymatter]::before {
 	content: counter(toc1) "." counter(toc2) " ";
 }
 .toc ol li[class~=appendix]::before {
-	margin-left: 1em;
 	content: counter(appendix1, upper-latin) "." counter(toc2) " ";
 }
 
-
 .toc ol ol li[class~=bodymatter]::before {
-	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) " ";
 }
 .toc ol ol li[class~=appendix]::before {
-	margin-left: 1em;
 	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) " ";
 }
 
 .toc ol ol ol li[class~=bodymatter]::before {
-	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 .toc ol ol ol li[class~=appendix]::before {
-	margin-left: 1em;
 	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) " ";
 }
 
 .toc ol ol ol ol li[class~=bodymatter]::before {
-	margin-left: 1em;
 	content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 .toc ol ol ol ol li[class~=appendix]::before {
-	margin-left: 1em;
 	content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) " ";
 }
 
@@ -165,6 +182,7 @@ div.backmatter{
 }
 
 h2, section h1 { 
+	padding-top: 2em;
 	string-set: chapter-title content();
 	page-break-before: always;
 }
