@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
      "book/lib/tasks/tasks.rake",
      "book/resources/document_generation.txt",
      "book/snippets.yml",
+     "book/text/acknowledgements.glyph",
      "book/text/changelog.glyph",
      "book/text/compiling/compiling.glyph",
      "book/text/compiling/lite_mode.glyph",

@@ -65,7 +65,8 @@ section[
 		]
 		p[Finally, when the document is finalized, placeholders and escape sequences are removed and the final result is the following:]
 		highlight[=html|
-<span class="fmi">for more information on something, see <a href="#test">Test Section</a></span>
+<span class="fmi">for more information on something, 
+  see <a href="#test">Test Section</a></span>
 [...]
 <div class="section">
 <h2 id="test">Test Section</h2>

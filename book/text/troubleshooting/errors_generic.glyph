@@ -1,6 +1,6 @@
 	error_table[
 		ref_error[Invalid alias: macro '\.em[macro_name]' already exists|
-The alias name supplied to the @macro_alias@ method has already been used for another macro or alias.
+The alias name supplied to the code[macro_alias] method has already been used for another macro or alias.
 		]
 		ref_error[Undefined macro '\.em[macro_name]'|
 The document contains a macro that does not exist, i.e. it is not a standard or used-defined =>[#macro_ref|Glyph macro or alias].

@@ -1,7 +1,7 @@
 rewrite:[stats_for|
 	section[
 		@title[Displaying stats about {{title}}]
-		txt[To display statistics about {{object}}, execute @glyph stats {{command}}@. Glyph displays something like this:]
+		txt[To display statistics about {{object}}, execute code[glyph stats {{command}}]. Glyph displays something like this:]
 		highlight[=html|
 {{example}}
 		=]

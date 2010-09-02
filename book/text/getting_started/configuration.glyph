@@ -15,7 +15,7 @@ Instead of editing your configuration settings directly, you can use the #>[conf
 
 @glyph config@ _setting_ _\[value\]_
 
-If no _value_ is specified, glyph prints the value of the configuration setting, so typing @glyph config document.author@ right after creating a project (assuming you didn't set this in the Global Configuration) will print nothing, because this setting is blank by default.
+If no _value_ is specified, Glyph prints the value of the configuration setting, so typing @glyph config document.author@ right after creating a project (assuming you didn't set this in the Global Configuration) will print nothing, because this setting is blank by default.
 
 To change the value of a configuration setting, specify a value right after the setting, like this:
 

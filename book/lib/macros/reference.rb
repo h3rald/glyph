@@ -130,7 +130,7 @@ macro :ref_macro do
 		]} if raw_attr(:remarks)
 	interpret %{
 	section[
-		@title[<code>#{m_name}</code>]
+		@title[#{m_name}]
 		@id[m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
 		txt[
 #{m_value}
