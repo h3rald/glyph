@@ -1,6 +1,7 @@
 Glyph is a _Rapid Document Authoring Framework_. 
 
-With Glyph, creating and maintaining any kind of document -- be it a short article or a long book -- becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
+With Glyph, creating and maintaining any kind of document becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
+
 	<div class="section">
 <h2 id="h_1">What's wrong with Word Processors?</h2>
 Depends on the particular software. Common shortcomings include:
@@ -51,13 +52,13 @@ produce HTML files effortlessly.
   section[
     @title[What about PDFs?]
     @id[pdf]
-		p[
+    p[
 Once you have a single, well-formatted HTML 
 file, converting it to PDF is
 extremely easy with a free 3rd-party 
 renderer like =>[http://www.princexml.com|Prince] 
 or =>[http://code.google.com/p/wkhtmltopdf/|wkhtmltopdf].
-		]
+    ]
   ]   
 ]
 </code>
@@ -86,7 +87,7 @@ The Glyph code above corresponds to the following HTML code:
      file, converting it to PDF is
      extremely easy with a free 3rd-party renderer 
      like <a href="http://www.princexml.com">Prince</a> 
-			or <a href="http://code.google.com/p/wkhtmltopdf/\">wkhtmltopdf</a>.
+     or <a href="http://code.google.com/p/wkhtmltopdf/\">wkhtmltopdf</a>.
    </p>
   </div>
 </div>
@@ -103,8 +104,10 @@ Finding yourself repeating the same sentence over an over? Glyph allows you to c
 <pre>
 <code>
 snippet:[entities|snippets and macros]
-snippet:[custom_definitions|p[Glyph allows you to define your own &[entities].]]
-		&[custom_definitions]
+snippet:[custom_definitions|
+	p[Glyph allows you to define your own &[entities].]
+]
+&[custom_definitions]
 </code>
 </pre>
 </div>

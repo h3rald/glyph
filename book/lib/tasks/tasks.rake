@@ -5,7 +5,7 @@ namespace :custom do
 			Glyph.compile Glyph::PROJECT/"text/#{source}.glyph", Glyph::PROJECT/"../#{destination}.textile"
 		end
 		files = {
-			:AUTHORS => :acknowledgement, 
+			:AUTHORS => :acknowledgements, 
 			:CHANGELOG => :changelog, 
 			:LICENSE => :license, 
 			:README => :introduction
@@ -41,8 +41,12 @@ namespace :generate do
 				c.directory? ? c.rmtree : c.unlink
 			end
 		end
+		(dir/'images/glyph/glyph.eps').unlink 
+		(dir/'images/glyph/glyph.svg').unlink
 		# Create project page
-		project = Glyph.filter "layout:project[@contents[#{file_load(Glyph::PROJECT/'text/introduction.glyph')}]]"
+		project = Glyph.filter %{layout:project[
+				@contents[#{file_load(Glyph::PROJECT/'text/introduction.glyph')}]
+			]}
 		file_write dir/"glyph.textile", project
 	end	
 end

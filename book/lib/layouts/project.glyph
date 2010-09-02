@@ -11,7 +11,8 @@ links:
 - "Bug Tracking": http://www.github.com/h3rald/glyph/issues
 - "Development Wiki": http://wiki.github.com/h3rald/glyph
 - "Download": http://www.rubygems.org/gems/glyph
-- "Book (PDF)": http://github.com/h3rald/glyph/blob/master/book/output/pdf/glyph.pdf
+- "Book (PDF)": http://github.com/downloads/h3rald/glyph/glyph.pdf
+- "Book (Web)": http://www.h3rald.com/glyph/book/
 - "Docs": http://yardoc.org/docs/h3rald-glyph/
 - "User Group": http://groups.google.com/group/glyph-framework
 status: Active

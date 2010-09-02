@@ -8,24 +8,15 @@ else
 	interpret "txt[#{raw_value}]"
 end  
 	=]
+	macro:[=?sep|
+if Glyph['document.output'] == "h3rald" then
+	%{<br style="clear:both" />}
+end
+	=]
 ]?txt[Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, creating and maintaining any kind of document becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
-
-	section[
-		@title[What's wrong with Word Processors?]
-Depends on the particular software. Common shortcomings include:
-* Lack of proper content reuse capabilities
-* Inadequate and often even counter-productive WYSIWYG user interface
-* Lack of tools for managing and validating links and references
-* Mainly focused on one or a few similar output formats, normally tied to the very same layout
-	]
-	section[
-		@title[What's wrong with LaTeX?]
-LaTeX is _the_ tool that anyone should be using to produce high-quality publications. Glyph does not aim to be a LaTeX replacement, but there is a certain overlap of functionality. 
-
-LaTeX is a typesetting system, while Glyph is a document authoring tool. Arguably, Glyph could be simpler to learn and use, and require less software prerequisites and configurations. Looking at the type of documents that can be produced by both, it is safe to say that Glyph documents are normally _good enough_ for most needs and they can be written with less effort on the writer's part.
-	]
+	?sep[]
 	section[
 		@title[Main Features]
 		section[
@@ -143,6 +134,7 @@ If you have Ruby installed, just run @gem install glyph@. That's all it takes.
 * Development Wiki =>[http://wiki.github.com/h3rald/glyph]
 * RubyGem Download =>[http://www.rubygems.org/gems/glyph]
 * Book (PDF): =>[http://github.com/downloads/h3rald/glyph/glyph.pdf]
+* Book (Web): =>[http://www.h3rald.com/glyph/book/]
 * Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
 * User Group: =>[http://groups.google.com/group/glyph-framework]
 	]
