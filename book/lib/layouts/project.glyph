@@ -13,7 +13,7 @@ links:
 - "Download": http://www.rubygems.org/gems/glyph
 - "Book (PDF)": http://github.com/downloads/h3rald/glyph/glyph.pdf
 - "Book (Web)": http://www.h3rald.com/glyph/book/
-- "Docs": http://yardoc.org/docs/h3rald-glyph/
+- "Docs": http://rubydoc.info/gems/glyph/
 - "User Group": http://groups.google.com/group/glyph-framework
 status: Active
 version: %[Glyph::VERSION]
