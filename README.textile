@@ -149,7 +149,7 @@ If you have Ruby installed, just run @gem install glyph@. That's all it takes.
 * RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a>
 * Book (PDF): <a href="http://github.com/downloads/h3rald/glyph/glyph.pdf">http://github.com/downloads/h3rald/glyph/glyph.pdf</a>
 * Book (Web): <a href="http://www.h3rald.com/glyph/book/">http://www.h3rald.com/glyph/book/</a>
-* Reference Documentation: <a href="http://yardoc.org/docs/h3rald-glyph/">http://yardoc.org/docs/h3rald-glyph/</a>
+* Reference Documentation: <a href="http://rubydoc.info/gems/glyph/">http://rubydoc.info/gems/glyph/</a>
 * User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a>
 
 </div>
