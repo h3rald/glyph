@@ -4,7 +4,7 @@
 
 
 	<div class="section">
-<h2 id="h_1">v0.4.0 &ndash; September 4th 2010</h2>
+<h2 id="h_1">v0.4.0 &ndash; September 3th 2010</h2>
 <div class="section">
 <h3 id="h_2">13 Features Implemented</h3>
 <table><tr><th>ID</th>
@@ -54,7 +54,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_3">6 Bugs Fixed</h3>
+<h3 id="h_3">7 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -75,7 +75,10 @@
 		<td><p>Prevented non-rb files to be loaded as macros.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/145">#145</a></td>
-		<td><p>Dotfiles are now ignored by init command.</p></td></tr></table>
+		<td><p>Dotfiles are now ignored by init command.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/167">#167</a></td>
+		<td><p>Fixed <span class="caps">PDF</span> book download links.</p></td></tr></table>
 
 </div>
 
