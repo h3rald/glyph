@@ -114,21 +114,16 @@
 						</div>
 					</div> <!-- END FOOTER CONTAINER-->
 				</div> <!-- END FOOTER -->
-				<script src='http://www.google-analytics.com/ga.js' type='text/javascript'></script>	
-				<script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
+				<!-- Start of StatCounter Code -->
 				<script type="text/javascript">
-					try {
-						reinvigorate.track("ic648-011ry84432");
-					} catch(err) {}
-				</script>		
-				<script type="text/javascript">			
-					var lloogg_clientid = "2830021149dc1a04";
-					var pageTracker = _gat._getTracker("UA-287139-1");
-					pageTracker._setAllowLinker(true); 
-					pageTracker._trackPageview();
-					</script>			
-					<script type="text/javascript" src="http://lloogg.com/l.js?c=2830021149dc1a04"></script>			
-					<script src="http://www.google.com/jsapi?key=ABQIAAAA6h3j8Jri5D_da53UPbEbThRlq2n1sm52B5HDRR5tm6o8XM18FhTKn3v155RpPeD0kWnWG81QEhhifQ" type="text/javascript"></script>
-					<script src="/js/compressed.js" type="text/javascript"></script>
-				</body>
-			</html>
+					var sc_project=6193656; 
+					var sc_invisible=1; 
+					var sc_security="57f7ee2a"; 
+				</script>
+				<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script>
+				<!-- End of StatCounter Code -->
+				<script src='http://www.google-analytics.com/ga.js' type='text/javascript'></script>	
+				<script src="http://www.google.com/jsapi?key=ABQIAAAA6h3j8Jri5D_da53UPbEbThRlq2n1sm52B5HDRR5tm6o8XM18FhTKn3v155RpPeD0kWnWG81QEhhifQ" type="text/javascript"></script>
+				<script src="/js/compressed.js" type="text/javascript"></script>
+			</body>
+		</html>
