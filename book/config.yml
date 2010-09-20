@@ -21,5 +21,3 @@
       :index: bookindex
   :pdf: 
     :generator: prince
-:filters: 
-  :highlighter: ultraviolet

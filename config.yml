@@ -74,6 +74,8 @@
     :restrictions: []
   :coderay:
     # See options at http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html
+    :line_numbers: :inline
+    :tab_width: 2
     :css: :class 
   :ultraviolet:
     :line_numbers: true

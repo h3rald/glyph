@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{glyph}
-  s.version = "0.4.0.dev"
+  s.version = "0.4.1"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2010-09-02}
+  s.date = %q{2010-09-20}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -153,6 +153,7 @@ Gem::Specification.new do |s|
      "spec/files/markdown.markdown",
      "spec/files/references.glyph",
      "spec/files/test.sass",
+     "spec/files/test.scss",
      "spec/files/web1.glyph",
      "spec/files/web2.glyph",
      "spec/files/web_doc.glyph",

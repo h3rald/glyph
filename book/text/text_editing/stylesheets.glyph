@@ -1,7 +1,7 @@
 	p[Currently, Glyph does not provide any native way to format text and pages. The reason is that there's absolutely no need for that: CSS does the job just fine. In particular, CSS3 offers specific attributes and elements that can be used specifically for paginated documents. That's no replacement for LaTeX by any means, but it is enough if you're not looking for advanced typographical features.]
 	p[You can embed CSS files using the %>[style], like this:]
 	p[code[= style[default.css] =]]
-	txt[In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).]
+	txt[In this case, the %>[style] looks for a @default.css@ file in the @/styles@ folder of your Glyph project _and_ among the default Glyph stylesheets, and embeds it within a @<style>@ tag. If you supply a file with a @.sass@ or @.scss@ extension, it will interpret it as a Sass file and convert it to CSS automatically (if the _Haml_ gem is installed).]
 	tip[
 By default, stylesheets are embedded within text files. If necessary, you can choose to link them or import them by changing the values of the $>[document.styles].
 	]

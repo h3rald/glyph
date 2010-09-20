@@ -1,0 +1,7 @@
+$border-color: #e6e6e6; 
+$link-color: #007BC4;
+$link-hover-color: #005B91;
+
+@mixin standard-border {
+	border: 1px solid $border-color;
+}

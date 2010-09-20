@@ -1,0 +1,214 @@
+@page {
+  size: A4;
+  margin: 40pt 30pt 40pt 30pt;
+  @top {
+    content: string(book-title) " - " string(chapter-title);
+    font-style: italic; }
+
+  @bottom {
+    content: counter(page, decimal); } }
+
+
+@page frontmatter {
+  @bottom {
+    content: counter(page, lower-roman); } }
+
+
+@page backmatter {
+  @bottom {
+    content: counter(page, decimal); } }
+
+
+@page :first {
+  padding-top: 10%;
+  @top {
+    content: normal; }
+
+  @bottom {
+    content: normal; } }
+
+
+ol.toc {
+  margin-left: 1.5em; }
+
+.toc {
+  > li[class] {
+    font-weight: bold; }
+  li {
+    list-style-type: none;
+    margin-left: 0;
+    a {
+      color: #000;
+      &:hover {
+        color: #000; }
+      &::after {
+        content: leader(".") target-counter(attr(href), page); } } } }
+
+.titlepage h1, .halftitlepage h1 {
+  string-set: book-title content(); }
+
+/* TOC Counters */
+
+.toc {
+  > li {
+    &[class~=chapter] {
+      counter-increment: toc1;
+      counter-reset: toc2; }
+    &[class~=appendix] {
+      counter-increment: appendix1;
+      counter-reset: toc2; } }
+  ol {
+    li[class] {
+      counter-increment: toc2;
+      counter-reset: toc3; }
+    ol {
+      li[class] {
+        counter-increment: toc3;
+        counter-reset: toc4; }
+      ol {
+        li[class] {
+          counter-increment: toc4;
+          counter-reset: toc5; }
+        ol li[class] {
+          counter-increment: toc5; } } } }
+  > li {
+    &[class~=chapter]::before {
+      content: counter(toc1) ". "; }
+    &[class~=appendix]::before {
+      content: counter(appendix1, upper-latin) ". "; }
+    &[class] {
+      margin: 1em 0; } }
+  ol {
+    li[class]::before {
+      margin-left: 1em; }
+    ol {
+      li[class]::before {
+        margin-left: 2em; }
+      ol {
+        li[class]::before {
+          margin-left: 3em; }
+        ol li[class]::before {
+          margin-left: 4em; } } }
+    li {
+      &[class~=frontmatter]::before {
+        content: "   "; }
+      &[class~=bodymatter]::before {
+        content: counter(toc1) "." counter(toc2) "   "; }
+      &[class~=appendix]::before {
+        content: counter(appendix1, upper-latin) "." counter(toc2) "   "; } }
+    ol {
+      li {
+        &[class~=bodymatter]::before {
+          content: counter(toc1) "." counter(toc2) "." counter(toc3) "   "; }
+        &[class~=appendix]::before {
+          content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "   "; } }
+      ol {
+        li {
+          &[class~=bodymatter]::before {
+            content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "   "; }
+          &[class~=appendix]::before {
+            content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "   "; } }
+        ol li {
+          &[class~=bodymatter]::before {
+            content: counter(toc1) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) "   "; }
+          &[class~=appendix]::before {
+            content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) "   "; } } } } } }
+
+div {
+  &.frontmatter {
+    page: frontmatter; }
+  &.backmatter {
+    page: backmatter; } }
+
+.bodymatter {
+  h2::before, h1:before {
+    content: "Chapter " counter(h2, upper-roman) ":   ";
+    counter-reset: footnote; } }
+
+.backmatter h2::before {
+  content: "Appendix " counter(a2, upper-latin) ":   "; }
+
+.bodymatter {
+  section h1:before {
+    content: "Appendix " counter(a2, upper-latin) ":   "; }
+  h3::before, section h1:before {
+    content: counter(h2) "." counter(h3) "   "; } }
+
+.backmatter h3::before {
+  content: counter(a2, upper-latin) "." counter(h3) "   "; }
+
+.bodymatter {
+  section section h1:before {
+    content: counter(a2, upper-latin) "." counter(h3) "   "; }
+  h4::before, section section h1:before {
+    content: counter(h2) "." counter(h3) "." counter(h4) "   "; } }
+
+.backmatter h4::before {
+  content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "   "; }
+
+.bodymatter {
+  section section section h2:before {
+    content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "   "; }
+  h5::before, section section section section h2:before {
+    content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "   "; } }
+
+.backmatter h5::before, .bodymatter section section section section h2:before {
+  content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) "   "; }
+
+h2, section h1 {
+  padding-top: 2em;
+  string-set: chapter-title content();
+  page-break-before: always; }
+
+.halftitlepage h2, .titlepage h2 {
+  page-break-before: avoid; }
+
+.bodymatter {
+  h2, h1 {
+    counter-increment: h2;
+    counter-reset: h3; } }
+
+.backmatter {
+  h2, h1 {
+    counter-increment: a2;
+    counter-reset: h3; } }
+
+.bodymatter h3, .backmatter h3, .bodymatter section h1, .backmatter section h1 {
+  counter-increment: h3;
+  counter-reset: h4; }
+
+.bodymatter h4, .backmatter h4, .bodymatter section section h1, .backmatter section section h1 {
+  counter-increment: h4;
+  counter-reset: h5; }
+
+.bodymatter h5, .backmatter h5, .bodymatter section section section h1, .backmatter section section section h1 {
+  counter-increment: h5; }
+
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid; }
+
+.box, .note, .important, .tip, .caution, .code {
+  page-break-inside: avoid; }
+
+/* Footnotes */
+
+@page {
+  @footnotes {
+    border-top: 1px solid #000; } }
+
+
+.fn {
+  font-size: 85%;
+  margin-left: 1.5em;
+  display: prince-footnote;
+  counter-increment: footnote;
+	&:footnote-call {
+		content: counter(footnote);
+		font-size: 85%;
+		vertical-align: super;
+		line-height: none;
+		font-weight: bold;
+		margin-left: 1pt; }
+	&:footnote-marker {
+		font-weight: bold;
+		margin-right: 0.5em; } }

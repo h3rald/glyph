@@ -1,3 +1,5 @@
+@import "definitions.scss";
+
 * {
   border: none;
   font-family: inherit;
@@ -29,31 +31,33 @@ body {
   text-align: justify; }
 
 /* Structure */
+
 .halftitlepage {
   margin: auto;
   text-align: center; }
 
 .titlepage {
   margin: auto;
-  text-align: center; }
-  .titlepage h1 {
+  text-align: center;
+  h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-bottom: 0.2em; } }
+
+.halftitlepage {
+  h1 {
     font-size: 2.5em;
     font-weight: bold;
     line-height: 1.5em;
     margin-bottom: 0.2em; }
-
-.halftitlepage h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  line-height: 1.5em;
-  margin-bottom: 0.2em; }
-.halftitlepage h2 {
-  font-size: 1.1em;
-  font-style: italic;
-  font-weight: bold;
-  line-height: 1.2em;
-  margin-bottom: 0.5em;
-  prince-bookmark-level: none; }
+  h2 {
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
+    prince-bookmark-level: none; } }
 
 .titlepage h2 {
   font-size: 1.1em;
@@ -97,7 +101,7 @@ blockquote {
   color: #121212; }
 
 table {
-  border: 1px solid #e6e6e6; }
+  @include standard-border; }
 
 th {
   background: #EEE; }
@@ -106,7 +110,7 @@ tr, td, th {
   padding: 5px; }
 
 td, tr {
-  border: 1px solid #e6e6e6; }
+  @include standard-border; }
 
 sup {
   font-size: 0.7em;
@@ -114,6 +118,7 @@ sup {
   margin-left: -0.4em; }
 
 /* BLOCKS */
+
 .center {
   margin: auto;
   text-align: center; }
@@ -127,7 +132,7 @@ sup {
   text-align: center; }
 
 .note, .important, .tip, .caution, .box {
-  border: 1px solid #e6e6e6;
+  @include standard-border;
   display: block;
   margin: 0.5em auto;
   padding: 0 0.5em;
@@ -135,7 +140,7 @@ sup {
   background: #EEE;
   color: #1F1F1F; }
 
-.note > p, .important > p, .tip > p, .caution > p {
+.note>p, .important>p, .tip>p, .caution>p {
   margin: 0;
   padding: 0; }
 
@@ -158,20 +163,21 @@ sup {
   border: 1px solid #004D00;
   background: #7AFF7A;
   padding: 3px;
-  margin: 1px; }
-  .comment .comment-pre {
-    color: #004D00; }
+  margin: 1px;
+  .comment-pre {
+    color: #004D00; } }
 
 .todo {
   display: block;
   border: 1px solid #990000;
   background: #FF9999;
   padding: 3px;
-  margin: 1px; }
-  .todo .todo-pre {
-    color: #990000; }
+  margin: 1px;
+  .todo-pre {
+    color: #990000; } }
 
 /* TEXT */
+
 body {
   color: #000;
   font-size: 1em; }
@@ -201,10 +207,10 @@ em {
   font-style: italic; }
 
 a {
-  color: #5d9edb;
-  text-decoration: none; }
-  a:hover {
-    color: #275187; }
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    color: $link-hover-color; } }
 
 code {
   font-size: 0.75em; }
@@ -223,14 +229,15 @@ nav, .navigation {
   display: block;
   margin: 1em auto;
   text-align: center;
-  border: 1px solid #e6e6e6; }
+  @include standard-border; }
 
-nav.contents {
-  margin: auto;
-  text-align: left;
-  border: none; }
-nav a {
-  margin: 1em; }
+nav {
+  &.contents {
+    margin: auto;
+    text-align: left;
+    border: none; }
+  a {
+    margin: 1em; } }
 
 .navigation a {
   margin: 1em; }
@@ -243,13 +250,14 @@ mark {
   font-style: italic;
   background: none; }
 
-pre > code {
+pre>code {
   font-size: 1em; }
 
-td p, td ul, td ol {
-  margin: 0; }
+td {
+  p, ul, ol {
+    margin: 0; } }
 
-td > div.code, td > code {
+td>div.code, td>code {
   width: auto;
   margin: 0.2em;
   padding: 0.2em; }
@@ -258,6 +266,7 @@ td > div.code, td > code {
   margin: 2em auto; }
 
 /* FONTS */
+
 body {
   font-family: "Gentium Book Basic", "Book Antiqua", "Times New Roman", "Serif"; }
 

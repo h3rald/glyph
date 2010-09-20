@@ -1,0 +1,3 @@
+sass pagination.scss > pagination.css
+sass default.scss > default.css
+sass coderay.scss > coderay.css
