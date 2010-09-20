@@ -5,3 +5,16 @@ $link-hover-color: #005B91;
 @mixin standard-border {
 	border: 1px solid $border-color;
 }
+
+@mixin codeblock {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #222;
+  font-family: 'Courier New', 'Terminal', monospace;
+  color: #E6E0DB;
+  padding: 20px;
+  overflow: auto;
+  font-size: 0.8em;
+  margin: 20px 0 20px 0;
+}

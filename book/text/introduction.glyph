@@ -8,16 +8,9 @@ else
 	interpret "txt[#{raw_value}]"
 end  
 	=]
-	macro:[=?sep|
-if Glyph['document.output'] == "h3rald" then
-	%{<br style="clear:both" />}
-end
-	=]
 ]?txt[Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, creating and maintaining any kind of document becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
-
-	?sep[]
 
 	section[
 		@title[Main Features]

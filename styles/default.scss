@@ -153,11 +153,6 @@ sup {
   text-align: center;
   font-weight: bold; }
 
-.code {
-  margin: 1em auto;
-  padding: 0.5em;
-  width: 600px; }
-
 .comment {
   display: block;
   border: 1px solid #004D00;
@@ -212,14 +207,11 @@ a {
   &:hover {
     color: $link-hover-color; } }
 
-code {
-  font-size: 0.75em; }
+pre > code {
+	@include codeblock; }
 
-pre {
-  font-size: 0.75em;
-  border: 1px solid #cecece;
-  padding: 0.5em;
-  background: #ededed; }
+code { 
+	font-size: 0.8em; }
 
 span.line-numbers {
   margin: 0;
@@ -250,17 +242,9 @@ mark {
   font-style: italic;
   background: none; }
 
-pre>code {
-  font-size: 1em; }
-
 td {
   p, ul, ol {
     margin: 0; } }
-
-td>div.code, td>code {
-  width: auto;
-  margin: 0.2em;
-  padding: 0.2em; }
 
 .topic {
   margin: 2em auto; }

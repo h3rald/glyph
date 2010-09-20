@@ -35,6 +35,13 @@ rw:[issue|
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
 ]
+release[0.4.1|September 25th 2010|
+	bugs[
+		issue[169|*.scss files are now supported by the %>[style].]
+		issue[170|Improved default CodeRay stylesheet.]
+		issue[171|SCSS now used internally by Glyph to generate default CSS files.]
+	]
+]
 release[0.4.0|September 3th 2010|
 	features[
 		issue[40|A new #>[stats] can be used to display statistics about project files, snippets, macros, bookmarks and links.]

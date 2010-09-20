@@ -9,10 +9,8 @@ github: glyph
 links:
 - "Repository": http://www.github.com/h3rald/glyph/
 - "Bug Tracking": http://www.github.com/h3rald/glyph/issues
-- "Development Wiki": http://wiki.github.com/h3rald/glyph
 - "Download": http://www.rubygems.org/gems/glyph
-- "Book (PDF)": http://github.com/downloads/h3rald/glyph/glyph.pdf
-- "Book (Web)": http://www.h3rald.com/glyph/book/
+- "Book": http://www.h3rald.com/glyph/book/
 - "Docs": http://rubydoc.info/gems/glyph/
 - "User Group": http://groups.google.com/group/glyph-framework
 status: Active

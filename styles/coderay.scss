@@ -1,27 +1,6 @@
-span.CodeRay {
-  white-space: pre;
-  border: 0px;
-  padding: 2px; }
-
-table.CodeRay {
-  border-collapse: collapse;
-  width: 100%;
-  padding: 2px;
-  td {
-    padding: 2px 4px;
-    vertical-align: top; } }
-
+@import "definitions.scss";
 .CodeRay {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  background-color: #222;
-  font-family: 'Courier New', 'Terminal', monospace;
-  color: #E6E0DB;
-  padding: 20px;
-  overflow: auto;
-  font-size: 12px;
-  margin: 20px 0 20px 0;
+	@include codeblock;
   pre {
 		line-height: 1.2em;
     margin: 0px;

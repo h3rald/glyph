@@ -19,7 +19,7 @@ end
 
 namespace :generate do
 	desc "Create output for h3rald.com integration"
-	task :h3rald => [:web] do
+	task :h3rald => [:web5] do
 		dir = Glyph::PROJECT/'output/h3rald'
 		(dir/"glyph/book").mkpath
 		# Copy files in subdir
