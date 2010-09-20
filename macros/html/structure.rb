@@ -120,12 +120,12 @@ macro :style do
 	when 'embed' then
 		style = ""
 		case file.extname
-		when ".css"
+		when ".css" then
 			style = file_load file
-		when ".sass"
+		when ".sass", ".scss" then
 			begin
 				require 'sass'
-				style = Sass::Engine.new(file_load(file)).render
+				style = Sass::Engine.new(file_load(file), :syntax => file.extname.gsub(/^\./, '').to_sym).render
 			rescue LoadError
 				macro_error "Haml is not installed. Please run: gem install haml"
 			rescue Exception

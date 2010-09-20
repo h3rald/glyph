@@ -40,8 +40,8 @@ describe "Macro:" do
 	end
 
 	it "document, head, style" do
-		interpret "document[head[style[test.sass]]]"
-		@p.document.output.gsub(/\n|\t/, '').should == %{
+		file_copy Glyph::SPEC_DIR/'files/test.scss', Glyph::PROJECT/'styles/test.scss'
+		doc = %{
 		<?xml version="1.0" encoding="utf-8"?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -51,10 +51,14 @@ describe "Macro:" do
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-				<style type=\"text/css\">#main {  background-color: blue; }</style>
+				<style type=\"text/css\">#main {  background-color: blue;  margin: 12px; }</style>
 			</head>
 		</html>
-		}.gsub(/\n|\t/, '')
+		}
+		interpret "document[head[style[test.sass]]]"
+		@p.document.output.gsub(/\n|\t/, '').should == doc.gsub(/\n|\t/, '')
+		interpret "document[head[style[test.scss]]]"
+		@p.document.output.gsub(/\n|\t/, '').should == doc.gsub(/\n|\t/, '')
 	end	
 
 	it "style should link files by absolute or relative path in Lite mode" do
@@ -68,15 +72,13 @@ describe "Macro:" do
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-				<style type=\"text/css\">#main {  background-color: blue; }</style>
+				<style type=\"text/css\">#main {  background-color: blue;  margin: 12px; }</style>
 			</head>
 		</html>
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
 		interpret "document[head[style[styles/test.sass]]]"
-		@p.document.output.gsub(/\n|\t/, '').should == result
-		interpret "document[head[style[#{Glyph::PROJECT}/styles/test.sass]]]"
 		@p.document.output.gsub(/\n|\t/, '').should == result
 	end
 
