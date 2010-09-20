@@ -35,7 +35,7 @@ rw:[issue|
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
 ]
-release[0.4.0|September 4th 2010|
+release[0.4.0|September 3th 2010|
 	features[
 		issue[40|A new #>[stats] can be used to display statistics about project files, snippets, macros, bookmarks and links.]
 		issue[73|It is now possible to validate online HTTP links.]
@@ -58,6 +58,7 @@ release[0.4.0|September 4th 2010|
 		issue[140|Added @Glyph::Macro::Helpers@ module to avoid code duplication in macros for different output formats.]
 		issue[141|Prevented non-rb files to be loaded as macros.]
 		issue[145|Dotfiles are now ignored by #>[init].]
+		issue[167|Fixed PDF book download links.]
 	]
 ]
 release[0.3.0|June 13th 2010|

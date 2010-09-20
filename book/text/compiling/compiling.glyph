@@ -25,6 +25,7 @@ Currently, Glyph supports:
 By default, Glyph attempts to use wkhtmltopdf. To change this, set the $>[output_pdf_generator] to code[prince]. 
 	]
 	note[Glyph expects PDF generators to be installed on the local machine and callable via command line using the code[wkhtmltopdf] or the code[prince] commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).]
+	tip[Glyph's default CSS file use the free em[Gentium] font for all text. You can download it from =>[http://www.sil.org/~gaultney/gentium/|here].]
 ]
 section[
 	@title[Web/Web5 Output]

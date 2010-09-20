@@ -3,7 +3,7 @@
 	&:[wkhtml|=>[http://code.google.com/p/wkhtmltopdf/|wkhtmltopdf]]
 	macro:[=?txt|
 if Glyph.lite? then
-	interpret raw_value
+	interpret "section[#{raw_value}]"
 else
 	interpret "txt[#{raw_value}]"
 end  
@@ -16,9 +16,12 @@ end
 ]?txt[Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, creating and maintaining any kind of document becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
+
 	?sep[]
+
 	section[
 		@title[Main Features]
+
 		section[
 			@title[Command Line Interface]
 Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's] for its simplicity and power (thanks to the =>[http://github.com/davetron5000/gli|gli] gem). Here are some example commands: 
@@ -32,6 +35,7 @@ Glyph is 100% command line. Its interface resambles =>[http://git-scm.com/|Git's
 * @glyph outline -l 2@ -- Display the document outline, up to second-level headers.
 * @glyph stats@ -- Display project statistics.
 		]
+
 		section[
 			@title[Minimalist Syntax]
 Glyph syntax rules can be explained using Glyph itself:
@@ -83,6 +87,7 @@ The Glyph code above corresponds to the following HTML code:
 </div>
 			=]
 		]
+
 		section[
 			@title[Content Reuse]
 Finding yourself repeating the same sentence over an over? Glyph allows you to create snippets. Within snippets. Within other snippets (and so on, for a long long time...) as long as you don't define a snippet by defining itself, which would be kinda nasty (and Glyph would complain!):
@@ -135,7 +140,7 @@ If you have Ruby installed, just run @gem install glyph@. That's all it takes.
 * RubyGem Download =>[http://www.rubygems.org/gems/glyph]
 * Book (PDF): =>[http://github.com/downloads/h3rald/glyph/glyph.pdf]
 * Book (Web): =>[http://www.h3rald.com/glyph/book/]
-* Reference Documentation: =>[http://yardoc.org/docs/h3rald-glyph/]
+* Reference Documentation: =>[http://rubydoc.info/gems/glyph/]
 * User Group: =>[http://groups.google.com/group/glyph-framework]
 	]
 ]
