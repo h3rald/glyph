@@ -218,7 +218,6 @@ module Glyph
 				@node << subtree
 				result = interpreter.document.output
 			end
-			result.gsub(/\\*([\[\]])/){"\\#$1"}
 			result
 		end
 
@@ -252,7 +251,7 @@ module Glyph
 			block = Glyph::MACROS[@name]
 			macro_error "Undefined macro '#@name'}" unless block
 			res = instance_exec(@node, &block).to_s
-			res.gsub!(/\\*([\[\]\|])/){"\\#$1"} 
+			res.gsub!(/\\?([\[\]\|])/){"\\#$1"} 
 			res
 		end
 

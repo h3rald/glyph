@@ -9,14 +9,7 @@ module Glyph
 	# as well as replacing placeholders.
 	class Document
 
-		ESCAPES = [
-			['\\]', ']'], 
-			['\\[', '['],
-			['\\=', '='],
-			['\\.', ''],
-			['\\\\', '\\'],
-			['\\|', '|']
-		]
+		ESCAPES = /\\([\\\]\[\|.=])/
 
 		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics, :links, :toc
 
@@ -49,15 +42,19 @@ module Glyph
 
 		# Copies bookmarks, headers, todos, styles and placeholders from another Glyph::Document
 		# @param [Glyph::Document] document a valid Glyph::Document
-		def inherit_from(document)
-			@bookmarks = document.bookmarks
-			@headers = document.headers
-			@todos = document.todos
-			@styles = document.styles
-			@topics = document.topics
-			@placeholders = document.placeholders
-			@toc = document.toc
-			@links = document.links
+		# @param [Hash] data specifies which data will be inherited (e.g. bookmarks, headers, ...).
+		# 	By default, all data is inherited.
+		# @example Inheriting everything except topics
+		# 	doc1.inherit_from doc2, :topics => false 
+		def inherit_from(document, data={})
+			@bookmarks = document.bookmarks unless data[:bookmarks] == false
+			@headers = document.headers unless data[:headers] == false
+			@todos = document.todos unless data[:todos] == false
+			@styles = document.styles unless data[:styles] == false
+			@topics = document.topics unless data[:topics] == false
+			@placeholders = document.placeholders unless data[:placeholders] == false
+			@toc = document.toc unless data[:toc] == false
+			@links = document.links unless data[:links] == true
 			self
 		end
 
@@ -139,17 +136,13 @@ module Glyph
 			return (@state = :finalized) if @context[:embedded]
 			raise RuntimeError, "Document cannot be finalized due to previous errors" unless @context[:document].errors.blank?
 			# Substitute placeholders
-			ESCAPES.each{|e| @output.gsub! e[0], e[1]}
 			@placeholders.each_pair do |key, value| 
 				begin
 					key_s = key.to_s
 					value_s = value.call(self).to_s
-					toc[:contents].gsub! key_s, value_s if toc[:contents].to_s.match key_s 
-					if Glyph.multiple_output_files? then
-						@topics.each do |t|
-							ESCAPES.each{|e| t[:contents].gsub! e[0], e[1]}
-							t[:contents].gsub! key_s, value_s
-						end
+					toc[:contents].gsub! key_s, value_s rescue nil
+					@topics.each do |t|
+						t[:contents].gsub! key_s, value_s
 					end
 					@output.gsub! key_s, value_s
 				rescue Glyph::MacroError => e
@@ -157,6 +150,12 @@ module Glyph
 				rescue Exception => e
 					Glyph.warning e.message
 				end
+			end
+			# Substitute escape sequences
+			@output.gsub!(ESCAPES) { |match| ($1 == '.') ? '' : $1 }
+			toc[:contents].gsub!(ESCAPES) { |match| ($1 == '.') ? '' : $1 } rescue nil
+			@topics.each do |t|
+				t[:contents].gsub!(ESCAPES) { |match| ($1 == '.') ? '' : $1 }
 			end
 			@state = :finalized
 		end

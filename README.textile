@@ -1,11 +1,12 @@
+<div class="section">
 Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, creating and maintaining any kind of document becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.
-	
+
 	<div class="section">
-<h2 id="h_1">Main Features</h2>
+<h3 id="h_1">Main Features</h3>
 <div class="section">
-<h3 id="h_2">Command Line Interface</h3>
+<h4 id="h_2">Command Line Interface</h4>
 Glyph is 100% command line. Its interface resambles <a href="http://git-scm.com/">Git's</a> for its simplicity and power (thanks to the <a href="http://github.com/davetron5000/gli">gli</a> gem). Here are some example commands: 
 
 * @glyph init@ -- to initialize a new Glyph project in the current (empty) directory.
@@ -18,8 +19,9 @@ Glyph is 100% command line. Its interface resambles <a href="http://git-scm.com/
 * @glyph stats@ -- Display project statistics.
 
 </div>
+
 		<div class="section">
-<h3 id="h_3">Minimalist Syntax</h3>
+<h4 id="h_3">Minimalist Syntax</h4>
 Glyph syntax rules can be explained using Glyph itself:
 			
 <div class="code">
@@ -80,8 +82,9 @@ The Glyph code above corresponds to the following HTML code:
 </div>
 
 </div>
+
 		<div class="section">
-<h3 id="h_4">Content Reuse</h3>
+<h4 id="h_4">Content Reuse</h4>
 Finding yourself repeating the same sentence over an over? Glyph allows you to create snippets. Within snippets. Within other snippets (and so on, for a long long time...) as long as you don't define a snippet by defining itself, which would be kinda nasty (and Glyph would complain!):
 			
 <div class="code">
@@ -108,31 +111,31 @@ snippet:[custom_definitions|
 
 </div>
 		<div class="section">
-<h3 id="h_5">Automation of Common Tasks</h3>
+<h4 id="h_5">Automation of Common Tasks</h4>
 If you're writing a book, you shouldn't have to worry about pagination, headers, footers, table of contents, section numbering or similar. Glyph understands you, and will take care of everything for you (with a little help from CSS3, sometimes).
 
 </div>
 		<div class="section">
-<h3 id="h_6">Reference Validation</h3>
+<h4 id="h_6">Reference Validation</h4>
 Feel free to add plenty of links, snippets, bookmarks, ... if Glyph doesn't find something, it will definitely complain. Broken references are a thing on the past, and you don't need to worry about it.
 
 </div>
 		<div class="section">
-<h3 id="h_7">Extreme Extensibility</h3>
+<h4 id="h_7">Extreme Extensibility</h4>
 * You miss a <code>!!!</code> macro to format really, _really_ important things? Create it. In under 3 seconds, in Ruby or Glyph itself. And yes, you can use special characters, too.
 * You want your own, very special special @glyph create --everything@ command to create all _you_ need in a Glyph project? You can do it. Using your own Rake tasks, too.
 * You want Glyph to output ODF files? You can do it, and you'll be able to run @glyph generate -f odf@. This would probably require a little more time, but it's trivial, from a technical point of view.
 
 </div>
 		<div class="section">
-<h3 id="h_8">Convention over Configuration</h3>
+<h4 id="h_8">Convention over Configuration</h4>
 Put your text files in @/text@, your images in @/images@, add custom macros in a @macro@ folder within your @/lib@ folder... you get the picture: Glyph has its special places.
 
 Nonetheless, you also have 1 (_one_) configuration file to customize to your heart's content (with smart defaults).
 
 </div>	
 		<div class="section">
-<h3 id="h_9">Free and Open Source</h3>
+<h4 id="h_9">Free and Open Source</h4>
 Glyph is 100% Open Source Software, developed using the Ruby Programming Language and licensed under the very permissive terms of the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>.
 
 If you have Ruby installed, just run @gem install glyph@. That's all it takes.
@@ -141,7 +144,7 @@ If you have Ruby installed, just run @gem install glyph@. That's all it takes.
 
 </div>
 	<div class="section">
-<h2 id="h_10">Resources</h2>
+<h3 id="h_10">Resources</h3>
 * Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a>
 * Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a>
 * Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a>
@@ -151,5 +154,7 @@ If you have Ruby installed, just run @gem install glyph@. That's all it takes.
 * Book (Web): <a href="http://www.h3rald.com/glyph/book/">http://www.h3rald.com/glyph/book/</a>
 * Reference Documentation: <a href="http://rubydoc.info/gems/glyph/">http://rubydoc.info/gems/glyph/</a>
 * User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a>
+
+</div>
 
 </div>

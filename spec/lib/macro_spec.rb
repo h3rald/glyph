@@ -194,9 +194,9 @@ describe Glyph::Macro do
 		Glyph.macro :test_int do
 			interpret "- #{value} -"
 		end
-		text1 = %{em[test\\\\\.\\[...\\\\\.\\]]} # test\\\.\[\\\.\]
-		text2 = %{em[=test\\\\\\.[...\\\\\\.]=]}  # test\\\.[\\\.]
-		text3 = %{test_int[em[=test\\\\\.[...\\\\\.]=]]}
+		text1 = "em[test\\\\\\.\\[...\\\\\\.\\]]" # test\\\.\[\\\.\]
+		text2 = "em[=test\\\\\\.[...\\\\\\.]=]"  # test\\\.[\\\.]
+		text3 = "test_int[em[=test\\\\\\.[...\\\\\\.]=]]"
 		out = "<em>test\\[...\\]</em>"
 		output_for(text1).should == out
 		output_for(text2).should == out

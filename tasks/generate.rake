@@ -91,7 +91,7 @@ namespace :generate do
 		index_layout = Glyph["output.#{Glyph['document.output']}.layouts.index"] || :index
 		# Generate index topic
 		context = {} 
-		context[:document] = Glyph::Document.new(Glyph::DocumentNode.new).inherit_from(Glyph.document)
+		context[:document] = Glyph::Document.new(Glyph::DocumentNode.new).inherit_from(Glyph.document, :topics => false)
 		context[:source] = {:name => "layout:#{index_layout}", :file => "layouts/#{index_layout}.glyph"}
 		# Do not display errors (already displayed when document is finalized).
 		q = Glyph['system.quiet']

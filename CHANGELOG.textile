@@ -4,9 +4,33 @@
 
 
 	<div class="section">
-<h2 id="h_1">v0.4.0 &ndash; September 3th 2010</h2>
+<h2 id="h_1">v0.4.1 &ndash; September 25th 2010</h2>
 <div class="section">
-<h3 id="h_2">13 Features Implemented</h3>
+<h3 id="h_2">4 Bugs Fixed</h3>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/169">#169</a></td>
+		<td><p>*.scss files are now supported by the style macro.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/170">#170</a></td>
+		<td><p>Improved default CodeRay stylesheet.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/171">#171</a></td>
+		<td><p><span class="caps">SCSS</span> now used internally by Glyph to generate default <span class="caps">CSS</span> files.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/173">#173</a></td>
+		<td><p>Consecutive escape sequences are now interpreted correctly in topics.</p></td></tr></table>
+
+</div>
+
+</div>
+
+	<div class="section">
+<h2 id="h_3">v0.4.0 &ndash; September 3th 2010</h2>
+<div class="section">
+<h3 id="h_4">13 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -54,7 +78,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_3">7 Bugs Fixed</h3>
+<h3 id="h_5">7 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -85,9 +109,9 @@
 </div>
 
 	<div class="section">
-<h2 id="h_4">v0.3.0 &ndash; June 13th 2010</h2>
+<h2 id="h_6">v0.3.0 &ndash; June 13th 2010</h2>
 <div class="section">
-<h3 id="h_5">13 Features Implemented</h3>
+<h3 id="h_7">13 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -135,7 +159,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_6">3 Bugs Fixed</h3>
+<h3 id="h_8">3 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -154,9 +178,9 @@
 </div>
 
 	<div class="section">
-<h2 id="h_7">v0.2.0 &ndash; May 9th 2010</h2>
+<h2 id="h_9">v0.2.0 &ndash; May 9th 2010</h2>
 <div class="section">
-<h3 id="h_8">11 Features Implemented</h3>
+<h3 id="h_10">11 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -198,7 +222,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_9">8 Bugs Fixed</h3>
+<h3 id="h_11">8 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -232,7 +256,7 @@
 </div>
 
 	<div class="section">
-<h2 id="h_10">v0.1.0 &ndash; April 8th 2010</h2>
+<h2 id="h_12">v0.1.0 &ndash; April 8th 2010</h2>
 Initial release.
 
 </div>
