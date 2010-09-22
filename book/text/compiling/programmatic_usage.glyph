@@ -10,7 +10,7 @@ That's pretty much it. Of course, both the @filter@ and @compile@ method cause G
 		txt[
 For an example on how to use Glyph programmatically (specifically in conjunction with the =>[http://nanoc.stoneship.org/|nanoc] static site generator), see =>[http://github.com/h3rald/h3rald|h3rald.com source code], in particular:
 * =>[http://github.com/h3rald/h3rald/blob/master/lib/glyph_filter.rb|lib/glyph_filter.rb] -- using the @Glyph#filter@ method.
-* =>[http://github.com/h3rald/h3rald/blob/master/Rules|Rules] -- using the @Glyph#compile@ method to generate PDF files.
+* =>[http://github.com/h3rald/h3rald/blob/master/lib/glyph_context.rb|lib/glyph_context.rb] -- using the @Glyph#compile@ method to generate PDF files.
 		]
 	]
 	section[
