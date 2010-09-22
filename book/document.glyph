@@ -1,9 +1,11 @@
 book[
 	@head[
-		style[default.css]
-		?[eq[$[document.output]|pdf]|style[pagination.css]]
-		?[eq[$[filters.highlighter]|coderay]|style[coderay.css]]
-		?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/lazy.css]]
+		?[not[eq[$[document.output]|h3rald]]|
+			style[default.css]
+			?[eq[$[document.output]|pdf]|style[pagination.css]]
+			?[eq[$[filters.highlighter]|coderay]|style[coderay.css]]
+			?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/lazy.css]]
+		]
 	]
 	@pre-title[
 		?[

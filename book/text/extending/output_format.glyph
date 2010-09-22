@@ -49,8 +49,7 @@ namespace :generate do
       if i.file? then
         next if 
           i.to_s.match(Regexp.escape(dir/'glyph')) \|\| 
-          i.to_s.match(Regexp.escape(dir/'images')) \|\| 
-          i.to_s.match(Regexp.escape(dir/'styles'))
+          i.to_s.match(Regexp.escape(dir/'images')) 
         dest = dir/"glyph/book/#{i.relative_path_from(Glyph::PROJECT/dir)}"
         src = i.to_s
         Pathname.new(dest).parent.mkpath
@@ -59,7 +58,7 @@ namespace :generate do
     end
     # Remove files
     dir.children.each do \|c\|
-      unless [dir/'glyph', dir/'images', dir/'styles'].include? c then
+      unless [dir/'glyph', dir/'images'].include? c then
         c.directory? ? c.rmtree : c.unlink
       end
     end
