@@ -3,15 +3,14 @@ permalink: glyph
 filters_pre: 
 - erb
 - redcloth
-title: "Project: Glyph"
+title: "Glyph"
+subtitle: "A Rapid Document Authoring Framework"
 type: project
 github: glyph
 links:
 - "Repository": http://www.github.com/h3rald/glyph/
-- "Bug Tracking": http://www.github.com/h3rald/glyph/issues
 - "Download": http://www.rubygems.org/gems/glyph
-- "Book": http://www.h3rald.com/glyph/book/
-- "Docs": http://rubydoc.info/gems/glyph/
+- "Documentation": /glyph/book/
 - "User Group": http://groups.google.com/group/glyph-framework
 status: Active
 version: %[Glyph::VERSION]

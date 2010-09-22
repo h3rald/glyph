@@ -65,7 +65,7 @@ For examples see any of the following:
 		@remarks[&[unsafe]]
 		@params[
 			-p[0|The full name of a configuration setting.]	
-			-p[0|The new value of the configuration setting]	
+			-p[1|The new value of the configuration setting]	
 		]
 	]
 	

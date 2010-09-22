@@ -6,7 +6,7 @@
 	<div class="section">
 <h2 id="h_1">v0.4.1 &ndash; September 25th 2010</h2>
 <div class="section">
-<h3 id="h_2">4 Bugs Fixed</h3>
+<h3 id="h_2">5 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -21,7 +21,10 @@
 		<td><p><span class="caps">SCSS</span> now used internally by Glyph to generate default <span class="caps">CSS</span> files.</p></td></tr>
 		
 	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/173">#173</a></td>
-		<td><p>Consecutive escape sequences are now interpreted correctly in topics.</p></td></tr></table>
+		<td><p>Consecutive escape sequences are now interpreted correctly in topics.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/174">#174</a></td>
+		<td><p>Fixed error causing broken images in web5/html5 output.</p></td></tr></table>
 
 </div>
 

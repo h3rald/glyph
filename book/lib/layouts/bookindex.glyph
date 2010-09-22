@@ -47,7 +47,7 @@
 				</nav> 
 
 				<nav class="section"> 
-					/<a href="/projects/" rel="archives">PROJECTS</a> 
+					/<a href="/glyph/" rel="archives">GLYPH</a> 
 				</nav> 
 
 			</header> 
@@ -55,10 +55,10 @@
 				<header> 
 					<hgroup> 
 					<h1>Glyph - Document Authoring Framework</h1> 
-					<h2>Online Help</h2> 
+					<h2>Documentation</h2> 
 					</hgroup> 
 				</header> 
-				<section id="body-text"> 
+				<section id="body-text" class="glyph-index"> 
 					toc[]
 				</section> 
 			</article> 

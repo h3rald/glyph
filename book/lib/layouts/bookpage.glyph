@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html lang="en"> 
 	<head> 
-		<title>Glyph - {{title}}</title> 
+		<title>{{title}} &ndash; Glyph Documentation</title> 
 
 
 
@@ -47,7 +47,7 @@
 				</nav> 
 
 				<nav class="section"> 
-					/<a href="/projects/" rel="archives">PROJECTS</a> 
+					/<a href="/glyph/" rel="archives">GLYPH</a> 
 				</nav> 
 
 			</header> 
@@ -55,9 +55,10 @@
 				<header> 
 					<hgroup> 
 					<h1>{{title}}</h1> 
+					<h2>Glyph Documentation</h2>
 					</hgroup> 
 				</header> 
-				<section id="body-text" class="hyphenate"> 
+				<section id="body-text" class="hyphenate glyph-book"> 
 
 							navigation[{{id}}]
 							{{contents}}

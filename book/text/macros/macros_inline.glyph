@@ -23,7 +23,7 @@
 		@example[=fmi[creating links\|#links]=]
 		@params[
 			-p[0|The object that needs additional explanation.]
-			-p[0|A valid bookmark within the document.]
+			-p[1|A valid bookmark within the document.]
 		]
 	]
 

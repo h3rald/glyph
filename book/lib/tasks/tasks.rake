@@ -25,23 +25,21 @@ namespace :generate do
 		# Copy files in subdir
 		(dir).find do |i|
 			if i.file? then
-				next if 
-					i.to_s.match(Regexp.escape(dir/'glyph')) || 
-					i.to_s.match(Regexp.escape(dir/'images')) 
+				next if i.to_s.match(Regexp.escape(dir/'glyph')) 
 				dest = dir/"glyph/book/#{i.relative_path_from(Glyph::PROJECT/dir)}"
 				src = i.to_s
 				Pathname.new(dest).parent.mkpath
 				file_copy src, dest
 			end
 		end
-		# Remove files
+		# Remove files from output dir
 		dir.children.each do |c|
-			unless [dir/'glyph', dir/'images'].include? c then
+			unless c == dir/'glyph' then
 				c.directory? ? c.rmtree : c.unlink
 			end
 		end
-		(dir/'images/glyph/glyph.eps').unlink 
-		(dir/'images/glyph/glyph.svg').unlink
+		(dir/'glyph/book/images/glyph/glyph.eps').unlink 
+		(dir/'glyph/book/images/glyph/glyph.svg').unlink
 		# Create project page
 		project = Glyph.filter %{layout:project[
 				@contents[#{file_load(Glyph::PROJECT/'text/introduction.glyph')}]

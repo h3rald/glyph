@@ -41,6 +41,7 @@ release[0.4.1|September 25th 2010|
 		issue[170|Improved default CodeRay stylesheet.]
 		issue[171|SCSS now used internally by Glyph to generate default CSS files.]
 		issue[173|Consecutive escape sequences are now interpreted correctly in topics.]
+		issue[174|Fixed error causing broken images in web5/html5 output.]
 	]
 ]
 release[0.4.0|September 3th 2010|

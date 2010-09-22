@@ -24,7 +24,7 @@ macro :figure do
 	caption = "figcaption[#{param(1)}]" rescue nil
 	figure_element_for image, alt, caption do |alt, dest_file, caption|
 		interpret %{=figure[
-img[#{alt}@src[#{Glyph['document.base']}#{dest_file}]#{@node.attrs.join}]
+img[#{alt}@src[#{Glyph["output.#{Glyph['document.output']}.base"]}#{dest_file}]#{@node.attrs.join}]
 					#{caption}
 ]}
 	end
