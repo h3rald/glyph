@@ -35,7 +35,7 @@ rw:[issue|
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
 ]
-release[0.4.1|September 25th 2010|
+release[0.4.1|September 23th 2010|
 	bugs[
 		issue[169|*.scss files are now supported by the %>[style].]
 		issue[170|Improved default CodeRay stylesheet.]
