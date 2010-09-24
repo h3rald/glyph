@@ -182,6 +182,7 @@ Test -- Test Snippet
 		define_em_macro
 		interpret("rewrite:[rw_test|em[{{0}}\\.em[{{a}}]]]").process
 		output_for("rw_test[test @a[em[A!]]]").should == "<em>test<em><em>A!</em></em></em>"
+		output_for("rw_test[]").should == "<em><em></em></em>"
 	end
 
 	it "rewrite should detect mutual definitions" do

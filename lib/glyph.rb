@@ -212,11 +212,11 @@ module Glyph
 			body = text.dup
 			# Parameters
 			body.gsub!(/\{\{(\d+)\}\}/) do
-				raw_param($1.to_i).strip
+				raw_param($1.to_i).to_s.strip
 			end
 			# Attributes
 			body.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
-				raw_attr($1.to_sym).strip
+				raw_attr($1.to_sym).to_s.strip
 			end
 			interpret body
 		end
