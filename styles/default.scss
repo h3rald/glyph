@@ -1,8 +1,8 @@
 @import "definitions.scss";
 
 * {
-  border: none;
   font-family: inherit;
+  border: none;
   font-size: 100%;
   font-style: inherit;
   margin: 0;
@@ -207,11 +207,11 @@ a {
   &:hover {
     color: $link-hover-color; } }
 
-pre > code {
-	@include codeblock; }
+.code > pre {
+  @include codeblock; }
 
-code { 
-	font-size: 0.8em; }
+code, .CodeRay { 
+  font-size: 0.8em; }
 
 span.line-numbers {
   margin: 0;

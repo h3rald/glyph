@@ -1,6 +1,6 @@
 * {
-  border: none;
   font-family: inherit;
+  border: none;
   font-size: 100%;
   font-style: inherit;
   margin: 0;
@@ -201,7 +201,7 @@ a {
   a:hover {
     color: #005b91; }
 
-pre > code {
+.code > pre {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -209,11 +209,10 @@ pre > code {
   font-family: 'Courier New', 'Terminal', monospace;
   color: #E6E0DB;
   padding: 20px;
-  overflow: auto;
-  font-size: 0.8em;
+  overflow: auto hidden;
   margin: 20px 0 20px 0; }
 
-code {
+code, .CodeRay {
   font-size: 0.8em; }
 
 span.line-numbers {

@@ -127,6 +127,15 @@ module Glyph
 			ALIASES[:by_def][name.to_sym]
 		end
 
+		# Returns a list of macro names corresponding to sections
+		# that commonly have a title
+		def titled_sections
+			(Glyph['system.structure.frontmatter']+
+			Glyph['system.structure.bodymatter']+
+			Glyph['system.structure.backmatter']+
+			[:section]).uniq
+		end
+
 		# Returns true if the macro names point to the same definition
 		# @param [String, Symbol] ident1 the first macro to compare
 		# @param [String, Symbol] ident2 the second macro to compare

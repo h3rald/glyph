@@ -1,49 +1,38 @@
-.CodeRay {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  background-color: #222;
-  font-family: 'Courier New', 'Terminal', monospace;
-  color: #E6E0DB;
-  padding: 20px;
-  overflow: auto;
-  font-size: 0.8em;
-  margin: 20px 0 20px 0; }
-  .CodeRay pre {
-    line-height: 1.2em;
-    margin: 0px;
-    padding: 0px; }
-  .CodeRay .no {
-    font-weight: bold;
-    color: #595959; }
-  .CodeRay .an {
-    color: #E7BE69; }
-  .CodeRay .c {
-    color: #BC9358;
-    font-style: italic; }
-  .CodeRay .ch {
-    color: #509E4F; }
-  .CodeRay .cl, .CodeRay .co {
-    color: #FFF; }
-  .CodeRay .fl {
-    color: #A4C260; }
-  .CodeRay .fu {
-    color: #FFC56D; }
-  .CodeRay .gv {
-    color: #D0CFFE; }
-  .CodeRay .i {
-    color: #A4C260; }
-  .CodeRay .iv {
-    color: #D0CFFE; }
-  .CodeRay .pp {
-    color: #E7BE69; }
-  .CodeRay .r {
-    color: #CB7832; }
-  .CodeRay .rx, .CodeRay .s {
-    color: #A4C260; }
-  .CodeRay .sy {
-    color: #6C9CBD; }
-  .CodeRay .ta {
-    color: #E7BE69; }
-  .CodeRay .pc {
-    color: #6C9CBD; }
+.CodeRay pre {
+  line-height: 1.2em;
+  margin: 0px;
+  color: #FFF; }
+.CodeRay .no {
+  font-weight: bold;
+  color: #595959; }
+.CodeRay .an {
+  color: #E7BE69; }
+.CodeRay .c {
+  color: #BC9358;
+  font-style: italic; }
+.CodeRay .ch {
+  color: #509E4F; }
+.CodeRay .cl, .CodeRay .co {
+  color: #FFF; }
+.CodeRay .fl {
+  color: #A4C260; }
+.CodeRay .fu {
+  color: #FFC56D; }
+.CodeRay .gv {
+  color: #D0CFFE; }
+.CodeRay .i {
+  color: #A4C260; }
+.CodeRay .iv {
+  color: #D0CFFE; }
+.CodeRay .pp {
+  color: #E7BE69; }
+.CodeRay .r {
+  color: #CB7832; }
+.CodeRay .rx, .CodeRay .s {
+  color: #A4C260; }
+.CodeRay .sy {
+  color: #6C9CBD; }
+.CodeRay .ta {
+  color: #E7BE69; }
+.CodeRay .pc {
+  color: #6C9CBD; }
