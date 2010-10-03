@@ -197,4 +197,14 @@ Test -- Test Snippet
 		end.should raise_error(Glyph::MacroError)
 	end
 
+	it "output?" do
+		out = Glyph['document.output']
+		Glyph['document.output'] = "html"
+		output_for("?[output?[html|web]|YES!]").should == "YES!"
+		Glyph['document.output'] = "web"
+		output_for("?[output?[html|web]|YES!]").should == "YES!"
+		Glyph['document.output'] = "web5"
+		output_for("?[output?[html|web]|YES!|NO...]").should == "NO..."
+	end
+
 end	

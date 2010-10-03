@@ -195,6 +195,10 @@ macro "rewrite:" do
 	nil
 end
 
+macro "output?" do
+	Glyph['document.output'].in? parameters
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
