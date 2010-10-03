@@ -130,6 +130,7 @@ end
 (Glyph['system.structure.frontmatter'] + Glyph['system.structure.bodymatter'] + Glyph['system.structure.backmatter']).
 	each {|s| macro_alias s => :section }
 
+macro_alias "§" => :section
 macro_alias :frontcover => :section
 macro_alias :titlepage => :section
 macro_alias :halftitlepage => :section

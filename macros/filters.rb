@@ -70,6 +70,28 @@ macro :markdown do
 	end
 end
 
+rewrite "textile_section", 
+%{section[
+		@src[{{src}}]
+		@id[{{id}}]
+		@notoc[{{notoc}}]
+		@title[{{title}}]
+		textile[
+{{0}}
+		]
+	]}
+
+rewrite "markdown_section", 
+%{section[
+		@src[{{src}}]
+		@id[{{id}}]
+		@notoc[{{notoc}}]
+		@title[{{title}}]
+		markdown[
+{{0}}
+		]
+	]}
+
 macro :highlight do
 	exact_parameters 2  
 	lang = param(0)
@@ -123,3 +145,7 @@ end
 
 macro_alias :md => :markdown
 macro_alias :txt => :textile
+macro_alias :txt_section => :textile_section
+macro_alias :md_section => :markdown_section
+macro_alias "§txt" => :textile_section
+macro_alias "§md" => :markdown_section

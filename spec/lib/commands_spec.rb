@@ -231,10 +231,11 @@ test_project - Outline
 		reset_quiet
 		create_project
 		out = run_command(["stats", "-ms"])
-		out.should match "-- Total Macro Definitions: 45" 
+		total_macros = (Glyph::MACROS.keys - Glyph::ALIASES[:by_alias].keys).uniq.length
+		out.should match "-- Total Macro Definitions: #{total_macros}" 
 		out.should match "-- Unused Snippets: test"
 		out = run_command(["stats"])
-		out.should match "-- Total Macro Definitions: 45" 
+		out.should match "-- Total Macro Definitions: #{total_macros}" 
 		out.should_not match "-- Unused Snippets: test"
 		out.should match "-- Total Unreferenced Bookmarks: 3"
 		out = run_command(["stats", "-lb", "--bookmark=md"])

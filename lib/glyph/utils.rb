@@ -121,6 +121,8 @@ module Glyph
 			ALIASES[:by_alias][name.to_sym]
 		end
 
+		# Returns the names of the macro aliases referencing the supplied definition
+		# @param [String, Symbol] name the macro name to check
 		def macro_aliases_for(name)
 			ALIASES[:by_def][name.to_sym]
 		end

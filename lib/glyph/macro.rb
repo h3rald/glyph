@@ -57,12 +57,13 @@ module Glyph
 		# @option options [Boolean] :strip whether the value is stripped or not
 		# @return [String, nil] the value of the attribute
 		# @since 0.3.0
-		def attribute(name, options={:strip => true})
+		def attribute(name, options={:strip => true, :null_if_blank => true})
 			return @attributes[name.to_sym] if @attributes && @attributes[name.to_sym]
 			return nil unless @node.attribute(name)
 			@attributes = {} unless @attributes
 			@attributes[name] = @node.attribute(name).evaluate(@node, :attrs => true).to_s
 			@attributes[name].strip! if options[:strip]
+			@attributes[name] = nil if @attributes[name].blank? && options[:null_if_blank]
 			@attributes[name]
 		end
 
@@ -72,12 +73,13 @@ module Glyph
 		# @option options [Boolean] :strip whether the value is stripped or not
 		# @return [String, nil] the value of the parameter
 		# @since 0.3.0
-		def parameter(n, options={:strip => true})
+		def parameter(n, options={:strip => true, :null_if_blank => true})
 			return @parameters[n] if @parameters && @parameters[n]
 			return nil unless @node.parameter(n)
 			@parameters = Array.new(@node.parameters.length) unless @parameters
 			@parameters[n] = @node.parameter(n).evaluate(@node, :params => true).to_s
 			@parameters[n].strip! if options[:strip]
+			@parameters[n] = nil if @parameters[n].blank? && options[:null_if_blank]
 			@parameters[n]
 		end
 
@@ -86,12 +88,13 @@ module Glyph
 		# @option options [Boolean] :strip whether the value is stripped or not
 		# @return [Hash] the macro attributes
 		# @since 0.3.0
-		def attributes(options={:strip => true})
+		def attributes(options={:strip => true, :null_if_blank => true})
 			return @attributes if @attributes
 			@attributes = {}
 			@node.attributes.each do |value|
 				@attributes[value[:name]] = value.evaluate(@node, :attrs => true)
 				@attributes[value[:name]].strip! if options[:strip]
+				@attributes[value[:name]] = nil if @attributes[value[:name]].blank? && options[:null_if_blank]
 			end
 			@attributes
 		end
@@ -101,12 +104,13 @@ module Glyph
 		# @option options [Boolean] :strip whether the value is stripped or not
 		# @return [Array] the macro parameters
 		# @since 0.3.0
-		def parameters(options={:strip => true})
+		def parameters(options={:strip => true, :null_if_blank => true})
 			return @parameters if @parameters
 			@parameters = []
 			@node.parameters.each do |value|
 				@parameters << value.evaluate(@node, :params => true)
 				@parameters.last.strip! if options[:strip]
+				@parameters.last = nil if @parameters.last.blank? && options[:null_if_blank]
 			end
 			@parameters
 		end

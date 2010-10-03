@@ -176,6 +176,32 @@ describe Glyph::Macro do
 		m.node.attribute(:b)[:value].should == nil
 	end
 
+	it "should treat empty parameters/attributes as null" do
+		Glyph.macro :test_ap do
+			result = ""
+			if attr(:a) then
+				result << "(a)"
+			else
+				result << "(!a)"
+			end
+			if param(0) then
+				result << "(0)"
+			else
+				result << "(!0)"
+			end
+			if param(1) then
+				result << "(1)"
+			else
+				result << "(!1)"
+			end
+			result
+		end
+		output_for("test_ap[]").should == "(!a)(!0)(!1)"
+		output_for("test_ap[@a[]|]").should == "(!a)(!0)(!1)"
+		output_for("test_ap[@a[.]|]").should == "(a)(!0)(!1)"
+		output_for("test_ap[@a[.].|.]").should == "(a)(0)(1)"
+	end
+
 	it "should expose a path method to determine its location" do
 		tree = Glyph::Parser.new(%{
 		test1[

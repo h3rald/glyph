@@ -158,7 +158,8 @@ module Glyph
 						list = ""
 						added_headers ||= []
 						n1.descend do |n2, level|
-							if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
+							#if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
+							if n2.is_a?(Glyph::MacroNode) && Glyph.macro_eq?(n2[:name], :section) then
 								if Glyph.multiple_output_files? then
 									# Only consider topics/booklets when building TOC for web/web5
 									next if !n2.attribute(:src) && n2.child_macros.select{|child| child.attribute(:src)}.blank? 
@@ -201,7 +202,8 @@ module Glyph
 					level = 1
 					@node.ascend do |n| 
 						break if n.respond_to?(:attribute) && n.attribute(:class) && n.attribute(:class).children.join.strip == "topic"
-						if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
+						#if n.is_a?(Glyph::MacroNode) && Glyph["system.structure.headers"].include?(n[:name]) then
+						if n.is_a?(Glyph::MacroNode) && Glyph.macro_eq?(n[:name], :section) then
 							level+=1
 						end
 					end
