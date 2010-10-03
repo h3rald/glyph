@@ -131,9 +131,9 @@ end
 
 macro :condition do
 	min_parameters 1
-	max_parameters 2
+	max_parameters 3
 	res = param(0)
-	(res.blank? || res == "false") ? "" : param(1).to_s
+	(res.blank? || res == "false") ? param(2).to_s : param(1).to_s
 end
 
 macro :eq do

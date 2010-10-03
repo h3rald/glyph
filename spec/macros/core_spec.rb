@@ -74,6 +74,11 @@ describe "Macro:" do
 		Glyph['test_config'].should == true
 	end
 
+	it "condition (else)" do
+		output_for("?[true|OK|NOT OK]").should == "OK"
+		output_for("?[false|OK|NOT OK]").should == "NOT OK"
+	end
+
 	it "comment" do
 		output_for("--[config:[some_random_setting|test]]").should == ""
 		Glyph[:some_random_setting].should == nil
