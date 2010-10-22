@@ -12,18 +12,18 @@ Consider the following code:
 	]
 	highlight[=html|
 ?[$[document.draft]\|
-This is a first draft of the Glyph Book]
-?[not[$[document.draft]]\|
+This is a first draft of the Glyph Book\|
 This is the official version of the Glyph Book]
 	=]
 	txt[
 In this case, if @document.draft@ is set to @true@, "This is a first draft of the Glyph Book" will be displayed; if not, "This is the official version of the Glyph Book" will be displayed instead.
 
-The %>[condition] takes two parameters:
-* the first one is the condition to evaluate
-* the second one is the text to include in the document only if the condition is satisfied.
+The %>[condition] takes up to three parameters:
+# the condition to evaluate
+# the text to include in the document only if the condition is satisfied.
+# _(Optional)_ the text to include in the document if the condition is _not_ satisfied.
 
-Note that _both_ parameters can contain macros, of course, so you can write things like:
+Note that _all_ parameters can contain macros, of course, so you can write things like:
 	]
 	highlight[=html|
 ?[and[

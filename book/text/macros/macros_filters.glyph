@@ -1,3 +1,23 @@
+rw:[filtered_section|
+	ref_macro[
+		@n[{{markup}}_section]
+		@desc[Creates a section (see %>[section]) whose content can be formatted with {{markup}} markup.]
+		@aliases[{{aliases}}]
+		@block_example[=
+{{markup}}_section[
+	@title[Test Section]
+	@id[test]
+Some *{{markup}}* text.
+]
+		=]
+		@params[-p[0|The text of the section]]
+		@attrs[
+			-a[title|The title of the section &[opt]]
+			-a[id|The ID of the section &[opt]]
+			-a[notoc|If not blank, the header will not appear in the Table of Contents. &[opt]]
+		]
+	]
+]
 	ref_macro[
 		@n[markdown]
 		@desc[
@@ -8,6 +28,11 @@ Uses a Markdown converter (BlueCloth, RDiscount, Maruku or Kramdown) to transfor
 		@aliases[md]
 		@example[=markdown[This is *emphasized* text.]=]
 		@params[-p[0|The Markdown text to filter.]]
+	]
+
+	filtered_section[
+		@markup[markdown]
+		@aliases[§md, md_section]
 	]
 
 	ref_macro[
@@ -22,9 +47,14 @@ Uses the RedCloth gem to transform the value into HTML or LaTeX, depending on th
 		@params[-p[0|The Textile text to filter.]]
 	]
 
+	filtered_section[
+		@markup[textile]
+		@aliases[§txt, txt_section]
+	]
+
 	ref_macro[
 		@n[highlight]
-		@desc[Highlights a piece of source code (second parameter) according to the specified language (first parameter). fmi[code highligting|#source_code].]
+		@desc[Highlights a piece of source code according to the specified language. fmi[code highligting|#source_code].]
 		@block_example[=
 highlight[ruby\|
   def hello
@@ -32,4 +62,8 @@ highlight[ruby\|
   end
 ]
 		=]
+		@params[
+			-p[0|A programming language supported by the underlying highlighter.]
+			-p[1|The code to highlight.]
+		]
 	]

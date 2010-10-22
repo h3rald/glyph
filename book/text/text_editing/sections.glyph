@@ -1,5 +1,5 @@
 
-	p[Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section], like so:]
+	p[Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section] (aliased by code[§]), like so:]
 
 	highlight[=html|
 section[
@@ -29,4 +29,26 @@ Note an important difference from HTML: there is no need for an explicit level f
 
 	txt[
 By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--\[...\]@ macros are _comments_, therefore they are not included in the final output).
+	]
+  section[
+		@title[Markup-aware sections]
+		txt[Although Glyph can be used on its own to produce valid HTML or XML code, you may often want to use &[markups] to save some typing. Typically, you'll end up writing a lot of code like this:]
+	
+		highlight[=html|
+section[
+	@title[My Textile section]
+	textile[
+Textile markup can be used _here_.
+	]
+]
+		=]
+		txt[To save you even more typing, you can use the %>[textile_section] (aliased by @txt_section@ and @§txt@) and the %>[markdown_section] (aliased by @md_section@ and @§md@). By doing so, the previous code snippet can be written like this:]
+		highlight[=html|
+§txt[
+	@title[My Textile section]
+Textile markup can be used _here_.
+]
+		=]
+		tip[txt[On an Italian keyboard, you can type a @§@ character by pressing *SHIFT + &ugrave;*. Unfortunately, that's about the only useful thing an Italian keyboard does. If you use Vim, you can map it to some key sequence like @''s@, like this: @map! ''s <C-V>u00A7@.]]
+ 
 	]

@@ -64,7 +64,7 @@ Used to create a book. By default, it includes the following macros:
 
 	ref_macro[
 		@n[section]
-		@desc[Creates a section (@<div>@ tag).]
+		@desc[Creates a section (@<div>@ or @<section>@ tag).]
 		@aliases[%[=Glyph['system.structure'].values.flatten.uniq.map{\|a\| a.to_s }.push("section").sort.join(', ')=]]
 		@block_example[=
 section[

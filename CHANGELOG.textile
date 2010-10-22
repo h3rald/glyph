@@ -4,9 +4,42 @@
 
 
 	<div class="section">
-<h2 id="h_1">v0.4.1 &ndash; September 25th 2010</h2>
+<h2 id="h_1">v0.4.2 &ndash; October 22th 2010</h2>
 <div class="section">
-<h3 id="h_2">5 Bugs Fixed</h3>
+<h3 id="h_2">3 Features Implemented</h3>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/172">#172</a></td>
+		<td><p>A new output? macro macro can be used to test whether Glyph is compiling to a particular output format.</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/175">#175</a></td>
+		<td><p>The conditional macro now support a third parameter (else branch).</p></td></tr>
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/176">#176</a></td>
+		<td><p>A bunch of new aliases and shortcuts are available for the section macro.</p></td></tr></table>
+
+</div>
+	
+	
+		<div class="section">
+<h3 id="h_3">1 Bug Fixed</h3>
+<table><tr><th>ID</th>
+					<th>Description</th></tr>
+				
+		
+	<tr><td><a href="http://github.com/h3rald/glyph/issues/closed#issue/178">#178</a></td>
+		<td><p>No error is raised anymore if less than the required parameters/attributes are supplied to a rewritten macro.</p></td></tr></table>
+
+</div>
+
+</div>
+
+	<div class="section">
+<h2 id="h_4">v0.4.1 &ndash; September 23th 2010</h2>
+<div class="section">
+<h3 id="h_5">5 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -31,9 +64,9 @@
 </div>
 
 	<div class="section">
-<h2 id="h_3">v0.4.0 &ndash; September 3th 2010</h2>
+<h2 id="h_6">v0.4.0 &ndash; September 3th 2010</h2>
 <div class="section">
-<h3 id="h_4">13 Features Implemented</h3>
+<h3 id="h_7">13 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -81,7 +114,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_5">7 Bugs Fixed</h3>
+<h3 id="h_8">7 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -112,9 +145,9 @@
 </div>
 
 	<div class="section">
-<h2 id="h_6">v0.3.0 &ndash; June 13th 2010</h2>
+<h2 id="h_9">v0.3.0 &ndash; June 13th 2010</h2>
 <div class="section">
-<h3 id="h_7">13 Features Implemented</h3>
+<h3 id="h_10">13 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -162,7 +195,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_8">3 Bugs Fixed</h3>
+<h3 id="h_11">3 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -181,9 +214,9 @@
 </div>
 
 	<div class="section">
-<h2 id="h_9">v0.2.0 &ndash; May 9th 2010</h2>
+<h2 id="h_12">v0.2.0 &ndash; May 9th 2010</h2>
 <div class="section">
-<h3 id="h_10">11 Features Implemented</h3>
+<h3 id="h_13">11 Features Implemented</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -225,7 +258,7 @@
 	
 	
 		<div class="section">
-<h3 id="h_11">8 Bugs Fixed</h3>
+<h3 id="h_14">8 Bugs Fixed</h3>
 <table><tr><th>ID</th>
 					<th>Description</th></tr>
 				
@@ -259,7 +292,7 @@
 </div>
 
 	<div class="section">
-<h2 id="h_12">v0.1.0 &ndash; April 8th 2010</h2>
+<h2 id="h_15">v0.1.0 &ndash; April 8th 2010</h2>
 Initial release.
 
 </div>

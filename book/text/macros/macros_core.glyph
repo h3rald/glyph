@@ -142,6 +142,15 @@ Checks a string against a regular expression.
 	]
 
 	ref_macro[
+		@n[output?]
+		@desc[Evaluates to true if Glyph is generating output in the specified format(s).]
+		@example[=?[output?[web\|web5]\|This text is printed only when generating web or web5 output.]=]
+		@params[
+			-p[0, ...|a valid output target.]
+		]
+	]
+
+	ref_macro[
 		@n[or]
 		@desc[Conditional @or@ operator, to be used with the %>[condition].]
 		@example[=?[or[true\|false]\|This is always displayed.]=]

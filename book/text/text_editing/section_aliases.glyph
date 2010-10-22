@@ -1,5 +1,5 @@
 	txt[
-There are _a lot_ of macros that can be used in the same way as @section@, one for each element commonly used in =>[http://en.wikipedia.org/wiki/Book_design|book design]. Each one of them is a simple wrapper for a @<div>@ tag with a @class@ attribute set to its name.
+There are _a lot_ of macros that can be used in the same way as @section@, one for each element commonly used in =>[http://en.wikipedia.org/wiki/Book_design|book design]. 
 
 The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:
 	]
@@ -24,5 +24,5 @@ The following table lists the identifiers of all section-like macros, divided ac
 	p[strong[&Dagger;]: Any subsection of this section is not listed in the Table of Contents.]
 
 	note[
-		code[frontmatter], code[bodymatter] and code[backmatter] are also macro identifiers, but they are exposed as attributes for the %>[book] and the %>[article], so if you're using either of these two macros as your root macro for your document, there's no need to use them explicitly.
+		code[frontmatter], code[bodymatter] and code[backmatter] are also macro identifiers, but they are also exposed as attributes for the %>[book] and the %>[article], so if you're using either of these two macros as your root macro for your document, there's no need to use them explicitly.
 	]

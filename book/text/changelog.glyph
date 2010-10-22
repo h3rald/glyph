@@ -2,9 +2,11 @@
 macro :features do
 	verb = (@name == :features) ? "Implemented" : "Fixed"
 	total = @node.child_macros.length
+	name = @name.to_s.capitalize
+	name.chop! if total == 1
 	interpret %{
 		section[
-			@title[#{total} #{@name.to_s.capitalize} #{verb}]
+			@title[#{total} #{name} #{verb}]
 			table[
 				tr[
 					th[ID]
@@ -34,6 +36,16 @@ rw:[issue|
 	%:[%>|"#{value} macro"]
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
+]
+release[0.4.2|October 22th 2010|
+	features[
+		issue[172|A new %>[output?] macro can be used to test whether Glyph is compiling to a particular output format.]
+		issue[175|The conditional macro now support a third parameter (else branch).]
+		issue[176|A bunch of new aliases and shortcuts are available for the section macro.]
+	]
+	bugs[
+		issue[178|No error is raised anymore if less than the required parameters/attributes are supplied to a rewritten macro.]
+	]
 ]
 release[0.4.1|September 23th 2010|
 	bugs[
