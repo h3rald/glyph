@@ -21,16 +21,16 @@ stats_for[
 \[...\]
 -- Total External Links: 95
 -- External Links
-   - &\[yardoc\]/Glyph 
-   - &\[yardoc\]/Glyph/Document 
-   - &\[yardoc\]/Glyph/Interpreter 
-   - &\[yardoc\]/Glyph/Macro 
-   - &\[yardoc\]/Glyph/Macro/Validators 
-   - &\[yardoc\]/Glyph/Macro:update_source 
-   - &\[yardoc\]/Glyph/MacroNode 
-   - &\[yardoc\]/Glyph/Parser 
-   - &\[yardoc\]/Glyph/SyntaxNode 
-   - &\[yardoc\]/Macro 
+   - &\[rubydoc\]/Glyph 
+   - &\[rubydoc\]/Glyph/Document 
+   - &\[rubydoc\]/Glyph/Interpreter 
+   - &\[rubydoc\]/Glyph/Macro 
+   - &\[rubydoc\]/Glyph/Macro/Validators 
+   - &\[rubydoc\]/Glyph/Macro:update_source 
+   - &\[rubydoc\]/Glyph/MacroNode 
+   - &\[rubydoc\]/Glyph/Parser 
+   - &\[rubydoc\]/Glyph/SyntaxNode 
+   - &\[rubydoc\]/Macro 
    - http://code.google.com/p/wkhtmltopdf/ 
    - http://coderay.rubychan.de/ 
    - http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html 

@@ -97,7 +97,7 @@ Evaluates to the contents of a text file stored in the @text/@ directory referen
 				li[&[unsafe]]
 				li[@.glyph@ is assumed if no file extension is specified.]
 				li[
-This macro can also be used to include @.rb@ ruby files within the @lib@ directory. File contents are evaluated in the context of the =>[&[yardoc]/Glyph|Glyph] module.
+This macro can also be used to include @.rb@ ruby files within the @lib@ directory. File contents are evaluated in the context of the =>[&[rubydoc]/Glyph|Glyph] module.
 				]
 			]
 		]
@@ -183,7 +183,7 @@ rw:[release\|
 
 	ref_macro[
 		@n[ruby]
-		@desc[Evaluates its value as Ruby code within the context of the =>[&[yardoc]/Glyph|Glyph] module.]
+		@desc[Evaluates its value as Ruby code within the context of the =>[&[rubydoc]/Glyph|Glyph] module.]
 		@aliases[%]
 		@examples[=
 %[Time.now]

@@ -1,4 +1,4 @@
-	p[If you need to make sure that a macro is used properly, consider using =>[&[yardoc]/Glyph/Macro/Validators|validators]. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.]
+	p[If you need to make sure that a macro is used properly, consider using =>[&[rubydoc]/Glyph/Macro/Validators|validators]. These methods can be used anywhere within the macro code to check whether certain conditions are met or not. Some default validators are provided to check the number of parameters of a macro, and they are actually used in some system macros.]
 	p[If you want to create your own validators, you can call the generic code[validate] method which takes the message to display in case of error, a Hash of options and a block containing the validation to perform.]
 	box[Validating macro placement|
 		txt[

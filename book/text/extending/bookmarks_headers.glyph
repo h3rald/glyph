@@ -1,5 +1,5 @@
 	txt[
-The =>[&[yardoc]/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
+The =>[&[rubydoc]/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
 	]
 
 	highlight[=ruby|

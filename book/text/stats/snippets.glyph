@@ -12,13 +12,13 @@ stats_for[
      glang                  htmlcode               img_attrs              img_file               macros                 
      markups                only_after_declaration only_defined_through   opt                    prince                 
      referenced_with_path   sq_esc                 unsafe                 uv                     wkhtml                 
-     yardoc                 
+     rubydoc                 
 -- Used Snippets:
      bin_params             called_on_files        coderay                filter_by_ext          gcode                  
      glang                  htmlcode               img_attrs              img_file               macros                 
      markups                only_after_declaration only_defined_through   opt                    prince                 
      referenced_with_path   sq_esc                 unsafe                 uv                     wkhtml                 
-     yardoc                 
+     rubydoc                 
 	]
 	@remarks[
 * Information on snippet usage and definitions is available only when displaying statistics for a single snippet.
@@ -26,10 +26,10 @@ stats_for[
 ]
 stats_for[
 	@title[a single snippet]
-	@object[a single snippet (e.g. code[yardoc])]
-	@command[--snippet=yardoc]
+	@object[a single snippet (e.g. code[rubydoc])]
+	@command[--snippet=rubydoc]
 	@example[
-===== Snippet 'yardoc'
+===== Snippet 'rubydoc'
 -- Definition:
 -------------------
 http://rubydoc.info/gems/glyph

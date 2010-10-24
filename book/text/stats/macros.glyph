@@ -67,7 +67,7 @@ stats_for[
 	]
 	@remarks[
 * All the instances of the specified macro definition _and all its aliases_ are collected, regardless whether a definition or an alias is specified.
-* If you use custom macros, make sure they call the =>[&[yardoc]/Glyph/Macro:update_source|Macro#update_source] appropriately method if necessary.
+* If you use custom macros, make sure they call the =>[&[rubydoc]/Glyph/Macro:update_source|Macro#update_source] appropriately method if necessary.
 * If macros are used within =>[#rewriting|rewritten] macros, they'll be also listed in each file where the rewritten macro is used. 
 	]
 ]

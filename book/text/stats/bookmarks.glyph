@@ -33,7 +33,7 @@ stats_for[
 ]
 stats_for[
 	@title[a single bookmark]
-	@object[a single bookmark (e.g. code[yardoc])]
+	@object[a single bookmark (e.g. code[rubydoc])]
 	@command[--bookmark=c_config]
 	@example[
 ===== Bookmark 'c_config' (header)
