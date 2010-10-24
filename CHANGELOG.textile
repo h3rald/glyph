@@ -1,8 +1,10 @@
 
 
 
+
+
 	<div class="section">
-<h2 id="h_1">v0.4.2 &ndash; October 22nd 2010</h2>
+<h2 id="h_1">v0.4.2 &ndash; October 22th 2010</h2>
 <div class="section">
 <h3 id="h_2">3 Features Implemented</h3>
 <table><tr><th>ID</th>
