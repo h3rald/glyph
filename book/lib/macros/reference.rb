@@ -187,7 +187,7 @@ macro :class do
 	else
 		path = value
 	end
-	interpret %{=>[&[yardoc]/#{path}|code[#{value}]]}
+	interpret %{=>[&[rubydoc]/#{path}|code[#{value}]]}
 end
 
 

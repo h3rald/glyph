@@ -1,5 +1,5 @@
 	txt[
-Besides using Glyph from the command line, you can also use it straight from your code. Glyph's public =>[http://yardoc.org/docs/glyph/Glyph|API] is simple and can be used to:
+Besides using Glyph from the command line, you can also use it straight from your code. Glyph's public =>[&[yardoc]|API] is simple and can be used to:
 * Retrieve and update configuration settings (using @Glyph\[\]@ and @Glyph\[\]=@)
 * Filter text to HTML (using @Glyph#filter@)
 * Compile Glyph source files into HTML or PDF files (using @Glyph#compile@)
