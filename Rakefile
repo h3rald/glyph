@@ -33,17 +33,17 @@ begin
 		s.files.exclude 'book/output/web/**/*'
 		s.files.exclude 'book/output/web5/**/*'
 		s.files.exclude 'book/output/html5/**/*'
-		s.add_dependency 'gli', '>= 1.1.1' # Command line interface
+		s.add_dependency 'gli', '>= 1.1.3' # Command line interface
 		s.add_dependency 'extlib', '>= 0.9.15' # Extension methods
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks
-		s.add_development_dependency 'rspec', '>= 1.3.0' # Test suite
-		s.add_development_dependency 'yard', '>= 0.6.0' # Documentation suite
-		s.add_development_dependency 'jeweler', '1.4.0' # Gem management
+		s.add_development_dependency 'rspec', '>= 2.1.0' # Test suite
+		s.add_development_dependency 'yard', '>= 0.6.2' # Documentation suite
+		s.add_development_dependency 'jeweler', '1.5.1' # Gem management
 		s.add_development_dependency 'directory_watcher', ">= 1.3.2" # Auto-regeneration
-		s.add_development_dependency 'haml', ">= 3.0.15" # Sass filter
+		s.add_development_dependency 'haml', ">= 3.0.24" # Sass filter
 		s.add_development_dependency 'RedCloth', ">= 4.2.3" # Textile filter
-		s.add_development_dependency 'bluecloth', ">= 2.0.7" # Markdown filter
-		s.add_development_dependency 'coderay', ">= 0.9.3" # Syntax Highlighting
+		s.add_development_dependency 'bluecloth', ">= 2.0.9" # Markdown filter
+		s.add_development_dependency 'coderay', ">= 0.9.5" # Syntax Highlighting
 	end
 	Jeweler::GemcutterTasks.new
 rescue LoadError
