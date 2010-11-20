@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Glyph
 	
 	# A Glyph::Interpreter object perform the following actions:

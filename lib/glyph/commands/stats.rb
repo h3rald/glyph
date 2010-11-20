@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 GLI.desc 'Display statistics'
 command :stats do |c|
 	c.desc "Display stats about macros"

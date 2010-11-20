@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Hash
 
 	# Converts self to a Node

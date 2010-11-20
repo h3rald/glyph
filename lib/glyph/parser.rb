@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 require 'strscan'
 
 module Glyph
@@ -142,7 +143,7 @@ module Glyph
 				offset = @input.matched.match(/^[^\\](\]|\|)$/) ? 1 : @input.matched.length
 			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
-			match = @input.string[start_p..@input.pos-1]
+			match = extract_string(start_p..@input.pos-1)
 			illegal_macro_delimiter? start_p, match
 			if match.length > 0 then
 				create_node TextNode, :value => match
@@ -164,7 +165,7 @@ module Glyph
 				end
 			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
-			match = @input.string[start_p..@input.pos-1]
+			match = extract_string(start_p..@input.pos-1)
 			illegal_nesting = match.match(/([^\[\]\|\\\s]+)\[\=/)[1] rescue nil
 				if illegal_nesting then
 					error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{current[:name]}'"
@@ -196,6 +197,24 @@ module Glyph
 		end
 
 		private
+		
+		# Thanks Thomas Leitner
+		# http://redmine.ruby-lang.org/issues/show/2645
+		def extract_string(range)
+			result = nil
+			if RUBY_VERSION >= '1.9'
+				begin
+					enc = @input.string.encoding
+					@input.string.force_encoding('ASCII-8BIT')
+					result = @input.string[range].force_encoding(enc)
+				ensure
+					@input.string.force_encoding(enc)
+				end
+			else
+				result = @input.string[range]
+			end
+			result
+		end
 
 		def aggregate_parameters_for(node)
 			indices = []
@@ -216,7 +235,7 @@ module Glyph
 				total_parameters = 0
 				save_parameter = lambda do |max_index|
 					parameter = create_node ParameterNode, :name => "#{total_parameters}".to_sym
-						total_parameters +=1
+					total_parameters +=1
 					current_index.upto(max_index) do |index|
 						parameter << (node & index)
 					end

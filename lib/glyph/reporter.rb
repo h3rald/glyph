@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Glyph
 
 	# This class is used to display statistics collected by a Glyph::Analyzer. 

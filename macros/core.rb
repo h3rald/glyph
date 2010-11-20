@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 
 macro :snippet do
 	no_mutual_inclusion_in 0	

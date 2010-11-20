@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 
 macro :fmi do
 	exact_parameters 2, :level => :warning

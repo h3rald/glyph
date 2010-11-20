@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Glyph
 
 	# @since 0.4.0

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Glyph
 
 	# A subclass of Glyph::SyntaxNode is instantiated by Glyph::Parser whenever a known

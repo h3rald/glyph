@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 GLI.desc 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 GLI.desc 'Compile the project'
 arg_name "[source_file] [destination_file]"
 command :compile do |c|

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require File.join(File.dirname(__FILE__), "..", "spec_helper")
+# encoding: utf-8
 
 describe Glyph::Config do
 
@@ -14,7 +14,7 @@ describe Glyph::Config do
 	end
 
 	after(:all) do
-		@config_path.delete
+		@config_path.delete rescue nil
 	end
 
 	it "should load a YAML configuration file" do

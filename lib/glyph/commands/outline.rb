@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 GLI.desc 'Display the document outline'
 command :outline do |c|
 	c.desc "Limit to level N"

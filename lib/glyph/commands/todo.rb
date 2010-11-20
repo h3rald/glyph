@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 GLI.desc 'Display all project TODO items'
 command :todo do |c|
 	c.action do |global_options, options, args|

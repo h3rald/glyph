@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
+
 lib = File.expand_path(File.dirname(__FILE__) + '/lib')
 $: << lib
 require 'rubygems'
@@ -49,10 +51,10 @@ rescue LoadError
 end
 
 begin
-	require "spec/rake/spectask"
-	Spec::Rake::SpecTask.new('spec') do |t|
-		t.spec_files = FileList['spec/**/*_spec.rb']
-		t.spec_opts = ["--color"]
+	require "rspec/core/rake_task"
+	RSpec::Core::RakeTask.new do |t|
+		t.pattern = 'spec/**/*_spec.rb'
+		t.rspec_opts = ["-c", "-f progress", "-r ./spec/spec_helper.rb"]
 	end
 rescue LoadError
 	puts "RSpec is not available. Install it with: gem install rspec"

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require File.join(File.dirname(__FILE__), "..", "spec_helper")
+# encoding: utf-8
 
 describe "Filter Macros" do
 

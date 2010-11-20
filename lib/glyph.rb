@@ -1,6 +1,7 @@
 # Copyright (c) 2009-2010 Fabio Cevasco
 # website: http://www.h3rald.com/glyph
 # license: MIT
+# encoding: utf-8
 
 require 'rubygems'
 require 'pathname'
