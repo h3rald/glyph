@@ -17,7 +17,6 @@ macro :snippet do
 			else
 				macro_warning e.message, e
 			end
-			macro_todo "Correct errors in snippet '#{ident}'"
 		end
 	else
 		macro_warning "Snippet '#{ident}' does not exist"
@@ -86,10 +85,8 @@ macro :include do
 				raise
 			rescue Glyph::MacroError => e
 				macro_warning e.message, e
-				macro_todo "Correct errors in file '#{value}'"
 			rescue Exception => e
 				macro_warning e.message, e
-				macro_todo "Correct errors in file '#{value}'"
 			end
 		end
 	else

@@ -138,7 +138,7 @@ describe "Macro:" do
 
 	it "image should link files by absolute or relative path in Lite mode" do
 		result = %{
-			<img alt="-" src="images/ligature.jpg" width="90%" height="90%" />
+			<img src="images/ligature.jpg" width="90%" height="90%" />
 		}.gsub(/\n|\t/, '')
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
@@ -161,7 +161,7 @@ describe "Macro:" do
 	it "fig should link files by absolute or relative path in Lite mode" do
 		result = %{
 			<div class="figure">
-			<img alt="-" src="images/ligature.jpg" />
+			<img src="images/ligature.jpg" />
 			<div class="caption">Ligature</div>
 			</div>
 		}.gsub(/\n|\t/, '')

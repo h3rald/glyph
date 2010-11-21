@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe Glyph do
 
@@ -91,6 +90,26 @@ describe Glyph do
 		Glyph.macro_definition_for(:"=>").should == :link
 		Glyph.macro_definition_for(:link).should == nil
 		Glyph.macro_alias?(:"#").should == true
+	end
+
+	it "should store macro representations" do
+		delete_project_dir
+		create_project_dir
+		Glyph.macro :test_rep do
+		end
+		Glyph.macro_alias :test_rep_alias  => :test_rep
+		Glyph.rep :test_rep do |data|
+			"TEST - #{data[:a]}"
+		end
+		Glyph::REPS[:test_rep].call(:a => 1).should == "TEST - 1" 
+		Glyph::REPS[:test_rep_alias].call(:a => 1).should == "TEST - 1" 
+	end
+
+	it "should load reps for a given output" do
+		Glyph.reps_for(:html)
+		Glyph::REPS[:section].should_not be_blank
+		Glyph::REPS[:link].should_not be_blank
+		Glyph::REPS[:"=>"].should_not be_blank
 	end
 
 end

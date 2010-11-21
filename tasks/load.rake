@@ -51,16 +51,10 @@ namespace :load do
 		end
 		case  Glyph['options.macro_set']
 		when 'glyph' then
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb')
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/filters.rb')
-			Glyph.instance_eval file_load(Glyph::HOME/'macros/xml.rb')
-			macro_dirs = Glyph["output.#{Glyph['document.output']}.macro_dirs"]
+			load_macros_from_dir.call Glyph::HOME/"macros"
+			# Load representations
+			Glyph.instance_eval file_load(Glyph::HOME/"macros/reps/#{Glyph['document.output']}.rb")
 			layout_dirs = Glyph["output.#{Glyph['document.output']}.layout_dirs"] || []
-			unless macro_dirs.blank?
-				macro_dirs.each {|d| load_macros_from_dir.call Glyph::HOME/"macros/#{d}" }
-			else
-				warning "No #{Glyph['document.output']} macros defined"
-			end
 			layout_dirs.each {|d| load_layouts_from_dir.call Glyph::HOME/"layouts/#{d}" }
 		when 'xml' then
 			Glyph.instance_eval file_load(Glyph::HOME/'macros/core.rb') 
@@ -75,7 +69,7 @@ namespace :load do
 		# load project macros
 		unless Glyph.lite? then
 			load_macros_from_dir.call Glyph::PROJECT/"lib/macros"
-			load_macros_from_dir.call Glyph::PROJECT/"lib/macros/#{Glyph['document.output']}"
+			Glyph.instance_eval file_load(Glyph::PROJECT/"lib/macros/reps/#{Glyph['document.output']}.rb") rescue nil
 			load_layouts_from_dir.call Glyph::PROJECT/'lib/layouts' if Glyph.multiple_output_files?
 		end
 	end

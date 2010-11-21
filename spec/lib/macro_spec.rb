@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe Glyph::Macro do
 
@@ -227,6 +226,18 @@ describe Glyph::Macro do
 		output_for(text1).should == out
 		output_for(text2).should == out
 		output_for(text3).should == "- #{out} -"
+	end
+
+	it "should render representations" do
+		Glyph.macro :em_with_rep do
+			@data[:value] = value
+			render
+		end
+		Glyph.rep :em_with_rep do |data|
+			%{<em>!#{data[:value]}!</em>}
+		end
+		output_for("em_with_rep[testing...]").should == "<em>!testing...!</em>"
+		Glyph::Macro.new({}).render(:em_with_rep, :value => "test").should == "<em>!test!</em>"
 	end
 
 end

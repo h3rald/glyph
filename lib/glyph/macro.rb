@@ -8,7 +8,6 @@ module Glyph
 	class Macro
 
 		include Validators
-		include Helpers
 		include Utils
 
 		attr_reader :node, :source_name, :source_file, :source_topic
@@ -16,6 +15,7 @@ module Glyph
 		# Creates a new macro instance from a Node
 		# @param [Node] node a node populated with macro data
 		def initialize(node)
+			@data = {}
 			@node = node
 			@name = @node[:name]
 			@updated_source = nil
@@ -250,10 +250,26 @@ module Glyph
 			@node[:document].header hash
 		end
 
+		# @since 0.5.0
+		# Renders a macro representation
+		# @param [Symbol, String] rep the representation to render
+		# @param [Hash] data the data to pass to the representation
+		def render(rep=nil, data=nil)
+			rep ||= @name
+			data ||= @data
+			block = Glyph::REPS[rep.to_sym]
+			macro_error "No macro representation for '#{rep}'", e unless block
+			begin
+				instance_exec(data, &block).to_s
+			rescue Exception => e
+				macro_error "An error occurred when rendering 'rep'", e 
+			end
+		end
+
 		# Executes a macro definition in the context of self
 		def expand
 			block = Glyph::MACROS[@name]
-			macro_error "Undefined macro '#@name'}" unless block
+			macro_error "Undefined macro '#@name'", e unless block
 			res = instance_exec(@node, &block).to_s
 			res.gsub!(/\\?([\[\]\|])/){"\\#$1"} 
 			res

@@ -184,8 +184,7 @@ describe "glyph" do
 		out = file_load Glyph::PROJECT/'output/html/test_project.html'
 		out.should == %{<div class="section">
 <h2 id="h_1">Test</h2>
-<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Correct errors in file 'errors.glyph'</span>
-<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>Correct errors in file 'syntax_error.glyph'</span>
+
 
 </div>}
 		res.match("error: #{err}").should == nil

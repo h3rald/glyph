@@ -33,8 +33,8 @@ describe "Macro:" do
 		Glyph.run! 'generate:web'
 		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
 		web2 = Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html')
-		web1.match(%{<div class="navigation"><a href="/index.html">Contents</a><a href="/a/b/web2.html">&rarr; Topic #2</a></div>}).blank?.should == false
-		web2.match(%{<div class="navigation"><a href="/a/web1.html">Topic #1 &larr;</a><a href="/index.html">Contents</a></div>}).blank?.should == false
+		web1.match(%{<div class="navigation"> | <a href="/index.html">Contents</a> | <a href="/a/b/web2.html">Topic #2</a></div>}).blank?.should == false
+		web2.match(%{<div class="navigation"><a href="/a/web1.html">Topic #1</a> | <a href="/index.html">Contents</a> | </div>}).blank?.should == false
 	end
 
 	it "toc should only list topics" do

@@ -32,7 +32,6 @@ module Glyph
 	require LIB/'bookmark'
 	require LIB/'document'
 	require LIB/'macro_validators'
-	require LIB/'macro_helpers'
 	require LIB/'macro'
 	require LIB/'syntax_node'
 	require LIB/'parser'
@@ -73,6 +72,9 @@ module Glyph
 
 	# All the currently-loaded macros
 	MACROS = {}
+	
+	# All the currently-loaded macro representations
+	REPS = {}
 
 	# All macro aliases
 	ALIASES = {:by_alias => {}, :by_def => {}}
@@ -169,6 +171,7 @@ module Glyph
 		self.enable_all
 		self.config_reset
 		MACROS.clear
+		REPS.clear
 		SNIPPETS.clear
 	end
 
@@ -202,6 +205,29 @@ module Glyph
 	# @param [Symbol, String] name the name of the macro
 	def self.macro(name, &block)
 		MACROS[name.to_sym] = block
+	end
+
+	# Defines a new macro representation
+	# @since 0.5.0
+	# @param [Symbol, String] name the name of the macro
+	def self.rep(name, &block)
+		REPS[name.to_sym] = block
+		# Mirror aliases as well
+		ALIASES[:by_def][name.to_sym].to_a.each { |a| REPS[a] = block }
+	end
+
+	# Loads macro representations for a given output
+	# @since 0.5.0
+	# @param [Symbol, String] output a valid output format
+	def self.reps_for(output)
+		Glyph.instance_eval file_load(Glyph::HOME/"macros/reps/#{output}.rb") rescue nil
+	end
+
+	# Loads project macro representations for a given output
+	# @since 0.5.0
+	# @param [Symbol, String] output a valid output format
+	def self.project_reps_for(output)
+		Glyph.instance_eval file_load(Glyph::PROJECT/"lib/macros/reps/#{output}.rb") rescue nil
 	end
 
 	#@since 0.4.0
