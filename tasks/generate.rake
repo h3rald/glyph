@@ -62,11 +62,11 @@ namespace :generate do
 		info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
-			file = (Glyph['document.output'] == 'pdf') ? Glyph['document.filename']+".html" : Glyph['document.output_file']
+			file = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? Glyph['document.filename']+".html" : Glyph['document.output_file']
 		else
-			out = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
+			out = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? 'html' : Glyph['document.output']
 			out = Glyph::PROJECT/"output/#{out}"
-			extension = (Glyph['document.output'] == 'pdf') ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
+			extension = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
 			file = "#{Glyph['document.filename']}#{extension}"
 		end
 		out.mkpath
@@ -77,10 +77,15 @@ namespace :generate do
 	desc "Create a standalone HTML 5 file"
 	task :html5 => [:html] do; end
 
-	desc "Create an e-book file in .mobi (Kindle) format"
-	task :mobi => [:html] do
-	  Glyph.info "Generating .mobi (Kindle) e-book"
-		gen_calibre = lambda do |cmd|
+	task :calibre => [:html] do
+		out = Glyph['document.output']
+		output_cfg = "output.#{out}"
+		# TODO: support other e-book renderers
+		unless Glyph["#{output_cfg}.generator"] == "calibre" then
+			error "Glyph cannot generate e-book. At present, output.#{out}.generator can only be set to 'calibre'" 
+		end
+	  Glyph.info "Generating #{Glyph['document.output'].upcase} e-book..."
+		gen_calibre = lambda do |path, cmd|
 			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
 			IO.popen(cmd+" 2>&1") do |pipe|
 				pipe.sync = true
@@ -89,59 +94,25 @@ namespace :generate do
 				end
 			end
 		end
-
 		cover_opt = ""
-		ebook_convert = Glyph['options.ebook.converter'] || "/usr/bin/ebook-convert"
     ebook_isbn = Glyph['document.isbn'] || Glyph['document.title'].hash
-    cover_art = Glyph['output.ebook.cover'] || nil
-    output_profile = Glyph['output.ebook.mobi.profile'] || "kindle"
-
-    unless cover_art.nil?
-      cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\""
-    end
-
+    cover_art = Glyph['document.cover'] 
+    output_profile = Glyph["#{output_cfg}.profile"]
+		cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\"" unless cover_art.blank?
     html_file = "#{Glyph::PROJECT}/output/html/#{Glyph['document.filename']}.html"
-    out_dir = "#{Glyph::PROJECT}/output/ebook"
+    out_dir = "#{Glyph::PROJECT}/output/#{out}"
     Pathname.new(out_dir).mkpath
-
-    calibre_cmd = "#{ebook_convert} #{html_file} #{out_dir}/#{Glyph['document.filename']}.mobi --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" --smarten-punctuation #{cover_opt} --output-profile #{output_profile}"
-
-    gen_calibre.call calibre_cmd
-	  Glyph.info "Done."
-  end
-
-	desc "Create an e-book file in .epub (Nook/Kobo/etc.) format"
-	task :epub => [:html] do
-	  Glyph.info "Generating .epub (Nook/Kobo/etc.) e-book"
-		gen_calibre = lambda do |cmd|
-			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
-			IO.popen(cmd+" 2>&1") do |pipe|
-				pipe.sync = true
-				while str = pipe.gets do
-					puts str
-				end
-			end
-		end
-
-		cover_opt = ""
-		ebook_convert = Glyph['options.ebook.converter'] || "/usr/bin/ebook-convert"
-    ebook_isbn = Glyph['document.isbn'] || Glyph['document.title'].hash
-    cover_art = Glyph['output.ebook.cover'] || nil
-    output_profile = Glyph['output.ebook.epub.profile'] || "nook"
-
-    unless cover_art.nil?
-      cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\""
-    end
-
-    html_file = "#{Glyph::PROJECT}/output/html/#{Glyph['document.filename']}.html"
-    out_dir = "#{Glyph::PROJECT}/output/ebook"
-
-    Pathname.new(out_dir).mkpath
-    calibre_cmd = "#{ebook_convert} #{html_file} #{out_dir}/#{Glyph['document.filename']}.epub --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" --smarten-punctuation #{cover_opt} --output-profile #{output_profile}"
-
-    gen_calibre.call calibre_cmd
+    calibre_cmd = "ebook-convert #{html_file} #{out_dir}/#{Glyph['document.filename']}.#{out} --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" #{cover_opt} --output-profile #{output_profile}"
+		windows_path = ""
+    gen_calibre.call windows_path, calibre_cmd
 	  Glyph.info "Done."
 	end
+
+	desc "Create an e-book file in .mobi (Kindle) format"
+	task :mobi => [:calibre] do; end
+
+	desc "Create an e-book file in .epub (Nook/Kobo/etc.) format"
+	task :epub => [:calibre] do; end
 
   desc "Generate .mobi and .epub ebook files"
   task :ebooks => [:mobi, :epub] do ; end

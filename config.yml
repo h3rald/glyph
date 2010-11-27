@@ -5,9 +5,11 @@
   :subtitle: ""
   :filename: ""
   :revision: ""
+  :isbn: false
   :draft: false
   :output: html
   :styles: embed # link, import
+  :cover: false
 :options:
   :url_validation: false
   :macro_set: 'glyph' # core, xml, filters
@@ -34,24 +36,24 @@
     :multifile: false
     :extension: '.html'
     :filter_target: 'html'
-    :macro_dirs: ['html']
+    :macro_reps: 'html'
   :html5:
     :multifile: false
     :extension: '.html'
     :filter_target: 'html'
-    :macro_dirs: ['html', 'html5']
+    :macro_reps: 'html5'
   :pdf:
     :multifile: false
     :extension: '.pdf'
     :filter_target: 'html'
     :generator: 'wkhtmltopdf'
-    :macro_dirs: ['html']
+    :macro_reps: 'html'
   :web:
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
-    :macro_dirs: ['html']
-    :layout_dirs: ['web']
+    :macro_reps: 'html'
+    :layout_dir: 'web'
     :layouts:
       :topic: 'topic'
       :index: 'index'
@@ -60,12 +62,26 @@
     :multifile: true
     :extension: '.html'
     :filter_target: 'html'
-    :macro_dirs: ['html', 'html5']
-    :layout_dirs: ['web5']
+    :macro_reps: 'html5'
+    :layout_dir: 'web5'
     :layouts:
       :topic: 'topic'
       :index: 'index'
     :base: "/"
+  :epub:
+    :multifile: false
+    :extension: '.epub'
+    :filter_target: 'html'
+    :generator: 'calibre'
+    :profile: "nook"
+    :macro_reps: 'html'
+  :mobi:
+    :multifile: false
+    :extension: '.mobi'
+    :filter_target: 'html'
+    :generator: 'calibre'
+    :profile: "kindle"
+    :macro_reps: 'html'
 :filters:
   :highlighter: 'coderay'
   :markdown:

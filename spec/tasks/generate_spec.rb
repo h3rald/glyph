@@ -23,13 +23,15 @@ describe "generate" do
 	end
 
   it ":mobi should generate a mobi document" do
-    lambda { Glyph.run! 'generate:mobi'}.should_not raise_error
-		(Glyph::PROJECT/'output/ebook/test_project.mobi').exist?.should == true
+		Glyph['document.output'] = 'mobi'
+    lambda { stdout_for { Glyph.run! 'generate:mobi'}}.should_not raise_error
+		(Glyph::PROJECT/'output/mobi/test_project.mobi').exist?.should == true
   end
 
   it ":epub should generate an epub document" do
-    lambda { Glyph.run! 'generate:epub'}.should_not raise_error
-		(Glyph::PROJECT/'output/ebook/test_project.epub').exist?.should == true
+		Glyph['document.output'] = 'epub'
+    lambda { stdout_for { Glyph.run! 'generate:epub'}}.should_not raise_error
+		(Glyph::PROJECT/'output/epub/test_project.epub').exist?.should == true
   end
 
 	it "should copy images" do
