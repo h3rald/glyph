@@ -2,7 +2,7 @@ The following configuration settings are used to enable or disable specific Glyp
 
 config_table[
 	ref_config[options.filters_by_file_extension|
-If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).  
+If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).
 	]
 	ref_config[options.macro_set|
 Determines which macro set will be loaded. It can be set to:
@@ -14,7 +14,7 @@ Determines which macro set will be loaded. It can be set to:
 Enables Safe Mode (\.fmi[Glyph modes|#modes]).
 	]
 	ref_config[options.url_validation|
-If set to _true_, every external link will be validated (see =>[#links]). 
+If set to _true_, every external link will be validated (see =>[#links]).
 	]
 	ref_config[options.xml_blacklist|
 The XML tags listed here cannot be generated using Glyph code.
@@ -22,4 +22,6 @@ The XML tags listed here cannot be generated using Glyph code.
 	ref_config[options.xml_fallback|
 If set to true, any unknown macro name will considered an XML element (see =>[#other_elements]).
 	]
+	ref_config[options.ebook.converter|
+The full path name of the ebook-convert command. Defaults to /usr/bin/ebook-convert.]
 ]

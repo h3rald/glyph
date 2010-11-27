@@ -10,7 +10,7 @@ task :default => :spec
 begin
 	require 'yard'
 	YARD::Rake::YardocTask.new(:yardoc) do |t|
-		t.files   = ['lib/**/*.rb', './README.textile', 'lib/*.rb'] 
+		t.files   = ['lib/**/*.rb', './README.textile', 'lib/*.rb']
 		t.options = ['--no-private']
 	end
 rescue LoadError
@@ -31,6 +31,7 @@ begin
 		s.files.exclude 'book/output/web/**/*'
 		s.files.exclude 'book/output/web5/**/*'
 		s.files.exclude 'book/output/html5/**/*'
+		s.files.exclude 'book/output/ebook/**/*'
 		s.add_dependency 'gli', '>= 1.1.1' # Command line interface
 		s.add_dependency 'extlib', '>= 0.9.15' # Extension methods
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks

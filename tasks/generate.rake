@@ -27,7 +27,7 @@ namespace :generate do
 				dir.mkpath
 				case
 				when f.extname == ".css" then
-					file_copy f, dir/f.basename 
+					file_copy f, dir/f.basename
 				when f.extname == ".sass" then
 					style = Sass::Engine.new(file_load(f.to_s)).render
 					out_file = dir/f.basename.to_s.gsub(/\.sass$/, '.css')
@@ -77,6 +77,75 @@ namespace :generate do
 	desc "Create a standalone HTML 5 file"
 	task :html5 => [:html] do; end
 
+	desc "Create an e-book file in .mobi (Kindle) format"
+	task :mobi => [:html] do
+	  Glyph.info "Generating .mobi (Kindle) e-book"
+		gen_calibre = lambda do |cmd|
+			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
+			IO.popen(cmd+" 2>&1") do |pipe|
+				pipe.sync = true
+				while str = pipe.gets do
+					puts str
+				end
+			end
+		end
+
+		cover_opt = ""
+		ebook_convert = Glyph['options.ebook.converter'] || "/usr/bin/ebook-convert"
+    ebook_isbn = Glyph['document.isbn'] || Glyph['document.title'].hash
+    cover_art = Glyph['output.ebook.cover'] || nil
+    output_profile = Glyph['output.ebook.mobi.profile'] || "kindle"
+
+    unless cover_art.nil?
+      cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\""
+    end
+
+    html_file = "#{Glyph::PROJECT}/output/html/#{Glyph['document.filename']}.html"
+    out_dir = "#{Glyph::PROJECT}/output/ebook"
+    Pathname.new(out_dir).mkpath
+
+    calibre_cmd = "#{ebook_convert} #{html_file} #{out_dir}/#{Glyph['document.filename']}.mobi --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" --smarten-punctuation #{cover_opt} --output-profile #{output_profile}"
+
+    gen_calibre.call calibre_cmd
+	  Glyph.info "Done."
+  end
+
+	desc "Create an e-book file in .epub (Nook/Kobo/etc.) format"
+	task :epub => [:html] do
+	  Glyph.info "Generating .epub (Nook/Kobo/etc.) e-book"
+		gen_calibre = lambda do |cmd|
+			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
+			IO.popen(cmd+" 2>&1") do |pipe|
+				pipe.sync = true
+				while str = pipe.gets do
+					puts str
+				end
+			end
+		end
+
+		cover_opt = ""
+		ebook_convert = Glyph['options.ebook.converter'] || "/usr/bin/ebook-convert"
+    ebook_isbn = Glyph['document.isbn'] || Glyph['document.title'].hash
+    cover_art = Glyph['output.ebook.cover'] || nil
+    output_profile = Glyph['output.ebook.epub.profile'] || "nook"
+
+    unless cover_art.nil?
+      cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\""
+    end
+
+    html_file = "#{Glyph::PROJECT}/output/html/#{Glyph['document.filename']}.html"
+    out_dir = "#{Glyph::PROJECT}/output/ebook"
+
+    Pathname.new(out_dir).mkpath
+    calibre_cmd = "#{ebook_convert} #{html_file} #{out_dir}/#{Glyph['document.filename']}.epub --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" --smarten-punctuation #{cover_opt} --output-profile #{output_profile}"
+
+    gen_calibre.call calibre_cmd
+	  Glyph.info "Done."
+	end
+
+  desc "Generate .mobi and .epub ebook files"
+  task :ebooks => [:mobi, :epub] do ; end
+
 	desc "Create multiple HTML files"
 	task :web => [:images, :styles] do
 		info "Generating HTML files..."
@@ -90,7 +159,7 @@ namespace :generate do
 		out.mkpath
 		index_layout = Glyph["output.#{Glyph['document.output']}.layouts.index"] || :index
 		# Generate index topic
-		context = {} 
+		context = {}
 		context[:document] = Glyph::Document.new(Glyph::DocumentNode.new).inherit_from(Glyph.document, :topics => false)
 		context[:source] = {:name => "layout:#{index_layout}", :file => "layouts/#{index_layout}.glyph"}
 		# Do not display errors (already displayed when document is finalized).
@@ -128,13 +197,13 @@ namespace :generate do
 		end
 		out.mkpath
 		generate_pdf = lambda do |path, cmd|
-			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/ 
+			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
 			IO.popen(cmd+" 2>&1") do |pipe|
 				pipe.sync = true
 				while str = pipe.gets do
 					puts str
 				end
-			end	
+			end
 			if (out/file).exist? then
 				info "'#{file}' generated successfully."
 			else

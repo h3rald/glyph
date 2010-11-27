@@ -22,9 +22,19 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
+  it ":mobi should generate a mobi document" do
+    lambda { Glyph.run! 'generate:mobi'}.should_not raise_error
+		(Glyph::PROJECT/'output/ebook/test_project.mobi').exist?.should == true
+  end
+
+  it ":epub should generate an epub document" do
+    lambda { Glyph.run! 'generate:epub'}.should_not raise_error
+		(Glyph::PROJECT/'output/ebook/test_project.epub').exist?.should == true
+  end
+
 	it "should copy images" do
 		dir = (Glyph::PROJECT/'images/test').mkpath
-		file_copy Glyph::HOME/'spec/files/ligature.jpg', Glyph::PROJECT/'images/test' 
+		file_copy Glyph::HOME/'spec/files/ligature.jpg', Glyph::PROJECT/'images/test'
 		lambda { Glyph.run! 'generate:html' }.should_not raise_error
 		(Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?.should == true
 	end
@@ -56,10 +66,10 @@ describe "generate" do
 		lambda { Glyph.run! 'generate:web'}.should raise_error(RuntimeError, "You cannot have a 'styles' directory under your 'text' directory.")
 		reset_web.call
 		# check that the task can be run without errors
-		reset_web.call 
+		reset_web.call
 		Glyph["output.#{Glyph['document.output']}.base"] = "/test/"
-		#lambda { 
-			Glyph.run! 'generate:web' 
+		#lambda {
+			Glyph.run! 'generate:web'
 		#}.should_not raise_error
 		# check that images are copied
 		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true
