@@ -24,12 +24,16 @@ The main source file to compile. It can be also be overridden by calling the #>[
 How to process stylesheets. It can be set to one of the following values:
 * @embed@ -- Embed stylesheets within the document.
 * @link@ -- Link stylesheets.
-* @import@ -- Import stylesheets using the code[@import] CSS directive. 
+* @import@ -- Import stylesheets using the code[@import] CSS directive.
 	]
 	ref_config[document.subtitle|
 The subtitle of the document, displayed using the %>[subtitle].
 	]
 	ref_config[document.title|
 The title of the document, displayed using the %>[title].
+	]
+	ref_config[document.isbn|
+The ISBN of the document, for e-book generation. If this option is not specified,
+a hash of the document title will be used instead.
 	]
 ]

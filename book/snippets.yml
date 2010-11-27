@@ -1,4 +1,4 @@
---- 
+---
 :glang: Glyph Language
 :macros: Glyph Macros
 :sq_esc: Square brackets must be escaped unless used as macro delimiters or within a quoting macro.
@@ -16,3 +16,4 @@
 :img_file: "The name of the image file (relative to the code[images/] folder)."
 :img_attrs: "Any attribute supported by the =>[http://www.w3schools.com/tags/tag_IMG.asp|img tag]."
 :opt: "em[(optional)]"
+:calibre: "=>[http://calibre-ebook.com/|Calibre]"

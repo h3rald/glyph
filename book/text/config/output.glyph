@@ -5,7 +5,7 @@ If set to _true_, the document will be rendered in multiple files, according to 
 The extension to use for the output file(s).
 ]
 &:[o_filter_target|
-The output target for filters. It can be set to @html@ (for RedCloth and MarkDown) or @latex@ (RedCloth-only). 
+The output target for filters. It can be set to @html@ (for RedCloth and MarkDown) or @latex@ (RedCloth-only).
 ]
 &:[o_macro_dirs|
 The directories from which macros will be loaded (both in Glyph's home and the current project directory).
@@ -79,5 +79,14 @@ section[
 		out_cfg[web5.layouts.topic]
 		out_cfg[web5.macro_dirs]
 		out_cfg[web5.multifile]
+	]
+]
+section[
+	@title[output.ebook.*]
+	config_table[
+	out_cfg[ebook.cover|
+The name of the cover image to use.]
+	out_cfg[ebook.epub.profile]
+	out_cfg[ebook.mobi.profile]
 	]
 ]
