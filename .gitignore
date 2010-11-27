@@ -2,6 +2,7 @@
 thumbs.db
 .rvmrc*
 .bundle
+spec/config.yml
 Gemfile.lock
 book/output
 book/output/*

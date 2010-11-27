@@ -87,7 +87,6 @@ class Node < Hash
 
 	# Iterates through children recursively (including self)
 	# @param [Node, nil] element the node to process
-	# @yieldparam [Integer] level the initial tree depth
 	# @yieldparam [Node] element the current node
 	# @yieldparam [Integer] level the current tree depth
 	def descend(element=nil, level=0, &block)

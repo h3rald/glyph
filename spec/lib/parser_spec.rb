@@ -243,4 +243,11 @@ Contents]
 		parse_text(text).should == tree
 	end
 
+	it "should allow macro composition" do
+		parse_text("test[...|a/b/c[...]]").should == parse_text("test[...|a[b[c[...]]]]")
+		parse_text(" /test[...]").should == parse_text(" test[...]")
+		parse_text(" test/[...]").should == parse_text(" test[...]")
+		parse_text("a/b/c[=test[...]=]").should == parse_text("a[b[c[=test[...]=]]]")
+	end
+
 end

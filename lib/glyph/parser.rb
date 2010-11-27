@@ -60,17 +60,14 @@ module Glyph
 				name.chop!
 				name.chop!
 				error "#{name}[...] - A macro cannot start with '@' or a digit." if name.match(/^[0-1@]/)
-				node = create_node(MacroNode, {
-					:name => name.to_sym, 
-					:escape => true, 
-					:attributes => [], 
-					:parameters => []
-				})
-				while contents = parse_escaped_contents(node) do
-					node << contents unless contents.is_a?(AttributeNode)
+				node = macro_node_for name, true
+				leaf = node
+				node.descend { |n, level| leaf = n }
+				while contents = parse_escaped_contents(leaf) do
+					leaf << contents unless contents.is_a?(AttributeNode)
 				end
 				@input.scan(/\=\]/) or error "Escaping macro '#{name}' not closed"		
-				organize_children_for node
+				organize_children_for leaf
 				node
 			else
 				nil
@@ -101,17 +98,14 @@ module Glyph
 				name = @input.matched
 				name.chop!
 				error "#{name}[...] - A macro cannot start with '@' or a digit." if name.match(/^[0-1@]/)
-				node = create_node(MacroNode, {
-					:escape => false, 
-					:name => name.to_sym, 
-					:attributes => [], 
-					:parameters => []
-				})
-				while contents = parse_contents(node) do
-					node << contents unless contents.is_a?(AttributeNode)
+				node = macro_node_for name 
+				leaf = node
+				node.descend { |n, level| leaf = n }
+				while contents = parse_contents(leaf) do
+					leaf << contents unless contents.is_a?(AttributeNode)
 				end
 				@input.scan(/\]/) or error "Macro '#{name}' not closed"		
-				organize_children_for node
+				organize_children_for leaf
 				node
 			else
 				nil
@@ -197,6 +191,27 @@ module Glyph
 		end
 
 		private
+
+		def macro_node_for(ident, escape=false)
+			macro_names = ident.split(/\//).select{|e| !e.blank?}
+			nest_node = lambda do |parent, count|
+				node = create_node(MacroNode, {
+					:escape => false, 
+					:name => macro_names[count].to_sym
+				})
+				parent ? (parent&0) << node : parent = node
+				if macro_names[count+1] then
+					node << create_node(ParameterNode, :name => :"0") 
+					nest_node.call(node, count+1)
+				else
+					node[:parameters] = []
+					node[:attributes] = []
+					node[:escape] = escape
+				end
+				node
+			end
+			nest_node.call(nil, 0)
+		end
 		
 		# Thanks Thomas Leitner
 		# http://redmine.ruby-lang.org/issues/show/2645
