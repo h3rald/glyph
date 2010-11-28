@@ -64,7 +64,7 @@ describe "load" do
 	it "[layouts] should load layouts" do
 		Glyph['document.output'] = 'web'
 		Glyph.run! 'load:macros'
-		Glyph::MACROS[:"layout:topic"].blank?.should == false
+		Glyph::MACROS[:"layout/topic"].blank?.should == false
 	end
 
 	it "[tasks] should load tasks" do

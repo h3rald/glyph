@@ -36,7 +36,7 @@ macro :section do
 		if Glyph.multiple_output_files? 
 			topic_id = (attr(:id) || "t_#{@node[:document].topics.length}").to_sym
 			layout = attr(:layout) || Glyph["output.#{Glyph['document.output']}.layouts.topic"] || :topic
-			layout_name = "layout:#{layout}".to_sym
+			layout_name = "layout/#{layout}".to_sym
 			macro_error "Layout '#{layout}' not found" unless Glyph::MACROS[layout_name]
 			result = interpret %{#{layout_name}[
 											@title[#{attr(:title)}]

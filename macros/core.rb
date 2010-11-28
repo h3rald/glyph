@@ -197,6 +197,13 @@ macro "output?" do
 	Glyph['document.output'].in? parameters
 end
 
+macro :layout do
+	dispatch do |node|
+		node[:name] = "layout/#{node[:name]}".to_sym
+		Glyph::Macro.new(node).expand
+	end
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
