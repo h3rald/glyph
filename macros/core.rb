@@ -204,6 +204,36 @@ macro :layout do
 	end
 end
 
+macro :let do
+	exact_parameters 1
+	param(0).to_s
+end
+
+macro :attribute do
+	exact_parameters 1
+	a = param(0).to_sym
+	macro_node = @node.find_parent do |n|
+		n.is_a?(Glyph::MacroNode) && n.attr(a)
+	end
+	if macro_node then
+		Glyph::Macro.new(macro_node).attr(a)
+	else
+		nil
+	end
+end
+
+macro "attribute:" do
+	exact_parameters 2
+	a = param(0).to_sym
+	macro_node = @node.find_parent do |n|
+		n.is_a?(Glyph::MacroNode) && n.attr(a)
+	end
+	macro_error "Undeclared attribute '#{a}'" unless macro_node
+	macro_node.attr(a).children.clear
+	macro_node.attr(a) << Glyph::TextNode.new.from(:value => param(1))	
+	nil
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
@@ -214,3 +244,7 @@ macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias '?' => :condition
 macro_alias 'rw:' => 'rewrite:'
+macro_alias '@' => :attribute
+macro_alias :attr => :attribute
+macro_alias '@:' => "attribute:"
+macro_alias "attr:" => "attribute:"

@@ -59,7 +59,7 @@ module Glyph
 				name = @input.matched
 				name.chop!
 				name.chop!
-				error "#{name}[...] - A macro cannot start with '@' or a digit." if name.match(/^[0-1@]/)
+				error "#{name}[=...=] - A macro cannot start with a digit or contain '@'" if (name.match(/^[0-1]/) || name.match(/@/)) && !name.match(/^@:?$/)
 				node = macro_node_for name, true
 				leaf = node
 				node.descend { |n, level| leaf = n }
@@ -75,7 +75,7 @@ module Glyph
 		end
 
 		def escaping_attribute(current)
-			if @input.scan(/@[^\[\]\|\\\s]+\[\=/) then
+			if @input.scan(/@[^:\[\]\|\\\s]+\[\=/) then
 				error "Attributes cannot be nested" if @current_attribute
 				name = @input.matched[1..@input.matched.length-3]
 				node = create_node(AttributeNode, {
@@ -97,7 +97,7 @@ module Glyph
 			if @input.scan(/[^\[\]\|\\\s]+\[/) then
 				name = @input.matched
 				name.chop!
-				error "#{name}[...] - A macro cannot start with '@' or a digit." if name.match(/^[0-1@]/)
+				error "#{name}[...] - A macro cannot start with a digit or contain '@'" if (name.match(/^[0-1]/) || name.match(/@/)) && !name.match(/^@:?$/)
 				node = macro_node_for name 
 				leaf = node
 				node.descend { |n, level| leaf = n }
@@ -113,7 +113,7 @@ module Glyph
 		end
 
 		def attribute(current)
-			if @input.scan(/@[^\[\]\|\\\s]+\[/) then
+			if @input.scan(/@[^:\[\]\|\\\s]+\[/) then
 				error "Attributes cannot be nested" if current.is_a?(AttributeNode)
 				name = @input.matched[1..@input.matched.length-2]
 				node = create_node(AttributeNode, {

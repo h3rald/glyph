@@ -207,4 +207,40 @@ Test -- Test Snippet
 		output_for("?[output?[html|web]|YES!|NO...]").should == "NO..."
 	end
 
+	it "let, attribute, attribute:" do
+		test = %{
+			let[
+				@a[1]
+				@b[1]
+				-- @[a]@[b] --
+			]
+		}
+		nested_test = %{
+			section[
+				@title[test]
+				let[
+					-- @[title]@[unknown] --
+				]
+			]
+		}
+		set_test = %{
+			section[
+				@title[test]
+				em[-- @[title]@:[title|changed!]@[title] --]
+				let[
+					@a[1]
+					em[@:[title|changed again!]-- @[title] --]
+				]
+			]
+		}
+		invalid_set = %{@:[test|1]}
+		invalid_macro = %{=>@[test]}
+		output_for(test).should match("-- 11 --")
+		output_for(nested_test).should match("-- test --")
+		output_for(set_test).should match("-- testchanged! --")
+		output_for(set_test).should match("-- changed again! --")
+		lambda { output_for(invalid_set)}.should raise_error(Glyph::MacroError, "Undeclared attribute 'test'")
+		lambda { output_for(invalid_macro) }.should raise_error
+	end
+
 end	
