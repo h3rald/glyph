@@ -5,7 +5,7 @@ document[
 	]
 	body[
 		toc[]
-		contents[
+		section[
 			section[
 				@title[Web Document]
 ...

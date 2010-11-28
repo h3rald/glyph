@@ -125,11 +125,18 @@ module Glyph
 		# @return [String] the value of the macro
 		# @since 0.3.0 
 		def expand(context)
-			xml_element(context)	
 			self[:source] = context[:source]
 			self[:document] = context[:document] 
 			self[:info] = context[:info]
 			self[:value] = ""
+			dispatched = parent_macro.dispatch(self) rescue nil
+			return dispatched if dispatched
+			if Glyph['options.macro_set'] == "xml" || Glyph::MACROS[self[:name]].blank? && Glyph['options.xml_fallback'] then
+				m = Glyph::MacroNode.new
+				m[:name] = :xml
+				Glyph::Macro.new(m).expand
+				return m[:dispatch].call self
+			end
 			Glyph::Macro.new(self).expand
 		end
 
@@ -141,33 +148,12 @@ module Glyph
 			s
 		end
 
-		protected
-
-		def xml_element(context)
-			known_macro = Glyph::MACROS.include? self[:name]
-			name = self[:name].to_s
-			if !known_macro && name.match(/^=(.+)/) then
-				# Force tag name override if macro starts with a '='
-				name.gsub! /^=(.+)/, '\1' 
-			end
-			case
-				# Use XML syntax
-			when Glyph['options.macro_set'] == 'xml' then
-				self[:element] = name
-				self[:name] = :"|xml|" 
-				# Fallback to XML syntax
-			when Glyph["options.xml_fallback"] then
-				unless known_macro then
-					self[:element] = name
-					self[:fallback] = true
-					self[:name] = :"|xml|" 
-				end
-			else
-				# Unknown macro
-				raise RuntimeError, "Undefined macro '#{name}'\n -> source: #{context[:source][:name]}" unless known_macro
-			end
+		# @since 0.5.0
+		# TODO: doc
+		def dispatch(node)
+			return self[:dispatch].call node if self[:dispatch]
+			false
 		end
-
 	end
 
 	# A piece of text in Glyph Abstract Syntax Tree

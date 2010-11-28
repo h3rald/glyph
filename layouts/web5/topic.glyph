@@ -4,7 +4,7 @@ document[
 	]
 	body[
 		@class[topic]
-		=article[
+		xml/article[
 			section[
 				@title[{{title}}]
 				@id[{{id}}]

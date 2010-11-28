@@ -48,13 +48,13 @@ describe Glyph::Macro::Validators do
 
 	it "should validate XML attributes" do
 		language 'xml'
-		output_for("test[test @.test[test]]").should == "<test>test</test>"
+		output_for("test[test @.test[test]]").should == "<test>test </test>"
 	end
 
 	it "should validate required attributes" do
 		Glyph['document.output'] = 'web'
 		Glyph.run! 'load:macros'
-		lambda { output_for("contents[section[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute")
+		lambda { output_for("section[section[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute")
 	end
 
 	it "should validate if a macro is within another one" do

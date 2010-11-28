@@ -36,9 +36,9 @@ end
 
 # TODO: change fallback
 rep :figure do |data|
-	interpret %{=figure[
-img[@src[#{data[:src]}]#{data[:attrs].join}]
-					figcaption[#{data[:caption]}]
+	interpret %{xml/figure[
+xml/img[@src[#{data[:src]}]#{data[:attrs].join}]
+					xml/figcaption[#{data[:caption]}]
 ]}
 end
 

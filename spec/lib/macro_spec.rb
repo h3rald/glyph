@@ -240,4 +240,21 @@ describe Glyph::Macro do
 		Glyph::Macro.new({}).render(:em_with_rep, :value => "test").should == "<em>!test!</em>"
 	end
 
+	it "should perform dispatching" do
+		Glyph.macro :dispatcher do
+			dispatch do |node|
+				"dispatched: #{node[:name]}" if node[:name] == :em
+			end
+		end
+		Glyph.macro :another_macro do
+			"...#{value}"
+		end
+		define_em_macro
+		output_for("dispatcher[em[test]]").should == "dispatched: em"
+		output_for("dispatcher[em[@attr[test]]]").should == "dispatched: em"
+		output_for("dispatcher[...|em[@attr[test]]]").should == "..." # Dispatcher macros should only take one parameter
+		output_for("dispatcher[another_macro[test]]").should == "...test"
+		output_for("dispatcher[another_macro[another_macro[test]]]").should == "......test"
+	end
+
 end

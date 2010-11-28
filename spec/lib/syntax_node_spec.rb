@@ -83,12 +83,6 @@ describe Glyph::MacroNode do
 		@n.expand({}).should == "--test:test--"
 	end
 
-	it "should resolve to an XML element" do
-		reset_quiet
-		@n.expand({}) rescue nil # |xml| macro not defined
-		@n[:element].should == "test"
-	end
-
 	it "should retrieve parameter nodes easily" do
 		@n.parameter(0).should == @p
 		@n.parameters.should == [@p]
@@ -106,6 +100,38 @@ describe Glyph::MacroNode do
 		@p.parent[:escape] = true
 		@p.to_s.should == "test"
 		@p.contents.should == ".[=test=]"
+	end
+
+	it "should perform macro dispatching" do
+		dispatch_proc = lambda do |node|
+			"dispatched: #{node[:name]}"
+		end
+		Glyph.macro :test_macro do
+			"--test macro--"
+		end
+		# Parent dispatcher via parameter
+		d = macro_node :dispatcher
+		d[:dispatch] = dispatch_proc
+		p = p_node 0
+		m = macro_node :test_macro
+		p << m
+		d << p
+		m.expand({}).should == "dispatched: test_macro"
+		# Parent dispatcher via attribute
+		d = macro_node :dispatcher
+		d[:dispatch] = dispatch_proc
+		a = a_node :attr1
+		m = macro_node :test_macro
+		a << m
+		d << a
+		m.expand({}).should == "dispatched: test_macro"
+		# No dispatcher
+		d = macro_node :no_dispatcher
+		a = a_node :attr1
+		m = macro_node :test_macro
+		a << m
+		d << a
+		m.expand({}).should == "--test macro--"
 	end
 	
 end

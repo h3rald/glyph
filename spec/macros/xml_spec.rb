@@ -35,7 +35,7 @@ describe "Glyph Language" do
 	it "should support XML attributes" do
 		language('xml')
 		output_for("span[@class[test] @style[color:red;] test...]").should == %{
-			<span class="test" style="color:red;">test...</span>
+			<span class="test" style="color:red;">  test...</span>
 		}.strip
 	end
 
@@ -48,7 +48,7 @@ describe "Glyph Language" do
 	it "should notify the user that a macro is not found for invalid elements if xml_fallback is enabled" do
 		# Assuming options.xml_fallback = true
 		language('glyph')
-		lambda { interpret("*a[test]").document }.should raise_error(Glyph::MacroError, "Unknown macro '*a'")
+		lambda { interpret("*a[test]").document }.should raise_error(Glyph::MacroError, "Invalid XML element '*a'")
 	end	
 
 	it "should not render blacklisted tags" do
@@ -72,6 +72,15 @@ describe "Glyph Language" do
       title[tesy]
 		}
 		output_for(text).gsub(/\s/, '').should == "<test>test</test>"
+	end
+
+	it "should work with macro composition" do
+		language('glyph')
+		output_for("xml/a[@test[...]xyz]").should == "<a test=\"...\">xyz</a>"
+		output_for("xml/a[@test[...]xml/b[test]]").should == "<a test=\"...\">\n<b>test</b>\n</a>"
+		output_for("xml/a[xml/b[test]xml/c[test]]").should == "<a>\n<b>test</b><c>test</c>\n</a>"
+		output_for("xml/a[xml/b[test]xml/c[@test[test_attr]test]]").should == "<a>\n<b>test</b><c test=\"test_attr\">test</c>\n</a>"
+		output_for("xml/a[xml/b[@test[true]]]").should == "<a>\n<b test=\"true\" />\n</a>"
 	end
 
 end	

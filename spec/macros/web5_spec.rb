@@ -17,7 +17,7 @@ describe "Macro:" do
 	end
 
 	it "section (topic)" do
-		interpret("contents[section[@src[a/web1.glyph]@title[Test]]]")
+		interpret("section[section[@src[a/web1.glyph]@title[Test]]]")
 		topic = @p.document.topics[0]
 		topic[:contents].match(/<article>/).blank?.should == false
 	end
