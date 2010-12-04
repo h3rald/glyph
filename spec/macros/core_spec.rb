@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe "Macro:" do
 
@@ -241,6 +240,30 @@ Test -- Test Snippet
 		output_for(set_test).should match("-- changed again! --")
 		lambda { output_for(invalid_set)}.should raise_error(Glyph::MacroError, "Undeclared attribute 'test'")
 		lambda { output_for(invalid_macro) }.should raise_error
+	end
+
+	it "add, multiply, subtract" do
+		output_for("add[2|2]").should == "4"
+		output_for("add[1|2|3|4]").should == "10"
+		output_for("add[1|2|-3]").should == "0"
+		output_for("add[a|1|2]").should == "3"
+		output_for("add[a|test]").should == "0"
+		lambda { output_for("add[1]").should == "1"}.should raise_error
+		lambda { output_for("add[]").should == "1"}.should raise_error
+		output_for("subtract[2|2]").should == "0"
+		output_for("subtract[1|2|3|4]").should == "-8"
+		output_for("subtract[1|2|-3]").should == "2"
+		output_for("subtract[a|1|2]").should == "-3"
+		output_for("subtract[a|test]").should == "0"
+		lambda { output_for("subtract[1]").should == "1"}.should raise_error
+		lambda { output_for("subtract[]").should == "1"}.should raise_error
+		output_for("multiply[2|2]").should == "4"
+		output_for("multiply[1|2|3|4]").should == "24"
+		output_for("multiply[1|2|-3]").should == "-6"
+		output_for("multiply[a|1|2]").should == "0"
+		output_for("multiply[a|test]").should == "0"
+		lambda { output_for("multiply[1]").should == "1"}.should raise_error
+		lambda { output_for("multiply[]").should == "1"}.should raise_error
 	end
 
 end	

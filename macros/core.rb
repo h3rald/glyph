@@ -234,6 +234,21 @@ macro "attribute:" do
 	nil
 end
 
+macro :add do
+	min_parameters 2
+	params.inject(0){|sum, n| sum + n.to_i}
+end
+
+macro :subtract do
+	min_parameters 2
+	params[1..params.length-1].inject(params[0].to_i){|diff, n| diff - n.to_i}
+end
+
+macro :multiply do
+	min_parameters 2
+	params.inject(1){|mult, n| mult * n.to_i}
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
