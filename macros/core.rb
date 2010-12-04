@@ -233,8 +233,9 @@ macro "attribute:" do
 		n.is_a?(Glyph::MacroNode) && n.attr(a)
 	end
 	macro_error "Undeclared attribute '#{a}'" unless macro_node
+	attr_value = param(1)
 	macro_node.attr(a).children.clear
-	macro_node.attr(a) << Glyph::TextNode.new.from(:value => param(1))	
+	macro_node.attr(a) << Glyph::TextNode.new.from(:value => attr_value)	
 	nil
 end
 
@@ -283,6 +284,18 @@ macro :s do
 			macro_warning "\"#{str}\".#{meth}(#{meth_params.map{|p| p.inspect}.join(', ') rescue nil}) - #{e.message}", e
 			""
 		end
+	end
+end
+
+macro :while do
+	exact_parameters 2
+	raw_cond = @node.parameter(0)
+	raw_body = @node.parameter 1
+	cond = raw_cond.evaluate(@node, :params => true)
+	while (!cond.blank? && cond != "false") do
+		result = raw_body.evaluate(@node, :params => true)
+		cond = raw_cond.evaluate(@node, :params => true)
+		result
 	end
 end
 

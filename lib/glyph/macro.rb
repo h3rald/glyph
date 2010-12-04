@@ -109,8 +109,8 @@ module Glyph
 			@parameters = []
 			@node.parameters.each do |value|
 				@parameters << value.evaluate(@node, :params => true)
-				@parameters.last.strip! if options[:strip]
-				@parameters.last = nil if @parameters.last.blank? && options[:null_if_blank]
+				@parameters[@parameters.length-1].strip! if options[:strip]
+				@parameters[@parameters.length-1] = nil if @parameters.last.blank? && options[:null_if_blank]
 			end
 			@parameters
 		end

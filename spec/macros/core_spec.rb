@@ -238,6 +238,17 @@ Test -- Test Snippet
 		output_for(set_test).should match("-- changed again! --")
 		lambda { output_for(invalid_set)}.should raise_error(Glyph::MacroError, "Undeclared attribute 'test'")
 		lambda { output_for(invalid_macro) }.should raise_error
+		# Set same attribute
+		text = %{
+			let[
+				@a[-]
+				em[
+					@:[a|s/concat[@[a]|--]]
+					@[a]
+				]
+			]
+		}
+		output_for(text).strip.should match("---")
 	end
 
 	it "add, multiply, subtract" do
@@ -281,6 +292,21 @@ Test -- Test Snippet
 		output_for("gte[2|2]").should == "true"
 		output_for("lte[2|2]").should == "true"
 		output_for("gt[aaa|2]").should == "true"
+	end
+
+	it "while" do
+		text = %{
+			let[
+				@count[5]
+				@text[-]
+				while[gt[@[count]|0]|
+					@:[text|s/concat[@[text]|test-]]					
+					@:[count|subtract[@[count]|1]]
+				]
+				@[text]
+			]
+		}
+		output_for(text).strip.should == "-test-test-test-test-test-"
 	end
 
 end	
