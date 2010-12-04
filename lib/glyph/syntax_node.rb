@@ -129,7 +129,7 @@ module Glyph
 			self[:document] = context[:document] 
 			self[:info] = context[:info]
 			self[:value] = ""
-			dispatched = parent_macro.dispatch(self) rescue nil
+			dispatched = parent_macro.dispatch(self) if parent_macro
 			return dispatched if dispatched
 			if Glyph['options.macro_set'] == "xml" || Glyph::MACROS[self[:name]].blank? && Glyph['options.xml_fallback'] then
 				m = Glyph::MacroNode.new

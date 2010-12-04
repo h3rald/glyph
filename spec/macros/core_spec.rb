@@ -55,8 +55,6 @@ describe "Macro:" do
 		@p.document.output.should == ""
 		interpret("?[not[match[$[document.source]|/^docu/]]|em[test]]")
 		@p.document.output.should == ""
-		# Invalid regexp
-		lambda { interpret("?[match[$[document.source]|document]em[test]]").document.output }.should raise_error
 		interpret "?[%[lite?]|test]"
 		@p.document.output.should == ""
 		interpret "?[%[!lite?]|test]"
@@ -264,6 +262,16 @@ Test -- Test Snippet
 		output_for("multiply[a|test]").should == "0"
 		lambda { output_for("multiply[1]").should == "1"}.should raise_error
 		lambda { output_for("multiply[]").should == "1"}.should raise_error
+	end
+
+	it "s" do
+		lambda { output_for("s/each[test]") }.should raise_error
+		lambda { output_for("s/gsub[]") }.should raise_error
+		output_for("s/gsub[string|/ri/|i]").should == "sting"
+		output_for("s/match[test|/EST/i]").should == "est"
+		output_for("s/upcase[test]").should == "TEST"
+		output_for("s/insert[hell|4|o]").should == "hello"
+		output_for("s/slice[test]").should == ""
 	end
 
 end	

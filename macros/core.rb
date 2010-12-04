@@ -166,15 +166,6 @@ macro :or do
 	(res_a || res_b) ? true : nil
 end
 
-macro :match do
-	within :condition
-	exact_parameters 2
-	val = param(0).to_s
-	regexp = param(1).to_s
-	macro_error "Invalid regular expression: #{regexp}" unless regexp.match /^\/.*\/[a-z]?$/
-	val.match(instance_eval(regexp)) ? true : nil
-end
-
 macro "alias:" do
 	exact_parameters 2
 	Glyph.macro_alias param(0) => param(1)
@@ -247,6 +238,39 @@ end
 macro :multiply do
 	min_parameters 2
 	params.inject(1){|mult, n| mult * n.to_i}
+end
+
+macro :s do
+	dispatch do |node|
+		forbidden = [:each, :each_line, :each_byte, :upto, :intern, :to_sym, :to_f]
+		meth = node[:name]
+		infer_type = lambda do |str|
+			case
+			when str.match(/[+-]?\d+/) then
+				# Integer
+				str.to_i
+			when str.match(/^\/.+?\/[imoxneus]?$/) then
+				# Regexp
+				Kernel.instance_eval str
+			else
+				str
+			end
+		end
+		macro_error "Macro 's/#{meth}' takes at least one parameter" unless node.params.length > 0
+		macro_error "String method '#{meth}' is not supported" if meth.in?(forbidden) || meth.to_s.match(/\!$/)
+		str = node.param(0).evaluate(node, :params => true)
+		begin
+			if node.param(1) then
+				meth_params = node.params[1..node.params.length-1].map{|p| infer_type.call(p.evaluate(node, :params => true))}
+				str.send(meth, *meth_params).to_s
+			else
+				str.send(meth).to_s
+			end
+		rescue Exception => e
+			macro_warning "\"#{str}\".#{meth}(#{meth_params.map{|p| p.inspect}.join(', ') rescue nil}) - #{e.message}", e
+			""
+		end
+	end
 end
 
 macro_alias '--' => :comment
