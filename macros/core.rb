@@ -135,35 +135,48 @@ macro :condition do
 end
 
 macro :eq do
-	within :condition
-	min_parameters 1
-	max_parameters 2
-	(param(0).to_s == param(1).to_s)	? true : nil
+	exact_parameters 2
+	(param(0) == param(1))	? true : nil
 end
 
 macro :not do
-	within :condition
 	max_parameters 1
 	v = param(0).to_s
 	(v.blank? || v == "false") ? true : nil 
 end
 
 macro :and do
-	within :condition
-	min_parameters 1
-	max_parameters 2
+	exact_parameters 2
 	res_a = !param(0).blank?
 	res_b = !param(1).blank?
 	(res_a && res_b) ? true : nil
 end
 
 macro :or do
-	within :condition
-	min_parameters 1
-	max_parameters 2
+	exact_parameters 2
 	res_a = !param(0).blank?
 	res_b = !param(1).blank?
 	(res_a || res_b) ? true : nil
+end
+
+macro :lt do
+	exact_parameters 2
+	(param(0) < param(1)) ? true : nil
+end
+
+macro :lte do
+	exact_parameters 2
+	(param(0) <= param(1)) ? true : nil
+end
+
+macro :gt do
+	exact_parameters 2
+	(param(0) > param(1)) ? true : nil
+end
+
+macro :gte do
+	exact_parameters 2
+	(param(0) >= param(1)) ? true : nil
 end
 
 macro "alias:" do

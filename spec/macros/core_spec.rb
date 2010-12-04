@@ -274,4 +274,13 @@ Test -- Test Snippet
 		output_for("s/slice[test]").should == ""
 	end
 
+	it "lt, lte, gt, gte" do
+		lambda { output_for("lt[1|2|3]")}.should raise_error
+		output_for("lt[2|7]").should == "true"
+		output_for("gt[2|7]").should == ""
+		output_for("gte[2|2]").should == "true"
+		output_for("lte[2|2]").should == "true"
+		output_for("gt[aaa|2]").should == "true"
+	end
+
 end	
