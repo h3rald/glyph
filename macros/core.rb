@@ -184,16 +184,10 @@ macro "alias:" do
 	Glyph.macro_alias param(0) => param(1)
 end
 
-macro "rewrite:" do
+macro "define:" do
 	safety_check
 	exact_parameters 2
-	macro_name = param(0).to_sym
-	@node.param(1).descend do |n, level|
-		if n[:name] == macro_name then
-			macro_error "Macro '#{macro_name}' cannot be defined by itself"
-		end
-	end
-	Glyph.rewrite macro_name, raw_param(1).dup	
+	Glyph.define param(0).to_sym, raw_param(1).dup	
 	nil
 end
 
@@ -308,7 +302,7 @@ macro_alias '$' => :config
 macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias '?' => :condition
-macro_alias 'rw:' => 'rewrite:'
+macro_alias 'def:' => 'define:'
 macro_alias '@' => :attribute
 macro_alias :attr => :attribute
 macro_alias '@:' => "attribute:"

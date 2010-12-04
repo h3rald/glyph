@@ -72,6 +72,9 @@ module Glyph
 
 	# All the currently-loaded macros
 	MACROS = {}
+
+	# Anonymous macro cache
+	LAMBDAS = {}
 	
 	# All the currently-loaded macro representations
 	REPS = {}
@@ -171,6 +174,7 @@ module Glyph
 		self.enable_all
 		self.config_reset
 		MACROS.clear
+		LAMBDAS.clear
 		REPS.clear
 		SNIPPETS.clear
 	end
@@ -230,11 +234,11 @@ module Glyph
 		Glyph.instance_eval file_load(Glyph::PROJECT/"lib/macros/reps/#{output}.rb") rescue nil
 	end
 
-	#@since 0.4.0
-	# Creates a new macro by rewriting.
+	#@since 0.5.0
+	# Defines a new macro in Glyph code.
 	# @param [Symbol, String] name the name of the macro
 	# @param [String] text the Glyph code used to define the macro
-	def self.rewrite(name, text)
+	def self.define(name, text)
 		macro name do
 			body = text.dup
 			# Parameters

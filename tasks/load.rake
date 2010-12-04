@@ -46,7 +46,7 @@ namespace :load do
 		end
 		load_layouts_from_dir = lambda do |dir|
 			load_files_from_dir(dir, ".glyph") do |file, contents|
-				Glyph.rewrite "layout/#{file.basename(file.extname)}".to_sym, contents
+				Glyph.define "layout/#{file.basename(file.extname)}".to_sym, contents
 			end
 		end
 		out_cfg = "output.#{Glyph['document.output']}"

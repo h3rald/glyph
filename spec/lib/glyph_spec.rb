@@ -68,14 +68,14 @@ describe Glyph do
 		lambda { output_for("include[test.glyph]")}.should raise_error Glyph::MacroError
 		lambda {output_for("config:[test|true]")}.should raise_error Glyph::MacroError
 		lambda { output_for("ruby[Time.now]")}.should raise_error Glyph::MacroError
-		lambda { output_for("rw:[a|section[{{0}}]]")}.should raise_error Glyph::MacroError
+		lambda { output_for("def:[a|section[{{0}}]]")}.should raise_error Glyph::MacroError
 		Glyph.safe_mode = false
 	end
 
-	it "should rewrite macros using Glyph syntax" do
+	it "should define macros using Glyph syntax" do
 		define_em_macro
-		Glyph.rewrite :test_rw_macro, %{em[{{0}} -- {{a}}]}
-		output_for("test_rw_macro[@a[!]?]").should == "<em>? -- !</em>"
+		Glyph.define :test_def_macro, %{em[{{0}} -- {{a}}]}
+		output_for("test_def_macro[@a[!]?]").should == "<em>? -- !</em>"
 	end
 
 	it "should store alias information" do

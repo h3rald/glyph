@@ -180,18 +180,26 @@ Test -- Test Snippet
 		Glyph::MACROS[:test].should == Glyph::MACROS[:em]
 	end
 
-	it "rewrite:" do
+	it "define:" do
 		define_em_macro
-		interpret("rewrite:[rw_test|em[{{0}}\\.em[{{a}}]]]").process
-		output_for("rw_test[test @a[em[A!]]]").should == "<em>test<em><em>A!</em></em></em>"
-		output_for("rw_test[]").should == "<em><em></em></em>"
+		interpret("def:[def_test|em[{{0}}\\.em[{{a}}]]]").process
+		output_for("def_test[test @a[em[A!]]]").should == "<em>test<em><em>A!</em></em></em>"
+		output_for("def_test[]").should == "<em><em></em></em>"
 	end
 
-	it "rewrite should detect mutual definitions" do
-		define_em_macro
-		lambda do
-			interpret("rw:[rw_test2|em[rw_test2[{{0}}]]]").process
-		end.should raise_error(Glyph::MacroError)
+	it "define should support recursion" do
+		fact = %{
+			def:[fact|
+				?[
+					eq[{{0}}|0]|1|
+						multiply[
+							{{0}} | fact[subtract[{{0}}|1]]
+						]
+					]
+				]
+			fact[5]
+		}
+		output_for(fact).strip.should == "120"
 	end
 
 	it "output?" do

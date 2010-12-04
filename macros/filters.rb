@@ -71,7 +71,7 @@ macro :markdown do
 	end
 end
 
-rewrite "textile_section", 
+define "textile_section", 
 %{section[
 		@src[{{src}}]
 		@id[{{id}}]
@@ -82,7 +82,7 @@ rewrite "textile_section",
 		]
 	]}
 
-rewrite "markdown_section", 
+define "markdown_section", 
 %{section[
 		@src[{{src}}]
 		@id[{{id}}]
