@@ -298,16 +298,13 @@ macro :map do
 	array_node = nil
 	validate("The first parameter must be an array of macros") do
 		array_node = @node.child_macros[0] rescue nil
-		array_node.all? {|i| i.child_macros[0] rescue nil }
+		array_node.child_macros[0] rescue nil
 	end	
 	function = param 1
 	body = function.dup
 	result = []
-	array_node.parameters.each do |p| 
-		subs = body.gsub(/\{\{(\d+)\}\}/) do
-		 	p.evaluate(array_node, :params => true) if $1 == "0"
-		end
-		result << interpret(subs)
+	array_node.child_macros.each do |m| 
+		result << Glyph::Macro.new(m).apply(body)
 	end
 	result = [""] if result.all? {|i| i.blank?}
 	".[=#{result.join("|")}=]"
