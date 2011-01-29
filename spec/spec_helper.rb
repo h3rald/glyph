@@ -90,7 +90,7 @@ def stdout_for(&block)
 end
 
 def run_command_successfully(cmd)
-	run_command(cmd).match(/error/) == nil
+	run_command(cmd).match(/error|warning/) == nil
 end
 
 def define_em_macro

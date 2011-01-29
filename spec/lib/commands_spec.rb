@@ -23,7 +23,7 @@ describe "glyph" do
 	it "[config] should read configuration settings" do
 		create_project
 		run_command_successfully(["config", "-g"]).should == false
-		run_command(["config", "document.html.filter_target"]).match(/html/m).should_not == nil
+		run_command(["config", "document.output"]).match(/html/m).should_not == nil
 	end
 
 	it "[config] should write configuration settings" do
@@ -41,7 +41,6 @@ describe "glyph" do
 		Glyph::PROJECT_CONFIG.get('another.test').should_not == "something else"
 		Glyph::GLOBAL_CONFIG.read
 		Glyph::GLOBAL_CONFIG.get('another.test').should == "something else"
-		run_command_successfully(["config", "-g", "yet.another.test", "something else", "extra argument"]).should == false
 		(Glyph::SPEC_DIR/'.glyphrc').unlink
 	end
 
