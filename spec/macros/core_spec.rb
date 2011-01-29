@@ -317,4 +317,23 @@ Test -- Test Snippet
 		output_for(text).strip.should == "-test-test-test-test-test-"
 	end
 
+	it "map" do
+		define_em_macro
+		output_for("map['[1|2|3]|em[{{0}}]]").should == ".[=<em>1</em>|<em>2</em>|<em>3</em>=]"
+		output_for("map['[em[a]|em[b]|em[c]]|em[{{0}}]]").should == ".[=<em><em>a</em></em>|<em><em>b</em></em>|<em><em>c</em></em>=]"
+		lambda { output_for("map[]") }.should raise_error
+		lambda { output_for("map[1]") }.should raise_error
+		lambda { output_for("map[1|2]") }.should raise_error
+		lambda { output_for("map[1|{{0}}]") }.should raise_error
+		lambda { output_for("map[1|2|{{0}}]") }.should raise_error
+		lambda { output_for("map[.[1|2]]") }.should raise_error
+		output_for("map[.[1|2]|{{1}}]").should == ".[==]" 
+		output_for("map['[1|2]|{{0}}]").should == ".[=1|2=]"
+		output_for("map[quote[1]|{{0}}]").should == ".[=1=]"
+		output_for("map[.[]|{{0}}]").should == ".[==]"
+		output_for("map[.[1|2|3]|{{0}}]").should == ".[=1|2|3=]"
+		output_for("map[em[1|2|3]|{{0}}]").should == ".[=1|2|3=]"
+		output_for("map[em[=1|2|3=]|{{0}}]").should == ".[=1|2|3=]"
+	end
+
 end	

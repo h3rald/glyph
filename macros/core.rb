@@ -283,7 +283,7 @@ end
 
 macro :while do
 	exact_parameters 2
-	raw_cond = @node.parameter(0)
+	raw_cond = @node.parameter 0
 	raw_body = @node.parameter 1
 	cond = raw_cond.evaluate(@node, :params => true)
 	while (!cond.blank? && cond != "false") do
@@ -291,6 +291,25 @@ macro :while do
 		cond = raw_cond.evaluate(@node, :params => true)
 		result
 	end
+end
+
+macro :map do
+	exact_parameters 2
+	array_node = nil
+	validate("The first map parameter must be a macro") do
+		array_node = @node.child_macros[0] rescue nil
+	end	
+	function = param 1
+	body = function.dup
+	result = []
+	array_node.parameters.each do |p| 
+		subs = body.gsub(/\{\{(\d+)\}\}/) do
+		 	p.evaluate(array_node, :params => true) if $1 == "0"
+		end
+		result << interpret(subs)
+	end
+	result = [""] if result.all? {|i| i.blank?}
+	".[=#{result.join("|")}=]"
 end
 
 macro_alias '--' => :comment
@@ -301,6 +320,8 @@ macro_alias '%' => :ruby
 macro_alias '$' => :config
 macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
+macro_alias "'" => :escape
+macro_alias :quote => :escape
 macro_alias '?' => :condition
 macro_alias 'def:' => 'define:'
 macro_alias '@' => :attribute
