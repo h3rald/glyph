@@ -262,10 +262,24 @@ module Glyph
 			instance_exec(data, &block).to_s
 		end
 
-		# TODO: block
+		# TODO: docs
 		def dispatch(&block)
 			@node[:dispatch] = block
 			value
+		end
+
+		# TODO: docs
+		def apply(text)
+			body = text.dup
+			# Parameters
+			body.gsub!(/\{\{(\d+)\}\}/) do
+				raw_param($1.to_i).to_s.strip
+			end
+			# Attributes
+			body.gsub!(/\{\{([^\[\]\|\\\s]+)\}\}/) do
+				raw_attr($1.to_sym).to_s.strip
+			end
+			interpret body
 		end
 
 		# Executes a macro definition in the context of self

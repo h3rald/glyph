@@ -257,4 +257,11 @@ describe Glyph::Macro do
 		output_for("dispatcher[another_macro[another_macro[test]]]").should == "......test"
 	end
 
+	it "should apply text with placeholders to macro data" do
+		Glyph.macro :data do
+			apply "{{1}} {{a}} {{0}}" 
+		end
+		output_for("data[@a[is]a test|This]").should == "This is a test"
+	end
+
 end

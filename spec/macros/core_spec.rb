@@ -336,4 +336,24 @@ Test -- Test Snippet
 		output_for("map[em[=1|2|3=]|{{0}}]").should == ".[=1|2|3=]"
 	end
 
+	it "unescape" do
+		define_em_macro
+		lambda { output_for("~[]")}.should raise_error
+		lambda { output_for("_[1]")}.should raise_error
+		lambda { output_for("_[em[1]]")}.should raise_error
+		lambda { output_for("_[.[=1=]|.[=2=]]")}.should raise_error
+		output_for("~[.[=em[test]=]]").should == "<em>test</em>"
+		output_for("unquote['[=1|2|3=]]").should == "123"
+	end
+
+	it "apply" do
+		define_em_macro
+		lambda { output_for("apply[]") }.should raise_error
+		lambda { output_for("apply[a|b|c]") }.should raise_error
+		lambda { output_for("apply[a|b]") }.should raise_error
+		output_for("apply[em[a]|b]").should == "b"
+		output_for("apply[em[a]|-{{0}}-]").should == "-a-"
+		output_for("apply[em[@test[1]2|3]|{{1}}-{{0}}-{{test}}]").should == "3-2-1"
+	end
+
 end	

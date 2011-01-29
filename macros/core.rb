@@ -296,8 +296,9 @@ end
 macro :map do
 	exact_parameters 2
 	array_node = nil
-	validate("The first map parameter must be a macro") do
+	validate("The first parameter must be an array of macros") do
 		array_node = @node.child_macros[0] rescue nil
+		array_node.all? {|i| i.child_macros[0] rescue nil }
 	end	
 	function = param 1
 	body = function.dup
@@ -312,6 +313,29 @@ macro :map do
 	".[=#{result.join("|")}=]"
 end
 
+macro :unescape do
+	exact_parameters 1
+	escaped_macro = nil
+	validate("The first parameter must be an escaped macro") do
+		escaped_macro = @node.child_macros[0] rescue nil
+		escaped_macro && escaped_macro[:escape]
+	end	
+	result = ""
+	escaped_macro.parameters.each do |p|
+		result << interpret((p&0).to_s)
+	end
+	result
+end
+
+macro :apply do
+	exact_parameters 2
+	macro_node = nil
+	validate("The first parameter must be a macro") do
+		macro_node = @node.child_macros[0] rescue nil
+	end
+	Glyph::Macro.new(macro_node).apply parameter(1)
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
@@ -322,6 +346,9 @@ macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias "'" => :escape
 macro_alias :quote => :escape
+macro_alias "_" => :unescape
+macro_alias "~" => :unescape
+macro_alias :unquote => :unescape
 macro_alias '?' => :condition
 macro_alias 'def:' => 'define:'
 macro_alias '@' => :attribute
