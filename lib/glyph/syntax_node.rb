@@ -61,7 +61,11 @@ module Glyph
 		# @since 0.3.0
 		def to_s
 			e = self[:escape] ? "=" : ""
-			"#{self[:name]}["+e+attributes.join+parameters.join("|")+e+"]"
+			"#{self[:name]}["+e+contents+e+"]"
+		end
+
+		def contents
+			attributes.join+parameters.join("|")
 		end
 		
 		# Expands the macro

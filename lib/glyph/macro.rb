@@ -209,20 +209,7 @@ module Glyph
 		# @param [String] string the string to interpret
 		# @return [String] the interpreted output
 		def interpret(string)
-			if @node[:escape] then
-				result = string 
-			else
-				context = {}
-				context[:source] = @updated_source || @node[:source]
-				context[:embedded] = true
-				context[:document] = @node[:document]
-				interpreter = Glyph::Interpreter.new string, context
-				subtree = interpreter.parse
-				subtree[:source] = context[:source]
-				@node << subtree
-				result = interpreter.document.output
-			end
-			result
+			@node[:escape] ? string : inject(string).document.output
 		end
 
 		# @see Glyph::Document#placeholder
@@ -282,6 +269,22 @@ module Glyph
 			interpret body
 		end
 
+		# TODO: docs
+		def inject(string)
+			context = create_context
+			interpreter = Glyph::Interpreter.new string, context
+			subtree = interpreter.parse
+			subtree[:source] = context[:source]
+			@node << subtree
+			interpreter
+		end
+
+		# TODO: docs
+		def parse(string)
+			Glyph::Interpreter.new(string, create_context).parse
+		end
+
+
 		# Executes a macro definition in the context of self
 		def expand
 			block = Glyph::MACROS[@name]
@@ -289,6 +292,16 @@ module Glyph
 			res = instance_exec(@node, &block).to_s
 			res.gsub!(/\\?([\[\]\|])/){"\\#$1"} 
 			res
+		end
+
+		private
+
+		def create_context
+			context = {}
+			context[:source] = @updated_source || @node[:source]
+			context[:embedded] = true
+			context[:document] = @node[:document]
+			context
 		end
 
 	end

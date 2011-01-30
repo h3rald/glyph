@@ -317,32 +317,6 @@ Test -- Test Snippet
 		output_for(text).strip.should == "-test-test-test-test-test-"
 	end
 
-	it "map" do
-		define_em_macro
-		lambda { output_for("map['[1|2|3]|em[{{0}}]]")}.should raise_error
-		output_for("map['[.[1]|.[2]|.[3]]|em[{{0}}]]").should == ".[=<em>1</em>|<em>2</em>|<em>3</em>=]"
-		output_for("map['[em[a]|em[b]|em[c]]|em[-{{0}}-]]").should == ".[=<em>-a-</em>|<em>-b-</em>|<em>-c-</em>=]"
-		lambda { output_for("map[]") }.should raise_error
-		lambda { output_for("map[1]") }.should raise_error
-		lambda { output_for("map[1|2]") }.should raise_error
-		lambda { output_for("map[1|{{0}}]") }.should raise_error
-		lambda { output_for("map[1|2|{{0}}]") }.should raise_error
-		lambda { output_for("map[.[1|2]]") }.should raise_error
-		output_for("map[.['[1]|'[@a[3]2]]|{{0}}{{a}}]").should == ".[=1|23=]" 
-		output_for("map[quote[.[1]]|{{0}}]").should == ".[=1=]"
-		output_for("map[.[.[]]|{{0}}]").should == ".[==]"
-	end
-
-	it "unescape" do
-		define_em_macro
-		lambda { output_for("~[]")}.should raise_error
-		lambda { output_for("_[1]")}.should raise_error
-		lambda { output_for("_[em[1]]")}.should raise_error
-		lambda { output_for("_[.[=1=]|.[=2=]]")}.should raise_error
-		output_for("~[.[=em[test]=]]").should == "<em>test</em>"
-		output_for("unquote['[=1|2|3=]]").should == "123"
-	end
-
 	it "apply" do
 		define_em_macro
 		lambda { output_for("apply[]") }.should raise_error
@@ -351,6 +325,16 @@ Test -- Test Snippet
 		output_for("apply[em[a]|b]").should == "b"
 		output_for("apply[em[a]|-{{0}}-]").should == "-a-"
 		output_for("apply[em[@test[1]2|3]|{{1}}-{{0}}-{{test}}]").should == "3-2-1"
+	end
+
+	it "quote and unquote" do
+		define_em_macro
+		output_for("quote[em[test]]").should == "quote[em[test]]"
+		output_for("'[em[a]|em[b]]").should == "'[em[a]|em[b]]"
+		output_for("unquote[quote[em[test]]]").should == "<em>test</em>"
+		output_for("~[quote[em[a]|em[b]]]").should == "<em>a</em><em>b</em>"
+		lambda { output_for("unquote[...|...]")}.should raise_error
+		output_for("unquote[...]").should == "..."
 	end
 
 end	

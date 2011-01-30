@@ -293,35 +293,14 @@ macro :while do
 	end
 end
 
-macro :map do
-	exact_parameters 2
-	array_node = nil
-	validate("The first parameter must be an array of macros") do
-		array_node = @node.child_macros[0] rescue nil
-		array_node.child_macros[0] rescue nil
-	end	
-	function = param 1
-	body = function.dup
-	result = []
-	array_node.child_macros.each do |m| 
-		result << Glyph::Macro.new(m).apply(body)
-	end
-	result = [""] if result.all? {|i| i.blank?}
-	".[=#{result.join("|")}=]"
+macro :quote do
+	"#@name[#{@node.contents}]"
 end
 
-macro :unescape do
+macro :unquote do
 	exact_parameters 1
-	escaped_macro = nil
-	validate("The first parameter must be an escaped macro") do
-		escaped_macro = @node.child_macros[0] rescue nil
-		escaped_macro && escaped_macro[:escape]
-	end	
-	result = ""
-	escaped_macro.parameters.each do |p|
-		result << interpret((p&0).to_s)
-	end
-	result
+	content = parse(value.gsub(/\\([\]\[\|=])/, '\1'))&0
+	content.respond_to?(:parameters) ? Glyph::Macro.new(content).parameters.join : content[:value]
 end
 
 macro :apply do
@@ -341,11 +320,8 @@ macro_alias '%' => :ruby
 macro_alias '$' => :config
 macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
-macro_alias "'" => :escape
-macro_alias :quote => :escape
-macro_alias "_" => :unescape
-macro_alias "~" => :unescape
-macro_alias :unquote => :unescape
+macro_alias "'" => :quote
+macro_alias "~" => :unquote
 macro_alias '?' => :condition
 macro_alias 'def:' => 'define:'
 macro_alias '@' => :attribute
