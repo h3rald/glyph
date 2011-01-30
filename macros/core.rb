@@ -309,13 +309,13 @@ macro :apply do
 	quote = parse_quoted_string value
 	result = []
 	Glyph::Macro.new(quote).node.parameters.each do |p|
-		content = p&0
+		content = p.children.select{ |c| c.respond_to?(:parameters) || !c[:value].to_s.strip.blank?}[0]
 		if content.respond_to? :parameters then
 			# macro node
 			result << Glyph::Macro.new(content).apply(parameter(1))
 		else
 			# text node
-			result << parameter(1).gsub(/\{\{0}\}/, content[:value]).gsub(/\{\{.+?\}\}/, '') 
+			result << interpret(raw_parameter(1).to_s.gsub(/\{\{0}\}/, content[:value]).gsub(/\{\{.+?\}\}/, ''))
 		end
 	end
 	result = [""] if result.all?{|i| i.blank?}
@@ -336,6 +336,61 @@ macro :length do
 	quote.parameters.length.to_s
 end
 
+macro :get do
+	exact_parameters 2
+	quoted_parameter 0
+	quote = parse_quoted_string value
+	interpret quote.parameter(parameter(1).to_i).to_s rescue "" 
+end
+
+macro :sort do
+	max_parameters 2
+	quoted_parameter 0
+	sort_by = parameter 1 rescue nil
+	if sort_by.blank? || sort_by.match(/^\d+$/) then
+		param_sort = sort_by.to_i
+	else
+		attr_sort = sort_by
+	end
+	quote = parse_quoted_string value
+	sorted_parameters = quote.parameters.sort_by do |p|
+		content = p.children.select{ |c| c.respond_to?(:parameters) || !c[:value].to_s.strip.blank?}[0]
+		if content.respond_to? :parameters then
+			# macro node
+			if param_sort then
+				Glyph::Macro.new(content).parameter(param_sort).to_s
+			else
+				Glyph::Macro.new(content).attribute(attr_sort.to_sym).to_s
+			end
+		else
+			# text node
+			content[:value]
+		end
+	end
+	"'[#{sorted_parameters.map{|p| p.to_s}.join("|")}]"
+end
+
+
+macro :select do
+	exact_parameters 2
+	quoted_parameter 0
+	quote = parse_quoted_string value
+	result = []
+	Glyph::Macro.new(quote).node.parameters.each do |p|
+		content = p.children.select{ |c| c.respond_to?(:parameters) || !c[:value].to_s.strip.blank?}[0]
+		if content.respond_to? :parameters then
+			# macro node
+			selected = Glyph::Macro.new(content).apply(parameter(1))
+		else
+			# text node
+			selected = interpret raw_parameter(1).to_s.gsub(/\{\{0}\}/, content[:value]).gsub(/\{\{.+?\}\}/, '') 
+		end
+		result << content unless selected.blank? || selected == "false"
+	end
+	result = [""] if result.all?{|i| i.blank?}
+	"'[#{result.map{|p| p.to_s}.join("|")}]"
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
@@ -347,6 +402,7 @@ macro_alias '.' => :escape
 macro_alias "'" => :quote
 macro_alias "~" => :unquote
 macro_alias :map => :apply
+macro_alias :filter => :select
 macro_alias '?' => :condition
 macro_alias 'def:' => 'define:'
 macro_alias '@' => :attribute

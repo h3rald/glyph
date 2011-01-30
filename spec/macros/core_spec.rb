@@ -341,7 +341,6 @@ Test -- Test Snippet
 	end
 
 	it "reverse, length" do
-		define_em_macro
 		lambda { output_for("reverse[.|.]") }.should raise_error
 		lambda { output_for("reverse[.]")}.should raise_error
 		output_for("reverse['[1|2|3]]").should == "'[3|2|1]"
@@ -351,6 +350,36 @@ Test -- Test Snippet
 		output_for("length['[.]]").should == "1"
 		output_for("length['[.|.]]").should == "2"
 	end
+
+	it "get" do
+		define_em_macro
+		lambda { output_for("get[]")}.should raise_error
+		lambda { output_for("get[.|.]")}.should raise_error
+		output_for("get['[1]|.]").should == "1"
+		output_for("get['[1|2|3]|1]").should == "2"
+		output_for("get['[1|2|em[3]]|2]").should == "<em>3</em>"
+		output_for("get['[1]|4]").should == ""
+	end
+
+	it "sort" do
+		lambda { output_for("sort[]")}.should raise_error
+		lambda { output_for("sort[1|2]")}.should raise_error
+		output_for("sort['[5|1|4|2|3|6]]").should == "'[1|2|3|4|5|6]"
+		q = "'[.[@a[3]] | .[@a[1]@b[2]] | .[@a[2]1|2|3]]"
+		output_for("sort[#{q}|a]").should == "'[ .[@a[1]@b[2]] | .[@a[2]1|2|3]|.[@a[3]] ]" 
+		output_for("reverse[sort[#{q}|a]]").should == "'[.[@a[3]] | .[@a[2]1|2|3]| .[@a[1]@b[2]] ]" 
+	end
+
+	it "select" do
+		lambda { output_for("select[]") }.should raise_error
+		lambda { output_for("select[1|2]") }.should raise_error
+		output_for("select['[1|2|2|3]|gte[{{0}}|2]]").should == "'[2|2|3]"
+		q = "'[ .[@a[1]a|b] | .[@b[1]a] | .[@b[1]@a[2]a|b|c] ]"
+		output_for("select[#{q}|{{a}}]").should == "'[.[@a[1]a|b]|.[@b[1]@a[2]a|b|c]]"
+		output_for("select[#{q}|or[{{a}}|{{b}}]]").should == "'[.[@a[1]a|b]|.[@b[1]a]|.[@b[1]@a[2]a|b|c]]"
+		output_for("filter[#{q}|{{1}}]").should == "'[.[@a[1]a|b]|.[@b[1]@a[2]a|b|c]]"
+	end
+
 
 
 end	
