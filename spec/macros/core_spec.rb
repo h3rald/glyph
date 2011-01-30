@@ -322,9 +322,11 @@ Test -- Test Snippet
 		lambda { output_for("apply[]") }.should raise_error
 		lambda { output_for("apply[a|b|c]") }.should raise_error
 		lambda { output_for("apply[a|b]") }.should raise_error
-		output_for("apply[em[a]|b]").should == "b"
-		output_for("apply[em[a]|-{{0}}-]").should == "-a-"
-		output_for("apply[em[@test[1]2|3]|{{1}}-{{0}}-{{test}}]").should == "3-2-1"
+		lambda { output_for("apply[em[a]|b]")}.should raise_error
+		output_for("apply['[em[a]]|b]").should == "'[b]"
+		output_for("apply['[a]|-{{0}}-]").should == "'[-a-]"
+		output_for("apply['[.[@test[1]2|3]]|{{1}}-{{0}}-{{test}}]").should == "'[3-2-1]"
+		output_for("map['[.[@a[a1]1+]|.[@a[a2]]|.[3+]]|{{0}}%{{a}}]").should == "'[1+%a1|%a2|3+%]"
 	end
 
 	it "quote and unquote" do
@@ -333,8 +335,22 @@ Test -- Test Snippet
 		output_for("'[em[a]|em[b]]").should == "'[em[a]|em[b]]"
 		output_for("unquote[quote[em[test]]]").should == "<em>test</em>"
 		output_for("~[quote[em[a]|em[b]]]").should == "<em>a</em><em>b</em>"
+		output_for("~['['[em[test]]]]").should == "'[em[test]]"
 		lambda { output_for("unquote[...|...]")}.should raise_error
 		output_for("unquote[...]").should == "..."
 	end
+
+	it "reverse, length" do
+		define_em_macro
+		lambda { output_for("reverse[.|.]") }.should raise_error
+		lambda { output_for("reverse[.]")}.should raise_error
+		output_for("reverse['[1|2|3]]").should == "'[3|2|1]"
+		lambda { output_for("length[.|.]") }.should raise_error
+		lambda { output_for("length[.]")}.should raise_error
+		output_for("length['[]]").should == "0"
+		output_for("length['[.]]").should == "1"
+		output_for("length['[.|.]]").should == "2"
+	end
+
 
 end	

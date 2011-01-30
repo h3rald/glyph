@@ -284,6 +284,11 @@ module Glyph
 			Glyph::Interpreter.new(string, create_context).parse
 		end
 
+		# TODO: docs
+		def parse_quoted_string(string)
+			parse(string.gsub(/\\([\]\[\|=])/, '\1'))&0
+		end
+
 
 		# Executes a macro definition in the context of self
 		def expand

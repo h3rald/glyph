@@ -299,17 +299,41 @@ end
 
 macro :unquote do
 	exact_parameters 1
-	content = parse(value.gsub(/\\([\]\[\|=])/, '\1'))&0
+	content = parse_quoted_string value
 	content.respond_to?(:parameters) ? Glyph::Macro.new(content).parameters.join : content[:value]
 end
 
 macro :apply do
 	exact_parameters 2
-	macro_node = nil
-	validate("The first parameter must be a macro") do
-		macro_node = @node.child_macros[0] rescue nil
+	quoted_parameter 0
+	quote = parse_quoted_string value
+	result = []
+	Glyph::Macro.new(quote).node.parameters.each do |p|
+		content = p&0
+		if content.respond_to? :parameters then
+			# macro node
+			result << Glyph::Macro.new(content).apply(parameter(1))
+		else
+			# text node
+			result << parameter(1).gsub(/\{\{0}\}/, content[:value]).gsub(/\{\{.+?\}\}/, '') 
+		end
 	end
-	Glyph::Macro.new(macro_node).apply parameter(1)
+	result = [""] if result.all?{|i| i.blank?}
+	"'[#{result.join("|")}]"
+end
+
+macro :reverse do
+	exact_parameters 1
+	quoted_parameter 0
+	quote = parse_quoted_string value
+	"'[#{quote.parameters.reverse.map{|p| p.contents}.join("|")}]"
+end
+
+macro :length do
+	exact_parameters 1
+	quoted_parameter 0
+	quote = parse_quoted_string value
+	quote.parameters.length.to_s
 end
 
 macro_alias '--' => :comment
@@ -322,6 +346,7 @@ macro_alias '$:' => 'config:'
 macro_alias '.' => :escape
 macro_alias "'" => :quote
 macro_alias "~" => :unquote
+macro_alias :map => :apply
 macro_alias '?' => :condition
 macro_alias 'def:' => 'define:'
 macro_alias '@' => :attribute

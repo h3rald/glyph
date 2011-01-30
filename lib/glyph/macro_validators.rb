@@ -173,6 +173,13 @@ module Glyph
 				end
 			end
 
+			# TODO: docs
+			def quoted_parameter(position, options={:level => :error})
+				validate("Macro '#{@name}' requires a quoted macro at position #{position}", options) do
+					(@node&(position)).find_child {|n| n[:name] && Glyph.macro_eq?(n[:name], :quote)}
+				end
+			end
+
 		end
 	end
 end

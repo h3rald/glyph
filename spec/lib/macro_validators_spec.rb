@@ -75,5 +75,19 @@ describe Glyph::Macro::Validators do
 		lambda { output_for("em[within_m[test]]") }.should raise_error(Glyph::MacroError, "Macro 'within_m' must not be within a 'em' macro")
 	end	
 
+	it "should validate if macro contains quoted parameters" do
+		Glyph.run! 'load:macros'
+		Glyph.macro :q_par_0 do
+			quoted_parameter 0
+			"---"
+		end
+		Glyph.macro :q_par_1 do
+			quoted_parameter 1
+			"---"
+		end
+		lambda { puts output_for("q_par_0[.|'[test]]") }.should raise_error(Glyph::MacroError, "Macro 'q_par_0' requires a quoted macro at position 0")
+		output_for("q_par_1[.|'[test]]").should == "---"
+	end
+
 end
 
