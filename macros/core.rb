@@ -391,6 +391,24 @@ macro :select do
 	"'[#{result.map{|p| p.to_s}.join("|")}]"
 end
 
+
+macro :fragment do
+	exact_parameters 2
+	ident, contents = param(0).to_sym, param(1)
+	macro_error "Fragment '#{ident}' is already defined" if @node[:document].fragments.has_key? ident
+	@node[:document].fragments[ident] = contents
+end
+
+macro :embed do
+	exact_parameters 1
+	ident = param(0).to_sym
+	placeholder do |document|
+		fragment = document.fragments[ident]
+		macro_error "Fragment '#{ident}' is not defined" unless fragment
+		fragment
+	end
+end
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'
@@ -409,3 +427,5 @@ macro_alias '@' => :attribute
 macro_alias :attr => :attribute
 macro_alias '@:' => "attribute:"
 macro_alias "attr:" => "attribute:"
+macro_alias "##" => :fragment
+macro_alias "<=" => :embed

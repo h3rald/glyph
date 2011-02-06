@@ -11,7 +11,7 @@ module Glyph
 
 		ESCAPES = /\\([\\\]\[\|.=])/
 
-		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics, :links, :toc
+		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics, :links, :toc, :fragments
 
 		# Creates a new document
 		# @param [GlyphSyntaxNode] tree the syntax tree to be evaluate
@@ -24,6 +24,7 @@ module Glyph
 			@placeholders = {}
 			@bookmarks = {}
 			@headers = {}
+			@fragments = {}
 			@styles = []
 			@errors = []
 			@todos = []
@@ -54,7 +55,8 @@ module Glyph
 			@topics = document.topics unless data[:topics] == false
 			@placeholders = document.placeholders unless data[:placeholders] == false
 			@toc = document.toc unless data[:toc] == false
-			@links = document.links unless data[:links] == true
+			@links = document.links unless data[:links] == false
+			@fragments = document.fragments unless data[:fragments] == false
 			self
 		end
 

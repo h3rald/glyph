@@ -149,5 +149,15 @@ describe Glyph::Document do
 		reset_quiet
 	end
 
+	it "should store fragments" do
+		delete_project
+		create_project
+		Glyph.run! "load:all"
+		doc = create_doc create_tree("testing ##[frag1|fragments!] -- ##[frag2|another fragment]")
+		doc.analyze
+		doc.fragments.should == {:frag1 => "fragments!", :frag2 => "another fragment"}
+		reset_quiet
+	end
+
 end
 

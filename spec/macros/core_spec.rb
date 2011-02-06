@@ -380,6 +380,20 @@ Test -- Test Snippet
 		output_for("filter[#{q}|{{1}}]").should == "'[.[@a[1]a|b]|.[@b[1]@a[2]a|b|c]]"
 	end
 
+	it "fragment" do
+		text = "... ##[id1|test fragment #1] ... ##[id2|test fragment #2]"
+	 	interpret text
+		@p.document.fragments.should == {:id1 => "test fragment #1", :id2 => "test fragment #2"}	
+		@p.document.output.should == "... test fragment #1 ... test fragment #2"
+		lambda { output_for "##[id1|test] -- fragment[id1|test]" }.should raise_error
+		lambda { output_for "##[id1]" }.should raise_error
+	end
+
+it "embed" do
+	text = "... <=[id2] ##[id1|test fragment #1] ... ##[id2|test fragment #2] <=[id1]"
+	output_for(text).should == "... test fragment #2 test fragment #1 ... test fragment #2 test fragment #1"
+end	
+
 
 
 end	
