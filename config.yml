@@ -1,5 +1,5 @@
 :document:
-  :source: 'document.glyph'
+  :source: document.glyph
   :author: ""
   :title: ""
   :subtitle: ""
@@ -12,7 +12,7 @@
   :cover: false
 :options:
   :url_validation: false
-  :macro_set: 'glyph' # core, xml, filters
+  :macro_set: glyph # core, xml, filters
   :safe_mode: false
   :filter_by_file_extension: true
   :xml_fallback: true
@@ -34,58 +34,59 @@
 :output:
   :html:
     :multifile: false
-    :extension: '.html'
-    :filter_target: 'html'
-    :macro_reps: 'html'
+    :extension: .html
+    :filter_target: html
+    :macro_reps: html
   :html5:
     :multifile: false
-    :extension: '.html'
-    :filter_target: 'html'
-    :macro_reps: 'html5'
+    :extension: .html
+    :filter_target: html
+    :macro_reps: html5
   :pdf:
     :multifile: false
-    :extension: '.pdf'
-    :filter_target: 'html'
-    :generator: 'wkhtmltopdf'
-    :macro_reps: 'html'
+    :extension: .pdf
+    :filter_target: html
+    :through: html
+    :generator: wkhtmltopdf
+    :macro_reps: html
   :web:
     :multifile: true
-    :extension: '.html'
-    :filter_target: 'html'
-    :macro_reps: 'html'
-    :layout_dir: 'web'
+    :extension: .html
+    :filter_target: html
+    :macro_reps: html
+    :layout_dir: web
     :layouts:
-      :topic: 'topic'
-      :index: 'index'
-    :base: "/"
+      :topic: topic
+      :index: index
+    :base: /
   :web5:
     :multifile: true
-    :extension: '.html'
-    :filter_target: 'html'
-    :macro_reps: 'html5'
-    :layout_dir: 'web5'
+    :extension: .html
+    :filter_target: html
+    :macro_reps: html5
+    :layout_dir: web5
     :layouts:
-      :topic: 'topic'
-      :index: 'index'
-    :base: "/"
+      :topic: topic
+      :index: index
+    :base: /
   :epub:
     :multifile: false
-    :extension: '.epub'
-    :filter_target: 'html'
-    :generator: 'calibre'
-    :profile: "nook"
-    :macro_reps: 'html'
+    :extension: .epub
+    :filter_target: html
+    :generator: calibre
+    :profile: nook
+    :macro_reps: html
   :mobi:
     :multifile: false
-    :extension: '.mobi'
-    :filter_target: 'html'
-    :generator: 'calibre'
-    :profile: "kindle"
-    :macro_reps: 'html'
+    :extension: .mobi
+    :filter_target: html
+    :generator: calibre
+    :profile: kindle
+    :macro_reps: html
 :filters:
-  :highlighter: 'coderay'
+  :highlighter: coderay
   :markdown:
-    :converter: 'bluecloth'
+    :converter: bluecloth
   :redcloth:
     :restrictions: []
   :coderay:
@@ -95,7 +96,7 @@
     :css: :class 
   :ultraviolet:
     :line_numbers: true
-    :theme: 'lazy'
+    :theme: lazy
 :system:
   :quiet: false
   :structure:

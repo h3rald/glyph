@@ -145,13 +145,14 @@ describe "glyph" do
 				Test -- Test Snippet
 			</div>
 		}.gsub(/\t|\n/, '')
-		Glyph.enable 'generate:html'
 		(Glyph::PROJECT/'article.html').unlink
 		Glyph['document.output'] = 'pdf'
 		src = Glyph::PROJECT/'article.html'
 		out = Glyph::PROJECT/'article.pdf'
 		generate_pdf = lambda do |gen|
+			Glyph.enable 'generate:html'
 			Glyph.enable 'generate:pdf'
+			Glyph.enable 'generate:pdf_through_html'
 			Glyph['output.pdf.generator'] = gen
 			run_command_successfully(["compile", "article.glyph"]).should == true
 			src.exist?.should == true

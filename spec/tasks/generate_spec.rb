@@ -28,9 +28,16 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html5/test_project.html').exist?.should == true
 	end
 
-  it ":pdf should generate a pdf document" do
+  it ":pdf_through_html should generate a pdf document through html" do
 		Glyph['document.output'] = 'pdf'
-    lambda { stdout_for { Glyph.run! 'generate:pdf'}}.should_not raise_error
+    lambda { stdout_for { Glyph.run! 'generate:pdf_through_html'}}.should_not raise_error
+		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
+		(Glyph::PROJECT/'output/pdf/test_project.pdf').exist?.should == true
+	end
+
+  it ":pdf_through_html5 should generate a pdf document through html5" do
+		Glyph['document.output'] = 'pdf'
+    lambda { stdout_for { Glyph.run! 'generate:pdf_through_html5'}}.should_not raise_error
 		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
 		(Glyph::PROJECT/'output/pdf/test_project.pdf').exist?.should == true
   end

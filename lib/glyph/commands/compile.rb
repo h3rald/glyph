@@ -20,6 +20,7 @@ command :compile do |c|
 		target = Glyph['document.output']
 		target = nil if target.blank?
 		target ||= Glyph["output.#{Glyph['document.output']}.filter_target"]
+		through = Glyph["output.#{target}.through"]
 		Glyph['document.source'] = options[:s] if options[:s]
 		if Glyph.multiple_output_files? then
 			Glyph["output.#{Glyph['document.output']}.base"] = Glyph::PROJECT/"output/#{Glyph['document.output']}/".to_s if Glyph["output.#{Glyph['document.output']}.base"].blank?
@@ -45,7 +46,7 @@ command :compile do |c|
 			Glyph['document.output_file'] = destination_file.basename.to_s # System use only
 		end
 		begin
-			Glyph.run "generate:#{target}"
+			Glyph.run "generate:#{target}#{through ? "_through_#{through}" : ""}"
 		rescue Exception => e
 			message = e.message
 			if Glyph.debug? then

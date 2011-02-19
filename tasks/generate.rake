@@ -150,8 +150,8 @@ namespace :generate do
 	desc "Create multiple HTML 5 files"
 	task :web5 => [:web] do; end
 
-	desc "Create a pdf file"
-	task :pdf => :html do
+	desc "Create a pdf file (do not call directly)"
+	task :pdf do
 		info "Generating PDF file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
@@ -182,5 +182,11 @@ namespace :generate do
 			error "Glyph cannot generate PDF. Please specify a valid output.pdf.generator setting."
 		end
 	end
+
+	desc "Create a pdf file through html"
+	task :pdf_through_html => [:html, :pdf] do; end
+
+	desc "Create a pdf file through html5"
+	task :pdf_through_html5 => [:html5, :pdf] do; end
 
 end
