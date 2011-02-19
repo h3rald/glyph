@@ -157,5 +157,16 @@ module Glyph
 			Glyph["output.#{Glyph['document.output']}.multifile"]
 		end
 
+		# Execute an external command
+		# @since 0.5.0
+		def run_external_command(cmd)
+			IO.popen(cmd+" 2>&1") do |pipe|
+				pipe.sync = true
+				while str = pipe.gets do
+					puts str
+				end
+			end
+		end
+
 	end
 end

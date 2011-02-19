@@ -22,15 +22,30 @@ describe "generate" do
 		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
 	end
 
+	it ":html5 should generate a standalone html document" do
+		Glyph['document.output'] = 'html5'
+		lambda { Glyph.run! 'generate:html5'}.should_not raise_error
+		(Glyph::PROJECT/'output/html5/test_project.html').exist?.should == true
+	end
+
+  it ":pdf should generate a pdf document" do
+		Glyph['document.output'] = 'pdf'
+    lambda { stdout_for { Glyph.run! 'generate:pdf'}}.should_not raise_error
+		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
+		(Glyph::PROJECT/'output/pdf/test_project.pdf').exist?.should == true
+  end
+
   it ":mobi should generate a mobi document" do
 		Glyph['document.output'] = 'mobi'
     lambda { stdout_for { Glyph.run! 'generate:mobi'}}.should_not raise_error
+		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
 		(Glyph::PROJECT/'output/mobi/test_project.mobi').exist?.should == true
   end
 
   it ":epub should generate an epub document" do
 		Glyph['document.output'] = 'epub'
     lambda { stdout_for { Glyph.run! 'generate:epub'}}.should_not raise_error
+		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
 		(Glyph::PROJECT/'output/epub/test_project.epub').exist?.should == true
   end
 

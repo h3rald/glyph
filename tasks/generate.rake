@@ -64,7 +64,7 @@ namespace :generate do
 			out = Pathname.new Glyph['document.output_dir']
 			file = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? Glyph['document.filename']+".html" : Glyph['document.output_file']
 		else
-			out = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? 'html' : Glyph['document.output']
+			out = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? 'tmp' : Glyph['document.output']
 			out = Glyph::PROJECT/"output/#{out}"
 			extension = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
 			file = "#{Glyph['document.filename']}#{extension}"
@@ -85,27 +85,23 @@ namespace :generate do
 			error "Glyph cannot generate e-book. At present, output.#{out}.generator can only be set to 'calibre'" 
 		end
 	  Glyph.info "Generating #{Glyph['document.output'].upcase} e-book..."
-		gen_calibre = lambda do |path, cmd|
-			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
-			IO.popen(cmd+" 2>&1") do |pipe|
-				pipe.sync = true
-				while str = pipe.gets do
-					puts str
-				end
-			end
-		end
 		cover_opt = ""
     ebook_isbn = Glyph['document.isbn'] || Glyph['document.title'].hash
     cover_art = Glyph['document.cover'] 
     output_profile = Glyph["#{output_cfg}.profile"]
 		cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\"" unless cover_art.blank?
-    html_file = "#{Glyph::PROJECT}/output/html/#{Glyph['document.filename']}.html"
+    html_file = "#{Glyph::PROJECT}/output/tmp/#{Glyph['document.filename']}.html"
     out_dir = "#{Glyph::PROJECT}/output/#{out}"
+		out_file = "#{Glyph['document.filename']}.#{out}" 
+		out_path = Pathname.new "#{out_dir}/#{out_file}"
     Pathname.new(out_dir).mkpath
-    calibre_cmd = "ebook-convert #{html_file} #{out_dir}/#{Glyph['document.filename']}.#{out} --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" #{cover_opt} --output-profile #{output_profile}"
-		windows_path = ""
-    gen_calibre.call windows_path, calibre_cmd
-	  Glyph.info "Done."
+    calibre_cmd = "ebook-convert #{html_file} #{out_path} --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" #{cover_opt} --output-profile #{output_profile}"
+		run_external_command calibre_cmd
+		if out_path.exist? then
+			info "'#{out_file}' generated successfully."
+		else
+			error "An error occurred while generating #{out_file}"
+		end
 	end
 
 	desc "Create an e-book file in .mobi (Kindle) format"
@@ -163,18 +159,13 @@ namespace :generate do
 			file = Glyph['document.output_file']
 		else
 			out = Glyph::PROJECT/"output/pdf"
-			src = Glyph::PROJECT/"output/html/#{Glyph['document.filename']}.html"
+			src = Glyph::PROJECT/"output/tmp/#{Glyph['document.filename']}.html"
 			file = "#{Glyph['document.filename']}.pdf"
 		end
 		out.mkpath
 		generate_pdf = lambda do |path, cmd|
 			ENV['PATH'] += path if RUBY_PLATFORM.match /mswin/
-			IO.popen(cmd+" 2>&1") do |pipe|
-				pipe.sync = true
-				while str = pipe.gets do
-					puts str
-				end
-			end
+			run_external_command cmd
 			if (out/file).exist? then
 				info "'#{file}' generated successfully."
 			else
