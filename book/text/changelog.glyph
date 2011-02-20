@@ -20,13 +20,13 @@ end
 
 macro_alias :bugs => :features
 =]
-rw:[release|
+def:[release|
 	section[
 		@title[v{{0}} &ndash; {{1}}]
 		{{2}}
 	]
 ]
-rw:[issue|
+def:[issue|
 	tr[
 		td[\.=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}|#{{0}}]]
 		td[txt[{{1}}]]

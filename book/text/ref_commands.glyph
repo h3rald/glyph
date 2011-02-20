@@ -112,8 +112,8 @@ glyph outline -f
 section[
 	@title[stats]	
 	@id[c_stats]
-	rw:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
-	rw:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
+	def:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
+	def:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
 	p[Displays project statistics (\.fmi[this command|#stats]).]
 	examples[
 glyph	stats -m 

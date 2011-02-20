@@ -1,4 +1,4 @@
-rw:[filtered_section|
+def:[filtered_section|
 	ref_macro[
 		@n[{{markup}}_section]
 		@desc[Creates a section (see %>[section]) whose content can be formatted with {{markup}} markup.]

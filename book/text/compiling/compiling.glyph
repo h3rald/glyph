@@ -34,8 +34,8 @@ section[
 	p[code[= glyph compile -f mobi =]]
 	p[code[= glyph compile -f epub =]]
 	p[This option requires that you have &[calibre] and its command-line tools installed. Glyph assumes the ebook-convert command is installed in /usr/bin. If this is not so, you can set the code[options.ebook.converter] option to the path to the ebook-convert command.]
-	p[If you have cover art for your e-book, put it in the code[images] folder, and specify the name of the file in the code[output.ebook.cover] configuration option.]
-	p[You can also specify the output profile used by the code[ebook-convert] command by setting the code[output.ebook.epub.profile] and [output.ebook.mobi.profile] options. If these are not specified, the conversion will use the code[kindle] output profile for mobi files, and the code[nook] output profile for epub files. See the documentation for Calibre for a list of available output profiles.]
+	p[If you have cover art for your e-book, put it in the code[images] folder, and specify the name of the file in the code[document.cover] configuration option.]
+	p[You can also specify the output profile used by the code[ebook-convert] command by setting the code[output.epub.profile] and code[output.mobi.profile] options. If these are not specified, the conversion will use the code[kindle] output profile for mobi files, and the code[nook] output profile for epub files. See the documentation for Calibre for a list of available output profiles.]
 	tip[Giving the command code[= glyph compile -f ebooks =] will generate both mobi and epub files.]
 ]
 

@@ -1,8 +1,8 @@
 book[
 	@head[
-		?[not[eq[$[document.output]|h3rald]]|
+		?[not[output?[h3rald]]|
 			style[default.css]
-			?[eq[$[document.output]|pdf]|style[pagination.css]]
+			?[output?[pdf]|style[pagination.css]]
 			?[eq[$[filters.highlighter]|coderay]|style[coderay.css]]
 			?[eq[$[filters.highlighter]|ultraviolet]|style[ultraviolet/lazy.css]]
 		]
@@ -10,14 +10,14 @@ book[
 	@pre-title[
 		?[
 			and[
-				eq[$[document.output]|pdf]|
+				output?[pdf]|
 				eq[$[output.pdf.generator]|prince]
 			]|image[@width[20%]@height[20%]glyph/glyph.svg]]
 		?[
 			or[
-				eq[$[document.output]|html]|
+				output?[html]|
 				and[
-					eq[$[document.output]|pdf]|
+					output?[pdf]|
 					eq[$[output.pdf.generator]|wkhtmltopdf]]
 			]|image[glyph/glyph.png]]
 	]

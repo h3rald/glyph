@@ -81,12 +81,3 @@ section[
 		out_cfg[web5.multifile]
 	]
 ]
-section[
-	@title[output.ebook.*]
-	config_table[
-	out_cfg[ebook.cover|
-The name of the cover image to use.]
-	out_cfg[ebook.epub.profile]
-	out_cfg[ebook.mobi.profile]
-	]
-]
