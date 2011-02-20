@@ -43,6 +43,19 @@ macro "macro:" do
 	""
 end
 
+macro :load do
+	safety_check
+	exact_parameters 1
+	file = param 0 
+	path = Glyph::PROJECT/file
+	if path.exist? then
+		file_load path
+	else
+		macro_warning "File '#{file}' no found."
+		"[FILE '#{value}' NOT FOUND]"
+	end
+end
+
 macro :include do
 	safety_check
 	exact_parameters 1

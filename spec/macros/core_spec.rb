@@ -133,6 +133,16 @@ Test -- Test Snippet
 		output_for("include[test.rb]day[]").should == Time.now.day.to_s	
 	end
 
+	it "load" do
+		text1 = %{section[@title[...]]}
+		text2 = %{Time.now.day}
+		file_write Glyph::PROJECT/"test1.glyph", text1
+		file_write Glyph::PROJECT/"test2.rb", text2
+		output_for("load[test/test1.glyph]").should == "[FILE 'test/test1.glyph' NOT FOUND]"
+		output_for("load[test1.glyph]").should == text1
+		output_for("load[test2.rb]").should == text2
+	end
+
 
 	it "escape" do
 		define_em_macro
