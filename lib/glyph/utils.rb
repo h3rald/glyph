@@ -98,7 +98,7 @@ module Glyph
                 # @yield [src, dest] the source file and the corresponding output file
 		# @since 0.4.0
 		def with_files_from(dir, &block)
-			output = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
+			output =  complex_output? ? 'tmp' : Glyph['document.output']
 			dir_path = Glyph::PROJECT/"output/#{output}/#{dir}"
 			dir_path.mkpath
 			(Glyph::PROJECT/dir).find do |i|
@@ -109,6 +109,13 @@ module Glyph
 					block.call src, dest
 				end
 			end
+		end
+
+		# Returns true if Glyph['document.output'] requires two or more conversions
+		# @since 0.5.0
+		def complex_output?
+			out = Glyph['document.output']
+			!Glyph["output.#{out}.generator"].blank? || !Glyph["output.#{out}.through"].blank?
 		end
 
 		# Returns true if the macro name is used as an alias

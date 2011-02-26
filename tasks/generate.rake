@@ -18,7 +18,7 @@ namespace :generate do
 	task :styles => [:document] do
 		if Glyph['document.styles'].in?(['link', 'import']) && !Glyph.lite? then
 			info "Copying stylesheets..."
-			output = (Glyph['document.output'] == 'pdf') ? 'html' : Glyph['document.output']
+			output = complex_output?  ? 'tmp' : Glyph['document.output']
 			out_dir = Glyph::PROJECT/"output/#{output}/styles"
 			Glyph.document.styles.each do |f|
 				styles_dir = f.parent.to_s.include?(Glyph::HOME/'styles') ? Glyph::HOME/'styles' : Glyph::PROJECT/'styles'
@@ -62,11 +62,11 @@ namespace :generate do
 		info "Generating HTML file..."
 		if Glyph.lite? then
 			out = Pathname.new Glyph['document.output_dir']
-			file = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? Glyph['document.filename']+".html" : Glyph['document.output_file']
+			file = complex_output? ? Glyph['document.filename']+".html" : Glyph['document.output_file']
 		else
-			out = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? 'tmp' : Glyph['document.output']
+			out = complex_output? ? 'tmp' : Glyph['document.output']
 			out = Glyph::PROJECT/"output/#{out}"
-			extension = (Glyph['document.output'].in? ['pdf', 'mobi', 'epub']) ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
+			extension = complex_output? ? Glyph["output.html.extension"] : Glyph["output.#{Glyph['document.output']}.extension"]
 			file = "#{Glyph['document.filename']}#{extension}"
 		end
 		out.mkpath
