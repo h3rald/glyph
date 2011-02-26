@@ -97,6 +97,9 @@ namespace :generate do
     Pathname.new(out_dir).mkpath
     calibre_cmd = "ebook-convert #{html_file} #{out_path} #{options.to_options}"
 		run_external_command calibre_cmd
+		# Remove stylesheets and images (copied by default to output directory)
+		(Pathname.new(out_dir)/"images").rmtree rescue nil
+		(Pathname.new(out_dir)/"styles").rmtree rescue nil
 		if out_path.exist? then
 			info "'#{out_file}' generated successfully."
 		else
