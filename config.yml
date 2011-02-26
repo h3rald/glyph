@@ -74,14 +74,19 @@
     :extension: .epub
     :filter_target: html
     :generator: calibre
-    :profile: nook
+    :calibre:
+      # See options at http://calibre-ebook.com/user_manual/cli/ebook-convert-3.html
+      "output-profile": nook
     :macro_reps: html
   :mobi:
     :multifile: false
     :extension: .mobi
     :filter_target: html
     :generator: calibre
-    :profile: kindle
+    :calibre:
+      # See options at http://calibre-ebook.com/user_manual/cli/ebook-convert-3.html
+      "no-inline-toc":
+      "output-profile": kindle
     :macro_reps: html
 :filters:
   :highlighter: coderay

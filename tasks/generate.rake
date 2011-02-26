@@ -85,17 +85,17 @@ namespace :generate do
 			error "Glyph cannot generate e-book. At present, output.#{out}.generator can only be set to 'calibre'" 
 		end
 	  Glyph.info "Generating #{Glyph['document.output'].upcase} e-book..."
-		cover_opt = ""
-    ebook_isbn = Glyph['document.isbn'] || Glyph['document.title'].hash
-    cover_art = Glyph['document.cover'] 
-    output_profile = Glyph["#{output_cfg}.profile"]
-		cover_opt = "--cover \"#{Glyph::PROJECT}/images/#{cover_art}\"" unless cover_art.blank?
+		options = Glyph[output_cfg][:calibre].dup
+		options[:isbn] = Glyph['document.isbn'] unless Glyph["document.isbn"].blank?
+		options[:cover] = "#{Glyph::PROJECT}/images/#{Glyph['document.cover']}" unless Glyph["document.cover"].blank?
+		options[:title] = Glyph["document.title"]
+		options[:authors] = Glyph["document.author"]
     html_file = "#{Glyph::PROJECT}/output/tmp/#{Glyph['document.filename']}.html"
     out_dir = "#{Glyph::PROJECT}/output/#{out}"
 		out_file = "#{Glyph['document.filename']}.#{out}" 
 		out_path = Pathname.new "#{out_dir}/#{out_file}"
     Pathname.new(out_dir).mkpath
-    calibre_cmd = "ebook-convert #{html_file} #{out_path} --title \"#{Glyph['document.filename']}\" --authors \"\" --isbn \"#{ebook_isbn}\" #{cover_opt} --output-profile #{output_profile}"
+    calibre_cmd = "ebook-convert #{html_file} #{out_path} #{options.to_options}"
 		run_external_command calibre_cmd
 		if out_path.exist? then
 			info "'#{out_file}' generated successfully."
@@ -104,14 +104,10 @@ namespace :generate do
 		end
 	end
 
-	desc "Create an e-book file in .mobi (Kindle) format"
-	task :mobi => [:calibre] do; end
-
-	desc "Create an e-book file in .epub (Nook/Kobo/etc.) format"
-	task :epub => [:calibre] do; end
-
-  desc "Generate .mobi and .epub ebook files"
-  task :ebooks => [:mobi, :epub] do ; end
+	[:mobi, :epub].each do |out|
+		desc "Create an e-book file in #{out} format"
+		task out => [:calibre] do; end
+	end
 
 	desc "Create multiple HTML files"
 	task :web => [:images, :styles] do

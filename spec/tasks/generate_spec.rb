@@ -51,7 +51,8 @@ describe "generate" do
 
   it ":epub should generate an epub document" do
 		Glyph['document.output'] = 'epub'
-    lambda { stdout_for { Glyph.run! 'generate:epub'}}.should_not raise_error
+    #lambda { 
+			stdout_for { Glyph.run! 'generate:epub'}#}.should_not raise_error
 		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
 		(Glyph::PROJECT/'output/epub/test_project.epub').exist?.should == true
   end
