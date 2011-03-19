@@ -68,10 +68,16 @@ def delete_project
 	Glyph.document = nil
 end
 
-def run_command(cmd)
-	stdout_for do
-		GLI.run cmd
+def run_command(cmd, return_code=false)
+	result = 0
+	out = stdout_for do
+		result = GLI.run cmd
 	end
+	return_code ? result : out
+end
+
+def run_command_with_status(cmd)
+	run_command(cmd, true)
 end
 
 def stdout_for(&block)
@@ -90,7 +96,7 @@ def stdout_for(&block)
 end
 
 def run_command_successfully(cmd)
-	run_command(cmd).match(/error|warning/) == nil
+	run_command(cmd, true) == 0
 end
 
 def define_em_macro

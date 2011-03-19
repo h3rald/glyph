@@ -14,6 +14,7 @@ module Glyph
 		# @param [String] source_name the name of the source file (stored in the root node) 
 		# @since 0.3.0
 		def initialize(text, source_name="--")
+			@ruby19 = RUBY_VERSION >= '1.9' ? true : false
 			@source_name = source_name || "--"
 			@input = StringScanner.new text
 			@output = create_node DocumentNode, :name => @source_name.to_sym
@@ -30,8 +31,8 @@ module Glyph
 				@output << result
 				count +=1
 			end
-			if @input.pos < @input.string.length then
-				current_char = @input.string[@input.pos].chr
+			if @input.pos < @input.string.bytesize then
+				current_char = @input.string[@input.pos].chr rescue nil
 				illegal_delimiter = current_char.match(/\]|\[/) rescue nil
 				error "Macro delimiter '#{current_char}' not escaped" if illegal_delimiter
 			end
@@ -77,7 +78,7 @@ module Glyph
 		def escaping_attribute(current)
 			if @input.scan(/@[^:\[\]\|\\\s]+\[\=/) then
 				error "Attributes cannot be nested" if @current_attribute
-				name = @input.matched[1..@input.matched.length-3]
+				name = @input.matched[1..@input.matched.bytesize-3]
 				node = create_node(AttributeNode, {
 					:escape => true, 
 					:name => name.to_sym
@@ -115,7 +116,7 @@ module Glyph
 		def attribute(current)
 			if @input.scan(/@[^:\[\]\|\\\s]+\[/) then
 				error "Attributes cannot be nested" if current.is_a?(AttributeNode)
-				name = @input.matched[1..@input.matched.length-2]
+				name = @input.matched[1..@input.matched.bytesize-2]
 				node = create_node(AttributeNode, {
 					:escape => false, 
 					:name => name.to_sym
@@ -134,12 +135,12 @@ module Glyph
 		def text(current)
 			start_p = @input.pos
 			res = @input.scan_until /(\\.)|(\A(\]|\|)|[^\\](\]|\|)|[^\[\]\|\\\s]+\[|\Z)/
-				offset = @input.matched.match(/^[^\\](\]|\|)$/) ? 1 : @input.matched.length
+			offset = @input.matched.match(/^[^\\](\]|\|)$/) ? 1 : @input.matched.bytesize
 			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
 			match = extract_string(start_p..@input.pos-1)
 			illegal_macro_delimiter? start_p, match
-			if match.length > 0 then
+			if match.bytesize > 0 then
 				create_node TextNode, :value => match
 			else
 				nil
@@ -155,7 +156,7 @@ module Glyph
 				when @input.matched.match(/^[^\\]\|$/) then
 					offset = 1
 				else
-					offset = @input.matched.length
+					offset = @input.matched.bytesize
 				end
 			@input.pos = @input.pos - offset rescue @input.pos
 			return nil if @input.pos == start_p
@@ -164,7 +165,7 @@ module Glyph
 				if illegal_nesting then
 					error "Cannot nest escaping macro '#{illegal_nesting}' within escaping macro '#{current[:name]}'"
 				end
-				if match.length > 0 then
+				if match.bytesize > 0 then
 					create_node TextNode, :value => match, :escaped => true
 				else
 					nil
@@ -217,7 +218,7 @@ module Glyph
 		# http://redmine.ruby-lang.org/issues/show/2645
 		def extract_string(range)
 			result = nil
-			if RUBY_VERSION >= '1.9'
+			if @ruby19 then 
 				begin
 					enc = @input.string.encoding
 					@input.string.force_encoding('ASCII-8BIT')

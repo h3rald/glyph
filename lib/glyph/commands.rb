@@ -2,7 +2,6 @@
 
 include GLI
 
-
 GLI.desc "Enable debugging"
 switch [:d, :debug]
 
@@ -16,6 +15,8 @@ require Glyph::LIB/'commands/stats'
 
 Glyph.run 'load:tasks'
 Glyph.run 'load:commands'
+
+version Glyph::VERSION
 
 pre do |global,command,options,args|
 	# Pre logic here
@@ -40,10 +41,9 @@ on_error do |exception|
 	raise if Glyph.library?
 	if exception.is_a? Glyph::MacroError then
 		exception.display
-		false
 	else
+		Glyph.warning exception.message
 		if Glyph.debug? then
-			Glyph.warning exception.message
 			puts "\n"+"-"*20+"[ Backtrace: ]"+"-"*20
 			puts "Backtrace:"
 			exception.backtrace.each do |b|
@@ -51,6 +51,6 @@ on_error do |exception|
 			end
 			Glyph.debug_mode = false
 		end
-		true
 	end
+	false
 end

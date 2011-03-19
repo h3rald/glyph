@@ -328,7 +328,7 @@ macro :apply do
 			result << Glyph::Macro.new(content).apply(parameter(1))
 		else
 			# text node
-			result << interpret(raw_parameter(1).to_s.gsub(/\{\{0}\}/, content[:value]).gsub(/\{\{.+?\}\}/, ''))
+			result << interpret(raw_parameter(1).to_s.gsub(/\{\{0\}\}/, content[:value]).gsub(/\{\{.+?\}\}/, ''))
 		end
 	end
 	result = [""] if result.all?{|i| i.blank?}
@@ -396,7 +396,7 @@ macro :select do
 			selected = Glyph::Macro.new(content).apply(parameter(1))
 		else
 			# text node
-			selected = interpret raw_parameter(1).to_s.gsub(/\{\{0}\}/, content[:value]).gsub(/\{\{.+?\}\}/, '') 
+			selected = interpret raw_parameter(1).to_s.gsub(/\{\{0\}\}/, content[:value]).gsub(/\{\{.+?\}\}/, '') 
 		end
 		result << content unless selected.blank? || selected == "false"
 	end

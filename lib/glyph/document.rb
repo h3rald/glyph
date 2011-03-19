@@ -9,7 +9,7 @@ module Glyph
 	# as well as replacing placeholders.
 	class Document
 
-		ESCAPES = /\\([\\\]\[\|.=])/
+		ESCAPES = /\\([\\\]\[\|\/=])/
 
 		attr_reader :bookmarks, :placeholders, :headers, :styles, :context, :errors, :todos, :topics, :links, :toc, :fragments
 
@@ -154,10 +154,10 @@ module Glyph
 				end
 			end
 			# Substitute escape sequences
-			@output.gsub!(ESCAPES) { |match| ($1 == '.') ? '' : $1 }
-			toc[:contents].gsub!(ESCAPES) { |match| ($1 == '.') ? '' : $1 } rescue nil
+			@output.gsub!(ESCAPES) { |match| ($1 == '/') ? '' : $1 }
+			toc[:contents].gsub!(ESCAPES) { |match| ($1 == '/') ? '' : $1 } rescue nil
 			@topics.each do |t|
-				t[:contents].gsub!(ESCAPES) { |match| ($1 == '.') ? '' : $1 }
+				t[:contents].gsub!(ESCAPES) { |match| ($1 == '/') ? '' : $1 }
 			end
 			@state = :finalized
 		end

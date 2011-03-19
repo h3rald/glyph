@@ -26,7 +26,8 @@ end
 # Block
 
 rep :note do |data|
-	%{<div class="#{data[:name]}">
+	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "note"
+	%{<div class="#{css_class}">
 <span class="note-title">#{data[:name].to_s.capitalize}</span>#{data[:text]}
 
 </div>}
@@ -173,8 +174,9 @@ rep :toc_sublist do |data|
 end
 
 rep :section do |data|
+	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "section"
 	title = data[:title] ? %{<h#{data[:level]} id="#{data[:id]}">#{data[:title]}</h#{data[:level]}>\n} : ""
-	%{<div class="#{data[:name]}">
+	%{<div class="#{css_class}">
 #{title}#{data[:content]}
 
 </div>}	

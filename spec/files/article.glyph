@@ -1,5 +1,5 @@
 $:[document.author|Test]
 &:[test|Test Snippet]
-section[
-	$[document.author] -- &[test]
+§[
+  改善 $[document.author] -- &[test]
 ]

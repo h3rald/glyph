@@ -10,7 +10,7 @@ command :compile do |c|
 	c.desc "Auto-regenerate output on file changes"
 	c.switch [:a, :auto]
 	c.action do |global_options, options, args|
-		raise ArgumentError, "Too many arguments" if args.length > 2
+		exit_now! "Too many arguments", -12 if args.length > 2
 		Glyph.lite_mode = true unless args.blank? 
 		Glyph.run! 'load:config'
 		original_config = Glyph::CONFIG.dup
@@ -27,8 +27,8 @@ command :compile do |c|
 		else
 			Glyph["output.#{Glyph['document.output']}.base"] = ""
 		end
-		raise ArgumentError, "Output target not specified" unless target
-		raise ArgumentError, "Unknown output target '#{target}'" unless output_targets.include? target.to_sym
+		exit_now! "Output target not specified", -30 unless target
+		exit_now! "Unknown output target '#{target}'", -31 unless output_targets.include? target.to_sym
 
 		# Lite mode
 		if Glyph.lite? then
@@ -38,8 +38,8 @@ command :compile do |c|
 			src_extension = Regexp.escape(source_file.extname) 
 			dst_extension = "."+Glyph['document.output']
 			destination_file ||= Pathname.new(source_file.to_s.gsub(/#{src_extension}$/, dst_extension))
-			raise ArgumentError, "Source file '#{source_file}' does not exist" unless source_file.exist? 
-			raise ArgumentError, "Source and destination file are the same" if source_file.to_s == destination_file.to_s
+			exit_now! "Source file '#{source_file}' does not exist", -32 unless source_file.exist? 
+			exit_now! "Source and destination file are the same", -33 if source_file.to_s == destination_file.to_s
 			Glyph['document.filename'] = filename
 			Glyph['document.source'] = source_file.to_s
 			Glyph['document.output_dir'] = destination_file.parent.to_s # System use only
@@ -64,7 +64,7 @@ command :compile do |c|
 			begin
 				require 'directory_watcher'
 			rescue LoadError
-				raise RuntimeError, "DirectoryWatcher is not available. Install it with: gem install directory_watcher"
+				exit_now! "DirectoryWatcher is not available. Install it with: gem install directory_watcher", -34
 			end
 			Glyph.info 'Auto-regeneration enabled'
 			Glyph.info 'Use ^C to interrupt'

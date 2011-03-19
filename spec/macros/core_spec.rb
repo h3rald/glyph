@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 
 describe "Macro:" do
 
@@ -118,7 +119,7 @@ This is a test.
 	it "include should assume .glyph as the default extension" do
 		file_copy Glyph::SPEC_DIR/'files/article.glyph', Glyph::PROJECT/'text/article.glyph'
 		output_for("include[article]").gsub(/\n|\t/, '').should == %{<div class="section">
-Test -- Test Snippet
+改善 Test -- Test Snippet
 
 </div>}.gsub(/\n|\t/, '')
 	end
@@ -192,7 +193,7 @@ Test -- Test Snippet
 
 	it "define:" do
 		define_em_macro
-		interpret("def:[def_test|em[{{0}}\\.em[{{a}}]]]").process
+		interpret("def:[def_test|em[{{0}}\\/em[{{a}}]]]").process
 		output_for("def_test[test @a[em[A!]]]").should == "<em>test<em><em>A!</em></em></em>"
 		output_for("def_test[]").should == "<em><em></em></em>"
 	end

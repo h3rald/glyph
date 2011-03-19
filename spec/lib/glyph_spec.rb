@@ -49,7 +49,10 @@ describe Glyph do
 	it "should provide a compile method to compile files in lite mode" do
 		reset_quiet
 		file_copy Glyph::PROJECT/'../files/article.glyph', Glyph::PROJECT/'article.glyph'
-		lambda { Glyph.compile Glyph::PROJECT/'article.glyph' }.should_not raise_error
+		#lambda { 
+			Glyph.debug_mode = true
+			Glyph.compile Glyph::PROJECT/'article.glyph' 
+		#}.should_not raise_error
 		(Glyph::PROJECT/'article.html').exist?.should == true
 	end
 
