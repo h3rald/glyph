@@ -20,7 +20,7 @@ end
 # Block
 
 rep :note do |data|
-	css_class = data[:name].match(/[a-z0-9_-]/i) ? data[:name] : "note"
+	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "note"
 	%{<aside class="#{css_class}">
 <span class="note-title">#{data[:name].capitalize}</span>#{data[:text]}
 
@@ -95,7 +95,7 @@ rep :toc do |data|
 end
 
 rep :section do |data|
-	css_class = data[:name].match(/[a-z0-9_-]/i) ? data[:name] : "section"
+	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "section"
 	title = data[:title] ? %{<header><h1 id="#{data[:id]}">#{data[:title]}</h1></header>\n} : ""
 	%{<section class="#{css_class}">
 #{title}#{data[:content]}

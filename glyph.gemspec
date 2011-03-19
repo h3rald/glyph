@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fabio Cevasco"]
-  s.date = %q{2011-02-20}
+  s.date = %q{2011-03-20}
   s.default_executable = %q{glyph}
   s.description = %q{Glyph is a framework for structured document authoring.}
   s.email = %q{h3rald@h3rald.com}
@@ -215,7 +215,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://www.h3rald.com/glyph/}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{Glyph -- A Ruby-powered Document Authoring Framework}
   s.test_files = [
     "spec/files/custom_command.rb",
@@ -247,46 +247,45 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<gli>, [">= 1.1.3"])
+      s.add_runtime_dependency(%q<gli>, [">= 1.2.6"])
       s.add_runtime_dependency(%q<extlib>, [">= 0.9.15"])
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_development_dependency(%q<rspec>, [">= 2.1.0"])
-      s.add_development_dependency(%q<yard>, [">= 0.6.2"])
-      s.add_development_dependency(%q<jeweler>, ["= 1.5.1"])
-      s.add_development_dependency(%q<directory_watcher>, [">= 1.3.2"])
-      s.add_development_dependency(%q<haml>, [">= 3.0.24"])
-      s.add_development_dependency(%q<RedCloth>, [">= 4.2.3"])
-      s.add_development_dependency(%q<bluecloth>, [">= 2.0.9"])
-      s.add_development_dependency(%q<coderay>, [">= 0.9.5"])
+      s.add_development_dependency(%q<rspec>, [">= 2.5.1"])
+      s.add_development_dependency(%q<yard>, [">= 0.6.5"])
+      s.add_development_dependency(%q<jeweler>, ["= 1.5.2"])
+      s.add_development_dependency(%q<directory_watcher>, [">= 1.4.0"])
+      s.add_development_dependency(%q<haml>, [">= 3.0.25"])
+      s.add_development_dependency(%q<RedCloth>, [">= 4.2.7"])
+      s.add_development_dependency(%q<bluecloth>, [">= 2.1.0"])
+      s.add_development_dependency(%q<coderay>, [">= 0.9.7"])
     else
-      s.add_dependency(%q<gli>, [">= 1.1.3"])
+      s.add_dependency(%q<gli>, [">= 1.2.6"])
       s.add_dependency(%q<extlib>, [">= 0.9.15"])
       s.add_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_dependency(%q<rspec>, [">= 2.1.0"])
-      s.add_dependency(%q<yard>, [">= 0.6.2"])
-      s.add_dependency(%q<jeweler>, ["= 1.5.1"])
-      s.add_dependency(%q<directory_watcher>, [">= 1.3.2"])
-      s.add_dependency(%q<haml>, [">= 3.0.24"])
-      s.add_dependency(%q<RedCloth>, [">= 4.2.3"])
-      s.add_dependency(%q<bluecloth>, [">= 2.0.9"])
-      s.add_dependency(%q<coderay>, [">= 0.9.5"])
+      s.add_dependency(%q<rspec>, [">= 2.5.1"])
+      s.add_dependency(%q<yard>, [">= 0.6.5"])
+      s.add_dependency(%q<jeweler>, ["= 1.5.2"])
+      s.add_dependency(%q<directory_watcher>, [">= 1.4.0"])
+      s.add_dependency(%q<haml>, [">= 3.0.25"])
+      s.add_dependency(%q<RedCloth>, [">= 4.2.7"])
+      s.add_dependency(%q<bluecloth>, [">= 2.1.0"])
+      s.add_dependency(%q<coderay>, [">= 0.9.7"])
     end
   else
-    s.add_dependency(%q<gli>, [">= 1.1.3"])
+    s.add_dependency(%q<gli>, [">= 1.2.6"])
     s.add_dependency(%q<extlib>, [">= 0.9.15"])
     s.add_dependency(%q<rake>, [">= 0.8.7"])
-    s.add_dependency(%q<rspec>, [">= 2.1.0"])
-    s.add_dependency(%q<yard>, [">= 0.6.2"])
-    s.add_dependency(%q<jeweler>, ["= 1.5.1"])
-    s.add_dependency(%q<directory_watcher>, [">= 1.3.2"])
-    s.add_dependency(%q<haml>, [">= 3.0.24"])
-    s.add_dependency(%q<RedCloth>, [">= 4.2.3"])
-    s.add_dependency(%q<bluecloth>, [">= 2.0.9"])
-    s.add_dependency(%q<coderay>, [">= 0.9.5"])
+    s.add_dependency(%q<rspec>, [">= 2.5.1"])
+    s.add_dependency(%q<yard>, [">= 0.6.5"])
+    s.add_dependency(%q<jeweler>, ["= 1.5.2"])
+    s.add_dependency(%q<directory_watcher>, [">= 1.4.0"])
+    s.add_dependency(%q<haml>, [">= 3.0.25"])
+    s.add_dependency(%q<RedCloth>, [">= 4.2.7"])
+    s.add_dependency(%q<bluecloth>, [">= 2.1.0"])
+    s.add_dependency(%q<coderay>, [">= 0.9.7"])
   end
 end
 
