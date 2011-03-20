@@ -309,9 +309,7 @@ module Glyph
 		def expand
 			block = Glyph::MACROS[@name]
 			macro_error "Undefined macro '#@name'" unless block
-			instance_exec(@node, &block).to_s.gsub(/\\?([\[\]\|])/){"\\#$1"}.tap do |r|
-				puts "_"*20+"\n"+r if r.match /Creates a macro alias/
-			end
+			instance_exec(@node, &block).to_s.gsub(/\\?([\[\]\|])/){"\\#$1"}
 		end
 
 		private

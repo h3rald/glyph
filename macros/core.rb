@@ -7,11 +7,6 @@ macro :snippet do
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
 			update_source "snippet[#{ident}]"
-			if Glyph::SNIPPETS[ident].match /Creates a macro/ then
-				puts "--> snippet:"
-				puts Glyph::SNIPPETS[ident]
-				puts "--"*20
-			end
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			case 

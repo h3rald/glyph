@@ -73,9 +73,6 @@ module Glyph
 	# All the currently-loaded macros
 	MACROS = {}
 
-	# Anonymous macro cache
-	LAMBDAS = {}
-	
 	# All the currently-loaded macro representations
 	REPS = {}
 
