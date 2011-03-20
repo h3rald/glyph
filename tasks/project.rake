@@ -11,8 +11,6 @@ namespace :project do
 		# Create subdirectories
 		subdirs = ['lib/macros', 'lib/tasks', 'lib/layouts', 'lib/tasks', 'lib/commands', 'text', 'output', 'images', 'styles']
 		subdirs.each {|d| (dir/d).mkpath }
-		# Create snippets
-		yaml_dump Glyph::PROJECT/'snippets.yml', {:test => "This is a \nTest snippet"}
 		# Create files
 		file_copy Glyph::HOME/'document.glyph', Glyph::PROJECT/'document.glyph'
 		config = yaml_load Glyph::HOME/'config.yml'

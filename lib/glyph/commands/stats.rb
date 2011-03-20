@@ -34,6 +34,7 @@ command :stats do |c|
 		no_flags = true
 		[:macro, :bookmark, :link, :snippet].each do |f|
 			if options[f] then
+				analyzer.stats_for :snippets if f == :snippet
 				analyzer.stats_for f, options[f] 
 				no_flags = false
 			end

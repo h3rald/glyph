@@ -34,7 +34,7 @@ module Glyph
 			file ||= @node[:source][:file] rescue nil
 			@updated_source = {:name => name, :file => file, :topic => topic}
 		end
-		
+
 		# Returns a Glyph code representation of the specified parameter
 		# @param [Fixnum] n the index of the parameter
 		# @return [String, nil] the string representation of the parameter
@@ -163,7 +163,7 @@ module Glyph
 			end
 			macros.reverse.compact.join('/')
 		end
-		
+
 		# Returns a todo message to include in the document in case of errors.
 		# @param [String] message the message to include in the document
 		# @return [String] the resulting todo message
@@ -212,7 +212,6 @@ module Glyph
 			@node[:escape] ? string : inject(string).document.output
 		end
 
-		# @see Glyph::Document#placeholder
 		def placeholder(&block)
 			@node[:document].placeholder &block
 		end			
@@ -235,6 +234,16 @@ module Glyph
 		# @see Glyph::Document#header
 		def header(hash)
 			@node[:document].header hash
+		end
+
+		# @see Glyph::Document#snippet
+		def snippet(key, value)
+			@node[:document].snippet key, value
+		end
+
+		# @see Glyph::Document#snippet?
+		def snippet?(ident)
+			@node[:document].snippet? ident
 		end
 
 		# @since 0.5.0
@@ -321,6 +330,5 @@ module Glyph
 			context[:document] = @node[:document]
 			context
 		end
-
 	end
 end

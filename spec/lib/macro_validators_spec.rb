@@ -36,8 +36,7 @@ describe Glyph::Macro::Validators do
 	end
 
 	it "should check for mutual inclusion" do
-		Glyph::SNIPPETS[:inc] = "Test &[inc]"
-		lambda {interpret("&[inc] test").document}.should raise_error(Glyph::MutualInclusionError)
+		interpret("&:[inc|Test &[inc]]&[inc] test").document.output.should == "Test [SNIPPET 'inc' NOT PROCESSED] test"
 	end
 
 	it "should validate XML elements" do

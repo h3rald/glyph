@@ -45,7 +45,6 @@ ul[
 
 reset_glyph
 Glyph.run! 'load:all'
-Glyph::SNIPPETS[:test] = text
 Benchmark.bm(30) do |x|
 
 	sep
@@ -56,7 +55,7 @@ Benchmark.bm(30) do |x|
 	puts " => Macro Set: Glyph"
 	sep
 	rep(x, "section[...]") { macro_exec "section[#{text}]" }
-	rep(x, "snippet[...]") { macro_exec "snippet[test]" }
+	rep(x, "snippet[...]") { macro_exec "snippet:[test|#{text}]snippet[test]" }
   rep(x, "textile[...]") { macro_exec "textile[#{text}]" }
 	rep(x, "markdown[...]") { macro_exec "markdown[#{text}]" }
 	rep(x, "HTML text") { macro_exec html }

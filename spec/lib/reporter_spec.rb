@@ -84,6 +84,7 @@ describe Glyph::Reporter do
 	end
 
 	it "should display stats for a single snippet" do
+		stats :snippets
 		stats :snippet, :test
 		out = stdout_for { rep.display }
 		out.should match "-- Total Used Instances: 2"

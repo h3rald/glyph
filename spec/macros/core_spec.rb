@@ -15,26 +15,22 @@ describe "Macro:" do
 
 	it "snippet" do
 		define_em_macro
-		interpret "Testing a snippet: &[test]."
+		interpret "&:[test|This is a \nTest snippet]Testing a snippet: &[test]."
 		@p.document.output.should == "Testing a snippet: This is a \nTest snippet."
 		interpret("Testing &[wrong].")
 		@p.document.output.should == "Testing [SNIPPET 'wrong' NOT PROCESSED]." 
-		Glyph::SNIPPETS[:a] = "this is a em[test] &[b]"
-		Glyph::SNIPPETS[:b] = "and another em[test]"
-		text = "TEST: &[a]"
+		text = "&:[b|and another em[test]]&:[a|this is a em[test] &[b]]TEST: &[a]"
 		interpret text
 		@p.document.output.should == "TEST: this is a <em>test</em> and another <em>test</em>"
 		# Check snippets with links
-		Glyph::SNIPPETS[:c] = "This is a link to something afterwards: =>[#other]"
-		text = "Test. &[c]. #[other|Test]."
+		text = "&:[c|This is a link to something afterwards: =>[#other]]Test. &[c]. #[other|Test]."
 		output_for(text).should == %{Test. This is a link to something afterwards: <a href="#other">Test</a>. <a id="other">Test</a>.}
 	end
 
 	it "snippet:" do
 		interpret("&[t1] - &:[t1|Test #1] - &[t1]")
 		@p.document.output.should == "[SNIPPET 't1' NOT PROCESSED] -  - Test #1"
-		Glyph::SNIPPETS[:t1].should == "Test #1"
-		Glyph::SNIPPETS.delete :t1
+		@p.document.snippet?(:t1).should == "Test #1"
 	end
 
 	it "condition" do

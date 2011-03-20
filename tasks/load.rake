@@ -4,7 +4,7 @@ namespace :load do
 	include Glyph::Utils
 
 	desc "Load all files"
-	task :all => [:config, :tasks, :commands, :snippets, :macros] do
+	task :all => [:config, :tasks, :commands, :macros] do
 	end
 
 	desc "Load tasks"
@@ -23,16 +23,6 @@ namespace :load do
 			load_files_from_dir(Glyph::PROJECT/'lib/commands', '.rb') do |f, contents|
 				require f
 			end
-		end
-	end
-
-	desc "Load snippets"
-	task :snippets do
-		unless Glyph.lite? then
-			raise RuntimeError, "The current directory is not a valid Glyph project" unless Glyph.project?
-			snippets = yaml_load Glyph::PROJECT/'snippets.yml'
-			raise RuntimeError, "Invalid snippets file" unless snippets.blank? || snippets.is_a?(Hash)
-			Glyph::SNIPPETS.replace snippets
 		end
 	end
 

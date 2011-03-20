@@ -188,7 +188,8 @@ module Glyph
 		def stats_snippets
 			c = @stats[:snippets] = {}
 			snippets = {}
-			c[:definitions] = Glyph::SNIPPETS.keys.sort
+			c[:definitions] = @doc.snippets.keys.sort
+			c[:values] = @doc.snippets
 			c[:used] = []
 			c[:unused] = []
 			c[:total] = 0
@@ -206,7 +207,7 @@ module Glyph
 		def stats_snippet(name)
 			name = name.to_sym
 			snippets = {}
-			raise ArgumentError, "Snippet '#{name}' does not exist" unless Glyph::SNIPPETS[name]
+			raise ArgumentError, "Snippet '#{name}' does not exist" unless @doc.snippet? name
 			with_macros(:snippet) do |n|
 				code = n.parameters[0].to_s.to_sym
 				if code == name then

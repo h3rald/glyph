@@ -16,18 +16,6 @@ describe "load" do
 		delete_project
 		lambda { Glyph.run! 'load:all' }.should raise_error
 	end
-	
-	it "[snippets] should load snippet definitions" do
-		lambda { Glyph.run! 'load:snippets'}.should_not raise_error
-		Glyph::SNIPPETS[:test].blank?.should == false
-	end
-
-	it "[snippets] should not load snippets.xml in Lite mode" do
-		Glyph.lite_mode = true
-		lambda { Glyph.run! 'load:snippets'}.should_not raise_error
-		Glyph::SNIPPETS[:test].blank?.should == true
-		Glyph.lite_mode = false
-	end
 
 	it "[macros] should load macro definitions" do
 		lambda { Glyph.run! 'load:macros'}.should_not raise_error

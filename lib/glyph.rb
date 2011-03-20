@@ -67,9 +67,6 @@ module Glyph
 	# The current version of Glyph
 	VERSION = file_load(HOME/'VERSION').strip
 
-	# All the currently-loaded snippets
-	SNIPPETS = {}
-
 	# All the currently-loaded macros
 	MACROS = {}
 
@@ -171,9 +168,7 @@ module Glyph
 		self.enable_all
 		self.config_reset
 		MACROS.clear
-		LAMBDAS.clear
 		REPS.clear
-		SNIPPETS.clear
 	end
 
 	# Reenables all Glyph Rake tasks

@@ -56,11 +56,11 @@ describe Glyph do
 		(Glyph::PROJECT/'article.html').exist?.should == true
 	end
 
-	it "should provide a reset method to remove config overrides, reenable tasks, clear macros and snippets." do
+	it "should provide a reset method to remove config overrides, reenable tasks, clear macros and reps" do
 		Glyph['test_setting'] = true
 		Glyph.reset
-		Glyph::SNIPPETS.length.should == 0
 		Glyph::MACROS.length.should == 0
+		Glyph::REPS.length.should == 0
 		Glyph['test_setting'].should == nil
 	end
 

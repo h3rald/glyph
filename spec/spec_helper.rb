@@ -62,7 +62,7 @@ end
 
 def delete_project 
 	delete_project_dir
-	Glyph::SNIPPETS.clear
+	Glyph::REPS.clear
 	Glyph::MACROS.clear
 	Glyph['document.source'] = 'document.glyph'
 	Glyph.document = nil

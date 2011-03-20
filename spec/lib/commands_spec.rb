@@ -234,10 +234,8 @@ test_project - Outline
 		out = run_command(["stats", "-ms"])
 		total_macros = (Glyph::MACROS.keys - Glyph::ALIASES[:by_alias].keys).uniq.length
 		out.should match "-- Total Macro Definitions: #{total_macros}" 
-		out.should match "-- Unused Snippets: test"
 		out = run_command(["stats"])
 		out.should match "-- Total Macro Definitions: #{total_macros}" 
-		out.should_not match "-- Unused Snippets: test"
 		out.should match "-- Total Unreferenced Bookmarks: 3"
 		out = run_command(["stats", "-lb", "--bookmark=md"])
 		out.should match "-- Unreferenced Bookmarks: h_1, h_2, md" 

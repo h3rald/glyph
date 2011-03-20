@@ -94,7 +94,7 @@ module Glyph
 			section "Snippet '#{s[:param]}'"
 			info "Definition:"
 			puts "-------------------"
-			puts SNIPPETS[s[:param]]
+			puts @stats[:snippets][:values][s[:param]]
 			puts "-------------------"
 			total :used_instances, s[:stats][:total]
 			occurrences s[:stats][:files], "Usage Details:" if @detailed

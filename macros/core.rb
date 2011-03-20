@@ -2,12 +2,11 @@
 # encoding: utf-8
 
 macro :snippet do
-	no_mutual_inclusion_in 0	
 	ident = value.to_sym
-	if Glyph::SNIPPETS.has_key? ident then
+	if snippet? ident then
 		begin
 			update_source "snippet[#{ident}]"
-			interpret Glyph::SNIPPETS[ident] 
+			interpret snippet?(ident) 
 		rescue Exception => e
 			case 
 			when e.is_a?(Glyph::MutualInclusionError) then
@@ -28,7 +27,7 @@ macro "snippet:" do
 	exact_parameters 2
 	ident = param(0)
 	text = param(1)
-	Glyph::SNIPPETS[ident.to_sym] = text
+	snippet ident, text
 	""
 end
 
