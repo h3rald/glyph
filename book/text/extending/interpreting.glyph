@@ -27,7 +27,7 @@ When the @interpret@ method is called, the following happens:
 macro :issue do
   interpret %{
     tr[
-      td[\.=>[http://github.com/h3rald/glyph/issues/closed#issue/#{param[0]}\|##{param(0)}]]
+      td[\/=>[http://github.com/h3rald/glyph/issues/closed#issue/#{param[0]}\|##{param(0)}]]
       td[txt[#{param(1)}]]
     ]
   }
@@ -37,7 +37,7 @@ end
 		highlight[=html|
 rewrite:[issue\|
   tr[
-    td[\.=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}\|#{{0}}]]
+    td[\/=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}\|#{{0}}]]
     td[txt[{{1}}]]
   ]
 ]

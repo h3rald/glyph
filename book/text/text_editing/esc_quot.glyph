@@ -47,7 +47,7 @@ This is another section.
  		]
  		tr[
  			td[code[\\\=]]
-   		td[code[\.=]]
+   		td[code[\/=]]
    		td[Equal signs do not have to be escaped by default, but an escaped equal sign will evaluate to iself.]
  		]
  		tr[
@@ -56,9 +56,9 @@ This is another section.
    		td[Pipes must be escaped (even within quoting macros) unless they are used to separate macro parameters.]
  		]
  		tr[
-   		td[code[\\.]]
+   		td[code[\\/]]
    		td[]
-   		td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters: br[]code[=_\\.=>[#link\|This link is emphasized using Textile]_ =]
+   		td[An escaped dot evaluates to nothing. Useful to separate macro identifiers from other characters: br[]code[=_\\/=>[#link\|This link is emphasized using Textile]_ =]
     	]
   	]
 	]

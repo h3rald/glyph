@@ -35,7 +35,6 @@ rep :box do |data|
 </aside>}
 end
 
-# TODO: change fallback
 rep :figure do |data|
 	interpret %{xml/figure[
 xml/img[@src[#{data[:src]}]#{data[:attrs].join}]

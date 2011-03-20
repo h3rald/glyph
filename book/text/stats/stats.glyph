@@ -1,4 +1,4 @@
-rewrite:[stats_for|
+def:[stats_for|
 	section[
 		@title[Displaying stats about {{title}}]
 		txt[To display statistics about {{object}}, execute code[glyph stats {{command}}]. Glyph displays something like this:]
@@ -18,7 +18,7 @@ p[Glyph includes a #>[stats] that can be used to display useful statistics about
 highlight[html|
 $ glyph help stats
 =====================================
-Glyph v\.%[Glyph::VERSION]
+Glyph v\/%[Glyph::VERSION]
 =====================================
 stats \[options\] 
     Display statistics

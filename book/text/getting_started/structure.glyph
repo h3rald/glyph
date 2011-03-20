@@ -36,7 +36,7 @@ book[
 	textile[
 Even without knowing anything about &[glang], you can easily figure out that this file defines a document with a Table of Contents, a Preface some Chapters and an Appendix.
 
-As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for em[\.=>[#macro_intro|macros]] and em[\.=>[#attribute_intro|attributes]]. The only syntactic difference between macros and attributes is that attributes are preceded by a code[@]. 
+As you can see, Glyph wraps portions of text within square brackets preceded by an identifier. These identifiers are used for em[\/=>[#macro_intro|macros]] and em[\/=>[#attribute_intro|attributes]]. The only syntactic difference between macros and attributes is that attributes are preceded by a code[@]. 
 
 For now, think about a macro as something that performs a certain action and -- generally -- produces some text output or manipulation of the text inside it. In this way, it becomes easy to understand that the @chapter@ macro creates a chapter and the %>[include] includes an external file, for example.
 Attributes "belong" to the macro they're in, so in this case the %>[book] has the following attributes:

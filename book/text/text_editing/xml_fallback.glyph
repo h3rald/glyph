@@ -59,7 +59,7 @@ table[@class[features]
 	]
 	p[Basically, if the $>[options.xml_fallback] is set to code[true], any macro unknown to Glyph with at most one parameter will be converted to an XML tag with the same name and any attribute will be converted to the corresponding XML attribute.]
 	important[While macro names and attributes are validated so that an error is returned if they contain illegal character, no check is performed against any particular XML schema.]
-	txt[Additionally, it is possible to force macro-to-XML conversion by prepending an equal sign to any macro, so for example code[=\.=snippet[test]=] will be converted into @<snippet>test</snippet>@.]
+	txt[Additionally, it is possible to force macro-to-XML conversion by prepending an equal sign to any macro, so for example code[=\/=snippet[test]=] will be converted into @<snippet>test</snippet>@.]
 	section[
 		@title[Blacklisted XML tags]
 		@id[xml_blacklist]

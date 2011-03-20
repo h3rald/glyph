@@ -1,23 +1,23 @@
 	error_table[
-		ref_error[Macro delimiter '\.em[delimiter]' not escaped|
+		ref_error[Macro delimiter '\/em[delimiter]' not escaped|
 Returned in case of unescaped code[\[]or code[\]].
 		]
 		ref_error[em[macro_name]\[...\] - A macro cannot start with '@' or a digit.|
 Returned if an invalid macro name was specified.
 		]
-		ref_error[Macro '\.em[macro_name]' not closed|
-Returned if a macro lacks its end delimiter code[\.=\]].
+		ref_error[Macro '\/em[macro_name]' not closed|
+Returned if a macro lacks its end delimiter code[\/=\]].
 		]
-		ref_error[Escaping macro '\.em[macro_name]' not closed|
-Returned if an escaping macro lacks its end delimiter code[\.=\]].
+		ref_error[Escaping macro '\/em[macro_name]' not closed|
+Returned if an escaping macro lacks its end delimiter code[\/=\]].
 		]
-		ref_error[Attribute @\.em[attribute_name] not closed|
+		ref_error[Attribute @\/em[attribute_name] not closed|
 Returned if a macro attribute lacks its end delimiter code[\]].
 		]
 		ref_error[Attributes cannot be nested|
 Returned if a macro attribute was found immediately within another attribute.
 		]
-		ref_error[Cannot nest escaping macro '\.em[macro_name_1]' within escaping macro '\.em[macro_name_2]'|
+		ref_error[Cannot nest escaping macro '\/em[macro_name_1]' within escaping macro '\/em[macro_name_2]'|
 Returned if an escaping macro contains another escaping macro.
 		]
 		ref_error[Parameter delimiter '\|' not allowed here|

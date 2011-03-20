@@ -100,6 +100,14 @@ describe Glyph::MacroNode do
 		@p.parent[:escape] = true
 		@p.to_s.should == "test"
 		@p.contents.should == ".[=test=]"
+		###
+		n = macro_node(:test)
+		a = a_node(:a)
+		a[:escape] = true
+		a << text_node("alias[test\\|test1]")
+		n << a
+		a.to_s.should == "@a[=alias[test\\|test1]=]"
+		a.contents.should == ".[=alias[test\\|test1]=]"
 	end
 
 	it "should perform macro dispatching" do

@@ -2,7 +2,7 @@
 	textile[
 Glyph stores configuration settings in the following YAML files:
 # Your _Project Configuration_ is stored in the @config.yml@ file, included in each Glyph Project.
-# Your _Global Configuration_ is stored in a @.glyphrc@ file in your code[$HOME] (or ==\.code[%HOMEPATH%]== on Windows) directory (not created by default).
+# Your _Global Configuration_ is stored in a @.glyphrc@ file in your code[$HOME] (or ==\/code[%HOMEPATH%]== on Windows) directory (not created by default).
 # The _System Configuration_ is stored in the source directory of Glyph itself.
 
 When compiling, Glyph loads all these configuration files and merges them according to the following rules:

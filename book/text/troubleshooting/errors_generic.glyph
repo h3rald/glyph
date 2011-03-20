@@ -1,8 +1,8 @@
 	error_table[
-		ref_error[Invalid alias: macro '\.em[macro_name]' already exists|
+		ref_error[Invalid alias: macro '\/em[macro_name]' already exists|
 The alias name supplied to the code[macro_alias] method has already been used for another macro or alias.
 		]
-		ref_error[Undefined macro '\.em[macro_name]'|
+		ref_error[Undefined macro '\/em[macro_name]'|
 The document contains a macro that does not exist, i.e. it is not a standard or used-defined =>[#macro_ref|Glyph macro or alias].
 		]
 		ref_error[An error occurred when generating _file-name_.pdf|
@@ -17,28 +17,28 @@ Returned if a glyph command was executed outside a valid glyph project directory
 		ref_error[Invalid snippet file|
 The code[snippet.yml] file contains invalid data. Most likely, it does not evaluate to a Ruby code[Hash].
 		]
-		ref_error[Directory '\.em[directory_name]' is not empty|
+		ref_error[Directory '\/em[directory_name]' is not empty|
 	Returned when executing the #>[init] in a directory that is not empty.
 		]
-		ref_error[File '\.em[file_name]' already exists|
+		ref_error[File '\/em[file_name]' already exists|
 Returned if the name of an existing file was specified as a parameter for the #>[add].
 		]
-		ref_error[Unknown macro '\.em[macro_name]'|
+		ref_error[Unknown macro '\/em[macro_name]'|
 Returned by the #>[stats] if the specified macro was not found.
 		]
-		ref_error[Macro '\.em[macro_name]' is not used in this document|
+		ref_error[Macro '\/em[macro_name]' is not used in this document|
 Returned by the #>[stats] if the specified macro is defined but unused.
 		]
-		ref_error[Bookmark '\.em[bookmark_name]' does not exist|
+		ref_error[Bookmark '\/em[bookmark_name]' does not exist|
 Returned by the #>[stats] if the specified bookmark does not exist.
 		]
-		ref_error[No link matching /\.em[regexp]/ was found|
+		ref_error[No link matching /\/em[regexp]/ was found|
 Returned by the #>[stats] if the no link target matches the supplied regular expression.
 		]
-		ref_error[Unknown snippet '\.em[snippet_name]'|
+		ref_error[Unknown snippet '\/em[snippet_name]'|
 Returned by the #>[stats] if the specified snippet was not found.
 		]
-		ref_error[Snippet '\.em[snippet_name]' is not used in this document|
+		ref_error[Snippet '\/em[snippet_name]' is not used in this document|
 Returned by the #>[stats] if the specified snippet is defined but unused.
 		]
 	]

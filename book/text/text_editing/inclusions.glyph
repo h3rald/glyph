@@ -33,7 +33,7 @@ tip[Besides storing snippets in the @snippets.yml@ file, you can also define the
   This is a 
   Test snippet
 	=]
-	p[You can use code[=&amp;[markups]=] anywhere in your document instead of having to type "\.&[markups]" every time. Additionally, later on you can change the value of the code[markups] snippet only in the code[snippets.yml] file to change it everywhere else in the document.]
+	p[You can use code[=&amp;[markups]=] anywhere in your document instead of having to type "\/&[markups]" every time. Additionally, later on you can change the value of the code[markups] snippet only in the code[snippets.yml] file to change it everywhere else in the document.]
 	] 
 	tip[
 Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.

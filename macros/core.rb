@@ -7,6 +7,11 @@ macro :snippet do
 	if Glyph::SNIPPETS.has_key? ident then
 		begin
 			update_source "snippet[#{ident}]"
+			if Glyph::SNIPPETS[ident].match /Creates a macro/ then
+				puts "--> snippet:"
+				puts Glyph::SNIPPETS[ident]
+				puts "--"*20
+			end
 			interpret Glyph::SNIPPETS[ident] 
 		rescue Exception => e
 			case 
@@ -307,19 +312,23 @@ macro :while do
 end
 
 macro :quote do
-	"#@name[#{@node.contents}]"
+	contents = @node.contents
+	contents.gsub! /\\\|/, "\\\\|"
+	contents.gsub! /\\\//, "\\\\/"
+	"#@name[#{contents}]"
 end
 
 macro :unquote do
 	exact_parameters 1
-	content = parse_quoted_string value
+	text = value
+	content = parse_quoted_string text
 	content.respond_to?(:parameters) ? Glyph::Macro.new(content).parameters.join : content[:value]
 end
 
 macro :apply do
 	exact_parameters 2
-	quoted_parameter 0
 	quote = parse_quoted_string value
+	quoted_parameter 0, quote
 	result = []
 	Glyph::Macro.new(quote).node.parameters.each do |p|
 		content = p.children.select{ |c| c.respond_to?(:parameters) || !c[:value].to_s.strip.blank?}[0]
@@ -337,28 +346,27 @@ end
 
 macro :reverse do
 	exact_parameters 1
-	quoted_parameter 0
 	quote = parse_quoted_string value
+	quoted_parameter 0, quote
 	"'[#{quote.parameters.reverse.map{|p| p.contents}.join("|")}]"
 end
 
 macro :length do
 	exact_parameters 1
-	quoted_parameter 0
 	quote = parse_quoted_string value
+	quoted_parameter 0, quote
 	quote.parameters.length.to_s
 end
 
 macro :get do
 	exact_parameters 2
-	quoted_parameter 0
 	quote = parse_quoted_string value
+	quoted_parameter 0, quote
 	interpret quote.parameter(parameter(1).to_i).to_s rescue "" 
 end
 
 macro :sort do
 	max_parameters 2
-	quoted_parameter 0
 	sort_by = parameter 1 rescue nil
 	if sort_by.blank? || sort_by.match(/^\d+$/) then
 		param_sort = sort_by.to_i
@@ -366,6 +374,7 @@ macro :sort do
 		attr_sort = sort_by
 	end
 	quote = parse_quoted_string value
+	quoted_parameter 0, quote
 	sorted_parameters = quote.parameters.sort_by do |p|
 		content = p.children.select{ |c| c.respond_to?(:parameters) || !c[:value].to_s.strip.blank?}[0]
 		if content.respond_to? :parameters then
@@ -386,7 +395,6 @@ end
 
 macro :select do
 	exact_parameters 2
-	quoted_parameter 0
 	quote = parse_quoted_string value
 	result = []
 	Glyph::Macro.new(quote).node.parameters.each do |p|

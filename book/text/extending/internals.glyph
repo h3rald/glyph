@@ -51,10 +51,10 @@ section[
 		highlight[=html|
 <span class="fmi">for more information on something, see ‡‡‡‡‡PLACEHOLDER ¤ 1‡‡‡‡‡
 </span>
-\\\\\.[...\\\\\.]
+\\\\\/[...\\\\\/]
 <div class="section">
 <h2 id="test">Test Section</h2>
-\\\\\.[...\\\\\.]
+\\\\\/[...\\\\\/]
 
 </div>
 		=]

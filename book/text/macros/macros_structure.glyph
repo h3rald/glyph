@@ -83,7 +83,7 @@ section[
 
 	ref_macro[
 		@n[style]
-		@desc[Embeds the content of a CSS or Sass file within a @<style>@ tag (\.fmi[stylesheets|#stylesheets]).]
+		@desc[Embeds the content of a CSS or Sass file within a @<style>@ tag (\/fmi[stylesheets|#stylesheets]).]
 		@example[=style[default.css]=]
 		@params[-p[0|The stylesheet file to embed.]]
 	]

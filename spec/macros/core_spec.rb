@@ -343,10 +343,14 @@ This is a test.
 	it "quote and unquote" do
 		define_em_macro
 		output_for("quote[em[test]]").should == "quote[em[test]]"
+		output_for("'[em[=test\\|test\\/t[...]=]]").should == "'[em[=test\\|test\\/t[...]=]]"
 		output_for("'[em[a]|em[b]]").should == "'[em[a]|em[b]]"
+		output_for("'[t[@a[test[a|b|c]]@b[=q[test1\\|test2]=]]]").should == "'[t[@a[test[a|b|c]]@b[=q[test1\\|test2]=]]]"
+		output_for("'['['[test[=t[...\\|...]=]]]]").should == "'['['[test[=t[...\\|...]=]]]]"
 		output_for("unquote[quote[em[test]]]").should == "<em>test</em>"
 		output_for("~[quote[em[a]|em[b]]]").should == "<em>a</em><em>b</em>"
 		output_for("~['['[em[test]]]]").should == "'[em[test]]"
+		output_for("~['['[t[@a[test[a|b|c]]@b[=q[test1\\|test2]=]]]]]").should == "'[t[@a[test[a|b|c]]@b[=q[test1\\|test2]=]]]"
 		lambda { output_for("unquote[...|...]")}.should raise_error
 		output_for("unquote[...]").should == "..."
 	end
@@ -377,8 +381,12 @@ This is a test.
 		lambda { output_for("sort[1|2]")}.should raise_error
 		output_for("sort['[5|1|4|2|3|6]]").should == "'[1|2|3|4|5|6]"
 		q = "'[.[@a[3]] | .[@a[1]@b[2]] | .[@a[2]1|2|3]]"
-		output_for("sort[#{q}|a]").should == "'[ .[@a[1]@b[2]] | .[@a[2]1|2|3]|.[@a[3]] ]" 
+		result = "'[ .[@a[1]@b[2]] | .[@a[2]1|2|3]|.[@a[3]] ]" 
+		output_for("sort[#{q}|a]").should == result
+		output_for("&:[test-array|#{q}]sort[&[test-array]|a]").should == result
 		output_for("reverse[sort[#{q}|a]]").should == "'[.[@a[3]] | .[@a[2]1|2|3]| .[@a[1]@b[2]] ]" 
+		q2 = "'[.[@test[=test[..\\|...]=]@b[bbb]] | .[@b[aaa]@test2[=test1[...\\|...]=]]]"
+		output_for("sort[#{q2}|b]").should == "'[ .[@b[aaa]@test2[=test1[...\\|...]=]]|.[@test[=test[..\\|...]=]@b[bbb]] ]"
 	end
 
 	it "select" do

@@ -29,7 +29,7 @@ That's it. If you try to run @glyph help@ within your project directory, notice 
 	highlight[html|
 $ glyph help
 =====================================
-Glyph v\.%[Glyph::VERSION]
+Glyph v\/%[Glyph::VERSION]
 =====================================
 usage: glyph command \[options\]
 

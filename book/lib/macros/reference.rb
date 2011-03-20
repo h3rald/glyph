@@ -123,7 +123,7 @@ macro :ref_macro do
 	m_aliases = "aliases[#{raw_attr(:aliases)}]" if raw_attr(:aliases)
 	m_remarks = %{section[
 		@title[Remarks]
-		@notoc[:true]
+		@notoc[true]
 			txt[
 #{raw_attr(:remarks)}
 			]

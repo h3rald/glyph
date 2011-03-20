@@ -2,7 +2,7 @@ The following configuration settings are used to enable or disable specific Glyp
 
 config_table[
 	ref_config[options.filters_by_file_extension|
-If set to @true@, a filter macro is applied to included files, based on their extensions (\.fmi[including files|#incl]).
+If set to @true@, a filter macro is applied to included files, based on their extensions (\/fmi[including files|#incl]).
 	]
 	ref_config[options.macro_set|
 Determines which macro set will be loaded. It can be set to:
@@ -11,7 +11,7 @@ Determines which macro set will be loaded. It can be set to:
 * core -- Loads core macros only.
 	]
 	ref_config[options.safe_mode|
-Enables Safe Mode (\.fmi[Glyph modes|#modes]).
+Enables Safe Mode (\/fmi[Glyph modes|#modes]).
 	]
 	ref_config[options.url_validation|
 If set to _true_, every external link will be validated (see =>[#links]).

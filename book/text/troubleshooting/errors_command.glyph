@@ -1,5 +1,5 @@
 	error_table[
-		ref_error[Source file '\.em[source_file]' does not exist|
+		ref_error[Source file '\/em[source_file]' does not exist|
 Returned if Glyph is running in =>[#lite_mode|lite mode] and the specified source file was not found.
 		]
 		ref_error[Source and destination file are the same|
@@ -17,7 +17,7 @@ No file name was specified for the #>[add].
 		ref_error[Output target not specified|
 Returned if no target was specified for the #>[compile] _and_ if the $>[document.output] is not set.
 		]
-		ref_error[Unknown output target '\.em[target_name]'|
+		ref_error[Unknown output target '\/em[target_name]'|
 An unsupported output target was specified for the #>[compile]. Only the following output targets are supported:
 			ul[
 				li[html]
@@ -27,10 +27,10 @@ An unsupported output target was specified for the #>[compile]. Only the followi
 		ref_error[Too few/too many arguments|
 Returned if the #>[config] was used with no arguments or more than two arguments respectively.
 		]
-		ref_error[Unknown setting '\.em[setting_name]'|
+		ref_error[Unknown setting '\/em[setting_name]'|
 The name of an unknown setting was specified for the #>[config].
 		]
-		ref_error[Cannot reset '\.em[setting_name]' setting (system use only).|
+		ref_error[Cannot reset '\/em[setting_name]' setting (system use only).|
 Returned by the #>[config] when attempting to override a setting in the code[system.*] namespace.
 		]
 	]

@@ -4,7 +4,7 @@ Glyph's command-line interface has been built using the =>[http://github.com/dav
 strong[glyph] em[global_options] strong[command] em[options] em[parameters]
 
 Where:
-* em[global_options] and _options_ are in the form: @-n@ _value_ or @--name=@\._value_, e.g. @-f pdf@ or @--format=pdf@
+* em[global_options] and _options_ are in the form: @-n@ _value_ or @--name=@\/_value_, e.g. @-f pdf@ or @--format=pdf@
 * _parameters_ are separated by whitespaces, and can be wrapped in quotes.
 ]
 section[
@@ -51,7 +51,7 @@ If specified, enable =>[#auto_regeneration|auto regeneration] (requires the =>[h
 section[
 	@title[config]
 	@id[c_config]
-Gets or sets a configuration setting in the project or global configuration file (\.fmi[configuration files|#cfg]).
+Gets or sets a configuration setting in the project or global configuration file (\/fmi[configuration files|#cfg]).
 	examples[
 glyph config document.filename
 glyph config -g document.author "Fabio Cevasco"
@@ -114,7 +114,7 @@ section[
 	@id[c_stats]
 	def:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
 	def:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
-	p[Displays project statistics (\.fmi[this command|#stats]).]
+	p[Displays project statistics (\/fmi[this command|#stats]).]
 	examples[
 glyph	stats -m 
 glyph stats --link=h3rald.com

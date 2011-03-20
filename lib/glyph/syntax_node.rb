@@ -153,7 +153,8 @@ module Glyph
 		end
 
 		# @since 0.5.0
-		# TODO: doc
+		# Calls the ruby block stored in the :dispatch key, if present,
+		# in the context of node
 		def dispatch(node)
 			return self[:dispatch].call node if self[:dispatch]
 			false

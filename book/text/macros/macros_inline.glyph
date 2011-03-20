@@ -29,9 +29,9 @@
 
 	ref_macro[
 		@n[link]
-		@desc[Creates an hyperlink (\.fmi[creating links|#links]).]
-		@aliases[\.=>]
-		@example[=\.=>[http://www.h3rald.com\|H3RALD.com]=]
+		@desc[Creates an hyperlink (\/fmi[creating links|#links]).]
+		@aliases[\/=>]
+		@example[=\/=>[http://www.h3rald.com\|H3RALD.com]=]
 		@params[
 			-p[0|A valid bookmark within the document or an URL.]
 			-p[1|The text of the link &[opt].]

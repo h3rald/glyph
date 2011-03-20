@@ -8,7 +8,7 @@ By default, a Glyph project can be "compiled" into an HTML document. Additionall
 section[
 	@title[HTML/HTML5 output]
 	p[To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the code[document.glyph] file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the code[/output/html] folder.]
-	p[The name of the HTML file can be set in the configuration (\.$>[document.filename]).]
+	p[The name of the HTML file can be set in the configuration (\/$>[document.filename]).]
 	p[To create an HTML5 file instead, you must specify it explicitly like this:]
 	p[code[= glyph compile -f html5 =]]
 ]

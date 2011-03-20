@@ -16,10 +16,10 @@ Glyph requires the following gems:
 * rake
 
 Additionally, some Glyph macros may require additional gems, such as:
-* RedCloth (\.%>[textile])
-* BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (\.%>[markdown])
+* RedCloth (\/%>[textile])
+* BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (\/%>[markdown])
 * Haml (if you want to load .sass files with the %>[style])
-* CodeRay _or_ UltraViolet (\.%>[highlight])
+* CodeRay _or_ UltraViolet (\/%>[highlight])
 * directory_watcher (to use auto-regeneration with the #>[compile])
 	]
 

@@ -28,7 +28,7 @@ def:[release|
 ]
 def:[issue|
 	tr[
-		td[\.=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}|#{{0}}]]
+		td[\/=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}|#{{0}}]]
 		td[txt[{{1}}]]
 	]
 ]
@@ -111,7 +111,7 @@ release[0.2.0|May 9th 2010|
 		issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]	
 		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] (Jabbslad).]	
 		issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project.]
-		issue[92|6 new macros have been defined to allow conditional processing (\.%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
+		issue[92|6 new macros have been defined to allow conditional processing (\/%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
 		issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
 		issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed (koraktor).]
 		issue[99|Added a @document.draft@ setting. If set to @true@, comments and TODOs are rendered in output files.]

@@ -17,8 +17,8 @@ end
 	highlight[=mediawiki|
 highlight[\=ruby\|
   def find_child(&block)
-    children.each do \\\.\|c\\\.\|
-      c.descend do \\\.\|node, level\\\.\|
+    children.each do \\\/\|c\\\/\|
+      c.descend do \\\/\|node, level\\\/\|
         return node if block.call(node)
       end
     end
