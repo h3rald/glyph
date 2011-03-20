@@ -1,25 +1,20 @@
-&:[core-macros|
-	'[
-		ref_macro[
-			@n[alias]
-			@desc[Creates a macro alias.]
-			@params[
-				-p[0|The name of the alias.]
-				-p[1|The name of an existing macro.]
-			]
-			@example[=alias[s\|section]=]
+
+	ref_macro[
+		@n[alias]
+		@desc[Creates a macro alias.]
+		@params[
+			-p[0|The name of the alias.]
+			-p[1|The name of an existing macro.]
 		]
-		|
-		ref_macro[
+		@example[=alias[s\|section]=]
+	]
+
+	ref_macro[
 		@n[and]
 		@desc[Conditional code[and] operator, to be used with the %>[condition].]
 		@params[&[bin_params]]
 		@example[=?[and[true\|false]\|This is never displayed.]=]
-		]
 	]
-]
-
-~[sort[&[core-macros]|n]]
 
 	ref_macro[
 		@n[comment]

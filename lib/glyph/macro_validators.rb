@@ -173,19 +173,6 @@ module Glyph
 				end
 			end
 
-			# Ensures that the node provided is a quote macro
-			# @param [Fixnum] position the position of the quoted parameter (for output purposes only)
-			# @param [Glyph::MacroNode] quote the macro to verify
-			# @param [Hash] options a hash containing validation options
-			# @option options :level the error level (:error, :warning)
-			# @return [Boolean] whether the validation passed or not
-			# @since 0.5.0
-			def quoted_parameter(position, quote, options={:level => :error})
-				validate("Macro '#{@name}' requires a quoted macro at position #{position}", options) do
-					Glyph.macro_eq?(quote[:name], :quote) rescue nil
-				end
-			end
-
 		end
 	end
 end
