@@ -19,21 +19,27 @@
 		<link rel="shortcut icon" href="/favicon.png" type="image/png" /> 
 		<meta content="44.388041;9.073248" name="ICBM" /> 
 
-
 		<link rel="stylesheet" type="text/css" href="/styles/html5reset.css" /> 
 		<link rel="stylesheet" type="text/css" href="/styles/style.css" /> 
-
-		<!--\[if lte IE 8\]>
-		<script src="/js/html5.js" type="text/javascript"></script>
-		<!\[endif\]--> 
+ 
+		<script src="/js/head.js" type="text/javascript"></script> 
+		<script src="http://www.google.com/jsapi?key=ABQIAAAAr6RY1Z6dchG_sX9WDLSy3xRlq2n1sm52B5HDRR5tm6o8XM18FhR56xHNNH6CsX86uN5VoTrglpyOyQ" type="text/javascript"></script> 
+		<script type="text/javascript"> 
+			head.js("/js/sevenup.js", 
+					"/js/sevenup_black.js", 
+					"https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js",
+					"/js/jquery-timeago.js",
+					"/js/jquery-easing.js",
+					"/js/jquery-fancybox.js",
+					"/js/jquery-toc.js", 
+					"/js/date.js",
+					"/js/feeds.js",
+					"/js/hyphenator.js",
+					"/js/init.js");
+		</script> 
+		<script src="/js/search.js" type="text/javascript"></script> 
 	</head> 
 	<body> 
-		<!--\[if lte IE 6\]>
-		<div id="ie-warning">
-			This site is not compatible with Internet Explorer 6 or lower. You should consider using a more modern browser for a better &ndash; and <em>safer</em> &ndash; web experience. \[<a href="http://browsehappy.com/browsers/">Read More &raquo;</a>\]
-		</div>
-		<!\[endif\]--> 
-
 		<section id="container"> 
 
 			<header class="page"> 
@@ -60,10 +66,14 @@
 				</header> 
 				<section id="body-text" class="glyph-index"> 
 					toc[]
+					<nav id="sharing-buttons"> 
+						<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="h3rald">Tweet</a> 
+						<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> 
+					</nav> 
 				</section> 
 			</article> 
-
-
+					
+			
 			<footer> 
 				<section class="ads"> 
 					<script type="text/javascript"><!--
@@ -81,44 +91,38 @@
 					<nav> 
 						<a href="/about/">ABOUT</a>\|<a href="/contact/">CONTACT</a> 
 					</nav> 
-					<p>H3RALD Web Site v8.1 &mdash; &copy; 2010 &mdash; <em>Fabio Cevasco</em></p> 
+					<p>H3RALD Web Site v8.1.1 &copy; 2004 &mdash; 2011 <em>Fabio Cevasco</em></p> 
 				</section> 
 			</footer> 
 		</section><!-- #container end --> 
-		<script src="http://www.google.com/jsapi?key=ABQIAAAAr6RY1Z6dchG_sX9WDLSy3xRlq2n1sm52B5HDRR5tm6o8XM18FhR56xHNNH6CsX86uN5VoTrglpyOyQ" type="text/javascript"></script> 
-		<!-- <script src="/js/jquery.js" type="text/javascript"></script> --> 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
-		<script src="/js/jquery-timeago.js" type="text/javascript"></script> 
-		<script src="/js/jquery-easing.js" type="text/javascript"></script> 
-		<script src="/js/jquery-fancybox.js" type="text/javascript"></script> 
-		<script src="/js/jquery-toc.js" type="text/javascript"></script> 
-		<script src="/js/date.js" type="text/javascript"></script> 
-		<script src="/js/feeds.js" type="text/javascript"></script> 
-		<script src="/js/search.js" type="text/javascript"></script> 
-		<script src="/js/hyphenator.js" type="text/javascript"></script> 
-		<script src="/js/init.js" type="text/javascript"></script> 
-		<!-- Start Google Analytics --> 
-		<script type="text/javascript"> 
-			.[=
-			var _gaq = _gaq \|\| [];
-			_gaq.push(['_setAccount', 'UA-18587377-1']);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-			=]
-		</script> 
-		<!-- End Google Analytics --> 
-		<!-- Start of StatCounter Code --> 
-		<script type="text/javascript"> 
-			var sc_project=6193656; 
-			var sc_invisible=1; 
-			var sc_security="57f7ee2a"; 
-		</script> 
-		<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script> 
-		<!-- End of StatCounter Code --> 
+		
+		
+			<script type="text/javascript"> 
+					$(document).ready(function() {
+							display_commits(5, 'ruby-compendium');
+							});
+			</script> 
+		
+ <!-- Start Google Analytics --> 
+ <script type="text/javascript"> 
+  var _gaq = _gaq \|\| \[\];
+  _gaq.push(\['_setAccount', 'UA-18587377-1'\]);
+  _gaq.push(\['_trackPageview'\]);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')\[0\]; s.parentNode.insertBefore(ga, s);
+  })();
+ </script> 
+ <!-- End Google Analytics --> 
+ <!-- Start of StatCounter Code --> 
+  <script type="text/javascript"> 
+	var sc_project=6193656; 
+	var sc_invisible=1; 
+	var sc_security="57f7ee2a"; 
+	</script> 
+	<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script> 
+	<!-- End of StatCounter Code --> 
 	</body> 
 </html>
