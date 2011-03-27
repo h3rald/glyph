@@ -151,11 +151,10 @@ describe "Macro:" do
 	it "figure" do
 		interpret "figure[@alt[ligature]ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
-			<div class="figure">
-			<img src="images/ligature.jpg" alt="ligature" />
-			<div class="caption">Ligature</div>
-			</div>
-		}.gsub(/\n|\t/, '')
+			<div class=\"figure\" alt=\"ligature\">
+				<img src=\"images/ligature.jpg\" />
+				<div class=\"caption\">Ligature</div>
+			</div>}.gsub(/\n|\t/, '')
 	end
 
 	it "fig should link files by absolute or relative path in Lite mode" do

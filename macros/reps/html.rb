@@ -57,10 +57,7 @@ rep :image do |data|
 end
 
 rep :figure do |data|
-	interpret %{div[@class[figure]
-img[@src[#{data[:src]}]#{data[:attrs].join}]
-					div[@class[caption]#{data[:caption]}]
-]}
+	interpret %{div[@class[figure]#{data[:attrs].join}\\/img[@src[#{data[:src]}]]div[@class[caption]#{data[:caption]}]]}
 end
 
 rep :title do |data|

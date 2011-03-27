@@ -76,11 +76,10 @@ describe "Macro:" do
 	it "figure (html5)" do
 		interpret "figure[@alt[ligature]ligature.jpg|Ligature]"
 		@p.document.output.gsub(/\t|\n/, '').should == %{
-			<figure>
-			<img src="images/ligature.jpg" alt="ligature" />
-			<figcaption>Ligature</figcaption>
-			</figure>
-		}.gsub(/\n|\t/, '')
+			<figure alt=\"ligature\">
+				<img src=\"images/ligature.jpg\" />
+				<figcaption>Ligature</figcaption>
+			</figure>}.gsub(/\n|\t/, '')
 	end
 
 	it "draftcomment, todo (html5)" do

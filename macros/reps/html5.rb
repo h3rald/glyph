@@ -22,7 +22,7 @@ end
 rep :note do |data|
 	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "note"
 	%{<aside class="#{css_class}">
-<span class="note-title">#{data[:name].capitalize}</span>#{data[:text]}
+<span class="note-title">#{data[:name].to_s.capitalize}</span>#{data[:text]}
 
 </aside>}
 end
@@ -36,10 +36,7 @@ rep :box do |data|
 end
 
 rep :figure do |data|
-	interpret %{xml/figure[
-xml/img[@src[#{data[:src]}]#{data[:attrs].join}]
-					xml/figcaption[#{data[:caption]}]
-]}
+	interpret %{xml/figure[#{data[:attrs].join}\\/xml/img[@src[#{data[:src]}]]xml/figcaption[#{data[:caption]}]]}
 end
 
 rep :title do |data|
