@@ -19,12 +19,13 @@ begin
 		s.email = "h3rald@h3rald.com"
 		s.homepage = "http://www.h3rald.com/glyph/"
 		s.authors = ["Fabio Cevasco"]
+		s.version = Glyph::VERSION
 		s.files.exclude 'book/output/**/*'
 		s.add_dependency 'gli', '>= 1.2.6' # Command line interface
 		s.add_dependency 'extlib', '>= 0.9.15' # Extension methods
 		s.add_dependency 'rake', '>= 0.8.7' # Glyph rasks
 		s.add_development_dependency 'rspec', '>= 2.5.1' # Test suite
-		s.add_development_dependency 'yard', '>= 0.6.5' # Documentation suite
+		s.add_development_dependency 'yard', '>= 0.6.7' # Documentation suite
 		s.add_development_dependency 'jeweler', '1.5.2' # Gem management
 		s.add_development_dependency 'directory_watcher', ">= 1.4.0" # Auto-regeneration
 		s.add_development_dependency 'haml', ">= 3.0.25" # Sass filter
