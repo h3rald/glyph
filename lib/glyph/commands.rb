@@ -5,6 +5,9 @@ include GLI
 GLI.desc "Enable debugging"
 switch [:d, :debug]
 
+GLI.desc "Prints the version of the program"
+switch [:v, :version]
+
 require Glyph::LIB/'commands/init'
 require Glyph::LIB/'commands/add'
 require Glyph::LIB/'commands/compile'
@@ -16,21 +19,18 @@ require Glyph::LIB/'commands/stats'
 Glyph.run 'load:tasks'
 Glyph.run 'load:commands'
 
-version Glyph::VERSION
-
 pre do |global,command,options,args|
 	# Pre logic here
-	# Return true to proceed; false to abourt and not call the
+	# Return true to proceed; false to abort and not call the
 	# chosen command
 	if global[:d] then
 		Glyph.debug_mode = true
 	end
-	if !command || command.name == :help then
-		puts "====================================="
+	if global[:v] || !command || command.name == :help then
 		puts "Glyph v#{Glyph::VERSION}"
-		puts "====================================="
+    puts
 	end
-	true
+	global[:v] ? false : true
 end
 
 post do |global,command,options,args|

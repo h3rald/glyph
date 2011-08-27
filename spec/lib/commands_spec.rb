@@ -14,6 +14,11 @@ describe "glyph" do
 		reset_quiet
 		delete_project
 	end
+  
+  it "[-v] should pront the program name and version and quit" do
+    run_command(["-v"]).should == "Glyph v#{Glyph::VERSION}\n\n"
+    run_command(["-v", "compile"]).should == "Glyph v#{Glyph::VERSION}\n\n"
+  end
 
 	it "[init] should create a project in the current directory" do
 		delete_project

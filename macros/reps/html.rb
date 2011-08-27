@@ -132,7 +132,7 @@ rep :style do |data|
 				require 'sass'
 				style = Sass::Engine.new(file_load(file), :syntax => file.extname.gsub(/^\./, '').to_sym).render
 			rescue LoadError
-				macro_error "Haml is not installed. Please run: gem install haml"
+				macro_error "Sass is not installed. Please run: gem install sass"
 			rescue Exception
 				raise
 			end

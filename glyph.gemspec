@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", [">= 2.5.1"])
   s.add_development_dependency("yard", [">= 0.6.5"])
   s.add_development_dependency("directory_watcher", [">= 1.4.0"])
-  s.add_development_dependency("haml", [">= 3.0.25"])
+  s.add_development_dependency("sass", [">= 3.1.7"])
   s.add_development_dependency("RedCloth", [">= 4.2.7"])
   s.add_development_dependency("bluecloth", [">= 2.1.0"])
   s.add_development_dependency("coderay", [">= 0.9.7"])
