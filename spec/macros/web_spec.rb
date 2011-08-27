@@ -41,19 +41,21 @@ describe "Macro:" do
 		Glyph.run! 'generate:web'
 		index = Glyph.file_load(Glyph::PROJECT/'output/web/index.html')
 		index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?.should == true
-		index.match(%{href="/a/web1.html#h_2"}).blank?.should == false
-		index.match(%{href="/a/b/web2.html#h_6"}).blank?.should == false
+		index.match(%{href="/a/web1.html#h_3"}).blank?.should == false
+		index.match(%{href="/a/b/web2.html#h_7"}).blank?.should == false
+		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
+    web1.should match(/<h2 id="t_0">Topic #1<\/h2>/) #  Headers are reset in each topic
 		delete_project
 		reset_quiet
 		create_web_project
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'generate:html'
 		index = Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html')
-		index.match(%{href="a/web1.html#h_2"}).blank?.should == true
-		index.match(%{href="a/b/web2.html#h_6"}).blank?.should == true
+		index.match(%{href="a/web1.html#h_3"}).blank?.should == true
+		index.match(%{href="a/b/web2.html#h_7"}).blank?.should == true
 		index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?.should == false
 		index.match(%{href="#h_2"}).blank?.should == false
-		index.match(%{href="#h_7"}).blank?.should == false # Header numbers are different...
+		index.match(%{href="#h_8"}).blank?.should == false # Header numbers are different...
 	end
 
 end	

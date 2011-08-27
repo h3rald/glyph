@@ -38,20 +38,21 @@ body {
   text-align: center; }
   .titlepage h1 {
     font-size: 2.5em;
+    line-height: 1.2em;
     font-weight: bold;
-    line-height: 1.5em;
     margin-bottom: 0.2em; }
 
 .halftitlepage h1 {
   font-size: 2.5em;
   font-weight: bold;
-  line-height: 1.5em;
   margin-bottom: 0.2em; }
 .halftitlepage h2 {
   font-size: 1.1em;
   font-style: italic;
   font-weight: bold;
-  line-height: 1.2em;
+  padding-top: 0;
+  margin-top: 0;
+  line-height: 2.5em;
   margin-bottom: 0.5em;
   prince-bookmark-level: none; }
 
@@ -59,7 +60,9 @@ body {
   font-size: 1.1em;
   font-style: italic;
   font-weight: bold;
-  line-height: 1.2em;
+  padding-top: 0;
+  margin-top: 0;
+  line-height: 2.5em;
   margin-bottom: 0.5em;
   prince-bookmark-level: none; }
 
@@ -126,11 +129,16 @@ sup {
   margin: auto;
   text-align: center; }
 
+code {
+  font-size: 0.8em;
+}
+
 .note, .important, .tip, .caution, .box {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #CCC;
   display: block;
   margin: 0.5em auto;
-  padding: 0 0.5em;
+  padding: 1em;
+  padding-top: 0em;
   width: 600px;
   background: #EEE;
   color: #1F1F1F; }
@@ -146,7 +154,10 @@ sup {
 .box-title {
   display: block;
   text-align: center;
-  font-weight: bold; }
+  font-weight: bold; 
+  font-size: 120%;
+  margin: 0.5em;
+}
 
 .comment {
   display: block;
@@ -201,20 +212,6 @@ a {
   a:hover {
     color: #005b91; }
 
-.code > pre {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  background-color: #222;
-  font-family: 'Courier New', 'Terminal', monospace;
-  color: #E6E0DB;
-  padding: 20px;
-  overflow: auto hidden;
-  margin: 20px 0 20px 0; }
-
-code, .CodeRay {
-  font-size: 0.8em; }
-
 span.line-numbers {
   margin: 0;
   padding: 3px; }
@@ -251,7 +248,7 @@ td p, td ul, td ol {
 
 /* FONTS */
 body {
-  font-family: "Gentium Book Basic", "Book Antiqua", "Times New Roman", "Serif"; }
+  font-family: 'Crimson Text', 'Palatino', 'Bookman', 'Georgia', 'Times'; }
 
 code, pre {
   font-family: "Droid Sans Mono", "Consolas", "Monaco", "Courier", "Monospace"; }

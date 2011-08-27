@@ -9,10 +9,14 @@ document[
 			section[
 				@title[Web Document]
 ...
-				section[
-					@src[a/web1.glyph]
-					@title[Topic #1]
-				]
+        section[
+          @title[Another section]
+Some text...
+				   section[
+					  @src[a/web1.glyph]
+					  @title[Topic #1]
+			  	]
+        ]
 				section[
 					@src[a/b/web2.glyph]
 					@title[Topic #2]

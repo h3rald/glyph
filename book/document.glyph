@@ -11,10 +11,11 @@ book[
 		?[and[
 			output?[pdf]|
 			eq[$[output.pdf.generator]|prince]]|
-			image[@width[20%]@height[20%]glyph/glyph.svg]|
-			image[glyph/glyph.png]]
+			  image[@width[20%]@height[20%]glyph/glyph.svg]|
+			  image[glyph/glyph.png]]
 	]
 	@frontmatter[
+    include[snippets]
 		toc[3]
 		introduction[
 			@title[Introduction]
