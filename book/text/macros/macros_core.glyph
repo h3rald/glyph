@@ -1,5 +1,12 @@
 
 	ref_macro[
+		@n[add]
+		@desc[Adds two or more integers together.]
+		@params[Two or more integer values.]
+		@example[=add[2\|5\|7]=]
+	]
+
+	ref_macro[
 		@n[alias]
 		@desc[Creates a macro alias.]
 		@params[
@@ -14,6 +21,25 @@
 		@desc[Conditional code[and] operator, to be used with the %>[condition].]
 		@params[&[bin_params]]
 		@example[=?[and[true\|false]\|This is never displayed.]=]
+	]
+
+	ref_macro[
+		@n[attribute]
+		@desc[Returns the value of the specified attribute. ##[see_let|For a more complete example, see the %>[let]].]
+    @aliases[@]
+		@example[=@[title]=]
+		@params[-p[0|The name of the attribute to retrieve.]]
+	]
+
+	ref_macro[
+		@n[attribute:]
+		@desc[Sets the value of the specified attribute. <=[see_let].]
+    @aliases[@:]
+		@example[=@:[title\|Test Title]=]
+		@params[
+      -p[0|The name of the attribute to set.]
+      -p[1|The value of the attribute.]
+    ]
 	]
 
 	ref_macro[
@@ -85,6 +111,41 @@ For examples see any of the following:
 	]
 
 	ref_macro[
+		@n[fragment]
+		@desc[Delimits a fragment of text that can be embedded using the %>[embed].]
+		@aliases[##]
+		@example[=##\[test_fragment|This is an embeddable fragment\]=]
+		@params[
+      -p[0|The ID of the fragment.]
+      -p[1|The contents of the fragment.]
+    ]
+	]
+
+	ref_macro[
+		@n[embed]
+		@desc[Embeds text previously-delimited using the %>[fragment].]
+		@aliases[<=]
+		@example[=<=\[test_fragment\]=]
+		@params[-p[0|The ID of the fragment.]]
+	]
+
+  def:[comp_macro|
+	  ref_macro[
+		  @n[{{0}}]
+		  @desc[Returns em[true] if the first parameter is {{0}} the second one.]
+	  	@example[={{1}}\[5\|2\]=]
+	  	@params[
+        -p[0|The first integer to compare.]
+        -p[1|The second integer to compare.]
+      ]
+	  ]
+  ]
+
+  comp_macro[gt|greater than]
+
+  comp_macro[gte|greater than or equal to]
+
+	ref_macro[
 		@n[include]
 		@desc[
 Evaluates to the contents of a text file stored in the @text/@ directory referenced by its relative path. If &[filter_by_ext], filters the contents of the file using the =>[#f_macros|filter macro] corresponding to the file extension.
@@ -102,6 +163,35 @@ This macro can also be used to include @.rb@ ruby files within the @lib@ directo
 			]
 		]
 	]
+
+	ref_macro[
+		@n[let]
+		@desc[Used to bind one or more attributes via the %>[attribute]. Actually, you can use %>[attribute] inside any other macro, but it looks tidier in this way.]
+		@block_example[=
+let[
+  @:[a\|2]
+  @:[b\|3]
+  section[
+    @title[Testing]
+    @[title]: @[a] * @[b] = multiply[@[a]\|@[b]] --[Outputs: Testing: 2 * 3 = 6]
+  ]
+]
+    =]
+		@params[-p[0|Any content.]]
+	]
+
+	ref_macro[
+		@n[load]
+		@desc[Embeds the contents of a file.]
+		@params[
+      -p[0|The file to embed, relative to the Glyph project folder.]
+    ]
+		@example[=load[my_samples.rb]=]
+	]
+
+  comp_macro[lt|less than]
+
+  comp_macro[lte|less than or equal to]
 
 	ref_macro[
 		@n[match]
@@ -135,6 +225,13 @@ Checks a string against a regular expression.
 	]
 		
 	ref_macro[
+		@n[multiply]
+		@desc[Multiplies two or more integers together.]
+		@params[Two or more integer values.]
+		@example[=add[3\|5\|9]=]
+	]
+
+	ref_macro[
 		@n[not]
 		@desc[Conditional @not@ operator, to be used with the %>[condition].]
 		@example[=?[not[false]\|This is always displayed.]=]
@@ -158,21 +255,24 @@ Checks a string against a regular expression.
 	]
 
 	ref_macro[
-		@n[rewrite:]
+		@n[define:]
 		@desc[Defines a new macro by rewriting (for more information, see =>[#rewriting])]
-		@aliases[rw:]
+		@aliases[def:]
 		@params[
 			-p[0|The name of the new macro.]
 			-p[0|The macro definition (Glyph code).]
 		]
 		@block_example[=
-rw:[release\|
-  section[
-    @title[Release {{0}}]
-    {{1}}
-  ]
-]
-		=]
+def:[factorial\|
+	?[
+  	eq[{{0}}\|0]\|1|
+			multiply[
+				{{0}} \| factorial[subtract[{{0}}\|1]]
+			]
+		]
+	]
+factorial[5]
+  	=]
 		@remarks[
 			ul[
 				li[The new macro &[only_after_declaration].]
@@ -194,6 +294,15 @@ rw:[release\|
 	]
 
 	ref_macro[
+		@n[s]
+		@desc[Can be used to dispatch almost any instance method of the ruby =>[http://rubydoc.info/stdlib/core/1.9.2/String|String] class.]
+		@examples[=
+s/match[This is a test string\|/test/]
+s/sub[This is a test string\|/a test/\|another test]
+    =]
+	]
+
+	ref_macro[
 		@n[snippet]
 		@desc[Returns the value of a snippet.]
 		@aliases[&amp;]
@@ -211,4 +320,37 @@ rw:[release\|
 			-p[0|The ID of the new snippet.]
 			-p[1|The contents of the new snippet.]
 		]
+	]
+
+	ref_macro[
+		@n[subtract]
+		@desc[Subtracts two or more integers together.]
+		@params[Two or more integer values.]
+		@example[=add[10\|5\|2]=]
+	]
+
+	ref_macro[
+		@n[xml]
+		@desc[When used composed with another macro, it can be used to render arbitrary raw XML tags.]
+		@example[=xml/img[@src[test.png]@alt[A Test image]]=]
+	]
+
+	ref_macro[
+		@n[while]
+		@desc[Keeps evaluating the second parameter while a condition is satisfied.]
+		@block_example[=
+let[
+  @count[5]
+	@text[-]
+	while[gt[@[count]\|0]\|
+		@:[text\|s/concat[@[text]\|@[count]-]]					
+		@:[count\|subtract[@[count]\|1]]
+	]
+	@[text] --[Outputs: -5-4-3-2-1-]
+]
+    =]
+		@params[
+      -p[0|The condition to check.]
+		  -p[1|The code to evaluate while the condition is satisfied.]
+    ]
 	]

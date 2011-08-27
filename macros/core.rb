@@ -322,6 +322,7 @@ macro :embed do
 	end
 end
 
+
 macro_alias '--' => :comment
 macro_alias '&' => :snippet
 macro_alias '&:' => 'snippet:'

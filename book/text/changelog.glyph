@@ -24,11 +24,13 @@ def:[release|
 	section[
 		@title[v{{0}} &ndash; {{1}}]
 		{{2}}
+
+    p/em[&rarr; View closed issues on =>[https://github.com/h3rald/glyph/issues?direction=asc&labels={{0}}&sort=created&state=closed|GitHub]]
 	]
 ]
 def:[issue|
 	tr[
-		td[\/=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}|#{{0}}]]
+		td[\/=>[https://github.com/h3rald/glyph/issues/{{0}}|#{{0}}]]
 		td[txt[{{1}}]]
 	]
 ]
@@ -37,9 +39,25 @@ def:[issue|
 	%:[#>|"#{value} command"]
 	%:[$>|"#{value} setting"]
 ]
+release[0.5.0|??? 2011|
+	features[
+    issue[165|The %>[fragment] and the %>[embed] can be used to delimit and embed text fragments, in a way much similar to snippets.]
+		issue[179|Macro can be composed with other macros via backslashes, provided that containers only take exactly one parameter. The new %>[xml] dispatcher must be used composed with other macros to create raw XML tags, prepending = to macro names no longer works.]
+    issue[180|Glyph can now generate ebooks in MOBI and EPUB format &ndash; with Calibre's help.]
+    issue[181|By using the new %>[let] macro, it is possible to define lexically scoped "variables" via the %>[attrubute:], and retrieve them within the scope of the let macro using the %>[attribute].]
+    issue[182|A %>[while] can be used to execute glyph code multiple times.]
+    issue[183|The %>[s] dispatcher can be used to call almost any instance method of the Ruby String class. The "match" macro cannot be used anymore; use "s/match" instead.]
+    issue[184|The old "rewrite" macro has been renamed to "define". The new %>[define] fully supports recursion.]
+    issue[189|The %>[add], the %>[subtract] and the %>[multiply] macro can be used to perform operations on integers.]
+    issue[190|The lt, gt, lte, gte macros can be used to compare integer values.]
+    issue[194|The %>[load] macro can be used to embed the contents of a file without performing any evaluation.]
+  ]
+  bugs[
+    issue[|]
+  ]
 release[0.4.2|October 22th 2010|
 	features[
-		issue[172|A new %>[output?] macro can be used to test whether Glyph is compiling to a particular output format.]
+		issue[172|A new %>[output?] can be used to test whether Glyph is compiling to a particular output format.]
 		issue[175|The conditional macro now support a third parameter (else branch).]
 		issue[176|A bunch of new aliases and shortcuts are available for the section macro.]
 	]
