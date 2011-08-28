@@ -51,6 +51,7 @@ describe "Macro:" do
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'generate:html'
 		index = Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html')
+    index.should match(%{<li class="section"><a href="#h_3">Topic #1</a></li><li><ol><li class="section"><a href="#h_4">Test #1a</a></li>})
 		index.match(%{href="a/web1.html#h_3"}).blank?.should == true
 		index.match(%{href="a/b/web2.html#h_7"}).blank?.should == true
 		index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?.should == false

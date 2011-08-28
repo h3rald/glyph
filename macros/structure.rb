@@ -167,8 +167,7 @@ macro :toc do
 				list = ""
 				added_headers ||= []
 				n1.descend do |n2, level|
-					#if n2.is_a?(Glyph::MacroNode) && Glyph['system.structure.headers'].include?(n2[:name]) then
-					if n2.is_a?(Glyph::MacroNode) && n2[:name].in?(Glyph.titled_sections) then
+				  if n2.is_a?(Glyph::MacroNode) && n2[:name].in?(Glyph.titled_sections) then
 						if Glyph.multiple_output_files? then
 							# Only consider topics/booklets when building TOC for web/web5
 							next if !n2.attribute(:src) && n2.child_macros.select{|child| child.attribute(:src)}.blank? 
@@ -192,7 +191,7 @@ macro :toc do
 							list << render(:toc_item, :classes => [container, n2[:name]], :title => link_header) 
 						end
 						child_list = ""
-						n2.child_macros.each do |c|
+						n2.children.each do |c|
 							child_list << descend_section.call(c, added_headers)
 						end	
 						list << render(:toc_sublist, :contents => child_list) unless child_list.blank?
