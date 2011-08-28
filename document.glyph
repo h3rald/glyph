@@ -1,29 +1,29 @@
 book[
   @frontmatter[
-		toc[]
-		preface[
-			@title[Preface]
-			todo[Write the preface]
-			include[preface]
-		]
-	]
+    toc[]
+    preface[
+      @title[Preface]
+      todo[Write the preface]
+      include[preface]
+    ]
+  ]
   @bodymatter[  
     chapter[ 
-			@title[Chapter 1]
-			todo[Write chapter 1]
+      @title[Chapter 1]
+      todo[Write chapter 1]
       include[chapter_1]
     ]
     chapter[
-			@title[Chapter 2]
-			todo[Write chapter 2]
+      @title[Chapter 2]
+      todo[Write chapter 2]
       include[chapter_2]
     ]
   ]
-	@backmatter[
-		appendix[
-			@title[Appendix A]
-			todo[Write appendix A]
-			include[appendix_a]
-		]
-	]
+  @backmatter[
+    appendix[
+      @title[Appendix A]
+      todo[Write appendix A]
+      include[appendix_a]
+    ]
+  ]
 ]

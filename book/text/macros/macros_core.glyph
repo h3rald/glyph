@@ -114,7 +114,7 @@ For examples see any of the following:
 		@n[fragment]
 		@desc[Delimits a fragment of text that can be embedded using the %>[embed].]
 		@aliases[##]
-		@example[=##\[test_fragment|This is an embeddable fragment\]=]
+		@example[=##\[test_fragment\|This is an embeddable fragment\]=]
 		@params[
       -p[0|The ID of the fragment.]
       -p[1|The contents of the fragment.]
@@ -265,7 +265,7 @@ Checks a string against a regular expression.
 		@block_example[=
 def:[factorial\|
 	?[
-  	eq[{{0}}\|0]\|1|
+  	eq[{{0}}\|0]\|1\|
 			multiply[
 				{{0}} \| factorial[subtract[{{0}}\|1]]
 			]

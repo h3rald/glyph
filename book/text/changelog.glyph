@@ -1,152 +1,161 @@
 %[=
 macro :features do
-	verb = (@name == :features) ? "Implemented" : "Fixed"
-	total = @node.child_macros.length
-	name = @name.to_s.capitalize
-	name.chop! if total == 1
-	interpret %{
-		section[
-			@title[#{total} #{name} #{verb}]
-			table[
-				tr[
-					th[ID]
-					th[Description]
-				]
-				#{@node.value}
-			]
-		]
-	}
+  verb = (@name == :features) ? "Implemented" : "Fixed"
+  total = @node.child_macros.length
+  name = @name.to_s.capitalize
+  name.chop! if total == 1
+  interpret %{
+    section[
+      @title[#{total} #{name} #{verb}]
+      table[
+        tr[
+          th[ID]
+          th[Description]
+        ]
+        #{@node.value}
+      ]
+    ]
+  }
 end
 
 macro_alias :bugs => :features
 =]
 def:[release|
-	section[
-		@title[v{{0}} &ndash; {{1}}]
-		{{2}}
+  section[
+    @title[v{{0}} &ndash; {{1}}]
+    {{2}}
 
     p/em[&rarr; View closed issues on =>[https://github.com/h3rald/glyph/issues?direction=asc&labels={{0}}&sort=created&state=closed|GitHub]]
-	]
+  ]
 ]
 def:[issue|
-	tr[
-		td[\/=>[https://github.com/h3rald/glyph/issues/{{0}}|#{{0}}]]
-		td[txt[{{1}}]]
-	]
+  tr[
+    td[\/=>[https://github.com/h3rald/glyph/issues/{{0}}|#{{0}}]]
+    td[txt[{{1}}]]
+  ]
 ]
 ?[eq[%[ARGV\[0\]]|generate]|
-	%:[%>|"#{value} macro"]
-	%:[#>|"#{value} command"]
-	%:[$>|"#{value} setting"]
+  %:[%>|"#{value} macro"]
+  %:[#>|"#{value} command"]
+  %:[$>|"#{value} setting"]
 ]
 release[0.5.0|??? 2011|
-	features[
+  features[
+    issue[152|It is now possible to generate a PDF document through HTML5, not only HTML, by setting the $>[output.pdf.through] to @html5@.]    
     issue[165|The %>[fragment] and the %>[embed] can be used to delimit and embed text fragments, in a way much similar to snippets.]
-		issue[179|Macro can be composed with other macros via backslashes, provided that containers only take exactly one parameter. The new %>[xml] dispatcher must be used composed with other macros to create raw XML tags, prepending = to macro names no longer works.]
+    issue[177|Introduced the concept of "macro representations", to make macro code output-independent.]
+    issue[179|Macro can be composed with other macros via backslashes, provided that containers only take exactly one parameter. The new %>[xml] dispatcher must be used composed with other macros to create raw XML tags, prepending = to macro names no longer works.]
     issue[180|Glyph can now generate ebooks in MOBI and EPUB format &ndash; with Calibre's help.]
     issue[181|By using the new %>[let] macro, it is possible to define lexically scoped "variables" via the %>[attrubute:], and retrieve them within the scope of the let macro using the %>[attribute].]
     issue[182|A %>[while] can be used to execute glyph code multiple times.]
-    issue[183|The %>[s] dispatcher can be used to call almost any instance method of the Ruby String class. The "match" macro cannot be used anymore; use "s/match" instead.]
-    issue[184|The old "rewrite" macro has been renamed to "define". The new %>[define] fully supports recursion.]
+    issue[183|The %>[s] dispatcher can be used to call almost any instance method of the Ruby String class. The @match@ macro cannot be used anymore; use @s/match@ instead.]
+    issue[184|The old @rewrite:@ macro has been renamed to @define:@. The new %>[define] fully supports recursion.]
     issue[189|The %>[add], the %>[subtract] and the %>[multiply] macro can be used to perform operations on integers.]
     issue[190|The lt, gt, lte, gte macros can be used to compare integer values.]
     issue[194|The %>[load] macro can be used to embed the contents of a file without performing any evaluation.]
+    issue[195|@\\/@ must not be used as invisible space separator, instead of @\\.@.]
+    issue[197|Snippets are no longer managed via a separate snippet.yml file and _must_ be defined within Glyph source files, using the %>[snippet:].]
+    issue[200|Typing @glyph -v@ now prints the current version of Glyph on the screen.]
+    issue[201|Glyph no longer depends on Jeweler to create and manage its gem.]
   ]
   bugs[
-    issue[|]
+    issue[151|Fixed a bug related to Jeweler's gemspec validation. And for all it matters, Jeweler is no longer a development dependency for Glyph.]
+    issue[166|Temporary output files are now placed in a temporary folder.]
+    issue[196|Glyph now handles non-ASCII characters properly with Ruby 1.9 as well.]
   ]
+]
 release[0.4.2|October 22th 2010|
-	features[
-		issue[172|A new %>[output?] can be used to test whether Glyph is compiling to a particular output format.]
-		issue[175|The conditional macro now support a third parameter (else branch).]
-		issue[176|A bunch of new aliases and shortcuts are available for the section macro.]
-	]
-	bugs[
-		issue[178|No error is raised anymore if less than the required parameters/attributes are supplied to a rewritten macro.]
-	]
+  features[
+    issue[172|A new %>[output?] can be used to test whether Glyph is compiling to a particular output format.]
+    issue[175|The conditional macro now support a third parameter (else branch).]
+    issue[176|A bunch of new aliases and shortcuts are available for the section macro.]
+  ]
+  bugs[
+    issue[178|No error is raised anymore if less than the required parameters/attributes are supplied to a rewritten macro.]
+  ]
 ]
 release[0.4.1|September 23th 2010|
-	bugs[
-		issue[169|*.scss files are now supported by the %>[style].]
-		issue[170|Improved default CodeRay stylesheet.]
-		issue[171|SCSS now used internally by Glyph to generate default CSS files.]
-		issue[173|Consecutive escape sequences are now interpreted correctly in topics.]
-		issue[174|Fixed error causing broken images in web5/html5 output.]
-	]
+  bugs[
+    issue[169|*.scss files are now supported by the %>[style].]
+    issue[170|Improved default CodeRay stylesheet.]
+    issue[171|SCSS now used internally by Glyph to generate default CSS files.]
+    issue[173|Consecutive escape sequences are now interpreted correctly in topics.]
+    issue[174|Fixed error causing broken images in web5/html5 output.]
+  ]
 ]
 release[0.4.0|September 3th 2010|
-	features[
-		issue[40|A new #>[stats] can be used to display statistics about project files, snippets, macros, bookmarks and links.]
-		issue[73|It is now possible to validate online HTTP links.]
-		issue[112|It is now possible to use _wkhtmltopdf_ instead of Prince to generate PDF files from HTML files.]
-		issue[114|It is now possible to generate documents comprised of multiple files (topics).]
-		issue[115|It is now possible to define layouts (used when generating multi-file outputs) using Glyph macros.]
-		issue[120|It is now possible to compile your project to a single HTML5 file (@html5@ output) or multiple files (@web5@ output)]
-		issue[135|Stylesheets can now be linked and imported as well as embedded.]
-		issue[138|@web@ and @web5@ output formats inherit @html@ macros.]
-		issue[142|A new %>[navigation] can be used in @web@ and @web5@ outputs to navigate through topics.]
-		issue[143|A topic-based TOC is generated when compiling to @web@ or @web5@]
-		issue[144|Two new validators are now available to check whether a macro has (or doesn't have) a certain ancestor: @within@ and @not_within@.]
-		issue[147|The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).]
-		issue[148|It is now possible to create custom tasks and commands to extend Glyph functionality.]
-	]
-	bugs[
-		issue[133|Added HTML charset to Glyph documents (utf-8).]
-		issue[136|Moved utility functions to separate @Glyph::Utils@ module.]
-		issue[139|Heavily restructured Glyph configuration.]
-		issue[140|Added @Glyph::Macro::Helpers@ module to avoid code duplication in macros for different output formats.]
-		issue[141|Prevented non-rb files to be loaded as macros.]
-		issue[145|Dotfiles are now ignored by #>[init].]
-		issue[167|Fixed PDF book download links.]
-	]
+  features[
+    issue[40|A new #>[stats] can be used to display statistics about project files, snippets, macros, bookmarks and links.]
+    issue[73|It is now possible to validate online HTTP links.]
+    issue[112|It is now possible to use _wkhtmltopdf_ instead of Prince to generate PDF files from HTML files.]
+    issue[114|It is now possible to generate documents comprised of multiple files (topics).]
+    issue[115|It is now possible to define layouts (used when generating multi-file outputs) using Glyph macros.]
+    issue[120|It is now possible to compile your project to a single HTML5 file (@html5@ output) or multiple files (@web5@ output)]
+    issue[135|Stylesheets can now be linked and imported as well as embedded.]
+    issue[138|@web@ and @web5@ output formats inherit @html@ macros.]
+    issue[142|A new %>[navigation] can be used in @web@ and @web5@ outputs to navigate through topics.]
+    issue[143|A topic-based TOC is generated when compiling to @web@ or @web5@]
+    issue[144|Two new validators are now available to check whether a macro has (or doesn't have) a certain ancestor: @within@ and @not_within@.]
+    issue[147|The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).]
+    issue[148|It is now possible to create custom tasks and commands to extend Glyph functionality.]
+  ]
+  bugs[
+    issue[133|Added HTML charset to Glyph documents (utf-8).]
+    issue[136|Moved utility functions to separate @Glyph::Utils@ module.]
+    issue[139|Heavily restructured Glyph configuration.]
+    issue[140|Added @Glyph::Macro::Helpers@ module to avoid code duplication in macros for different output formats.]
+    issue[141|Prevented non-rb files to be loaded as macros.]
+    issue[145|Dotfiles are now ignored by #>[init].]
+    issue[167|Fixed PDF book download links.]
+  ]
 ]
 release[0.3.0|June 13th 2010|
-	features[
-		issue[39|A new #>[outline] is available to display the document outline.]
-		issue[110|It is now possible to use Glyph language to produce arbitrary XML code.]
-		issue[111|System settings are now stored within a @system.*@ namespace and cannot be changed via the %>[config:] or the #>[config].]
-		issue[116|It is now possible to use named attributes within Glyph macros.]
-		issue[119|#[new_parser]A new parser was implemented from scratch to improve performance. Treetop gem no longer required.]
-		issue[121|Some macros have been removed in favor of XML fallback, others have been updated.]
-		issue[123|The SyntaxNode class has been specialized to differentiate between macros, attributes, parameters, text and escapes.]
-		issue[124|Implemented new %>[article] and %>[book].]
-		issue[126|A new %>[rewrite:] has been implemented to create simple macros using just Glyph code.]
-		issue[127|A new %>[alias] has been implemented to create macro aliases.]
-		issue[128|A blacklist for XML tags has been exposed via the @language.options.xml_blacklist@ setting.]
-		issue[129|The %>[include] can now be used in lite mode, it can evaluate ruby files and requires relative paths.]
-		issue[130|A new "safe mode" has been implemented to explicitly forbid certain potentially unsafe macros.]
-	]
-	bugs[
-		issue[109|Performance has been dramatically improved by implementing a parser from scratch (see =>[#new_parser|#119])]
-		issue[122|Macro encoding/decoding no longer necessary due to the new parser (see =>[#new_parser|#119])]
-		issue[125|Warning messages have been streamlined.]
-	]
+  features[
+    issue[39|A new #>[outline] is available to display the document outline.]
+    issue[110|It is now possible to use Glyph language to produce arbitrary XML code.]
+    issue[111|System settings are now stored within a @system.*@ namespace and cannot be changed via the %>[config:] or the #>[config].]
+    issue[116|It is now possible to use named attributes within Glyph macros.]
+    issue[119|#[new_parser]A new parser was implemented from scratch to improve performance. Treetop gem no longer required.]
+    issue[121|Some macros have been removed in favor of XML fallback, others have been updated.]
+    issue[123|The SyntaxNode class has been specialized to differentiate between macros, attributes, parameters, text and escapes.]
+    issue[124|Implemented new %>[article] and %>[book].]
+    issue[126|A new %>[rewrite:] has been implemented to create simple macros using just Glyph code.]
+    issue[127|A new %>[alias] has been implemented to create macro aliases.]
+    issue[128|A blacklist for XML tags has been exposed via the @language.options.xml_blacklist@ setting.]
+    issue[129|The %>[include] can now be used in lite mode, it can evaluate ruby files and requires relative paths.]
+    issue[130|A new "safe mode" has been implemented to explicitly forbid certain potentially unsafe macros.]
+  ]
+  bugs[
+    issue[109|Performance has been dramatically improved by implementing a parser from scratch (see =>[#new_parser|#119])]
+    issue[122|Macro encoding/decoding no longer necessary due to the new parser (see =>[#new_parser|#119])]
+    issue[125|Warning messages have been streamlined.]
+  ]
 ]
 release[0.2.0|May 9th 2010|
-	features[
-		issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet required).]
-		issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
-		issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]	
-		issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] (Jabbslad).]	
-		issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project.]
-		issue[92|6 new macros have been defined to allow conditional processing (\/%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
-		issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
-		issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed (koraktor).]
-		issue[99|Added a @document.draft@ setting. If set to @true@, comments and TODOs are rendered in output files.]
-		issue[100|#[system_css]Glyph CSS files are no longer copied to new projects, but they can be referenced as if they were (see also =>[#css_not_copied|#93]).]
-		issue[108|It is now possible to define Glyph macros within Glyph source files using the %>[macro:].]
-	]
-	bugs[
-		issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.] 
-		issue[93|#[css_not_copied]Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles (see also =>[#system_css|#100]).]
-		issue[95|The #>[config] did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.]
-		issue[98|Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.]
-		issue[101|Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.]
-		issue[103|Fixed a bug that caused test failures when deleting the test project directory.]
-		issue[104|Nested Glyph macros calling @Macro#interpret@ no longer ignore escape delimiters.]
-		issue[107|Added the possibility to encode (using the @encode@ macro) and decode (using the @decode@ macro) macros so that they can be interpreted later.]
-	]
+  features[
+    issue[62|A new %>[highlight] is available to highlight source code (CodeRay or UltraViolet required).]
+    issue[76|It is now possible to use Glyph programmatically via the new @Glyph#filter@ and @Glyph#compile@ methods.]
+    issue[87|It is now possible to define snippets inside a Glyph source file using the %>[snippet:].]  
+    issue[88|It is now possible to change configuration settings inside a Glyph source file using the %>[config:] (Jabbslad).]  
+    issue[89|It is now possible to compile a single Glyph source file without creating a Glyph project.]
+    issue[92|6 new macros have been defined to allow conditional processing (\/%>[condition], %>[eq], %>[not], %>[and], %>[or], %>[match])]
+    issue[94|It is now possible to add _validators_ to macros, for example to check the number of parameters they take.]
+    issue[97|The #>[compile] command can now take an extra @--auto@ switch to trigger document auto-regeneration whenever a source file is changed (koraktor).]
+    issue[99|Added a @document.draft@ setting. If set to @true@, comments and TODOs are rendered in output files.]
+    issue[100|#[system_css]Glyph CSS files are no longer copied to new projects, but they can be referenced as if they were (see also =>[#css_not_copied|#93]).]
+    issue[108|It is now possible to define Glyph macros within Glyph source files using the %>[macro:].]
+  ]
+  bugs[
+    issue[86|Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.] 
+    issue[93|#[css_not_copied]Default css files were not copied when creating a new project. The issue has been resolved by allowing the %>[style] to reference Glyph's system styles (see also =>[#system_css|#100]).]
+    issue[95|The #>[config] did not save data to YAML configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the YAML file too.]
+    issue[98|Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.]
+    issue[101|Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.]
+    issue[103|Fixed a bug that caused test failures when deleting the test project directory.]
+    issue[104|Nested Glyph macros calling @Macro#interpret@ no longer ignore escape delimiters.]
+    issue[107|Added the possibility to encode (using the @encode@ macro) and decode (using the @decode@ macro) macros so that they can be interpreted later.]
+  ]
 ]
 release[0.1.0|April 8th 2010|
-	Initial release.
+  Initial release.
 ]

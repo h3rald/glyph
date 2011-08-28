@@ -8,132 +8,137 @@ Where:
 * _parameters_ are separated by whitespaces, and can be wrapped in quotes.
 ]
 section[
-	@title[Global Options]
-	section[
-		@title[code[-d], code[--debug]]
-		@id[debug_switch]
-		p[If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.]
-	]
+  @title[Global Options]
+  section[
+    @title[code[-d], code[--debug]]
+    @id[debug_switch]
+    p[If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.]
+  ]
+  section[
+    @title[code[-v], code[--version]]
+    @id[version_switch]
+    p[Prints the current version of Glyph, ignoring any other command or switches.]
+  ]
 ]
 section[
-	@title[add]
-	@id[c_add]
-	p[Creates a new text file in the code[text/] folder.]
-	example[glyph add introduction.textile]
-	parameters[
-	-p[em[file_name]|The name (or relative path) of the new file to be created.]
-	]
+  @title[add]
+  @id[c_add]
+  p[Creates a new text file in the code[text/] folder.]
+  example[glyph add introduction.textile]
+  parameters[
+  -p[em[file_name]|The name (or relative path) of the new file to be created.]
+  ]
 ]
 section[
-	@title[compile]
-	@id[c_compile]
-	p[Compiles a Glyph document into an output file. If no options are specified, the code[document.glyph] file is used as source to produce a standalone HTML file.]
-	example[glyph compile -f pdf]
-	parameters[
-	-p[em[source]|The source glyph file to compile em[(Optional)].]
-	-p[em[destination]|The destination file em[(Optional)].]
-	]
-	options[
-		-o[source|
+  @title[compile]
+  @id[c_compile]
+  p[Compiles a Glyph document into an output file. If no options are specified, the code[document.glyph] file is used as source to produce a standalone HTML file.]
+  example[glyph compile -f pdf]
+  parameters[
+  -p[em[source]|The source glyph file to compile em[(Optional)].]
+  -p[em[destination]|The destination file em[(Optional)].]
+  ]
+  options[
+    -o[source|
 The source file to compile. 
-			default[document.glyph]
-	]
-		-o[format|
+      default[document.glyph]
+  ]
+    -o[format|
 The format of the output file.
-			default[html]
-			values[html, pdf]
-		]
-		-o[auto|
+      default[html]
+      values[html, pdf]
+    ]
+    -o[auto|
 If specified, enable =>[#auto_regeneration|auto regeneration] (requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed).
-		]
-	]
+    ]
+  ]
 ]
 section[
-	@title[config]
-	@id[c_config]
+  @title[config]
+  @id[c_config]
 Gets or sets a configuration setting in the project or global configuration file (\/fmi[configuration files|#cfg]).
-	examples[
+  examples[
 glyph config document.filename
 glyph config -g document.author "Fabio Cevasco"
-	]
-	options[
-		-o[global|
+  ]
+  options[
+    -o[global|
 If specified, the global configuration file is processed instead of the project file.
-		default[false]
-		]
-	]
-	parameters[
-		-p[em[setting]|The name of a valid =>[#cfg_ref|configuration setting].]
-		-p[em[value]|The new value of the configuration setting.]
-	]
+    default[false]
+    ]
+  ]
+  parameters[
+    -p[em[setting]|The name of a valid =>[#cfg_ref|configuration setting].]
+    -p[em[value]|The new value of the configuration setting.]
+  ]
 ]
 section[
-	@title[help]
-	@id[c_help]
+  @title[help]
+  @id[c_help]
 Prints information about all Glyph commands or about one specific command.
-	examples[
+  examples[
 glyph help
 glyph help compile
-	]
-	parameters[
-		-p[em[command]|A valid Glyph command.]
-	]
+  ]
+  parameters[
+    -p[em[command]|A valid Glyph command.]
+  ]
 ]
 section[
-	@title[init]
-	@id[c_init]
+  @title[init]
+  @id[c_init]
 Creates a new Glyph project in the current directory (if empty).
-	example[glyph init]
+  example[glyph init]
 ]
 section[
-	@title[outline]
-	@id[c_outline]
+  @title[outline]
+  @id[c_outline]
 Display an outline of the current document.
-	options[
-		-o[limit|
+  options[
+    -o[limit|
 Only display headers until the specified level.
-		]
-		-o[ids|
+    ]
+    -o[ids|
 Display section IDs.
-		]
-		-o[files|
+    ]
+    -o[files|
 Display file names.
-		]
-		-o[titles|
+    ]
+    -o[titles|
 Display section titles.
-		]
-	]
-	examples[
+    ]
+  ]
+  examples[
 glyph outline -it -l 1
 glyph outline -l 2
 glyph outline -f
-	]
+  ]
 ]
 section[
-	@title[stats]	
-	@id[c_stats]
-	def:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
-	def:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
-	p[Displays project statistics (\/fmi[this command|#stats]).]
-	examples[
-glyph	stats -m 
+  @title[stats] 
+  @id[c_stats]
+  def:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
+  def:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
+  p[Displays project statistics (\/fmi[this command|#stats]).]
+  examples[
+glyph stats -m 
 glyph stats --link=h3rald.com
-	]
-	options[
-		stats_option[bookmarks]
-		stats_long_option[bookmark]
-		-o[files|If specified, general statistics about project files are displayed.]
-		stats_option[links]
-		long_option[link|Display detailed statistics about all links whose target matches the specified regular expression.]
-		stats_option[macros]
-		stats_long_option[macro]
-		stats_option[snippets]
-		stats_long_option[snippet]
-	]
+  ]
+  options[
+    stats_option[bookmarks]
+    stats_long_option[bookmark]
+    -o[files|If specified, general statistics about project files are displayed.]
+    stats_option[links]
+    long_option[link|Display detailed statistics about all links whose target matches the specified regular expression.]
+    stats_option[macros]
+    stats_long_option[macro]
+    stats_option[snippets]
+    stats_long_option[snippet]
+  ]
 ]
 section[
-	@title[todo]
-	@id[c_todo]
+  @title[todo]
+  @id[c_todo]
 Prints all the todo items saved using the %>[todo].
-	example[glyph todo]
+  example[glyph todo]
 ]
