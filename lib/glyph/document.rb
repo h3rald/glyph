@@ -9,6 +9,7 @@ module Glyph
 	# as well as replacing placeholders.
 	class Document
 
+    # A Regexp containing the characters to escape
 		ESCAPES = /\\([\\\]\[\|\/=])/
 
 		attr_reader :bookmarks, :placeholders, :headers, :styles, :context
@@ -80,7 +81,8 @@ module Glyph
 		end
 
 		# Stores a new bookmark
-		# @param [Hash] hash the bookmark hash: {:id => "BookmarkID", :title => "Bookmark Title", :file => "dir/preface.glyph"}
+		# @param [Hash] hash the bookmark hash
+    # @example {:id => "BookmarkID", :title => "Bookmark Title", :file => "dir/preface.glyph"}
 		# @return [Glyph::Bookmark] the stored bookmark
 		# @raise [RuntimeError] if the bookmark is already defined.
 		def bookmark(hash)
@@ -91,7 +93,8 @@ module Glyph
 		end
 
 		# Stores a new header
-		# @param [Hash] hash the header hash: {:id => "Bookmark_ID", :title => "Bookmark Title", :level => 3}
+		# @param [Hash] hash the header hash
+    # @example {:id => "Bookmark_ID", :title => "Bookmark Title", :level => 3}
 		# @return [Glyph::Header] the stored header
 		# @raise [RuntimeError] if the bookmark is already defined.
 		def header(hash)
@@ -129,7 +132,7 @@ module Glyph
 		# @since 0.4.0
 		# Stores a stylesheet
 		# @param [String] file the stylesheet file
-		# @raises [RuntimeError] if the stylesheet is already specified for the document (unless the output has more than one file)
+		# @raise [RuntimeError] if the stylesheet is already specified for the document (unless the output has more than one file)
 		def style(file)
 			f = Pathname.new file
 			if @styles.include?(f) && !Glyph.multiple_output_files? then

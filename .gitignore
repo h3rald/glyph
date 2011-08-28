@@ -4,6 +4,7 @@ thumbs.db
 .bundle
 spec/config.yml
 *.gem
+doc
 Gemfile.lock
 book/output
 book/output/*

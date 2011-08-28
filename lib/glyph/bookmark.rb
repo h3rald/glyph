@@ -33,7 +33,7 @@ module Glyph
 
 		# Returns true if the two bookmarks have the same ID and file
 		# @param [Glyph::Bookmark] b the bookmark to compare
-		# @raises [RuntimeError] if the parameter supplied is not a bookmark
+		# @raise [RuntimeError] if the parameter supplied is not a bookmark
 		def ==(b)
 			raise RuntimeError, "#{b.inspect} is not a bookmark" unless b.is_a? Glyph::Bookmark
 			self.code == b.code && self.file == b.file

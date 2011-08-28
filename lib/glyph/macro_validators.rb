@@ -23,7 +23,7 @@ module Glyph
 			end
 
 			# Ensures that the provided name is a valid XML element name.
-			# @params [String, Symbol] name the element name to validate
+			# @param [String, Symbol] name the element name to validate
 			# @param [Hash] options a hash containing validation options (for now the only option is :level)
 			# @return [Boolean] whether the validation passed or not
 			# @since 0.3.0

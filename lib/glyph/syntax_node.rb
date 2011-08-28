@@ -64,6 +64,8 @@ module Glyph
 			"#{self[:name]}["+e+contents+e+"]"
 		end
 
+    # @return [String] a textual representation of the macro parameters.
+    # @since 0.3.0
 		def contents
 			attributes.join+parameters.join("|")
 		end

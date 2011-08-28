@@ -40,8 +40,13 @@ module Glyph
 	require LIB/'reporter'
 	extend Glyph::Utils
 
+  # A generic Glyph error.
 	class Error < RuntimeError; end
+  
+  # A syntax error.
 	class SyntaxError < Error; end
+
+  # A macro error.
 	class MacroError < Error
 		include Glyph::Utils
 		attr_reader :macro
@@ -62,6 +67,8 @@ module Glyph
 			msg "#{"-"*54}\n#{@macro.node.to_s.gsub(/\t/, ' ')}\n#{"-"*54}" if Glyph.debug?
 		end
 	end
+  
+  # An infinite recursion error
 	class MutualInclusionError < MacroError; end
 
 	# The current version of Glyph
@@ -110,10 +117,13 @@ module Glyph
 	CONFIG = Glyph::Config.new :resettable => true, :mutable => false
 
 	home_dir = Pathname.new(RUBY_PLATFORM.match(/win32|mingw/) ? ENV['HOMEPATH'] : ENV['HOME'])
+  # System configuration
 	SYSTEM_CONFIG = 
 		Glyph::Config.new(:file => HOME/'config.yml')
+  # Global configuration
 	GLOBAL_CONFIG = 
 		Glyph.test? ? Glyph::Config.new(:file => SPEC_DIR/'.glyphrc') : Glyph::Config.new(:file => home_dir/'.glyphrc')
+  # Project configuration
 	PROJECT_CONFIG = 
 		Glyph::Config.new(:file => PROJECT/'config.yml', :resettable => true) rescue Glyph::Config.new(:resettable => true, :mutable => true)
 
@@ -305,7 +315,6 @@ module Glyph
 		end
 		result
 	end
-
 
 end
 

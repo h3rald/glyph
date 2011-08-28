@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+# Core Hash class.
 class Hash
 
 	# Converts self to a Node

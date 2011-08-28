@@ -212,6 +212,7 @@ module Glyph
 			@node[:escape] ? string : inject(string).document.output
 		end
 
+    # @see Glyph::Document#placeholder
 		def placeholder(&block)
 			@node[:document].placeholder &block
 		end			
