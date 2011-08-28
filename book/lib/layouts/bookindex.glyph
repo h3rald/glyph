@@ -2,9 +2,6 @@
 <html lang="en">
 	<head>
 		<title>Glyph - Document Authoring Framework</title>
-		<link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-		
-		
 		
 		<meta charset="utf-8" />
 		<meta name="author" content="Fabio Cevasco" />

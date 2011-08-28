@@ -17,7 +17,7 @@ The first step required to add a new output format to Glyph is extending Glyph's
     :extension: '.html'
     :filter_target: 'html'
     :base: '/glyph/book/'
-    :macro_dirs: ['html', 'html5']
+    :macro_rep: html5
     :layout_dirs: ['web5']
     :layouts: 
       :topic: bookpage
@@ -63,7 +63,7 @@ namespace :generate do
     (dir/'glyph/book/images/glyph/glyph.eps').unlink 
     (dir/'glyph/book/images/glyph/glyph.svg').unlink
     # Create project page
-    project = Glyph.filter %{layout:project[
+    project = Glyph.filter %{layout/project[
         @contents[#{file_load(Glyph::PROJECT/'text/introduction.glyph')}]
       ]}
     file_write dir/"glyph.textile", project

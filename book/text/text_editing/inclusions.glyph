@@ -34,7 +34,6 @@ Snippets can be defined using the %>[snippet:] (aliased by @&:@) and called by u
 Glyph supports &[markups].
     =]
     p[You can use code[=&amp;[markups]=] anywhere in your document instead of having to type "\/&[markups]" every time. Additionally, later on you can change the value of the  code[markups] to change it everywhere else in the document.]
-    ] 
     tip[
 Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
     ]
@@ -42,7 +41,7 @@ Snippets (or any other macro) can be nested within other snippets. Glyph takes c
   §[
     @title[Fragments]
     @id[fragments]
-    txt[As an even simpler alternative to snippets, consider using _fragments_. The %>[fragment:] (aliased by @##@) can be used to mark a section of Glyph code as a fragment that can then be _embedded_ using the %>[embed] (aliased by @<=@), like this:]
+    txt[As an even simpler alternative to snippets, consider using _fragments_. The %>[fragment] (aliased by @##@) can be used to mark a section of Glyph code as a fragment that can then be _embedded_ using the %>[embed] (aliased by @<=@), like this:]
     
     highlight[=html|
 Snippets and fragments ##[good_way\|are a good way to reuse] small chunks of content, while the include and load macros <=[good_way] entire files.
