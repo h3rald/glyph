@@ -8,9 +8,9 @@ Glyph does not formally enforce the correctness of topic composition and usage, 
 ]
 highlight[=html|
 section[
-	@title[My First Topic]
-	@id[first_topic]
-	@src[test/first_topic.glyph]
+  @title[My First Topic]
+  @id[first_topic]
+  @src[test/first_topic.glyph]
 ]
 =]
 txt[
@@ -18,9 +18,9 @@ This is an ordinary section with a title and an explicit ID, but it has no conte
 ]
 highlight[=html|
 section[
-	@title[My First Topic]
-	@id[first_topic]
-	include[test/first_topic.glyph]
+  @title[My First Topic]
+  @id[first_topic]
+  include[test/first_topic.glyph]
 ]
 =]
 txt[

@@ -1,4 +1,13 @@
-	txt[
+  txt[
+Glyph supports several ways of re-using existing content:
+* =>[#file-inclusions]
+* =>[#snippets]
+* =>[#fragments]
+  ]
+  §[
+    @title[File inclusions]
+    @id[file-inclusions]
+    txt[
 If you're authoring a user manual, a long article, or a book, writing everything inside a single @document.glyph@ file may not be optimal. For this reason, Glyph provides an %>[include] that can be used to include the contents of any file within the @text/@ directory:
 
 code[=include[general/introduction.textile]=]
@@ -10,31 +19,38 @@ When including a text file, an input filter macro is applied to its contents by 
 * @.markdown@ or @.md@ &rarr; %>[markdown]
 
 You can override this behavior by setting the @filters.by_file_extensions@ configuration setting to @false@. If no extension is specified, @.glyph@ is assumed.
-
-tip[The %>[include] can also be used to include (and evaluate) ruby files (with a @.rb@ extension). In this case, the ruby file must be placed within the @lib/@ directory of the current project.]
-
+    ]
+    §txt[
+      @title[Remarks]
+* The %>[include] can also be used to include (and evaluate) ruby files (with a @.rb@ extension). In this case, the ruby file must be placed within the @lib/@ directory of the current project.
+* The %>[load] macro can be used to include the content of any file _without_ performing any evaluation.
+    ]
+  ]
+  §[
+    @title[Snippets]
+    @id[snippets]
+    txt[
 While including the context of an entire file is definitely a useful feature for content reuse, sometimes it can be an overkill. What if, for example, you just want to reuse a short procedure or even a sentence or a single word? In this case, you may want to consider using a _snippet_ instead.
 
-Snippets are text strings saved in YAML format in the @snippets.yml@ file. They can be included anywhere in your document using the %>[snippet] (or its alias @&@). 
+Snippets can be defined using the %>[snippet:] (aliased by @&:@) and called by using the %>[snippet] (aliased by @&@). Consider the following simple example:
+    ]
+    highlight[=html|
+&:[markups\|Textile or Markdown]
 
-tip[Besides storing snippets in the @snippets.yml@ file, you can also define them right in your document, using the %>[snippet:].]
-	]
-	box[Example|
-	p[Consider the following code[snippets.yml] file:]
-	highlight[=yaml|
---- 
-:glang: Glyph Language
-:macros: Glyph Macros
-:sq_esc: \\\|-
-  Square brackets must be escaped 
-  unless used as macro delimiters or within a quoting macro.
-:markups: Textile or Markdown
-:test: \\\|-
-  This is a 
-  Test snippet
-	=]
-	p[You can use code[=&amp;[markups]=] anywhere in your document instead of having to type "\/&[markups]" every time. Additionally, later on you can change the value of the code[markups] snippet only in the code[snippets.yml] file to change it everywhere else in the document.]
-	] 
-	tip[
+Glyph supports &[markups].
+    =]
+    p[You can use code[=&amp;[markups]=] anywhere in your document instead of having to type "\/&[markups]" every time. Additionally, later on you can change the value of the  code[markups] to change it everywhere else in the document.]
+    ] 
+    tip[
 Snippets (or any other macro) can be nested within other snippets. Glyph takes care of checking if you nested snippets or macros mutually and warns you as necessary.
-	]
+    ]
+  ]
+  §[
+    @title[Fragments]
+    @id[fragments]
+    txt[As an even simpler alternative to snippets, consider using _fragments_. The %>[fragment:] (aliased by @##@) can be used to mark a section of Glyph code as a fragment that can then be _embedded_ using the %>[embed] (aliased by @<=@), like this:]
+    
+    highlight[=html|
+Snippets and fragments ##[good_way\|are a good way to reuse] small chunks of content, while the include and load macros <=[good_way] entire files.
+    =]
+  ]

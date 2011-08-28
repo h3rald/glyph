@@ -1,4 +1,4 @@
-	txt[
+  txt[
 Sometimes you may want text to be included in a document only if certain conditions are satisfied. For example, you may want to display a disclaimer section only if the document is a draft (see the $>[document.draft]), or use a particular stylesheet only if when you generate a PDF document.
 
 To do so, you can use the %>[condition] (aliased by @?@), and a set of additional macros that can be used as conditional operators i.e.:
@@ -6,16 +6,15 @@ To do so, you can use the %>[condition] (aliased by @?@), and a set of additiona
 * %>[not]
 * %>[and]
 * %>[or]
-* %>[match]
 
 Consider the following code:
-	]
-	highlight[=html|
+  ]
+  highlight[=html|
 ?[$[document.draft]\|
 This is a first draft of the Glyph Book\|
 This is the official version of the Glyph Book]
-	=]
-	txt[
+  =]
+  txt[
 In this case, if @document.draft@ is set to @true@, "This is a first draft of the Glyph Book" will be displayed; if not, "This is the official version of the Glyph Book" will be displayed instead.
 
 The %>[condition] takes up to three parameters:
@@ -24,8 +23,8 @@ The %>[condition] takes up to three parameters:
 # _(Optional)_ the text to include in the document if the condition is _not_ satisfied.
 
 Note that _all_ parameters can contain macros, of course, so you can write things like:
-	]
-	highlight[=html|
+  ]
+  highlight[=html|
 ?[and[
     eq[$[document.output]\|pdf]
     \|
@@ -33,13 +32,13 @@ Note that _all_ parameters can contain macros, of course, so you can write thing
     ]
   \|
   style[pagination.css]]
-	=]
-	p[In this case, the code[pagination.css] stylesheet is included only when you're generating a PDF document using Prince XML.]
+  =]
+  p[In this case, the code[pagination.css] stylesheet is included only when you're generating a PDF document using Prince XML.]
   section[
-		@title[Results of conditional expressions]
-		txt[
+    @title[Results of conditional expressions]
+    txt[
 The %>[condition] in Glyph works in a similar way as conditionals in programming languages: if the conditional expression (supplied as first parameter) is satisfied then the second parameter is executed or displayed. But when is a conditional expression satisfied? Glyph is a simple mini-language to perform text manipulation, and has no types, it can only understand text, therefore:
 * A conditional expression is satisfied if it evaluates to a non-empty string except "false".
 * A conditional expression is not satisfied if it evaluates to an empty string or the string "false".
-		]
+    ]
   ]

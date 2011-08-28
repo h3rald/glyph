@@ -116,18 +116,18 @@ book[
 				@src[text_editing/stylesheets]
 			]
 			section[
-				@title[Including Files and Snippets]
+				@title[Content Reuse]
 				@id[incl]
 				@src[text_editing/inclusions]
-			]
-			section[
-				@title[Evaluating Ruby code and Configuration Settings]
-				@src[text_editing/evaluation]
 			]
 			section[
 				@title[Conditional Macros]
 				@id[cond_macros]
 				@src[text_editing/conditionals]
+			]
+			section[
+				@title[Simple programming and code evaluation]
+				@src[text_editing/evaluation]
 			]
 		]
 		chapter[

@@ -1,173 +1,173 @@
 
-	ref_macro[
-		@n[add]
-		@desc[Adds two or more integers together.]
-		@params[Two or more integer values.]
-		@example[=add[2\|5\|7]=]
-	]
+  ref_macro[
+    @n[add]
+    @desc[Adds two or more integers together.]
+    @params[Two or more integer values.]
+    @example[=add[2\|5\|7]=]
+  ]
 
-	ref_macro[
-		@n[alias]
-		@desc[Creates a macro alias.]
-		@params[
-			-p[0|The name of the alias.]
-			-p[1|The name of an existing macro.]
-		]
-		@example[=alias[s\|section]=]
-	]
+  ref_macro[
+    @n[alias]
+    @desc[Creates a macro alias.]
+    @params[
+      -p[0|The name of the alias.]
+      -p[1|The name of an existing macro.]
+    ]
+    @example[=alias[s\|section]=]
+  ]
 
-	ref_macro[
-		@n[and]
-		@desc[Conditional code[and] operator, to be used with the %>[condition].]
-		@params[&[bin_params]]
-		@example[=?[and[true\|false]\|This is never displayed.]=]
-	]
+  ref_macro[
+    @n[and]
+    @desc[Conditional code[and] operator, to be used with the %>[condition].]
+    @params[&[bin_params]]
+    @example[=?[and[true\|false]\|This is never displayed.]=]
+  ]
 
-	ref_macro[
-		@n[attribute]
-		@desc[Returns the value of the specified attribute. ##[see_let|For a more complete example, see the %>[let]].]
+  ref_macro[
+    @n[attribute]
+    @desc[Returns the value of the specified attribute. ##[see_let|For a more complete example, see the %>[let]].]
     @aliases[@]
-		@example[=@[title]=]
-		@params[-p[0|The name of the attribute to retrieve.]]
-	]
+    @example[=@[title]=]
+    @params[-p[0|The name of the attribute to retrieve.]]
+  ]
 
-	ref_macro[
-		@n[attribute:]
-		@desc[Sets the value of the specified attribute. <=[see_let].]
+  ref_macro[
+    @n[attribute:]
+    @desc[Sets the value of the specified attribute. <=[see_let].]
     @aliases[@:]
-		@example[=@:[title\|Test Title]=]
-		@params[
+    @example[=@:[title\|Test Title]=]
+    @params[
       -p[0|The name of the attribute to set.]
       -p[1|The value of the attribute.]
     ]
-	]
+  ]
 
-	ref_macro[
-		@n[comment]
-		@desc[
+  ref_macro[
+    @n[comment]
+    @desc[
 Evaluates to nothing. Used to add comments in a Glyph document that will not be displayed in output files. 
-		]
-		@aliases[--]
-		@params[-p[0|The contents to comment out]]
-		@example[=--[\/=>[#link\|This link will not be evaluated]]=]
-		@remarks[Macros are not expanded within comments.]
-	]
+    ]
+    @aliases[--]
+    @params[-p[0|The contents to comment out]]
+    @example[=--[\/=>[#link\|This link will not be evaluated]]=]
+    @remarks[Macros are not expanded within comments.]
+  ]
 
-	ref_macro[
-		@n[condition]
-		@desc[
+  ref_macro[
+    @n[condition]
+    @desc[
 Tests a conditional expression. For more information, see =>[#cond_macros].
-		]
-		@aliases[?]
-		@params[
-			-p[0|The condition to test]
-			-p[1|The contents to expand if the condition is satisfied.]
-		]
-		@remarks[
+    ]
+    @aliases[?]
+    @params[
+      -p[0|The condition to test]
+      -p[1|The contents to expand if the condition is satisfied.]
+    ]
+    @remarks[
 For examples see any of the following:
 * %>[and]
 * %>[or]
 * %>[not]
 * %>[match]
 * %>[eq]
-		]
-	]
+    ]
+  ]
 
-	ref_macro[
-		@n[config]
-		@desc[Returns the value of a configuration setting.]
-		@aliases[$]
-		@example[=$[document.author]=]
-		@params[
-			-p[0|The full name of a configuration setting.]	
-		]
-	]
+  ref_macro[
+    @n[config]
+    @desc[Returns the value of a configuration setting.]
+    @aliases[$]
+    @example[=$[document.author]=]
+    @params[
+      -p[0|The full name of a configuration setting.] 
+    ]
+  ]
 
-	ref_macro[
-		@n[config:]
-		@desc[Sets the value of a configuration setting.]
-		@aliases[$:]
-		@example[=$:[document.draft\|true]=]
-		@remarks[&[unsafe]]
-		@params[
-			-p[0|The full name of a configuration setting.]	
-			-p[1|The new value of the configuration setting]	
-		]
-	]
-	
-	ref_macro[
-		@n[eq]
-		@desc[Conditional equality operator, to be used with the %>[condition].]
-		@example[=?[eq[$[document.draft]\|true]\|This is displayed only in draft documents.]=]
-		@params[&[bin_params]]
-	]
+  ref_macro[
+    @n[config:]
+    @desc[Sets the value of a configuration setting.]
+    @aliases[$:]
+    @example[=$:[document.draft\|true]=]
+    @remarks[&[unsafe]]
+    @params[
+      -p[0|The full name of a configuration setting.] 
+      -p[1|The new value of the configuration setting]  
+    ]
+  ]
+  
+  ref_macro[
+    @n[eq]
+    @desc[Conditional equality operator, to be used with the %>[condition].]
+    @example[=?[eq[$[document.draft]\|true]\|This is displayed only in draft documents.]=]
+    @params[&[bin_params]]
+  ]
 
-	ref_macro[
-		@n[escape]
-		@desc[Evaluates to its value. Commonly used with the escaping delimiters code[\[\=] and code[\=\]].]
-		@aliases[.]
-		@example[=.\[=Macros are escaped here =>[#test].=\]=]
-		@params[-p[0|The contents to escape.]]
-	]
+  ref_macro[
+    @n[escape]
+    @desc[Evaluates to its value. Commonly used with the escaping delimiters code[\[\=] and code[\=\]].]
+    @aliases[.]
+    @example[=.\[=Macros are escaped here =>[#test].=\]=]
+    @params[-p[0|The contents to escape.]]
+  ]
 
-	ref_macro[
-		@n[fragment]
-		@desc[Delimits a fragment of text that can be embedded using the %>[embed].]
-		@aliases[##]
-		@example[=##\[test_fragment\|This is an embeddable fragment\]=]
-		@params[
+  ref_macro[
+    @n[fragment]
+    @desc[Delimits a fragment of text that can be embedded using the %>[embed].]
+    @aliases[##]
+    @example[=##\[test_fragment\|This is an embeddable fragment\]=]
+    @params[
       -p[0|The ID of the fragment.]
       -p[1|The contents of the fragment.]
     ]
-	]
+  ]
 
-	ref_macro[
-		@n[embed]
-		@desc[Embeds text previously-delimited using the %>[fragment].]
-		@aliases[<=]
-		@example[=<=\[test_fragment\]=]
-		@params[-p[0|The ID of the fragment.]]
-	]
+  ref_macro[
+    @n[embed]
+    @desc[Embeds text previously-delimited using the %>[fragment].]
+    @aliases[<=]
+    @example[=<=\[test_fragment\]=]
+    @params[-p[0|The ID of the fragment.]]
+  ]
 
   def:[comp_macro|
-	  ref_macro[
-		  @n[{{0}}]
-		  @desc[Returns em[true] if the first parameter is {{0}} the second one.]
-	  	@example[={{1}}\[5\|2\]=]
-	  	@params[
+    ref_macro[
+      @n[{{0}}]
+      @desc[Returns em[true] if the first parameter is {{0}} the second one.]
+      @example[={{1}}\[5\|2\]=]
+      @params[
         -p[0|The first integer to compare.]
         -p[1|The second integer to compare.]
       ]
-	  ]
+    ]
   ]
 
   comp_macro[gt|greater than]
 
   comp_macro[gte|greater than or equal to]
 
-	ref_macro[
-		@n[include]
-		@desc[
+  ref_macro[
+    @n[include]
+    @desc[
 Evaluates to the contents of a text file stored in the @text/@ directory referenced by its relative path. If &[filter_by_ext], filters the contents of the file using the =>[#f_macros|filter macro] corresponding to the file extension.
-		]
-		@aliases[@]
-		@example[=include[frontmatter/introduction]=]
-		@params[-p[0|The file to include.]]
-		@remarks[
-			ul[
-				li[&[unsafe]]
-				li[@.glyph@ is assumed if no file extension is specified.]
-				li[
+    ]
+    @aliases[@]
+    @example[=include[frontmatter/introduction]=]
+    @params[-p[0|The file to include.]]
+    @remarks[
+      ul[
+        li[&[unsafe]]
+        li[@.glyph@ is assumed if no file extension is specified.]
+        li[
 This macro can also be used to include @.rb@ ruby files within the @lib@ directory. File contents are evaluated in the context of the =>[&[rubydoc]/Glyph|Glyph] module.
-				]
-			]
-		]
-	]
+        ]
+      ]
+    ]
+  ]
 
-	ref_macro[
-		@n[let]
-		@desc[Used to bind one or more attributes via the %>[attribute]. Actually, you can use %>[attribute] inside any other macro, but it looks tidier in this way.]
-		@block_example[=
+  ref_macro[
+    @n[let]
+    @desc[Used to bind one or more attributes via the %>[attribute]. Actually, you can use %>[attribute] inside any other macro, but it looks tidier in this way.]
+    @block_example[=
 let[
   @:[a\|2]
   @:[b\|3]
@@ -177,180 +177,180 @@ let[
   ]
 ]
     =]
-		@params[-p[0|Any content.]]
-	]
+    @params[-p[0|Any content.]]
+  ]
 
-	ref_macro[
-		@n[load]
-		@desc[Embeds the contents of a file.]
-		@params[
+  ref_macro[
+    @n[load]
+    @desc[Embeds the contents of a file.]
+    @params[
       -p[0|The file to embed, relative to the Glyph project folder.]
     ]
-		@example[=load[my_samples.rb]=]
-	]
+    @example[=load[my_samples.rb]=]
+  ]
 
   comp_macro[lt|less than]
 
   comp_macro[lte|less than or equal to]
 
-	ref_macro[
-		@n[match]
-		@desc[
+  ref_macro[
+    @n[match]
+    @desc[
 Checks a string against a regular expression.
-		]
-		@params[
-			-p[0|The string to check.]
-			-p[1|The regular expression to match against the string.]
-			-p[2|The contents to expand if the string matches.]
-		]
-		@remarks[This macro must be used with the %>[condition].]
-		@example[=?[match[Hello!\|/^hell/i]\|This is always displayed]=]
-	]
+    ]
+    @params[
+      -p[0|The string to check.]
+      -p[1|The regular expression to match against the string.]
+      -p[2|The contents to expand if the string matches.]
+    ]
+    @remarks[This macro must be used with the %>[condition].]
+    @example[=?[match[Hello!\|/^hell/i]\|This is always displayed]=]
+  ]
 
-	ref_macro[
-		@n[macro:]
-		@desc[Defines a macro.]
-		@remarks[
-			ul[
-				li[&[unsafe]]
-				li[The new macro &[only_after_declaration].]
-			]
-		]
-		@aliases[%:]
-		@example[=%:[test\|"<em>test: #{value}</em>"]=]
-		@params[
-			-p[0|The name of the new macro.]
-			-p[1|The macro definition (Ruby code).]
-		]
-	]
-		
-	ref_macro[
-		@n[multiply]
-		@desc[Multiplies two or more integers together.]
-		@params[Two or more integer values.]
-		@example[=add[3\|5\|9]=]
-	]
+  ref_macro[
+    @n[macro:]
+    @desc[Defines a macro.]
+    @remarks[
+      ul[
+        li[&[unsafe]]
+        li[The new macro &[only_after_declaration].]
+      ]
+    ]
+    @aliases[%:]
+    @example[=%:[test\|"<em>test: #{value}</em>"]=]
+    @params[
+      -p[0|The name of the new macro.]
+      -p[1|The macro definition (Ruby code).]
+    ]
+  ]
+    
+  ref_macro[
+    @n[multiply]
+    @desc[Multiplies two or more integers together.]
+    @params[Two or more integer values.]
+    @example[=add[3\|5\|9]=]
+  ]
 
-	ref_macro[
-		@n[not]
-		@desc[Conditional @not@ operator, to be used with the %>[condition].]
-		@example[=?[not[false]\|This is always displayed.]=]
-		@params[-p[0|The expression to negate]]
-	]
+  ref_macro[
+    @n[not]
+    @desc[Conditional @not@ operator, to be used with the %>[condition].]
+    @example[=?[not[false]\|This is always displayed.]=]
+    @params[-p[0|The expression to negate]]
+  ]
 
-	ref_macro[
-		@n[output?]
-		@desc[Evaluates to true if Glyph is generating output in the specified format(s).]
-		@example[=?[output?[web\|web5]\|This text is printed only when generating web or web5 output.]=]
-		@params[
-			-p[0, ...|a valid output target.]
-		]
-	]
+  ref_macro[
+    @n[output?]
+    @desc[Evaluates to true if Glyph is generating output in the specified format(s).]
+    @example[=?[output?[web\|web5]\|This text is printed only when generating web or web5 output.]=]
+    @params[
+      -p[0, ...|a valid output target.]
+    ]
+  ]
 
-	ref_macro[
-		@n[or]
-		@desc[Conditional @or@ operator, to be used with the %>[condition].]
-		@example[=?[or[true\|false]\|This is always displayed.]=]
-		@params[&[bin_params]]
-	]
+  ref_macro[
+    @n[or]
+    @desc[Conditional @or@ operator, to be used with the %>[condition].]
+    @example[=?[or[true\|false]\|This is always displayed.]=]
+    @params[&[bin_params]]
+  ]
 
-	ref_macro[
-		@n[define:]
-		@desc[Defines a new macro by rewriting (for more information, see =>[#rewriting])]
-		@aliases[def:]
-		@params[
-			-p[0|The name of the new macro.]
-			-p[0|The macro definition (Glyph code).]
-		]
-		@block_example[=
+  ref_macro[
+    @n[define:]
+    @desc[Defines a new macro by rewriting (for more information, see =>[#rewriting])]
+    @aliases[def:]
+    @params[
+      -p[0|The name of the new macro.]
+      -p[0|The macro definition (Glyph code).]
+    ]
+    @block_example[=
 def:[factorial\|
-	?[
-  	eq[{{0}}\|0]\|1\|
-			multiply[
-				{{0}} \| factorial[subtract[{{0}}\|1]]
-			]
-		]
-	]
+  ?[
+    eq[{{0}}\|0]\|1\|
+    multiply[
+      {{0}} \| factorial[subtract[{{0}}\|1]]
+    ]
+  ]
+]
 factorial[5]
-  	=]
-		@remarks[
-			ul[
-				li[The new macro &[only_after_declaration].]
-				li[&[unsafe]]
-			]
-		]
-	]
+    =]
+    @remarks[
+      ul[
+        li[The new macro &[only_after_declaration].]
+        li[&[unsafe]]
+      ]
+    ]
+  ]
 
-	ref_macro[
-		@n[ruby]
-		@desc[Evaluates its value as Ruby code within the context of the =>[&[rubydoc]/Glyph|Glyph] module.]
-		@aliases[%]
-		@examples[=
+  ref_macro[
+    @n[ruby]
+    @desc[Evaluates its value as Ruby code within the context of the =>[&[rubydoc]/Glyph|Glyph] module.]
+    @aliases[%]
+    @examples[=
 %[Time.now]
 %[Glyph::VERSION]
-		=]
-		@params[-p[0|The Ruby code to evaluate.]]
-		@remarks[&[unsafe]]
-	]
+    =]
+    @params[-p[0|The Ruby code to evaluate.]]
+    @remarks[&[unsafe]]
+  ]
 
-	ref_macro[
-		@n[s]
-		@desc[Can be used to dispatch almost any instance method of the ruby =>[http://rubydoc.info/stdlib/core/1.9.2/String|String] class.]
-		@examples[=
+  ref_macro[
+    @n[s]
+    @desc[Can be used to dispatch almost any instance method of the ruby =>[http://rubydoc.info/stdlib/core/1.9.2/String|String] class.]
+    @examples[=
 s/match[This is a test string\|/test/]
 s/sub[This is a test string\|/a test/\|another test]
     =]
-	]
+  ]
 
-	ref_macro[
-		@n[snippet]
-		@desc[Returns the value of a snippet.]
-		@aliases[&amp;]
-		@example[=&amp;[glang]=]
-		@params[-p[0|The ID of the snippet to retrieve.]]
-	]
+  ref_macro[
+    @n[snippet]
+    @desc[Returns the value of a snippet.]
+    @aliases[&amp;]
+    @example[=&amp;[glang]=]
+    @params[-p[0|The ID of the snippet to retrieve.]]
+  ]
 
-	ref_macro[
-		@n[snippet:]
-		@desc[Defines a snippet.]
-		@remarks[The new snippet &[only_after_declaration].]
-		@aliases[&amp;:]
-		@example[=&amp;:[test\|This is a test]=]
-		@params[
-			-p[0|The ID of the new snippet.]
-			-p[1|The contents of the new snippet.]
-		]
-	]
+  ref_macro[
+    @n[snippet:]
+    @desc[Defines a snippet.]
+    @remarks[The new snippet &[only_after_declaration].]
+    @aliases[&amp;:]
+    @example[=&amp;:[test\|This is a test]=]
+    @params[
+      -p[0|The ID of the new snippet.]
+      -p[1|The contents of the new snippet.]
+    ]
+  ]
 
-	ref_macro[
-		@n[subtract]
-		@desc[Subtracts two or more integers together.]
-		@params[Two or more integer values.]
-		@example[=add[10\|5\|2]=]
-	]
+  ref_macro[
+    @n[subtract]
+    @desc[Subtracts two or more integers together.]
+    @params[Two or more integer values.]
+    @example[=add[10\|5\|2]=]
+  ]
 
-	ref_macro[
-		@n[xml]
-		@desc[When used composed with another macro, it can be used to render arbitrary raw XML tags.]
-		@example[=xml/img[@src[test.png]@alt[A Test image]]=]
-	]
+  ref_macro[
+    @n[xml]
+    @desc[When used composed with another macro, it can be used to render arbitrary raw XML tags.]
+    @example[=xml/img[@src[test.png]@alt[A Test image]]=]
+  ]
 
-	ref_macro[
-		@n[while]
-		@desc[Keeps evaluating the second parameter while a condition is satisfied.]
-		@block_example[=
+  ref_macro[
+    @n[while]
+    @desc[Keeps evaluating the second parameter while a condition is satisfied.]
+    @block_example[=
 let[
   @count[5]
-	@text[-]
-	while[gt[@[count]\|0]\|
-		@:[text\|s/concat[@[text]\|@[count]-]]					
-		@:[count\|subtract[@[count]\|1]]
-	]
-	@[text] --[Outputs: -5-4-3-2-1-]
+  @text[-]
+  while[gt[@[count]\|0]\|
+    @:[text\|s/concat[@[text]\|@[count]-]]          
+    @:[count\|subtract[@[count]\|1]]
+  ]
+  @[text] --[Outputs: -5-4-3-2-1-]
 ]
     =]
-		@params[
+    @params[
       -p[0|The condition to check.]
-		  -p[1|The code to evaluate while the condition is satisfied.]
+      -p[1|The code to evaluate while the condition is satisfied.]
     ]
-	]
+  ]

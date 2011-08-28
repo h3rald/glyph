@@ -1,28 +1,28 @@
-	txt[
+  txt[
 There are _a lot_ of macros that can be used in the same way as @section@, one for each element commonly used in =>[http://en.wikipedia.org/wiki/Book_design|book design]. 
 
 The following table lists the identifiers of all section-like macros, divided according to the part of the book they should be placed in:
-	]
-	table[
-  	tr[
-   		th[Frontmatter]
-    	td[txt[@imprint@ ^&dagger;^, @dedication@ ^&dagger;^, @inspiration@ ^&dagger;^, @foreword@ ^&Dagger;^, @introduction@ ^&Dagger;^, @acknowledgement@ ^&Dagger;^, @prologue@ ^&Dagger;^, @toc@ ^*^]]
-  	]
-  	tr[
-    	th[Bodymatter]
-    	td[txt[@volume@, @book@, @part@, @chapter@]]
-  	]
-  	tr[
-    	th[Backmatter]
-    	td[txt[@epilogue@ ^&Dagger;^, @afterword@ ^&Dagger;^, @postscript@ ^&dagger;^, @appendix@, @addendum@ ^&Dagger;^, @glossary@ ^**&Dagger;^, @colophon@ ^&dagger;^, @bibliography@ ^**&Dagger;^, @promotion@ ^&dagger;^, @references@ ^**&Dagger;^, @index@ ^**&Dagger;^, @lot@ ^**&Dagger;^, @lof@ ^**&Dagger;^]]
-  	]
-	]
+  ]
+  table[
+    tr[
+      th[Frontmatter]
+      td[txt[@imprint@ ^&dagger;^, @dedication@ ^&dagger;^, @inspiration@ ^&dagger;^, @foreword@ ^&Dagger;^, @introduction@ ^&Dagger;^, @acknowledgement@ ^&Dagger;^, @prologue@ ^&Dagger;^, @toc@ ^*^]]
+    ]
+    tr[
+      th[Bodymatter]
+      td[txt[@volume@, @book@, @part@, @chapter@]]
+    ]
+    tr[
+      th[Backmatter]
+      td[txt[@epilogue@ ^&Dagger;^, @afterword@ ^&Dagger;^, @postscript@ ^&dagger;^, @appendix@, @addendum@ ^&Dagger;^, @glossary@ ^**&Dagger;^, @colophon@ ^&dagger;^, @bibliography@ ^**&Dagger;^, @promotion@ ^&dagger;^, @references@ ^**&Dagger;^, @index@ ^**&Dagger;^, @lot@ ^**&Dagger;^, @lof@ ^**&Dagger;^]]
+    ]
+  ]
 
-	p[strong[*]: The %>[toc] is used to generate the Table of Contents automatically, and it takes no parameters.]
-	p[strong[**]: This macro is likely to be extended in future versions to generate/aggregate content automatically.]
-	p[strong[&dagger;]: This section is not listed in the Table of Contents.]
-	p[strong[&Dagger;]: Any subsection of this section is not listed in the Table of Contents.]
+  p[strong[*]: The %>[toc] is used to generate the Table of Contents automatically, and it takes no parameters.]
+  p[strong[**]: This macro is likely to be extended in future versions to generate/aggregate content automatically.]
+  p[strong[&dagger;]: This section is not listed in the Table of Contents.]
+  p[strong[&Dagger;]: Any subsection of this section is not listed in the Table of Contents.]
 
-	note[
-		code[frontmatter], code[bodymatter] and code[backmatter] are also macro identifiers, but they are also exposed as attributes for the %>[book] and the %>[article], so if you're using either of these two macros as your root macro for your document, there's no need to use them explicitly.
-	]
+  note[
+    code[frontmatter], code[bodymatter] and code[backmatter] are also macro identifiers, but they are also exposed as attributes for the %>[book] and the %>[article], so if you're using either of these two macros as your root macro for your document, there's no need to use them explicitly.
+  ]

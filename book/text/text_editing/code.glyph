@@ -1,9 +1,9 @@
-	txt[
+  txt[
 If you're a programmer, chances are that you're going to include some source code in your articles and books. Glyph offers two ways to format code blocks effortlessly: the %>[codeblock], which simply wraps text into @<pre>@ and @<code>@ tags, or the %>[highlight]. The last one requires either &[coderay] or &[uv], but it provides syntax highlighting for the most common programming languages.
 
 Cosider the following piece of ruby code:
-	]
-	highlight[=mediawiki|
+  ]
+  highlight[=mediawiki|
 def find_child(&block)
   children.each do \|c\|
     c.descend do \|node, level\|
@@ -12,9 +12,9 @@ def find_child(&block)
   end
   nil
 end
-	=]
-	p[It can be wrapped in a highlight macro, like so:]
-	highlight[=mediawiki|
+  =]
+  p[It can be wrapped in a highlight macro, like so:]
+  highlight[=mediawiki|
 highlight[\=ruby\|
   def find_child(&block)
     children.each do \\\/\|c\\\/\|
@@ -25,9 +25,9 @@ highlight[\=ruby\|
     nil
   end
 \=]
-	=]
-	p[...to produce the following, using the $[filters.highlighter] highlighter:]
-	highlight[=ruby|
+  =]
+  p[...to produce the following, using the $[filters.highlighter] highlighter:]
+  highlight[=ruby|
 def find_child(&block)
   children.each do \|c\|
     c.descend do \|node, level\|
@@ -36,11 +36,11 @@ def find_child(&block)
   end
   nil
 end
-	=]
-	box[Some Remarks|
-		txt[
+  =]
+  box[Some Remarks|
+    txt[
 * Highlighters require some configuration. For more information on relevant configuration settings, see the =>[#cfg_filters|filters.*] configuration settings.
 * If you're using the %>[highlight] together within the %>[textile], you must wrap the macro call within @<notextile>@ tags.
 * You must always escape pipes (@\|@) with the code or the highlight macro.
-		]
-	]
+    ]
+  ]

@@ -1,5 +1,59 @@
-	txt[
-&[glang] is not a full-blown programming language and it is currently not Turing-complete (it does not provide loops). However, it is possible to evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
+  §txt[
+    @title[Turing-completeness]
+
+As of version 0.5.0, Glyph can be considered _Turing-complete_, as it satisfies the following =>[http://c2.com/cgi/wiki?LanguageRequirementsForTuringCompleteness|requirements for Turing-completeness]:
+* A conditional construct, implemented via the %>[condition].
+* Variable assignment, by setting the value of snippets using the %>[snippet:] and of attributes using the %>[attribute:].
+* (infinite) iteration implemented through the %>[while] or recursion, which is possible thanks to the %>[def:].
+* A memory model which emulates an infinite store: there are no enforced limits on attribute/snippets allocations and number of algorithms or parameters.
+  ]
+
+  §txt[
+    @title[Operations on integer values]
+
+Glyph can be used to perform operation on integer values (additions, subtractions and multiplications). For example, code[=\/add[2\|3\|7]=] will evaluate to @12@, and code[=\/multiply[add[3\|7]\|subtract[5\|1\|2]]=] will return 20.
+
+As a more complex example, consider the following @factorial@ macro, which is able to calculate the factorial of a number recursively:
+
+highlight[=html|
+def:[factorial\|
+  ?[
+    eq[{{0}}\|0]\|1\|
+    multiply[
+      {{0}} \| factorial[subtract[{{0}}\|1]]
+    ]
+  ]
+]
+=]
+
+If you try executing code[=factorial[5]=], it will evaluate to @120@.
+
+  ]
+  §txt[
+    @title[Lexically-scoped attribute assignment]
+
+=>[#snippets] can be used in a similar way as _variables_ are used in programming languages. Or better, they can be used as _global variables_, as they are visible from anywhere in the Glyph document. If you need something more restricted to, say, a section and all its subsections, you can define your own attributes and use them in a very similar way.
+
+Consider the following Glyph code:
+  ]
+  highlight[=html|
+let[
+  @:[a\|bits]
+  @:[b\|bobs]
+  section[
+    @title[Something more about attributes]
+Attributes are like lexically scoped variables. You can use them to store @[a] and @[b].
+  ]
+]
+  =]
+  txt[
+The %>[let] here only acts as a dummy macro (it does nothing really) to bind attributes using the %>[attribute:] (aliased by code[@:]). Attributes can then be used anywhere within the @let@ macro, so the content of the section reads: "Attributes are like lexically-scoped variables. You can use them to store bits and bobs". 
+
+Note that attributes defined through the %>[attribute:] are... well, attributes! Feel free to use the %>[attribute] to access standard attributes like @title@, etc.
+  ]
+  §txt[
+    @title[Evaluating Ruby code]
+For anything more complex than what described in the previous sections you can also evaluate simple ruby code snippets using the @ruby@ macro (aliased to @%@), like this:
 * code[=%[2 + 2]=] &rarr; 4
 * code[=%[Time.now]=] &rarr; %[Time.now]
 * code[=%[Glyph::VERSION]=] &rarr; %[Glyph::VERSION]
@@ -7,4 +61,4 @@
 The scope for the code evaluation is the Kernel module, (with all inclusions required by Glyph itself). 
 
 Although it is possible to retrieve Glyph configuration settings in this way (e.g. code[=%[cfg('document.author')]=]), the %>[config] (aliased to @$@) makes things slightly simpler (e.g. code[=$[document.author]=]).
-	]
+  ]

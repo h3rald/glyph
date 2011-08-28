@@ -18,7 +18,7 @@ Glyph requires the following gems:
 Additionally, some Glyph macros may require additional gems, such as:
 * RedCloth (\/%>[textile])
 * BlueCloth _or_ RDiscount _or_ Maruku _or_ Kramdown (\/%>[markdown])
-* Haml (if you want to load .sass files with the %>[style])
+* Sass (if you want to load .sass files with the %>[style])
 * CodeRay _or_ UltraViolet (\/%>[highlight])
 * directory_watcher (to use auto-regeneration with the #>[compile])
 	]
@@ -33,5 +33,4 @@ Every Glyph project is comprised of the following directories:
 Additionally, the following files are also created at top level:
 * @config.yml@ -- containing your =>[#cfg|Project Configuration].
 * @document.glyph@ -- containing the =>[#struct|structure] of your document.
-* @snippets.yml@ -- containing your text =>[#incl|snippets].
 ]

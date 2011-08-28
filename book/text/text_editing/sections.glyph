@@ -1,7 +1,7 @@
 
-	p[Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section] (aliased by code[§]), like so:]
+  p[Glyph documents are normally organized as a hierarchical tree of nested chapters, appendixes, sections, etc. To define a section, use the %>[section] (aliased by code[§]), like so:]
 
-	highlight[=html|
+  highlight[=html|
 section[
   @title[Section #1]
 Write the section contents here...
@@ -10,13 +10,13 @@ Write the section contents here...
 This section is nested into the previous one.
   ] --[End of Section #2]
 ] --[End of Section #1]
-	=]
+  =]
 
-	txt[This example defines two nested sections. If the code[@title] attribute is specified like in this case, it will be converted to a proper HTML header and it will appear in the Table of Contents (see the %>[toc]).
+  txt[This example defines two nested sections. If the code[@title] attribute is specified like in this case, it will be converted to a proper HTML header and it will appear in the Table of Contents (see the %>[toc]).
 
 Note an important difference from HTML: there is no need for an explicit level for the headers, as it will be determined at runtime when the document is compiled, based on how sections are nested. The previous code snippet (taken as it is), for example, will be transformed into the following HTML code:]
 
-	highlight[=html|
+  highlight[=html|
 <div class="section">
   <h2>Section #1</h2>
   <p>Write the section contents here...</p>
@@ -25,30 +25,30 @@ Note an important difference from HTML: there is no need for an explicit level f
     <p>This section is nested in the previous one</p>
   </div>
 </div>
-	=]
+  =]
 
-	txt[
+  txt[
 By default, in Glyph the first header level is _2_, so the two headers are rendered as @h2@ and @h3@, respectively (@--\[...\]@ macros are _comments_, therefore they are not included in the final output).
-	]
+  ]
   section[
-		@title[Markup-aware sections]
-		txt[Although Glyph can be used on its own to produce valid HTML or XML code, you may often want to use &[markups] to save some typing. Typically, you'll end up writing a lot of code like this:]
-	
-		highlight[=html|
+    @title[Markup-aware sections]
+    txt[Although Glyph can be used on its own to produce valid HTML or XML code, you may often want to use &[markups] to save some typing. Typically, you'll end up writing a lot of code like this:]
+  
+    highlight[=html|
 section[
-	@title[My Textile section]
-	textile[
+  @title[My Textile section]
+  textile[
 Textile markup can be used _here_.
-	]
+  ]
 ]
-		=]
-		txt[To save you even more typing, you can use the %>[textile_section] (aliased by @txt_section@ and @§txt@) and the %>[markdown_section] (aliased by @md_section@ and @§md@). By doing so, the previous code snippet can be written like this:]
-		highlight[=html|
+    =]
+    txt[To save you even more typing, you can use the %>[textile_section] (aliased by @txt_section@ and @§txt@) and the %>[markdown_section] (aliased by @md_section@ and @§md@). By doing so, the previous code snippet can be written like this:]
+    highlight[=html|
 §txt[
-	@title[My Textile section]
+  @title[My Textile section]
 Textile markup can be used _here_.
 ]
-		=]
-		tip[txt[On an Italian keyboard, you can type a @§@ character by pressing *SHIFT + &ugrave;*. Unfortunately, that's about the only useful thing an Italian keyboard does. If you use Vim, you can map it to some key sequence like @''s@, like this: @map! ''s <C-V>u00A7@.]]
+    =]
+    tip[txt[On an Italian keyboard, you can type a @§@ character by pressing *SHIFT + &ugrave;*. Unfortunately, that's about the only useful thing an Italian keyboard does. If you use Vim, you can map it to some key sequence like @''s@, like this: @map! ''s <C-V>u00A7@.]]
  
-	]
+  ]
