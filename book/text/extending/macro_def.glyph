@@ -1,42 +1,42 @@
-	txt[
+  txt[
 Glyph was created wih extensibility in mind. You can freely extend &[glang] by creating or overriding macros, to do whatever you like. Macro definitions are written in pure Ruby code and placed in @.rb@ files within the @lib/macros/@ folder of your project.
 
-		box[Alternative Ways to Define Macros|
+    box[Alternative Ways to Define Macros|
 You can also define macros:
 * inside your document, using the %>[macro:].
 * Using the %>[include] specifying the path to an @.rb@ file containing macro definitions stored in the @lib/@ directory (useful especially when =>[#lite_mode|compiling single Glyph files]).
-		]
+    ]
 
 This is the source code of a fairly simple macro used to format a note:
-	]
-	highlight[=ruby|
+  ]
+  highlight[=ruby|
 macro :note do
   %{<div class="#{@name}"><span class="note-title">#{@name.to_s.capitalize}</span>
-		#{@value}
+    #{@value}
 
     </div>}
 end
-	=]
-	txt[
+  =]
+  txt[
 The @macro@ method takes a single @Symbol@ or @String@ parameter, corresponding to the name of the macro. In this case, the entire block (or _body_ of the macro) is a @String@ corresponding to what we want the macro to evaluate to: a @<div>@ tag containing a note. 
 
 The body of the macro is evaluated in the context of the class[Glyph::Macro] class, therefore its instance variables (like code[@name] or code[@value]) can be used directly.
 
-		box[Why using code[@name] instead of just "note"?|
+    box[Why using code[@name] instead of just "note"?|
 For the @note@ macro, it absolutely makes no difference. However, by using code[@name] it is possible to re-use the same code for the @tip@, @important@ and @caution@ macros as well, which are in fact only aliases of the @note@ macro.
-		]
+    ]
 
 The following table lists all the instance variables that can be used inside macros:
-	]
-	table[
-  	tr[
-    	th[Variable]
-    	th[Description]
- 		]
-  	tr[
-    	td[code[@node]]
-    	td[
-				txt[
+  ]
+  table[
+    tr[
+      th[Variable]
+      th[Description]
+    ]
+    tr[
+      td[code[@node]]
+      td[
+        txt[
 A class[Glyph::MacroNode] containing information about the macro. Useful for accessing parent and child macros, and the current class[Glyph::Document]. Normally, instances of the code[MacroNode] class contain the following keys:
 * @:name@, the name of the macro.
 * @:source@, a @String@ identifying the source of the macro (a file, a snippet, etc.) 
@@ -45,15 +45,63 @@ A class[Glyph::MacroNode] containing information about the macro. Useful for acc
 * @:document@, the instance of code[Document] the macro is contained in (populated after the document has been parsed and analyzed).
 
 Note that the first two keys can also be accessed via instance variables.
-				]
-			]
-  	]
-  	tr[
-    	td[code[@name]]
-    	td[The name of the macro.]
-  	]
-  	tr[
-    td[code[@source]]
-    td[A code[String] identifying the source of the macro (a file, a snippet, etc.).]
-  	]
-	]
+        ]
+      ]
+    ]
+    tr[
+      td[code[@name]]
+      td[The name of the macro.]
+    ]
+    tr[
+      td[code[@source_name]]
+      td[A code[String] identifying the source of the macro (a file, a snippet, etc.).]
+    ]
+    tr[
+      td[code[@source_topic]]
+      td[A code[String] identifying the source topic of the macro.]
+    ]
+    tr[
+      td[code[@source_file]]
+      td[A code[String] identifying the source file of the macro.]
+    ]
+  ]
+  §[
+    @title[Representations]
+    txt[
+There's a small problem with the code used to define the @note@ macro in the previous section: what if I want to format notes using HTML5 instead of HTML, or another output format?
+
+Glyph supports different output formats, therefore macros must be format-independent! In fact, this is the actual source of the @note@ macro:
+    ]
+    highlight[=ruby|
+macro :note do
+  @data[:name] = @name
+  @data[:text] = value
+  render
+end
+    =]
+    txt[
+The HTML representation of the note macro is defined in the @macros/reps/html.rb@ file as follows:
+    ]
+    highlight[=ruby|
+rep :note do \|data\|
+	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "note"
+	%{<div class="#{css_class}">
+<span class="note-title">#{data[:name].to_s.capitalize}</span>#{data[:text]}
+
+</div>}
+end
+    =]
+    txt[
+The HTML5 representation of the note macro, on the other hand, is defined in the @macros/reps/html5.rb@ file as follows:
+    ]
+    highlight[=ruby|
+rep :note do \|data\|
+	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "note"
+	%{<aside class="#{css_class}">
+<span class="note-title">#{data[:name].to_s.capitalize}</span>#{data[:text]}
+
+</aside>}
+end
+    =]
+Note the different tags used to render the note. 
+  ]

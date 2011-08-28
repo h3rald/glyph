@@ -4,7 +4,7 @@
 As of version 0.5.0, Glyph can be considered _Turing-complete_, as it satisfies the following =>[http://c2.com/cgi/wiki?LanguageRequirementsForTuringCompleteness|requirements for Turing-completeness]:
 * A conditional construct, implemented via the %>[condition].
 * Variable assignment, by setting the value of snippets using the %>[snippet:] and of attributes using the %>[attribute:].
-* (infinite) iteration implemented through the %>[while] or recursion, which is possible thanks to the %>[def:].
+* (infinite) iteration implemented through the %>[while] or recursion, which is possible thanks to the %>[define:].
 * A memory model which emulates an infinite store: there are no enforced limits on attribute/snippets allocations and number of algorithms or parameters.
   ]
 

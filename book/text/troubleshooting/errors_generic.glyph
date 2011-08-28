@@ -5,12 +5,18 @@ The alias name supplied to the code[macro_alias] method has already been used fo
 		ref_error[Undefined macro '\/em[macro_name]'|
 The document contains a macro that does not exist, i.e. it is not a standard or used-defined =>[#macro_ref|Glyph macro or alias].
 		]
+		ref_error[No macro representation for '\/em[macro_name]'|
+There is no valid macro representation for the specified macro.
+		]
 		ref_error[An error occurred when generating _file-name_.pdf|
 Returned if Prince could not generate the PDF file or if Prince is not installed. Normally, Prince provides additional details on the specific error(s).
 		]
 		ref_error[Glyph cannot generate PDF. Please specify a valid output.pdf.generator setting|
 Returned if the $>[output.pdf.generator] has not be set to a valid PDF renderer. Currently, the only supported values for this setting are code[prince] and code[wkhtmltopdf].
 		]
+    ref_error[Glyph cannot generate e-book. At present, output.\/em[ebook_format].generator can only be set to 'calibre'.|
+Returned if the output.\/em[ebook_format].generator setting has not be set to @calibre@.
+    ]
 		ref_error[The current directory is not a valid Glyph project|
 Returned if a glyph command was executed outside a valid glyph project directory.
 		]

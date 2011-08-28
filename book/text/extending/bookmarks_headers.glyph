@@ -1,16 +1,18 @@
-	txt[
+  txt[
 The =>[&[rubydoc]/Macro|@Glyph::Macro@] class also includes a few methods to check and store bookmarks and headers. Consider for example the following source code for the %>[anchor]:
-	]
+  ]
 
-	highlight[=ruby|
+  highlight[=ruby|
 macro :anchor do 
-  ident, title = @params
-  macro_error "Bookmark '#{ident}' already exists" if bookmark? ident
-  bookmark :id => ident, :title => title
-  %{<a id="#{ident}">#{title}</a>}
+  min_parameters 1
+  max_parameters 2
+  bookmark :id => param(0), :title => param(1), :file => @source_file
+  @data[:id] = param 0
+  @data[:title] = param 1
+  render
 end
-	=] 
+  =] 
 
-	txt[
+  txt[
 The @bookmark?@ method can be used to check the existance of a particular ID within the whole document, while the @bookmark@ method is used to store bookmark IDs and titles. In a similar way, you can use @header?@ and @header@ methods to check the existance of headers within the documents or store new ones.
-	]
+  ]

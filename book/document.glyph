@@ -65,6 +65,11 @@ book[
 				@src[text_editing/attribute_intro]
 			]
 			section[
+				@title[Macro Composition]
+				@id[composition]
+				@src[text_editing/macro_composition]
+			]
+			section[
 				@title[Escaping and Quoting]
 				@id[esc_quot]
 				@src[text_editing/esc_quot]
@@ -126,7 +131,7 @@ book[
 				@src[text_editing/conditionals]
 			]
 			section[
-				@title[Simple programming and code evaluation]
+				@title[Simple Programming and Code Evaluation]
 				@src[text_editing/evaluation]
 			]
 		]

@@ -4,6 +4,9 @@ config_table[
 	ref_config[document.author|
 The author of the document.
 	]
+	ref_config[document.cover|
+The image used as the document cover (used only for e-book generation).
+	]
 	ref_config[document.draft|
 If set to @true@, the document is considered a draft, so =>[#m_draftcomment|draft comments] and =>[#m_todo|todo items] will be displayed.
 	]
@@ -33,7 +36,6 @@ The subtitle of the document, displayed using the %>[subtitle].
 The title of the document, displayed using the %>[title].
 	]
 	ref_config[document.isbn|
-The ISBN of the document, for e-book generation. If this option is not specified,
-a hash of the document title will be used instead.
+The ISBN of the document, for e-book generation.
 	]
 ]

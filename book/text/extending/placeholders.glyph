@@ -5,22 +5,34 @@ Here's the source code of the %>[link]:
 	]
 	highlight[=ruby|
 macro :link do
-  href, title = @params
-  if href.match /^#/ then
-    anc = href.gsub(/^#/, '').to_sym
-    bmk = bookmark? anc
-    if bmk then
-      title \|\|= bmk[:title]
-    else
-      plac = placeholder do \|document\|
-        macro_error "Bookmark '#{anc}' does not exist" unless document.bookmarks[anc] 
-        document.bookmarks[anc][:title]
-      end
-      title \|\|= plac
-    end
+	min_parameters 1
+	max_parameters 2
+	target = param 0 
+	title = param 1 
+	if target.match /^#/ then
+		@node[:document].links << target 
+		anchor = target.gsub /^#/, ''
+		bmk = bookmark? anchor
+		if !bmk then
+			placeholder do \|document\|
+				bmk = document.bookmark?(anchor)
+				macro_error "Bookmark '#{anchor}' does not exist" unless bmk
+				bmk_title = title
+				bmk_title = bmk.title if bmk_title.blank?
+				@data[:target] = bmk.link(@source_file)
+				@data[:title] = bmk_title
+				render
+			end
+		else
+			bmk_title = title
+			bmk_title = bmk.title if bmk_title.blank?
+			@data[:target] = bmk.link(@source_file)
+			@data[:title] = bmk_title
+			render
+		end
+	else
+    # Code omitted...
   end
-  title \|\|= href
-  %{<a href="#{href}">#{title}</a>}
 end
 	=]
 	txt[

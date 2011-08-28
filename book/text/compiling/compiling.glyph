@@ -6,54 +6,54 @@ By default, a Glyph project can be "compiled" into an HTML document. Additionall
 * Web5 (i.e. multiple HTML5 files)
 ]
 section[
-	@title[HTML/HTML5 output]
-	p[To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the code[document.glyph] file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the code[/output/html] folder.]
-	p[The name of the HTML file can be set in the configuration (\/$>[document.filename]).]
-	p[To create an HTML5 file instead, you must specify it explicitly like this:]
-	p[code[= glyph compile -f html5 =]]
+  @title[HTML/HTML5 output]
+  p[To compile a Glyph project to an HTML document, use the #>[compile] within your Glyph project folder. Glyph parses the code[document.glyph] file (and all included files and snippets); if no errors are found, Glyph creates an HTML document in the code[/output/html] folder.]
+  p[The name of the HTML file can be set in the configuration (\/$>[document.filename]).]
+  p[To create an HTML5 file instead, you must specify it explicitly like this:]
+  p[code[= glyph compile -f html5 =]]
 ]
 section[
-	@title[PDF Output]
-	p[To generate a PDF document, you must specify code[pdf] as format, like this:]
-	p[code[= glyph compile -f pdf =]]
-	p[The command above will attempt to compile the project into an HTML document and then call a third-party PDF generator to convert it into a PDF file.]
-	txt[
+  @title[PDF Output]
+  p[To generate a PDF document, you must specify code[pdf] as format, like this:]
+  p[code[= glyph compile -f pdf =]]
+  p[The command above will attempt to compile the project into an HTML document and then call a third-party PDF generator to convert it into a PDF file.]
+  txt[
 Currently, Glyph supports:
 * &[prince] (version 7.0 or higher) -- a commercial generator that can be used freely for personal use. Prince produces high-quality PDF files and implement most of the new features introduced in CSS3, used heavily in Glyph's =>[#default_stylesheets|code[pagination.css]] default stylesheet.
 * &[wkhtml] (version 1.0 beta4 or higher) -- an open source generator that uses the WebKit rendering engine to transform HTML files into PDF. Although not as advanced as Prince, it produces very satisfactory results.
 
 By default, Glyph attempts to use wkhtmltopdf. To change this, set the $>[output_pdf_generator] to code[prince].
-	]
-	note[Glyph expects PDF generators to be installed on the local machine and callable via command line using the code[wkhtmltopdf] or the code[prince] commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).]
-	tip[Glyph's default CSS file use the free em[Gentium] font for all text. You can download it from =>[http://www.sil.org/~gaultney/gentium/|here].]
+  ]
+  note[Glyph expects PDF generators to be installed on the local machine and callable via command line using the code[wkhtmltopdf] or the code[prince] commands. Just install them as you would with any other program, depending on your operating system (yes, they both offer Windows installers).]
+  tip[Glyph's default CSS file use the free em[Gentium] font for all text. You can download it from =>[http://www.sil.org/~gaultney/gentium/|here].]
 ]
 
 section[
-	@title[EPUB/MOBI output]
-	p[To generate .epub or .mobi e-books, you must specify code[epub] or code[mobi] as format, like this:]
-	p[code[= glyph compile -f mobi =]]
-	p[code[= glyph compile -f epub =]]
-	p[This option requires that you have &[calibre] and its command-line tools installed. Glyph assumes the ebook-convert command is installed in /usr/bin. If this is not so, you can set the code[options.ebook.converter] option to the path to the ebook-convert command.]
-	p[If you have cover art for your e-book, put it in the code[images] folder, and specify the name of the file in the code[document.cover] configuration option.]
-	p[You can also specify the output profile used by the code[ebook-convert] command by setting the code[output.epub.profile] and code[output.mobi.profile] options. If these are not specified, the conversion will use the code[kindle] output profile for mobi files, and the code[nook] output profile for epub files. See the documentation for Calibre for a list of available output profiles.]
-	tip[Giving the command code[= glyph compile -f ebooks =] will generate both mobi and epub files.]
+  @title[EPUB/MOBI output]
+  p[To generate .epub or .mobi e-books, you must specify code[epub] or code[mobi] as format, like this:]
+  p[code[= glyph compile -f mobi =]]
+  p[code[= glyph compile -f epub =]]
+  p[This option requires that you have &[calibre] and its command-line tools installed. Glyph assumes the ebook-convert command is installed in /usr/bin. If this is not so, you can set the code[options.ebook.converter] option to the path to the ebook-convert command.]
+  p[If you have cover art for your e-book, put it in the code[images] folder, and specify the name of the file in the code[document.cover] configuration option.]
+  p[You can also specify the output profile used by the code[ebook-convert] command by setting the code[output.epub.profile] and code[output.mobi.profile] options. If these are not specified, the conversion will use the code[kindle] output profile for mobi files, and the code[nook] output profile for epub files. See the documentation for Calibre for a list of available output profiles.]
+  tip[Giving the command code[= glyph compile -f ebooks =] will generate both mobi and epub files.]
 ]
 
 section[
-	@title[Web/Web5 Output]
-	@id[web_output]
-	txt[
+  @title[Web/Web5 Output]
+  @id[web_output]
+  txt[
 To generate a Web or Web5 output, specify @web@ or @web5@ as format. These two output formats behave different way from the others, and require that your project uses =>[#topics|topics] and =>[#layouts|layouts].
 
 Basically, here's what happens when you compile your project in web or web5 format:
 # The document code is parsed as normal
 # Separate topic files are generated according to the code[@src] attributes of your sections
 # The code[document.glyph] (or whatever file you're using as document source) is _not_ rendered. Instead, an @index.html@ file will be created in the output folder based on the contents of your =>[#index_layout|index layout].
-	]
+  ]
 ]
 section[
-	@title[Auto Regeneration]
-	@id[auto_regeneration]
-	txt[You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed.]
-	note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
+  @title[Auto Regeneration]
+  @id[auto_regeneration]
+  txt[You can also call the #>[compile] with a @--auto@ switch. If you do so, your project will be recompiled automatically every time any source file is changed.]
+  note[Auto regeneration requires the =>[http://rubygems.org/gems/directory_watcher|directory_watcher] gem to be installed.]
 ]

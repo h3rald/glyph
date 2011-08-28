@@ -1,8 +1,8 @@
 stats_for[
-	@title[all macros]
-	@object[all macros]
-	@command[--macros]
-	@example[
+  @title[all macros]
+  @object[all macros]
+  @command[--macros]
+  @example[
 ===== Macros
 -- Total Macro Instances: 2497
 -- Total Macro Definitions: 65
@@ -37,17 +37,17 @@ stats_for[
      textile       title         toc           todo          values        
      \|xml\|         
   ]
-	@remarks[
+  @remarks[
 * Only macro _definitions_ (not their _aliases_) are displayed, both default and user-defined.
 * The @\|xml\|@ macro is a special macro used if the $>[options.xml_fallback] is enabled.
 * There's no distinction between macros defined by the user and macros defined by Glyph itself.
-	]
+  ]
 ]
 stats_for[
-	@title[a single macro]
-	@object[a single macro (e.g. code[note])]
-	@command[--macro=note]
-	@example[
+  @title[a single macro]
+  @object[a single macro (e.g. code[note])]
+  @command[--macro=note]
+  @example[
 ===== Macro 'note' 
 -- Total Instances: 18
 -- Occurrences:
@@ -64,10 +64,10 @@ stats_for[
    - text/text_editing/raw_html.glyph (1)
    - text/text_editing/section_aliases.glyph (1)
    - text/text_editing/xml_fallback.glyph (2)
-	]
-	@remarks[
+  ]
+  @remarks[
 * All the instances of the specified macro definition _and all its aliases_ are collected, regardless whether a definition or an alias is specified.
 * If you use custom macros, make sure they call the =>[&[rubydoc]/Glyph/Macro:update_source|Macro#update_source] appropriately method if necessary.
 * If macros are used within =>[#rewriting|rewritten] macros, they'll be also listed in each file where the rewritten macro is used. 
-	]
+  ]
 ]

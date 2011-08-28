@@ -1,8 +1,8 @@
 stats_for[
-	@title[all links]
-	@object[all links]
-	@command[--links]
-	@example[
+  @title[all links]
+  @object[all links]
+  @command[--links]
+  @example[
 ===== Links
 -- Total Internal Links: 89
 -- Internal Links
@@ -36,15 +36,15 @@ stats_for[
    - http://coderay.rubychan.de/doc/classes/CodeRay/Encoders/HTML.html 
 \[...\]   
   ]
-	@remarks[
+  @remarks[
 * The only criteria used to determine if a link is internal is whether it starts with a @#@ or not.
-	]
+  ]
 ]
 stats_for[
-	@title[links matching a regular expression]
-	@object[links matching a regular expression (e.g. code[/c_/])]
-	@command[--link=c_]
-	@example[
+  @title[links matching a regular expression]
+  @object[links matching a regular expression (e.g. code[/c_/])]
+  @command[--link=c_]
+  @example[
 ===== Links matching /c_/
 -- Total Links: 8
 -- Link Targets:
@@ -83,8 +83,8 @@ stats_for[
    - #esc_quot (2)
      - text/extending/macro_def.glyph (1)
      - text/text_editing/macro_intro.glyph (1)
-	]
-	@remarks[
+  ]
+  @remarks[
 * No distinction between external and internal targets is made.
-	]
+  ]
 ]

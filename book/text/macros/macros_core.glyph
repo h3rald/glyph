@@ -124,8 +124,8 @@ For examples see any of the following:
   ref_macro[
     @n[embed]
     @desc[Embeds text previously-delimited using the %>[fragment].]
-    @aliases[<=]
-    @example[=<=\[test_fragment\]=]
+    @aliases[&amp;=]
+    @example[=&amp;=\[test_fragment\]=]
     @params[-p[0|The ID of the fragment.]]
   ]
 
@@ -256,7 +256,7 @@ Checks a string against a regular expression.
 
   ref_macro[
     @n[define:]
-    @desc[Defines a new macro by rewriting (for more information, see =>[#rewriting])]
+    @desc[Defines a new macro in Glyph code (for more information, see =>[#rewriting])]
     @aliases[def:]
     @params[
       -p[0|The name of the new macro.]

@@ -14,14 +14,53 @@ end
 	txt[
 When the @interpret@ method is called, the following happens:
 # A new Glyph document is created from the @String@ passed to the method.
-# The bookmarks, headers and placeholders are passed from the main document to the new one. Because they are stored in arrays and hashes, they are passed by reference, so for example any new bookmark stored in the new document will also become available in the main document.
+# Document-specific objects (bookmarks, headers, snippet, fragments, placeholders, etc.) are passed from the main document to the new one. Because they are stored in arrays and hashes, they are passed by reference, so for example any new bookmark stored in the new document will also become available in the main document.
 # Any macro included in the @String@ is evaluated, and the resulting text is returned by the method. Note that this new document does not get finalized: in other words, placeholders will be left as they are, and they'll eventually be replaced when _the main document_ is finalized.
 	]
 
-	section[
-		@title[Rewriting]
+  §[
+    @title[Dispatching]
+    txt[
+=>[#composition] can be useful to remove nesting, but you can also use it to create your own macro _dispatchers_. What is a macro dispatcher? The easies way to understand this is by looking at the source code of one of them, the %>[s]:
+    ]
+    highlight[=ruby|
+macro :s do
+	dispatch do \|node\|
+		forbidden = [:each, :each_line, :each_byte, :upto, :intern, :to_sym, :to_f]
+		meth = node[:name]
+		infer_type = lambda do \|str\|
+      # Code omitted...
+		end
+		macro_error "Macro 's/#{meth}' takes at least one parameter" unless node.params.length > 0
+		macro_error "String method '#{meth}' is not supported" if meth.in?(forbidden) \|\| meth.to_s.match(/\!$/)
+		str = node.param(0).evaluate(node, :params => true)
+		begin
+			if node.param(1) then
+				meth_params = node.params[1..node.params.length-1].map do \|p\| 
+          infer_type.call(p.evaluate(node, :params => true))
+        end
+				str.send(meth, *meth_params).to_s
+			else
+				str.send(meth).to_s
+			end
+		rescue Exception => e
+      # Code omittted
+		end
+	end
+end
+    =]
+    txt[
+See the @dispatch@ method at the very beginning? This method takes a block with a @node@ parameter, corresponding to the MacroNode of the macro which is being composed with @s@. So, for example, if you write code[=s/sub[my string\|/my/\|your]=] the node of a macro called @sub@ will be passed to the block. Of course there's no @sub@ macro defined in Glyph, but it doesn't matter: its name will be interpreted as the name of a method of the Ruby String class in this case, so no worries.
+
+Got it? Tricky, but damn useful to create your own "dynamic" macros.
+    ]
+
+  ]
+
+	§[
+		@title[Defining macros using Glyph]
 		@id[rewriting]
-		p[While the code[interpret] method is useful to evaluate Glyph code in a macro while performing other actions (storing a bookmark, checking for the presence of an anchor, etc.), in some cases it may not be necessary. If you simply want your macro to be converted into existing Glyph macro without performing any action excepting parameter substitution, you can just use the %>[rewrite:] within youy Glyph document]
+		p[While the code[interpret] method is useful to evaluate Glyph code in a macro while performing other actions (storing a bookmark, checking for the presence of an anchor, etc.), in some cases it may not be necessary. If you simply want your macro to be converted into existing Glyph macro without performing any action excepting parameter substitution, you can just use the %>[define:] within your Glyph document]
 		p[Consider the following macro definition:]
 		highlight[=ruby|
 macro :issue do
@@ -33,15 +72,15 @@ macro :issue do
   }
 end
 		=]
-		p[The code[issue] macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the %>[rewrite:]:]
+		p[The code[issue] macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the %>[define:] (aliased by @def:@):]
 		highlight[=html|
-rewrite:[issue\|
+define:[issue\|
   tr[
     td[\/=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}\|#{{0}}]]
     td[txt[{{1}}]]
   ]
 ]
 		=]
-		p[Within the %>[rewrite:], it is possible to use a special syntax to call the code[raw_attr] or code[raw_param] methods: br[]
+		p[Within the %>[define:], it is possible to use a special syntax to call the code[raw_attr] or code[raw_param] methods: br[]
 			code[{{]em[parameter_number] or em[attribute_name]code[}}]]
 	]

@@ -1,0 +1,28 @@
+txt[
+Glyph macros can be _composed_ with other using the @/@ character. Macro composition can be used instead of nesting, provided that macro containers (also called _dispatchers_ in certain situations) take only one parameter and no attributes.
+
+For example, the following code:
+]
+highlight[=html|
+?[
+  not[output?[pdf]]\|
+  ...
+]
+=]
+
+p[Can be written like this:]
+
+highlight[=html|
+?[
+  not/output?[pdf]\|
+  ...
+]
+=]
+
+txt[
+In this case, the %>[not] was composed with the %>[output?], thus removing one level of nesting.
+
+Composition can be useful to simplify complex Glyph macro constructs, but also for _macro dispatching_. Currently, Glyph supports two _dispatchers_:
+* The %>[s], used to call almost any method of the Ruby String class.
+* The %>[xml], used to render raw XML tags.
+]

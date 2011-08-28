@@ -9,9 +9,9 @@ section[
 	txt[
 Before creating custom Glyph commands and tasks, you should have a basic understanding on how they work, and which commands -- or better, which tasks -- are already available.
 
-The following diagram outlines the relationships between commands and tasks:
+The following diagram outlines the relationships between the default commands and some tasks:
 	]
-	figure[glyph/commands_tasks.png|Glyph default commands and tasks]
+	figure[glyph/commands_tasks.png|Some of Glyph default commands and tasks]
 	txt[
 As you can see:
 * All commands call at at least one task.

@@ -7,8 +7,11 @@ The extension to use for the output file(s).
 &:[o_filter_target|
 The output target for filters. It can be set to @html@ (for RedCloth and MarkDown) or @latex@ (RedCloth-only).
 ]
-&:[o_macro_dirs|
-The directories from which macros will be loaded (both in Glyph's home and the current project directory).
+&:[o_through|
+The intermediate format from which a PDF file is generated. It can be set to @html@ or @html5@.
+]
+&:[o_macro_reps|
+The name of the representation file from which macro representation will be loaded.
 ]
 &:[o_layout_dirs|
 The directories from which layout macros will be loaded (both in Glyph's home and the current project directory).
@@ -22,18 +25,48 @@ The name of the layout to use to render the document index file.
 &:[o_base|
 The directory to use as root for all link paths.
 ]
+&:[o_calibre|
+An array of options to configure Calibre. See the =>[http://calibre-ebook.com/user_manual/cli/ebook-convert-3.html|full list].
+]
 These settings are used to configure output-specific options.
 
 
+section[
+	@title[output.epub.*]
+	config_table[
+		out_cfg[epub.extension]
+		out_cfg[epub.filter_target]
+		ref_config[output.epub.generator|
+The external program used to generate EPUB files. It must be set to @calibre@.
+		]
+    out_cfg[epub.calibre]
+		out_cfg[epub.macro_reps]
+		out_cfg[epub.multifile]
+	]
+]
+section[
+	@title[output.mobi.*]
+	config_table[
+		out_cfg[mobi.extension]
+		out_cfg[mobi.filter_target]
+		ref_config[output.mobi.generator|
+The external program used to generate MOBI files. It must be set to @calibre@.
+		]
+    out_cfg[mobi.calibre]
+		out_cfg[mobi.macro_reps]
+		out_cfg[mobi.multifile]
+	]
+]
 section[
 	@title[output.pdf.*]
 	config_table[
 		out_cfg[pdf.extension]
 		out_cfg[pdf.filter_target]
+    out_cfg[pdf.through]
 		ref_config[output.pdf.generator|
 The external program used to generate PDF files. It can be set to @prince@ or @wkhtmltopdf@.
 		]
-		out_cfg[pdf.macro_dirs]
+		out_cfg[pdf.macro_reps]
 		out_cfg[pdf.multifile]
 	]
 ]
@@ -42,7 +75,7 @@ section[
 	config_table[
 		out_cfg[html.extension]
 		out_cfg[html.filter_target]
-		out_cfg[html.macro_dirs]
+		out_cfg[html.macro_reps]
 		out_cfg[html.multifile]
 	]
 ]
@@ -51,7 +84,7 @@ section[
 	config_table[
 		out_cfg[html5.extension]
 		out_cfg[html5.filter_target]
-		out_cfg[html5.macro_dirs]
+		out_cfg[html5.macro_reps]
 		out_cfg[html5.multifile]
 	]
 ]
@@ -64,7 +97,7 @@ section[
 		out_cfg[web.layout_dirs]
 		out_cfg[web.layouts.index]
 		out_cfg[web.layouts.topic]
-		out_cfg[web.macro_dirs]
+		out_cfg[web.macro_reps]
 		out_cfg[web.multifile]
 	]
 ]
@@ -77,7 +110,7 @@ section[
 		out_cfg[web5.layout_dirs]
 		out_cfg[web5.layouts.index]
 		out_cfg[web5.layouts.topic]
-		out_cfg[web5.macro_dirs]
+		out_cfg[web5.macro_reps]
 		out_cfg[web5.multifile]
 	]
 ]

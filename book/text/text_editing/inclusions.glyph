@@ -1,9 +1,3 @@
-  txt[
-Glyph supports several ways of re-using existing content:
-* =>[#file-inclusions]
-* =>[#snippets]
-* =>[#fragments]
-  ]
   §[
     @title[File inclusions]
     @id[file-inclusions]

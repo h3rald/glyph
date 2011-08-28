@@ -1,25 +1,24 @@
 def:[stats_for|
-	section[
-		@title[Displaying stats about {{title}}]
-		txt[To display statistics about {{object}}, execute code[glyph stats {{command}}]. Glyph displays something like this:]
-		highlight[=html|
+  section[
+    @title[Displaying stats about {{title}}]
+    txt[To display statistics about {{object}}, execute code[glyph stats {{command}}]. Glyph displays something like this:]
+    highlight[=html|
 {{example}}
-		=]
-		section[
-			@title[Remarks]
-			txt[
+    =]
+    section[
+      @title[Remarks]
+      txt[
 {{remarks}}
-			]
-		]
-	]
+      ]
+    ]
+  ]
 ]
 p[Glyph includes a #>[stats] that can be used to display useful statistics about your Glyph project. If you try running Glyph's command help, you'll see that this command can take quite a few options:
 ]
 highlight[html|
 $ glyph help stats
-=====================================
-Glyph v\/%[Glyph::VERSION]
-=====================================
+Glyph v0.5.0
+
 stats \[options\] 
     Display statistics
 

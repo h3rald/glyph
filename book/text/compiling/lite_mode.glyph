@@ -1,12 +1,12 @@
-	p[Glyph's primary goal is to author complex documents like books or manuals. In order to do so, a Glyph project is required to keep everything organized and automated via a set of predefined conventions, exactly like Ruby on Rails or other similar frameworks do.]
-	p[If you want to write a one-page article or a short draft, however, creating and managing Glyph projects can be an unnecessary burden. Luckily, you don't have to: you can use Glyph to compile single files containing Glyph code, by adding one parameter (or two if you want to specify a custom destination file) to the #>[compile], like this:]
-	p[code[glyph compile source.glyph destination.htm]]
-	p[This command will process a file called code[source.glyph] and produce an HTML file called code[destination.htm].]
-	section[
-		@title[Limitations]
-		@id[lite_limitations]
-		&:[only_defined_through|can only be defined inside the source file, using the]
-		txt[
+  p[Glyph's primary goal is to author complex documents like books or manuals. In order to do so, a Glyph project is required to keep everything organized and automated via a set of predefined conventions, exactly like Ruby on Rails or other similar frameworks do.]
+  p[If you want to write a one-page article or a short draft, however, creating and managing Glyph projects can be an unnecessary burden. Luckily, you don't have to: you can use Glyph to compile single files containing Glyph code, by adding one parameter (or two if you want to specify a custom destination file) to the #>[compile], like this:]
+  p[code[glyph compile source.glyph destination.htm]]
+  p[This command will process a file called code[source.glyph] and produce an HTML file called code[destination.htm].]
+  section[
+    @title[Limitations]
+    @id[lite_limitations]
+    &:[only_defined_through|can only be defined inside the source file, using the]
+    txt[
 &:[referenced_with_path|must be referenced with their absolute path, or a path relative to the current directory]
 This sort of "lite" mode comes with a few minor limitations: 
 * Snippets &[only_defined_through] %>[snippet:].
@@ -15,5 +15,5 @@ This sort of "lite" mode comes with a few minor limitations:
 * Images &[referenced_with_path], and will not be copied anywhere when the output file is generated.
 * Stylesheets &[referenced_with_path], or the name of an existing Glyph =>[#default_stylesheets|system stylesheet].
 * The files included through the %>[include] &[referenced_with_path].
-		]
-	]
+    ]
+  ]

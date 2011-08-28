@@ -25,7 +25,7 @@ def:[release|
     @title[v{{0}} &ndash; {{1}}]
     {{2}}
 
-    p/em[&rarr; View closed issues on =>[https://github.com/h3rald/glyph/issues?direction=asc&labels={{0}}&sort=created&state=closed|GitHub]]
+    p/em[&rarr; View closed issues on =>[https://github.com/h3rald/glyph/issues?direction=asc&amp;labels={{0}}&amp;sort=created&amp;state=closed|GitHub].]
   ]
 ]
 def:[issue|
@@ -39,17 +39,17 @@ def:[issue|
   %:[#>|"#{value} command"]
   %:[$>|"#{value} setting"]
 ]
-release[0.5.0|??? 2011|
+release[0.5.0|August 28th 2011|
   features[
-    issue[152|It is now possible to generate a PDF document through HTML5, not only HTML, by setting the $>[output.pdf.through] to @html5@.]    
+    issue[152|It is now possible to generate a PDF document through HTML5, not only HTML, by setting the @output.pdf.through@ setting to @html5@.]    
     issue[165|The %>[fragment] and the %>[embed] can be used to delimit and embed text fragments, in a way much similar to snippets.]
     issue[177|Introduced the concept of "macro representations", to make macro code output-independent.]
     issue[179|Macro can be composed with other macros via backslashes, provided that containers only take exactly one parameter. The new %>[xml] dispatcher must be used composed with other macros to create raw XML tags, prepending = to macro names no longer works.]
     issue[180|Glyph can now generate ebooks in MOBI and EPUB format &ndash; with Calibre's help.]
-    issue[181|By using the new %>[let] macro, it is possible to define lexically scoped "variables" via the %>[attrubute:], and retrieve them within the scope of the let macro using the %>[attribute].]
+    issue[181|By using the new %>[let] macro, it is possible to define lexically scoped "variables" via the %>[attribute:], and retrieve them within the scope of the let macro using the %>[attribute].]
     issue[182|A %>[while] can be used to execute glyph code multiple times.]
     issue[183|The %>[s] dispatcher can be used to call almost any instance method of the Ruby String class. The @match@ macro cannot be used anymore; use @s/match@ instead.]
-    issue[184|The old @rewrite:@ macro has been renamed to @define:@. The new %>[define] fully supports recursion.]
+    issue[184|The old @rewrite:@ macro has been renamed to @define:@. The new %>[define:] fully supports recursion.]
     issue[189|The %>[add], the %>[subtract] and the %>[multiply] macro can be used to perform operations on integers.]
     issue[190|The lt, gt, lte, gte macros can be used to compare integer values.]
     issue[194|The %>[load] macro can be used to embed the contents of a file without performing any evaluation.]
@@ -62,6 +62,7 @@ release[0.5.0|??? 2011|
     issue[151|Fixed a bug related to Jeweler's gemspec validation. And for all it matters, Jeweler is no longer a development dependency for Glyph.]
     issue[166|Temporary output files are now placed in a temporary folder.]
     issue[196|Glyph now handles non-ASCII characters properly with Ruby 1.9 as well.]
+    issue[199|Fixed a bug that caused incorrect TOC nesting when using the @src@ attribute of the %>[section].]
   ]
 ]
 release[0.4.2|October 22th 2010|
@@ -119,7 +120,7 @@ release[0.3.0|June 13th 2010|
     issue[121|Some macros have been removed in favor of XML fallback, others have been updated.]
     issue[123|The SyntaxNode class has been specialized to differentiate between macros, attributes, parameters, text and escapes.]
     issue[124|Implemented new %>[article] and %>[book].]
-    issue[126|A new %>[rewrite:] has been implemented to create simple macros using just Glyph code.]
+    issue[126|A new @rewrite@ macro has been implemented to create simple macros using just Glyph code.]
     issue[127|A new %>[alias] has been implemented to create macro aliases.]
     issue[128|A blacklist for XML tags has been exposed via the @language.options.xml_blacklist@ setting.]
     issue[129|The %>[include] can now be used in lite mode, it can evaluate ruby files and requires relative paths.]
