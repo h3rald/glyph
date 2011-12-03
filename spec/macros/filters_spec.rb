@@ -55,9 +55,7 @@ interpret text
 		code = %{def test_method(a, b)
 				puts a+b
 			end}
-			cr_result = %{<div class=\"CodeRay\"> <div class=\"code\"><pre><span class=\"no\">1</span> <span class=\"r\">def</span> <span class=\"fu\">test_method</span>(a, b) 
-				<span class=\"no\">2</span> puts a+b 
-				<span class=\"no\">3</span> <span class=\"r\">end</span></pre></div> </div>}
+			cr_result = %{<div class=\"CodeRay\"> <div class=\"code\"><pre><span class=\"line-numbers\"><a href=\"#n1\" name=\"n1\">1</a></span><span class=\"keyword\">def</span> <span class=\"function\">test_method</span>(a, b) <span class=\"line-numbers\"><a href=\"#n2\" name=\"n2\">2</a></span> puts a+b <span class=\"line-numbers\"><a href=\"#n3\" name=\"n3\">3</a></span> <span class=\"keyword\">end</span> </pre></div> </div>}
 			uv_result = %{<pre class=\"iplastic\"><span class=\"Keyword\">def</span> 
 			<span class=\"FunctionName\">test_method</span>(<span class=\"Arguments\">a<span class=\"Arguments\">,</span> b</span>) 
 			puts a<span class=\"Keyword\">+</span>b <span class=\"Keyword\">end</span> </pre>}

@@ -80,8 +80,9 @@ img[
 
 	ref_macro[
 		@n[pubdate]
-		@desc[Evaluates to a date string (in the format: em[current_month] em[current_year]; i.e. _%B_ _%Y_), within a @<div>@ tag.]
+		@desc[Evaluates to a date string (in the format: em[current_month] em[current_year]; i.e. _%B_ _%Y_), within a @<div>@ tag. If a parameter is supplied, its value is used instead of the current date.]
 		@example[=pubdate[]=]
+		@params[-p[0|An alternative content for the _pubdate_ @div@.]]
 	]
 
 	ref_macro[

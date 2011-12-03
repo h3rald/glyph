@@ -32,15 +32,15 @@ Gem::Specification.new do |s|
   s.default_executable = "glyph"
   s.extra_rdoc_files = Dir.glob "*.textile"
  
-  s.add_runtime_dependency("gli", [">= 1.2.6"])
+  s.add_runtime_dependency("gli", [">= 1.4.0"])
   s.add_runtime_dependency("extlib", [">= 0.9.15"])
-  s.add_runtime_dependency("rake", [">= 0.8.7"])
+  s.add_runtime_dependency("rake", [">= 0.9.2.2"])
 
   s.add_development_dependency("rspec", [">= 2.5.1"])
-  s.add_development_dependency("yard", [">= 0.6.5"])
-  s.add_development_dependency("directory_watcher", [">= 1.4.0"])
-  s.add_development_dependency("sass", [">= 3.1.7"])
-  s.add_development_dependency("RedCloth", [">= 4.2.7"])
-  s.add_development_dependency("bluecloth", [">= 2.1.0"])
-  s.add_development_dependency("coderay", [">= 0.9.7"])
+  s.add_development_dependency("yard", [">= 0.7.4"])
+  s.add_development_dependency("directory_watcher", [">= 1.4.1"])
+  s.add_development_dependency("sass", [">= 3.1.11"])
+  s.add_development_dependency("RedCloth", [">= 4.2.9"])
+  s.add_development_dependency("bluecloth", [">= 2.2.0"])
+  s.add_development_dependency("coderay", [">= 1.0.4"])
 end

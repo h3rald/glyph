@@ -69,10 +69,9 @@ macro :author do
 	render
 end
 
-# TODO -- document new param!
 macro :pubdate do
 	max_parameters 1
-	@data[:date] = params(0).blank? ? Time.now.strftime("%B %Y") : params(0)
+	@data[:date] = param(0).blank? ? Time.now.strftime("%B %Y") : param(0)
 	render
 end
 
