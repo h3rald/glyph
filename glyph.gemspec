@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = "glyph"
-  s.version = "0.5.0"
+  s.version = "0.5.1"
   s.summary = "Glyph -- A Ruby-powered Document Authoring Framework"
   s.description = "Glyph is a framework for structured document authoring."
   s.homepage = "http://www.h3rald.com/glyph/"
   s.authors = ["Fabio Cevasco"]
   s.email = "h3rald@h3rald.com"
-  s.date = "2011-08-28"
+  s.date = "2011-11-04"
   s.license = "MIT"
 
   s.files = ["Rakefile"]
