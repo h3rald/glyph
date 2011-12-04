@@ -93,36 +93,6 @@ ol.toc {
 .toc ol ol ol ol li[class~=appendix]::before {
   content: counter(appendix1, upper-latin) "." counter(toc2) "." counter(toc3) "." counter(toc4) "." counter(toc5) "   "; }
 
-h2, section h1 {
-  padding-top: 2em;
-  string-set: chapter-title content();
-  page-break-before: always; }
-
-.halftitlepage h2, .titlepage h2 {
-  page-break-before: avoid; }
-
-.bodymatter .chapter h2, .bodymatter .chapter h1 {
-  counter-increment: h2;
-  counter-reset: h3; }
-
-.backmatter h2, .backmatter h1 {
-  counter-increment: a2;
-  counter-reset: h3; }
-
-.bodymatter h3, .backmatter h3, .bodymatter section h1, .backmatter section h1 {
-  counter-increment: h3;
-  counter-reset: h4; }
-
-.bodymatter h4, .backmatter h4, .bodymatter section section h1, .backmatter section section h1 {
-  counter-increment: h4;
-  counter-reset: h5; }
-
-.bodymatter h5, .backmatter h5, .bodymatter section section section h1, .backmatter section section section h1 {
-  counter-increment: h5; }
-
-h1, h2, h3, h4, h5 {
-  page-break-after: avoid; }
-
 div.frontmatter {
   page: frontmatter; }
 div.backmatter {
@@ -158,6 +128,36 @@ div.backmatter {
 
 .backmatter h5::before, .bodymatter section section section section h2:before {
   content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) "   "; }
+
+h2, section h1 {
+  padding-top: 2em;
+  string-set: chapter-title content();
+  page-break-before: always; }
+
+.halftitlepage h2, .titlepage h2 {
+  page-break-before: avoid; }
+
+.bodymatter h2, .bodymatter h1 {
+  counter-increment: h2;
+  counter-reset: h3; }
+
+.backmatter h2, .backmatter h1 {
+  counter-increment: a2;
+  counter-reset: h3; }
+
+.bodymatter h3, .backmatter h3, .bodymatter section h1, .backmatter section h1 {
+  counter-increment: h3;
+  counter-reset: h4; }
+
+.bodymatter h4, .backmatter h4, .bodymatter section section h1, .backmatter section section h1 {
+  counter-increment: h4;
+  counter-reset: h5; }
+
+.bodymatter h5, .backmatter h5, .bodymatter section section section h1, .backmatter section section section h1 {
+  counter-increment: h5; }
+
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid; }
 
 .box, .note, .important, .tip, .caution, .code {
   page-break-inside: avoid; }

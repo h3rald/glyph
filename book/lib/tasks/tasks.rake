@@ -2,7 +2,7 @@ namespace :custom do
 	task :generate, [:file] do |t, args|
 		generate = lambda do |source, destination|
 			Glyph.info "Generating #{destination}..."
-			Glyph.compile Glyph::PROJECT/"text/#{source}.glyph", Glyph::PROJECT/"../#{destination}.textile"
+			Glyph.compile Glyph::PROJECT/"text/#{source}.glyph", "#{Glyph::PROJECT/"../#{destination}.textile"}"
 		end
 		files = {
 			:AUTHORS => :acknowledgements, 

@@ -6,5 +6,6 @@
 	<li><a href="http://balcone.eveel.ru">Dmitry A. Ustalov</a> (eveel)</li>
 	<li><a href="http://www.stuartellis.eu">Stuart Ellis</a> (stuartellis)</li>
 	<li>Eric Givens (darthzippy)</li>
+	<li><a href="http://www.taylored-software.com/">Tammy Cravit</a> (tammycravit)</li>
 </ul>
     

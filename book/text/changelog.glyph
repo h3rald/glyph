@@ -39,6 +39,12 @@ def:[issue|
   %:[#>|"#{value} command"]
   %:[$>|"#{value} setting"]
 ]
+release[0.5.1|December 4th 2011|
+  bugs[
+    issue[203|Fixed error in %>[pubdate].]
+    issue[204|Updated CodeRay stylesheet.]
+  ]
+]
 release[0.5.0|August 28th 2011|
   features[
     issue[152|It is now possible to generate a PDF document through HTML5, not only HTML, by setting the @output.pdf.through@ setting to @html5@.]    
