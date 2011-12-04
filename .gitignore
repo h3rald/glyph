@@ -2,6 +2,7 @@
 thumbs.db
 .rvmrc*
 .bundle
+.sass-cache
 spec/config.yml
 *.gem
 doc
