@@ -72,7 +72,7 @@ module Glyph
 	class MutualInclusionError < MacroError; end
 
 	# The current version of Glyph
-	VERSION = "0.5.0"
+	VERSION = "0.5.1"
 
 	# All the currently-loaded macros
 	MACROS = {}

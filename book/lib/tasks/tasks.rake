@@ -41,7 +41,7 @@ namespace :generate do
 		(dir/'glyph/book/images/glyph/glyph.eps').unlink 
 		(dir/'glyph/book/images/glyph/glyph.svg').unlink
 		# Create project page
-		project = Glyph.filter %{layout:project[
+		project = Glyph.filter %{layout/project[
 				@contents[#{file_load(Glyph::PROJECT/'text/introduction.glyph')}]
 			]}
 		file_write dir/"glyph.textile", project

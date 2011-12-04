@@ -17,7 +17,7 @@
     :macro_reps: html5
     :layout_dir: web5
     :layouts:
-      :topic: topic
-      :index: index
+      :topic: bookpage
+      :index: bookindex
   :pdf: 
     :generator: prince
