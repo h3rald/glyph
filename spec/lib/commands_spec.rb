@@ -156,18 +156,13 @@ describe "glyph" do
 		Glyph['document.output'] = 'pdf'
 		src = Glyph::PROJECT/'article.html'
 		out = Glyph::PROJECT/'article.pdf'
-		generate_pdf = lambda do |gen|
-			Glyph.enable 'generate:html'
-			Glyph.enable 'generate:pdf'
-			Glyph.enable 'generate:pdf_through_html'
-			Glyph['output.pdf.generator'] = gen
-			run_command_successfully(["compile", "article.glyph"]).should == true
-			src.exist?.should == true
-			out.exist?.should == true
-			out.unlink
-		end
-		generate_pdf.call 'prince'
-		generate_pdf.call 'wkhtmltopdf'
+    Glyph.enable 'generate:html'
+    Glyph.enable 'generate:pdf'
+    Glyph.enable 'generate:pdf_through_html'
+    run_command_successfully(["compile", "article.glyph"]).should == true
+    src.exist?.should == true
+    out.exist?.should == true
+    out.unlink
 		Glyph.lite_mode = false
 	end	
 

@@ -47,7 +47,7 @@
     :extension: .pdf
     :filter_target: html
     :through: html
-    :generator: wkhtmltopdf
+    :generator: prince
     :macro_reps: html
   :web:
     :multifile: true
