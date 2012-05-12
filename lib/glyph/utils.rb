@@ -142,6 +142,7 @@ module Glyph
 			(Glyph['system.structure.frontmatter']+
 			Glyph['system.structure.bodymatter']+
 			Glyph['system.structure.backmatter']+
+      Glyph.macro_aliases_for(:section)+
 			[:section]).uniq
 		end
 

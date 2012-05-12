@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: UTF-8
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe "Macro:" do
@@ -187,5 +188,29 @@ describe "Macro:" do
 		@p.document.todos.length.should == 1
 		Glyph['document.draft'] = false
 	end
+
+  it "Aliased section titles should be at the same level of non-aliased section titles" do
+    normal = %{
+      section[
+        @title[Title2]
+        ...
+      ]
+    }
+    aliased = %{
+      §[
+        @title[Title2]
+        ...
+      ]
+    }
+    container = lambda do |s|
+      %{
+      section[
+        @title[Title]
+        #{s}
+      ]
+      }
+    end
+    output_for(container.call aliased).should == output_for(container.call normal)
+  end
 
 end	
