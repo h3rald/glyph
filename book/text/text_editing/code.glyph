@@ -3,7 +3,7 @@ If you're a programmer, chances are that you're going to include some source cod
 
 Cosider the following piece of ruby code:
   ]
-  highlight[=mediawiki|
+  highlight[=text|
 def find_child(&block)
   children.each do \|c\|
     c.descend do \|node, level\|
@@ -14,7 +14,7 @@ def find_child(&block)
 end
   =]
   p[It can be wrapped in a highlight macro, like so:]
-  highlight[=mediawiki|
+  highlight[=text|
 highlight[\=ruby\|
   def find_child(&block)
     children.each do \\\/\|c\\\/\|

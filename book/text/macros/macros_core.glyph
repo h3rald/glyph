@@ -2,7 +2,6 @@
   ref_macro[
     @n[add]
     @desc[Adds two or more integers together.]
-    @params[Two or more integer values.]
     @example[=add[2\|5\|7]=]
   ]
 
@@ -227,7 +226,6 @@ Checks a string against a regular expression.
   ref_macro[
     @n[multiply]
     @desc[Multiplies two or more integers together.]
-    @params[Two or more integer values.]
     @example[=add[3\|5\|9]=]
   ]
 
@@ -325,7 +323,6 @@ s/sub[This is a test string\|/a test/\|another test]
   ref_macro[
     @n[subtract]
     @desc[Subtracts two or more integers together.]
-    @params[Two or more integer values.]
     @example[=add[10\|5\|2]=]
   ]
 

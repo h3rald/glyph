@@ -31,8 +31,8 @@ describe "Macro:" do
 
 	it "navigation" do
 		Glyph.run! 'generate:web'
-		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
-		web2 = Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html')
+		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html').gsub /\n|\t/, ''
+		web2 = Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html').gsub /\n|\t/, ''
 		web1.match(%{<div class="navigation"> | <a href="/index.html">Contents</a> | <a href="/a/b/web2.html">Topic #2</a></div>}).blank?.should == false
 		web2.match(%{<div class="navigation"><a href="/a/web1.html">Topic #1</a> | <a href="/index.html">Contents</a> | </div>}).blank?.should == false
 	end
@@ -50,7 +50,7 @@ describe "Macro:" do
 		create_web_project
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'generate:html'
-		index = Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html')
+		index = Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html').gsub /\n|\t|   |  /, ''
     index.should match(%{<li class="section"><a href="#h_3">Topic #1</a></li><li><ol><li class="section"><a href="#h_4">Test #1a</a></li>})
 		index.match(%{href="a/web1.html#h_3"}).blank?.should == true
 		index.match(%{href="a/b/web2.html#h_7"}).blank?.should == true

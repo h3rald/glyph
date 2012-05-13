@@ -24,9 +24,9 @@ describe "Macro:" do
 
 	it "navigation" do
 		Glyph.run! 'generate:web5'
-		web1 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/web1.html')
-		web2 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/b/web2.html')
-		web1.match(%{<nav> | <a href="/index.html">Contents</a> | <a href="/a/b/web2.html">&rarr; Topic #2</a></nav>}).blank?.should == false
-		web2.match(%{<nav><a href="/a/web1.html">Topic #1</a> | <a href="/index.html">Contents</a> | </nav>}).blank?.should == false
+		web1 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/web1.html').gsub(/\n|\t|  /, '')
+		web2 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/b/web2.html').gsub(/\n|\t|  /, '') 
+		web1.should match(%{<nav>|<a href="/index.html">Contents</a>|<a href="/a/b/web2.html">&rarr; Topic #2</a></nav>})
+		web2.should match(%{<nav><a href="/a/web1.html">Topic #1</a>|<a href="/index.html">Contents</a>|</nav>})
 	end
 end	

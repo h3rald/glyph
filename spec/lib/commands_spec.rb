@@ -149,7 +149,7 @@ describe "glyph" do
 		Pathname.new('article.html').exist?.should == true
 		file_load('article.html').gsub(/\t|\n/, '').should == %{
 			<div class="section">
-				改善 Test -- Test Snippet
+				&#25913;&#21892; Test -- Test Snippet
 			</div>
 		}.gsub(/\t|\n/, '')
 		(Glyph::PROJECT/'article.html').unlink
@@ -184,11 +184,7 @@ describe "glyph" do
 		err = "Document cannot be finalized due to previous errors"
 		res = run_command(["compile"])
 		out = file_load Glyph::PROJECT/'output/html/test_project.html'
-		out.should == %{<div class="section">
-<h2 id="h_1">Test</h2>
-
-
-</div>}
+		out.gsub(/\t|\n/, '').should == %{<div class="section">   <h2 id="h_1">Test</h2></div>}
 		res.match("error: #{err}").should == nil
 	end
 

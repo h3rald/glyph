@@ -70,7 +70,7 @@ namespace :generate do
 			file = "#{Glyph['document.filename']}#{extension}"
 		end
 		out.mkpath
-		file_write out/file, Glyph.document.output
+		file_write out/file, clean_xml_document(Glyph.document.output)
 		info "'#{file}' generated successfully."
 	end
 
@@ -133,7 +133,7 @@ namespace :generate do
 		Glyph['system.quiet'] = true
 		index_topic = Glyph::Interpreter.new("layout/#{index_layout}[]", context).document.output
 		Glyph['system.quiet'] = q
-		file_write out/"index.html", index_topic
+		file_write out/"index.html", clean_xml_document(index_topic)
 		# Generate all topics
 		Glyph.document.topics.each do |topic|
 			extension = "#{Glyph["output.#{Glyph['document.output']}.extension"]}"
@@ -141,7 +141,7 @@ namespace :generate do
 			file += extension unless file.match /#{Regexp.escape(extension)}$/
 			info "Generating topic '#{file}'"
 			(out/file).parent.mkpath
-			file_write out/file, topic[:contents]
+			file_write out/file, clean_xml_document(topic[:contents])
 		end
 		info "Web output generated successfully."
 	end

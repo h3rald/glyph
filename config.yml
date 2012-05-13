@@ -37,11 +37,13 @@
     :extension: .html
     :filter_target: html
     :macro_reps: html
+    :clean_source: true
   :html5:
     :multifile: false
     :extension: .html
     :filter_target: html
     :macro_reps: html5
+    :clean_source: true
   :pdf:
     :multifile: false
     :extension: .pdf
@@ -49,11 +51,13 @@
     :through: html
     :generator: prince
     :macro_reps: html
+    :clean_source: false
   :web:
     :multifile: true
     :extension: .html
     :filter_target: html
     :macro_reps: html
+    :clean_source: true
     :layout_dir: web
     :layouts:
       :topic: topic
@@ -64,6 +68,7 @@
     :extension: .html
     :filter_target: html
     :macro_reps: html5
+    :clean_source: true
     :layout_dir: web5
     :layouts:
       :topic: topic
@@ -74,6 +79,7 @@
     :extension: .epub
     :filter_target: html
     :generator: calibre
+    :clean_source: false
     :calibre:
       # See options at http://calibre-ebook.com/user_manual/cli/ebook-convert-3.html
       "output-profile": nook
@@ -83,6 +89,7 @@
     :extension: .mobi
     :filter_target: html
     :generator: calibre
+    :clean_source: false
     :calibre:
       # See options at http://calibre-ebook.com/user_manual/cli/ebook-convert-3.html
       "no-inline-toc":
