@@ -73,7 +73,7 @@ macro :issue do
 end
 		=]
 		p[The code[issue] macro is only rewriting existing Glyph code around the two parameters provided. In this case, it is possible to do exactly the same thing using the %>[define:] (aliased by @def:@):]
-		highlight[=html|
+		highlight[=plain|
 define:[issue\|
   tr[
     td[\/=>[http://github.com/h3rald/glyph/issues/closed#issue/{{0}}\|#{{0}}]]

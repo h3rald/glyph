@@ -146,11 +146,8 @@ module Glyph
     # Returns a list of macro names corresponding to sections
     # that commonly have a title
     def titled_sections
-      (Glyph['system.structure.frontmatter']+
-       Glyph['system.structure.bodymatter']+
-       Glyph['system.structure.backmatter']+
-       Glyph.macro_aliases_for(:section)+
-       [:section]).uniq
+      (Glyph.macro_aliases_for(:section)+
+       [:section]-[:frontmatter, :bodymatter, :backmatter]).uniq
     end
 
     # Returns true if the macro names point to the same definition

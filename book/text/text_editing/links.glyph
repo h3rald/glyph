@@ -9,7 +9,7 @@ If you care about link validation and you want to save some keystrokes, then you
 	]
 	box[Example|
 		p[&[gcode]]
-		highlight[=html|
+		highlight[=plain|
 This is a link to link[#test].
 ...
 This is link[#wrong].
@@ -23,7 +23,7 @@ This is a #[test\\\|test anchor].
 <p>This is a <a id="test">test anchor</a>.</p>
 		=]
 		p[Additionally, the following warning message is displayed when =>[#compile|compiling]:]
-		highlight[=html|
+		highlight[=plain|
 warning: Bookmark 'wrong' does not exist
  -> source: @: authoring.textile
  -> path: document/body/bodymatter/chapter/@/textile/section/section/box/link
@@ -37,7 +37,7 @@ Basically, if you use the %>[link] and the %>[anchor], Glyph makes sure that:
 
 Besides using the %>[anchor], you can also create an anchor for a header by passing an code[@id] attribute the the %>[section], like this: 
 	]
-	highlight[=html|
+	highlight[=plain|
 section[
   @title[My Section]
   @id[my_section]

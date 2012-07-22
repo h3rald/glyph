@@ -8,14 +8,14 @@ As of version 0.5.0, Glyph can be considered _Turing-complete_, as it satisfies 
 * A memory model which emulates an infinite store: there are no enforced limits on attribute/snippets allocations and number of algorithms or parameters.
   ]
 
-  §txt[
+  §[
     @title[Operations on integer values]
 
-Glyph can be used to perform operation on integer values (additions, subtractions and multiplications). For example, code[=\/add[2\|3\|7]=] will evaluate to @12@, and code[=\/multiply[add[3\|7]\|subtract[5\|1\|2]]=] will return 20.
+p[Glyph can be used to perform operation on integer values (additions, subtractions and multiplications). For example, code[=\/add[2\|3\|7]=] will evaluate to @12@, and code[=\/multiply[add[3\|7]\|subtract[5\|1\|2]]=] will return 20.]
 
-As a more complex example, consider the following @factorial@ macro, which is able to calculate the factorial of a number recursively:
+p[As a more complex example, consider the following @factorial@ macro, which is able to calculate the factorial of a number recursively:]
 
-highlight[=html|
+  highlight[=html|
 def:[factorial\|
   ?[
     eq[{{0}}\|0]\|1\|
@@ -24,9 +24,9 @@ def:[factorial\|
     ]
   ]
 ]
-=]
+  =]
 
-If you try executing code[=factorial[5]=], it will evaluate to @120@.
+p[If you try executing code[=factorial[5]=], it will evaluate to @120@.]
 
   ]
   §txt[

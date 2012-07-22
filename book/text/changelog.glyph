@@ -24,8 +24,6 @@ def:[release|
   section[
     @title[v{{0}} &ndash; {{1}}]
     {{2}}
-
-    p/em[&rarr; View closed issues on =>[https://github.com/h3rald/glyph/issues?direction=asc&amp;labels={{0}}&amp;sort=created&amp;state=closed|GitHub].]
   ]
 ]
 def:[issue|

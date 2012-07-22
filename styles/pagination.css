@@ -1,6 +1,6 @@
 @page {
   size: A4;
-  margin: 40pt 30pt 40pt 30pt;
+  margin: 60pt 30pt 60pt 30pt;
   @top {
     content: string(book-title) " - " string(chapter-title);
     font-style: italic; }
@@ -137,11 +137,11 @@ h2, section h1 {
 .halftitlepage h2, .titlepage h2 {
   page-break-before: avoid; }
 
-.bodymatter h2, .bodymatter h1 {
+.chapter {
   counter-increment: h2;
   counter-reset: h3; }
 
-.backmatter h2, .backmatter h1 {
+.appendix {
   counter-increment: a2;
   counter-reset: h3; }
 

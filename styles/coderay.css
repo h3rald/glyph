@@ -3,12 +3,13 @@
  */
 .CodeRay {
   background-color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #ECECEC;
   line-height: 1.3em;
   font-size: 12px;
-  font-family: Monospace;
+  font-family: 'Inconsolata', Monospace;
   color: #000;
-  padding: 1em 0px 1em 1em; }
+  padding: 10px;
+  margin: 1em 0; }
 
 .CodeRay pre, .CodeRay code {
   padding: 0;
@@ -32,11 +33,10 @@ table.CodeRay td {
   vertical-align: top; }
 
 .CodeRay .line-numbers, .CodeRay .no {
-  border: 1px solid #ECECEC;
-  margin: 0 inherit;
+  margin: 0 2px 0 0;
   background-color: #ECECEC;
   color: #AAA;
-  padding: 0px 7px;
+  width: 20px;
   text-align: right; }
 
 .CodeRay .line-numbers tt {
@@ -90,7 +90,9 @@ ol.CodeRay li {
 
 .CodeRay .comment {
   color: #998;
-  font-style: italic; }
+  font-style: italic;
+  border: 0;
+  background: transparent; }
 
 .CodeRay .char {
   color: #04D; }

@@ -28,7 +28,7 @@ While including the context of an entire file is definitely a useful feature for
 
 Snippets can be defined using the %>[snippet:] (aliased by @&:@) and called by using the %>[snippet] (aliased by @&@). Consider the following simple example:
     ]
-    highlight[=html|
+    highlight[=plain|
 &:[markups\|Textile or Markdown]
 
 Glyph supports &[markups].
@@ -44,7 +44,7 @@ Snippets (or any other macro) can be nested within other snippets. Glyph takes c
     @id[fragments]
     txt[As an even simpler alternative to snippets, consider using _fragments_. The %>[fragment:] (aliased by @##@) can be used to mark a section of Glyph code as a fragment that can then be _embedded_ using the %>[embed] (aliased by @<=@), like this:]
     
-    highlight[=html|
+    highlight[=plain|
 Snippets and fragments ##[good_way\|are a good way to reuse] small chunks of content, while the include and load macros <=[good_way] entire files.
     =]
   ]

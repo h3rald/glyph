@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+Dir.chdir '../styles'
+
+system 'sh "generate"'
+
+Dir.chdir '../book'
+
 require_relative '../lib/glyph.rb'
 require_relative '../lib/glyph/commands.rb'
 

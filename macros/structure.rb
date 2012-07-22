@@ -27,6 +27,7 @@ macro :section do
 			:definition => @source_file,
 			:file => (attr(:src) || @source_file)
 		@node[:header] = bmk
+    @data[:toc] = !attr(:notoc)
 		@data[:title] = attr :title
 		@data[:level] = level
 		@data[:id] = bmk.code
