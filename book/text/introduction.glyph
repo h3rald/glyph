@@ -1,13 +1,6 @@
 .[
 	&:[prince|=>[http://www.princexml.com/|Prince]]
 	&:[wkhtml|=>[http://code.google.com/p/wkhtmltopdf/|wkhtmltopdf]]
-	macro:[=?txt|
-if Glyph.lite? then
-	interpret "section[#{raw_value}]"
-else
-	interpret "txt[#{raw_value}]"
-end  
-	=]
 ]section[txt[Glyph is a _Rapid Document Authoring Framework_. 
 
 With Glyph, creating and maintaining any kind of document becomes as easy as... _programming_. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.]

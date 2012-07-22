@@ -8,11 +8,13 @@
   @bottom {
     content: counter(page, decimal); } }
 
+.bodymatter > :nth-child(1) {
+  counter-reset: page 1;
+}
 
 @page frontmatter {
   @bottom {
     content: counter(page, lower-roman); } }
-
 
 @page backmatter {
   @bottom {
@@ -134,25 +136,25 @@ div {
   h3::before, section h1:before {
     content: counter(h2) "." counter(h3) "   "; } }
 
-.backmatter h3::before {
+.backmatter h3.toc::before {
   content: counter(a2, upper-latin) "." counter(h3) "   "; }
 
 .bodymatter {
-  section section h1:before {
+  section section h1.toc:before {
     content: counter(a2, upper-latin) "." counter(h3) "   "; }
-  h4::before, section section h1:before {
+  h4.toc::before, section section h1.toc:before {
     content: counter(h2) "." counter(h3) "." counter(h4) "   "; } }
 
-.backmatter h4::before {
+.backmatter h4.toc::before {
   content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "   "; }
 
 .bodymatter {
-  section section section h2:before {
+  section section section h2.toc:before {
     content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "   "; }
-  h5::before, section section section section h2:before {
+  h5.toc::before, section section section section h2.toc:before {
     content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "   "; } }
 
-.backmatter h5::before, .bodymatter section section section section h2:before {
+.backmatter h5.toc::before, .bodymatter section section section section h2.toc:before {
   content: counter(a2, upper-latin) "." counter(h3) "." counter(h4) "." counter(h5) "   "; }
 
 h2, section h1 {
@@ -163,23 +165,23 @@ h2, section h1 {
 .halftitlepage h2, .titlepage h2 {
   page-break-before: avoid; }
 
-.chapter  {
+.bodymatter .chapter{
     counter-increment: h2;
     counter-reset: h3; }
 
-.appendix {
+.backmatter .appendix {
     counter-increment: a2;
     counter-reset: h3; }
 
-.bodymatter h3, .backmatter h3, .bodymatter section h1, .backmatter section h1 {
+.bodymatter h3.toc, .backmatter h3.toc, .bodymatter section h1.toc, .backmatter section h1.toc {
   counter-increment: h3;
   counter-reset: h4; }
 
-.bodymatter h4, .backmatter h4, .bodymatter section section h1, .backmatter section section h1 {
+.bodymatter h4.toc, .backmatter h4.toc, .bodymatter section section h1.toc, .backmatter section section h1.toc {
   counter-increment: h4;
   counter-reset: h5; }
 
-.bodymatter h5, .backmatter h5, .bodymatter section section section h1, .backmatter section section section h1 {
+.bodymatter h5.toc, .backmatter h5.toc, .bodymatter section section section h1.toc, .backmatter section section section h1.toc {
   counter-increment: h5; }
 
 h1, h2, h3, h4, h5 {

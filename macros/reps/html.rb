@@ -171,9 +171,10 @@ rep :toc_sublist do |data|
 end
 
 rep :section do |data|
-	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "section"
-	title = data[:title] ? %{<h#{data[:level]} id="#{data[:id]}">#{data[:title]}</h#{data[:level]}>\n} : ""
-	%{<div class="#{css_class}">
+	sec_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "section"
+  hd_class = data[:toc] ? "toc" : "notoc"
+	title = data[:title] ? %{<h#{data[:level]} id="#{data[:id]}" class="#{hd_class}">#{data[:title]}</h#{data[:level]}>\n} : ""
+	%{<div class="#{sec_class}">
 #{title}#{data[:content]}
 
 </div>}	

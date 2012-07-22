@@ -51,7 +51,7 @@ book[
 		chapter[
 			@title[Authoring Documents]
 			section[
-				@title[.glyph files]
+				@title[code[.glyph] files]
 				@src[text_editing/glyph_files]
 			]
 			section[
@@ -296,22 +296,22 @@ book[
 			@title[Configuration Reference]
 			@id[cfg_ref]
 			section[
-				@title[document.*]
+				@title[code[document.*]]
 				@id[cfg_document]
 				@src[config/document]
 			]
 			section[
-				@title[filters.*]
+				@title[code[filters.*]]
 				@id[cfg_filters]
 				@src[config/filters]
 			]
 			section[
-				@title[options.*]
+				@title[code[options.*]]
 				@id[cfg_options]
 				@src[config/options]
 			]
 			section[
-				@title[output.*]
+				@title[code[output.*]]
 				@id[cfg_output]
 				@src[config/output]
 			]

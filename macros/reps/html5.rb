@@ -91,9 +91,10 @@ rep :toc do |data|
 end
 
 rep :section do |data|
-	css_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "section"
-	title = data[:title] ? %{<header><h1 id="#{data[:id]}">#{data[:title]}</h1></header>\n} : ""
-	%{<section class="#{css_class}">
+	sec_class = data[:name].to_s.match(/[a-z0-9_-]/i) ? data[:name] : "section"
+  hd_class = data[:toc] ? "toc" : "notoc"
+	title = data[:title] ? %{<header><h1 id="#{data[:id]}" class="#{hd_class}">#{data[:title]}</h1></header>\n} : ""
+	%{<section class="#{sec_class}">
 #{title}#{data[:content]}
 
 </section>}	

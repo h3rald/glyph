@@ -90,21 +90,13 @@ end
 
 macro :block_example do
 	interpret %{
-		div[@class[example]
-			p[strong[Example]]
+		section[
+			@title[Example]
+      @notoc[true]
 			highlight[=html|
 #{value}
 			=]
 		]
-	}
-end
-
-macro :examples do
-	%{
-<div class="examples">
-<p><strong>Examples:</strong></p> 
-#{value.split("\n").map{|i| "<code>#{i}</code><br />"}.to_s}
-</div>
 	}
 end
 
@@ -130,7 +122,7 @@ macro :ref_macro do
 		]} if raw_attr(:remarks)
 	interpret %{
 	section[
-		@title[#{m_name}]
+		@title[code[#{m_name}]]
 		@id[m_#{m_name.gsub(/[^a-z0-1_-]/, '_')}]
 		txt[
 #{m_value}

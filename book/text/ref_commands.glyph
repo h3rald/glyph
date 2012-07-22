@@ -21,7 +21,7 @@ section[
   ]
 ]
 section[
-  @title[add]
+  @title[code[add]]
   @id[c_add]
   p[Creates a new text file in the code[text/] folder.]
   example[glyph add introduction.textile]
@@ -30,7 +30,7 @@ section[
   ]
 ]
 section[
-  @title[compile]
+  @title[code[compile]]
   @id[c_compile]
   p[Compiles a Glyph document into an output file. If no options are specified, the code[document.glyph] file is used as source to produce a standalone HTML file.]
   example[glyph compile -f pdf]
@@ -54,12 +54,14 @@ If specified, enable =>[#auto_regeneration|auto regeneration] (requires the =>[h
   ]
 ]
 section[
-  @title[config]
+  @title[code[config]]
   @id[c_config]
 Gets or sets a configuration setting in the project or global configuration file (\/fmi[configuration files|#cfg]).
-  examples[
-glyph config document.filename
-glyph config -g document.author "Fabio Cevasco"
+  §[
+    @title[Examples]
+    @notoc[true]
+    p[code[glyph config document.filename]]
+    p[code[glyph config -g document.author "Fabio Cevasco"]]
   ]
   options[
     -o[global|
@@ -73,25 +75,27 @@ If specified, the global configuration file is processed instead of the project 
   ]
 ]
 section[
-  @title[help]
+  @title[code[help]]
   @id[c_help]
 Prints information about all Glyph commands or about one specific command.
-  examples[
-glyph help
-glyph help compile
+  §[
+    @title[Examples]
+    @notoc[true]
+    p[code[glyph help]]
+    p[code[glyph help compile]]
   ]
   parameters[
     -p[em[command]|A valid Glyph command.]
   ]
 ]
 section[
-  @title[init]
+  @title[code[init]]
   @id[c_init]
 Creates a new Glyph project in the current directory (if empty).
   example[glyph init]
 ]
 section[
-  @title[outline]
+  @title[code[outline]]
   @id[c_outline]
 Display an outline of the current document.
   options[
@@ -108,21 +112,25 @@ Display file names.
 Display section titles.
     ]
   ]
-  examples[
-glyph outline -it -l 1
-glyph outline -l 2
-glyph outline -f
+  §[
+    @title[Examples]
+    @notoc[true]
+    p[code[glyph outline -it -l 1]]
+    p[code[glyph outline -l 2]]
+    p[code[glyph outline -f]]
   ]
 ]
 section[
-  @title[stats] 
+  @title[code[stats]] 
   @id[c_stats]
   def:[stats_option|-o[{{0}}|If specified, general statistics about {{0}} are displayed (see =>[#stats_{{0}}]).]]
   def:[stats_long_option|long_option[{{0}}|Display detailed statistics about the specified {{0}}.]]
   p[Displays project statistics (\/fmi[this command|#stats]).]
-  examples[
-glyph stats -m 
-glyph stats --link=h3rald.com
+  §[
+    @title[Examples]
+    @notoc[true]
+    p[code[glyph stats -m]]
+    p[code[glyph stats --link=h3rald.com]]
   ]
   options[
     stats_option[bookmarks]
@@ -137,7 +145,7 @@ glyph stats --link=h3rald.com
   ]
 ]
 section[
-  @title[todo]
+  @title[code[todo]]
   @id[c_todo]
 Prints all the todo items saved using the %>[todo].
   example[glyph todo]

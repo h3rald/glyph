@@ -92,7 +92,7 @@ macro :navigation do
 	# Get the previous topic
 	previous_topic = @node[:document].topics.last
 	if previous_topic then
-		@data[:previous] = render :link, :target => "#{base_url}#{previous_topic[:src].gsub(/\..+$/, '.html')}", :title => previous_topic[:title]
+		@data[:previous] = render :link, :target => "#{base_url}#{previous_topic[:src].gsub(/\..+$/, '.html')}", :title => "← "+previous_topic[:title]
 	else
 		@data[:previous] = ""
 	end
@@ -100,7 +100,7 @@ macro :navigation do
 	@data[:next] = placeholder do |document|
 		current_topic = document.topics.select{|t| t[:id] == topic_id}[0] rescue nil
 		next_topic = document.topics[document.topics.index(current_topic)+1] rescue nil
-		render :link, :title => next_topic[:title], :target => "#{base_url}#{next_topic[:src].gsub(/\..+$/, '.html')}" if next_topic
+		render :link, :title => next_topic[:title]+" →", :target => "#{base_url}#{next_topic[:src].gsub(/\..+$/, '.html')}" if next_topic
 	end
 	render
 end
