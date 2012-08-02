@@ -74,7 +74,7 @@ interpret text
 	it "textile_section, markdown_section" do
 		output_for("§txt[*test*]").should == "<div class=\"section\">\n<p><strong>test</strong></p>\n\n</div>"
 		output_for("§md[*test*]").should == "<div class=\"section\">\n<p><em>test</em></p>\n\n</div>"
-		output_for("textile_section[@title[test]...]").should == "<div class=\"section\">\n<h2 id=\"h_1\">test</h2>\n<p>&#8230;</p>\n\n</div>"
+		output_for("textile_section[@title[test]...]").should == "<div class=\"section\">\n<h2 id=\"h_1\" class=\"toc\">test</h2>\n<p>&#8230;</p>\n\n</div>"
 	end
 
 

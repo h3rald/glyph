@@ -147,11 +147,12 @@ describe "glyph" do
 		file_copy "#{Glyph::PROJECT}/../files/ligature.jpg", "#{Glyph::PROJECT}/ligature.jpg"
 		run_command_successfully(["compile", "article.glyph"]).should == true
 		Pathname.new('article.html').exist?.should == true
-		file_load('article.html').gsub(/\t|\n/, '').should == %{
+		compact_html(file_load('article.html')).should == compact_html(%{
+      <?xml version="1.0"?>
 			<div class="section">
-				&#25913;&#21892; Test -- Test Snippet
+			  &#x6539;&#x5584; Test -- Test Snippet
 			</div>
-		}.gsub(/\t|\n/, '')
+		})
 		(Glyph::PROJECT/'article.html').unlink
 		Glyph['document.output'] = 'pdf'
 		src = Glyph::PROJECT/'article.html'
@@ -184,7 +185,7 @@ describe "glyph" do
 		err = "Document cannot be finalized due to previous errors"
 		res = run_command(["compile"])
 		out = file_load Glyph::PROJECT/'output/html/test_project.html'
-		out.gsub(/\t|\n/, '').should == %{<div class="section">   <h2 id="h_1">Test</h2></div>}
+		compact_html(out).should == %{<?xml version="1.0"?><div class="section"><h2 id="h_1" class="toc">Test</h2></div>}
 		res.match("error: #{err}").should == nil
 	end
 

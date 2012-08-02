@@ -84,10 +84,10 @@ describe "Macro:" do
 		interpret text
 		@p.document.output.gsub(/\n|\t/, '').should == %{
 			<div class="section">
-			<h2 id="h_1">Container section</h2>
+			<h2 id="h_1" class="toc">Container section</h2>
 			This is a test.
 				<div class="section">
-				<h3 id="h_2">Test Section</h3>	
+				<h3 id="h_2" class="toc">Test Section</h3>	
 				<p>&#8230;</p>
 				</div>
 			</div>
@@ -97,10 +97,10 @@ describe "Macro:" do
 	it "include should work in Lite mode" do
 		Glyph.lite_mode = true
 		result = %{<div class="section">
-<h2 id="h_1">Container section</h2>
+<h2 id="h_1" class="toc">Container section</h2>
 This is a test.
 	<div class="section">
-	<h3 id="h_2">Test Section</h3>
+	<h3 id="h_2" class="toc">Test Section</h3>
 		<p>&#8230;</p>
 	</div>
 

@@ -166,3 +166,12 @@ def macro_node(name, options={})
 		:escape => false
 	}.merge options)
 end
+
+
+def compact_html(html)
+  html.tap do |h|
+    h.gsub! /\n|\t/, ''
+    h.gsub! /\s{2,}/, ''
+    h.gsub! /\>\s*\</, '><'
+  end
+end

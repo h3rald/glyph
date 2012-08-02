@@ -31,8 +31,8 @@ describe "Macro:" do
 
 	it "navigation" do
 		Glyph.run! 'generate:web'
-		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html').gsub /\n|\t/, ''
-		web2 = Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html').gsub /\n|\t/, ''
+		web1 = compact_html Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
+		web2 = compact_html Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html')
 		web1.match(%{<div class="navigation"> | <a href="/index.html">Contents</a> | <a href="/a/b/web2.html">Topic #2</a></div>}).blank?.should == false
 		web2.match(%{<div class="navigation"><a href="/a/web1.html">Topic #1</a> | <a href="/index.html">Contents</a> | </div>}).blank?.should == false
 	end
@@ -44,13 +44,13 @@ describe "Macro:" do
 		index.match(%{href="/a/web1.html#h_3"}).blank?.should == false
 		index.match(%{href="/a/b/web2.html#h_7"}).blank?.should == false
 		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
-    web1.should match(/<h2 id="t_0">Topic #1<\/h2>/) #  Headers are reset in each topic
+    web1.should match(/<h2 id="t_0" class="toc">Topic #1<\/h2>/) #  Headers are reset in each topic
 		delete_project
 		reset_quiet
 		create_web_project
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'generate:html'
-		index = Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html').gsub /\n|\t|   |  /, ''
+		index = compact_html Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html')
     index.should match(%{<li class="section"><a href="#h_3">Topic #1</a></li><li><ol><li class="section"><a href="#h_4">Test #1a</a></li>})
 		index.match(%{href="a/web1.html#h_3"}).blank?.should == true
 		index.match(%{href="a/b/web2.html#h_7"}).blank?.should == true
