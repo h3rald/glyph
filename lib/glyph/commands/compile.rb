@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-GLI.desc 'Compile the project'
+d 'Compile the project'
 arg_name "[source_file] [destination_file]"
 command :compile do |c|
 	c.desc "Specify a glyph file to compile (default: document.glyph)"

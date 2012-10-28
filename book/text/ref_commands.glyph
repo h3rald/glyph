@@ -15,9 +15,9 @@ section[
     p[If specified, the command is executed in debug mode and additional diagnostic information is printed on the screen.]
   ]
   section[
-    @title[code[-v], code[--version]]
-    @id[version_switch]
-    p[Prints the current version of Glyph, ignoring any other command or switches.]
+    @title[code[-h], code[--help]]
+    @id[help_switch]
+    p[Displays help on the program.]
   ]
 ]
 section[

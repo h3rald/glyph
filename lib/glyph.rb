@@ -278,7 +278,7 @@ module Glyph
 			require 'glyph/commands'
 			self['system.quiet'] = true
 			self.library_mode = true
-			GLI.run ["compile", src.to_s, out].compact	
+			TOPLEVEL_BINDING.eval('self').run ["compile", src.to_s, out].compact	
 		rescue Exception => e
 			raise 
 		ensure

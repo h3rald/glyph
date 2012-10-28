@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
+
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
-require 'glyph/commands'
 
 describe "glyph" do
 
@@ -14,11 +14,6 @@ describe "glyph" do
 		reset_quiet
 		delete_project
 	end
-  
-  it "[-v] should pront the program name and version and quit" do
-    run_command(["-v"]).should == "Glyph v#{Glyph::VERSION}\n\n"
-    run_command(["-v", "compile"]).should == "Glyph v#{Glyph::VERSION}\n\n"
-  end
 
 	it "[init] should create a project in the current directory" do
 		delete_project
@@ -35,7 +30,7 @@ describe "glyph" do
 
 	it "[config] should write configuration settings" do
 		create_project
-		run_command_successfully(["config", "test_setting", true]).should == true
+		run_command_successfully(["config", "test_setting", "true"]).should == true
 		Glyph::CONFIG.get(:test_setting).should == true
 		Glyph::PROJECT_CONFIG.read
 		Glyph::PROJECT_CONFIG.get('test_setting').should == true
@@ -54,7 +49,7 @@ describe "glyph" do
 	it "[config] should not overwrite system settings" do
 		create_project
 		Glyph['system.test_setting'] = false
-		run_command(["config", "system.test_setting", true]).match(/warning.+\(system use only\)/m).should_not == nil
+		run_command(["config", "system.test_setting", "true"]).match(/warning.+\(system use only\)/m).should_not == nil
 		Glyph['system.test_setting'].should == false
 	end
 

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-GLI.desc 'Display statistics'
+d 'Display statistics'
 command :stats do |c|
 	c.desc "Display stats about macros"
 	c.switch [:m, :macros]

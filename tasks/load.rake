@@ -19,10 +19,7 @@ namespace :load do
 	desc "Load commands"
 	task :commands do
 		unless Glyph.lite? then
-			include GLI if (Glyph::PROJECT/'lib/commands').exist?
-			load_files_from_dir(Glyph::PROJECT/'lib/commands', '.rb') do |f, contents|
-				require f
-			end
+      commands_from Glyph::PROJECT/'lib/commands'
 		end
 	end
 

@@ -9,4 +9,4 @@ Dir.chdir '../book'
 require_relative '../lib/glyph.rb'
 require_relative '../lib/glyph/commands.rb'
 
-GLI.run ["compile", '-f', 'pdf']
+GLI::App.run ["compile", '-f', 'pdf']

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-GLI.desc 'Get/set configuration settings'
+d 'Get/set configuration settings'
 arg_name "setting [new_value]"
 command :config do |c|
 	c.desc "Read from/Save to global configuration"

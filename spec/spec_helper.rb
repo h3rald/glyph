@@ -13,6 +13,8 @@ rescue
 end
 
 require "glyph"
+require "glyph/commands"
+
 
 Glyph['system.quiet'] = true
 
@@ -71,7 +73,7 @@ end
 def run_command(cmd, return_code=false)
 	result = 0
 	out = stdout_for do
-		result = GLI.run cmd
+		result = TOPLEVEL_BINDING.eval('self').run cmd
 	end
 	return_code ? result : out
 end

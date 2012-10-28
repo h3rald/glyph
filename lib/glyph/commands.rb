@@ -1,20 +1,16 @@
 # encoding: utf-8
 
-include GLI
+include GLI::App
 
-GLI.desc "Enable debugging"
+program_desc "A rapid document authoring framework"
+
+d "Enable debugging"
 switch [:d, :debug]
 
-GLI.desc "Prints the version of the program"
-switch [:v, :version]
+d "Display documentation"
+switch [:h, :help]
 
-require Glyph::LIB/'commands/init'
-require Glyph::LIB/'commands/add'
-require Glyph::LIB/'commands/compile'
-require Glyph::LIB/'commands/config'
-require Glyph::LIB/'commands/todo'
-require Glyph::LIB/'commands/outline'
-require Glyph::LIB/'commands/stats'
+commands_from Glyph::LIB/"commands"
 
 Glyph.run 'load:tasks'
 Glyph.run 'load:commands'
@@ -26,11 +22,7 @@ pre do |global,command,options,args|
 	if global[:d] then
 		Glyph.debug_mode = true
 	end
-	if global[:v] || !command || command.name == :help then
-		puts "Glyph v#{Glyph::VERSION}"
-    puts
-	end
-	global[:v] ? false : true
+  true
 end
 
 post do |global,command,options,args|
