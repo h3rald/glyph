@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://www.h3rald.com/glyph/"
   s.authors = ["Fabio Cevasco"]
   s.email = "h3rald@h3rald.com"
-  s.date = "2012-11-24"
+  s.date = "2012-11-10"
   s.license = "MIT"
 
   s.files = ["Rakefile"]
