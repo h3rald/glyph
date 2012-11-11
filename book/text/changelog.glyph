@@ -37,6 +37,16 @@ def:[issue|
   %:[#>|"#{value} command"]
   %:[$>|"#{value} setting"]
 ]
+release[0.5.2|November 11th 2012|
+  features[
+    issue[208|HTML output now indented automatically.]
+    issue[206|CSS improvements.]
+  ]
+  bugs[
+    issue[209|Made Glyph compatible with gli v2.x.]
+    issue[207|Fixed heading level of aliased macro always set to 2.]
+  ]
+]
 release[0.5.1|December 4th 2011|
   bugs[
     issue[203|Fixed error in %>[pubdate].]
