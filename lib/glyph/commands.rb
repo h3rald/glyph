@@ -2,6 +2,7 @@
 
 include GLI::App
 
+version Glyph::VERSION
 program_desc "A rapid document authoring framework"
 
 d "Enable debugging"
