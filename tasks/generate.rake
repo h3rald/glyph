@@ -25,12 +25,19 @@ namespace :generate do
 				subdir = f.parent.relative_path_from(styles_dir).to_s.gsub(/^\./, '')
 				dir = out_dir/subdir
 				dir.mkpath
-				case
-				when f.extname == ".css" then
+				case f.extname
+				when ".css" then
 					file_copy f, dir/f.basename
-				when f.extname == ".sass" then
-					style = Sass::Engine.new(file_load(f.to_s)).render
-					out_file = dir/f.basename.to_s.gsub(/\.sass$/, '.css')
+				when ".sass", ".scss" then
+					begin
+						require 'sass'
+						style = Sass::Engine.new(file_load(f.to_s), :syntax => f.extname.gsub(/^\./, '').to_sym).render
+					rescue LoadError
+						macro_error "Sass is not installed. Please run: gem install sass"
+					rescue Exception
+						raise
+					end
+					out_file = dir/f.basename.to_s.gsub(/\.s[ac]ss$/, '.css')
 					file_write out_file, style
 				else
 					raise RuntimeError, "Unsupported stylesheet: '#{f.basename}'"
