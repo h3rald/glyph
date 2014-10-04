@@ -4,29 +4,23 @@
   @top {
     content: string(book-title) " - " string(chapter-title);
     font-style: italic; }
-
   @bottom {
     content: counter(page,decimal); } }
-
 .bodymatter > :nth-child(1) {
   counter-reset: page 1; }
 
 @page frontmatter {
   @bottom {
     content: counter(page,lower-roman); } }
-
 @page backmatter {
   @bottom {
     content: counter(page,decimal); } }
-
 @page :first {
   padding-top: 10%;
   @top {
     content: normal; }
-
   @bottom {
     content: normal; } }
-
 ol.toc {
   margin-left: 1.5em; }
 
@@ -169,7 +163,6 @@ h1, h2, h3, h4, h5 {
 @page {
   @footnotes {
     border-top: 1px solid #000; } }
-
 .fn {
   font-size: 85%;
   margin-left: 1.5em;
@@ -185,3 +178,5 @@ h1, h2, h3, h4, h5 {
   .fn:footnote-marker {
     font-weight: bold;
     margin-right: 0.5em; }
+
+/*# sourceMappingURL=pagination.css.map */

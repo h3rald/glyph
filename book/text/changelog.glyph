@@ -37,6 +37,12 @@ def:[issue|
   %:[#>|"#{value} command"]
   %:[$>|"#{value} setting"]
 ]
+
+release[0.5.3|October 4 2014|
+  bugs[
+    issue[216|Fix error with SCSS generation]
+  ]
+]
 release[0.5.2|November 11th 2012|
   features[
     issue[208|HTML output now indented automatically.]

@@ -7,5 +7,6 @@
 	<li><a href="http://www.stuartellis.eu">Stuart Ellis</a> (stuartellis)</li>
 	<li>Eric Givens (darthzippy)</li>
 	<li><a href="http://www.taylored-software.com/">Tammy Cravit</a> (tammycravit)</li>
+	<li><a href="https://github.com/grv87">Basil Peace</a> (grv87)</li>
 </ul>
     

@@ -1,37 +1,39 @@
-<?xml version="1.0"?>
 <div class="section">
-  <p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
-  <p>With Glyph, creating and maintaining any kind of document becomes as easy as&#x2026; <em>programming</em>. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.</p>
-  <div class="section">
-    <h3 id="h_1" class="toc">Main Features</h3>
-    <div class="section">
-      <h4 id="h_2" class="toc">Command Line Interface</h4>
-      <p>Glyph is 100% command line. Its interface resambles <a href="http://git-scm.com/">Git&#x2019;s</a> for its simplicity and power (thanks to the <a href="http://github.com/davetron5000/gli">gli</a> gem). Here are some example commands:</p>
-      <ul>
-        <li><code>glyph init</code> &#x2014; to initialize a new Glyph project in the current (empty) directory.</li>
-        <li><code>glyph add introduction.textile</code> &#x2014; to create a new file called <em>introduction.textile</em>.</li>
-        <li><code>glyph compile</code> &#x2014; to compile the current document into a single <span class="caps">HTML</span> file.</li>
-        <li><code>glyph compile --auto</code> &#x2014; to keep recompiling the current document every time a file is changed.</li>
-        <li><code>glyph compile -f pdf</code> &#x2014; to compile the current document into <span class="caps">HTML</span> and then transform it into <span class="caps">PDF</span>.</li>
-        <li><code>glyph compile readme.glyph</code> &#x2014; to compile a <em>readme.glyph</em> located in the current directory into a single <span class="caps">HTML</span> file.</li>
-        <li><code>glyph outline -l 2</code> &#x2014; Display the document outline, up to second-level headers.</li>
-        <li><code>glyph stats</code> &#x2014; Display project statistics.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h4 id="h_3" class="toc">Minimalist Syntax</h4>
-      <p>Glyph syntax rules can be explained using Glyph itself:</p>
-      <div class="CodeRay">
-        <div class="code">
-          <pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>section[
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  @title[Something about Glyph]
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  txt[
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>You can use Glyph macros in conjunction 
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>with _Textile_ or _Markdown_ to
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>produce HTML files effortlessly.
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>  ]
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>  p[Alternatively, you can just use em[Glyph itself] to generate HTML tags.]
-<span class="line-numbers"><a href="#n9" name="n9">9</a></span>  section[
+<p>Glyph is a <em>Rapid Document Authoring Framework</em>.</p>
+<p>With Glyph, creating and maintaining any kind of document becomes as easy as&#8230; <em>programming</em>. Glyph enables you to minimize text duplication, focus on content rather than presentation, manage references seamlessly and automate tedious tasks through a simple but effective macro language, specifically geared towards customization and extensibility.</p>
+
+	<div class="section">
+<h3 id="h_1" class="toc">Main Features</h3>
+<div class="section">
+<h4 id="h_2" class="toc">Command Line Interface</h4>
+<p>Glyph is 100% command line. Its interface resambles <a href="http://git-scm.com/">Git&#8217;s</a> for its simplicity and power (thanks to the <a href="http://github.com/davetron5000/gli">gli</a> gem). Here are some example commands:</p>
+<ul>
+	<li><code>glyph init</code> &#8212; to initialize a new Glyph project in the current (empty) directory.</li>
+	<li><code>glyph add introduction.textile</code> &#8212; to create a new file called <em>introduction.textile</em>.</li>
+	<li><code>glyph compile</code> &#8212; to compile the current document into a single <span class="caps">HTML</span> file.</li>
+	<li><code>glyph compile --auto</code> &#8212; to keep recompiling the current document every time a file is changed.</li>
+	<li><code>glyph compile -f pdf</code> &#8212; to compile the current document into <span class="caps">HTML</span> and then transform it into <span class="caps">PDF</span>.</li>
+	<li><code>glyph compile readme.glyph</code> &#8212; to compile a <em>readme.glyph</em> located in the current directory into a single <span class="caps">HTML</span> file.</li>
+	<li><code>glyph outline -l 2</code> &#8212; Display the document outline, up to second-level headers.</li>
+	<li><code>glyph stats</code> &#8212; Display project statistics.</li>
+</ul>
+
+</div>
+
+		<div class="section">
+<h4 id="h_3" class="toc">Minimalist Syntax</h4>
+<p>Glyph syntax rules can be explained using Glyph itself:</p>
+
+			<div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>section[
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  @title[Something about Glyph]
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  txt[
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>You can use Glyph macros in conjunction 
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>with _Textile_ or _Markdown_ to
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>produce HTML files effortlessly.
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  ]
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  p[Alternatively, you can just use em[Glyph itself] to generate HTML tags.]
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  section[
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    @title[What about PDFs?]
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>    @id[pdf]
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    p[
@@ -42,93 +44,103 @@
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>or =&gt;[http://code.google.com/p/wkhtmltopdf/|wkhtmltopdf].
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>    ]
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>  ]   
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>]</pre>
-        </div>
-      </div>
-      <p>The Glyph code above corresponds to the following HTML code:</p>
-      <div class="CodeRay">
-        <div class="code">
-          <pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="tag">&lt;div</span><span class="attribute-name">class</span>=<span class="string"><span class="delimiter">"</span><span class="content">section</span><span class="delimiter">"</span></span><span class="tag">&gt;</span><span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="tag">&lt;h2</span><span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">h_10</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>Something about Glyph<span class="tag">&lt;/h2&gt;</span><span class="line-numbers"><a href="#n3" name="n3">3</a></span><span class="tag">&lt;p&gt;</span><span class="line-numbers"><a href="#n4" name="n4">4</a></span>    You can use Glyph macros in conjunction with 
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    <span class="tag">&lt;em&gt;</span>Textile<span class="tag">&lt;/em&gt;</span> or <span class="tag">&lt;em&gt;</span>Markdown<span class="tag">&lt;/em&gt;</span> to
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    produce HTML files effortlessly.
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>  <span class="tag">&lt;/p&gt;</span>
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>  <span class="tag">&lt;p&gt;</span>
-<span class="line-numbers"><a href="#n9" name="n9">9</a></span>    Alternatively, you can just use <span class="tag">&lt;em&gt;</span>Glyph itself<span class="tag">&lt;/em&gt;</span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>]</pre></div>
+</div>
+
+<p>The Glyph code above corresponds to the following HTML code:</p>
+				<div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">section</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span class="tag">&lt;h2</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">h_10</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Something about Glyph<span class="tag">&lt;/h2&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  <span class="tag">&lt;p&gt;</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    You can use Glyph macros in conjunction with 
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="tag">&lt;em&gt;</span>Textile<span class="tag">&lt;/em&gt;</span> or <span class="tag">&lt;em&gt;</span>Markdown<span class="tag">&lt;/em&gt;</span> to
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    produce HTML files effortlessly.
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  <span class="tag">&lt;/p&gt;</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  <span class="tag">&lt;p&gt;</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    Alternatively, you can just use <span class="tag">&lt;em&gt;</span>Glyph itself<span class="tag">&lt;/em&gt;</span>
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    to generate HTML tags.
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>  <span class="tag">&lt;/p&gt;</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">"</span><span class="content">section</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>   <span class="tag">&lt;h3</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">"</span><span class="content">pdf</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>What about PDFs?<span class="tag">&lt;/h3&gt;</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">section</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>   <span class="tag">&lt;h3</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pdf</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>What about PDFs?<span class="tag">&lt;/h3&gt;</span>
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>   <span class="tag">&lt;p&gt;</span>
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>     Once you have a single, well-formatted HTML 
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>     file, converting it to PDF is
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>     extremely easy with a free 3rd-party renderer 
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     like <span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">"</span><span class="content">http://www.princexml.com</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>Prince<span class="tag">&lt;/a&gt;</span> 
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     or <span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">"</span><span class="content">http://code.google.com/p/wkhtmltopdf/</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>wkhtmltopdf<span class="tag">&lt;/a&gt;</span>.
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     like <span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.princexml.com</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Prince<span class="tag">&lt;/a&gt;</span> 
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     or <span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://code.google.com/p/wkhtmltopdf/</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>wkhtmltopdf<span class="tag">&lt;/a&gt;</span>.
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>   <span class="tag">&lt;/p&gt;</span>
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>  <span class="tag">&lt;/div&gt;</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <h4 id="h_4" class="toc">Content Reuse</h4>
-      <p>Finding yourself repeating the same sentence over an over? Glyph allows you to create snippets. Within snippets. Within other snippets (and so on, for a long long time&#x2026;) as long as you don&#x2019;t define a snippet by defining itself, which would be kinda nasty (and Glyph would complain!):</p>
-      <div class="CodeRay">
-        <div class="code">
-          <pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>snippet:[entities|snippets and macros]
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="tag">&lt;/div&gt;</span></pre></div>
+</div>
+
+</div>
+
+		<div class="section">
+<h4 id="h_4" class="toc">Content Reuse</h4>
+<p>Finding yourself repeating the same sentence over an over? Glyph allows you to create snippets. Within snippets. Within other snippets (and so on, for a long long time&#8230;) as long as you don&#8217;t define a snippet by defining itself, which would be kinda nasty (and Glyph would complain!):</p>
+			<div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>snippet:[entities|snippets and macros]
 <span class="line-numbers"><a href="#n2" name="n2">2</a></span>snippet:[custom_definitions|
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>  p[Glyph allows you to define your own &amp;[entities].]
 <span class="line-numbers"><a href="#n4" name="n4">4</a></span>]
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>&amp;[custom_definitions]</pre>
-        </div>
-      </div>
-      <p>...which results in:</p>
-      <div class="CodeRay">
-        <div class="code">
-          <pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="tag">&lt;p&gt;</span>Glyph allows you to define your own snippets and macros.<span class="tag">&lt;/p&gt;</span></pre>
-        </div>
-      </div>
-      <p>If yourself dreaming about <em>parametric</em> snippets, just create your own macros (see the <a href="http://github.com/h3rald/glyph/blob/master/book/text/changelog.glyph">source</a> of Glyph&#x2019;s changelog, just to have an idea).</p>
-    </div>
-    <div class="section">
-      <h4 id="h_5" class="toc">Automation of Common Tasks</h4>
-      <p>If you&#x2019;re writing a book, you shouldn&#x2019;t have to worry about pagination, headers, footers, table of contents, section numbering or similar. Glyph understands you, and will take care of everything for you (with a little help from CSS3, sometimes).</p>
-    </div>
-    <div class="section">
-      <h4 id="h_6" class="toc">Reference Validation</h4>
-      <p>Feel free to add plenty of links, snippets, bookmarks, &#x2026; if Glyph doesn&#x2019;t find something, it will definitely complain. Broken references are a thing on the past, and you don&#x2019;t need to worry about it.</p>
-    </div>
-    <div class="section">
-      <h4 id="h_7" class="toc">Extreme Extensibility</h4>
-      <ul>
-        <li>You miss a <code>!!!</code> macro to format really, <em>really</em> important things? Create it. In under 3 seconds, in Ruby or Glyph itself. And yes, you can use special characters, too.</li>
-        <li>You want your own, very special special <code>glyph create --everything</code> command to create all <em>you</em> need in a Glyph project? You can do it. Using your own Rake tasks, too.</li>
-        <li>You want Glyph to output <span class="caps">ODF</span> files? You can do it, and you&#x2019;ll be able to run <code>glyph generate -f odf</code>. This would probably require a little more time, but it&#x2019;s trivial, from a technical point of view.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h4 id="h_8" class="toc">Convention over Configuration</h4>
-      <p>Put your text files in <code>/text</code>, your images in <code>/images</code>, add custom macros in a <code>macro</code> folder within your <code>/lib</code> folder&#x2026; you get the picture: Glyph has its special places.</p>
-      <p>Nonetheless, you also have 1 (<em>one</em>) configuration file to customize to your heart&#x2019;s content (with smart defaults).</p>
-    </div>
-    <div class="section">
-      <h4 id="h_9" class="toc">Free and Open Source</h4>
-      <p>Glyph is 100% Open Source Software, developed using the Ruby Programming Language and licensed under the very permissive terms of the <a href="http://www.opensource.org/licenses/mit-license.php"><span class="caps">MIT</span> License</a>.</p>
-      <p>If you have Ruby installed, just run <code>gem install glyph</code>. That&#x2019;s all it takes.</p>
-    </div>
-  </div>
-  <div class="section">
-    <h3 id="h_10" class="toc">Resources</h3>
-    <ul>
-      <li>Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a></li>
-      <li>Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a></li>
-      <li>Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a></li>
-      <li>Development Wiki <a href="http://wiki.github.com/h3rald/glyph">http://wiki.github.com/h3rald/glyph</a></li>
-      <li>RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a></li>
-      <li>Book (<span class="caps">PDF</span>): <a href="http://github.com/downloads/h3rald/glyph/glyph.pdf">http://github.com/downloads/h3rald/glyph/glyph.pdf</a></li>
-      <li>Book (Web): <a href="http://www.h3rald.com/glyph/book/">http://www.h3rald.com/glyph/book/</a></li>
-      <li>Reference Documentation: <a href="http://rubydoc.info/gems/glyph/">http://rubydoc.info/gems/glyph/</a></li>
-      <li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
-    </ul>
-  </div>
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>&amp;[custom_definitions]</pre></div>
+</div>
+
+		<p>...which results in:</p>
+			<div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="tag">&lt;p&gt;</span>Glyph allows you to define your own snippets and macros.<span class="tag">&lt;/p&gt;</span></pre></div>
+</div>
+
+		<p>If yourself dreaming about <em>parametric</em> snippets, just create your own macros (see the <a href="http://github.com/h3rald/glyph/blob/master/book/text/changelog.glyph">source</a> of Glyph&#8217;s changelog, just to have an idea).</p>
+
+</div>
+		<div class="section">
+<h4 id="h_5" class="toc">Automation of Common Tasks</h4>
+<p>If you&#8217;re writing a book, you shouldn&#8217;t have to worry about pagination, headers, footers, table of contents, section numbering or similar. Glyph understands you, and will take care of everything for you (with a little help from CSS3, sometimes).</p>
+
+</div>
+		<div class="section">
+<h4 id="h_6" class="toc">Reference Validation</h4>
+<p>Feel free to add plenty of links, snippets, bookmarks, &#8230; if Glyph doesn&#8217;t find something, it will definitely complain. Broken references are a thing on the past, and you don&#8217;t need to worry about it.</p>
+
+</div>
+		<div class="section">
+<h4 id="h_7" class="toc">Extreme Extensibility</h4>
+<ul>
+	<li>You miss a <code>!!!</code> macro to format really, <em>really</em> important things? Create it. In under 3 seconds, in Ruby or Glyph itself. And yes, you can use special characters, too.</li>
+	<li>You want your own, very special special <code>glyph create --everything</code> command to create all <em>you</em> need in a Glyph project? You can do it. Using your own Rake tasks, too.</li>
+	<li>You want Glyph to output <span class="caps">ODF</span> files? You can do it, and you&#8217;ll be able to run <code>glyph generate -f odf</code>. This would probably require a little more time, but it&#8217;s trivial, from a technical point of view.</li>
+</ul>
+
+</div>
+		<div class="section">
+<h4 id="h_8" class="toc">Convention over Configuration</h4>
+<p>Put your text files in <code>/text</code>, your images in <code>/images</code>, add custom macros in a <code>macro</code> folder within your <code>/lib</code> folder&#8230; you get the picture: Glyph has its special places.</p>
+<p>Nonetheless, you also have 1 (<em>one</em>) configuration file to customize to your heart&#8217;s content (with smart defaults).</p>
+
+</div>	
+		<div class="section">
+<h4 id="h_9" class="toc">Free and Open Source</h4>
+<p>Glyph is 100% Open Source Software, developed using the Ruby Programming Language and licensed under the very permissive terms of the <a href="http://www.opensource.org/licenses/mit-license.php"><span class="caps">MIT</span> License</a>.</p>
+<p>If you have Ruby installed, just run <code>gem install glyph</code>. That&#8217;s all it takes.</p>
+
+</div>
+
+</div>
+	<div class="section">
+<h3 id="h_10" class="toc">Resources</h3>
+<ul>
+	<li>Home Page: <a href="http://www.h3rald.com/glyph/">http://www.h3rald.com/glyph/</a></li>
+	<li>Repository: <a href="http://www.github.com/h3rald/glyph/">http://www.github.com/h3rald/glyph/</a></li>
+	<li>Bug Tracking: <a href="http://www.github.com/h3rald/glyph/issues">http://www.github.com/h3rald/glyph/issues</a></li>
+	<li>Development Wiki <a href="http://wiki.github.com/h3rald/glyph">http://wiki.github.com/h3rald/glyph</a></li>
+	<li>RubyGem Download <a href="http://www.rubygems.org/gems/glyph">http://www.rubygems.org/gems/glyph</a></li>
+	<li>Book (<span class="caps">PDF</span>): <a href="http://github.com/downloads/h3rald/glyph/glyph.pdf">http://github.com/downloads/h3rald/glyph/glyph.pdf</a></li>
+	<li>Book (Web): <a href="http://www.h3rald.com/glyph/book/">http://www.h3rald.com/glyph/book/</a></li>
+	<li>Reference Documentation: <a href="http://rubydoc.info/gems/glyph/">http://rubydoc.info/gems/glyph/</a></li>
+	<li>User Group: <a href="http://groups.google.com/group/glyph-framework">http://groups.google.com/group/glyph-framework</a></li>
+</ul>
+
+</div>
+
 </div>

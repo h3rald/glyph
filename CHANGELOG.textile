@@ -1,54 +1,885 @@
-<?xml version="1.0"?>
+
+
+
+
+
+
+  <div class="section">
+<h2 id="h_1" class="toc">v0.5.3 &ndash; October 4 2014</h2>
 <div class="section">
-  <h2 id="h_1" class="toc">v0.5.2  November 11th 2012</h2>
+<h3 id="h_2" class="toc">1 Bug Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/216">#216</a></td>
+    <td>
+<p>Fix error with <span class="caps">SCSS</span> generation</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
   <div class="section">
-    <h3 id="h_2" class="toc">2 Features Implemented</h3>
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td>
-          <a href="https://github.com/h3rald/glyph/issues/208">#208</a>
-        </td>
-        <td>
-          <p><span class="caps">HTML</span> output now indented automatically.</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="https://github.com/h3rald/glyph/issues/206">#206</a>
-        </td>
-        <td>
-          <p><span class="caps">CSS</span> improvements.</p>
-        </td>
-      </tr>
-    </table>
-  </div>
+<h2 id="h_3" class="toc">v0.5.2 &ndash; November 11th 2012</h2>
+<div class="section">
+<h3 id="h_4" class="toc">2 Features Implemented</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/208">#208</a></td>
+    <td>
+<p><span class="caps">HTML</span> output now indented automatically.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/206">#206</a></td>
+    <td>
+<p><span class="caps">CSS</span> improvements.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+  
+  
+    <div class="section">
+<h3 id="h_5" class="toc">2 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/209">#209</a></td>
+    <td>
+<p>Made Glyph compatible with gli v2.&#215;.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/207">#207</a></td>
+    <td>
+<p>Fixed heading level of aliased macro always set to 2.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
   <div class="section">
-    <h3 id="h_3" class="toc">2 Bugs Fixed</h3>
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td>
-          <a href="https://github.com/h3rald/glyph/issues/209">#209</a>
-        </td>
-        <td>
-          <p>Made Glyph compatible with gli v2.&#xD7;.</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="https://github.com/h3rald/glyph/issues/207">#207</a>
-        </td>
-        <td>
-          <p>Fixed heading level of aliased macro always set to 2.</p>
-        </td>
-      </tr>
-    </table>
-  </div>
+<h2 id="h_6" class="toc">v0.5.1 &ndash; December 4th 2011</h2>
+<div class="section">
+<h3 id="h_7" class="toc">2 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/203">#203</a></td>
+    <td>
+<p>Fixed error in pubdate macro.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/204">#204</a></td>
+    <td>
+<p>Updated CodeRay stylesheet.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_8" class="toc">v0.5.0 &ndash; August 28th 2011</h2>
+<div class="section">
+<h3 id="h_9" class="toc">16 Features Implemented</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/152">#152</a></td>
+    <td>
+<p>It is now possible to generate a <span class="caps">PDF</span> document through HTML5, not only <span class="caps">HTML</span>, by setting the <code>output.pdf.through</code> setting to <code>html5</code>.</p>
+</td>
+  </tr>    
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/165">#165</a></td>
+    <td>
+<p>The fragment macro and the embed macro can be used to delimit and embed text fragments, in a way much similar to snippets.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/177">#177</a></td>
+    <td>
+<p>Introduced the concept of &#8220;macro representations&#8221;, to make macro code output-independent.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/179">#179</a></td>
+    <td>
+<p>Macro can be composed with other macros via backslashes, provided that containers only take exactly one parameter. The new xml macro dispatcher must be used composed with other macros to create raw <span class="caps">XML</span> tags, prepending = to macro names no longer works.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/180">#180</a></td>
+    <td>
+<p>Glyph can now generate ebooks in <span class="caps">MOBI</span> and <span class="caps">EPUB</span> format &ndash; with Calibre&#8217;s help.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/181">#181</a></td>
+    <td>
+<p>By using the new let macro macro, it is possible to define lexically scoped &#8220;variables&#8221; via the attribute: macro, and retrieve them within the scope of the let macro using the attribute macro.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/182">#182</a></td>
+    <td>
+<p>A while macro can be used to execute glyph code multiple times.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/183">#183</a></td>
+    <td>
+<p>The s macro dispatcher can be used to call almost any instance method of the Ruby String class. The <code>match</code> macro cannot be used anymore; use <code>s/match</code> instead.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/184">#184</a></td>
+    <td>
+<p>The old <code>rewrite:</code> macro has been renamed to <code>define:</code>. The new define: macro fully supports recursion.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/189">#189</a></td>
+    <td>
+<p>The add macro, the subtract macro and the multiply macro macro can be used to perform operations on integers.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/190">#190</a></td>
+    <td>
+<p>The lt, gt, lte, gte macros can be used to compare integer values.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/194">#194</a></td>
+    <td>
+<p>The load macro macro can be used to embed the contents of a file without performing any evaluation.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/195">#195</a></td>
+    <td>
+<p><code>\/</code> must not be used as invisible space separator, instead of <code>\.</code>.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/197">#197</a></td>
+    <td>
+<p>Snippets are no longer managed via a separate snippet.yml file and <em>must</em> be defined within Glyph source files, using the snippet: macro.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/200">#200</a></td>
+    <td>
+<p>Typing <code>glyph -v</code> now prints the current version of Glyph on the screen.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/201">#201</a></td>
+    <td>
+<p>Glyph no longer depends on Jeweler to create and manage its gem.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+  
+  
+    <div class="section">
+<h3 id="h_10" class="toc">4 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/151">#151</a></td>
+    <td>
+<p>Fixed a bug related to Jeweler&#8217;s gemspec validation. And for all it matters, Jeweler is no longer a development dependency for Glyph.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/166">#166</a></td>
+    <td>
+<p>Temporary output files are now placed in a temporary folder.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/196">#196</a></td>
+    <td>
+<p>Glyph now handles non-<span class="caps">ASCII</span> characters properly with Ruby 1.9 as well.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/199">#199</a></td>
+    <td>
+<p>Fixed a bug that caused incorrect <span class="caps">TOC</span> nesting when using the <code>src</code> attribute of the section macro.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_11" class="toc">v0.4.2 &ndash; October 22th 2010</h2>
+<div class="section">
+<h3 id="h_12" class="toc">3 Features Implemented</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/172">#172</a></td>
+    <td>
+<p>A new output? macro can be used to test whether Glyph is compiling to a particular output format.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/175">#175</a></td>
+    <td>
+<p>The conditional macro now support a third parameter (else branch).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/176">#176</a></td>
+    <td>
+<p>A bunch of new aliases and shortcuts are available for the section macro.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+  
+  
+    <div class="section">
+<h3 id="h_13" class="toc">1 Bug Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/178">#178</a></td>
+    <td>
+<p>No error is raised anymore if less than the required parameters/attributes are supplied to a rewritten macro.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_14" class="toc">v0.4.1 &ndash; September 23th 2010</h2>
+<div class="section">
+<h3 id="h_15" class="toc">5 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/169">#169</a></td>
+    <td>
+<p>*.scss files are now supported by the style macro.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/170">#170</a></td>
+    <td>
+<p>Improved default CodeRay stylesheet.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/171">#171</a></td>
+    <td>
+<p><span class="caps">SCSS</span> now used internally by Glyph to generate default <span class="caps">CSS</span> files.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/173">#173</a></td>
+    <td>
+<p>Consecutive escape sequences are now interpreted correctly in topics.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/174">#174</a></td>
+    <td>
+<p>Fixed error causing broken images in web5/html5 output.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_16" class="toc">v0.4.0 &ndash; September 3th 2010</h2>
+<div class="section">
+<h3 id="h_17" class="toc">13 Features Implemented</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/40">#40</a></td>
+    <td>
+<p>A new stats command can be used to display statistics about project files, snippets, macros, bookmarks and links.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/73">#73</a></td>
+    <td>
+<p>It is now possible to validate online <span class="caps">HTTP</span> links.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/112">#112</a></td>
+    <td>
+<p>It is now possible to use <em>wkhtmltopdf</em> instead of Prince to generate <span class="caps">PDF</span> files from <span class="caps">HTML</span> files.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/114">#114</a></td>
+    <td>
+<p>It is now possible to generate documents comprised of multiple files (topics).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/115">#115</a></td>
+    <td>
+<p>It is now possible to define layouts (used when generating multi-file outputs) using Glyph macros.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/120">#120</a></td>
+    <td>
+<p>It is now possible to compile your project to a single HTML5 file (<code>html5</code> output) or multiple files (<code>web5</code> output)</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/135">#135</a></td>
+    <td>
+<p>Stylesheets can now be linked and imported as well as embedded.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/138">#138</a></td>
+    <td>
+<p><code>web</code> and <code>web5</code> output formats inherit <code>html</code> macros.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/142">#142</a></td>
+    <td>
+<p>A new navigation macro can be used in <code>web</code> and <code>web5</code> outputs to navigate through topics.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/143">#143</a></td>
+    <td>
+<p>A topic-based <span class="caps">TOC</span> is generated when compiling to <code>web</code> or <code>web5</code></p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/144">#144</a></td>
+    <td>
+<p>Two new validators are now available to check whether a macro has (or doesn&#8217;t have) a certain ancestor: <code>within</code> and <code>not_within</code>.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/147">#147</a></td>
+    <td>
+<p>The default stylesheets provided by Glyph are now compatible with HTML5 outputs (html5 and web5).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/148">#148</a></td>
+    <td>
+<p>It is now possible to create custom tasks and commands to extend Glyph functionality.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+  
+  
+    <div class="section">
+<h3 id="h_18" class="toc">7 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/133">#133</a></td>
+    <td>
+<p>Added <span class="caps">HTML</span> charset to Glyph documents (utf-8).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/136">#136</a></td>
+    <td>
+<p>Moved utility functions to separate <code>Glyph::Utils</code> module.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/139">#139</a></td>
+    <td>
+<p>Heavily restructured Glyph configuration.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/140">#140</a></td>
+    <td>
+<p>Added <code>Glyph::Macro::Helpers</code> module to avoid code duplication in macros for different output formats.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/141">#141</a></td>
+    <td>
+<p>Prevented non-rb files to be loaded as macros.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/145">#145</a></td>
+    <td>
+<p>Dotfiles are now ignored by init command.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/167">#167</a></td>
+    <td>
+<p>Fixed <span class="caps">PDF</span> book download links.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_19" class="toc">v0.3.0 &ndash; June 13th 2010</h2>
+<div class="section">
+<h3 id="h_20" class="toc">13 Features Implemented</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/39">#39</a></td>
+    <td>
+<p>A new outline command is available to display the document outline.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/110">#110</a></td>
+    <td>
+<p>It is now possible to use Glyph language to produce arbitrary <span class="caps">XML</span> code.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/111">#111</a></td>
+    <td>
+<p>System settings are now stored within a <code>system.*</code> namespace and cannot be changed via the config: macro or the config command.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/116">#116</a></td>
+    <td>
+<p>It is now possible to use named attributes within Glyph macros.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/119">#119</a></td>
+    <td>
+<p><a id="new_parser"></a>A new parser was implemented from scratch to improve performance. Treetop gem no longer required.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/121">#121</a></td>
+    <td>
+<p>Some macros have been removed in favor of <span class="caps">XML</span> fallback, others have been updated.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/123">#123</a></td>
+    <td>
+<p>The SyntaxNode class has been specialized to differentiate between macros, attributes, parameters, text and escapes.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/124">#124</a></td>
+    <td>
+<p>Implemented new article macro and book macro.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/126">#126</a></td>
+    <td>
+<p>A new <code>rewrite</code> macro has been implemented to create simple macros using just Glyph code.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/127">#127</a></td>
+    <td>
+<p>A new alias macro has been implemented to create macro aliases.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/128">#128</a></td>
+    <td>
+<p>A blacklist for <span class="caps">XML</span> tags has been exposed via the <code>language.options.xml_blacklist</code> setting.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/129">#129</a></td>
+    <td>
+<p>The include macro can now be used in lite mode, it can evaluate ruby files and requires relative paths.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/130">#130</a></td>
+    <td>
+<p>A new &#8220;safe mode&#8221; has been implemented to explicitly forbid certain potentially unsafe macros.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+  
+  
+    <div class="section">
+<h3 id="h_21" class="toc">3 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/109">#109</a></td>
+    <td>
+<p>Performance has been dramatically improved by implementing a parser from scratch (see <a href="#new_parser">#119</a>)</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/122">#122</a></td>
+    <td>
+<p>Macro encoding/decoding no longer necessary due to the new parser (see <a href="#new_parser">#119</a>)</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/125">#125</a></td>
+    <td>
+<p>Warning messages have been streamlined.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_22" class="toc">v0.2.0 &ndash; May 9th 2010</h2>
+<div class="section">
+<h3 id="h_23" class="toc">11 Features Implemented</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/62">#62</a></td>
+    <td>
+<p>A new highlight macro is available to highlight source code (CodeRay or UltraViolet required).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/76">#76</a></td>
+    <td>
+<p>It is now possible to use Glyph programmatically via the new <code>Glyph#filter</code> and <code>Glyph#compile</code> methods.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/87">#87</a></td>
+    <td>
+<p>It is now possible to define snippets inside a Glyph source file using the snippet: macro.</p>
+</td>
+  </tr>  
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/88">#88</a></td>
+    <td>
+<p>It is now possible to change configuration settings inside a Glyph source file using the config: macro (Jabbslad).</p>
+</td>
+  </tr>  
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/89">#89</a></td>
+    <td>
+<p>It is now possible to compile a single Glyph source file without creating a Glyph project.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/92">#92</a></td>
+    <td>
+<p>6 new macros have been defined to allow conditional processing (condition macro, eq macro, not macro, and macro, or macro, match macro)</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/94">#94</a></td>
+    <td>
+<p>It is now possible to add <em>validators</em> to macros, for example to check the number of parameters they take.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/97">#97</a></td>
+    <td>
+<p>The compile command command can now take an extra <code>--auto</code> switch to trigger document auto-regeneration whenever a source file is changed (koraktor).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/99">#99</a></td>
+    <td>
+<p>Added a <code>document.draft</code> setting. If set to <code>true</code>, comments and TODOs are rendered in output files.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/100">#100</a></td>
+    <td>
+<p><a id="system_css"></a>Glyph <span class="caps">CSS</span> files are no longer copied to new projects, but they can be referenced as if they were (see also <a href="#css_not_copied">#93</a>).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/108">#108</a></td>
+    <td>
+<p>It is now possible to define Glyph macros within Glyph source files using the macro: macro.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+  
+  
+    <div class="section">
+<h3 id="h_24" class="toc">8 Bugs Fixed</h3>
+<table>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+        </tr>
+        
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/86">#86</a></td>
+    <td>
+<p>Warning and error messages have been updated, and it is now possible to show additional debug information. Additionally, syntax errors are now handled before the document is processed.</p>
+</td>
+  </tr> 
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/93">#93</a></td>
+    <td>
+<p><a id="css_not_copied"></a>Default css files were not copied when creating a new project. The issue has been resolved by allowing the style macro to reference Glyph&#8217;s system styles (see also <a href="#system_css">#100</a>).</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/95">#95</a></td>
+    <td>
+<p>The config command did not save data to <span class="caps">YAML</span> configuration files. This has been fixed ensuring that internal configuration overrides are not saved to the <span class="caps">YAML</span> file too.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/98">#98</a></td>
+    <td>
+<p>Glyph is now fully compatible with Ruby 1.9.1 and JRuby 1.4.0.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/101">#101</a></td>
+    <td>
+<p>Additional tests have been developed to improve Textile support. There should no longer be errors when using textile block elements inside Glyph macros.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/103">#103</a></td>
+    <td>
+<p>Fixed a bug that caused test failures when deleting the test project directory.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/104">#104</a></td>
+    <td>
+<p>Nested Glyph macros calling <code>Macro#interpret</code> no longer ignore escape delimiters.</p>
+</td>
+  </tr>
+    
+  <tr>
+    <td><a href="https://github.com/h3rald/glyph/issues/107">#107</a></td>
+    <td>
+<p>Added the possibility to encode (using the <code>encode</code> macro) and decode (using the <code>decode</code> macro) macros so that they can be interpreted later.</p>
+</td>
+  </tr>
+  
+      </table>
+
+</div>
+
+</div>
+
+  <div class="section">
+<h2 id="h_25" class="toc">v0.1.0 &ndash; April 8th 2010</h2>
+Initial release.
+
 </div>

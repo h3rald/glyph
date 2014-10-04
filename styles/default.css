@@ -103,7 +103,7 @@ blockquote {
   color: #121212; }
 
 table {
-  border: 1px solid black; }
+  border: 1px solid #000; }
 
 th {
   background: #EEE; }
@@ -112,7 +112,7 @@ tr, td, th {
   padding: 5px; }
 
 td, tr, th {
-  border: 1px solid black; }
+  border: 1px solid #000; }
 
 sup {
   font-size: 0.7em;
@@ -133,8 +133,8 @@ sup {
   text-align: center; }
 
 .note, .important, .tip, .caution, .box {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
   display: block;
   min-height: 50px;
   margin: 1em auto;
@@ -213,10 +213,10 @@ em {
   font-style: italic; }
 
 a {
-  color: #007bc4;
+  color: #007BC4;
   text-decoration: none; }
   a:hover {
-    color: #005b91; }
+    color: #005B91; }
 
 .code > pre {
   -webkit-border-radius: 5px;
@@ -238,7 +238,7 @@ nav, .navigation {
   display: block;
   margin: 1em auto;
   text-align: center;
-  border: 1px solid black; }
+  border: 1px solid #000; }
 
 nav.contents {
   margin: auto;
@@ -270,3 +270,5 @@ body {
 
 code, pre {
   font-family: "Inconsolata", Monospace; }
+
+/*# sourceMappingURL=default.css.map */
