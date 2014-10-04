@@ -42,7 +42,7 @@ Contents]
 		header_1 << text_node("Another test")
 		section_1 << text_node("\nContents")
 		section_0 << text_node("\n")
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should recognize escape sequences" do
@@ -57,12 +57,12 @@ Contents]
 		macro_0 << escape_node("\\[")
 		macro_0 << text_node(" ")
 		(tree&0) << macro_0
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should raise an error if a standard macro is not closed" do
 		text = "test\nsection[test\\]\ntest"
-		lambda { puts parse_text(text).inspect }.should	raise_error(Glyph::SyntaxError, "-- [3, 4] Macro 'section' not closed")
+		expect { puts parse_text(text).inspect }.to	raise_error(Glyph::SyntaxError, "-- [3, 4] Macro 'section' not closed")
 	end
 
 	it "should not parse macros within escaping macros" do
@@ -72,25 +72,25 @@ Contents]
 		macro_0 = p_node(0) 
 		macro_0 << text_node(" abc test2[This macro is escaped]\n cde", :escaped => true)
 		(tree&0) << macro_0
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should raise an error if escaped contents are nested" do
 		text = "test1[= abc test2[=This macro is escaped=]\n cde=]"
-		lambda  { puts parse_text(text).inspect }.should raise_error(Glyph::SyntaxError, "-- [1, 41] Cannot nest escaping macro 'test2' within escaping macro 'test1'")
+		expect  { puts parse_text(text).inspect }.to raise_error(Glyph::SyntaxError, "-- [1, 41] Cannot nest escaping macro 'test2' within escaping macro 'test1'")
 	end
 	
 	it "should raise an error if an escaping macro is not closed" do
 		text = "test1[= abc test2[This macro is escaped]\n cde] test"
-		lambda { puts parse_text(text).inspect }.should	raise_error(Glyph::SyntaxError, "-- [2, 10] Escaping macro 'test1' not closed")
+		expect { puts parse_text(text).inspect }.to	raise_error(Glyph::SyntaxError, "-- [2, 10] Escaping macro 'test1' not closed")
 	end
 
 	it "should raise errors if unescaped brackets are found" do
-		lambda { puts parse_text(" ] test[...] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 2] Macro delimiter ']' not escaped")
-		lambda { puts parse_text("[ test[...] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 1] Macro delimiter '[' not escaped")
-		lambda { puts parse_text(" test[...] [dgdsg]").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 12] Macro delimiter '[' not escaped")
-		lambda { puts parse_text(" test[...] dgdsg [").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 18] Macro delimiter '[' not escaped")
-		lambda { puts parse_text(" test[[...]] dgdsg").inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 7] Macro delimiter '[' not escaped")
+		expect { puts parse_text(" ] test[...] dgdsg").inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 2] Macro delimiter ']' not escaped")
+		expect { puts parse_text("[ test[...] dgdsg").inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 1] Macro delimiter '[' not escaped")
+		expect { puts parse_text(" test[...] [dgdsg]").inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 12] Macro delimiter '[' not escaped")
+		expect { puts parse_text(" test[...] dgdsg [").inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 18] Macro delimiter '[' not escaped")
+		expect { puts parse_text(" test[[...]] dgdsg").inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 7] Macro delimiter '[' not escaped")
 	end
 
 	it "should parse positional parameters (parameters)" do
@@ -114,12 +114,12 @@ Contents]
 		macro_011 << text_node("...")
 		(macro_01_p1&0) << macro_011
 		macro_0 << text_node(".")
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should not allow parameters outside macros" do
 		text = "... | test[...]"
-		lambda { puts parse_text(text).inspect }.should raise_error(Glyph::SyntaxError, "-- [1, 5] Parameter delimiter '|' not allowed here")
+		expect { puts parse_text(text).inspect }.to raise_error(Glyph::SyntaxError, "-- [1, 5] Parameter delimiter '|' not allowed here")
 	end
 
 	it "should recognize escaped pipes" do
@@ -140,7 +140,7 @@ Contents]
 		test_1 << text_node("a ", :escaped => true)
 		test_1 << escape_node("\\|")
 		test_1 << text_node("test", :escaped => true)
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should parse named parameters (attributes)" do
@@ -157,12 +157,12 @@ Contents]
 		(tree&0) << macro_0
 		(tree&0) << first
 		(tree&0) << second
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should not parse parameters inside attributes" do
 		text = "test[@attr[test|...]]"
-		lambda { puts parse_text(text).inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 16] Parameter delimiter '|' not allowed here")
+		expect { puts parse_text(text).inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 16] Parameter delimiter '|' not allowed here")
 	end
 
 	it "should parse attributes inside parameters" do
@@ -178,12 +178,12 @@ Contents]
 		par = tree.children.last&2
 		par << text_node("...")
 		test_1 << text_node(" test")
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should not allow attribute nesting" do
 		text = "... test[@par1[@par2[...]...]]"
-		lambda { puts parse_text(text).inspect}.should raise_error(Glyph::SyntaxError, "-- [1, 22] Attributes cannot be nested")
+		expect { puts parse_text(text).inspect}.to raise_error(Glyph::SyntaxError, "-- [1, 22] Attributes cannot be nested")
 	end
 
 	it "should parse macros nested in attributes" do
@@ -199,7 +199,7 @@ Contents]
 		c = a_node :c
 		c << text_node('...')
 		(a&0) << c
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should parse parameters in nested macros" do
@@ -221,7 +221,7 @@ Contents]
 		macro_0_p2 = p_node 2
 		macro_0_p2 << text_node("...")
 		(tree&0) << macro_0_p2
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should handle escaped sequences before macro names" do
@@ -233,21 +233,21 @@ Contents]
 		macro_0 = p_node(0) 
 		macro_0 << text_node("...")
 		(tree&2) << macro_0
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should ignore parameters for empty macros" do
 		text = "toc[]"
 		tree = document_node
 		tree << macro_node(:toc)
-		parse_text(text).should == tree
+		expect(parse_text(text)).to eq(tree)
 	end
 
 	it "should allow macro composition" do
-		parse_text("test[...|a/b/c[...]]").should == parse_text("test[...|a[b[c[...]]]]")
-		parse_text(" /test[...]").should == parse_text(" test[...]")
-		parse_text(" test/[...]").should == parse_text(" test[...]")
-		parse_text("a/b/c[=test[...]=]").should == parse_text("a[b[c[=test[...]=]]]")
+		expect(parse_text("test[...|a/b/c[...]]")).to eq(parse_text("test[...|a[b[c[...]]]]"))
+		expect(parse_text(" /test[...]")).to eq(parse_text(" test[...]"))
+		expect(parse_text(" test/[...]")).to eq(parse_text(" test[...]"))
+		expect(parse_text("a/b/c[=test[...]=]")).to eq(parse_text("a[b[c[=test[...]=]]]"))
 	end
 
 end

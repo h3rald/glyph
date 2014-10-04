@@ -20,118 +20,117 @@ describe Glyph::Analyzer do
 	end
 
 	it "should be initialized with a document" do
-		lambda { Glyph::Analyzer.new(Glyph.document) }.should_not raise_error
-		lambda { Glyph::Analyzer.new }.should_not raise_error
+		expect { Glyph::Analyzer.new(Glyph.document) }.not_to raise_error
+		expect { Glyph::Analyzer.new }.not_to raise_error
 	end
 
 	it "should expose a macro node iterator" do
-		lambda { @a.with_macros }.should raise_error(ArgumentError, "No block given")
+		expect { @a.with_macros }.to raise_error(ArgumentError, "No block given")
 		count = 0
-		lambda { @a.with_macros {|n| count+=1} }.should_not raise_error
-		count.should == 20
+		expect { @a.with_macros {|n| count+=1} }.not_to raise_error
+		expect(count).to eq(20)
 		count = 0
-		lambda { @a.with_macros(:snippet) {|n| count+=1} }.should_not raise_error
-		count.should == 2
+		expect { @a.with_macros(:snippet) {|n| count+=1} }.not_to raise_error
+		expect(count).to eq(2)
 		count = 0
-		lambda { @a.with_macros(:&) {|n| count+=1} }.should_not raise_error
-		count.should == 2
+		expect { @a.with_macros(:&) {|n| count+=1} }.not_to raise_error
+		expect(count).to eq(2)
 	end
 
 	it "should access macro instance arrays by definition" do
-		@a.macro_array_for(:snippet).should == []
+		expect(@a.macro_array_for(:snippet)).to eq([])
 		@a.with_macros {}
-		@a.macro_array_for(:snippet).length.should == 2
-		@a.macro_array_for(:&).length.should == 2
-		@a.macro_array_for(:section).length.should == 4
+		expect(@a.macro_array_for(:snippet).length).to eq(2)
+		expect(@a.macro_array_for(:&).length).to eq(2)
+		expect(@a.macro_array_for(:section).length).to eq(4)
 	end
 
 	it "should raise an error if a stat is not available" do
-		lambda { @a.stats_for :unknown }.should raise_error(RuntimeError, "Unable to calculate unknown stats")
+		expect { @a.stats_for :unknown }.to raise_error(RuntimeError, "Unable to calculate unknown stats")
 	end
 
 	it "should calculate stats for all macros" do
-		lambda {@a.stats_for :macros}.should_not raise_error
-		@a.stats[:macros].blank?.should == false
+		expect {@a.stats_for :macros}.not_to raise_error
+		expect(@a.stats[:macros].blank?).to eq(false)
 		c = @a.stats[:macros]
-		c[:definitions].should == (Glyph::MACROS.keys - Glyph::ALIASES[:by_alias].keys).uniq.sort
-		c[:aliases].should == Glyph::ALIASES[:by_alias].keys.sort
-		c[:instances].length.should == 20
-		c[:used_definitions].should == [:anchor, :include, :link, :markdown, :section, :snippet, :"snippet:", :textile, :toc]
+		expect(c[:definitions]).to eq((Glyph::MACROS.keys - Glyph::ALIASES[:by_alias].keys).uniq.sort)
+		expect(c[:aliases]).to eq(Glyph::ALIASES[:by_alias].keys.sort)
+		expect(c[:instances].length).to eq(20)
+		expect(c[:used_definitions]).to eq([:anchor, :include, :link, :markdown, :section, :snippet, :"snippet:", :textile, :toc])
 	end
 
 	it "should calculate stats for a single macro" do
-		lambda {@a.stats_for :macro, :dsfash }.should raise_error(ArgumentError, "Unknown macro 'dsfash'")
-		lambda {@a.stats_for :macro, :frontmatter }.should 
-		raise_error(ArgumentError, "Alias 'frontmatter' is not used in this document, did you mean 'section'?")
-		lambda {@a.stats_for :macro, :section }.should_not raise_error
+		expect {@a.stats_for :macro, :dsfash }.to raise_error(ArgumentError, "Unknown macro 'dsfash'")
+		expect {@a.stats_for :macro, :frontmatter }.to raise_error(ArgumentError, "Macro 'frontmatter' is not used in this document, did you mean 'section'?")
+		expect {@a.stats_for :macro, :section }.not_to raise_error
 		c = @a.stats[:macro]
-		c[:instances].length.should == 4
-		c[:files].should == [["document.glyph", 1], ["text/a/b/c/included.textile", 1], 
-			["text/a/b/c/markdown.markdown", 1], ["text/container.textile", 1]]
+		expect(c[:instances].length).to eq(4)
+		expect(c[:files]).to eq([["document.glyph", 1], ["text/a/b/c/included.textile", 1], 
+			["text/a/b/c/markdown.markdown", 1], ["text/container.textile", 1]])
 		@a.stats_for :macro, :"&"
 		c = @a.stats[:macro]
-		c[:alias_for].should == :snippet
-		c[:instances].length.should == 2
+		expect(c[:alias_for]).to eq(:snippet)
+		expect(c[:instances].length).to eq(2)
 	end
 
 	it "should calculate stats for all bookmarks" do
-		lambda {@a.stats_for :bookmarks}.should_not raise_error
+		expect {@a.stats_for :bookmarks}.not_to raise_error
 		c = @a.stats[:bookmarks]
-		c[:codes].should == [:h_1, :h_2, :md, :refs, :toc, :unused]
-		c[:unreferenced].should == [:h_2, :md, :toc, :unused]
-		c[:referenced].should == [[:h_1, 1], [:refs, 1]]
+		expect(c[:codes]).to eq([:h_1, :h_2, :md, :refs, :toc, :unused])
+		expect(c[:unreferenced]).to eq([:h_2, :md, :toc, :unused])
+		expect(c[:referenced]).to eq([[:h_1, 1], [:refs, 1]])
 	end
 
 	it "should calculate stats for a single bookmark" do
-		lambda {@a.stats_for :bookmark, '#h_7'}.should raise_error(ArgumentError, "Bookmark 'h_7' does not exist")
-		lambda {@a.stats_for :bookmark, '#h_1'}.should_not raise_error
+		expect {@a.stats_for :bookmark, '#h_7'}.to raise_error(ArgumentError, "Bookmark 'h_7' does not exist")
+		expect {@a.stats_for :bookmark, '#h_1'}.not_to raise_error
 		c = @a.stats[:bookmark]
-		c[:file].should == "text/container.textile"
-		c[:references].should == [["text/references.glyph", 1]]
-		c[:type].should == :header
+		expect(c[:file]).to eq("text/container.textile")
+		expect(c[:references]).to eq([["text/references.glyph", 1]])
+		expect(c[:type]).to eq(:header)
 	end
 
 	it "should calculate stats for all links do" do
-		lambda {@a.stats_for :links}.should_not raise_error
+		expect {@a.stats_for :links}.not_to raise_error
 		c = @a.stats[:links]
-		c[:internal].should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
-			 ["#refs", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
-		c[:external].should == [["http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		expect(c[:internal]).to eq([["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
+			 ["#refs", {:total=>1, :files=>[["text/references.glyph", 1]]}]])
+		expect(c[:external]).to eq([["http://www.h3rald.com", {:total=>1, :files=>[["text/references.glyph", 1]]}]])
 	end
 
 	it "should calculate stats for a single link" do
-		lambda {@a.stats_for :link, 'q'}.should raise_error(ArgumentError, "No link matching /q/ was found")
-		lambda {@a.stats_for :link, 'h'}.should_not raise_error
+		expect {@a.stats_for :link, 'q'}.to raise_error(ArgumentError, "No link matching /q/ was found")
+		expect {@a.stats_for :link, 'h'}.not_to raise_error
 		c = @a.stats[:link][:stats]
-		c.should == [["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
-			["http://www.h3rald.com",{:total=>1, :files=>[["text/references.glyph", 1]]}]]
+		expect(c).to eq([["#h_1", {:total=>1, :files=>[["text/references.glyph", 1]]}], 
+			["http://www.h3rald.com",{:total=>1, :files=>[["text/references.glyph", 1]]}]])
 	end
 
 	it "should calculate stats for all snippets" do
-		lambda {@a.stats_for :snippets}.should_not raise_error
+		expect {@a.stats_for :snippets}.not_to raise_error
 		c = @a.stats[:snippets]
-		c[:used].should == [:test]
-		c[:total].should == 2
-		c[:unused].should == [:unused]
-	 	c[:definitions].should == [:test, :unused]	
+		expect(c[:used]).to eq([:test])
+		expect(c[:total]).to eq(2)
+		expect(c[:unused]).to eq([:unused])
+	 	expect(c[:definitions]).to eq([:test, :unused])	
 	end
 
 	it "should calculate stats for a single snippet" do
-		lambda {@a.stats_for :snippet, 'test1'}.should raise_error(ArgumentError, "Snippet 'test1' does not exist")
-		lambda {@a.stats_for :snippet, 'unused'}.should raise_error(ArgumentError, "Snippet 'unused' is not used in this document")
-		lambda {@a.stats_for :snippet, 'test'}.should_not raise_error
+		expect {@a.stats_for :snippet, 'test1'}.to raise_error(ArgumentError, "Snippet 'test1' does not exist")
+		expect {@a.stats_for :snippet, 'unused'}.to raise_error(ArgumentError, "Snippet 'unused' is not used in this document")
+		expect {@a.stats_for :snippet, 'test'}.not_to raise_error
 		c = @a.stats[:snippet][:stats]
-		c.should == {:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]}
+		expect(c).to eq({:total=>2, :files=>[["document.glyph", 1], ["text/references.glyph", 1]]})
 	end
 
 	it "should calculate global stats" do
-		lambda {@a.stats_for :global}.should_not raise_error
+		expect {@a.stats_for :global}.not_to raise_error
 		c = @a.stats
-		c[:bookmarks].blank?.should == false
-		c[:links].blank?.should == false
-		c[:snippets].blank?.should == false
-		c[:macros].blank?.should == false
-		c[:files].should == {:layouts=>0, :images=>1, :styles=>1, :text=>4, :lib=>0}
+		expect(c[:bookmarks].blank?).to eq(false)
+		expect(c[:links].blank?).to eq(false)
+		expect(c[:snippets].blank?).to eq(false)
+		expect(c[:macros].blank?).to eq(false)
+		expect(c[:files]).to eq({:layouts=>0, :images=>1, :styles=>1, :text=>4, :lib=>0})
 	end
 
 end

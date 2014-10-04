@@ -18,16 +18,16 @@ describe "Macro:" do
 	it "anchor" do
 		interpret "this is a #[test|test]."
 		doc = @p.document
-		doc.output.should == "this is a <a id=\"test\">test</a>."
-		doc.bookmarks[:test].should == Glyph::Bookmark.new({:file => nil, :title => 'test', :id => :test})
-		lambda { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.should raise_error
+		expect(doc.output).to eq("this is a <a id=\"test\">test</a>.")
+		expect(doc.bookmarks[:test]).to eq(Glyph::Bookmark.new({:file => nil, :title => 'test', :id => :test}))
+		expect { interpret "this is a #[test|test]. #[test|This won't work!]"; @p.document }.to raise_error
 	end
 
 	it "section, chapter, header" do
 		text = "chapter[@title[Chapter X] ... section[@title[Section Y]@id[sec-y] ... section[@title[Another section] ...]]]"
 		interpret text
 		doc = @p.document
-		doc.output.gsub(/\n|\t/, '').should == %{<div class="chapter">
+		expect(doc.output.gsub(/\n|\t/, '')).to eq(%{<div class="chapter">
 					<h2 id="h_1" class="toc">Chapter X</h2>... 
 					<div class="section">
 					<h3 id="sec-y" class="toc">Section Y</h3>... 
@@ -36,8 +36,8 @@ describe "Macro:" do
 						</div>
 					</div>
 				</div>
-		}.gsub(/\n|\t/, '')
-		doc.bookmark?(:"sec-y").should == Glyph::Bookmark.new({:id => :"sec-y", :title => "Section Y", :file => nil})
+		}.gsub(/\n|\t/, ''))
+		expect(doc.bookmark?(:"sec-y")).to eq(Glyph::Bookmark.new({:id => :"sec-y", :title => "Section Y", :file => nil}))
 	end
 
 	it "document, head, style" do
@@ -57,9 +57,9 @@ describe "Macro:" do
 		</html>
 		}
 		interpret "document[head[style[test.sass]]]"
-		@p.document.output.gsub(/\n|\t/, '').should == doc.gsub(/\n|\t/, '')
+		expect(@p.document.output.gsub(/\n|\t/, '')).to eq(doc.gsub(/\n|\t/, ''))
 		interpret "document[head[style[test.scss]]]"
-		@p.document.output.gsub(/\n|\t/, '').should == doc.gsub(/\n|\t/, '')
+		expect(@p.document.output.gsub(/\n|\t/, '')).to eq(doc.gsub(/\n|\t/, ''))
 	end	
 
 	it "style should link files by absolute or relative path in Lite mode" do
@@ -80,14 +80,14 @@ describe "Macro:" do
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
 		interpret "document[head[style[styles/test.sass]]]"
-		@p.document.output.gsub(/\n|\t/, '').should == result
+		expect(@p.document.output.gsub(/\n|\t/, '')).to eq(result)
 	end
 
 	it "style should import and link stylesheets" do
 		Glyph['document.styles'] = 'import'
-		output_for("head[style[default.css]]").match(/@import url\("styles\/default\.css"\)/).blank?.should == false
+		expect(output_for("head[style[default.css]]").match(/@import url\("styles\/default\.css"\)/).blank?).to eq(false)
 		Glyph['document.styles'] = 'link'
-		output_for("head[style[default.css]]").match(%{<link href="styles/default.css" rel="stylesheet" type="text/css" />}).blank?.should == false
+		expect(output_for("head[style[default.css]]").match(%{<link href="styles/default.css" rel="stylesheet" type="text/css" />}).blank?).to eq(false)
 		Glyph['document.styles'] = 'embed'
 	end
 
@@ -96,7 +96,7 @@ describe "Macro:" do
 		interpret file_load(Glyph::PROJECT/'document.glyph')
 		doc = @p.document
 		doc.output.gsub!(/\n|\t/, '')
-		doc.output.slice(/(.+?<\/div>)/, 1).should == %{
+		expect(doc.output.slice(/(.+?<\/div>)/, 1)).to eq(%{
 			<div class="contents">
 			<h2 class="toc-header" id="toc">Table of Contents</h2>
 			<ol class="toc">
@@ -104,7 +104,7 @@ describe "Macro:" do
 				<li class="section"><a href="#md">Markdown</a></li>
 			</ol>
 			</div>
-		}.gsub(/\n|\t/, '')
+		}.gsub(/\n|\t/, ''))
 	end
 
 	it "link" do
@@ -115,26 +115,26 @@ describe "Macro:" do
 			#[test_id2|Test #2]
 		}
 		interpret text
-		@p.document.output.gsub(/\n|\t/, '').should == %{
+		expect(@p.document.output.gsub(/\n|\t/, '')).to eq(%{
 			<a href="#test_id">Test #1</a>
 			<a href="#test_id2">Test #2</a>
 			<a id="test_id">Test #1</a>
 			<a id="test_id2">Test #2</a>
-		}.gsub(/\n|\t/, '')
+		}.gsub(/\n|\t/, ''))
 	end
 
 	it "fmi" do
 		interpret "fmi[this topic|#test] #[test|Test]"
-		@p.document.output.should == %{<span class="fmi">
+		expect(@p.document.output).to eq(%{<span class="fmi">
 			for more information on this topic, 
-			see <a href="#test">Test</a></span> <a id="test">Test</a>}.gsub(/\n|\t/, '')
+			see <a href="#test">Test</a></span> <a id="test">Test</a>}.gsub(/\n|\t/, ''))
 	end	
 
 	it "image" do
 		interpret "image[@width[90%]@height[90%]@alt[-]ligature.jpg]"
-		@p.document.output.gsub(/\t|\n/, '').should == %{
+		expect(@p.document.output.gsub(/\t|\n/, '')).to eq(%{
 			<img src="images/ligature.jpg" width="90%" height="90%" alt="-" />
-		}.gsub(/\n|\t/, '')
+		}.gsub(/\n|\t/, ''))
 	end
 
 	it "image should link files by absolute or relative path in Lite mode" do
@@ -144,18 +144,18 @@ describe "Macro:" do
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
 		interpret "image[@width[90%]@height[90%]images/ligature.jpg]"
-		@p.document.output.gsub(/\t|\n/, '').should == result
+		expect(@p.document.output.gsub(/\t|\n/, '')).to eq(result)
 		interpret "image[@width[90%]@height[90%]#{Glyph::PROJECT}/images/ligature.jpg]"
-		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
+		expect(@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '')).to eq(result)
 	end
 
 	it "figure" do
 		interpret "figure[@alt[ligature]ligature.jpg|Ligature]"
-		@p.document.output.gsub(/\t|\n/, '').should == %{
+		expect(@p.document.output.gsub(/\t|\n/, '')).to eq(%{
 			<div class=\"figure\" alt=\"ligature\">
 				<img src=\"images/ligature.jpg\" />
 				<div class=\"caption\">Ligature</div>
-			</div>}.gsub(/\n|\t/, '')
+			</div>}.gsub(/\n|\t/, ''))
 	end
 
 	it "fig should link files by absolute or relative path in Lite mode" do
@@ -168,24 +168,24 @@ describe "Macro:" do
 		Glyph.lite_mode = true
 		Dir.chdir Glyph::PROJECT
 		interpret "figure[images/ligature.jpg|Ligature]"
-		@p.document.output.gsub(/\t|\n/, '').should == result
+		expect(@p.document.output.gsub(/\t|\n/, '')).to eq(result)
 		interpret "figure[#{Glyph::PROJECT}/images/ligature.jpg|Ligature]"
-		@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '').should == result
+		expect(@p.document.output.gsub(/\t|\n/, '').gsub(Glyph::PROJECT.to_s+'/', '')).to eq(result)
 	end
 
 	it "draftcomment, todo" do
 		text1 = "dc[comment!]"
 		text2 = "![todo!]"
 		interpret text1
-		@p.document.output.should == ""
+		expect(@p.document.output).to eq("")
 		interpret text2
-		@p.document.output.should == ""
+		expect(@p.document.output).to eq("")
 		Glyph['document.draft'] = true
 		interpret text1
-		@p.document.output.should == %{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>comment!</span>}
+		expect(@p.document.output).to eq(%{<span class="comment"><span class="comment-pre"><strong>Comment:</strong> </span>comment!</span>})
 		interpret text2
-		@p.document.output.should == %{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>todo!</span>}
-		@p.document.todos.length.should == 1
+		expect(@p.document.output).to eq(%{<span class="todo"><span class="todo-pre"><strong>TODO:</strong> </span>todo!</span>})
+		expect(@p.document.todos.length).to eq(1)
 		Glyph['document.draft'] = false
 	end
 
@@ -210,7 +210,7 @@ describe "Macro:" do
       ]
       }
     end
-    output_for(container.call aliased).should == output_for(container.call normal)
+    expect(output_for(container.call aliased)).to eq(output_for(container.call normal))
   end
 
 end	

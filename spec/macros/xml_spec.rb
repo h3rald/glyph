@@ -15,40 +15,40 @@ describe "Glyph Language" do
 
 	it "should support XML fallback by default" do
 		Glyph.run 'load:all'
-		output_for(%{
+		expect(output_for(%{
 			i[test]
 			code[
 			test
 			]
-		}).gsub(/\s+/, '').should == %{
+		}).gsub(/\s+/, '')).to eq(%{
 		<i>test</i>
 				<code>
 					test
-				</code>}.gsub(/\s+/, '')
+				</code>}.gsub(/\s+/, ''))
 	end
 
 	it "should support XML macros" do
 		language('xml')
-		output_for("pre[code[test]]").should == "<pre>\n<code>test</code>\n</pre>"
+		expect(output_for("pre[code[test]]")).to eq("<pre>\n<code>test</code>\n</pre>")
 	end
 
 	it "should support XML attributes" do
 		language('xml')
-		output_for("span[@class[test] @style[color:red;] test...]").should == %{
+		expect(output_for("span[@class[test] @style[color:red;] test...]")).to eq(%{
 			<span class="test" style="color:red;">  test...</span>
-		}.strip
+		}.strip)
 	end
 
 	it "should detect invalid characters for XML elements and attributes" do
 		language('xml')
-		lambda  { interpret("!&test[test]").document }.should raise_error
-		output_for("span[@class[test]@.[test]test]").should == %{<span class="test">test</span>}
+		expect  { interpret("!&test[test]").document }.to raise_error
+		expect(output_for("span[@class[test]@.[test]test]")).to eq(%{<span class="test">test</span>})
 	end
 
 	it "should notify the user that a macro is not found for invalid elements if xml_fallback is enabled" do
 		# Assuming options.xml_fallback = true
 		language('glyph')
-		lambda { interpret("*a[test]").document }.should raise_error(Glyph::MacroError, "Invalid XML element '*a'")
+		expect { interpret("*a[test]").document }.to raise_error(Glyph::MacroError, "Invalid XML element '*a'")
 	end	
 
 	it "should not render blacklisted tags" do
@@ -71,16 +71,16 @@ describe "Glyph Language" do
       param[test]
       title[tesy]
 		}
-		output_for(text).gsub(/\s/, '').should == "<test>test</test>"
+		expect(output_for(text).gsub(/\s/, '')).to eq("<test>test</test>")
 	end
 
 	it "should work with macro composition" do
 		language('glyph')
-		output_for("xml/a[@test[...]xyz]").should == "<a test=\"...\">xyz</a>"
-		output_for("xml/a[@test[...]xml/b[test]]").should == "<a test=\"...\">\n<b>test</b>\n</a>"
-		output_for("xml/a[xml/b[test]xml/c[test]]").should == "<a>\n<b>test</b><c>test</c>\n</a>"
-		output_for("xml/a[xml/b[test]xml/c[@test[test_attr]test]]").should == "<a>\n<b>test</b><c test=\"test_attr\">test</c>\n</a>"
-		output_for("xml/a[xml/b[@test[true]]]").should == "<a>\n<b test=\"true\" />\n</a>"
+		expect(output_for("xml/a[@test[...]xyz]")).to eq("<a test=\"...\">xyz</a>")
+		expect(output_for("xml/a[@test[...]xml/b[test]]")).to eq("<a test=\"...\">\n<b>test</b>\n</a>")
+		expect(output_for("xml/a[xml/b[test]xml/c[test]]")).to eq("<a>\n<b>test</b><c>test</c>\n</a>")
+		expect(output_for("xml/a[xml/b[test]xml/c[@test[test_attr]test]]")).to eq("<a>\n<b>test</b><c test=\"test_attr\">test</c>\n</a>")
+		expect(output_for("xml/a[xml/b[@test[true]]]")).to eq("<a>\n<b test=\"true\" />\n</a>")
 	end
 
 end	

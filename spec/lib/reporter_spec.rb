@@ -30,104 +30,104 @@ describe Glyph::Reporter do
 
 	it "should be initialized with stats" do
 		stats :macros
-		lambda { rep }.should_not raise_error
+		expect { rep }.not_to raise_error
 	end
 
 	it "should display macro stats" do
 		stats :macros
 		out = stdout_for { rep.display }
-		out.should match "Total Macro Instances: 20"
-		out.should match "-- Used Macro Definitions:"
+		expect(out).to match "Total Macro Instances: 20"
+		expect(out).to match "-- Used Macro Definitions:"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "-- Used Macro Definitions:"
+		expect(out).not_to match "-- Used Macro Definitions:"
 	end
 
 	it "should display stats for a single macro" do
 		stats :macro, :section
 		out = stdout_for { rep.display }
-		out.should match "text/a/b/c/markdown.markdown \\(1\\)"
-		out.should match "-- Total Instances: 4"
+		expect(out).to match "text/a/b/c/markdown.markdown \\(1\\)"
+		expect(out).to match "-- Total Instances: 4"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "text/a/b/c/markdown.markdown \\(1\\)"
+		expect(out).not_to match "text/a/b/c/markdown.markdown \\(1\\)"
 		stats :macro, :"=>"
 		out = stdout_for { rep.display }
-		out.should match "alias for: link"
+		expect(out).to match "alias for: link"
 	end
 
 	it "should display bookmark stats" do
 		stats :bookmarks
 		out = stdout_for { rep.display }
-		out.should match "-- Total Bookmarks: 6"
-		out.should match "h_1    h_2    md     refs   toc"
-		out.should match "   - h_1 \\(1\\)"
+		expect(out).to match "-- Total Bookmarks: 6"
+		expect(out).to match "h_1    h_2    md     refs   toc"
+		expect(out).to match "   - h_1 \\(1\\)"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "-- Occurrences:"
+		expect(out).not_to match "-- Occurrences:"
 	end
 
 	it "should display stats for a single bookmark" do
 		stats :bookmark, 'refs'
 		out = stdout_for { rep.display }
-		out.should match "===== Bookmark 'refs' \\(header\\)"
-		out.should match "   - text/references.glyph \\(1\\)"
+		expect(out).to match "===== Bookmark 'refs' \\(header\\)"
+		expect(out).to match "   - text/references.glyph \\(1\\)"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "-- Referenced in:"
+		expect(out).not_to match "-- Referenced in:"
 	end
 
 	it "should display snippet stats" do
 		stats :snippets
 		out = stdout_for { rep.display }
-		out.should match "-- Total Snippets: 2"
+		expect(out).to match "-- Total Snippets: 2"
 	end
 
 	it "should display stats for a single snippet" do
 		stats :snippets
 		stats :snippet, :test
 		out = stdout_for { rep.display }
-		out.should match "-- Total Used Instances: 2"
-		out.should match "   - text/references.glyph \\(1\\)"
+		expect(out).to match "-- Total Used Instances: 2"
+		expect(out).to match "   - text/references.glyph \\(1\\)"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "-- Usage Details:"
+		expect(out).not_to match "-- Usage Details:"
 	end
 
 	it "should display link stats" do
 		stats :links
 		out = stdout_for { rep.display }
-		out.should match "http://www.h3rald.com"
-		out.should match "-- Total Internal Links: 2"
+		expect(out).to match "http://www.h3rald.com"
+		expect(out).to match "-- Total Internal Links: 2"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "     - text/references.glyph (1)"
+		expect(out).not_to match "     - text/references.glyph (1)"
 	end
 
 	it "should display stats for a single link" do
 		stats :link, 'h3'
 		out = stdout_for { rep.display }
-		out.should match "===== Links matching \\/h3\\/"
-		out.should match "   - http://www.h3rald.com \\(1\\)"
+		expect(out).to match "===== Links matching \\/h3\\/"
+		expect(out).to match "   - http://www.h3rald.com \\(1\\)"
 		@r.detailed = false
 		out = stdout_for { @r.display }
-		out.should_not match "   - http://www.h3rald.com \\(1\\)"
+		expect(out).not_to match "   - http://www.h3rald.com \\(1\\)"
 	end
 
 	it "should display files stats" do
 		stats :files
 		out = stdout_for { rep.display }
-		out.should match "-- Total Files: 6"
-		out.should match "-- /text    -- 4"
+		expect(out).to match "-- Total Files: 6"
+		expect(out).to match "-- /text    -- 4"
 	end
 
 	it "should display global stats" do
 		stats :global
 		out = stdout_for { rep.display }
-		out.should match "-- Total Files: 6"
-		out.should match "   - http://www.h3rald.com"
-		out.should match "Total Macro Instances: 20"
-		out.should match "-- Total Snippets: 2"
-		out.should match "h_1    h_2    md     refs   toc"
+		expect(out).to match "-- Total Files: 6"
+		expect(out).to match "   - http://www.h3rald.com"
+		expect(out).to match "Total Macro Instances: 20"
+		expect(out).to match "-- Total Snippets: 2"
+		expect(out).to match "h_1    h_2    md     refs   toc"
 	end
 end

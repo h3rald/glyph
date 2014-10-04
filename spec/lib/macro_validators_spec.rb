@@ -18,42 +18,42 @@ describe Glyph::Macro::Validators do
 	end
 
 	it "should provide custom validation" do
-		lambda { interpret("section[validated_test[invalid]]").document.output }.should raise_error Glyph::MacroError
-		lambda { interpret("chapter[validated_test[valid]]").document.output }.should_not raise_error
+		expect { interpret("section[validated_test[invalid]]").document.output }.to raise_error Glyph::MacroError
+		expect { interpret("chapter[validated_test[valid]]").document.output }.not_to raise_error
 	end
 
 	it "should validate the number of parameters" do
 		# exact
-		lambda { interpret("section[sfsdg|saf]").document.output }.should raise_error Glyph::MacroError
+		expect { interpret("section[sfsdg|saf]").document.output }.to raise_error Glyph::MacroError
 		# none
-		lambda { interpret("title[test]").document.output }.should raise_error Glyph::MacroError
+		expect { interpret("title[test]").document.output }.to raise_error Glyph::MacroError
 		# min
-		lambda { interpret("?[]").document.output }.should raise_error Glyph::MacroError
+		expect { interpret("?[]").document.output }.to raise_error Glyph::MacroError
 		# max
-		lambda { interpret("not[a|b|c]").document.output }.should raise_error Glyph::MacroError
+		expect { interpret("not[a|b|c]").document.output }.to raise_error Glyph::MacroError
 		# correct
-		lambda { interpret("chapter[fmi[something|#something]]").document.output }.should_not raise_error 
+		expect { interpret("chapter[fmi[something|#something]]").document.output }.not_to raise_error 
 	end
 
 	it "should check for mutual inclusion" do
-		interpret("&:[inc|Test &[inc]]&[inc] test").document.output.should == "Test [SNIPPET 'inc' NOT PROCESSED] test"
+		expect(interpret("&:[inc|Test &[inc]]&[inc] test").document.output).to eq("Test [SNIPPET 'inc' NOT PROCESSED] test")
 	end
 
 	it "should validate XML elements" do
 		language 'xml'
-		lambda { interpret("<test[test]").document}.should raise_error
-		lambda { interpret("_test[test]").document}.should_not raise_error
+		expect { interpret("<test[test]").document}.to raise_error
+		expect { interpret("_test[test]").document}.not_to raise_error
 	end
 
 	it "should validate XML attributes" do
 		language 'xml'
-		output_for("test[test @.test[test]]").should == "<test>test </test>"
+		expect(output_for("test[test @.test[test]]")).to eq("<test>test </test>")
 	end
 
 	it "should validate required attributes" do
 		Glyph['document.output'] = 'web'
 		Glyph.run! 'load:macros'
-		lambda { output_for("section[section[@src[test]]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute")
+		expect { output_for("section[section[@src[test]]]") }.to raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute")
 	end
 
 	it "should validate if a macro is within another one" do
@@ -62,7 +62,7 @@ describe Glyph::Macro::Validators do
 			within :em
 			"---"
 		end
-		lambda { output_for("within_m[test]") }.should raise_error(Glyph::MacroError, "Macro 'within_m' must be within a 'em' macro")
+		expect { output_for("within_m[test]") }.to raise_error(Glyph::MacroError, "Macro 'within_m' must be within a 'em' macro")
 	end	
 
 	it "should validate if a macro is not within another one" do
@@ -71,7 +71,7 @@ describe Glyph::Macro::Validators do
 			not_within :em
 			"---"
 		end
-		lambda { output_for("em[within_m[test]]") }.should raise_error(Glyph::MacroError, "Macro 'within_m' must not be within a 'em' macro")
+		expect { output_for("em[within_m[test]]") }.to raise_error(Glyph::MacroError, "Macro 'within_m' must not be within a 'em' macro")
 	end	
 
 end

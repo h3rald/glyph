@@ -16,30 +16,30 @@ describe Glyph::Document do
 	end
 
 	it "should expose document data" do
-		@doc.bookmarks.should == {}
-		@doc.headers.should == {}
-		@doc.styles.should == []
-		@doc.placeholders.should == {}
-		@doc.new?.should == true
+		expect(@doc.bookmarks).to eq({})
+		expect(@doc.headers).to eq({})
+		expect(@doc.styles).to eq([])
+		expect(@doc.placeholders).to eq({})
+		expect(@doc.new?).to eq(true)
 	end
 
 	it "should store bookmarks" do
-		lambda { @doc.bookmark(:id => "test", :title => "Test Bookmark #1", :file => 'test.glyph')}.should_not raise_error
-		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #1", :file => 'test.glyph')}.should raise_error
-		lambda { @doc.bookmark(:id => :test, :title => "Test Bookmark #2", :file => 'test2.glyph')}.should raise_error
-		@doc.bookmarks.length.should == 1
-		@doc.bookmarks[:test].should == Glyph::Bookmark.new(:id => :test, :title => "Test Bookmark #1", :file => "test.glyph")
+		expect { @doc.bookmark(:id => "test", :title => "Test Bookmark #1", :file => 'test.glyph')}.not_to raise_error
+		expect { @doc.bookmark(:id => :test, :title => "Test Bookmark #1", :file => 'test.glyph')}.to raise_error
+		expect { @doc.bookmark(:id => :test, :title => "Test Bookmark #2", :file => 'test2.glyph')}.to raise_error
+		expect(@doc.bookmarks.length).to eq(1)
+		expect(@doc.bookmarks[:test]).to eq(Glyph::Bookmark.new(:id => :test, :title => "Test Bookmark #1", :file => "test.glyph"))
 	end
 
 	it "should store placeholders" do
 		p = lambda { "test" }
-		lambda { @doc.placeholder &p }.should_not raise_error
-		@doc.placeholders["‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡".to_sym].should == p
+		expect { @doc.placeholder &p }.not_to raise_error
+		expect(@doc.placeholders["‡‡‡‡‡PLACEHOLDER¤1‡‡‡‡‡".to_sym]).to eq(p)
 	end
 
 	it "should store styles" do
-		lambda {@doc.style "test.css"}.should_not raise_error
-		@doc.styles.include?(Pathname.new('test.css')).should == true
+		expect {@doc.style "test.css"}.not_to raise_error
+		expect(@doc.styles.include?(Pathname.new('test.css'))).to eq(true)
 	end
 
 	it "can inherit data from another document" do
@@ -50,33 +50,33 @@ describe Glyph::Document do
 		@doc.header :id => :test3, :title => "Test #3", :level => 3, :file => "test.glyph"
 		@doc.toc[:contents] = "TOC goes here..."
 		doc2 = create_doc @tree
-		doc2.bookmarks.length.should == 0
-		doc2.placeholders.length.should == 0
+		expect(doc2.bookmarks.length).to eq(0)
+		expect(doc2.placeholders.length).to eq(0)
 		doc2.bookmark :id => :test4, :title => "Test #4", :file => "test.glyph"
 		doc2.inherit_from @doc
-		doc2.bookmarks.length.should == 3
-		doc2.placeholders.length.should == 1
-		doc2.headers.length.should == 1
-		doc2.styles.length.should == 1
+		expect(doc2.bookmarks.length).to eq(3)
+		expect(doc2.placeholders.length).to eq(1)
+		expect(doc2.headers.length).to eq(1)
+		expect(doc2.styles.length).to eq(1)
 		doc2.toc[:contents] = "TOC goes here..."
-		doc2.bookmarks[0].should_not == Glyph::Bookmark.new(:id => :test4, :title => "Test #4", :file => "test.glyph")
+		expect(doc2.bookmarks[0]).not_to eq(Glyph::Bookmark.new(:id => :test4, :title => "Test #4", :file => "test.glyph"))
 	end
 
 	it "should analyze the syntax tree and finalize the document" do
-		lambda { @doc.output }.should raise_error
-		lambda { @doc.finalize }.should raise_error
-		lambda { @doc.analyze }.should_not raise_error
-		lambda { @doc.analyze }.should raise_error
-		@doc.analyzed?.should == true
-		lambda { @doc.output }.should raise_error
-		lambda { @doc.finalize }.should_not raise_error
-		@doc.output.should == "Test: Test: Test: Test|]..."
+		expect { @doc.output }.to raise_error
+		expect { @doc.finalize }.to raise_error
+		expect { @doc.analyze }.not_to raise_error
+		expect { @doc.analyze }.to raise_error
+		expect(@doc.analyzed?).to eq(true)
+		expect { @doc.output }.to raise_error
+		expect { @doc.finalize }.not_to raise_error
+		expect(@doc.output).to eq("Test: Test: Test: Test|]...")
 	end
 
 	it "should expose document structure" do
-		lambda { @doc.structure }.should raise_error
+		expect { @doc.structure }.to raise_error
 		@doc.analyze
-		@doc.structure.is_a?(Node).should == true
+		expect(@doc.structure.is_a?(Node)).to eq(true)
 	end
 
 	it "should substitute placeholders when finalizing" do
@@ -105,7 +105,7 @@ describe Glyph::Document do
 		doc = create_doc tree
 		doc.analyze
 		doc.finalize
-		doc.output.gsub(/\n|\t/, '')[0..14].should == "Total: 4 tests."
+		expect(doc.output.gsub(/\n|\t/, '')[0..14]).to eq("Total: 4 tests.")
 	end
 
 	it "should substitute escaped pipes only when finalizing the document" do
@@ -119,7 +119,7 @@ describe Glyph::Document do
 		doc = create_doc tree
 		doc.analyze
 		doc.finalize
-		doc.output.should == result
+		expect(doc.output).to eq(result)
 	end
 
 	it "should store the Table of Contents" do
@@ -145,7 +145,7 @@ describe Glyph::Document do
 		doc = create_doc tree
 		doc.analyze
 		doc.finalize
-		doc.toc[:contents].match(%{<div class="contents">}).blank?.should == false
+		expect(doc.toc[:contents].match(%{<div class="contents">}).blank?).to eq(false)
 		reset_quiet
 	end
 
@@ -155,7 +155,7 @@ describe Glyph::Document do
 		Glyph.run! "load:all"
 		doc = create_doc create_tree("testing ##[frag1|fragments!] -- ##[frag2|another fragment]")
 		doc.analyze
-		doc.fragments.should == {:frag1 => "fragments!", :frag2 => "another fragment"}
+		expect(doc.fragments).to eq({:frag1 => "fragments!", :frag2 => "another fragment"})
 		reset_quiet
 	end
 

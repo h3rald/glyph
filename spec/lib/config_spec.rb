@@ -19,34 +19,34 @@ describe Glyph::Config do
 
 	it "should load a YAML configuration file" do
 		@write_config_file.call @invalid
-		lambda { @cfg.read }.should raise_error
+		expect { @cfg.read }.to raise_error
 		@write_config_file.call @valid
-		@cfg.read.should == {:test => true}
+		expect(@cfg.read).to eq({:test => true})
 	end
 
 	it "should get and set configuration data through dot notation" do
 		@write_config_file.call @valid
 		@cfg.read
-		lambda { @cfg.set :test, false }.should_not raise_error
-		lambda { @cfg.set "test.wrong", true}.should raise_error
-		lambda { @cfg.set "test2.value", true}.should_not raise_error
-		@cfg.get("test2.value").should == true
-		lambda { @cfg.set "test2.value", "false"}.should_not raise_error
-		@cfg.get("test2.value").should == false
-		@cfg.get("test2.value2").should == nil
-		@cfg.to_hash.should == {:test => false, :test2 => {:value => false}}
+		expect { @cfg.set :test, false }.not_to raise_error
+		expect { @cfg.set "test.wrong", true}.to raise_error
+		expect { @cfg.set "test2.value", true}.not_to raise_error
+		expect(@cfg.get("test2.value")).to eq(true)
+		expect { @cfg.set "test2.value", "false"}.not_to raise_error
+		expect(@cfg.get("test2.value")).to eq(false)
+		expect(@cfg.get("test2.value2")).to eq(nil)
+		expect(@cfg.to_hash).to eq({:test => false, :test2 => {:value => false}})
 	end
 
 	it "can be resetted with a Hash, if resettable" do
-		lambda { @cfg.reset }.should raise_error
+		expect { @cfg.reset }.to raise_error
 		cfg2 = Glyph::Config.new :resettable => true
 		cfg2.reset :test => "reset!"
-		cfg2.to_hash.should == {:test => "reset!"}	
+		expect(cfg2.to_hash).to eq({:test => "reset!"})	
 	end
 
 	it "should be set to an empty Hash by default" do
 		cfg2 = Glyph::Config.new
-		cfg2.to_hash.should == {}
+		expect(cfg2.to_hash).to eq({})
 	end
 
 	it "should write a YAML configuration file" do
@@ -58,7 +58,7 @@ describe Glyph::Config do
 		@cfg.write
 		cfg2 = Glyph::Config.new :file => @config_path
 		cfg2.read
-		cfg2.to_hash.should == @cfg.to_hash
+		expect(cfg2.to_hash).to eq(@cfg.to_hash)
 	end
 
 	it "should merge with another Config without data loss" do
@@ -70,9 +70,9 @@ describe Glyph::Config do
 		cfg2 = Glyph::Config.new :file => @config_path
 		@cfg.update cfg2
 		updated = {:a =>1, :b => {:b1 => 1111, :b2 => 2222, :b3 => {:b11 => 1, :b12 =>2222}, :b4 => 4}, :c=> 3}
-		@cfg.to_hash.should == updated
+		expect(@cfg.to_hash).to eq(updated)
 		hash1.merge! hash2
-		hash1.should == {:a =>1, :b => {:b1 => 1111, :b2 => 2222, :b3 => {:b12 =>2222}}, :c=> 3}
+		expect(hash1).to eq({:a =>1, :b => {:b1 => 1111, :b2 => 2222, :b3 => {:b12 =>2222}}, :c=> 3})
 	end
 
 

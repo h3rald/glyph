@@ -19,14 +19,14 @@ describe "Macro:" do
 	it "section (topic)" do
 		interpret("section[section[@src[a/web1.glyph]@title[Test]]]")
 		topic = @p.document.topics[0]
-		topic[:contents].match(/<article>/).blank?.should == false
+		expect(topic[:contents].match(/<article>/).blank?).to eq(false)
 	end
 
 	it "navigation" do
 		Glyph.run! 'generate:web5'
 		web1 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/web1.html').gsub(/\n|\t|  /, '')
 		web2 = Glyph.file_load(Glyph::PROJECT/'output/web5/a/b/web2.html').gsub(/\n|\t|  /, '') 
-		web1.should match(%{<nav>|<a href="/index.html">Contents</a>|<a href="/a/b/web2.html">&rarr; Topic #2</a></nav>})
-		web2.should match(%{<nav><a href="/a/web1.html">Topic #1</a>|<a href="/index.html">Contents</a>|</nav>})
+		expect(web1).to match(%{<nav>|<a href="/index.html">Contents</a>|<a href="/a/b/web2.html">&rarr; Topic #2</a></nav>})
+		expect(web2).to match(%{<nav><a href="/a/web1.html">Topic #1</a>|<a href="/index.html">Contents</a>|</nav>})
 	end
 end	

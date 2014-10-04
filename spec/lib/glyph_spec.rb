@@ -11,39 +11,39 @@ describe Glyph do
 	end
 
 	it "should initialize a rake app and tasks" do
-		Rake.application.tasks.length.should > 0
+		expect(Rake.application.tasks.length).to be > 0
 	end
 
 	it "should run rake tasks" do
 		delete_project_dir
 		create_project_dir
 		Glyph.run 'project:create', Glyph::PROJECT
-		lambda { Glyph.run! 'project:create', Glyph::PROJECT }.should raise_error
+		expect { Glyph.run! 'project:create', Glyph::PROJECT }.to raise_error
 		delete_project_dir
 		create_project_dir
-		lambda { Glyph.run! 'project:create', Glyph::PROJECT }.should_not raise_error
+		expect { Glyph.run! 'project:create', Glyph::PROJECT }.not_to raise_error
 		delete_project_dir
 	end
 
 	it "should define macros" do
-		lambda { define_em_macro }.should_not raise_error
-		lambda { define_ref_macro }.should_not raise_error
-		Glyph::MACROS.include?(:em).should == true
-		Glyph::MACROS.include?(:ref).should == true
+		expect { define_em_macro }.not_to raise_error
+		expect { define_ref_macro }.not_to raise_error
+		expect(Glyph::MACROS.include?(:em)).to eq(true)
+		expect(Glyph::MACROS.include?(:ref)).to eq(true)
 	end
 
 	it "should support macro aliases" do
 		define_ref_macro
 		define_em_macro
-		lambda { Glyph.macro_alias("->" => :ref)}.should_not raise_error
-		Glyph::MACROS[:"->"].should == Glyph::MACROS[:ref]
+		expect { Glyph.macro_alias("->" => :ref)}.not_to raise_error
+		expect(Glyph::MACROS[:"->"]).to eq(Glyph::MACROS[:ref])
 		Glyph.macro_alias :em => :ref
-		Glyph::MACROS[:em].should == Glyph::MACROS[:ref]
+		expect(Glyph::MACROS[:em]).to eq(Glyph::MACROS[:ref])
 	end
 
 	it "should provide a filter method to convert raw text into HTML" do
 		Glyph['document.title'] = "Test"
-		Glyph.filter("title[]").gsub(/\n|\t/, '').should == "<h1>Test</h1>"
+		expect(Glyph.filter("title[]").gsub(/\n|\t/, '')).to eq("<h1>Test</h1>")
 	end
 
 	it "should provide a compile method to compile files in lite mode" do
@@ -53,32 +53,32 @@ describe Glyph do
 			Glyph.debug_mode = true
 			Glyph.compile Glyph::PROJECT/'article.glyph' 
 		#}.should_not raise_error
-		(Glyph::PROJECT/'article.html').exist?.should == true
+		expect((Glyph::PROJECT/'article.html').exist?).to eq(true)
 	end
 
 	it "should provide a reset method to remove config overrides, reenable tasks, clear macros and reps" do
 		Glyph['test_setting'] = true
 		Glyph.reset
-		Glyph::MACROS.length.should == 0
-		Glyph::REPS.length.should == 0
-		Glyph['test_setting'].should == nil
+		expect(Glyph::MACROS.length).to eq(0)
+		expect(Glyph::REPS.length).to eq(0)
+		expect(Glyph['test_setting']).to eq(nil)
 	end
 
 	it "should not allow certain macros to be expanded in safe mode" do
 		create_project
 		Glyph.run! "load:all"
 		Glyph.safe_mode = true
-		lambda { output_for("include[test.glyph]")}.should raise_error Glyph::MacroError
-		lambda {output_for("config:[test|true]")}.should raise_error Glyph::MacroError
-		lambda { output_for("ruby[Time.now]")}.should raise_error Glyph::MacroError
-		lambda { output_for("def:[a|section[{{0}}]]")}.should raise_error Glyph::MacroError
+		expect { output_for("include[test.glyph]")}.to raise_error Glyph::MacroError
+		expect {output_for("config:[test|true]")}.to raise_error Glyph::MacroError
+		expect { output_for("ruby[Time.now]")}.to raise_error Glyph::MacroError
+		expect { output_for("def:[a|section[{{0}}]]")}.to raise_error Glyph::MacroError
 		Glyph.safe_mode = false
 	end
 
 	it "should define macros using Glyph syntax" do
 		define_em_macro
 		Glyph.define :test_def_macro, %{em[{{0}} -- {{a}}]}
-		output_for("test_def_macro[@a[!]?]").should == "<em>? -- !</em>"
+		expect(output_for("test_def_macro[@a[!]?]")).to eq("<em>? -- !</em>")
 	end
 
 	it "should store alias information" do
@@ -86,13 +86,13 @@ describe Glyph do
 		create_project_dir
 		Glyph.run! 'project:create', Glyph::PROJECT
 		Glyph.run 'load:all'
-		Glyph::ALIASES[:by_def][:snippet].should == [:&]
-		Glyph::ALIASES[:by_alias][:"?"].should == :condition
-		Glyph.macro_aliases_for(:link).should == [:"=>"]
-		Glyph.macro_aliases_for(:"=>").should == nil
-		Glyph.macro_definition_for(:"=>").should == :link
-		Glyph.macro_definition_for(:link).should == nil
-		Glyph.macro_alias?(:"#").should == true
+		expect(Glyph::ALIASES[:by_def][:snippet]).to eq([:&])
+		expect(Glyph::ALIASES[:by_alias][:"?"]).to eq(:condition)
+		expect(Glyph.macro_aliases_for(:link)).to eq([:"=>"])
+		expect(Glyph.macro_aliases_for(:"=>")).to eq(nil)
+		expect(Glyph.macro_definition_for(:"=>")).to eq(:link)
+		expect(Glyph.macro_definition_for(:link)).to eq(nil)
+		expect(Glyph.macro_alias?(:"#")).to eq(true)
 	end
 
 	it "should store macro representations" do
@@ -104,15 +104,15 @@ describe Glyph do
 		Glyph.rep :test_rep do |data|
 			"TEST - #{data[:a]}"
 		end
-		Glyph::REPS[:test_rep].call(:a => 1).should == "TEST - 1" 
-		Glyph::REPS[:test_rep_alias].call(:a => 1).should == "TEST - 1" 
+		expect(Glyph::REPS[:test_rep].call(:a => 1)).to eq("TEST - 1") 
+		expect(Glyph::REPS[:test_rep_alias].call(:a => 1)).to eq("TEST - 1") 
 	end
 
 	it "should load reps for a given output" do
 		Glyph.reps_for(:html)
-		Glyph::REPS[:section].should_not be_blank
-		Glyph::REPS[:link].should_not be_blank
-		Glyph::REPS[:"=>"].should_not be_blank
+		expect(Glyph::REPS[:section]).not_to be_blank
+		expect(Glyph::REPS[:link]).not_to be_blank
+		expect(Glyph::REPS[:"=>"]).not_to be_blank
 	end
 
 end

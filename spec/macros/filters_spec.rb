@@ -16,14 +16,14 @@ describe "Filter Macros" do
 	it "should filter textile input" do
 		text = "textile[This is a _TEST_(TM).]"
 		interpret text
-		@p.document.output.should == "<p>This is a <em><span class=\"caps\">TEST</span></em>&#8482;.</p>"
+		expect(@p.document.output).to eq("<p>This is a <em><span class=\"caps\">TEST</span></em>&#8482;.</p>")
 		Glyph["output.#{Glyph['document.output']}.filter_target"] = :latex
 		interpret text
-		@p.document.output.should == "This is a \\emph{TEST}\\texttrademark{}.\n\n"
+		expect(@p.document.output).to eq("This is a \\emph{TEST}\\texttrademark{}.\n\n")
 		Glyph["output.#{Glyph['document.output']}.filter_target"] = :html
 		Glyph['filters.redcloth.restrictions'] = [:no_span_caps]
 		interpret text
-		@p.document.output.should == "<p>This is a <em>TEST</em>&#8482;.</p>"
+		expect(@p.document.output).to eq("<p>This is a <em>TEST</em>&#8482;.</p>")
 	end
 
 	it "should filter markdown input" do
@@ -35,8 +35,9 @@ describe "Filter Macros" do
 
 etc.]"
 interpret text
-@p.document.output.gsub(/\n|\t|\s{2}/, '').should == 
+expect(@p.document.output.gsub(/\n|\t|\s{2}/, '')).to eq( 
 	"<p>This is a test:</p><ul><li>item 1</li><li>item 2</li><li>item 3</li></ul><p>etc.</p>"
+)
 	end
 
 	it "highlight" do
@@ -64,7 +65,7 @@ interpret text
 				Glyph["filters.highlighter"] = hl.to_sym
 				Glyph.debug_mode = true
 				interpret("highlight[=ruby|\n#{code}=]")
-				@p.document.output.gsub(/\s+/, ' ').strip.should == result.gsub(/\s+/, ' ').strip
+				expect(@p.document.output.gsub(/\s+/, ' ').strip).to eq(result.gsub(/\s+/, ' ').strip)
 			end
 			Glyph['filters.ultraviolet.line_numbers'] = false
 			check.call 'ultraviolet', uv_result if uv
@@ -72,9 +73,9 @@ interpret text
 	end
 
 	it "textile_section, markdown_section" do
-		output_for("§txt[*test*]").should == "<div class=\"section\">\n<p><strong>test</strong></p>\n\n</div>"
-		output_for("§md[*test*]").should == "<div class=\"section\">\n<p><em>test</em></p>\n\n</div>"
-		output_for("textile_section[@title[test]...]").should == "<div class=\"section\">\n<h2 id=\"h_1\" class=\"toc\">test</h2>\n<p>&#8230;</p>\n\n</div>"
+		expect(output_for("§txt[*test*]")).to eq("<div class=\"section\">\n<p><strong>test</strong></p>\n\n</div>")
+		expect(output_for("§md[*test*]")).to eq("<div class=\"section\">\n<p><em>test</em></p>\n\n</div>")
+		expect(output_for("textile_section[@title[test]...]")).to eq("<div class=\"section\">\n<h2 id=\"h_1\" class=\"toc\">test</h2>\n<p>&#8230;</p>\n\n</div>")
 	end
 
 

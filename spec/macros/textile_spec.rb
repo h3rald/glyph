@@ -47,8 +47,8 @@ Testing:
 <h2 id="h_1" class="toc">Test</h2>
 #@html
 </div>}
-		filter(text1).should == result
-		filter(text2).gsub(/<\/h2>/, "</h2>").should == result
+		expect(filter(text1)).to eq(result)
+		expect(filter(text2).gsub(/<\/h2>/, "</h2>")).to eq(result)
 	end
 
 	######################################
@@ -70,10 +70,10 @@ Testing:
 #@textile
 	]
 ]}
-		filter(box1).should == result
-		filter(box2).should == result
-		filter(box3).should == result
-		filter(box4).should == result
+		expect(filter(box1)).to eq(result)
+		expect(filter(box2)).to eq(result)
+		expect(filter(box3)).to eq(result)
+		expect(filter(box4)).to eq(result)
 	end
 	
 	######################################
@@ -93,10 +93,10 @@ Testing:
 #@textile
 	]
 ]}
-		filter(note1).should == result
-		filter(note2).should == result
-		filter(note3).should == result
-		filter(note4).should == result
+		expect(filter(note1)).to eq(result)
+		expect(filter(note2)).to eq(result)
+		expect(filter(note3)).to eq(result)
+		expect(filter(note4)).to eq(result)
 	end
 	
 	######################################
@@ -149,11 +149,11 @@ Testing:
 #{code}
 	]
 	]]}
-		filter(text1).should == result
-		filter(text2).should == result
-		filter(text3).should == result
-		filter(text4).should == result
-		filter(text5).should == result
+		expect(filter(text1)).to eq(result)
+		expect(filter(text2)).to eq(result)
+		expect(filter(text3)).to eq(result)
+		expect(filter(text4)).to eq(result)
+		expect(filter(text5)).to eq(result)
 	end
 
 end	

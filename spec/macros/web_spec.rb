@@ -16,47 +16,47 @@ describe "Macro:" do
 	end
 
 	it "section (topic)" do
-		lambda { output_for("section[@src[test]]") }.should raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute") 
+		expect { output_for("section[@src[test]]") }.to raise_error(Glyph::MacroError, "Macro 'section' requires a 'title' attribute") 
 		interpret("section[@src[a/web1.glyph]@title[Test]]")
 		topic = @p.document.topics[0]
-		topic.blank?.should == false 
-		topic[:id].should == :t_0 
-		topic[:title].should == "Test" 
-		topic[:src].should == "a/web1.glyph"
-		topic[:contents].match(/id="w1_3"/).blank?.should == false
+		expect(topic.blank?).to eq(false) 
+		expect(topic[:id]).to eq(:t_0) 
+		expect(topic[:title]).to eq("Test") 
+		expect(topic[:src]).to eq("a/web1.glyph")
+		expect(topic[:contents].match(/id="w1_3"/).blank?).to eq(false)
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'load:macros'
-		output_for("contents[section[@src[a/web1.glyph]@title[Test]]]").match(/id="w1_3"/).blank?.should == false
+		expect(output_for("contents[section[@src[a/web1.glyph]@title[Test]]]").match(/id="w1_3"/).blank?).to eq(false)
 	end
 
 	it "navigation" do
 		Glyph.run! 'generate:web'
 		web1 = compact_html Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
 		web2 = compact_html Glyph.file_load(Glyph::PROJECT/'output/web/a/b/web2.html')
-		web1.match(%{<div class="navigation"> | <a href="/index.html">Contents</a> | <a href="/a/b/web2.html">Topic #2</a></div>}).blank?.should == false
-		web2.match(%{<div class="navigation"><a href="/a/web1.html">Topic #1</a> | <a href="/index.html">Contents</a> | </div>}).blank?.should == false
+		expect(web1.match(%{<div class="navigation"> | <a href="/index.html">Contents</a> | <a href="/a/b/web2.html">Topic #2</a></div>}).blank?).to eq(false)
+		expect(web2.match(%{<div class="navigation"><a href="/a/web1.html">Topic #1</a> | <a href="/index.html">Contents</a> | </div>}).blank?).to eq(false)
 	end
 
 	it "toc should only list topics" do
 		Glyph.run! 'generate:web'
 		index = Glyph.file_load(Glyph::PROJECT/'output/web/index.html')
-		index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?.should == true
-		index.match(%{href="/a/web1.html#h_3"}).blank?.should == false
-		index.match(%{href="/a/b/web2.html#h_7"}).blank?.should == false
+		expect(index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?).to eq(true)
+		expect(index.match(%{href="/a/web1.html#h_3"}).blank?).to eq(false)
+		expect(index.match(%{href="/a/b/web2.html#h_7"}).blank?).to eq(false)
 		web1 = Glyph.file_load(Glyph::PROJECT/'output/web/a/web1.html')
-    web1.should match(/<h2 id="t_0" class="toc">Topic #1<\/h2>/) #  Headers are reset in each topic
+    expect(web1).to match(/<h2 id="t_0" class="toc">Topic #1<\/h2>/) #  Headers are reset in each topic
 		delete_project
 		reset_quiet
 		create_web_project
 		Glyph['document.output'] = 'html'
 		Glyph.run! 'generate:html'
 		index = compact_html Glyph.file_load(Glyph::PROJECT/'output/html/test_project.html')
-    index.should match(%{<li class="section"><a href="#h_3">Topic #1</a></li><li><ol><li class="section"><a href="#h_4">Test #1a</a></li>})
-		index.match(%{href="a/web1.html#h_3"}).blank?.should == true
-		index.match(%{href="a/b/web2.html#h_7"}).blank?.should == true
-		index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?.should == false
-		index.match(%{href="#h_2"}).blank?.should == false
-		index.match(%{href="#h_8"}).blank?.should == false # Header numbers are different...
+    expect(index).to match(%{<li class="section"><a href="#h_3">Topic #1</a></li><li><ol><li class="section"><a href="#h_4">Test #1a</a></li>})
+		expect(index.match(%{href="a/web1.html#h_3"}).blank?).to eq(true)
+		expect(index.match(%{href="a/b/web2.html#h_7"}).blank?).to eq(true)
+		expect(index.match(%{<li class="section"><a href="#h_1">Web Document</a></li>}).blank?).to eq(false)
+		expect(index.match(%{href="#h_2"}).blank?).to eq(false)
+		expect(index.match(%{href="#h_8"}).blank?).to eq(false) # Header numbers are different...
 	end
 
 end	

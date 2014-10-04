@@ -13,64 +13,64 @@ describe "generate" do
 	end
 
 	it ":document should generate Glyph.document" do
-		lambda { Glyph.run! 'generate:document'}.should_not raise_error
-		Glyph.document.structure.children.length.should > 0
+		expect { Glyph.run! 'generate:document'}.not_to raise_error
+		expect(Glyph.document.structure.children.length).to be > 0
 	end
 
 	it ":html should generate a standalone html document" do
-		lambda { Glyph.run! 'generate:html'}.should_not raise_error
-		(Glyph::PROJECT/'output/html/test_project.html').exist?.should == true
+		expect { Glyph.run! 'generate:html'}.not_to raise_error
+		expect((Glyph::PROJECT/'output/html/test_project.html').exist?).to eq(true)
 	end
 
 	it ":html5 should generate a standalone html document" do
 		Glyph['document.output'] = 'html5'
-		lambda { Glyph.run! 'generate:html5'}.should_not raise_error
-		(Glyph::PROJECT/'output/html5/test_project.html').exist?.should == true
+		expect { Glyph.run! 'generate:html5'}.not_to raise_error
+		expect((Glyph::PROJECT/'output/html5/test_project.html').exist?).to eq(true)
 	end
 
   it ":pdf_through_html should generate a pdf document through html" do
 		Glyph['document.output'] = 'pdf'
-    lambda { stdout_for { Glyph.run! 'generate:pdf_through_html'}}.should_not raise_error
-		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
-		(Glyph::PROJECT/'output/pdf/test_project.pdf').exist?.should == true
+    expect { stdout_for { Glyph.run! 'generate:pdf_through_html'}}.not_to raise_error
+		expect((Glyph::PROJECT/'output/tmp/test_project.html').exist?).to eq(true)
+		expect((Glyph::PROJECT/'output/pdf/test_project.pdf').exist?).to eq(true)
 	end
 
   it ":pdf_through_html5 should generate a pdf document through html5" do
 		Glyph['document.output'] = 'pdf'
-    lambda { stdout_for { Glyph.run! 'generate:pdf_through_html5'}}.should_not raise_error
-		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
-		(Glyph::PROJECT/'output/pdf/test_project.pdf').exist?.should == true
+    expect { stdout_for { Glyph.run! 'generate:pdf_through_html5'}}.not_to raise_error
+		expect((Glyph::PROJECT/'output/tmp/test_project.html').exist?).to eq(true)
+		expect((Glyph::PROJECT/'output/pdf/test_project.pdf').exist?).to eq(true)
   end
 
   it ":mobi should generate a mobi document" do
 		Glyph['document.output'] = 'mobi'
-    lambda { stdout_for { Glyph.run! 'generate:mobi'}}.should_not raise_error
-		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
-		(Glyph::PROJECT/'output/mobi/test_project.mobi').exist?.should == true
+    expect { stdout_for { Glyph.run! 'generate:mobi'}}.not_to raise_error
+		expect((Glyph::PROJECT/'output/tmp/test_project.html').exist?).to eq(true)
+		expect((Glyph::PROJECT/'output/mobi/test_project.mobi').exist?).to eq(true)
   end
 
   it ":epub should generate an epub document" do
 		Glyph['document.output'] = 'epub'
     #lambda { 
 			stdout_for { Glyph.run! 'generate:epub'}#}.should_not raise_error
-		(Glyph::PROJECT/'output/tmp/test_project.html').exist?.should == true
-		(Glyph::PROJECT/'output/epub/test_project.epub').exist?.should == true
+		expect((Glyph::PROJECT/'output/tmp/test_project.html').exist?).to eq(true)
+		expect((Glyph::PROJECT/'output/epub/test_project.epub').exist?).to eq(true)
   end
 
 	it "should copy images" do
 		dir = (Glyph::PROJECT/'images/test').mkpath
 		file_copy Glyph::HOME/'spec/files/ligature.jpg', Glyph::PROJECT/'images/test'
-		lambda { Glyph.run! 'generate:html' }.should_not raise_error
-		(Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?.should == true
+		expect { Glyph.run! 'generate:html' }.not_to raise_error
+		expect((Glyph::PROJECT/'output/html/images/test/ligature.jpg').exist?).to eq(true)
 	end
 
 	it "should copy styles if necessary" do
 		Glyph['document.styles'] = 'import'
 		require 'sass'
 		file_write Glyph::PROJECT/'document.glyph', "head[style[default.css]\nstyle[test.sass]]"
-		lambda { Glyph.run! 'generate:html' }.should_not raise_error
-		(Glyph::PROJECT/'output/html/styles/default.css').exist?.should == true
-		(Glyph::PROJECT/'output/html/styles/test.css').exist?.should == true
+		expect { Glyph.run! 'generate:html' }.not_to raise_error
+		expect((Glyph::PROJECT/'output/html/styles/default.css').exist?).to eq(true)
+		expect((Glyph::PROJECT/'output/html/styles/test.css').exist?).to eq(true)
 	end
 
 	it ":web should generate multiple html documents" do
@@ -85,10 +85,10 @@ describe "generate" do
 	  # check that the user didn't create a styles or images directory under /text
 		reset_web.call
 		(Glyph::PROJECT/'text/images').mkdir
-		lambda { Glyph.run! 'generate:web'}.should raise_error(RuntimeError, "You cannot have an 'images' directory under your 'text' directory.")
+		expect { Glyph.run! 'generate:web'}.to raise_error(RuntimeError, "You cannot have an 'images' directory under your 'text' directory.")
 		reset_web.call
 		(Glyph::PROJECT/'text/styles').mkdir
-		lambda { Glyph.run! 'generate:web'}.should raise_error(RuntimeError, "You cannot have a 'styles' directory under your 'text' directory.")
+		expect { Glyph.run! 'generate:web'}.to raise_error(RuntimeError, "You cannot have a 'styles' directory under your 'text' directory.")
 		reset_web.call
 		# check that the task can be run without errors
 		reset_web.call
@@ -97,23 +97,23 @@ describe "generate" do
 			Glyph.run! 'generate:web'
 		#}.should_not raise_error
 		# check that images are copied
-		(Glyph::PROJECT/'output/web/images/ligature.jpg').exist?.should == true
+		expect((Glyph::PROJECT/'output/web/images/ligature.jpg').exist?).to eq(true)
 		# check that stylesheets are copied
-		(Glyph::PROJECT/'output/web/styles/default.css').exist?.should == true
-		(Glyph::PROJECT/'output/web/styles/test.css').exist?.should == true
+		expect((Glyph::PROJECT/'output/web/styles/default.css').exist?).to eq(true)
+		expect((Glyph::PROJECT/'output/web/styles/test.css').exist?).to eq(true)
 		# check that index.html is created
 		index = (Glyph::PROJECT/'output/web/index.html')
-		index.exist?.should == true
-		compact_html(file_load(index)).should match(/<li class="section"><a href="\/test\/a\/b\/web2.html#h_7">Topic #2<\/a>/)
+		expect(index.exist?).to eq(true)
+		expect(compact_html(file_load(index))).to match(/<li class="section"><a href="\/test\/a\/b\/web2.html#h_7">Topic #2<\/a>/)
 	  #	check that topics are copied in the proper directories
 		web1 = (Glyph::PROJECT/'output/web/a/web1.html')
-		web1.exist?.should == true
+		expect(web1.exist?).to eq(true)
 		web2 = (Glyph::PROJECT/'output/web/a/b/web2.html')
-		web2.exist?.should == true
+		expect(web2.exist?).to eq(true)
 		# Check that placeholders are replaced correctly and that links are valid
-		file_load(web2).match(/<a href="\/test\/a\/web1\.html#w1_3">Test #1b<\/a>/).blank?.should == false
-		file_load(web1).match(/<a href="\/test\/a\/b\/web2\.html#w2_1">Test #2a<\/a>/).blank?.should == false
-		file_load(web1).match(/<a href="#w1_3">Test #1b<\/a>/).blank?.should == false
+		expect(file_load(web2).match(/<a href="\/test\/a\/web1\.html#w1_3">Test #1b<\/a>/).blank?).to eq(false)
+		expect(file_load(web1).match(/<a href="\/test\/a\/b\/web2\.html#w2_1">Test #2a<\/a>/).blank?).to eq(false)
+		expect(file_load(web1).match(/<a href="#w1_3">Test #1b<\/a>/).blank?).to eq(false)
 	end
 
 
