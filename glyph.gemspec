@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "glyph"
-  s.version = "0.5.3"
+  s.version = "0.5.3.1"
   s.summary = "Glyph -- A Ruby-powered Document Authoring Framework"
   s.description = "Glyph is a framework for structured document authoring."
   s.homepage = "http://www.h3rald.com/glyph/"
