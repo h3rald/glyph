@@ -32,7 +32,7 @@ describe Glyph::Macro::Validators do
 		# max
 		lambda { interpret("not[a|b|c]").document.output }.should raise_error Glyph::MacroError
 		# correct
-		lambda { interpret("chapter[fmi[something|#something]]").document.output }.should_not raise_error Glyph::MacroError
+		lambda { interpret("chapter[fmi[something|#something]]").document.output }.should_not raise_error 
 	end
 
 	it "should check for mutual inclusion" do

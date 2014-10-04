@@ -44,7 +44,7 @@ describe "Macro:" do
 				<meta name="copyright" content="#{Glyph["document.author"]}" />
 				<meta name="generator" content="Glyph v#{Glyph::VERSION} (http://www.h3rald.com/glyph)" />
 				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-				<style type=\"text/css\">#main {  background-color: blue;  margin: 12px; }</style>
+				<style type=\"text/css\">#main {  background-color: #0000ff;  margin: 12px; }</style>
 			</head>
 		</html>
 		}.gsub(/\n|\t/, '')

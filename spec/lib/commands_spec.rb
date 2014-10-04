@@ -143,9 +143,8 @@ describe "glyph" do
 		run_command_successfully(["compile", "article.glyph"]).should == true
 		Pathname.new('article.html').exist?.should == true
 		compact_html(file_load('article.html')).should == compact_html(%{
-      <?xml version="1.0"?>
 			<div class="section">
-			  &#x6539;&#x5584; Test -- Test Snippet
+			  改善 Test -- Test Snippet
 			</div>
 		})
 		(Glyph::PROJECT/'article.html').unlink
@@ -180,7 +179,7 @@ describe "glyph" do
 		err = "Document cannot be finalized due to previous errors"
 		res = run_command(["compile"])
 		out = file_load Glyph::PROJECT/'output/html/test_project.html'
-		compact_html(out).should == %{<?xml version="1.0"?><div class="section"><h2 id="h_1" class="toc">Test</h2></div>}
+		compact_html(out).should == %{<div class="section"><h2 id="h_1" class="toc">Test</h2></div>}
 		res.match("error: #{err}").should == nil
 	end
 
